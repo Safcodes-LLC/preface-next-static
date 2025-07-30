@@ -5,6 +5,7 @@ import SectionGridAuthorBox from '@/components/SectionGridAuthorBox'
 import SectionGridPosts from '@/components/SectionGridPosts'
 import SectionLargeSlider from '@/components/SectionLargeSlider'
 import SectionMagazine1 from '@/components/SectionMagazine1'
+import SectionMagazine10 from '@/components/SectionMagazine10'
 import SectionMagazine2 from '@/components/SectionMagazine2'
 import SectionMagazine7 from '@/components/SectionMagazine7'
 import SectionMagazine8 from '@/components/SectionMagazine8'
@@ -36,6 +37,8 @@ const Page = async () => {
   return (
     <div className="relative pb-28 lg:pb-32">
       <div className="relative container space-y-28 lg:space-y-32">
+      <SectionMagazine10 posts={posts.slice(0, 8)} />
+        
         <SectionLargeSlider
           heading="Editor's pick"
           subHeading="The most outstanding articles"

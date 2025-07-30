@@ -14,13 +14,8 @@ const SectionMagazine10: FC<Props> = ({ posts, className }) => {
     <div className={clsx('section-magazine-10 relative', className)}>
       {!posts.length && <span>Nothing we found!</span>}
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
+        {posts[0] && <Card19 post={posts[0]} />}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:grid-rows-5">
-          {posts
-            .filter((_, i) => i < 3 && i >= 1)
-            .map((item, index) => (
-              <Card18 className="col-span-1 sm:row-span-3" key={index} post={item} />
-            ))}
-
           {posts[3] && (
             <Card19
               ratio="aspect-4/3 sm:aspect-16/1"
@@ -29,9 +24,12 @@ const SectionMagazine10: FC<Props> = ({ posts, className }) => {
               post={posts[3]}
             />
           )}
+          {posts
+            .filter((_, i) => i < 3 && i >= 1)
+            .map((item, index) => (
+              <Card18 className="col-span-1 sm:row-span-3" key={index} post={item} />
+            ))}
         </div>
-
-        {posts[0] && <Card19 post={posts[0]} />}
       </div>
     </div>
   )
