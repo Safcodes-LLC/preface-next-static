@@ -11,9 +11,10 @@ interface Props {
   videoUrl: string
   isHover: boolean
   handle: string
+  autoPlay?: boolean
 }
 
-const MediaVideo: FC<Props> = ({ videoUrl, isHover, handle }) => {
+const MediaVideo: FC<Props> = ({ videoUrl, isHover, handle, autoPlay = false }) => {
   const [isMuted, setIsMuted] = useState(true)
   const [showDescUnmuted, setShowDescUnmuted] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -22,11 +23,16 @@ const MediaVideo: FC<Props> = ({ videoUrl, isHover, handle }) => {
   const playerRef = useRef<ReactPlayer | null>(null)
 
   useEffect(() => {
-    if (isHover) {
+    if (autoPlay) {
+      // For autoplay, render immediately and start playing
+      setIsRendered(true)
+      setIsPlaying(true)
+    } else if (isHover) {
+      // For hover play, render on hover
       setIsRendered(true)
       playerRef.current?.seekTo(0, 'seconds')
     }
-  }, [isHover])
+  }, [isHover, autoPlay])
 
   useEffect(() => {
     return () => {
@@ -34,14 +40,17 @@ const MediaVideo: FC<Props> = ({ videoUrl, isHover, handle }) => {
     }
   }, [__timeOut])
 
+  const shouldPlay = autoPlay || isHover
+
   return (
-    <div className={clsx('absolute inset-0', isHover ? 'opacity-100' : 'opacity-0')}>
+    <div className={clsx('absolute inset-0', shouldPlay ? 'opacity-100' : 'opacity-0')}>
       {isRendered && (
         <ReactPlayer
           ref={playerRef}
           url={videoUrl}
           muted={isMuted}
-          playing={isHover}
+          playing={shouldPlay}
+          loop={autoPlay}
           style={{
             opacity: isPlaying ? 1 : 0,
           }}

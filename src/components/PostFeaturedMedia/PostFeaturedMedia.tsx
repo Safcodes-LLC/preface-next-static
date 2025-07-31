@@ -12,9 +12,10 @@ interface Props {
   className?: string
   post: TPost
   isHover?: boolean
+  autoPlay?: boolean
 }
 
-const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false }) => {
+const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPlay = false }) => {
   const { featuredImage, postType, videoUrl, galleryImgs, audioUrl, handle, title } = post
 
   const renderPostGallery = () => {
@@ -47,7 +48,7 @@ const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false }) => {
             postType={postType}
           />
         )}
-        <MediaVideo isHover={isHover} videoUrl={videoUrl} handle={handle} />
+        <MediaVideo isHover={isHover} videoUrl={videoUrl} handle={handle} autoPlay={autoPlay} />
       </>
     )
   }
