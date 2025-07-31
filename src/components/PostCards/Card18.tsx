@@ -9,6 +9,7 @@ import PostCardCommentBtn from '../PostCardCommentBtn'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
 import PostTypeFeaturedIcon from '../PostTypeFeaturedIcon'
+import ButtonPrimary from '@/shared/ButtonPrimary'
 
 interface Props {
   className?: string
@@ -66,8 +67,21 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
           <div className="w-0.5 h-8 bg-white flex-shrink-0 mt-3"></div>
           <h2 className={clsx('leading-snug font-semibold text-white line-clamp-2', titleClass)}>{title}</h2>
         </div>
+       <div className='flex flex-col items-center gap-2'>
+       <p className={clsx('mt-3 leading-snug font-medium text-[14px] text-white line-clamp-2')}>{excerpt}</p>
+        <div className="mb-4 relative z-10">
+          <ButtonPrimary 
+            color="logo-colors"
+            className="!text-[12px] !px-6 !py-1"
+          >
+            Start Reading
+            {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}
+          </ButtonPrimary>
+        </div>
+       </div>
         
-        <p className={clsx('mt-3 leading-snug font-medium text-[14px] text-white line-clamp-2')}>{excerpt}</p>
+   
+      
       </div>
     </div>
   )
