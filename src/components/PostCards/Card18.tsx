@@ -1,15 +1,12 @@
 import PostFeaturedMedia from '@/components/PostFeaturedMedia/PostFeaturedMedia'
 import { TPost } from '@/data/posts'
+import ButtonPrimary from '@/shared/ButtonPrimary'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
-import PostCardCommentBtn from '../PostCardCommentBtn'
-import PostCardLikeBtn from '../PostCardLikeBtn'
-import PostCardSaveBtn from '../PostCardSaveBtn'
 import PostTypeFeaturedIcon from '../PostTypeFeaturedIcon'
-import ButtonPrimary from '@/shared/ButtonPrimary'
 
 interface Props {
   className?: string
@@ -19,7 +16,8 @@ interface Props {
 }
 
 const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post }) => {
-  const { title, excerpt, handle, featuredImage, categories, postType, likeCount, liked, commentCount, bookmarked } = post
+  const { title, excerpt, handle, featuredImage, categories, postType, likeCount, liked, commentCount, bookmarked } =
+    post
 
   return (
     <div className={clsx('group post-card-18 relative flex flex-col overflow-hidden rounded-xl', className)}>
@@ -64,24 +62,22 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         {/* <CategoryBadgeList categories={categories} /> */}
         <div className="flex items-start gap-3">
           {/* vertical line */}
-          <div className="w-0.5 h-8 bg-white flex-shrink-0 mt-3"></div>
-          <h2 className={clsx('leading-snug font-semibold text-white line-clamp-2', titleClass)}>{title}</h2>
+          <div className="mt-1 h-8 w-0.5 flex-shrink-0 bg-white"></div>
+          <h2 className={clsx('!line-clamp-2 !text-sm leading-snug font-semibold text-white sm:!text-[17px]', titleClass)}>
+            {title}
+          </h2>
         </div>
-       <div className='flex flex-col items-center gap-2'>
-       <p className={clsx('mt-3 leading-snug font-medium text-[14px] text-white line-clamp-2')}>{excerpt}</p>
-        <div className="mb-4 relative z-10">
-          <ButtonPrimary 
-            color="logo-colors"
-            className="!text-[12px] !px-6 !py-1"
-          >
-            Start Reading
-            {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}
-          </ButtonPrimary>
+        <div className="flex flex-col items-center gap-2">
+          <p className={clsx('mt-3 line-clamp-2 text-[12px] leading-snug font-medium text-white sm:text-sm')}>
+            {excerpt}
+          </p>
+          <div className="relative z-10">
+            <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
+              Start Reading
+              {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}
+            </ButtonPrimary>
+          </div>
         </div>
-       </div>
-        
-   
-      
       </div>
     </div>
   )
