@@ -90,11 +90,11 @@ const Card19: FC<Props> = ({
         
         <div className="flex items-start gap-3 relative z-10">
           {verticalLine && <div className="mt-3 h-8 w-0.5 flex-shrink-0 bg-white"></div>}
-          <h2 className={clsx(' block font-semibold text-white', titleClass)}>{title}</h2>
+          <h2 className={clsx(' block font-semibold text-white !line-clamp-2 !text-[14px] sm:text-[18px]', titleClass)}>{title}</h2>
         </div>
         {!textCenter && (
-          <div className="mt-3 flex items-center justify-between gap-4 relative z-10">
-            <p className={clsx('line-clamp-2 text-[14px] leading-snug font-medium text-white flex-1')}>{excerpt}</p>
+          <div className="mt-3 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
+            <p className={clsx('line-clamp-2 text-[12px] sm:text-[14px]  leading-snug font-medium text-white flex-1')}>{excerpt}</p>
             <ButtonPrimary 
               color="logo-colors"
               className="!text-[12px] !px-4 !py-1 flex-shrink-0"
