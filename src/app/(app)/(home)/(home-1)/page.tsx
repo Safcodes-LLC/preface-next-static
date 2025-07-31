@@ -7,6 +7,7 @@ import SectionLargeSlider from '@/components/SectionLargeSlider'
 import SectionMagazine1 from '@/components/SectionMagazine1'
 import SectionMagazine10 from '@/components/SectionMagazine10'
 import SectionMagazine2 from '@/components/SectionMagazine2'
+import VideoHeroBanner from '@/components/VideoHeroBanner'
 import SectionMagazine7 from '@/components/SectionMagazine7'
 import SectionMagazine8 from '@/components/SectionMagazine8'
 import SectionMagazine9 from '@/components/SectionMagazine9'
@@ -38,7 +39,7 @@ const Page = async () => {
 
   // Create specific data for SectionMagazine10
   const magazine10Data = [
-    videoPosts[0], // 1st Card19 - Video data
+    videoPosts[3], // 1st Card19 - Video data
     defaultPosts[0], // 2nd Card19 - Article data  
     defaultPosts[1], // 1st Card18 - Article data
     defaultPosts[2], // 2nd Card18 - Article data
@@ -50,6 +51,9 @@ const Page = async () => {
 
   return (
     <div className="relative pb-28 lg:pb-32">
+      {/* Video Hero Banner */}
+      <VideoHeroBanner />
+      
       <div className="relative container space-y-28 lg:space-y-32">
         <SectionMagazine10 posts={magazine10Data} />
         
