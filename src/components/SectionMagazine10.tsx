@@ -14,7 +14,7 @@ const SectionMagazine10: FC<Props> = ({ posts, className }) => {
     <div className={clsx('section-magazine-10 relative', className)}>
       {!posts.length && <span>Nothing we found!</span>}
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
-        {posts[0] && <Card19 post={posts[0]} titleClass="text-lg sm:text-xl text-center px-[3rem] py-[2rem]" />}
+        {posts[0] && <Card19 post={posts[0]} titleClass="text-lg sm:text-xl" />}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:grid-rows-5">
           {posts[3] && (
             <Card19
