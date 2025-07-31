@@ -145,10 +145,10 @@ export async function getPostsDefault() {
         width: 1920,
         height: 1080,
       },
-      title: 'The Complete Guide to Living Sustainably',
+      title: 'MOM, WHY IS THE PROPHET CALLING US?',
       handle: 'sustainable-living-complete-guide',
       excerpt:
-        'Learn how to reduce your carbon footprint and live a more sustainable lifestyle with these practical tips.',
+        'A GLIMPSE INTO THE COMPASSIONATE SERMONS OF THE PROPHET ﷺ',
       date: '2025-04-20T12:00:00Z',
       readingTime: 6,
       commentCount: 45,
