@@ -57,7 +57,7 @@ export async function getPostsDefault() {
     {
       id: 'post-1',
       featuredImage: {
-        src: _demo_post_image_urls[0],
+        src: "/images/banner/bannerarticle-2.png",
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -98,7 +98,7 @@ export async function getPostsDefault() {
     {
       id: 'post-2',
       featuredImage: {
-        src: _demo_post_image_urls[1],
+        src: "/images/banner/bannerarticle-3.png",
         alt: 'The Future of Remote Work in 2025',
         width: 1920,
         height: 1080,
@@ -140,7 +140,7 @@ export async function getPostsDefault() {
     {
       id: 'post-3',
       featuredImage: {
-        src: _demo_post_image_urls[2],
+        src: "/images/banner/bannerarticle-1.png",
         alt: 'Sustainable Living: - The Complete Guide',
         width: 1920,
         height: 1080,
@@ -817,7 +817,7 @@ export async function getPostsVideo() {
     {
       id: 'post-video-1',
       featuredImage: {
-        src: _demo_post_image_urls[18],
+        src: "/images/banner/bannervideo-1.png",
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
