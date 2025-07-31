@@ -68,7 +68,7 @@ const Card19: FC<Props> = ({
       <div
         className={clsx(
           'absolute inset-x-0 bottom-0 flex grow flex-col',
-          textCenter ? 'w-full p-5 text-left sm:p-8 lg:mx-auto lg:w-[80%] lg:text-center lg:my-8' : 'p-5 text-left sm:p-8'
+          textCenter ? 'w-full p-5 text-left sm:p-8 xl:mx-auto xl:w-[80%] xl:text-center xl:my-8' : 'p-5 text-left sm:p-8'
         )}
       >
         <Link href={`/post/${handle}`} className="absolute inset-0" />
