@@ -18,7 +18,7 @@ import SectionSubscribe2 from '@/components/SectionSubscribe2'
 import SectionVideos from '@/components/SectionVideos'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
-import { getAllPosts, getPostsAudio, getPostsGallery, getPostsVideo } from '@/data/posts'
+import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -27,17 +27,31 @@ export const metadata: Metadata = {
 }
 
 const Page = async () => {
+  // Get specific data instead of random posts
   const posts = await getAllPosts()
-  const audioPosts = await getPostsAudio()
+  const defaultPosts = await getPostsDefault()
   const videoPosts = await getPostsVideo()
+  const audioPosts = await getPostsAudio()
   const galleryPosts = await getPostsGallery()
   const authors = await getAuthors()
   const categories = await getCategories()
 
+  // Create specific data for SectionMagazine10
+  const magazine10Data = [
+    videoPosts[0], // 1st Card19 - Video data
+    defaultPosts[0], // 2nd Card19 - Article data  
+    defaultPosts[1], // 1st Card18 - Article data
+    defaultPosts[2], // 2nd Card18 - Article data
+    defaultPosts[3], // 3rd Card18 - Article data
+    defaultPosts[4], // 4th Card18 - Article data
+    defaultPosts[5], // 5th Card18 - Article data
+    defaultPosts[6], // 6th Card18 - Article data
+  ]
+
   return (
     <div className="relative pb-28 lg:pb-32">
       <div className="relative container space-y-28 lg:space-y-32">
-      <SectionMagazine10 posts={posts.slice(0, 8)} />
+        <SectionMagazine10 posts={magazine10Data} />
         
         <SectionLargeSlider
           heading="Editor's pick"
