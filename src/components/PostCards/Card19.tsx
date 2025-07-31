@@ -15,6 +15,7 @@ interface Props {
   ratio?: string
   titleClass?: string
   post: TPost
+  verticalLine?: boolean
 }
 
 const Card19: FC<Props> = ({
@@ -22,6 +23,7 @@ const Card19: FC<Props> = ({
   titleClass = 'text-xl sm:text-2xl xl:text-3xl',
   ratio = 'aspect-4/3 sm:aspect-1/1',
   post,
+  verticalLine = false
 }) => {
   const { title, handle, featuredImage, categories, postType, likeCount, liked, commentCount, bookmarked } = post
 
@@ -66,7 +68,11 @@ const Card19: FC<Props> = ({
       <div className="absolute inset-x-0 bottom-0 flex grow flex-col p-5 sm:p-8">
         <Link href={`/post/${handle}`} className="absolute inset-0" />
         {/* <CategoryBadgeList categories={categories} /> */}
-        <h2 className={clsx('mt-3 block font-semibold text-white', titleClass)}>{title}</h2>
+        <div className="flex items-start gap-3">
+          {verticalLine && <div className="w-0.5 h-8 bg-white flex-shrink-0 mt-3"></div>}
+          <h2 className={clsx('mt-3 block font-semibold text-white', titleClass)}>{title}</h2>
+        </div>
+        {/* <p className={clsx('mt-3 leading-snug font-medium text-[14px] text-white line-clamp-2')}>{excerpt}</p> */}
       </div>
     </div>
   )

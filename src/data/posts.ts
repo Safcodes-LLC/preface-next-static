@@ -822,7 +822,7 @@ export async function getPostsVideo() {
         width: 1920,
         height: 1080,
       },
-      title: 'The impact of COVID-19 on The Airport Business',
+      title: 'WHAT IF YOU COULD STEP INTO A RIVER OF RENEWAL FIVE TIMES A DAY?',
       handle: 'the-impact-of-covid-19-on-the-airport-business',
       excerpt: 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
       date: '2025-06-10',
