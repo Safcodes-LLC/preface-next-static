@@ -29,7 +29,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
             <Image
               sizes="(max-width: 1024px) 100vw, 33vw"
               alt={title}
-              className="size-full rounded-xl object-cover brightness-100 transition-[filter] duration-300 group-hover:brightness-75"
+              className="size-full rounded-xl object-cover brightness-85 transition-[filter] duration-300 group-hover:brightness-60"
               src={featuredImage}
               priority
               fill
@@ -45,7 +45,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         )}
       </div>
 
-      <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-4 opacity-100 ">
         {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}

@@ -37,7 +37,7 @@ const Card19: FC<Props> = ({
           <>
             <Image
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="rounded-xl object-cover brightness-100 transition-[filter] duration-300 group-hover:brightness-75"
+              className="rounded-xl object-cover brightness-85 transition-[filter] duration-300 group-hover:brightness-60"
               src={featuredImage}
               alt={title}
               priority
