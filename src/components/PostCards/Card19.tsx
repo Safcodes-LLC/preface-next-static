@@ -71,13 +71,13 @@ const Card19: FC<Props> = ({
         className={clsx(
           'absolute inset-x-0 bottom-0 flex grow flex-col',
           textCenter
-            ? 'w-full p-5 text-left sm:p-6 xl:mx-auto xl:my-8 xl:w-[80%] xl:text-center'
+            ? 'w-full p-5 gap-2 sm:gap-4 text-left sm:p-6 xl:mx-auto xl:my-8 xl:w-[80%] xl:text-center'
             : 'p-5 text-left sm:p-6'
         )}
       >
         {/* Button above title */}
         {textCenter && (
-        <div className="mb-4 relative z-10">
+        <div className=" relative z-10">
           <ButtonPrimary 
             color="logo-colors"
             className="!text-[12px] !px-6 !py-1"
@@ -90,7 +90,7 @@ const Card19: FC<Props> = ({
         
         <div className="flex items-start gap-3 relative z-10">
           {verticalLine && <div className="mt-3 h-8 w-0.5 flex-shrink-0 bg-white"></div>}
-          <h2 className={clsx('mt-3 block font-semibold text-white', titleClass)}>{title}</h2>
+          <h2 className={clsx(' block font-semibold text-white', titleClass)}>{title}</h2>
         </div>
         {!textCenter && (
           <div className="mt-3 flex items-center justify-between gap-4 relative z-10">
