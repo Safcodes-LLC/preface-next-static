@@ -18,7 +18,7 @@ interface Props {
 }
 
 const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post }) => {
-  const { title, handle, featuredImage, categories, postType, likeCount, liked, commentCount, bookmarked } = post
+  const { title, excerpt, handle, featuredImage, categories, postType, likeCount, liked, commentCount, bookmarked } = post
 
   return (
     <div className={clsx('group post-card-18 relative flex flex-col overflow-hidden rounded-xl', className)}>
@@ -47,9 +47,10 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
       </div>
 
       <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <PostCardLikeBtn likeCount={likeCount} liked={liked} />
+        {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
-        <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} />
+        <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
+        <CategoryBadgeList categories={categories} />
       </div>
 
       <Link
@@ -59,8 +60,14 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
 
       <div className="absolute inset-x-0 bottom-0 flex grow flex-col p-6">
         <Link href={`/post/${handle}`} className="absolute inset-0" />
-        <CategoryBadgeList categories={categories} />
-        <h2 className={clsx('mt-3 leading-snug font-semibold text-white', titleClass)}>{title}</h2>
+        {/* <CategoryBadgeList categories={categories} /> */}
+        <div className="flex items-start gap-3">
+          {/* vertical line */}
+          <div className="w-0.5 h-8 bg-white flex-shrink-0 mt-3"></div>
+          <h2 className={clsx('leading-snug font-semibold text-white line-clamp-2', titleClass)}>{title}</h2>
+        </div>
+        
+        <p className={clsx('mt-3 leading-snug font-medium text-[14px] text-white line-clamp-2')}>{excerpt}</p>
       </div>
     </div>
   )
