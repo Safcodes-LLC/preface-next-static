@@ -65,7 +65,7 @@ const Card19: FC<Props> = ({
         {/* <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 flex grow flex-col p-5 sm:p-8">
+      <div className="absolute inset-x-0 bottom-0 flex grow flex-col p-5 sm:p-16">
         <Link href={`/post/${handle}`} className="absolute inset-0" />
         {/* <CategoryBadgeList categories={categories} /> */}
         <div className="flex items-start gap-3">
