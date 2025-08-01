@@ -16,7 +16,7 @@ const CardCategory2: FC<Props> = ({ className, category, badge }) => {
   return (
     <div
       className={clsx(
-        `card-category-2 relative flex flex-col items-center justify-center rounded-3xl  bg-white px-3 py-5 text-center sm:p-6 dark:bg-neutral-900`,
+        `card-category-2 relative flex flex-col items-center justify-center rounded-3xl  bg-white px-3 py-3 text-center sm:p-3 dark:bg-neutral-900`,
         className
       )}
     >
@@ -26,7 +26,7 @@ const CardCategory2: FC<Props> = ({ className, category, badge }) => {
         </Badge>
       )} */}
       <NcImage
-        containerClassName="relative shrink-0 size-20 "
+        containerClassName="relative shrink-0 size-16 "
         src={thumbnail || ''}
         fill
         sizes="80px"
