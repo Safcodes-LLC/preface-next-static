@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={beVietnamPro.className}>
-      <body className="bg-white text-base text-neutral-900 dark:bg-neutral-900 dark:text-neutral-200">
+      <body className="bg-[#F8F8F8] text-base text-neutral-900 dark:bg-neutral-900 dark:text-neutral-200">
         <ThemeProvider>
           <div>{children}</div>
         </ThemeProvider>
