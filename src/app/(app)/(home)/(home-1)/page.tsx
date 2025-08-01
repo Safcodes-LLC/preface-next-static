@@ -57,6 +57,13 @@ const Page = async () => {
       <div className="relative container space-y-28 lg:space-y-32">
         <SectionMagazine10 posts={magazine10Data} />
         
+        <SectionSliderNewCategories
+          heading="STORYTELLING ISLAM"
+          subHeading="Understanding Islam through 1001 stories"
+          categories={categories.slice(0, 10)}
+          categoryCardType="card3"
+        />
+
         <SectionLargeSlider
           heading="Editor's pick"
           subHeading="The most outstanding articles"
@@ -73,12 +80,7 @@ const Page = async () => {
           />
         </div>
 
-        <SectionSliderNewCategories
-          heading="Explore categories"
-          subHeading="Explore the categories"
-          categories={categories.slice(0, 10)}
-          categoryCardType="card4"
-        />
+       
 
         <div className="relative py-16 lg:py-20">
           <BackgroundSection />
