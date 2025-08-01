@@ -45,10 +45,7 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
     // Fetch data on client side
     const fetchData = async () => {
       try {
-        const [navigationData, postsData] = await Promise.all([
-          getNavigation(),
-          getAllPosts()
-        ])
+        const [navigationData, postsData] = await Promise.all([getNavigation(), getAllPosts()])
         setNavigationMenu(navigationData)
         setFeaturedPosts(postsData.slice(0, 2))
       } catch (error) {
@@ -62,10 +59,10 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
   return (
     <div
       className={clsx(
-        'header-2 fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-sm border-neutral-200 dark:bg-neutral-900/95 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100' 
-          : 'bg-transparent border-transparent text-white',
+        'header-2 fixed top-0 right-0 left-0 z-50 transition-all duration-300',
+        isScrolled
+          ? 'border-neutral-200 bg-white/95 text-neutral-900 backdrop-blur-sm dark:border-neutral-700 dark:bg-[#0A0A0A] dark:text-neutral-100'
+          : 'border-transparent bg-transparent text-white',
         bottomBorder && 'border-b',
         !bottomBorder && 'has-[.header-popover-full-panel]:border-b',
         className
@@ -74,7 +71,12 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
       <div className="container flex h-20 justify-between">
         <div className="flex flex-1 items-center gap-x-4 sm:gap-x-5 lg:gap-x-7">
           <Logo />
-          <div className={clsx('h-8 border-l', isScrolled ? 'border-neutral-200 dark:border-neutral-700' : 'border-white/20')}></div>
+          <div
+            className={clsx(
+              'h-8 border-l',
+              isScrolled ? 'border-neutral-200 dark:border-neutral-700' : 'border-white/20'
+            )}
+          ></div>
           <div className="-ms-1.5">
             <SearchModal type="type1" />
           </div>
@@ -102,4 +104,4 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
   )
 }
 
-export default Header2WithScroll 
+export default Header2WithScroll
