@@ -1326,12 +1326,12 @@ export async function getPostsGallery() {
     {
       id: 'post-gallery-1',
       featuredImage: {
-        src: _demo_post_image_urls[10],
+        src: "/images/holyquran/holyquranmain1.png",
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
       },
-      title: 'Where the Internet Lives: From Trauma to Triumph Oval',
+      title: 'The symmetry of spider and Sura al Ankabooth',
       handle: 'where-the-internet-lives-from-trauma-to-triumph-oval',
       excerpt: 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
       date: '2025-06-10',
@@ -1374,12 +1374,13 @@ export async function getPostsGallery() {
     {
       id: 'post-gallery-2',
       featuredImage: {
-        src: _demo_post_image_urls[11],
+        // src: _demo_post_image_urls[11],
+        src: "/images/holyquran/holyquranmain1.png",
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
       },
-      title: 'Ensure that interactive elements are easy to identify',
+      title: 'The bee, honey and message from the God',
       handle: 'ensure-that-interactive-elements-are-easy-to-identify',
       excerpt: 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
       date: '2025-06-10',

@@ -21,7 +21,7 @@ export async function getCategories() {
   return [
     {
       id: 'category-1',
-      name: 'Garden',
+      name: 'Islam for Beginners',
       handle: 'garden',
       description:
         'Explore the world of gardening, from planting to harvesting and everything in between. Discover tips, tricks, and expert advice to make your garden thrive.',
@@ -37,7 +37,7 @@ export async function getCategories() {
     },
     {
       id: 'category-2',
-      name: 'Technology',
+      name: 'Pillers of Faith',
       handle: 'technology',
       description:
         'Stay updated with the latest technology news, trends, and innovations. Explore the world of AI, blockchain, and the future of technology.',
