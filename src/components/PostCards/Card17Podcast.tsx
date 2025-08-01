@@ -2,6 +2,7 @@
 
 import { TPost } from '@/data/posts'
 import { Link } from '@/shared/link'
+import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { FC } from 'react'
@@ -19,15 +20,15 @@ const Card17Podcast: FC<Props> = ({ className, post }) => {
   return (
     <div
       className={clsx(
-        'post-card-17-podcast relative flex items-center justify-between gap-x-5 rounded-3xl border border-dashed border-neutral-200 bg-white p-2.5 dark:border-neutral-700 dark:bg-neutral-900',
+        'post-card-17-podcast relative flex items-center justify-between gap-x-5 rounded-xl  bg-white p-2.5 dark:bg-neutral-900',
         className
       )}
     >
       <div className="flex items-center gap-x-4">
-        <div className="relative size-14 shrink-0 rounded-full shadow-lg sm:size-18">
+        <div className="relative size-14 shrink-0 rounded-full shadow-lg sm:size-22">
           <Image
             sizes="(max-width: 1024px) 100vw, 50vw"
-            className="rounded-full object-cover"
+            className="rounded-[10px] object-cover"
             src={featuredImage}
             fill
             alt={title}
@@ -35,12 +36,12 @@ const Card17Podcast: FC<Props> = ({ className, post }) => {
         </div>
 
         <div className="flex grow flex-col">
-          <h2 className="block font-medium sm:text-base/snug sm:font-semibold">
-            <Link href={`/post/${handle}`} className="absolute inset-0"></Link>
+          <h2 className="block font-medium">
+            {/* <Link href={`/post/${handle}`} className="absolute inset-0"></Link> */}
             <span className="line-clamp-1">{title}</span>
           </h2>
 
-          <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1">
+          <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
             {IS_AUDIO && (
               <ButtonPlayMusicPlayer
                 post={post}
@@ -51,13 +52,18 @@ const Card17Podcast: FC<Props> = ({ className, post }) => {
             )}
 
             <div className="text-xs text-neutral-500 dark:text-neutral-400">
-              <time dateTime={date}>
+              {/* <time dateTime={date}>
                 {new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-              </time>
-              <span className="mx-1">/</span>
-              <span> {readingTime} min read</span>
+              </time> */}
+              {/* <span className="mx-1">/</span> */}
+              <span className="text-[12px] font-[400]"> 120 Articles</span>
             </div>
           </div>
+          <div className="flex shrink-0 items-center mt-[10px]">
+        <div className="inline-flex cursor-pointer items-center justify-center rounded-full bg-white p-1.5 border border-[#E2E2E2] dark:border-neutral-700 dark:bg-neutral-800">
+          <ArrowRightIcon className="h-3 w-3 text-neutral-700 dark:text-neutral-300 rtl:rotate-180" />
+        </div>
+      </div>
         </div>
       </div>
     </div>
