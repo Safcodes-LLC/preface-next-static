@@ -23,7 +23,7 @@ const Card10V2: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
-      <div className={clsx('relative w-full shrink-0 overflow-hidden rounded-3xl', ratio)}>
+      <div className={clsx('relative w-full shrink-0 overflow-hidden rounded-[15px]', ratio)}>
         <PostFeaturedMedia post={post} isHover={isHover} />
       </div>
       <div className="absolute inset-x-3 top-3 flex items-start gap-2">

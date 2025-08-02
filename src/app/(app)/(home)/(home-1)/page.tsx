@@ -77,6 +77,16 @@ const Page = async () => {
           categoryCardType="card2"
         />
 
+        <div className="relative py-16 lg:py-20">
+          <BackgroundSection />
+          <SectionSliderPosts
+            postCardName="card10V2"
+            heading="ISLAM FOR BEGINNERS"
+            subHeading="Over 100 Articles for beginners"
+            posts={defaultPosts.slice(0, 6)}
+          />
+        </div>
+
         <SectionLargeSlider
           heading="Editor's pick"
           subHeading="The most outstanding articles"
