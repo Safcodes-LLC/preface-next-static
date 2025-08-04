@@ -28,7 +28,7 @@ const Card5: FC<Props> = ({ className, post }) => {
             {title}
           </Link>
         </h2>
-        <PostCardMeta3 className="relative mt-auto" readingTime={readingTime} author={author} date={date} />
+        {/* <PostCardMeta3 className="relative mt-auto" readingTime={readingTime} author={author} date={date} /> */}
       </div>
     </div>
   )

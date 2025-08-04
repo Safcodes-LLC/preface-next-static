@@ -15,6 +15,7 @@ import SectionSliderNewAuthors from '@/components/SectionSliderNewAuthors'
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
 import SectionSliderPosts from '@/components/SectionSliderPosts'
 import SectionSubscribe2 from '@/components/SectionSubscribe2'
+import SectionTrending from '@/components/SectionTrending'
 import SectionVideos from '@/components/SectionVideos'
 import VideoHeroBanner from '@/components/VideoHeroBanner'
 import { getAuthors } from '@/data/authors'
@@ -87,10 +88,16 @@ const Page = async () => {
           />
         </div>
 
+        <SectionTrending
+          posts={posts.slice(0, 8)}
+          heading="LATEST ARTICLES"
+          subHeading="Discover the most outstanding articles in all topics of life"
+        />
+
         <SectionLargeSlider
           heading="Editor's pick"
           subHeading="The most outstanding articles"
-          className="pt-10 lg:pt-20"
+
           posts={audioPosts.slice(3, 8)}
         />
 
