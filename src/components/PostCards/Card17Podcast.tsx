@@ -20,7 +20,7 @@ const Card17Podcast: FC<Props> = ({ className, post }) => {
   return (
     <div
       className={clsx(
-        'post-card-17-podcast relative flex items-center justify-between gap-x-5 rounded-xl  bg-white p-2.5 dark:bg-neutral-900',
+        'post-card-17-podcast relative flex items-center justify-between gap-x-5 rounded-xl  bg-white p-2.5 dark:bg-[#0D0D0D]',
         className
       )}
     >
@@ -60,8 +60,8 @@ const Card17Podcast: FC<Props> = ({ className, post }) => {
             </div>
           </div>
           <div className="flex shrink-0 items-center mt-[10px]">
-        <div className="inline-flex cursor-pointer items-center justify-center rounded-full bg-white p-1.5 border border-[#E2E2E2] dark:border-neutral-700 dark:bg-neutral-800">
-          <ArrowRightIcon className="h-3 w-3 text-neutral-700 dark:text-neutral-300 rtl:rotate-180" />
+        <div className="inline-flex cursor-pointer items-center justify-center rounded-full bg-white p-1.5 border border-[#E2E2E2] dark:border-[#505050] dark:bg-[#0D0D0D]">
+          <ArrowRightIcon className="h-3 w-3 text-[#919191] dark:text-[#707070] rtl:rotate-180" />
         </div>
       </div>
         </div>
