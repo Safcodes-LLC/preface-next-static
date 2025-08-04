@@ -1,13 +1,14 @@
+'use client'
+
 import { TPost } from '@/data/posts'
 import clsx from 'clsx'
-import Image from 'next/image'
 import Link from 'next/link'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
 import LocalDate from '../LocalDate'
-import PostCardCommentBtn from '../PostCardCommentBtn'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
+import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
 
 interface Props {
   className?: string
@@ -45,18 +46,23 @@ const Card8: FC<Props> = ({ className, post, ratio = 'aspect-3/4 sm:aspect-2/1' 
       </div>
     )
   }
+  const [isHover, setIsHover] = useState(false)
 
   return (
-    <div className={clsx('group post-card-8 relative overflow-hidden rounded-3xl', className)}>
+    <div
+      className={clsx('group post-card-8 relative overflow-hidden rounded-3xl', className)}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    >
       <div className={clsx('relative size-full', ratio)}>
-        <Image
+        {/* <Image
           className="rounded-xl object-cover"
           src={featuredImage}
           alt={title}
           fill
           sizes="(max-width: 600px) 480px, 800px"
-        />
-
+        /> */}
+        <PostFeaturedMedia post={post} isHover={isHover} />
         <Link
           href={`/post/${handle}`}
           className="absolute inset-x-0 top-1/3 bottom-0 bg-linear-to-t from-black opacity-60 transition-opacity duration-300 group-hover:top-0 group-hover:opacity-70"

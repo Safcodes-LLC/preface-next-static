@@ -1,14 +1,14 @@
+'use client'
+
 import { TPost } from '@/data/posts'
 import clsx from 'clsx'
-import Image from 'next/image'
 import Link from 'next/link'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import ButtonPlayMusicPlayer from '../ButtonPlayMusicPlayer'
 import CategoryBadgeList from '../CategoryBadgeList'
-import LocalDate from '../LocalDate'
-import PostCardCommentBtn from '../PostCardCommentBtn'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
+import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
 
 interface Props {
   className?: string
@@ -32,6 +32,8 @@ const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post }) => {
     bookmarked,
   } = post
 
+  const [isHover, setIsHover] = useState(false)
+
   const renderMeta = () => {
     return (
       <div className="mt-3.5 text-neutral-300">
@@ -53,17 +55,22 @@ const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post }) => {
   }
 
   return (
-    <div className={clsx('group post-card-9 relative flex flex-col overflow-hidden rounded-3xl', className)}>
+    <div
+      className={clsx('group post-card-9 relative flex flex-col overflow-hidden rounded-3xl', className)}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    >
       <div className={`relative flex w-full items-start ${ratio}`}></div>
 
       <Link href={`/post/${handle}`} className="absolute inset-0">
-        <Image
+        {/* <Image
           fill
           alt={title}
           className="size-full rounded-3xl object-cover brightness-75"
           src={featuredImage}
           sizes="(max-width: 600px) 480px, 500px"
-        />
+        /> */}
+        <PostFeaturedMedia post={post} isHover={isHover} />
       </Link>
 
       {postType === 'audio' && (
