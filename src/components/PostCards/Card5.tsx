@@ -3,7 +3,6 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
-import PostCardMeta3 from '../PostCardMeta/PostCardMeta3'
 
 interface Props {
   className?: string
@@ -15,7 +14,7 @@ const Card5: FC<Props> = ({ className, post }) => {
   return (
     <div
       className={clsx(
-        'group post-card-5 relative rounded-3xl border border-neutral-200 bg-white p-5 transition-shadow hover:shadow-lg dark:border-neutral-700 dark:bg-neutral-900',
+        'group post-card-5 relative rounded-3xl bg-white p-5 transition-shadow hover:shadow-lg dark:bg-[#0D0D0D]',
         className
       )}
     >
