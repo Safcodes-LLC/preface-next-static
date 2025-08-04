@@ -33,7 +33,7 @@ const CardCategory3: FC<Props> = ({ className = '', category }) => {
         <span className="absolute inset-0 bg-black/10 opacity-0 transition-opacity group-hover:opacity-100"></span>
       </div>
       <div className="mt-4 text-center">
-        <h2 className={`text-base font-medium text-neutral-900 dark:text-neutral-100`}>{name}</h2>
+        <h2 className={`text-lg font-medium text-neutral-900 dark:text-neutral-100`}>{name}</h2>
         <span className={`mt-1 block text-sm text-neutral-600 dark:text-neutral-400`}>{count} Articles</span>
         <div className="inline-flex items-center justify-center rounded-full bg-[#00652E] dark:bg-[#60A43A] p-2 my-[10px] cursor-pointer">
           <ArrowRightIcon className="h-5 w-5 text-white rtl:rotate-180" />
