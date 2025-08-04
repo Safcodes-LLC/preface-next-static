@@ -40,14 +40,14 @@ const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post }) => {
             {title}
           </Link>
         </h2>
-        <div className="relative mt-3 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs">
+        {/* <div className="relative mt-3 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs">
           <Link href={`/author/${author.handle}`} className="absolute inset-0" />
           <span className="font-medium text-neutral-200 hover:text-white">{author.name}</span>
           <span className="font-medium">·</span>
           <LocalDate date={date} />
           <span>/</span>
           <span>{readingTime} min read</span>
-        </div>
+        </div> */}
       </div>
     )
   }
@@ -72,8 +72,8 @@ const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post }) => {
 
       <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-3">
         <PostCardLikeBtn likeCount={likeCount} liked={liked} />
-        <PostCardCommentBtn commentCount={commentCount} handle={handle} />
-        <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} />
+        <PostCardSaveBtn bookmarked={bookmarked} />
+        {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
       </div>
 
       <div className="absolute inset-x-0 bottom-0 flex grow flex-col p-4">

@@ -64,8 +64,8 @@ const Card8: FC<Props> = ({ className, post, ratio = 'aspect-3/4 sm:aspect-2/1' 
 
         <div className="absolute inset-x-0 top-0 z-10 flex flex-wrap gap-x-2 gap-y-1 p-4 sm:px-5">
           <PostCardLikeBtn likeCount={likeCount} liked={liked} />
-          <PostCardCommentBtn commentCount={commentCount} handle={handle} />
-          <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} />
+          <PostCardSaveBtn bookmarked={bookmarked} />
+          {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
         </div>
       </div>
 
@@ -78,7 +78,7 @@ const Card8: FC<Props> = ({ className, post, ratio = 'aspect-3/4 sm:aspect-2/1' 
           </p>
         </h2>
 
-        {renderMeta()}
+        {/* {renderMeta()} */}
       </div>
     </div>
   )

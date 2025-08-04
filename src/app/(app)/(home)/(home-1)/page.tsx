@@ -101,7 +101,7 @@ const Page = async () => {
           <SectionMagazine4
             heading="VISUALS"
             subHeading="Hover on the post card and preview video"
-            posts={posts.slice(0, 8)}
+            posts={videoPosts.slice(1, 8)}
             headingColor="light"
           />
         </div>
