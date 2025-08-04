@@ -1,18 +1,23 @@
 import clsx from 'clsx'
 
-type HeadingProps = { level?: 1 | 2 | 3 | 4 | 5 | 6; dimHeading?: string } & React.ComponentPropsWithoutRef<
-  'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
->
+type HeadingProps = {
+  level?: 1 | 2 | 3 | 4 | 5 | 6
+  dimHeading?: string
+  headingColor?: string
+} & React.ComponentPropsWithoutRef<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'>
 
-export function Heading({ className, level = 2, dimHeading, children, ...props }: HeadingProps) {
+export function Heading({ className, level = 2, dimHeading, headingColor, children, ...props }: HeadingProps) {
   let Element: `h${typeof level}` = `h${level}`
+
+  const isLight = headingColor === 'light'
 
   return (
     <Element
       {...props}
       className={clsx(
         className,
-        'text-3xl font-semibold tracking-tight text-pretty text-neutral-950 sm:text-4xl dark:text-white'
+        'text-3xl font-semibold tracking-tight text-pretty sm:text-4xl',
+        isLight ? 'text-white' : 'text-neutral-950 dark:text-white'
       )}
     >
       {children}
@@ -22,13 +27,17 @@ export function Heading({ className, level = 2, dimHeading, children, ...props }
   )
 }
 
-export function Subheading({ className, level = 3, ...props }: HeadingProps) {
+export function Subheading({ className, level = 3, headingColor, ...props }: HeadingProps) {
   let Element: `h${typeof level}` = `h${level}`
-
+  const isLight = headingColor === 'light'
   return (
     <Element
       {...props}
-      className={clsx(className, 'text-lg font-normal text-neutral-500 lg:text-xl dark:text-neutral-400')}
+      className={clsx(
+        className,
+        'text-lg font-normal lg:text-xl',
+        isLight ? 'text-[#C2C2C2]' : 'text-neutral-500 dark:text-neutral-400'
+      )}
     />
   )
 }
@@ -52,7 +61,11 @@ export default function HeadingWithSub({
       <Heading level={level} {...props}>
         {children}
       </Heading>
-      {subHeading && <Subheading className={clsx('mt-3.5 max-w-3xl', isCenter && 'mx-auto')}>{subHeading}</Subheading>}
+      {subHeading && (
+        <Subheading headingColor={props.headingColor} className={clsx('mt-3.5 max-w-3xl', isCenter && 'mx-auto')}>
+          {subHeading}
+        </Subheading>
+      )}
     </div>
   )
 }

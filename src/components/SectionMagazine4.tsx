@@ -11,9 +11,10 @@ type Props = Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> & {
   posts: TPost[]
   className?: string
   heading?: string
+  headingColor?: string
 }
 
-const SectionMagazine4: FC<Props> = ({ posts, heading, className, subHeading, dimHeading }) => {
+const SectionMagazine4: FC<Props> = ({ posts, heading, className, subHeading, dimHeading, headingColor }) => {
   return (
     <div className={clsx('section-magazine-4 relative', className)}>
       {/* <SectionTabHeader
@@ -23,7 +24,7 @@ const SectionMagazine4: FC<Props> = ({ posts, heading, className, subHeading, di
         tabActive="Development"
         tabs={['Development', 'Design', 'Illustration', 'Photography']}
       /> */}
-      <HeadingWithSub subHeading={subHeading} dimHeading={dimHeading}>
+      <HeadingWithSub subHeading={subHeading} dimHeading={dimHeading} headingColor={headingColor}>
         {heading}
       </HeadingWithSub>
       {!posts?.length && <span>Nothing we found!</span>}

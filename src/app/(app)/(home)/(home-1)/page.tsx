@@ -98,7 +98,12 @@ const Page = async () => {
 
         <div className="relative py-16 lg:py-20">
           <BackgroundDarkSection />
-          <SectionMagazine4 heading="VISUALS" subHeading="Hover on the post card and preview video" posts={posts.slice(0, 8)} />
+          <SectionMagazine4
+            heading="VISUALS"
+            subHeading="Hover on the post card and preview video"
+            posts={posts.slice(0, 8)}
+            headingColor="light"
+          />
         </div>
 
         <SectionLargeSlider
