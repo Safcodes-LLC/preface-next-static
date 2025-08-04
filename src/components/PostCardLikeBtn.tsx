@@ -17,7 +17,7 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked }) => {
   return (
     <button
       className={clsx(
-        'post-card-like-btn group flex h-8 items-center rounded-full ps-2 pe-3 text-xs leading-none transition-colors',
+        'post-card-like-btn group flex h-8 items-center rounded-full ps-2 pe-3 text-xs leading-none transition-colors cursor-pointer',
         className,
         isLiked
           ? 'bg-rose-50 text-rose-600 dark:bg-rose-100'

@@ -16,7 +16,7 @@ const BookmarkBtn: FC<Props> = ({ className, bookmarked }) => {
   return (
     <button
       className={clsx(
-        'relative flex size-8 items-center justify-center rounded-full bg-neutral-50 transition-colors duration-300 hover:bg-neutral-100 dark:bg-white/10 dark:hover:bg-white/20',
+        'relative flex size-8 items-center justify-center rounded-full bg-neutral-50 transition-colors duration-300 hover:bg-neutral-100 dark:bg-white/10 dark:hover:bg-white/20 cursor-pointer',
         className
       )}
       title="Save to reading list"
