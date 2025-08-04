@@ -1,9 +1,7 @@
-import BackgroundDarkSection from '@/components/BackgroundDarkSection'
 import BackgroundSection from '@/components/BackgroundSection'
 import SectionAds from '@/components/SectionAds'
 import SectionBecomeAnAuthor from '@/components/SectionBecomeAnAuthor'
 import SectionGridAuthorBox from '@/components/SectionGridAuthorBox'
-import SectionGridPosts from '@/components/SectionGridPosts'
 import SectionLargeSlider from '@/components/SectionLargeSlider'
 import SectionMagazine1 from '@/components/SectionMagazine1'
 import SectionMagazine10 from '@/components/SectionMagazine10'
@@ -95,9 +93,10 @@ const Page = async () => {
           heading="LATEST ARTICLES"
           subHeading="Discover the most outstanding articles in all topics of life"
         />
+      </div>
 
-        <div className="relative py-16 lg:py-20">
-          <BackgroundDarkSection />
+      <div className="my-28 bg-[#000000] py-16 lg:py-20 dark:bg-[#0D0D0D]">
+        <div className="relative container">
           <SectionMagazine4
             heading="VISUALS"
             subHeading="Hover on the post card and preview video"
@@ -105,6 +104,14 @@ const Page = async () => {
             headingColor="light"
           />
         </div>
+      </div>
+
+      {/* <div className="container space-y-28 lg:space-y-32">
+        <SectionMagazine8
+          posts={audioPosts.slice(0, 6)}
+          heading="Stream live audio"
+          dimHeading="Click on the icon to enjoy the music"
+        />
 
         <SectionLargeSlider
           heading="Editor's pick"
@@ -143,27 +150,6 @@ const Page = async () => {
           posts={galleryPosts}
           heading="The gallery posts"
           dimHeading="The best way to showcase your work"
-        />
-      </div>
-
-      <div className="my-28 bg-neutral-100 py-28 lg:py-32 dark:bg-neutral-900">
-        <div className="relative container">
-          <SectionGridPosts
-            headingIsCenter
-            postCardName="card11"
-            heading="Explore latest video articles"
-            subHeading="Hover over the card for a video preview"
-            posts={videoPosts.slice(0, 8)}
-            gridClass="md:grid-cols-2 lg:grid-cols-4"
-          />
-        </div>
-      </div>
-
-      <div className="container space-y-28 lg:space-y-32">
-        <SectionMagazine8
-          posts={audioPosts.slice(0, 6)}
-          heading="Stream live audio"
-          dimHeading="Click on the icon to enjoy the music"
         />
 
         <div className="relative py-16 lg:py-20">
@@ -215,7 +201,7 @@ const Page = async () => {
           widgetTags={categories.slice(0, 6)}
           widgetPosts={posts.slice(0, 4)}
         />
-      </div>
+      </div> */}
     </div>
   )
 }
