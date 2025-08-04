@@ -5,7 +5,6 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { FC, useState } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
-import LocalDate from '../LocalDate'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
 import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
@@ -59,10 +58,8 @@ const Card8: FC<Props> = ({ className, post, ratio = 'aspect-3/4 sm:aspect-2/1' 
 
         <CategoryBadgeList categories={categories} />
 
-        <h2 className="mt-4 block text-lg font-semibold text-neutral-50 sm:text-2xl">
-          <p className="line-clamp-2" title={title}>
-            {title}
-          </p>
+        <h2 className="mt-4 !line-clamp-2 block text-lg font-semibold text-white sm:text-xl" title={title}>
+          {title}
         </h2>
 
         {/* Meta info without inner <a> */}

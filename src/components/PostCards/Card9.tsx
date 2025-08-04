@@ -59,10 +59,8 @@ const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post }) => {
         <CategoryBadgeList categories={categories} />
 
         <div className="mt-3.5 text-neutral-300">
-          <h2 className="block text-lg/6 font-semibold text-white">
-            <p className="line-clamp-2" title={title}>
-              {title}
-            </p>
+          <h2 className="!line-clamp-2 block text-base xl:text-lg/6 font-medium text-white" title={title}>
+            {title}
           </h2>
         </div>
       </div>
