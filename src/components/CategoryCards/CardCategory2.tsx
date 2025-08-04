@@ -16,7 +16,7 @@ const CardCategory2: FC<Props> = ({ className, category, badge }) => {
   return (
     <div
       className={clsx(
-        `card-category-2 relative flex flex-col items-center justify-center rounded-3xl  bg-white px-3 py-3 text-center sm:p-3 dark:bg-neutral-900`,
+        `card-category-2 relative flex flex-col items-center justify-center rounded-3xl  bg-white px-3 py-3 text-center sm:p-3 dark:bg-[#0D0D0D]`,
         className
       )}
     >
@@ -36,7 +36,7 @@ const CardCategory2: FC<Props> = ({ className, category, badge }) => {
       <div className="mt-3">
         <h2 className={`text-base font-semibold`}>{name}</h2>
         <Link className="absolute inset-0" href={`/category/${handle}`} />
-        <span className={`mt-1 block text-sm text-neutral-500 dark:text-neutral-400`}>{count} articles</span>
+        <span className={`mt-1 block text-sm text-[#666666] dark:text-[#DFDFDF]`}>{count} articles</span>
       </div>
     </div>
   )
