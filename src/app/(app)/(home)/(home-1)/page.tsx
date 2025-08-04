@@ -1,3 +1,4 @@
+import BackgroundDarkSection from '@/components/BackgroundDarkSection'
 import BackgroundSection from '@/components/BackgroundSection'
 import SectionAds from '@/components/SectionAds'
 import SectionBecomeAnAuthor from '@/components/SectionBecomeAnAuthor'
@@ -7,6 +8,7 @@ import SectionLargeSlider from '@/components/SectionLargeSlider'
 import SectionMagazine1 from '@/components/SectionMagazine1'
 import SectionMagazine10 from '@/components/SectionMagazine10'
 import SectionMagazine2 from '@/components/SectionMagazine2'
+import SectionMagazine4 from '@/components/SectionMagazine4'
 import SectionMagazine7 from '@/components/SectionMagazine7'
 import SectionMagazine8 from '@/components/SectionMagazine8'
 import SectionMagazine9 from '@/components/SectionMagazine9'
@@ -94,10 +96,14 @@ const Page = async () => {
           subHeading="Discover the most outstanding articles in all topics of life"
         />
 
+        <div className="relative py-16 lg:py-20">
+          <BackgroundDarkSection />
+          <SectionMagazine4 heading="VISUALS" subHeading="Hover on the post card and preview video" posts={posts.slice(0, 8)} />
+        </div>
+
         <SectionLargeSlider
           heading="Editor's pick"
           subHeading="The most outstanding articles"
-
           posts={audioPosts.slice(3, 8)}
         />
 
