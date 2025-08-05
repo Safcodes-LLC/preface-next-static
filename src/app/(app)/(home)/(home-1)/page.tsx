@@ -1,22 +1,11 @@
 import BackgroundSection from '@/components/BackgroundSection'
-import SectionAds from '@/components/SectionAds'
-import SectionBecomeAnAuthor from '@/components/SectionBecomeAnAuthor'
-import SectionGridAuthorBox from '@/components/SectionGridAuthorBox'
-import SectionLargeSlider from '@/components/SectionLargeSlider'
-import SectionMagazine1 from '@/components/SectionMagazine1'
 import SectionMagazine10 from '@/components/SectionMagazine10'
-import SectionMagazine2 from '@/components/SectionMagazine2'
 import SectionMagazine4 from '@/components/SectionMagazine4'
 import SectionMagazine7 from '@/components/SectionMagazine7'
-import SectionMagazine8 from '@/components/SectionMagazine8'
-import SectionMagazine9 from '@/components/SectionMagazine9'
-import SectionPostsWithWidgets from '@/components/SectionPostsWithWidgets'
-import SectionSliderNewAuthors from '@/components/SectionSliderNewAuthors'
+import SectionSlider from '@/components/SectionSlider.tsx'
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
-import SectionSliderPosts from '@/components/SectionSliderPosts'
-import SectionSubscribe2 from '@/components/SectionSubscribe2'
 import SectionTrending from '@/components/SectionTrending'
-import SectionVideos from '@/components/SectionVideos'
+import SwipableSliderPosts from '@/components/SwipableSliderPosts'
 import VideoHeroBanner from '@/components/VideoHeroBanner'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
@@ -70,21 +59,45 @@ const Page = async () => {
           heading="HOLY QUR’AN"
           subHeading="Explore the lessonsfrom Holy Quran"
         />
+      </div>
 
-        <SectionSliderNewCategories
+      <div className="relative py-16 lg:py-20">
+        {/* <SectionSliderNewCategories   heading="STORYTELLING ISLAM"
+          subHeading="Understanding Islam through 1001 stories" categories={categories.slice(0, 10)} categoryCardType="card2" /> */}
+        <SectionSlider
           heading="TRENDING CATEGORIES"
           subHeading="Discover over 100 Popular topics"
           categories={categories.slice(0, 10)}
           categoryCardType="card2"
+          config={{
+            autoSlide: true,
+            autoSlideInterval: 5000,
+            showButtons: false,
+            loop: true,
+          }}
         />
+      </div>
 
+      <div className="relative container space-y-28 lg:space-y-32">
         <div className="relative py-16 lg:py-20">
           <BackgroundSection />
-          <SectionSliderPosts
+          {/* <SectionSliderPosts
             postCardName="card10V2"
             heading="ISLAM FOR BEGINNERS"
             subHeading="Over 100 Articles for beginners"
             posts={defaultPosts.slice(0, 6)}
+          /> */}
+          <SwipableSliderPosts
+            heading="ISLAM FOR BEGINNERS"
+            subHeading="Over 100 Articles for beginners"
+            posts={defaultPosts.slice(0, 8)}
+            postCardName="card10V2"
+            config={{
+              autoSlide: false,
+              autoSlideInterval: 4000,
+              showButtons: false,
+              loop: false,
+            }}
           />
         </div>
 
@@ -95,7 +108,7 @@ const Page = async () => {
         />
       </div>
 
-      <div className="my-28 bg-[#000000] py-16 lg:py-20 dark:bg-[#0D0D0D]">
+      <div className="mt-28 bg-[#000000] py-16 lg:py-20 dark:bg-[#0D0D0D]">
         <div className="relative container">
           <SectionMagazine4
             heading="VISUALS"

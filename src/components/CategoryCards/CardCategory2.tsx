@@ -12,7 +12,7 @@ interface Props {
 }
 
 const CardCategory2: FC<Props> = ({ className, category, badge }) => {
-  const { count, name, handle, thumbnail } = category
+  const { count, name, handle, thumbnail, icon } = category
   return (
     <div
       className={clsx(
@@ -26,8 +26,8 @@ const CardCategory2: FC<Props> = ({ className, category, badge }) => {
         </Badge>
       )} */}
       <NcImage
-        containerClassName="relative shrink-0 size-16 "
-        src={thumbnail || ''}
+        containerClassName="relative shrink-0 size-10 "
+        src={icon || thumbnail || ''}
         fill
         sizes="80px"
         alt={name}

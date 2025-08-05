@@ -21,45 +21,63 @@ export async function getCategories() {
   return [
     {
       id: 'category-1',
-      name: 'Islam for Beginners',
+      name: 'Islam',
       handle: 'garden',
       description:
         'Explore the world of gardening, from planting to harvesting and everything in between. Discover tips, tricks, and expert advice to make your garden thrive.',
       color: 'indigo',
       count: 13,
       date: '2025-06-10',
+      icon: {
+        src: '/images/categories/category_icon_1.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
       thumbnail: {
         src: _demo_category_image_urls[0],
-        alt: 'Garden',
+        alt: 'Islam',
         width: 1920,
         height: 1080,
       },
     },
     {
       id: 'category-2',
-      name: 'Pillers of Faith',
+      name: `Holy Qur'an`,
       handle: 'technology',
       description:
         'Stay updated with the latest technology news, trends, and innovations. Explore the world of AI, blockchain, and the future of technology.',
       color: 'blue',
       count: 25,
       date: '2025-05-15',
+      icon: {
+        src: '/images/categories/category_icon_2.png',
+        alt: `Holy Qur'an`,
+        width: 1920,
+        height: 1080,
+      },
       thumbnail: {
         src: _demo_category_image_urls[1],
-        alt: 'Technology',
+        alt: `Holy Qur'an`,
         width: 1920,
         height: 1080,
       },
     },
     {
       id: 'category-3',
-      name: 'Fitness',
+      name: 'Islam for Beginners',
       handle: 'fitness',
       description:
         'Discover workout routines, health tips, and wellness advice for a better lifestyle. Stay fit and healthy with our expert tips and advice.',
       color: 'red',
       count: 18,
       date: '2025-04-20',
+      icon: {
+        src: '/images/categories/category_icon_3.png',
+        alt: 'Islam for Beginners',
+        width: 1920,
+        height: 1080,
+      },
       thumbnail: {
         src: _demo_category_image_urls[2],
         alt: 'Fitness',
@@ -69,13 +87,19 @@ export async function getCategories() {
     },
     {
       id: 'category-4',
-      name: 'Finance',
+      name: 'Piller of Faith',
       handle: 'finance',
       description:
         'Stay updated with financial news, investment strategies, and money management tips. Make informed decisions with our expert advice.',
       color: 'green',
       count: 22,
       date: '2025-03-05',
+      icon: {
+        src: '/images/categories/category_icon_4.png',
+        alt: 'Piller of Faith',
+        width: 1920,
+        height: 1080,
+      },
       thumbnail: {
         src: _demo_category_image_urls[3],
         alt: 'Finance',
@@ -85,13 +109,19 @@ export async function getCategories() {
     },
     {
       id: 'category-5',
-      name: 'Travel',
+      name: 'School of thoughts',
       handle: 'travel',
       description:
         'Explore travel guides, destination reviews, and adventure stories from around the world. Plan your next adventure with our expert tips and advice.',
       color: 'yellow',
       count: 30,
       date: '2025-02-15',
+      icon: {
+        src: '/images/categories/category_icon_5.png',
+        alt: 'School of thoughts',
+        width: 1920,
+        height: 1080,
+      },
       thumbnail: {
         src: _demo_category_image_urls[4],
         alt: 'Travel',
@@ -108,6 +138,12 @@ export async function getCategories() {
       color: 'purple',
       count: 28,
       date: '2025-01-20',
+      icon: {
+        src: '/images/categories/category_icon_6.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
       thumbnail: {
         src: _demo_category_image_urls[5],
         alt: 'Photography',
@@ -124,6 +160,12 @@ export async function getCategories() {
       color: 'pink',
       count: 35,
       date: '2025-01-15',
+      icon: {
+        src: '/images/categories/category_icon_7.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
       thumbnail: {
         src: _demo_category_image_urls[6],
         alt: 'Music',
@@ -140,6 +182,12 @@ export async function getCategories() {
       color: 'gray',
       count: 22,
       date: '2025-01-10',
+      icon: {
+        src: '/images/categories/category_icon_8.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
       thumbnail: {
         src: _demo_category_image_urls[7],
         alt: 'Architecture',
@@ -156,6 +204,12 @@ export async function getCategories() {
       color: 'teal',
       count: 27,
       date: '2025-01-05',
+      icon: {
+        src: '/images/categories/category_icon_1.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
       thumbnail: {
         src: _demo_category_image_urls[8],
         alt: 'Wellness',
@@ -172,6 +226,12 @@ export async function getCategories() {
       color: 'orange',
       count: 31,
       date: '2025-01-01',
+      icon: {
+        src: '/images/categories/category_icon_1.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
       thumbnail: {
         src: _demo_category_image_urls[9],
         alt: 'Education',
@@ -188,6 +248,188 @@ export async function getCategories() {
       color: 'sky',
       count: 31,
       date: '2025-06-15',
+      icon: {
+        src: '/images/categories/category_icon_1.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
+      thumbnail: {
+        src: _demo_category_image_urls[1],
+        alt: 'Education',
+        width: 1920,
+        height: 1080,
+      },
+    },
+    {
+      id: 'category-12',
+      name: 'Typography',
+      handle: 'typography',
+      description:
+        'Stay informed about educational trends, learning resources, and academic insights. Stay updated with the latest educational news and trends.',
+      color: 'sky',
+      count: 31,
+      date: '2025-06-15',
+      icon: {
+        src: '/images/categories/category_icon_1.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
+      thumbnail: {
+        src: _demo_category_image_urls[1],
+        alt: 'Education',
+        width: 1920,
+        height: 1080,
+      },
+    },
+    {
+      id: 'category-13',
+      name: 'Typography',
+      handle: 'typography',
+      description:
+        'Stay informed about educational trends, learning resources, and academic insights. Stay updated with the latest educational news and trends.',
+      color: 'sky',
+      count: 31,
+      date: '2025-06-15',
+      icon: {
+        src: '/images/categories/category_icon_1.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
+      thumbnail: {
+        src: _demo_category_image_urls[1],
+        alt: 'Education',
+        width: 1920,
+        height: 1080,
+      },
+    },
+    {
+      id: 'category-14',
+      name: 'Typography',
+      handle: 'typography',
+      description:
+        'Stay informed about educational trends, learning resources, and academic insights. Stay updated with the latest educational news and trends.',
+      color: 'sky',
+      count: 31,
+      date: '2025-06-15',
+      icon: {
+        src: '/images/categories/category_icon_1.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
+      thumbnail: {
+        src: _demo_category_image_urls[1],
+        alt: 'Education',
+        width: 1920,
+        height: 1080,
+      },
+    },
+    {
+      id: 'category-15',
+      name: 'Typography',
+      handle: 'typography',
+      description:
+        'Stay informed about educational trends, learning resources, and academic insights. Stay updated with the latest educational news and trends.',
+      color: 'sky',
+      count: 31,
+      date: '2025-06-15',
+      icon: {
+        src: '/images/categories/category_icon_1.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
+      thumbnail: {
+        src: _demo_category_image_urls[1],
+        alt: 'Education',
+        width: 1920,
+        height: 1080,
+      },
+    },
+    {
+      id: 'category-16',
+      name: 'Typography',
+      handle: 'typography',
+      description:
+        'Stay informed about educational trends, learning resources, and academic insights. Stay updated with the latest educational news and trends.',
+      color: 'sky',
+      count: 31,
+      date: '2025-06-15',
+      icon: {
+        src: '/images/categories/category_icon_1.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
+      thumbnail: {
+        src: _demo_category_image_urls[1],
+        alt: 'Education',
+        width: 1920,
+        height: 1080,
+      },
+    },
+    {
+      id: 'category-17',
+      name: 'Typography',
+      handle: 'typography',
+      description:
+        'Stay informed about educational trends, learning resources, and academic insights. Stay updated with the latest educational news and trends.',
+      color: 'sky',
+      count: 31,
+      date: '2025-06-15',
+      icon: {
+        src: '/images/categories/category_icon_1.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
+      thumbnail: {
+        src: _demo_category_image_urls[1],
+        alt: 'Education',
+        width: 1920,
+        height: 1080,
+      },
+    },
+    {
+      id: 'category-18',
+      name: 'Typography',
+      handle: 'typography',
+      description:
+        'Stay informed about educational trends, learning resources, and academic insights. Stay updated with the latest educational news and trends.',
+      color: 'sky',
+      count: 31,
+      date: '2025-06-15',
+      icon: {
+        src: '/images/categories/category_icon_1.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
+      thumbnail: {
+        src: _demo_category_image_urls[1],
+        alt: 'Education',
+        width: 1920,
+        height: 1080,
+      },
+    },
+    {
+      id: 'category-19',
+      name: 'Typography',
+      handle: 'typography',
+      description:
+        'Stay informed about educational trends, learning resources, and academic insights. Stay updated with the latest educational news and trends.',
+      color: 'sky',
+      count: 31,
+      date: '2025-06-15',
+      icon: {
+        src: '/images/categories/category_icon_1.png',
+        alt: 'Islam',
+        width: 1920,
+        height: 1080,
+      },
       thumbnail: {
         src: _demo_category_image_urls[1],
         alt: 'Education',
