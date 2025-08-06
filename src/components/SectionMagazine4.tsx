@@ -1,9 +1,13 @@
+"use client"
+
 import { TPost } from '@/data/posts'
 import ButtonPrimary from '@/shared/ButtonPrimary'
 import HeadingWithSub, { HeadingWithSubProps } from '@/shared/Heading'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { FC } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
 import Card8 from './PostCards/Card8'
 import Card9 from './PostCards/Card9'
 
@@ -15,6 +19,12 @@ type Props = Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> & {
 }
 
 const SectionMagazine4: FC<Props> = ({ posts, heading, className, subHeading, dimHeading, headingColor }) => {
+  const firstSectionRef = useRef<HTMLDivElement | null>(null)
+  const secondSectionRef = useRef<HTMLDivElement | null>(null)
+  
+  const isFirstSectionInView = useInView(firstSectionRef, { once: true, amount: 0.3 })
+  const isSecondSectionInView = useInView(secondSectionRef, { once: true, amount: 0.3 })
+
   return (
     <div className={clsx('section-magazine-4 relative', className)}>
       {/* <SectionTabHeader
@@ -28,16 +38,32 @@ const SectionMagazine4: FC<Props> = ({ posts, heading, className, subHeading, di
         {heading}
       </HeadingWithSub>
       {!posts?.length && <span>Nothing we found!</span>}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7 xl:grid-cols-4">
+      
+      {/* First Section - Fade in from left */}
+      <motion.div
+        ref={firstSectionRef}
+        initial={{ opacity: 0, x: -50 }}
+        animate={isFirstSectionInView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7 xl:grid-cols-4"
+        aria-live="polite"
+      >
         {posts[0] && <Card8 className="sm:col-span-2" post={posts[0]} />}
-        {posts.slice(1, 3).map((item, index) => (
-          <Card9 key={index} post={item} />
-        ))}
-        {posts.slice(3, 5).map((item, index) => (
-          <Card9 key={index} post={item} />
-        ))}
+        {posts.slice(1, 3).map((item, index) => (<Card9 key={index} post={item} /> ))}
+      </motion.div>
+
+      {/* Second Section - Fade in from right with stagger */}
+      <motion.div
+        ref={secondSectionRef}
+        initial={{ opacity: 0, x: 50 }}
+        animate={isSecondSectionInView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7 xl:grid-cols-4 mt-6"
+        aria-live="polite"
+      >
+        {posts.slice(3, 5).map((item, index) => (<Card9 key={index} post={item} />))}
         {posts[5] && <Card8 className="sm:col-span-2" post={posts[5]} />}
-      </div>
+      </motion.div>
 
       {/* <div className="mt-20 flex justify-center">
         <ButtonPrimary>
