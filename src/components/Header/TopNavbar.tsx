@@ -87,14 +87,17 @@ const TopNavbar: FC<TopNavbarProps> = ({ isScrolled, className }) => {
       )}
     >
       <div className="container">
-        <div className="flex h-12 items-center justify-end gap-x-6">
+        <div className="flex h-12 items-center justify-end ">
           {/* Home Icon */}
           <Link
             href="/"
             className={clsx(
-              'flex items-center gap-x-1 text-sm font-medium transition-colors hover:text-blue-600',
-              isScrolled ? 'text-neutral-700 dark:text-neutral-300' : 'text-white/90'
+              'flex items-center gap-x-1 text-sm font-medium transition-colors rounded-full px-3 py-2',
+              isScrolled 
+                ? 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200' 
+                : 'text-white/90 hover:bg-white/10 hover:text-white'
             )}
+            title="Home"
           >
             <HomeIcon className="h-5 w-5" />
           </Link>
@@ -103,8 +106,10 @@ const TopNavbar: FC<TopNavbarProps> = ({ isScrolled, className }) => {
           <Link
             href="/about"
             className={clsx(
-              'text-sm font-medium transition-colors hover:text-blue-600',
-              isScrolled ? 'text-neutral-700 dark:text-neutral-300' : 'text-white/90'
+              'text-sm font-medium transition-colors rounded-full px-4 py-2.5 whitespace-nowrap',
+              isScrolled 
+                ? 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200' 
+                : 'text-white/90 hover:bg-white/10 hover:text-white'
             )}
           >
             About
@@ -114,8 +119,10 @@ const TopNavbar: FC<TopNavbarProps> = ({ isScrolled, className }) => {
           <Popover className="relative">
             <PopoverButton
               className={clsx(
-                'flex items-center gap-x-1 text-sm font-medium transition-colors hover:text-blue-600 focus:outline-hidden',
-                isScrolled ? 'text-neutral-700 dark:text-neutral-300' : 'text-white/90'
+                'flex items-center gap-x-1 text-sm font-medium transition-colors rounded-full px-4 py-2.5 whitespace-nowrap focus:outline-hidden',
+                isScrolled 
+                  ? 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200' 
+                  : 'text-white/90 hover:bg-white/10 hover:text-white'
               )}
             >
               <activeLanguage.FlagComponent className="" />
@@ -123,20 +130,20 @@ const TopNavbar: FC<TopNavbarProps> = ({ isScrolled, className }) => {
               <ChevronDownIcon className="h-4 w-4" />
             </PopoverButton>
 
-            <PopoverPanel className="absolute right-0 z-20 mt-2 w-64 rounded-lg bg-white p-4 shadow-lg ring-1 ring-black/5 dark:bg-neutral-800 dark:ring-white/10">
-              <div className="space-y-2">
+            <PopoverPanel className="absolute right-0 z-20 mt-2 w-64 rounded-lg bg-white py-4 shadow-lg ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+              <div className="space-y-1">
                 {languages.map((language) => (
                   <Link
                     key={language.id}
                     href={language.href}
                     className={clsx(
-                      'flex items-center gap-x-3 rounded-md p-2 text-sm transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-700',
+                      'flex items-center gap-x-3 rounded-md mx-2 px-4 py-2 text-sm transition-colors hover:bg-neutral-100 hover:text-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-neutral-200',
                       language.active
-                        ? 'bg-neutral-100 font-medium text-neutral-900 dark:bg-neutral-700 dark:text-neutral-100'
-                        : 'text-neutral-700 dark:text-neutral-300'
+                        ? 'bg-neutral-100 font-medium text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100'
+                        : 'font-normal text-neutral-600 dark:text-neutral-300'
                     )}
                   >
-                    <language.FlagComponent/>
+                    <language.FlagComponent className="" />
                     <div>
                       <div className="font-medium">{language.name}</div>
                       <div className="text-xs text-neutral-500 dark:text-neutral-400">{language.description}</div>
