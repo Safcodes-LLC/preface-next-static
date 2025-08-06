@@ -19,9 +19,10 @@ import { HugeiconsIcon } from '@hugeicons/react'
 
 interface Props {
   className?: string
+  trigger?: React.ReactNode
 }
 
-export default function AvatarDropdown({ className }: Props) {
+export default function AvatarDropdown({ className, trigger }: Props) {
   const user = {
     name: 'John Doe',
     email: 'john@gmail.com',
@@ -35,9 +36,18 @@ export default function AvatarDropdown({ className }: Props) {
   return (
     <div className={className}>
       <Popover>
-        <PopoverButton as={ButtonCircle} className="relative" plain>
+      {/* <PopoverButton as={ButtonCircle} className="relative" plain>
           <Avatar alt="avatar" src={user.avatar} width={32} height={32} className="size-8 rounded-full object-cover" />
-        </PopoverButton>
+        </PopoverButton> */}
+        {trigger ? (
+          <PopoverButton as="div" className={undefined}>
+            {trigger}
+          </PopoverButton>
+        ) : (
+          <PopoverButton as={ButtonCircle} className="relative" plain>
+            <Avatar alt="avatar" src={user.avatar} width={32} height={32} className="size-8 rounded-full object-cover" />
+          </PopoverButton>
+        )}
 
         <PopoverPanel
           transition

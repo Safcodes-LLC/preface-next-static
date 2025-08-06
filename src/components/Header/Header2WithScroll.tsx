@@ -4,15 +4,16 @@ import { getNavigation, TNavigationItem } from '@/data/navigation'
 import { getAllPosts, TPost } from '@/data/posts'
 import { Button } from '@/shared/Button'
 import Logo from '@/shared/Logo'
-import { PlusIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline'
+import { PlusIcon, ChatBubbleLeftRightIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { FC, useEffect, useState } from 'react'
-import AvatarDropdown from './AvatarDropdown'
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import HamburgerBtnMenu from './HamburgerBtnMenu'
 import Navigation from './Navigation/Navigation'
 import NotifyDropdown from './NotifyDropdown'
 import SearchModal from './SearchModal'
 import TopNavbar from './TopNavbar'
+import AvatarDropdown from './AvatarDropdown'
 
 interface Header2WithScrollProps {
   bottomBorder?: boolean
@@ -78,15 +79,15 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
         <div className="container flex h-20 justify-between">
         <div className="flex flex-1 items-center gap-x-4 sm:gap-x-5 lg:gap-x-7">
           <Logo />
-          <div
+          {/* <div
             className={clsx(
               'h-8 border-l',
               isScrolled ? 'border-neutral-200 dark:border-neutral-700' : 'border-white/20'
             )}
-          ></div>
-          <div className="-ms-1.5">
+          ></div> */}
+          {/* <div className="-ms-1.5">
             <SearchModal type="type1" />
-          </div>
+          </div> */}
         </div>
 
         <div className="mx-4 hidden flex-2 justify-center lg:flex">
@@ -105,14 +106,19 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
         </div>
 
         <div className="flex flex-1 items-center justify-end gap-x-0.5">
-          <div className="hidden sm:block">
-            <Button className="h-10 px-3!" href={'/submission'} plain>
-              <PlusIcon className="size-5!" />
-              Create
+          <div className="hidden sm:block text-[#60A43A]">
+            <Button className="h-10 px-3! " href={'/submission'} plain>
+              {/* <PlusIcon className="size-5!" /> */}
+              Sign in
             </Button>
           </div>
-          <NotifyDropdown className="me-3" />
-          <AvatarDropdown />
+          {/* <NotifyDropdown className="me-3" /> */}
+          <SearchModal type="type1" />
+          <AvatarDropdown
+            trigger={<button type="button" aria-label="Settings" className="ml-2 flex items-center cursor-pointer justify-center rounded-full p-2 focus:outline-none focus:ring-2 transition-all duration-200">
+              <Cog6ToothIcon className="w-6 h-6 text-[#4A4A4A]" aria-hidden="true" />
+            </button>}
+          />
           <div className="ms-2 flex lg:hidden">
             <HamburgerBtnMenu />
           </div>
