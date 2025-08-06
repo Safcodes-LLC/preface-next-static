@@ -31,7 +31,7 @@ const CardCategory2: FC<Props> = ({ className, category, badge }) => {
         fill
         sizes="80px"
         alt={name}
-        className="rounded-full object-cover shadow-lg"
+        className="object-contain w-full h-full"
       />
       <div className="mt-3">
         <h2 className={`text-base font-semibold`}>{name}</h2>

@@ -61,7 +61,7 @@ const Page = async () => {
         />
       </div>
 
-      <div className="relative py-16 lg:py-20">
+      <div className="relative py-16 lg:py-24">
         {/* <SectionSliderNewCategories   heading="STORYTELLING ISLAM"
           subHeading="Understanding Islam through 1001 stories" categories={categories.slice(0, 10)} categoryCardType="card2" /> */}
         <SectionSlider

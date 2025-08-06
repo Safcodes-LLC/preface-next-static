@@ -29,7 +29,7 @@ export async function getCategories() {
       count: 13,
       date: '2025-06-10',
       icon: {
-        src: '/images/categories/category_icon_1.png',
+        src: '/images/categories/category_1.png',
         alt: 'Islam',
         width: 1920,
         height: 1080,
@@ -51,7 +51,7 @@ export async function getCategories() {
       count: 25,
       date: '2025-05-15',
       icon: {
-        src: '/images/categories/category_icon_2.png',
+        src: '/images/categories/category_2.png',
         alt: `Holy Qur'an`,
         width: 1920,
         height: 1080,
@@ -73,7 +73,7 @@ export async function getCategories() {
       count: 18,
       date: '2025-04-20',
       icon: {
-        src: '/images/categories/category_icon_3.png',
+        src: '/images/categories/category_3.png',
         alt: 'Islam for Beginners',
         width: 1920,
         height: 1080,
@@ -95,7 +95,7 @@ export async function getCategories() {
       count: 22,
       date: '2025-03-05',
       icon: {
-        src: '/images/categories/category_icon_4.png',
+        src: '/images/categories/category_4.png',
         alt: 'Piller of Faith',
         width: 1920,
         height: 1080,
@@ -117,7 +117,7 @@ export async function getCategories() {
       count: 30,
       date: '2025-02-15',
       icon: {
-        src: '/images/categories/category_icon_5.png',
+        src: '/images/categories/category_5.png',
         alt: 'School of thoughts',
         width: 1920,
         height: 1080,
@@ -139,7 +139,7 @@ export async function getCategories() {
       count: 28,
       date: '2025-01-20',
       icon: {
-        src: '/images/categories/category_icon_6.png',
+        src: '/images/categories/category_1.png',
         alt: 'Islam',
         width: 1920,
         height: 1080,
@@ -161,7 +161,7 @@ export async function getCategories() {
       count: 35,
       date: '2025-01-15',
       icon: {
-        src: '/images/categories/category_icon_7.png',
+        src: '/images/categories/category_3.png',
         alt: 'Islam',
         width: 1920,
         height: 1080,
@@ -183,7 +183,7 @@ export async function getCategories() {
       count: 22,
       date: '2025-01-10',
       icon: {
-        src: '/images/categories/category_icon_8.png',
+        src: '/images/categories/category_5.png',
         alt: 'Islam',
         width: 1920,
         height: 1080,
@@ -205,7 +205,7 @@ export async function getCategories() {
       count: 27,
       date: '2025-01-05',
       icon: {
-        src: '/images/categories/category_icon_1.png',
+        src: '/images/categories/category_4.png',
         alt: 'Islam',
         width: 1920,
         height: 1080,
@@ -227,7 +227,7 @@ export async function getCategories() {
       count: 31,
       date: '2025-01-01',
       icon: {
-        src: '/images/categories/category_icon_1.png',
+        src: '/images/categories/category_1.png',
         alt: 'Islam',
         width: 1920,
         height: 1080,
@@ -249,7 +249,7 @@ export async function getCategories() {
       count: 31,
       date: '2025-06-15',
       icon: {
-        src: '/images/categories/category_icon_1.png',
+        src: '/images/categories/category_2.png',
         alt: 'Islam',
         width: 1920,
         height: 1080,
@@ -271,7 +271,7 @@ export async function getCategories() {
       count: 31,
       date: '2025-06-15',
       icon: {
-        src: '/images/categories/category_icon_1.png',
+        src: '/images/categories/category_4.png',
         alt: 'Islam',
         width: 1920,
         height: 1080,
@@ -293,7 +293,7 @@ export async function getCategories() {
       count: 31,
       date: '2025-06-15',
       icon: {
-        src: '/images/categories/category_icon_1.png',
+        src: '/images/categories/category_2.png',
         alt: 'Islam',
         width: 1920,
         height: 1080,
@@ -315,7 +315,7 @@ export async function getCategories() {
       count: 31,
       date: '2025-06-15',
       icon: {
-        src: '/images/categories/category_icon_1.png',
+        src: '/images/categories/category_3.png',
         alt: 'Islam',
         width: 1920,
         height: 1080,
@@ -337,7 +337,7 @@ export async function getCategories() {
       count: 31,
       date: '2025-06-15',
       icon: {
-        src: '/images/categories/category_icon_1.png',
+        src: '/images/categories/category_1.png',
         alt: 'Islam',
         width: 1920,
         height: 1080,
