@@ -12,6 +12,7 @@ import HamburgerBtnMenu from './HamburgerBtnMenu'
 import Navigation from './Navigation/Navigation'
 import NotifyDropdown from './NotifyDropdown'
 import SearchModal from './SearchModal'
+import TopNavbar from './TopNavbar'
 
 interface Header2WithScrollProps {
   bottomBorder?: boolean
@@ -57,18 +58,24 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
   }, [])
 
   return (
-    <div
-      className={clsx(
-        'header-2 fixed top-0 right-0 left-0 z-50 transition-all duration-300',
-        isScrolled
-          ? 'border-neutral-200 bg-white/95 text-neutral-900 backdrop-blur-sm dark:border-neutral-700 dark:bg-[#0A0A0A] dark:text-neutral-100'
-          : 'border-transparent bg-transparent text-white',
-        bottomBorder && 'border-b',
-        !bottomBorder && 'has-[.header-popover-full-panel]:border-b',
-        className
-      )}
-    >
-      <div className="container flex h-20 justify-between">
+    <>
+      {/* Top Navbar */}
+      <TopNavbar isScrolled={isScrolled} />
+      
+      {/* Main Header */}
+      <div
+        className={clsx(
+          'header-2 fixed top-8 right-0 left-0 z-40 transition-all duration-300',
+          isScrolled
+            ? 'border-neutral-200 bg-white/95 text-neutral-900 backdrop-blur-sm dark:border-neutral-700 dark:bg-[#0A0A0A] dark:text-neutral-100'
+            : 'border-transparent bg-transparent text-white',
+          bottomBorder && 'border-b',
+          !bottomBorder && 'has-[.header-popover-full-panel]:border-b',
+          className
+        )}
+      >
+        
+        <div className="container flex h-20 justify-between">
         <div className="flex flex-1 items-center gap-x-4 sm:gap-x-5 lg:gap-x-7">
           <Logo />
           <div
@@ -99,8 +106,9 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
             <HamburgerBtnMenu />
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

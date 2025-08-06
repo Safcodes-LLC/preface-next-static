@@ -1,4 +1,5 @@
 import Footer from '@/components/Footer/Footer'
+import Header2 from '@/components/Header/Header2'
 import Header2WithScroll from '@/components/Header/Header2WithScroll'
 import AsideSidebarNavigation from '@/components/aside-sidebar-navigation'
 import React, { ReactNode } from 'react'
@@ -15,6 +16,7 @@ const ApplicationLayoutWithVideo: React.FC<Props> = ({
   return (
     <>
       {/* Fixed header with scroll-based transparency */}
+      {/* <Header2/> */}
       <Header2WithScroll bottomBorder={headerHasBorder} />
 
       {/* Main content */}
