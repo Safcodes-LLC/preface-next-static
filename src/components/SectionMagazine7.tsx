@@ -1,7 +1,11 @@
+"use client"
+
 import { TPost } from '@/data/posts'
 import HeadingWithSub, { HeadingWithSubProps } from '@/shared/Heading'
 import clsx from 'clsx'
 import { FC } from 'react'
+import { motion, useInView, Variants } from 'framer-motion'
+import { useRef } from 'react'
 import Card10V3 from './PostCards/Card10V3'
 import Card17Podcast from './PostCards/Card17Podcast'
 
@@ -12,26 +16,124 @@ type Props = Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> & {
 }
 
 const SectionMagazine7: FC<Props> = ({ posts, className, heading, subHeading, dimHeading }) => {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 })
+
+  // Animation variants for the main section
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  // Animation for the two main cards
+  const mainCardVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      x: -60,
+      scale: 0.95
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: {
+        duration: 0.7,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  // Animation for the grid of smaller cards
+  const gridVariants: Variants = {
+    hidden: { 
+      opacity: 0,
+      y: 50,
+      scale: 0.9
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  // Animation for individual grid cards
+  const gridCardVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30,
+      rotateX: -10
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  }
+
   return (
     <div className={clsx('section-magazine-7 relative', className)}>
-      <HeadingWithSub subHeading={subHeading} dimHeading={dimHeading}>
-        {heading}
-      </HeadingWithSub>
-      <div className="grid grid-cols-1 gap-6 md:gap-8">
-        <div className="grid gap-6 md:gap-8 lg:grid-cols-2">
-          <Card10V3 post={posts[0]} />
-          <Card10V3 galleryType={2} post={posts[1]} />
-        </div>
-        <div className="mt-3 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3">
-          {/* <Card10 post={posts[2]} />
-          <Card10 post={posts[3]} />
-          {posts[4] && <Card10 post={posts[4]} />}
-          {posts[5] && <Card10 post={posts[5]} />} */}
-          {posts.slice(0, 6).map((p) => (
-            <Card17Podcast key={p.id} post={p} />
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <HeadingWithSub subHeading={subHeading} dimHeading={dimHeading}>
+          {heading}
+        </HeadingWithSub>
+      </motion.div>
+      
+      <motion.div 
+        ref={containerRef}
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        className="grid grid-cols-1 gap-6 md:gap-8"
+        aria-live="polite"
+      >
+        {/* Main two cards - slide in from left */}
+        <motion.div 
+          variants={mainCardVariants}
+          className="grid gap-6 md:gap-8 lg:grid-cols-2"
+        >
+          <motion.div variants={mainCardVariants}>
+            <Card10V3 post={posts[0]} />
+          </motion.div>
+          <motion.div variants={mainCardVariants}>
+            <Card10V3 galleryType={2} post={posts[1]} />
+          </motion.div>
+        </motion.div>
+
+        {/* Grid of smaller cards - slide up from bottom */}
+        <motion.div 
+          variants={gridVariants}
+          className="mt-3 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3"
+        >
+          {posts.slice(0, 6).map((p, index) => (
+            <motion.div key={p.id} variants={gridCardVariants}>
+              <Card17Podcast post={p} />
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   )
 }
