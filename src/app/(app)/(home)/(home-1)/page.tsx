@@ -44,8 +44,11 @@ const Page = async () => {
     <div className="relative pb-28 lg:pb-32">
       {/* Video Hero Banner */}
       {/* <VideoHeroBanner /> */}
-      <HeroWithMagazine posts={magazine10Data} />
-      <div className="relative container space-y-28 lg:space-y-32">
+      <div className="relative">
+        <HeroWithMagazine posts={magazine10Data} />
+      </div>
+
+      <div className="relative container space-y-28 lg:space-y-40">
         {/* <SectionMagazine10 posts={magazine10Data} /> */}
 
         <SectionSliderNewCategories
