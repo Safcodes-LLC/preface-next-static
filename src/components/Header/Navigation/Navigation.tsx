@@ -1,7 +1,7 @@
 import Card20 from '@/components/PostCards/Card20'
 import { TNavigationItem } from '@/data/navigation'
 import { TPost } from '@/data/posts'
-import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
@@ -65,60 +65,57 @@ const MegaMenu = ({ menuItem, featuredPosts }: { menuItem: TNavigationItem; feat
   )
 }
 
+const renderMenuLink = (menuItem: TNavigationItem, level = 1) => (
+  <Link
+    className="flex items-center rounded-md px-4 py-2 font-normal text-neutral-600 hover:bg-neutral-100 hover:text-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+    href={menuItem.href || '#'}
+  >
+    {menuItem.name}
+    {menuItem.children?.length && (
+      level === 1
+        ? <ChevronDownIcon className="ml-2 h-4 w-4 text-neutral-500" aria-hidden="true" />
+        : <ChevronRightIcon className="ml-2 h-4 w-4 text-neutral-500" aria-hidden="true" />
+    )}
+  </Link>
+)
+
+const renderDropdown = (menuItem: TNavigationItem, level = 2) => (
+  <li key={menuItem.id} className="menu-dropdown relative menu-item px-2">
+    {renderMenuLink(menuItem, level)}
+    {menuItem.children?.length && (
+      <div className="absolute top-0 left-full z-10 sub-menu w-56 pl-2">
+        <ul className="relative grid space-y-1 rounded-lg bg-white py-4 text-sm shadow-lg ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
+          {menuItem.children.map((child) =>
+            child.type === 'dropdown' && child.children?.length
+              ? renderDropdown(child, level + 1)
+              : (
+                <li key={child.id} className="px-2">
+                  {renderMenuLink(child, level + 1)}
+                </li>
+              )
+          )}
+        </ul>
+      </div>
+    )}
+  </li>
+)
+
 const DropdownMenu = ({ menuItem }: { menuItem: TNavigationItem }) => {
-  const renderMenuLink = (menuItem: TNavigationItem) => {
-    return (
-      <Link
-        className="flex items-center rounded-md px-4 py-2 font-normal text-neutral-600 hover:bg-neutral-100 hover:text-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
-        href={menuItem.href || '#'}
-      >
-        {menuItem.name}
-        {menuItem.children?.length && <ChevronDownIcon className="ml-2 h-4 w-4 text-neutral-500" aria-hidden="true" />}
-      </Link>
-    )
-  }
-
-  const renderDropdown = (menuItem: TNavigationItem) => {
-    return (
-      <li key={menuItem.id} className="menu-dropdown relative menu-item px-2">
-        {renderMenuLink(menuItem)}
-        {menuItem.children?.length && (
-          <div className="absolute top-0 left-full z-10 sub-menu w-56 pl-2">
-            <ul className="relative grid space-y-1 rounded-lg bg-white py-4 text-sm shadow-lg ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
-              {menuItem.children.map((child) => {
-                if (child.type === 'dropdown' && child.children?.length) {
-                  return renderDropdown(child)
-                }
-                return (
-                  <li key={child.id} className="px-2">
-                    {renderMenuLink(child)}
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        )}
-      </li>
-    )
-  }
-
   return (
     <li className="menu-dropdown relative menu-item flex">
       <Lv1MenuItem menuItem={menuItem} />
-
       {menuItem.children?.length && menuItem.type === 'dropdown' ? (
         <div className="absolute top-full left-0 z-50 sub-menu w-56">
           <ul className="relative grid space-y-1 rounded-lg bg-white py-3 text-sm shadow-lg ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
-            {menuItem.children?.map((childItem) => {
-              if (childItem.type === 'dropdown' && childItem.children?.length) {
-                return renderDropdown(childItem)
-              }
-              return (
-                <li key={childItem.id} className="px-2">
-                  {renderMenuLink(childItem)}
-                </li>
-              )
-            })}
+            {menuItem.children?.map((childItem) =>
+              childItem.type === 'dropdown' && childItem.children?.length
+                ? renderDropdown(childItem, 2)
+                : (
+                  <li key={childItem.id} className="px-2">
+                    {renderMenuLink(childItem, 2)}
+                  </li>
+                )
+            )}
           </ul>
         </div>
       ) : null}
