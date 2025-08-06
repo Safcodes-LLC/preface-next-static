@@ -57,7 +57,7 @@ const Page = async () => {
         <SectionMagazine7
           posts={galleryPosts.slice(0, 8)}
           heading="HOLY QUR’AN"
-          subHeading="Explore the lessonsfrom Holy Quran"
+          subHeading="Explore the lessons from Holy Quran"
         />
       </div>
 
