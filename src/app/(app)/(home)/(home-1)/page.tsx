@@ -1,4 +1,5 @@
 import BackgroundSection from '@/components/BackgroundSection'
+import HeroWithMagazine from '@/components/HeroWithMagazine'
 import SectionMagazine10 from '@/components/SectionMagazine10'
 import SectionMagazine4 from '@/components/SectionMagazine4'
 import SectionMagazine7 from '@/components/SectionMagazine7'
@@ -42,10 +43,10 @@ const Page = async () => {
   return (
     <div className="relative pb-28 lg:pb-32">
       {/* Video Hero Banner */}
-      <VideoHeroBanner />
-
+      {/* <VideoHeroBanner /> */}
+      <HeroWithMagazine posts={magazine10Data} />
       <div className="relative container space-y-28 lg:space-y-32">
-        <SectionMagazine10 posts={magazine10Data} />
+        {/* <SectionMagazine10 posts={magazine10Data} /> */}
 
         <SectionSliderNewCategories
           heading="STORYTELLING ISLAM"

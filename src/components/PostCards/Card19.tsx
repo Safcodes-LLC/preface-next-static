@@ -63,11 +63,18 @@ const Card19: FC<Props> = ({
         className="absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80"
       />
 
-      <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:px-7">
+      {/* <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:px-7">
         <CategoryBadgeList categories={categories} />
-        {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} /> */}
-        {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
-        {/* <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
+        <PostCardLikeBtn likeCount={likeCount} liked={liked} />
+        <PostCardCommentBtn commentCount={commentCount} handle={handle} />
+        <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} />
+      </div> */}
+
+      <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-4 opacity-100">
+        {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
+        <PostCardCommentBtn commentCount={commentCount} handle={handle} />
+        <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
+        <CategoryBadgeList categories={categories} />
       </div>
 
       <div
