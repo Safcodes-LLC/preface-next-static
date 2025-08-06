@@ -49,9 +49,9 @@ const SectionSliderNewCategories: FC<Props> = ({
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.2,
-        duration: 0.7,
+        staggerChildren: 0.15,
+        delayChildren: 0.3,
+        duration: 0.9,
         ease: 'easeOut',
       },
     },
@@ -60,18 +60,18 @@ const SectionSliderNewCategories: FC<Props> = ({
   const cardVariants: Variants = {
     hidden: {
       opacity: 0,
-      y: 40,
-      rotateX: 12,
-      scale: 0.92,
+      x: 80,
+      scale: 0.6,
+      rotateY: -20,
     },
     visible: {
       opacity: 1,
-      y: 0,
-      rotateX: 0,
+      x: 0,
       scale: 1,
+      rotateY: 0,
       transition: {
-        duration: 0.55,
-        ease: 'easeOut',
+        duration: 0.7,
+        ease: [0.25, 0.46, 0.45, 0.94], // Custom bounce-like easing
       },
     },
   }
