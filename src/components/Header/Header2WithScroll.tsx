@@ -4,7 +4,7 @@ import { getNavigation, TNavigationItem } from '@/data/navigation'
 import { getAllPosts, TPost } from '@/data/posts'
 import { Button } from '@/shared/Button'
 import Logo from '@/shared/Logo'
-import { PlusIcon } from '@heroicons/react/24/outline'
+import { PlusIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { FC, useEffect, useState } from 'react'
 import AvatarDropdown from './AvatarDropdown'
@@ -90,7 +90,18 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
         </div>
 
         <div className="mx-4 hidden flex-2 justify-center lg:flex">
-          <Navigation menu={navigationMenu} featuredPosts={featuredPosts} />
+          <div className="flex items-center gap-x-2">
+            <Navigation menu={navigationMenu} featuredPosts={featuredPosts} />
+            <a
+              href="/ask-the-scholar"
+              className="flex items-center gap-2 border border-white bg-white/80 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white px-5 py-2 rounded-sm shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 min-w-[155px] text-sm font-medium"
+              aria-label="Ask the Scholar"
+              style={{ marginTop: 0 }}
+            >
+              <ChatBubbleLeftRightIcon className="w-5 h-5" aria-hidden="true" />
+              <span className="whitespace-nowrap">Ask the Scholar</span>
+            </a>
+          </div>
         </div>
 
         <div className="flex flex-1 items-center justify-end gap-x-0.5">
