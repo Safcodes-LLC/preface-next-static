@@ -14,6 +14,8 @@ import CardCategory2 from './CategoryCards/CardCategory2'
 import CardCategory3 from './CategoryCards/CardCategory3'
 import CardCategory4 from './CategoryCards/CardCategory4'
 import CardCategory5 from './CategoryCards/CardCategory5'
+import { motion, useInView, Variants } from 'framer-motion'
+import { useRef } from 'react'
 
 interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
   className?: string
@@ -37,6 +39,42 @@ const SectionSliderNewCategories: FC<Props> = ({
   const theme = useContext(ThemeContext)
   const [emblaRef, emblaApi] = useEmblaCarousel({ ...emblaOptions, direction: theme?.themeDir })
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = useCarouselArrowButtons(emblaApi)
+
+  // Animation setup
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 })
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.2,
+        duration: 0.7,
+        ease: 'easeOut',
+      },
+    },
+  }
+
+  const cardVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+      rotateX: 12,
+      scale: 0.92,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      scale: 1,
+      transition: {
+        duration: 0.55,
+        ease: 'easeOut',
+      },
+    },
+  }
 
   const renderCard = (item: TCategory, index: number) => {
     const topIndex = index < 3 ? `#${index + 1}` : undefined
@@ -71,16 +109,23 @@ const SectionSliderNewCategories: FC<Props> = ({
       </HeadingWithArrowBtns>
 
       <div className="embla" ref={emblaRef}>
-        <div className="-ms-5 embla__container sm:-ms-7">
+        <motion.div
+          ref={containerRef}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="-ms-5 embla__container sm:-ms-7"
+        >
           {categories.map((category, index) => (
-            <div
+            <motion.div
               key={category.id}
               className="embla__slide basis-[86%] ps-5 sm:basis-1/2 sm:ps-7 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+              variants={cardVariants}
             >
               {renderCard(category, index)}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   )
