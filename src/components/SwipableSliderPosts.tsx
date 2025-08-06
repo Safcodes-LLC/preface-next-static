@@ -12,6 +12,7 @@ import HeadingWithArrowBtns from '@/shared/HeadingWithArrowBtns'
 import clsx from 'clsx'
 import { FC, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
+import { motion, useInView, Variants } from 'framer-motion'
 
 interface SliderConfig {
   autoSlide?: boolean
@@ -57,9 +58,44 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
   const [isPaused, setIsPaused] = useState(false)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const sliderRef = useRef<HTMLDivElement>(null)
+  const isSliderInView = useInView(sliderRef, { once: true, amount: 0.2 })
 
   const totalSlides = posts.length
   const totalPages = Math.ceil(totalSlides / cardsPerView)
+
+  // Animation variants for cards
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.3,
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const cardVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0.9,
+      y: 40,
+      rotateY: -15
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      rotateY: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  }
 
   // Responsive handling
   useEffect(() => {
@@ -169,16 +205,22 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
 
   return (
     <div className={clsx('swipable-slider-posts relative', className)}>
-      <HeadingWithArrowBtns
-        subHeading={subHeading}
-        hasNextPrev={showButtons}
-        prevBtnDisabled={prevBtnDisabled}
-        nextBtnDisabled={nextBtnDisabled}
-        onClickPrev={goToPrev}
-        onClickNext={goToNext}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={isSliderInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        {heading}
-      </HeadingWithArrowBtns>
+        <HeadingWithArrowBtns
+          subHeading={subHeading}
+          hasNextPrev={showButtons}
+          prevBtnDisabled={prevBtnDisabled}
+          nextBtnDisabled={nextBtnDisabled}
+          onClickPrev={goToPrev}
+          onClickNext={goToNext}
+        >
+          {heading}
+        </HeadingWithArrowBtns>
+      </motion.div>
 
       {/* Debug display - remove this in production */}
       {/* <div className="text-sm text-gray-500 mb-2">
@@ -186,19 +228,31 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
       </div> */}
 
       <div
+        ref={sliderRef}
         className="relative"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
         <div ref={combinedRef} className="overflow-hidden" {...(({ ref, ...handlers }) => handlers)(swipeHandlers)}>
-          {/* Simple grid layout - no complex translations */}
-          <div className="grid gap-4" style={{
-            gridTemplateColumns: `repeat(${cardsPerView}, 1fr)`,
-          }}>
+          {/* Animated grid layout */}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate={isSliderInView ? "visible" : "hidden"}
+            className="grid gap-4" 
+            style={{
+              gridTemplateColumns: `repeat(${cardsPerView}, 1fr)`,
+            }}
+            aria-live="polite"
+          >
             {currentPagePosts.map((post, index) => (
-              <div key={post.id || `${currentPage}-${index}`} className="px-2">
+              <motion.div 
+                key={post.id || `${currentPage}-${index}`} 
+                className="px-2"
+                variants={cardVariants}
+              >
                 {renderCard(post, currentPage * cardsPerView + index)}
-              </div>
+              </motion.div>
             ))}
             
             {/* Fill empty slots if last page has fewer cards */}
@@ -207,7 +261,7 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
                 <div key={`empty-${index}`} className="px-2" />
               ))
             }
-          </div>
+          </motion.div>
         </div>
 
         {/* Show fallback if no posts */}
@@ -219,7 +273,12 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
 
         {/* Pagination Dots */}
         {totalSlides > cardsPerView && totalPages > 1 && (
-          <div className="flex justify-center mt-6 space-x-2">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={isSliderInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+            className="flex justify-center mt-6 space-x-2"
+          >
             {Array.from({ length: totalPages }).map((_, pageIndex) => (
               <button
                 key={pageIndex}
@@ -236,7 +295,7 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
                 aria-label={`Go to page ${pageIndex + 1}`}
               />
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
     </div>
