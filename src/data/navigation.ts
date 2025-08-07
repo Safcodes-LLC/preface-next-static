@@ -54,12 +54,12 @@ export async function getNavigation(): Promise<TNavigationItem[]> {
       name: 'Knowledge Hub',
     },
     {
-      id: '3',
+      id: '4',
       href: '/quick-look',
       name: 'Quick Look',
     },
     {
-      id: '4',
+      id: '5',
       href: '/',
       name: 'Topics',
       type: 'dropdown',

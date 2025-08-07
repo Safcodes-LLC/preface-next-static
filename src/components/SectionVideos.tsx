@@ -105,7 +105,6 @@ const SectionVideos: FC<SectionVideosProps> = ({ videos = VIDEOS_DEMO, className
           }
         }}
         title={video.title}
-        key={video.id}
       >
         <div className="absolute inset-0 z-10 flex items-center justify-center">
           <NcPlayIcon2 playing={isPlay && currentVideo === video.id} />
@@ -130,7 +129,11 @@ const SectionVideos: FC<SectionVideosProps> = ({ videos = VIDEOS_DEMO, className
         <div className="absolute -top-4 -right-4 -bottom-4 z-0 w-2/3 rounded-3xl bg-primary-100/40 sm:rounded-[50px] md:top-0 md:right-0 md:bottom-0 xl:w-1/2 dark:bg-neutral-800/40"></div>
         <div className="relative grow pb-2 sm:pb-4 lg:pr-5 lg:pb-0 xl:pr-6">{renderMainVideo()}</div>
         <div className="grid shrink-0 grid-cols-4 gap-2 sm:gap-6 lg:w-36 lg:grid-cols-1 xl:w-40">
-          {videos.map(renderSubVideo)}
+          {videos.map((video) => (
+            <div key={video.id}>
+              {renderSubVideo(video)}
+            </div>
+          ))}
         </div>
       </div>
     </div>
