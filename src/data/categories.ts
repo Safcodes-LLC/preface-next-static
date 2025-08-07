@@ -455,6 +455,12 @@ export async function getCategoryByHandle(handle: string) {
       description: 'Explore all articles',
       count: 2500,
       date: '2025-01-01',
+      icon: {
+        src: '/images/categories/category_icon_1.png', // You can replace with appropriate path
+        alt: 'All articles',
+        width: 1920,
+        height: 1080,
+      },
       thumbnail: {
         src: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         alt: 'All',
