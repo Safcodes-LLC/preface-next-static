@@ -64,7 +64,7 @@ const HeroWithMagazine: React.FC<HeroWithMagazineProps> = ({ posts }) => {
       {/* Scroll tracking container - exactly 100vh + magazine section height */}
       <div 
         ref={containerRef} 
-        className="relative h-[240vh] sm:h-[200vh]"
+        className="relative h-[240vh] sm:h-[200vh] xl:h-[175vh]"
         // style={{ height: '200vh' }} // Reduced height to prevent video bleeding
       >
         {/* Full-screen hero with scroll animations */}
