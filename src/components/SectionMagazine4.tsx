@@ -49,7 +49,7 @@ const SectionMagazine4: FC<Props> = ({ posts, heading, className, subHeading, di
         aria-live="polite"
       >
         {posts[0] && <Card8 className="sm:col-span-2" post={posts[0]} />}
-        {posts.slice(1, 3).map((item, index) => (<Card9 key={index} post={item} /> ))}
+        {posts.slice(1, 3).map((item, index) => (<Card9 key={`first-${item.id || index}`} post={item} />))}
       </motion.div>
 
       {/* Second Section - Fade in from right with stagger */}
@@ -61,7 +61,7 @@ const SectionMagazine4: FC<Props> = ({ posts, heading, className, subHeading, di
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7 xl:grid-cols-4 mt-6"
         aria-live="polite"
       >
-        {posts.slice(3, 5).map((item, index) => (<Card9 key={index} post={item} />))}
+        {posts.slice(3, 5).map((item, index) => (<Card9 key={`second-${item.id || index}`} post={item} />))}
         {posts[5] && <Card8 className="sm:col-span-2" post={posts[5]} />}
       </motion.div>
 
