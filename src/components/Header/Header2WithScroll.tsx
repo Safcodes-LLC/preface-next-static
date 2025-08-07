@@ -86,7 +86,7 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
             )}
           ></div> */}
           {/* <div className="-ms-1.5">
-            <SearchModal type="type1" />
+            <SearchModal type="type1" isScrolled={isScrolled} />
           </div> */}
         </div>
 
@@ -106,17 +106,22 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
         </div>
 
         <div className="flex flex-1 items-center justify-end gap-x-0.5">
-          <div className="hidden sm:block text-[#60A43A]">
-            <Button className="h-10 px-3! " href={'/submission'} plain>
+          <div className="hidden sm:block">
+            <Button className="h-10 px-2! " href={'/submission'} color="logo-outline">
               {/* <PlusIcon className="size-5!" /> */}
               Sign in
             </Button>
           </div>
           {/* <NotifyDropdown className="me-3" /> */}
-          <SearchModal type="type1" />
+          <SearchModal type="type1" isScrolled={isScrolled} />
           <AvatarDropdown
             trigger={<button type="button" aria-label="Settings" className="ml-2 flex items-center cursor-pointer justify-center rounded-full p-2 focus:outline-none focus:ring-2 transition-all duration-200">
-              <Cog6ToothIcon className="w-6 h-6 text-[#4A4A4A]" aria-hidden="true" />
+              <Cog6ToothIcon className={clsx(
+                "w-6 h-6 transition-colors duration-200",
+                isScrolled 
+                  ? "text-neutral-900 dark:text-neutral-100" 
+                  : "text-white"
+              )} aria-hidden="true" />
             </button>}
           />
           <div className="ms-2 flex lg:hidden">

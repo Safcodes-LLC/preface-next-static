@@ -89,9 +89,10 @@ const quickActions: Option[] = [
 
 interface Props {
   type: 'type1' | 'type2'
+  isScrolled?: boolean
 }
 
-const SearchModal: FC<Props> = ({ type = 'type1' }) => {
+const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false }) => {
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
@@ -131,7 +132,12 @@ const SearchModal: FC<Props> = ({ type = 'type1' }) => {
 
   const buttonOpenModal1 = () => {
     return (
-      <ButtonCircle plain onClick={() => setOpen(true)}>
+      <ButtonCircle plain onClick={() => setOpen(true)} className={clsx(
+        "transition-colors duration-200",
+        isScrolled 
+          ? "text-neutral-900 dark:text-neutral-100" 
+          : "text-white"
+      )}>
         <HugeiconsIcon icon={Search01Icon} size={24} />
       </ButtonCircle>
     )
