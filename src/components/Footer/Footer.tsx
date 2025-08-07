@@ -1,6 +1,8 @@
 import { CustomLink } from '@/data/types'
 import Logo from '@/shared/Logo'
 import SocialsList1 from '@/shared/SocialsList1'
+import SocialsListStroke from '@/shared/SocialsListStroke'
+import SocialsListStroke2 from '@/shared/SocialsListStroke2'
 import React from 'react'
 
 export interface WidgetFooterMenu {
@@ -88,7 +90,8 @@ const Footer: React.FC = () => {
               <Logo size="size-10" />
             </div>
             <div className="col-span-2 flex items-center md:col-span-3">
-              <SocialsList1 />
+              {/* <SocialsList1 /> */}
+              <SocialsListStroke2/>
             </div>
           </div>
           {widgetMenus.map(renderWidgetMenuItem)}

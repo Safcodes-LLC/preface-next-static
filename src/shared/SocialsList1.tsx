@@ -34,17 +34,17 @@ const socialsDemo = [
 
 const SocialsList1: FC<Props> = ({ className, socials = socialsDemo }) => {
   return (
-    <div className={clsx('flex flex-col gap-y-4', className)}>
+    <div className={clsx('flex gap-y-4', className)}>
       {socials.map((item, index) => (
         <Link
           href={item.href}
-          className="group flex items-center gap-x-2.5 text-sm text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-white"
+          className="group flex items-center gap-x-2.5 text-sm text-neutral-700 mx-1 border border-[#CDCDCD] rounded-full p-1 hover:text-black dark:text-neutral-300 dark:hover:text-white"
           key={index}
           target="_blank"
           rel="noopener noreferrer"
         >
           <HugeiconsIcon icon={item.icon} size={20} />
-          {item.name}
+          {/* {item.name} */}
         </Link>
       ))}
     </div>
