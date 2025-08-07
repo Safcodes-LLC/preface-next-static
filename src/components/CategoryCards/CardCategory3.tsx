@@ -12,17 +12,11 @@ interface Props {
 const CardCategory3: FC<Props> = ({ className = '', category }) => {
   const { count, name, handle, thumbnail } = category
   return (
-    // <Link
-    //   href={`/category/${handle}`}
-    //   className={`card-category-3 flex flex-col rounded-[18px] bg-white dark:bg-[#0D0D0D] p-[10px] ${className}`}
-    // >
-    <span
-      // href={`/category/${handle}`}
-      className={`card-category-3 flex flex-col rounded-[18px] bg-white dark:bg-[#0D0D0D] p-[10px] ${className}`}
+    <Link
+      href={`/category/${handle}`}
+      className={`card-category-3 group flex flex-col rounded-[18px] bg-white p-[10px] dark:bg-[#0D0D0D] ${className}`}
     >
-
-
-      <div className="group aspect-w-5 relative h-0 w-full shrink-0 overflow-hidden rounded-2xl aspect-h-5">
+      <div className="aspect-w-5 relative h-0 w-full shrink-0 overflow-hidden rounded-2xl aspect-h-5">
         <Image
           src={thumbnail || ''}
           className="h-full w-full rounded-2xl object-cover"
@@ -35,12 +29,11 @@ const CardCategory3: FC<Props> = ({ className = '', category }) => {
       <div className="mt-4 text-center">
         <h2 className={`text-lg font-medium text-neutral-900 dark:text-neutral-100`}>{name}</h2>
         <span className={`mt-1 block text-sm text-neutral-600 dark:text-neutral-400`}>{count} Articles</span>
-        <div className="inline-flex items-center justify-center rounded-full bg-[#00652E] dark:bg-[#60A43A] p-2 my-[10px] cursor-pointer">
+        <div className="my-[10px] hidden cursor-pointer items-center justify-center rounded-full bg-[#00652E] p-2 transition-all duration-200 group-hover:inline-flex dark:bg-[#60A43A]">
           <ArrowRightIcon className="h-5 w-5 text-white rtl:rotate-180" />
         </div>
       </div>
-    </span>
-    // </Link>
+    </Link>
   )
 }
 
