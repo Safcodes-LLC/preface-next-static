@@ -7,8 +7,8 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = ({ children }) => {
-  // return <ApplicationLayout headerHasBorder>{children}</ApplicationLayout>
-  return <ApplicationLayoutWithVideo headerHasBorder>{children}</ApplicationLayoutWithVideo>
+  return <ApplicationLayout headerHasBorder>{children}</ApplicationLayout>
+  // return <ApplicationLayoutWithVideo headerHasBorder>{children}</ApplicationLayoutWithVideo>
 
 }
 

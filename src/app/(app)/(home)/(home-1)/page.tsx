@@ -1,13 +1,11 @@
 import BackgroundSection from '@/components/BackgroundSection'
-import HeroWithMagazine from '@/components/HeroWithMagazine'
-import SectionMagazine10 from '@/components/SectionMagazine10'
+import ParallaxScrollSection from '@/components/ParallaxScrollSection '
 import SectionMagazine4 from '@/components/SectionMagazine4'
 import SectionMagazine7 from '@/components/SectionMagazine7'
 import SectionSlider from '@/components/SectionSlider.tsx'
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
 import SectionTrending from '@/components/SectionTrending'
 import SwipableSliderPosts from '@/components/SwipableSliderPosts'
-import VideoHeroBanner from '@/components/VideoHeroBanner'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
@@ -44,11 +42,15 @@ const Page = async () => {
     <div className="relative pb-28 lg:pb-32">
       {/* Video Hero Banner */}
       {/* <VideoHeroBanner /> */}
-      <div className="relative">
+      {/* <div className="relative">
         <HeroWithMagazine posts={magazine10Data} />
-      </div>
-
-      <div className="relative container space-y-28 lg:space-y-40">
+      </div> */}
+      {/* <div className=''> */}
+      {/* <VideoHeroBanner /> */}
+      {/* </div> */}
+      {/* Parallax Scroll Section - VideoHeroBanner + SectionMagazine10 */}
+      <ParallaxScrollSection magazine10Data={magazine10Data} />
+      <div className="relative container mt-28 space-y-28 lg:space-y-40">
         {/* <SectionMagazine10 posts={magazine10Data} /> */}
 
         <SectionSliderNewCategories
