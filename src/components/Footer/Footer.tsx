@@ -1,7 +1,5 @@
 import { CustomLink } from '@/data/types'
 import Logo from '@/shared/Logo'
-import SocialsList1 from '@/shared/SocialsList1'
-import SocialsListStroke from '@/shared/SocialsListStroke'
 import SocialsListStroke2 from '@/shared/SocialsListStroke2'
 import React from 'react'
 
@@ -42,7 +40,7 @@ const widgetMenus: WidgetFooterMenu[] = [
       { href: '/', label: 'Vahab Aqafi' },
       { href: '/', label: 'Niyas Baqavi' },
       { href: '/', label: 'Nousahd Amani' },
-      { href: '/', label: "Rasheed Latheefi" },
+      { href: '/', label: 'Rasheed Latheefi' },
     ],
   },
   {
@@ -91,7 +89,11 @@ const Footer: React.FC = () => {
             </div>
             <div className="col-span-2 flex items-center md:col-span-3">
               {/* <SocialsList1 /> */}
-              <SocialsListStroke2/>
+              <SocialsListStroke2 />
+            </div>
+            <div className='flex flex-col'>
+              <span className='text-sm text-white'>info@preface.com</span>
+              <span className='text-sm text-white'>www.preface.com</span>
             </div>
           </div>
           {widgetMenus.map(renderWidgetMenuItem)}
