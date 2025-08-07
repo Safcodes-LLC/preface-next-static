@@ -92,10 +92,10 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
 
         <div className="mx-4 hidden flex-2 justify-center lg:flex">
           <div className="flex items-center gap-x-2">
-            <Navigation menu={navigationMenu} featuredPosts={featuredPosts} />
+            <Navigation menu={navigationMenu} featuredPosts={featuredPosts} isScrolled={isScrolled} />
             <a
               href="/ask-the-scholar"
-              className="flex items-center gap-2 border border-white bg-white/80 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white px-5 py-2 rounded-sm shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 min-w-[155px] text-sm font-medium"
+              className="flex items-center gap-2 border border-white bg-white/80 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white px-5 py-2 rounded-sm shadow-sm focus:outline-none transition-all duration-200 min-w-[155px] text-sm font-medium"
               aria-label="Ask the Scholar"
               style={{ marginTop: 0 }}
             >

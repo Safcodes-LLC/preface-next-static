@@ -6,10 +6,15 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
 
-const Lv1MenuItem = ({ menuItem }: { menuItem: TNavigationItem }) => {
+const Lv1MenuItem = ({ menuItem, isScrolled }: { menuItem: TNavigationItem; isScrolled?: boolean }) => {
   return (
     <Link
-      className="flex items-center self-center rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 lg:text-[15px] xl:px-5 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+      className={clsx(
+        "flex items-center self-center rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap lg:text-[15px] xl:px-5",
+        isScrolled 
+          ? "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+          : "text-neutral-300 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+      )}
       href={menuItem.href || '#'}
     >
       {menuItem.name}
@@ -20,7 +25,7 @@ const Lv1MenuItem = ({ menuItem }: { menuItem: TNavigationItem }) => {
   )
 }
 
-const MegaMenu = ({ menuItem, featuredPosts }: { menuItem: TNavigationItem; featuredPosts: TPost[] }) => {
+const MegaMenu = ({ menuItem, featuredPosts, isScrolled }: { menuItem: TNavigationItem; featuredPosts: TPost[]; isScrolled?: boolean }) => {
   const renderNavlink = (item: TNavigationItem) => {
     return (
       <li key={item.id} className={clsx('menu-item', item.isNew && 'menuIsNew')}>
@@ -36,7 +41,7 @@ const MegaMenu = ({ menuItem, featuredPosts }: { menuItem: TNavigationItem; feat
 
   return (
     <li className="menu-megamenu menu-item flex">
-      <Lv1MenuItem menuItem={menuItem} />
+      <Lv1MenuItem menuItem={menuItem} isScrolled={isScrolled} />
 
       {menuItem.children?.length && menuItem.type === 'mega-menu' ? (
         <div className="absolute inset-x-0 top-full z-50 sub-menu">
@@ -47,7 +52,7 @@ const MegaMenu = ({ menuItem, featuredPosts }: { menuItem: TNavigationItem; feat
                   {menuItem.children?.map((menuChild, index) => (
                     <div key={index}>
                       <p className="font-medium text-neutral-900 dark:text-neutral-200">{menuChild.name}</p>
-                      <ul className="mt-4 grid space-y-4">{menuChild.children?.map(renderNavlink)}</ul>
+                      <ul className="mt-4 grid space-y-1">{menuChild.children?.map(renderNavlink)}</ul>
                     </div>
                   ))}
                 </div>
@@ -100,10 +105,10 @@ const renderDropdown = (menuItem: TNavigationItem, level = 2) => (
   </li>
 )
 
-const DropdownMenu = ({ menuItem }: { menuItem: TNavigationItem }) => {
+const DropdownMenu = ({ menuItem, isScrolled }: { menuItem: TNavigationItem; isScrolled?: boolean }) => {
   return (
     <li className="menu-dropdown relative menu-item flex">
-      <Lv1MenuItem menuItem={menuItem} />
+      <Lv1MenuItem menuItem={menuItem} isScrolled={isScrolled} />
       {menuItem.children?.length && menuItem.type === 'dropdown' ? (
         <div className="absolute top-full left-0 z-50 sub-menu w-56">
           <ul className="relative grid space-y-1 rounded-lg bg-white py-3 text-sm shadow-lg ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
@@ -127,20 +132,21 @@ export interface Props {
   menu: TNavigationItem[]
   className?: string
   featuredPosts: TPost[]
+  isScrolled?: boolean
 }
-const Navigation: FC<Props> = ({ menu, className, featuredPosts }) => {
+const Navigation: FC<Props> = ({ menu, className, featuredPosts, isScrolled }) => {
   return (
     <ul className={clsx('flex', className)}>
       {menu.map((menuItem) => {
         if (menuItem.type === 'dropdown') {
-          return <DropdownMenu key={menuItem.id} menuItem={menuItem} />
+          return <DropdownMenu key={menuItem.id} menuItem={menuItem} isScrolled={isScrolled} />
         }
         if (menuItem.type === 'mega-menu') {
-          return <MegaMenu featuredPosts={featuredPosts} key={menuItem.id} menuItem={menuItem} />
+          return <MegaMenu featuredPosts={featuredPosts} key={menuItem.id} menuItem={menuItem} isScrolled={isScrolled} />
         }
         return (
           <li key={menuItem.id} className="relative menu-item flex">
-            <Lv1MenuItem key={menuItem.id} menuItem={menuItem} />
+            <Lv1MenuItem key={menuItem.id} menuItem={menuItem} isScrolled={isScrolled} />
           </li>
         )
       })}
