@@ -10,10 +10,10 @@ const Lv1MenuItem = ({ menuItem, isScrolled }: { menuItem: TNavigationItem; isSc
   return (
     <Link
       className={clsx(
-        "flex items-center self-center rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap lg:text-[15px] xl:px-5",
-        isScrolled 
-          ? "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
-          : "text-neutral-300 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+        'flex items-center self-center rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap lg:text-[15px] xl:px-5',
+        isScrolled
+          ? 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200'
+          : 'text-neutral-300 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200'
       )}
       href={menuItem.href || '#'}
     >
@@ -25,7 +25,15 @@ const Lv1MenuItem = ({ menuItem, isScrolled }: { menuItem: TNavigationItem; isSc
   )
 }
 
-const MegaMenu = ({ menuItem, featuredPosts, isScrolled }: { menuItem: TNavigationItem; featuredPosts: TPost[]; isScrolled?: boolean }) => {
+const MegaMenu = ({
+  menuItem,
+  featuredPosts,
+  isScrolled,
+}: {
+  menuItem: TNavigationItem
+  featuredPosts: TPost[]
+  isScrolled?: boolean
+}) => {
   const renderNavlink = (item: TNavigationItem) => {
     return (
       <li key={item.id} className={clsx('menu-item', item.isNew && 'menuIsNew')}>
@@ -76,11 +84,12 @@ const renderMenuLink = (menuItem: TNavigationItem, level = 1) => (
     href={menuItem.href || '#'}
   >
     {menuItem.name}
-    {menuItem.children?.length && (
-      level === 1
-        ? <ChevronDownIcon className="ml-2 h-4 w-4 text-neutral-500" aria-hidden="true" />
-        : <ChevronRightIcon className="ml-2 h-4 w-4 text-neutral-500" aria-hidden="true" />
-    )}
+    {menuItem.children?.length &&
+      (level === 1 ? (
+        <ChevronDownIcon className="ml-2 h-4 w-4 text-neutral-500" aria-hidden="true" />
+      ) : (
+        <ChevronRightIcon className="ml-2 h-4 w-4 text-neutral-500" aria-hidden="true" />
+      ))}
   </Link>
 )
 
@@ -91,13 +100,13 @@ const renderDropdown = (menuItem: TNavigationItem, level = 2) => (
       <div className="absolute top-0 left-full z-10 sub-menu w-56 pl-2">
         <ul className="relative grid space-y-1 rounded-lg bg-white py-4 text-sm shadow-lg ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
           {menuItem.children.map((child) =>
-            child.type === 'dropdown' && child.children?.length
-              ? renderDropdown(child, level + 1)
-              : (
-                <li key={child.id} className="px-2">
-                  {renderMenuLink(child, level + 1)}
-                </li>
-              )
+            child.type === 'dropdown' && child.children?.length ? (
+              renderDropdown(child, level + 1)
+            ) : (
+              <li key={child.id} className="px-2">
+                {renderMenuLink(child, level + 1)}
+              </li>
+            )
           )}
         </ul>
       </div>
@@ -113,13 +122,13 @@ const DropdownMenu = ({ menuItem, isScrolled }: { menuItem: TNavigationItem; isS
         <div className="absolute top-full left-0 z-50 sub-menu w-56">
           <ul className="relative grid space-y-1 rounded-lg bg-white py-3 text-sm shadow-lg ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
             {menuItem.children?.map((childItem) =>
-              childItem.type === 'dropdown' && childItem.children?.length
-                ? renderDropdown(childItem, 2)
-                : (
-                  <li key={childItem.id} className="px-2">
-                    {renderMenuLink(childItem, 2)}
-                  </li>
-                )
+              childItem.type === 'dropdown' && childItem.children?.length ? (
+                renderDropdown(childItem, 2)
+              ) : (
+                <li key={childItem.id} className="px-2">
+                  {renderMenuLink(childItem, 2)}
+                </li>
+              )
             )}
           </ul>
         </div>
@@ -139,14 +148,21 @@ const Navigation: FC<Props> = ({ menu, className, featuredPosts, isScrolled }) =
     <ul className={clsx('flex', className)}>
       {menu.map((menuItem) => {
         if (menuItem.type === 'dropdown') {
-          return <DropdownMenu key={menuItem.id} menuItem={menuItem} isScrolled={isScrolled} />
+          return <DropdownMenu key={`nav-${menuItem.id}`} menuItem={menuItem} isScrolled={isScrolled} />
         }
         if (menuItem.type === 'mega-menu') {
-          return <MegaMenu featuredPosts={featuredPosts} key={menuItem.id} menuItem={menuItem} isScrolled={isScrolled} />
+          return (
+            <MegaMenu 
+              featuredPosts={featuredPosts} 
+              key={`mega-${menuItem.id}`} 
+              menuItem={menuItem} 
+              isScrolled={isScrolled} 
+            />
+          )
         }
         return (
-          <li key={menuItem.id} className="relative menu-item flex">
-            <Lv1MenuItem key={menuItem.id} menuItem={menuItem} isScrolled={isScrolled} />
+          <li key={`item-${menuItem.id}`} className="relative menu-item flex">
+            <Lv1MenuItem menuItem={menuItem} isScrolled={isScrolled} />
           </li>
         )
       })}
