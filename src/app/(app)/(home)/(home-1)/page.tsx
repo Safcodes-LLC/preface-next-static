@@ -115,10 +115,10 @@ const Page = async () => {
         />
 
         {/* Dynamic Category Routing Demo */}
-        <div className="relative py-16 lg:py-20">
+        {/* <div className="relative py-16 lg:py-20">
           <BackgroundSection />
           <CategoryLinks className="container" />
-        </div>
+        </div> */}
       </div>
 
       <div className="mt-28 bg-[#000000] py-16 lg:py-20 dark:bg-[#0D0D0D]">
