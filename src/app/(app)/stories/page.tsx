@@ -1,5 +1,3 @@
-import ArchiveSortByListBox from '@/components/ArchiveSortByListBox'
-import ArchiveTabs from '@/components/ArchiveTabs'
 import CardAuthorBox2 from '@/components/CardAuthorBoxs/CardAuthorBox2'
 import CardCategory2 from '@/components/CategoryCards/CardCategory2'
 import Card11 from '@/components/PostCards/Card11'
@@ -11,7 +9,6 @@ import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/c
 import { Metadata } from 'next'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
-import { getCategories } from '@/data/categories'
 
 const sortByOptions = [
   { name: 'Most recent', value: 'most-recent' },
@@ -79,9 +76,7 @@ const PageStories = async ({
     searchQuery || '',
     searchTab as 'posts' | 'categories' | 'tags' | 'authors'
   )
-console.log(posts, "postssss.. ");
-
-
+  console.log(posts, 'postssss.. ')
 
   const renderLoopItems = () => {
     switch (searchTab) {
@@ -132,7 +127,7 @@ console.log(posts, "postssss.. ");
             alt="search"
             fill
             src="https://images.pexels.com/photos/2138922/pexels-photo-2138922.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            className="rounded-3xl object-cover md:rounded-[40px]"
+            className="object-cover md:rounded-2xl"
             sizes="(max-width: 1600px) 100vw, 95vw"
             priority
           />
@@ -190,7 +185,7 @@ console.log(posts, "postssss.. ");
         {renderLoopItems()}
         <div className="mx-auto mt-10 text-center md:mt-16">
           <ButtonSecondary>
-            Load More <ArrowDownIcon className="h-6 w-6 text-gray-500" />
+            Load More <ArrowDownIcon className="h-6 w-6 text-[#444444] dark:text-white" />
           </ButtonSecondary>
         </div>
         {/* PAGINATION */}
