@@ -1,4 +1,5 @@
 import { getAllPosts, getPostsDefault, TPost } from './posts'
+import { generateSlug } from '@/utils/slug'
 
 // TODO: replace with actual images
 // TODO: replace with actual images
@@ -21,22 +22,22 @@ export async function getCategories() {
   return [
     {
       id: 'category-1',
-      name: 'Islam',
-      handle: 'garden',
+      name: 'Muhammed',
+      handle: 'muhammed',
       description:
-        'Explore the world of gardening, from planting to harvesting and everything in between. Discover tips, tricks, and expert advice to make your garden thrive.',
+        'Explore the life, teachings, and legacy of Prophet Muhammad (PBUH). Discover his wisdom, character, and the profound impact he had on the world.',
       color: 'indigo',
       count: 13,
       date: '2025-06-10',
       icon: {
         src: '/images/categories/category_1.png',
-        alt: 'Islam',
+        alt: 'Muhammed',
         width: 1920,
         height: 1080,
       },
       thumbnail: {
         src: _demo_category_image_urls[0],
-        alt: 'Islam',
+        alt: 'Muhammed',
         width: 1920,
         height: 1080,
       },
@@ -44,9 +45,9 @@ export async function getCategories() {
     {
       id: 'category-2',
       name: `Holy Qur'an`,
-      handle: 'technology',
+      handle: 'holy-quran',
       description:
-        'Stay updated with the latest technology news, trends, and innovations. Explore the world of AI, blockchain, and the future of technology.',
+        'Explore the divine revelations, wisdom, and guidance found in the Holy Qur\'an. Discover its teachings, interpretations, and spiritual significance.',
       color: 'blue',
       count: 25,
       date: '2025-05-15',
@@ -66,9 +67,9 @@ export async function getCategories() {
     {
       id: 'category-3',
       name: 'Islam for Beginners',
-      handle: 'fitness',
+      handle: 'islam-for-beginners',
       description:
-        'Discover workout routines, health tips, and wellness advice for a better lifestyle. Stay fit and healthy with our expert tips and advice.',
+        'A comprehensive guide for those new to Islam. Learn about the basic principles, practices, and beliefs that form the foundation of Islamic faith.',
       color: 'red',
       count: 18,
       date: '2025-04-20',
@@ -80,51 +81,51 @@ export async function getCategories() {
       },
       thumbnail: {
         src: _demo_category_image_urls[2],
-        alt: 'Fitness',
+        alt: 'Islam for Beginners',
         width: 1920,
         height: 1080,
       },
     },
     {
       id: 'category-4',
-      name: 'Piller of Faith',
-      handle: 'finance',
+      name: 'Pillars of Faith',
+      handle: 'pillars-of-faith',
       description:
-        'Stay updated with financial news, investment strategies, and money management tips. Make informed decisions with our expert advice.',
+        'Explore the fundamental pillars of Islamic faith - Shahada, Salah, Zakat, Sawm, and Hajj. Understand their significance and practice.',
       color: 'green',
       count: 22,
       date: '2025-03-05',
       icon: {
         src: '/images/categories/category_4.png',
-        alt: 'Piller of Faith',
+        alt: 'Pillars of Faith',
         width: 1920,
         height: 1080,
       },
       thumbnail: {
         src: _demo_category_image_urls[3],
-        alt: 'Finance',
+        alt: 'Pillars of Faith',
         width: 1920,
         height: 1080,
       },
     },
     {
       id: 'category-5',
-      name: 'School of thoughts',
-      handle: 'travel',
+      name: 'Schools of Thought',
+      handle: 'schools-of-thought',
       description:
-        'Explore travel guides, destination reviews, and adventure stories from around the world. Plan your next adventure with our expert tips and advice.',
+        'Explore the different Islamic schools of thought and their interpretations. Understand the diversity within Islamic scholarship and jurisprudence.',
       color: 'yellow',
       count: 30,
       date: '2025-02-15',
       icon: {
         src: '/images/categories/category_5.png',
-        alt: 'School of thoughts',
+        alt: 'Schools of Thought',
         width: 1920,
         height: 1080,
       },
       thumbnail: {
         src: _demo_category_image_urls[4],
-        alt: 'Travel',
+        alt: 'Schools of Thought',
         width: 1920,
         height: 1080,
       },
@@ -441,8 +442,8 @@ export async function getCategories() {
 }
 
 export async function getCategoryByHandle(handle: string) {
-  // lower case handle
-  handle = handle?.toLowerCase()
+  // lower case handle and normalize for URL-friendly format
+  handle = handle?.toLowerCase().trim()
 
   // for demo purpose, get all posts
   const posts = (await getAllPosts()).slice(0, 12)
@@ -456,7 +457,7 @@ export async function getCategoryByHandle(handle: string) {
       count: 2500,
       date: '2025-01-01',
       icon: {
-        src: '/images/categories/category_icon_1.png', // You can replace with appropriate path
+        src: '/images/categories/category_icon_1.png',
         alt: 'All articles',
         width: 1920,
         height: 1080,
@@ -480,12 +481,15 @@ export async function getCategoryByHandle(handle: string) {
 
   // get all categories
   const categories = await getCategories()
-  let category = categories.find((category) => category.handle === handle)
+  
+  // Use the slug utility for better matching
+  const { findBySlug } = await import('@/utils/slug')
+  const category = findBySlug(handle, categories)
+  
   if (!category) {
-    // return null
-    // for demo purpose, return the first category
-    category = categories[0]
+    return null // Return null for proper 404 handling
   }
+  
   return {
     ...category,
     posts,

@@ -1,4 +1,5 @@
 import BackgroundSection from '@/components/BackgroundSection'
+import CategoryLinks from '@/components/CategoryLinks'
 import ParallaxScrollSection from '@/components/ParallaxScrollSection '
 import SectionMagazine4 from '@/components/SectionMagazine4'
 import SectionMagazine7 from '@/components/SectionMagazine7'
@@ -112,6 +113,12 @@ const Page = async () => {
           heading="LATEST ARTICLES"
           subHeading="Discover the most outstanding articles in all topics of life"
         />
+
+        {/* Dynamic Category Routing Demo */}
+        <div className="relative py-16 lg:py-20">
+          <BackgroundSection />
+          <CategoryLinks className="container" />
+        </div>
       </div>
 
       <div className="mt-28 bg-[#000000] py-16 lg:py-20 dark:bg-[#0D0D0D]">
@@ -125,102 +132,7 @@ const Page = async () => {
         </div>
       </div>
 
-      {/* <div className="container space-y-28 lg:space-y-32">
-        <SectionMagazine8
-          posts={audioPosts.slice(0, 6)}
-          heading="Stream live audio"
-          dimHeading="Click on the icon to enjoy the music"
-        />
 
-        <SectionLargeSlider
-          heading="Editor's pick"
-          subHeading="The most outstanding articles"
-          posts={audioPosts.slice(3, 8)}
-        />
-
-        <div className="relative py-16 lg:py-20">
-          <BackgroundSection />
-          <SectionSliderNewAuthors
-            heading="Newest authors"
-            subHeading="The latest articles from our authors"
-            authors={authors.slice(0, 10)}
-          />
-        </div>
-
-        <div className="relative py-16 lg:py-20">
-          <BackgroundSection />
-          <SectionSliderPosts
-            postCardName="card10V2"
-            heading="Explore latest articles"
-            subHeading="Click on the icon to enjoy the music"
-            posts={posts.slice(0, 6)}
-          />
-        </div>
-
-        <SectionMagazine1
-          heading="Most viewed articles"
-          subHeading="Explore the most viewed articles"
-          posts={posts.slice(0, 6)}
-        />
-
-        <SectionAds />
-
-        <SectionMagazine7
-          posts={galleryPosts}
-          heading="The gallery posts"
-          dimHeading="The best way to showcase your work"
-        />
-
-        <div className="relative py-16 lg:py-20">
-          <BackgroundSection />
-          <SectionMagazine9
-            posts={audioPosts.slice(0, 9)}
-            heading="Stream live audio"
-            dimHeading="Click on the icon to enjoy the music"
-          />
-        </div>
-
-        <SectionGridAuthorBox
-          authors={authors.slice(0, 10)}
-          heading="Top 10 authors of the month"
-          subHeading="Discover the most popular authors of the month"
-        />
-
-        <div className="relative py-16 lg:py-20">
-          <BackgroundSection />
-          <SectionBecomeAnAuthor />
-        </div>
-
-        <SectionMagazine2 heading="Most viewed articles" posts={posts.slice(0, 5)} />
-
-        <div className="relative py-16">
-          <BackgroundSection />
-          <SectionSliderPosts
-            postCardName="card11"
-            heading="Best articles of the month"
-            subHeading="Over 1118+ articles "
-            posts={posts.slice(0, 14)}
-          />
-        </div>
-
-        <SectionSubscribe2 className="pt-8" />
-
-        <SectionVideos
-          className="py-16 lg:py-20"
-          heading="🎬 The Videos"
-          subHeading="Check out our hottest videos. View more videos and discover new perspectives on just about any topic."
-        />
-
-        <SectionPostsWithWidgets
-          posts={posts.slice(0, 6)}
-          heading="Latest articles 🎈"
-          subHeading="Check out our latest articles"
-          widgetCategories={categories.slice(0, 5)}
-          widgetAuthors={authors.slice(0, 3)}
-          widgetTags={categories.slice(0, 6)}
-          widgetPosts={posts.slice(0, 4)}
-        />
-      </div> */}
     </div>
   )
 }
