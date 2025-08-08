@@ -22,8 +22,6 @@ const Card17: FC<Props> = ({ className, post }) => {
         className
       )}
     >
-
-      {/* Icon in the center-right */}
       <div className="relative h-[70px] w-[70px] shrink-0 rounded-full bg-[#F8F8F8] dark:bg-[#1A1A1A]">
         <Image
           sizes="70px"
@@ -33,18 +31,14 @@ const Card17: FC<Props> = ({ className, post }) => {
           alt={title}
         />
       </div>
-
-      {/* Text block on the left */}
       <div className="flex flex-col">
-        <h2 className="block font-medium text-base text=[#000000] dark:text-white">
+        <h2 className="block text-base font-medium text-[#000000] dark:text-white">
           <span className="line-clamp-1">{title}</span>
         </h2>
         <div className="mt-1">
           <span className="text-[12px] font-[400] text-neutral-500 dark:text-neutral-400">120 Articles</span>
         </div>
       </div>
-
-      
 
       {/* Arrow button on the far right */}
       <div className="flex shrink-0 items-center">

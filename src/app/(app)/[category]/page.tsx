@@ -1,8 +1,7 @@
 import Banner from '@/components/Banner'
-import PaginationWrapper from '@/components/PaginationWrapper'
 import Card17 from '@/components/PostCards/Card17'
 import { getCategories, getCategoryByHandle } from '@/data/categories'
-import { getPostsGallery } from '@/data/posts'
+import { getPostsDefault, getPostsGallery } from '@/data/posts'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -42,6 +41,7 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
   }
 
   const galleryPosts = await getPostsGallery()
+  const defaultPosts = await getPostsDefault()
 
   return (
     <div className={`page-category-${category}`}>
@@ -49,8 +49,8 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
       <div className="container mx-auto mt-12 sm:mt-20">
         <Banner
           image="/images/banner/common-banner.png"
-          title="Stories"
-          alt="Stories banner"
+          title={categoryData.name}
+          alt={`${categoryData.name} banner`}
           // className=""
         />
         <div className="w-full lg:max-w-4xl">
@@ -71,9 +71,6 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
             <Card17 key={post.id} post={post} />
           ))}
         </div>
-
-        {/* PAGINATIONS */}
-        <PaginationWrapper className="mt-20" />
       </div>
     </div>
   )

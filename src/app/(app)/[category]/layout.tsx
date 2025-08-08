@@ -1,8 +1,7 @@
 import { ApplicationLayout } from '@/app/(app)/application-layout'
-import BackgroundSection from '@/components/BackgroundSection'
-import SectionSliderNewAuthors from '@/components/SectionSliderNewAuthors'
-import SectionSubscribe2 from '@/components/SectionSubscribe2'
+import SectionSliderPosts from '@/components/SectionSliderPosts'
 import { getAuthors } from '@/data/authors'
+import { getPostsDefault } from '@/data/posts'
 import { ReactNode } from 'react'
 
 interface Props {
@@ -11,23 +10,21 @@ interface Props {
 
 const Layout: React.FC<Props> = async ({ children }) => {
   const authors = await getAuthors()
-
+  const defaultPosts = await getPostsDefault()
   return (
     <ApplicationLayout>
       {children}
 
       <div className="container space-y-20 py-20 lg:space-y-28 lg:py-28">
-        <div className="relative py-16 lg:py-20">
-          <BackgroundSection />
-          <SectionSliderNewAuthors
-            heading="Top elite authors"
-            subHeading="Discover our elite writers"
-            authors={authors.slice(0, 10)}
+        <div className="relative ">
+          {/* <BackgroundSection /> */}
+          <SectionSliderPosts
+            postCardName="card10V5"
+            heading="POPULAR ARTICLES FROM MOHAMMED ﷺ"
+            subHeading="Over 10 Articles"
+            posts={defaultPosts.slice(0, 6)}
           />
         </div>
-
-        {/* SUBCRIBES */}
-        <SectionSubscribe2 />
       </div>
     </ApplicationLayout>
   )

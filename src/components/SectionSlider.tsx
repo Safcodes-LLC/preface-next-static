@@ -1,16 +1,16 @@
 'use client'
 
 import { TCategory } from '@/data/categories'
+import HeadingWithSub from '@/shared/Heading'
 import clsx from 'clsx'
+import { motion, useAnimationControls } from 'framer-motion'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
-import { motion, useAnimationControls } from 'framer-motion'
 import CardCategory1 from './CategoryCards/CardCategory1'
 import CardCategory2 from './CategoryCards/CardCategory2'
 import CardCategory3 from './CategoryCards/CardCategory3'
 import CardCategory4 from './CategoryCards/CardCategory4'
 import CardCategory5 from './CategoryCards/CardCategory5'
-import HeadingWithSub from '@/shared/Heading'
 
 interface SliderConfig {
   autoSlide?: boolean
@@ -82,7 +82,7 @@ const SliderHeading: React.FC<HeadingProps> = ({ heading, subHeading, dimHeading
   const HeadingTag = level
 
   return (
-    <div className={clsx('container  mb-12', isCenter && 'text-center')}>
+    <div className={clsx('container mb-12', isCenter && 'text-center')}>
       <HeadingWithSub className="mb-0!" subHeading={subHeading}>
         {heading}
       </HeadingWithSub>
@@ -125,15 +125,15 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
   // Create duplicated categories for infinite loop (maintain order)
   const duplicatedCategories = React.useMemo(() => {
     if (!autoSlide || !loop || categories.length === 0) return categories
-    
+
     // Simply repeat the same sequence multiple times to maintain order
     const repeatCount = Math.ceil((cardsPerView * 3) / categories.length) + 2
     const duplicates = []
-    
+
     for (let i = 0; i < repeatCount; i++) {
       duplicates.push(...categories)
     }
-    
+
     return duplicates
   }, [categories, autoSlide, loop, cardsPerView])
 
@@ -165,15 +165,15 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
     const startInfiniteAnimation = () => {
       // Calculate total width needed to move through all original cards once
       const totalMoveDistance = -(categories.length * cardWidthPercentage)
-      
+
       controls.start({
         x: `${totalMoveDistance}%`,
         transition: {
           duration: (categories.length * (autoSlideInterval || 3000)) / 1000,
-          ease: "linear",
+          ease: 'linear',
           repeat: Infinity,
-          repeatType: "loop"
-        }
+          repeatType: 'loop',
+        },
       })
     }
 
@@ -313,17 +313,15 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
             }}
             transition={{
               duration: isInfiniteMode ? 0 : 0.3,
-              ease: isInfiniteMode ? "linear" : "easeOut"
+              ease: isInfiniteMode ? 'linear' : 'easeOut',
             }}
           >
             {categoriesToRender.map((category, index) => (
-              <div 
-                key={`${category.id}-${index}`} 
-                className="flex-shrink-0 px-4 lg:px-2 " 
-                style={{ 
-                  width: isInfiniteMode 
-                    ? `${cardWidthPercentage}%` 
-                    : `${100 / categoriesToRender.length}%` 
+              <div
+                key={`${category.id}-${index}`}
+                className="flex-shrink-0 px-4 lg:px-2"
+                style={{
+                  width: isInfiniteMode ? `${cardWidthPercentage}%` : `${100 / categoriesToRender.length}%`,
                 }}
               >
                 {renderCard(category, index)}

@@ -15,12 +15,13 @@ import clsx from 'clsx'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import { FC, useContext } from 'react'
+import Card10V5 from './PostCards/Card10V5'
 
 interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
   className?: string
   heading?: string
   posts: TPost[]
-  postCardName?: 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card11'
+  postCardName?: 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card11' | 'card10V5'
   emblaOptions?: EmblaOptionsType
 }
 
@@ -51,6 +52,8 @@ const SectionSliderPosts: FC<Props> = ({
         return <Card10 key={index} post={item} />
       case 'card10V2':
         return <Card10V2 key={index} post={item} />
+      case 'card10V5':
+        return <Card10V5 key={index} post={item} />
       case 'card11':
         return <Card11 key={index} post={item} />
 
