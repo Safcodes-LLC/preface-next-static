@@ -30,6 +30,17 @@ const Card17: FC<Props> = ({ className, post }) => {
           fill
           alt={title}
         />
+        {/* <NcImage
+        alt={name}
+        containerClassName={clsx(
+          'relative me-4 shrink-0 overflow-hidden rounded-lg',
+          size === 'large' ? 'size-20' : 'size-12'
+        )}
+        src={thumbnail || ''}
+        fill
+        className="object-cover"
+        sizes="80px"
+      /> */}
       </div>
       <div className="flex flex-col">
         <h2 className="block text-base font-medium text-[#000000] dark:text-white">

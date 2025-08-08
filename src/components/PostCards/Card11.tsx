@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { FC, useState } from 'react'
 import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
+import Image from 'next/image'
 
 interface Props {
   className?: string
@@ -15,7 +16,7 @@ interface Props {
 }
 
 const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'aspect-5/3' }) => {
-  const { title, handle, categories, date, likeCount, liked, commentCount, readingTime, bookmarked } = post
+  const { title, featuredImage, handle, categories, date, likeCount, liked, commentCount, readingTime, bookmarked } = post
   // console.log(post, 'post check')
 
   const [isHover, setIsHover] = useState(false)
@@ -30,7 +31,15 @@ const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'asp
       onMouseLeave={() => setIsHover(false)}
     >
       <div className={clsx('relative w-full shrink-0 overflow-hidden rounded-t-3xl', ratio)}>
-        <PostFeaturedMedia post={post} isHover={isHover} />
+        {/* <PostFeaturedMedia post={post} isHover={isHover} /> */}
+        <Image
+            alt="search"
+            fill
+            src={featuredImage}
+            className=" object-cover"
+            sizes="(max-width: 1600px) 100vw, 95vw"
+            priority
+          />
       </div>
       {/* <div className="absolute inset-x-3 top-3">
         <CategoryBadgeList categories={categories} />

@@ -110,7 +110,7 @@ const PageStories = async ({
       default:
         return (
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-8 lg:mt-10 lg:grid-cols-3 xl:grid-cols-3">
-            {posts?.map((post) => (
+            {posts?.slice(0,9)?.map((post) => (
               <Card11 key={post.id} post={post} />
             ))}
           </div>
