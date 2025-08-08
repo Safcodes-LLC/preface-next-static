@@ -53,7 +53,6 @@ const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'asp
         </div>
       </div>
     </div>
-    
   )
 }
 
