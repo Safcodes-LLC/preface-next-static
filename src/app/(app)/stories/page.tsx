@@ -1,3 +1,4 @@
+import Banner from '@/components/Banner'
 import CardAuthorBox2 from '@/components/CardAuthorBoxs/CardAuthorBox2'
 import CardCategory2 from '@/components/CategoryCards/CardCategory2'
 import Card11 from '@/components/PostCards/Card11'
@@ -7,7 +8,6 @@ import Tag from '@/shared/Tag'
 import { ArrowDownIcon } from '@heroicons/react/24/outline'
 import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
 import { Metadata } from 'next'
-import Image from 'next/image'
 import { redirect } from 'next/navigation'
 
 const sortByOptions = [
@@ -120,9 +120,9 @@ const PageStories = async ({
 
   return (
     <div className="stories-page">
-      {/* HEADER */}
       <div className="container mx-auto mt-12 sm:mt-20">
-        <div className="relative aspect-16/9 lg:aspect-16/5">
+        {/* HEADER */}
+        {/* <div className="relative aspect-16/9 lg:aspect-16/5">
           <Image
             alt="search"
             fill
@@ -131,19 +131,22 @@ const PageStories = async ({
             sizes="(max-width: 1600px) 100vw, 95vw"
             priority
           />
-          {/* Linear gradient overlay - left to right fade */}
           <div
             className="absolute inset-y-0 left-0 w-3/5 md:rounded-l-2xl"
             style={{
               background: 'linear-gradient(90deg, rgba(20, 20, 20, 0.76) 0%, rgba(97, 97, 97, 0) 100%)',
             }}
           ></div>
-
-          {/* Stories title */}
           <div className="absolute inset-0 flex items-center px-10">
             <h1 className="text-2xl font-bold text-white md:text-3xl">Stories</h1>
           </div>
-        </div>
+        </div> */}
+        <Banner
+          image="/images/banner/common-banner.png"
+          title="Stories"
+          alt="Stories banner"
+          // className=""
+        />
 
         {/* CONTENT */}
         {/* <div className="relative -mt-14 sm:container sm:-mt-36 lg:-mt-48">
