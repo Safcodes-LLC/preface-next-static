@@ -10,14 +10,14 @@ import React, { ReactNode } from 'react'
 interface Props {
   children: ReactNode
   headerHasBorder?: boolean
-  headerStyle?: 'header-1' | 'header-2'
+  headerStyle?: 'header-1' | 'header-2 | header-scroll | header-3'
   showBanner?: boolean
 }
 
 const ApplicationLayout: React.FC<Props> = ({
   children,
   headerHasBorder,
-  headerStyle = 'header-scroll',
+  headerStyle = 'header-2',
   showBanner = false,
 }) => {
   return (
