@@ -4,6 +4,7 @@ import Header2 from '@/components/Header/Header2'
 import Header2WithScroll from '@/components/Header/Header2WithScroll'
 import Header3 from '@/components/Header/Header3'
 import AsideSidebarNavigation from '@/components/aside-sidebar-navigation'
+import SocialSidebar from '@/components/SocialSidebar'
 import Banner from '@/shared/banner'
 import React, { ReactNode } from 'react'
 
@@ -35,6 +36,8 @@ const ApplicationLayout: React.FC<Props> = ({
       <Footer />
       {/* aside sidebar navigation */}
       <AsideSidebarNavigation />
+      {/* social media sidebar */}
+      <SocialSidebar />
     </>
   )
 }
