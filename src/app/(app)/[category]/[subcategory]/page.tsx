@@ -1,7 +1,6 @@
 import ArchiveSortByListBox from '@/components/ArchiveSortByListBox'
 import Banner from '@/components/Banner'
 import ModalCategories from '@/components/ModalCategories'
-import ModalTags from '@/components/ModalTags'
 import Card16Podcast from '@/components/PostCards/Card16Podcast'
 import { getCategories, getTags } from '@/data/categories'
 import { getAllPosts } from '@/data/posts'
@@ -63,9 +62,6 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
     return hasMatchingCategory || true
   })
 
-  console.log(posts, 'posts checking work or not')
-  console.log(posts.length, 'posts length checking')
-
   // Format subcategory name for display
   const subcategoryName = params.subcategory
     .split('-')
@@ -97,13 +93,13 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
       <div className="container pt-10 lg:pt-20">
         <div className="flex flex-wrap gap-x-2 gap-y-4">
           <ModalCategories categories={categories} />
-          <ModalTags tags={tags} />
+          {/* <ModalTags tags={tags} /> */}
           <div className="ms-auto">
             <ArchiveSortByListBox filterOptions={filterOptions} />
           </div>
         </div>
 
-        <div className="px-4 pt-6 lg:pt-10">
+        <div className="pt-6 lg:pt-10">
           {posts.length > 0 ? (
             <>
               <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">

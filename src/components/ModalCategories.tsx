@@ -20,9 +20,9 @@ const ModalCategories: FC<Props> = ({ categories }) => {
   return (
     <div className="modal-categories">
       <>
-        <Button type="button" color="white" onClick={() => setIsOpen(true)}>
-          <HugeiconsIcon icon={NotificationSquareIcon} size={24} />
-          <span>Categories</span>
+        <Button type="button" color="transparent" onClick={() => setIsOpen(true)}>
+          {/* <HugeiconsIcon icon={NotificationSquareIcon} size={24} /> */}
+          <span>Other Categories</span>
           <ChevronDownIcon className="size-4" />
         </Button>
         <Dialog size="5xl" open={isOpen} onClose={setIsOpen}>
@@ -36,9 +36,9 @@ const ModalCategories: FC<Props> = ({ categories }) => {
             </div>
           </DialogBody>
           <DialogActions>
-            <Button plain onClick={() => setIsOpen(false)}>
+            {/* <Button plain onClick={() => setIsOpen(false)}>
               Cancel
-            </Button>
+            </Button> */}
             <Button onClick={() => setIsOpen(false)}>Close</Button>
           </DialogActions>
         </Dialog>

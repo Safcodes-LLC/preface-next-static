@@ -65,7 +65,7 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
           </div>
           <ButtonPlayMusicPlayer post={post} />
         </div> */}
-        <div className="mt-20 flex grow flex-col rounded-3xl rounded-ss-none bg-white p-5 shadow-xl dark:bg-neutral-900 dark:shadow-2xl">
+        <div className="mt-20 flex grow flex-col rounded-3xl rounded-ss-none bg-white p-5 shadow-xl dark:bg-[#0D0D0D] dark:shadow-2xl">
           <h2 className="nc-card-title mb-2 block font-normal text-neutral-900 sm:text-base dark:text-neutral-100">
             <Link href={`/post/${handle}`} title={title} className="line-clamp-2">
               {title}
@@ -81,7 +81,7 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
             <div className="border-[#E2E2E2]transition-transform ms-auto flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border duration-200 hover:translate-x-0.5 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]">
               <ArrowRightIcon
                 strokeWidth={3}
-                className="h-3 w-3 text-[#C2C2C2] transition-colors duration-200 rtl:rotate-180 dark:text-[#707070] dark:hover:text-white"
+                className="h-3 w-3 text-[#C2C2C2] transition-colors duration-200 rtl:rotate-180 dark:text-[#707070]"
               />
             </div>
           </div>

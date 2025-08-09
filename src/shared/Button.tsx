@@ -155,6 +155,10 @@ const styles = {
       'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:var(--color-primary-500)] [--btn-border:var(--color-primary-600)]/90',
       '[--btn-icon:var(--color-primary-300)] data-active:[--btn-icon:var(--color-primary-200)] data-hover:[--btn-icon:var(--color-primary-200)]',
     ],
+    transparent: [
+      '!bg-transparent !border-[#DBDBDB] dark:!border-[#5B5B5B]',
+      'text-[#444444] dark:text-[#C2C2C2] text-sm font-normal'
+    ],
     'logo-colors': [
       'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:#60A43A] [--btn-border:#60A43A]/90',
       '[--btn-icon:var(--color-white)]/60 data-active:[--btn-icon:var(--color-white)]/80 data-hover:[--btn-icon:var(--color-white)]/80',
