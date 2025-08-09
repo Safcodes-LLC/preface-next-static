@@ -92,8 +92,8 @@ const Footer: React.FC = () => {
               <SocialsListStroke2 />
             </div>
             <div className="flex flex-col">
-              <span className="text-sm text-white">info@preface.com</span>
-              <span className="text-sm text-white">www.preface.com</span>
+              <span className="text-sm text-[#444444] dark:text-white">info@preface.com</span>
+              <span className="text-sm text-[#444444] dark:text-white">www.preface.com</span>
             </div>
           </div>
           {widgetMenus.map(renderWidgetMenuItem)}
