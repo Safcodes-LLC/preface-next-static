@@ -16,7 +16,7 @@ export function Heading({ className, level = 2, dimHeading, headingColor, childr
       {...props}
       className={clsx(
         className,
-        'text-3xl font-semibold tracking-tight text-pretty sm:text-4xl',
+        'text-[22px] font-semibold tracking-tight text-pretty sm:text-[26px]',
         isLight ? 'text-white' : 'text-neutral-950 dark:text-white'
       )}
     >
@@ -35,7 +35,7 @@ export function Subheading({ className, level = 3, headingColor, ...props }: Hea
       {...props}
       className={clsx(
         className,
-        'text-lg font-normal lg:text-xl',
+        'text-base font-normal lg:text-lg',
         isLight ? 'text-[#C2C2C2]' : 'text-neutral-500 dark:text-neutral-400'
       )}
     />
@@ -62,7 +62,7 @@ export default function HeadingWithSub({
         {children}
       </Heading>
       {subHeading && (
-        <Subheading headingColor={props.headingColor} className={clsx('mt-3.5 max-w-3xl', isCenter && 'mx-auto')}>
+        <Subheading headingColor={props.headingColor} className={clsx('mt-1 max-w-3xl', isCenter && 'mx-auto')}>
           {subHeading}
         </Subheading>
       )}
