@@ -13,6 +13,8 @@ import clsx from 'clsx'
 import { FC, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import { motion, useInView, Variants } from 'framer-motion'
+import Card10V5 from './PostCards/Card10V5'
+import Card10V6 from './PostCards/Card10V6'
 
 interface SliderConfig {
   autoSlide?: boolean
@@ -28,7 +30,7 @@ interface SwipableSliderPostsProps {
   subHeading?: string
   dimHeading?: boolean
   posts: TPost[]
-  postCardName?: 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card11'
+  postCardName?: 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card11' | 'card10V5' | 'card10V6'
   config?: SliderConfig
 }
 
@@ -183,6 +185,10 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
         return <Card10 key={index} post={post} />
       case 'card10V2':
         return <Card10V2 key={index} post={post} />
+      case 'card10V5':
+        return <Card10V5 key={index} post={post} />
+      case 'card10V6':
+        return <Card10V6 key={index} post={post} />
       case 'card11':
         return <Card11 key={index} post={post} />
       default:
