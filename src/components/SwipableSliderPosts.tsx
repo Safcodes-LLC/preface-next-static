@@ -10,11 +10,20 @@ import Card9 from '@/components/PostCards/Card9'
 import { TPost } from '@/data/posts'
 import HeadingWithArrowBtns from '@/shared/HeadingWithArrowBtns'
 import clsx from 'clsx'
+import { Variants, motion, useInView } from 'framer-motion'
 import { FC, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
-import { motion, useInView, Variants } from 'framer-motion'
 import Card10V5 from './PostCards/Card10V5'
 import Card10V6 from './PostCards/Card10V6'
+
+interface ResponsiveGridConfig {
+  default?: number
+  sm?: number
+  md?: number
+  lg?: number
+  xl?: number
+  '2xl'?: number
+}
 
 interface SliderConfig {
   autoSlide?: boolean
@@ -22,6 +31,7 @@ interface SliderConfig {
   showButtons?: boolean
   loop?: boolean
   slidesToScroll?: number
+  grid?: ResponsiveGridConfig
 }
 
 interface SwipableSliderPostsProps {
@@ -52,7 +62,7 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
   config = {},
 }) => {
   const mergedConfig = { ...defaultConfig, ...config }
-  const { autoSlide, autoSlideInterval, showButtons, loop, slidesToScroll } = mergedConfig
+  const { autoSlide, autoSlideInterval, showButtons, loop, slidesToScroll, grid } = mergedConfig
   const theme = useContext(ThemeContext)
 
   const [currentPage, setCurrentPage] = useState(0)
@@ -75,17 +85,17 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
         staggerChildren: 0.15,
         delayChildren: 0.3,
         duration: 0.8,
-        ease: "easeOut"
-      }
-    }
+        ease: 'easeOut',
+      },
+    },
   }
 
   const cardVariants: Variants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       scale: 0.9,
       y: 40,
-      rotateY: -15
+      rotateY: -15,
     },
     visible: {
       opacity: 1,
@@ -94,26 +104,40 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
       rotateY: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
-      }
-    }
+        ease: 'easeOut',
+      },
+    },
   }
 
   // Responsive handling
   useEffect(() => {
     const updateCardsPerView = () => {
       const width = window.innerWidth
-      if (width < 640) setCardsPerView(1)
-      else if (width < 768) setCardsPerView(2)
-      else if (width < 1024) setCardsPerView(3)
-      else if (width < 1280) setCardsPerView(4)
-      else setCardsPerView(4)
+      const { grid } = config
+
+      if (grid) {
+        // Use custom grid config if provided
+        if (width >= 1536 && grid['2xl']) setCardsPerView(grid['2xl'])
+        else if (width >= 1280 && grid.xl) setCardsPerView(grid.xl)
+        else if (width >= 1024 && grid.lg) setCardsPerView(grid.lg)
+        else if (width >= 768 && grid.md) setCardsPerView(grid.md)
+        else if (width >= 640 && grid.sm) setCardsPerView(grid.sm)
+        else if (grid.default) setCardsPerView(grid.default)
+        else setCardsPerView(1) // Fallback
+      } else {
+        // Default responsive behavior
+        if (width < 640) setCardsPerView(1)
+        else if (width < 768) setCardsPerView(2)
+        else if (width < 1024) setCardsPerView(3)
+        else if (width < 1280) setCardsPerView(4)
+        else setCardsPerView(4)
+      }
     }
 
     updateCardsPerView()
     window.addEventListener('resize', updateCardsPerView)
     return () => window.removeEventListener('resize', updateCardsPerView)
-  }, [])
+  }, [grid])
 
   // Reset to first page when cardsPerView changes
   useEffect(() => {
@@ -204,7 +228,7 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
   }
 
   const currentPagePosts = getCurrentPagePosts()
-  
+
   // Button states
   const prevBtnDisabled = !loop && currentPage === 0
   const nextBtnDisabled = !loop && currentPage >= totalPages - 1
@@ -214,7 +238,7 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={isSliderInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         <HeadingWithArrowBtns
           subHeading={subHeading}
@@ -241,62 +265,56 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
       >
         <div ref={combinedRef} className="overflow-hidden" {...(({ ref, ...handlers }) => handlers)(swipeHandlers)}>
           {/* Animated grid layout */}
-          <motion.div 
+          <motion.div
             variants={containerVariants}
             initial="hidden"
-            animate={isSliderInView ? "visible" : "hidden"}
-            className="grid gap-4" 
+            animate={isSliderInView ? 'visible' : 'hidden'}
+            className="grid gap-4"
             style={{
               gridTemplateColumns: `repeat(${cardsPerView}, 1fr)`,
             }}
             aria-live="polite"
           >
             {currentPagePosts.map((post, index) => (
-              <motion.div 
-                key={post.id || `${currentPage}-${index}`} 
-                className="px-2"
-                variants={cardVariants}
-              >
+              <motion.div key={post.id || `${currentPage}-${index}`} className="px-2" variants={cardVariants}>
                 {renderCard(post, currentPage * cardsPerView + index)}
               </motion.div>
             ))}
-            
+
             {/* Fill empty slots if last page has fewer cards */}
-            {currentPagePosts.length < cardsPerView && 
+            {currentPagePosts.length < cardsPerView &&
               Array.from({ length: cardsPerView - currentPagePosts.length }).map((_, index) => (
                 <div key={`empty-${index}`} className="px-2" />
-              ))
-            }
+              ))}
           </motion.div>
         </div>
 
         {/* Show fallback if no posts */}
-        {posts.length === 0 && (
-          <div className="text-center py-8 text-gray-500">
-            No posts to display
-          </div>
-        )}
+        {posts.length === 0 && <div className="py-8 text-center text-gray-500">No posts to display</div>}
 
         {/* Pagination Dots */}
         {totalSlides > cardsPerView && totalPages > 1 && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isSliderInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-            className="flex justify-center mt-6 space-x-2"
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.4 }}
+            className="mt-6 flex justify-center space-x-2"
           >
             {Array.from({ length: totalPages }).map((_, pageIndex) => (
               <button
                 key={pageIndex}
                 onClick={() => {
-                  console.log(`Clicking dot ${pageIndex + 1}, showing posts:`, posts.slice(pageIndex * cardsPerView, (pageIndex + 1) * cardsPerView).map(p => p.id || p.title))
+                  console.log(
+                    `Clicking dot ${pageIndex + 1}, showing posts:`,
+                    posts.slice(pageIndex * cardsPerView, (pageIndex + 1) * cardsPerView).map((p) => p.id || p.title)
+                  )
                   goToPage(pageIndex)
                 }}
                 className={clsx(
-                  'w-2 h-2 rounded-full transition-all duration-200',
+                  'h-2 w-2 rounded-full transition-all duration-200',
                   currentPage === pageIndex
-                    ? 'bg-[#00652E] dark:bg-[#60A43A] w-6'
-                    : 'bg-[#00652E] dark:bg-[#60A43A] hover:bg-[#0C7A3E] dark:hover:bg-[#4C872E]'
+                    ? 'w-6 bg-[#00652E] dark:bg-[#60A43A]'
+                    : 'bg-[#00652E] hover:bg-[#0C7A3E] dark:bg-[#60A43A] dark:hover:bg-[#4C872E]'
                 )}
                 aria-label={`Go to page ${pageIndex + 1}`}
               />

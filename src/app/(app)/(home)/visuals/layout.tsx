@@ -38,6 +38,11 @@ const Layout: React.FC<Props> = async ({ children }) => {
               autoSlideInterval: 4000,
               showButtons: false,
               loop: false,
+              grid: {
+                sm: 1,
+                lg: 2,
+                default: 1 // It's good practice to include a default value
+              }
             }}
           />
         </div>
