@@ -11,7 +11,6 @@ interface Props {
 
 const PostCardMeta4: FC<Props> = ({ meta, className, avatarSize }) => {
   const { date, author, title, handle, categories } = meta
-  console.log(meta,"meta");
   
   return (
     <div className={clsx('post-card-meta-2 relative flex gap-2 text-xs/6', className)}>
