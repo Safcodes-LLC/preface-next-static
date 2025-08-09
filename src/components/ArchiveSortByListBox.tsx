@@ -42,7 +42,7 @@ const ArchiveSortByListBoxComponent: FC<Props> = ({ className, filterOptions }) 
         <div className="relative">
           <ListboxButton className="rounded-full p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none">
             {/* <HugeiconsIcon icon={ArrangeByLettersAZIcon} size={24} className="text-neutral-700 dark:text-neutral-300" /> */}
-            <HugeiconsIcon icon={PreferenceHorizontalIcon} size={28} stroke="currentColor" strokeWidth={2.5} className="text-[#00652E] dark:text-neutral-300" />
+            <HugeiconsIcon icon={PreferenceHorizontalIcon} size={28} stroke="currentColor" strokeWidth={2.5} className="text-[#00652E] dark:text-[#60A43A]" />
           </ListboxButton>
           <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
             <ListboxOptions className="absolute right-0 z-50 mt-2 max-h-60 w-52 overflow-auto rounded-xl bg-white py-1 text-sm text-neutral-900 shadow-lg ring-1 ring-black/5 focus:outline-hidden dark:bg-neutral-900 dark:text-neutral-200 dark:ring-neutral-700">
