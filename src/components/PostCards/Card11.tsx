@@ -57,7 +57,7 @@ const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'asp
         </div>
 
         {/* Right content: arrow icon (fixed size) */}
-        <div className="flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2]transition-transform duration-200 hover:translate-x-0.5 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]">
+        <div className="flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2]transition-transform duration-200 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]">
           <ArrowRightIcon className="h-3 w-3 text-[#C2C2C2] transition-colors duration-200 rtl:rotate-180 dark:text-[#707070] dark:hover:text-white" />
         </div>
       </div>
