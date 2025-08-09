@@ -20,15 +20,16 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked }) => {
         'post-card-like-btn group flex h-8 cursor-pointer items-center rounded-full ps-2 pe-3 text-xs leading-none transition-colors',
         className,
         isLiked
-          ? 'bg-rose-50 text-rose-600 dark:bg-rose-100'
-          : 'bg-neutral-50 hover:bg-rose-50 hover:text-rose-600 dark:bg-white/10 dark:hover:bg-white/10 dark:hover:text-rose-400'
+          ? 'bg-[#D6F2E2] text-[#00652E]'
+          : 'bg-[#F9F9F9] text-[#737373] hover:bg-[#00652E] hover:text-[#D6F2E2] dark:bg-[#F9F9F9]'
+        // 'bg-neutral-50 hover:bg-rose-50 hover:text-rose-600 dark:bg-white/10 dark:hover:bg-white/10 dark:hover:text-rose-400
       )}
       onClick={() => setisLiked(!isLiked)}
       title="Like"
     >
-      <HeartIcon className="size-5" fill={isLiked ? 'currentColor' : 'none'} />
+      <HeartIcon className="size-4" strokeWidth={1} fill={isLiked ? 'currentColor' : 'none'} />
 
-      <span className={clsx('ms-1', isLiked && 'text-rose-600')}>
+      <span className={clsx('ms-1', isLiked && 'text-[#00652E]')}>
         {convertNumbThousand(isLiked ? likeCount + 1 : likeCount)}
       </span>
     </button>

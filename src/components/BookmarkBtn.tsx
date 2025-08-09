@@ -23,7 +23,7 @@ const BookmarkBtn: FC<Props> = ({ className, bookmarked }) => {
       onClick={() => setIsBookmarked(!isBookmarked)}
       type="button"
     >
-      <HugeiconsIcon icon={Bookmark02Icon} size={18} strokeWidth={1.75} fill={isBookmarked ? 'currentColor' : 'none'} />
+      <HugeiconsIcon icon={Bookmark02Icon} size={16} strokeWidth={1} fill={isBookmarked ? 'currentColor' : 'none'} />
     </button>
   )
 }
