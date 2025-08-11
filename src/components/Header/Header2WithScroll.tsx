@@ -4,16 +4,15 @@ import { getNavigation, TNavigationItem } from '@/data/navigation'
 import { getAllPosts, TPost } from '@/data/posts'
 import { Button } from '@/shared/Button'
 import Logo from '@/shared/Logo'
-import { PlusIcon, ChatBubbleLeftRightIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
+import { ChatBubbleLeftRightIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { FC, useEffect, useState } from 'react'
-import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
+import AvatarDropdown from './AvatarDropdown'
 import HamburgerBtnMenu from './HamburgerBtnMenu'
 import Navigation from './Navigation/Navigation'
-import NotifyDropdown from './NotifyDropdown'
 import SearchModal from './SearchModal'
 import TopNavbar from './TopNavbar'
-import AvatarDropdown from './AvatarDropdown'
+import Link from 'next/link'
 
 interface Header2WithScrollProps {
   bottomBorder?: boolean
@@ -62,7 +61,7 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
     <>
       {/* Top Navbar */}
       <TopNavbar isScrolled={isScrolled} />
-      
+
       {/* Main Header */}
       <div
         className={clsx(
@@ -75,59 +74,65 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
           className
         )}
       >
-        
         <div className="container flex h-20 justify-between">
-        <div className="flex flex-1 items-center gap-x-4 sm:gap-x-5 lg:gap-x-7">
-          <Logo />
-          {/* <div
+          <div className="flex flex-1 items-center gap-x-4 sm:gap-x-5 lg:gap-x-7">
+            <Logo />
+            {/* <div
             className={clsx(
               'h-8 border-l',
               isScrolled ? 'border-neutral-200 dark:border-neutral-700' : 'border-white/20'
             )}
           ></div> */}
-          {/* <div className="-ms-1.5">
+            {/* <div className="-ms-1.5">
             <SearchModal type="type1" isScrolled={isScrolled} />
           </div> */}
-        </div>
+          </div>
 
-        <div className="mx-4 hidden flex-2 justify-center lg:flex">
-          <div className="flex items-center gap-x-2">
-            <Navigation menu={navigationMenu} featuredPosts={featuredPosts} isScrolled={isScrolled} />
-            <a
-              href="/ask-the-scholar"
-              className="flex items-center gap-2 border border-white bg-white/80 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white px-5 py-2 rounded-sm shadow-sm focus:outline-none transition-all duration-200 min-w-[155px] text-sm font-medium"
-              aria-label="Ask the Scholar"
-              style={{ marginTop: 0 }}
-            >
-              <ChatBubbleLeftRightIcon className="w-5 h-5" aria-hidden="true" />
-              <span className="whitespace-nowrap">Ask the Scholar</span>
-            </a>
+          <div className="mx-4 hidden flex-2 justify-center lg:flex">
+            <div className="flex items-center gap-x-2">
+              <Navigation menu={navigationMenu} featuredPosts={featuredPosts} isScrolled={isScrolled} />
+              <Link
+                href="/ask-the-scholar"
+                className="flex min-w-[155px] items-center gap-2 rounded-sm border border-white bg-white/80 px-5 py-2 text-sm font-medium text-neutral-900 shadow-sm transition-all duration-200 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white"
+                aria-label="Ask the Scholar"
+                style={{ marginTop: 0 }}
+              >
+                <ChatBubbleLeftRightIcon className="h-5 w-5" aria-hidden="true" />
+                <span className="whitespace-nowrap">Ask the Scholar</span>
+              </Link>
+            </div>
           </div>
-        </div>
 
-        <div className="flex flex-1 items-center justify-end gap-x-0.5">
-          <div className="hidden sm:block">
-            <Button className="h-10 px-2! " href={'/submission'} color="logo-outline">
-              {/* <PlusIcon className="size-5!" /> */}
-              Sign in
-            </Button>
+          <div className="flex flex-1 items-center justify-end gap-x-0.5">
+            <div className="hidden sm:block">
+              <Button className="h-10 px-2!" href={'/submission'} color="logo-outline">
+                {/* <PlusIcon className="size-5!" /> */}
+                Sign in
+              </Button>
+            </div>
+            {/* <NotifyDropdown className="me-3" /> */}
+            <SearchModal type="type1" isScrolled={isScrolled} />
+            <AvatarDropdown
+              trigger={
+                <button
+                  type="button"
+                  aria-label="Settings"
+                  className="ml-2 flex cursor-pointer items-center justify-center rounded-full p-2 transition-all duration-200 focus:ring-2 focus:outline-none"
+                >
+                  <Cog6ToothIcon
+                    className={clsx(
+                      'h-6 w-6 transition-colors duration-200',
+                      isScrolled ? 'text-neutral-900 dark:text-neutral-100' : 'text-white'
+                    )}
+                    aria-hidden="true"
+                  />
+                </button>
+              }
+            />
+            <div className="ms-2 flex lg:hidden">
+              <HamburgerBtnMenu />
+            </div>
           </div>
-          {/* <NotifyDropdown className="me-3" /> */}
-          <SearchModal type="type1" isScrolled={isScrolled} />
-          <AvatarDropdown
-            trigger={<button type="button" aria-label="Settings" className="ml-2 flex items-center cursor-pointer justify-center rounded-full p-2 focus:outline-none focus:ring-2 transition-all duration-200">
-              <Cog6ToothIcon className={clsx(
-                "w-6 h-6 transition-colors duration-200",
-                isScrolled 
-                  ? "text-neutral-900 dark:text-neutral-100" 
-                  : "text-white"
-              )} aria-hidden="true" />
-            </button>}
-          />
-          <div className="ms-2 flex lg:hidden">
-            <HamburgerBtnMenu />
-          </div>
-        </div>
         </div>
       </div>
     </>

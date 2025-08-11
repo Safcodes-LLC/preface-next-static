@@ -2,13 +2,13 @@ import { getNavigation } from '@/data/navigation'
 import { getAllPosts } from '@/data/posts'
 import { Button } from '@/shared/Button'
 import Logo from '@/shared/Logo'
-import { PlusIcon } from '@heroicons/react/24/outline'
+import { ChatBubbleLeftRightIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
+import Link from 'next/link'
 import { FC } from 'react'
 import AvatarDropdown from './AvatarDropdown'
 import HamburgerBtnMenu from './HamburgerBtnMenu'
 import Navigation from './Navigation/Navigation'
-import NotifyDropdown from './NotifyDropdown'
 import SearchModal from './SearchModal'
 
 interface Props {
@@ -23,7 +23,7 @@ const Header2: FC<Props> = async ({ bottomBorder, className }) => {
   return (
     <div
       className={clsx(
-        'header-2 relative z-20 border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-900',
+        'header-2 relative z-20 border-neutral-200 bg-white dark:border-neutral-100 dark:bg-[#0A0A0A]',
         bottomBorder && 'border-b',
         !bottomBorder && 'has-[.header-popover-full-panel]:border-b',
         className
@@ -32,25 +32,50 @@ const Header2: FC<Props> = async ({ bottomBorder, className }) => {
       <div className="container flex h-20 justify-between">
         <div className="flex flex-1 items-center gap-x-4 sm:gap-x-5 lg:gap-x-7">
           <Logo />
-          <div className="h-8 border-l"></div>
-          <div className="-ms-1.5">
+          {/* <div className="h-8 border-l"></div> */}
+          {/* <div className="-ms-1.5">
             <SearchModal type="type1" />
-          </div>
+          </div> */}
         </div>
 
         <div className="mx-4 hidden flex-2 justify-center lg:flex">
-          <Navigation menu={navigationMenu} featuredPosts={featuredPosts} />
+          <div className="flex items-center gap-x-2">
+            <Navigation menu={navigationMenu} featuredPosts={featuredPosts} />
+            <Link
+              href="/ask-the-scholar"
+              className="flex min-w-[155px] items-center gap-2 rounded-sm border border-white bg-white/80 px-5 py-2 text-sm font-medium text-neutral-900 shadow-sm transition-all duration-200 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white"
+              aria-label="Ask the Scholar"
+              style={{ marginTop: 0 }}
+            >
+              <ChatBubbleLeftRightIcon className="h-5 w-5" aria-hidden="true" />
+              <span className="whitespace-nowrap">Ask the Scholar</span>
+            </Link>
+          </div>
         </div>
 
         <div className="flex flex-1 items-center justify-end gap-x-0.5">
           <div className="hidden sm:block">
-            <Button className="h-10 px-3!" href={'/submission'} plain>
-              <PlusIcon className="size-5!" />
-              Create
+            <Button className="h-8 !border-[#60A43A] !px-4 dark:hover:!bg-[#60A43A] dark:hover:!text-white dark:hover:!border-[#60A43A]" href={'/submission'} color="logooutline">
+              {/* <PlusIcon className="size-5!" /> */}
+              Sign in
             </Button>
           </div>
-          <NotifyDropdown className="me-3" />
-          <AvatarDropdown />
+          {/* <NotifyDropdown className="me-3" /> */}
+          <SearchModal type="type1" />
+          <AvatarDropdown
+            trigger={
+              <button
+                type="button"
+                aria-label="Settings"
+                className="flex cursor-pointer items-center justify-center rounded-full p-2 transition-all duration-200 focus:ring-2 focus:outline-none"
+              >
+                <Cog6ToothIcon
+                  className={clsx('h-6 w-6 text-white transition-colors duration-200')}
+                  aria-hidden="true"
+                />
+              </button>
+            }
+          />
           <div className="ms-2 flex lg:hidden">
             <HamburgerBtnMenu />
           </div>
