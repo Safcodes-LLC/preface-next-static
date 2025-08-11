@@ -25,7 +25,7 @@ const ApplicationLayout: React.FC<Props> = ({
     <>
       {/* header - Chose header style here / header 1 or header 2*/}
       {/* {showBanner && <Banner />} */}
-      <div className='container'>
+      <div className="container">
         <Banner />
       </div>
       {headerStyle === 'header-scroll' && <Header2WithScroll bottomBorder={headerHasBorder} />}
