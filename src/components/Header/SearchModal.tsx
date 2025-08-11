@@ -36,25 +36,25 @@ interface Option {
 const recommended_searches: Option[] = [
   {
     type: 'recommended_searches',
-    name: 'Design',
+    name: 'The Life and Legacy of Prophet Muhammad ﷺ',
     icon: Search01Icon,
     uri: '/search/?s=design',
   },
   {
     type: 'recommended_searches',
-    name: 'Development',
+    name: 'The Five Pillars of Islam',
     icon: Search01Icon,
     uri: '/search/?s=development',
   },
   {
     type: 'recommended_searches',
-    name: 'Marketing',
+    name: 'The Qur’an and Modern Challenges',
     icon: Search01Icon,
     uri: '/search/?s=marketing',
   },
   {
     type: 'recommended_searches',
-    name: 'Travel',
+    name: 'Islam and Social Justice',
     icon: Search01Icon,
     uri: '/search/?s=travel',
   },
@@ -63,26 +63,29 @@ const recommended_searches: Option[] = [
 const quickActions: Option[] = [
   {
     type: 'quick-action',
-    name: 'Go to search page',
+    name: 'Muhammed',
     icon: Search01Icon,
-    uri: '/search/?s=',
+    uri: '/search',
   },
   {
     type: 'quick-action',
-    name: 'Search authors',
-    icon: UserSearchIcon,
+    name: 'Islam',
+    // icon: UserSearchIcon,
+    icon: Search01Icon,
     uri: '/search/?tab=authors&s=',
   },
   {
     type: 'quick-action',
-    name: 'Search categories',
-    icon: FolderDetailsIcon,
+    name: 'Holy Quran',
+    // icon: FolderDetailsIcon,
+    icon: Search01Icon,
     uri: '/search/?tab=categories&s=',
   },
   {
     type: 'quick-action',
-    name: 'Search tags',
-    icon: Tag02Icon,
+    name: 'Islam For Beginners',
+    // icon: Tag02Icon,
+    icon: Search01Icon,
     uri: '/search/?tab=tags&s=',
   },
 ]
@@ -243,7 +246,7 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false }) => {
                 {query === '' && (
                   <li className="p-2">
                     <h2 className="mt-4 mb-2 px-3 text-xs font-medium text-gray-500 dark:text-gray-300">
-                      Recommended searches
+                      Popular Articles
                     </h2>
 
                     <ul className="text-sm text-gray-700 dark:text-gray-300">
@@ -282,7 +285,9 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false }) => {
                 )}
 
                 <li className="p-2">
-                  <h2 className="sr-only">Quick actions</h2>
+                <h2 className="mt-4 mb-2 px-3 text-xs font-medium text-gray-500 dark:text-gray-300">
+                      Popular Categories
+                    </h2>
                   <ul className="text-sm text-gray-700 dark:text-gray-300">
                     {quickActions.map((action) => (
                       <ComboboxOption
