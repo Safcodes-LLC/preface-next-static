@@ -55,7 +55,11 @@ const Header2: FC<Props> = async ({ bottomBorder, className }) => {
 
         <div className="flex flex-1 items-center justify-end gap-x-1">
           <div className="hidden sm:block">
-            <Button className="h-8 !border-[#60A43A] !px-4 dark:hover:!bg-[#60A43A] dark:hover:!text-white dark:hover:!border-[#60A43A]" href={'/submission'} color="logooutline">
+            <Button
+              className="h-8 !border-[#60A43A] !px-4 dark:hover:!border-[#60A43A] dark:hover:!bg-[#60A43A] dark:hover:!text-white"
+              href={'/login'}
+              color="logooutline"
+            >
               {/* <PlusIcon className="size-5!" /> */}
               Sign in
             </Button>
