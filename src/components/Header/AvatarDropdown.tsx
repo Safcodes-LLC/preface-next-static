@@ -57,7 +57,7 @@ export default function AvatarDropdown({ className, trigger }: Props) {
           }}
           className="z-40 w-80 rounded-3xl shadow-lg ring-1 ring-black/5 transition duration-200 ease-in-out data-closed:translate-y-1 data-closed:opacity-0"
         >
-          <div className="relative flex flex-col gap-y-6 bg-white px-6 py-7 dark:bg-neutral-800">
+          <div className="relative flex flex-col gap-y-6 bg-white px-6 py-7 dark:bg-[#0D0D0D]">
             <div className="relative flex items-center gap-x-3">
               <Avatar
                 alt="avatar"

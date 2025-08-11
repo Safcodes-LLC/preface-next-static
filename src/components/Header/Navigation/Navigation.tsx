@@ -10,10 +10,7 @@ const Lv1MenuItem = ({ menuItem, isScrolled }: { menuItem: TNavigationItem; isSc
   return (
     <Link
       className={clsx(
-        'flex items-center self-center rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap lg:text-[15px] xl:px-5',
-        isScrolled
-          ? 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200'
-          : 'text-neutral-300 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200'
+        'flex items-center self-center rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap lg:text-[15px] xl:px-5 text-[#000000] hover:bg-neutral-100 hover:text-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:hover:text-neutral-200',
       )}
       href={menuItem.href || '#'}
     >

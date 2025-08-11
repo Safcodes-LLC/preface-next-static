@@ -43,11 +43,11 @@ const Header2: FC<Props> = async ({ bottomBorder, className }) => {
             <Navigation menu={navigationMenu} featuredPosts={featuredPosts} />
             <Link
               href="/ask-the-scholar"
-              className="flex min-w-[155px] items-center gap-2 rounded-sm border border-white bg-white/80 px-5 py-2 text-sm font-medium text-neutral-900 shadow-sm transition-all duration-200 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white"
+              className="flex min-w-[155px] items-center gap-2 rounded-sm border border-white bg-white/80 px-5 py-2 text-sm font-medium text-neutral-900 shadow-sm transition-all duration-200 focus:outline-none hover:bg-white hover:shadow-md hover:scale-105 hover:border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white dark:hover:bg-neutral-800 dark:hover:border-neutral-600 dark:hover:shadow-lg"
               aria-label="Ask the Scholar"
               style={{ marginTop: 0 }}
             >
-              <ChatBubbleLeftRightIcon className="h-5 w-5" aria-hidden="true" />
+              <ChatBubbleLeftRightIcon className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
               <span className="whitespace-nowrap">Ask the Scholar</span>
             </Link>
           </div>
@@ -74,7 +74,7 @@ const Header2: FC<Props> = async ({ bottomBorder, className }) => {
                 className="flex cursor-pointer items-center justify-center rounded-full p-2 transition-all duration-200 focus:ring-2 focus:outline-none"
               >
                 <Cog6ToothIcon
-                  className={clsx('h-6 w-6 text-white transition-colors duration-200')}
+                  className={clsx('h-6 w-6 text-black dark:text-white transition-colors duration-200')}
                   aria-hidden="true"
                 />
               </button>

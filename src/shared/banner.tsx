@@ -119,7 +119,7 @@ export default function Banner() {
         <Link
           href="/about"
           className={clsx(
-            'rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap text-white/90 transition-colors hover:bg-white/10 hover:text-white'
+            'rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap text-[#000000] dark:text-white transition-colors'
           )}
         >
           About
@@ -129,7 +129,7 @@ export default function Banner() {
         <Popover className="relative">
           <PopoverButton
             className={clsx(
-              'flex items-center gap-x-1 rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap text-white/90 transition-colors hover:bg-white/10 hover:text-white focus:outline-hidden'
+              'flex items-center gap-x-1 rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap text-[#000000] dark:text-white transition-color focus:outline-hidden'
             )}
           >
             <activeLanguage.FlagComponent className="" />
@@ -162,7 +162,7 @@ export default function Banner() {
         </Popover>
 
         {/* Calendar with Date and Time */}
-        <div className={clsx('flex items-center gap-x-2 text-sm font-medium text-white/90')}>
+        <div className={clsx('flex items-center gap-x-2 text-sm font-medium text-[#000000] dark:text-white')}>
           <CalendarIcon className="h-5 w-5" />
           <div className="flex flex-col leading-none">
             <span className="text-xs">{currentDate}</span>
