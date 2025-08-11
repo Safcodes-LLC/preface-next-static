@@ -13,6 +13,7 @@ import Card3 from './PostCards/Card3'
 import Card4 from './PostCards/Card4'
 import Card7 from './PostCards/Card7'
 import Card9 from './PostCards/Card9'
+import Card10V6 from './PostCards/Card10V6'
 
 interface Props {
   posts?: TPost[]
@@ -21,7 +22,7 @@ interface Props {
   heading?: ReactNode
   subHeading?: ReactNode
   headingIsCenter?: boolean
-  postCardName?: 'card3' | 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card11' | 'card14' | 'card15Podcast'
+  postCardName?: 'card3' | 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card10V6' | 'card11' | 'card14' | 'card15Podcast'
 }
 
 const SectionGridPosts: FC<Props> = ({
@@ -52,7 +53,9 @@ const SectionGridPosts: FC<Props> = ({
       case 'card10':
         return <Card10 key={post.id} post={post} />
       case 'card10V2':
-        return <Card10V2 key={post.id} post={post} ratio="aspect-16/9" />
+        return <Card10V6 key={post.id} post={post} ratio="aspect-16/9" />
+      case 'card10V2':
+        return <Card10V6 key={post.id} post={post} ratio="aspect-16/9" />
       case 'card11':
         return <Card11 key={post.id} post={post} />
       case 'card14':
@@ -72,12 +75,12 @@ const SectionGridPosts: FC<Props> = ({
       <div className={clsx('mt-16 grid gap-x-6 gap-y-8 md:gap-x-7 md:gap-y-10 lg:mt-20', gridClass)}>
         {posts?.map((post) => renderCard(post))}
       </div>
-      <div className="mt-20 flex items-center justify-center">
+      {/* <div className="mt-20 flex items-center justify-center">
         <ButtonPrimary>
           Show me more
           <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" />
         </ButtonPrimary>
-      </div>
+      </div> */}
     </div>
   )
 }

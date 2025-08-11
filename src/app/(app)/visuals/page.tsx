@@ -194,22 +194,7 @@ const PageVisuals = async ({
         </div> */}
       </div>
 
-      <div className="container py-16 lg:pt-20">
-        {/* <div className="flex flex-wrap items-center gap-4">
-          <ArchiveTabs tabs={filterTabs} />
-          <ArchiveSortByListBox className="ms-auto shrink-0" filterOptions={sortByOptions} />
-        </div> */}
-
-        {/* LOOP ITEMS */}
-        {renderLoopItems()}
-        <div className="mx-auto mt-10 text-center md:mt-16">
-          <ButtonSecondary>
-            Load More <ArrowDownIcon className="h-6 w-6 text-[#444444] dark:text-white" />
-          </ButtonSecondary>
-        </div>
-        {/* PAGINATION */}
-        {/* <PaginationWrapper className="mt-20" /> */}
-      </div>
+      
     </div>
   )
 }
