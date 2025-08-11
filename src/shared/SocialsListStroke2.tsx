@@ -79,11 +79,11 @@ const socialsDemo: SocialItem[] = [
 
 const SocialsListStroke2: FC<Props> = ({ className, socials = socialsDemo }) => {
   return (
-    <div className={clsx('flex gap-x-2', className)}>
+    <div className={clsx('flex gap-x-1 md:gap-x-2', className)}>
       {socials.map((item, index) => (
         <Link
           href={item.href}
-          className="group flex items-center justify-center w-10 h-10 rounded-full border border-neutral-300 hover:border-neutral-400 transition-colors duration-200 dark:border-neutral-600 dark:hover:border-neutral-500"
+          className="group flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full border border-neutral-300 hover:border-neutral-400 transition-colors duration-200 dark:border-neutral-600 dark:hover:border-neutral-500"
           key={index}
           target="_blank"
           rel="noopener noreferrer"
