@@ -95,7 +95,13 @@ const Page = () => {
               <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">Password</Label>
               <Input type="password" className="mt-1" />
             </Field>
-
+            <Field className="block">
+              <div className="flex items-center justify-end text-[#00652E] dark:text-[#60A43A]">
+                <Link href="/forgot-password" className="text-sm font-medium underline">
+                  Forgot password?
+                </Link>
+              </div>
+            </Field>
             <ButtonPrimary type="submit" color="loginbtn">
               Login
             </ButtonPrimary>
