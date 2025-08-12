@@ -55,7 +55,7 @@ export function Label({ className, ...props }: { className?: string } & Omit<Hea
       {...props}
       className={clsx(
         className,
-        'text-sm/6 font-medium text-neutral-950 select-none data-disabled:opacity-50 dark:text-white'
+        'text-sm/6 font-medium text-neutral-950 select-none data-disabled:opacity-50 dark:text-[#B7B7B7]'
       )}
     />
   )

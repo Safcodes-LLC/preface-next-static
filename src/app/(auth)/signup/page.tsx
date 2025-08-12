@@ -84,11 +84,19 @@ const Page = () => {
         {/* FORM */}
         <form className="grid grid-cols-1 gap-6" action="#" method="post">
           <Field className="block">
-            <Label className="text-neutral-800 dark:text-neutral-200">Email address</Label>
-            <Input type="email" placeholder="example@example.com" className="mt-1" />
+            <Label className="text-[#868686] dark:text-[#B7B7B7]">Name</Label>
+            <Input type="text" placeholder="" className="mt-1" />
           </Field>
           <Field className="block">
-            <Label className="flex items-center justify-between text-neutral-800 dark:text-neutral-200">Password</Label>
+            <Label className="text-[#868686] dark:text-[#B7B7B7]">Email or Mobile Number</Label>
+            <Input type="email" placeholder="" className="mt-1" />
+          </Field>
+          <Field className="block">
+            <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">Password</Label>
+            <Input type="password" className="mt-1" />
+          </Field>
+          <Field className="block">
+            <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">Confirm Password</Label>
             <Input type="password" className="mt-1" />
           </Field>
           <ButtonPrimary type="submit">Continue</ButtonPrimary>
