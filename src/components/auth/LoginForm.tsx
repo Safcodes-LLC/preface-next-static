@@ -140,7 +140,7 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
           <Input
             type={showPassword ? 'text' : 'password'}
             className="pr-10"
-            placeholder="Enter your password"
+            placeholder=""
             value={formData.password}
             onChange={handleInputChange('password')}
             required
