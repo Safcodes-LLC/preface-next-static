@@ -3,6 +3,7 @@ import Input from '@/shared/Input'
 import Logo from '@/shared/Logo'
 import { Field, Label } from '@/shared/fieldset'
 import { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import type { JSX } from 'react'
 import { FaFacebookF } from 'react-icons/fa'
@@ -73,65 +74,81 @@ export const metadata: Metadata = {
 }
 const Page = () => {
   return (
-    <div className="container">
-      <div className="mt-16 mb-10 flex flex-col items-center text-center">
-        <Logo />
-        <h2 className="mt-8 text-2xl font-semibold text-[#000000] dark:text-white">Sign up</h2>
-        <p className="mt-1 text-sm text-[#000000] dark:text-neutral-300">Welcome to our blog magazine Community</p>
-      </div>
-
-      <div className="mx-auto max-w-md space-y-6">
-        {/* FORM */}
-        <form className="grid grid-cols-1 gap-6" action="#" method="post">
-          <Field className="block">
-            <Label className="text-[#868686] dark:text-[#B7B7B7]">Name</Label>
-            <Input type="text" placeholder="" className="mt-1" />
-          </Field>
-          <Field className="block">
-            <Label className="text-[#868686] dark:text-[#B7B7B7]">Email or Mobile Number</Label>
-            <Input type="email" placeholder="" className="mt-1" />
-          </Field>
-          <Field className="block">
-            <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">Password</Label>
-            <Input type="password" className="mt-1" />
-          </Field>
-          <Field className="block">
-            <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">
-              Confirm Password
-            </Label>
-            <Input type="password" className="mt-1" />
-          </Field>
-          <ButtonPrimary type="submit">Continue</ButtonPrimary>
-        </form>
-        {/* OR */}
-        <div className="relative text-center">
-          <span className="relative z-10 inline-block bg-white px-4 text-sm font-medium dark:bg-[#000000] dark:text-neutral-400">
-            OR
-          </span>
-          <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 transform border border-neutral-100 dark:border-neutral-800"></div>
+    <div className="grid min-h-screen grid-cols-1 md:grid-cols-[3fr_2fr]">
+      {/* LEFT SIDE - Content */}
+      <div className="flex flex-col justify-center bg-white px-6 sm:px-12 lg:px-20 dark:bg-black">
+        <div className="mt-16 mb-10 flex flex-col items-center text-center">
+          <Logo />
+          <h2 className="mt-8 text-2xl font-semibold text-[#000000] dark:text-white">Sign up</h2>
+          <p className="mt-1 text-sm text-[#000000] dark:text-neutral-300">Welcome to our blog magazine Community</p>
         </div>
 
-        <div className="grid gap-3 md:grid-cols-2">
-          {socials.map((item, index) => (
-            <Link
-              key={index}
-              href={item.href}
-              className="flex w-full rounded-full border border-neutral-100 bg-[#E2E2E2] px-4 py-3 transition-transform hover:translate-y-0.5 dark:border-[#363636] dark:bg-[#000000]"
-            >
-              <item.icon className="size-5 shrink-0" />
-              <h3 className="grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                {item.name}
-              </h3>
+        <div className="mx-auto max-w-md space-y-6">
+          {/* FORM */}
+          <form className="grid grid-cols-1 gap-6" action="#" method="post">
+            <Field className="block">
+              <Label className="text-[#868686] dark:text-[#B7B7B7]">Name</Label>
+              <Input type="text" placeholder="" className="mt-1" />
+            </Field>
+            <Field className="block">
+              <Label className="text-[#868686] dark:text-[#B7B7B7]">Email or Mobile Number</Label>
+              <Input type="email" placeholder="" className="mt-1" />
+            </Field>
+            <Field className="block">
+              <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">Password</Label>
+              <Input type="password" className="mt-1" />
+            </Field>
+            <Field className="block">
+              <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">
+                Confirm Password
+              </Label>
+              <Input type="password" className="mt-1" />
+            </Field>
+            <ButtonPrimary type="submit" color="loginbtn">
+              Continue
+            </ButtonPrimary>
+          </form>
+          {/* OR */}
+          <div className="relative text-center">
+            <span className="relative z-10 inline-block bg-white px-4 text-sm font-medium dark:bg-[#000000] dark:text-neutral-400">
+              OR
+            </span>
+            <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 transform border border-neutral-100 dark:border-neutral-800"></div>
+          </div>
+
+          <div className="grid gap-3 lg:grid-cols-2">
+            {socials.map((item, index) => (
+              <Link
+                key={index}
+                href={item.href}
+                className="flex w-full rounded-full border border-[#E2E2E2] bg-white px-4 py-3 transition-transform hover:translate-y-0.5 dark:border-[#363636] dark:bg-[#000000]"
+              >
+                <item.icon className="size-5 shrink-0" />
+                <h3 className="grow px-1 text-center text-sm font-medium text-[#404040] dark:text-white">
+                  {item.name}
+                </h3>
+              </Link>
+            ))}
+          </div>
+          {/* ==== */}
+          <div className="mb-16 block text-center text-sm text-[#404040] dark:text-neutral-300">
+            Already have an account? {` `}
+            <Link href="/login" className="font-medium text-[#00652E] underline">
+              Sign in
             </Link>
-          ))}
+          </div>
         </div>
-        {/* ==== */}
-        <div className="mb-16 block text-center text-sm text-neutral-700 dark:text-neutral-300">
-          Already have an account? {` `}
-          <Link href="/login" className="font-medium text-[#00652E] underline">
-            Sign in
-          </Link>
-        </div>
+      </div>
+      {/* RIGHT SIDE - Background image */}
+      <div className="relative hidden min-h-screen md:block">
+        <Image
+          src="/images/login-bg.png"
+          alt="Login background"
+          fill
+          priority
+          className="object-cover"
+          sizes="(max-width: 768px) 0px, 40vw"
+        />
       </div>
     </div>
   )

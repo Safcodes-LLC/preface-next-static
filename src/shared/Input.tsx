@@ -24,7 +24,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         type={type}
         className={clsx(
-          'block w-full border-[#E2E2E2] bg-white focus:border-[#B7B7B7] focus:ring-3 focus:ring-[#B7B7B7] dark:border-[#363636] dark:bg-[#000000] dark:focus:ring-primary-600/25',
+          'block w-full border-neutral-200 bg-white focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200/50 dark:border-neutral-700 dark:bg-[#000000] dark:focus:ring-neutral-600/25',
           rounded,
           fontClass,
           sizeClass,
