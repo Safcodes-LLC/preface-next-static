@@ -1,11 +1,11 @@
 'use client'
 
 import ButtonPrimary from '@/shared/ButtonPrimary'
-import { Field, Label } from '@/shared/fieldset'
 import Input from '@/shared/Input'
+import { Field, Label } from '@/shared/fieldset'
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useState } from 'react'
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 
 interface LoginFormProps {
   className?: string
@@ -153,7 +153,7 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
             aria-label={showPassword ? 'Hide password' : 'Show password'}
             disabled={isLoading}
           >
-            {showPassword ? <EyeIcon className="h-5 w-5" /> : <EyeSlashIcon  className="h-5 w-5" />}
+            {showPassword ? <EyeIcon className="h-5 w-5" /> : <EyeSlashIcon className="h-5 w-5" />}
           </button>
         </div>
       </Field>
