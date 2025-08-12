@@ -1,10 +1,12 @@
 import ButtonPrimary from '@/shared/ButtonPrimary'
-import { Field, Label } from '@/shared/fieldset'
 import Input from '@/shared/Input'
 import Logo from '@/shared/Logo'
+import { Field, Label } from '@/shared/fieldset'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import type { JSX } from 'react'
+import { FaFacebookF } from 'react-icons/fa'
+import { FcGoogle } from 'react-icons/fc'
 
 const socials: {
   name: string
@@ -14,23 +16,40 @@ const socials: {
   {
     name: 'Login with Google',
     href: '#',
-    icon: (props) => (
-      <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-        <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
-      </svg>
-    ),
+    // icon: (props) => (
+    //   <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+    //     <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
+    //   </svg>
+    // ),
+    icon: (props) => <FcGoogle {...props} />, // full-color Google icon
   },
   {
     name: 'Login with Facebook',
     href: '#',
-    icon: (props) => (
-      <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-        <path
-          fillRule="evenodd"
-          d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-          clipRule="evenodd"
-        />
-      </svg>
+    // icon: (props) => (
+    //   <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+    //     <path
+    //       fillRule="evenodd"
+    //       d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+    //       clipRule="evenodd"
+    //     />
+    //   </svg>
+    // ),
+    // icon: (props) => <FaFacebook {...props} color="#1877F2" />, // Facebook blue
+    icon: () => (
+      <span
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '20px',
+          height: '20px',
+          borderRadius: '50%',
+          backgroundColor: '#1877F2',
+        }}
+      >
+        <FaFacebookF size={12} color="white" />
+      </span>
     ),
   },
   // {
@@ -55,8 +74,10 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <div className="container">
-      <div className="my-16 flex justify-center">
+      <div className="mt-16 mb-10 flex flex-col items-center text-center">
         <Logo />
+        <h2 className="mt-8 text-2xl font-semibold text-[#000000] dark:text-white">Sign up</h2>
+        <p className="mt-1 text-sm text-[#000000] dark:text-neutral-300">Welcome to our blog magazine Community</p>
       </div>
 
       <div className="mx-auto max-w-md space-y-6">
@@ -90,7 +111,7 @@ const Page = () => {
           <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 transform border border-neutral-100 dark:border-neutral-800"></div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid gap-3 md:grid-cols-2">
           {socials.map((item, index) => (
             <Link
               key={index}
@@ -105,7 +126,7 @@ const Page = () => {
           ))}
         </div>
         {/* ==== */}
-        <div className="block text-center text-sm text-neutral-700 dark:text-neutral-300">
+        <div className="mb-16 block text-center text-sm text-neutral-700 dark:text-neutral-300">
           Already have an account? {` `}
           <Link href="/login" className="font-medium text-[#00652E] underline">
             Sign in
