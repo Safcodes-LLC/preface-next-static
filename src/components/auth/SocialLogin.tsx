@@ -4,12 +4,12 @@ import { FcGoogle } from 'react-icons/fc'
 
 const socials = [
   {
-    name: 'Continue with Google',
+    name: 'Login with Google',
     href: '/auth/google', // Replace with your actual OAuth URL
     icon: (props: React.SVGProps<SVGSVGElement>) => <FcGoogle {...props} />,
   },
   {
-    name: 'Continue with Facebook',
+    name: 'Login with Facebook',
     href: '/auth/facebook', // Replace with your actual OAuth URL
     icon: () => (
       <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#1877F2]">
@@ -36,19 +36,19 @@ export default function SocialLogin({ className = '' }: SocialLoginProps) {
 
       {/* Social buttons */}
       <div className="grid gap-3 lg:grid-cols-2">
-            {socials.map((item, index) => (
-              <Link
-                key={index}
-                href={item.href}
-                className="flex w-full rounded-full border border-[#E2E2E2] bg-white px-2 py-3 transition-transform hover:translate-y-0.5 dark:border-[#363636] dark:bg-[#000000]"
-              >
-                <item.icon className="size-5 shrink-0" />
-                <h3 className="grow px-1 text-center text-sm font-medium text-[#404040] dark:text-white">
-                  {item.name}
-                </h3>
-              </Link>
-            ))}
-          </div>
+        {socials.map((item, index) => (
+          <Link
+            key={index}
+            href={item.href}
+            className="flex items-center w-full rounded-full border border-[#E2E2E2] bg-white px-4 py-3 transition-transform hover:translate-y-0.5 dark:border-[#363636] dark:bg-[#000000]"
+          >
+            <item.icon className="size-5 shrink-0" />
+            <span className="flex-1 text-center text-sm font-medium text-[#404040] dark:text-white ml-3 whitespace-nowrap">
+              {item.name}
+            </span>
+          </Link>
+        ))}
+      </div>
     </>
   )
 }
