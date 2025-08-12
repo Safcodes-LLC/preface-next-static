@@ -1,11 +1,22 @@
-import React, { FC } from 'react'
+import React from 'react'
+import { Metadata } from 'next'
 
-interface Props {
-  children?: React.ReactNode
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Preface',
+    default: 'Authentication | Preface'
+  },
+  description: 'Join our blog magazine community - Login or create your account',
+  robots: {
+    index: false, // Don't index auth pages
+    follow: false,
+  }
 }
 
-const Layout: FC<Props> = ({ children }) => {
+interface AuthLayoutProps {
+  children: React.ReactNode
+}
+
+export default function AuthLayout({ children }: AuthLayoutProps) {
   return <>{children}</>
 }
-
-export default Layout
