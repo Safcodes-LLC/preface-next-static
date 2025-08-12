@@ -105,7 +105,7 @@ const Page = () => {
               <Input type="password" className="mt-1" />
             </Field>
             <ButtonPrimary type="submit" color="loginbtn">
-              Continue
+              Sign in
             </ButtonPrimary>
           </form>
           {/* OR */}
