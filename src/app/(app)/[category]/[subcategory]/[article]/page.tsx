@@ -12,7 +12,7 @@ export async function generateStaticParams() {
   // For now, we'll return some example articles
   return [
     { category: 'faith', subcategory: 'religion-and-reason', article: 'wisdom-and-worship' },
-    { category: 'muhammad', subcategory: 'life-and-message', article: 'legacy' },
+    { category: 'muhammad', subcategory: 'life-and-message', article: 'the-message-of-mohammad-pbuhs-life' },
     // Add more as needed
   ]
 }
@@ -59,7 +59,7 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
     <div className={`article-page article-${params.article}`}>
       <div className="mt-12 sm:mt-20">
         <Banner2
-          image={article.featuredImage?.src || '/images/banner/common-banner.png'}
+          image={'/images/banner/common-banner.png'}
           title={articleName}
           alt={`${articleName} banner`}
         />
