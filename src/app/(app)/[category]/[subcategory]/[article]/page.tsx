@@ -59,7 +59,7 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
     <div className={`article-page article-${params.article}`}>
       <div className="mt-12 sm:mt-20">
         <Banner2
-          image={'/images/banner/common-banner.png'}
+          image={'/images/banner/article-banner.png'}
           title={articleName}
           alt={`${articleName} banner`}
         />
