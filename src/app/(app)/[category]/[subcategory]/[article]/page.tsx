@@ -1,9 +1,6 @@
-import Banner from '@/components/Banner'
 import Banner2 from '@/components/Banner2'
 import { getPostByHandle } from '@/data/posts'
 import { Metadata } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 // Generate static params for all articles
@@ -58,16 +55,10 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
   return (
     <div className={`article-page article-${params.article}`}>
       <div className="mt-12 sm:mt-20">
-        <Banner2
-          image={'/images/banner/article-banner.png'}
-          title={articleName}
-          alt={`${articleName} banner`}
-        />
+        <Banner2 image={'/images/banner/article-banner.png'} title={articleName} alt={`${articleName} banner`} />
       </div>
 
-      <div className="container py-10 lg:py-20">
-      
-      </div>
+      <div className="container py-10 lg:py-20"></div>
     </div>
   )
 }
