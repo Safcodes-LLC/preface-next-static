@@ -26,10 +26,14 @@ const Banner2 = ({ image, title, alt, className = '' }: Banner2Props) => {
         }}
       ></div>
 
-      {/* Title */}
-      <div className="absolute bottom-0 flex items-center p-10">
-        <h1 className="text-2xl font-bold text-white md:text-3xl">{title}</h1>
+      {/* Title with horizontal line */}
+      <div className="absolute bottom-0 left-0 w-full">
+        <div className="container mx-auto px-4 pb-16 lg:pb-24">
+          <h1 className="text-2xl font-bold text-white md:text-3xl lg:text-3xl max-w-3xl mb-6">{title}</h1>
+          <hr className="w-full border-t-1 border-white" />
+        </div>
       </div>
+
     </div>
   )
 }
