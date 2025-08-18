@@ -61,7 +61,7 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
   }
 
   return (
-    <div className="single-post-page">
+    <div className="single-post-page pt-8">
       <SingleHeaderContainer post={post} />
 
       <div className="container mt-12 flex flex-col lg:flex-row">
