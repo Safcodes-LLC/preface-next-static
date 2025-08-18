@@ -170,7 +170,7 @@ const SingleMetaAction: FC<Props> = ({ className, likeCount, liked, commentCount
         {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
         {/* <p className="font-light text-neutral-400 sm:mx-1">/</p> */}
         <BookmarkBtn className="size-8.5!" color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white  relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-300 "/>
-        <ShareDropdown handle={handle} color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white" />
+        <ShareDropdown handle={handle} color="bg-transparent cursor-pointer border border-white text-white hover:bg-white/10 hover:text-white" />
         {/* <ActionDropdown handle={handle} title={title} /> */}
       </div>
     </div>
