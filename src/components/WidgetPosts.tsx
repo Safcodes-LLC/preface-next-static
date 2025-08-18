@@ -9,7 +9,7 @@ interface Props {
   posts: TPost[]
 }
 
-const WidgetPosts: FC<Props> = ({ className = 'bg-neutral-100 dark:bg-[#0D0D0D]', posts }) => {
+const WidgetPosts: FC<Props> = ({ className = 'bg-white dark:bg-[#0D0D0D]', posts }) => {
   return (
     <div className={clsx('widget-posts overflow-hidden rounded-3xl', className)}>
       <WidgetHeading title="Popular posts" viewAll={{ label: 'View all', href: '/#' }} />
