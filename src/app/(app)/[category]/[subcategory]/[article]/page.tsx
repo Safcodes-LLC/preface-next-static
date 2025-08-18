@@ -70,8 +70,8 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
         </div>
         <div className="mt-12 w-full lg:mt-0 lg:w-2/5 lg:ps-10 xl:w-1/3 xl:ps-0">
           <div className="space-y-7 lg:sticky lg:top-7">
-            <WidgetAuthors authors={widgetAuthors} />
-            <WidgetTags tags={widgetTags} />
+            {/* <WidgetAuthors authors={widgetAuthors} />
+            <WidgetTags tags={widgetTags} /> */}
             <WidgetCategories categories={widgetCategories} />
             <WidgetPosts posts={widgetPosts} />
           </div>
