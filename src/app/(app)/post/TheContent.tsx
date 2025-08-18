@@ -42,7 +42,7 @@ const TheContent = ({ content }: { content: string }) => {
         </p>
       </blockquote>
       <p>{`  It's probably important that images look okay here by default as well:`}</p>
-      <figure>
+      {/* <figure>
         <Image
           src="https://images.unsplash.com/photo-1501493870936-9c2e41625521?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1045&q=80"
           alt="nc blog"
@@ -55,7 +55,7 @@ const TheContent = ({ content }: { content: string }) => {
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure vel officiis ipsum placeat itaque neque dolorem
           modi perspiciatis dolor distinctio veritatis sapiente
         </figcaption>
-      </figure>
+      </figure> */}
       <p>
         {`   Now I'm going to show you an example of an unordered list to make sure
         that looks good, too:`}
@@ -77,7 +77,7 @@ const TheContent = ({ content }: { content: string }) => {
         {`  What I've written here is probably long enough, but adding this final
         sentence can't hurt.`}
       </p>
-      <pre className="rounded-2xl!">
+      {/* <pre className="rounded-2xl!">
         <code className="language-js">
           {`function tick() {
   const element = (
@@ -89,7 +89,7 @@ const TheContent = ({ content }: { content: string }) => {
   ReactDOM.render(element, document.getElementById('root'));
 } `}
         </code>
-      </pre>
+      </pre> */}
       <p>Hopefully that looks good enough to you.</p>
       <h3>We still need to think about stacked headings though.</h3>
       <h4>
