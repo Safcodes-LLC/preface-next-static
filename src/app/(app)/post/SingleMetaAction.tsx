@@ -1,7 +1,6 @@
 'use client'
 
 import BookmarkBtn from '@/components/BookmarkBtn'
-import PostCardCommentBtn from '@/components/PostCardCommentBtn'
 import PostCardLikeBtn from '@/components/PostCardLikeBtn'
 import { TPostDetail } from '@/data/posts'
 import { Button } from '@/shared/Button'
@@ -22,7 +21,7 @@ import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import { FC, useState } from 'react'
 
-function ActionDropdown({ handle, title, author }: { handle: string; title: string; author: TPostDetail['author'] }) {
+function ActionDropdown({ handle, title }: { handle: string; title: string }) {
   const [isOpenDialogHideAuthor, setIsOpenDialogHideAuthor] = useState(false)
   const [isOpenDialogReportPost, setIsOpenDialogReportPost] = useState(false)
 
@@ -82,7 +81,7 @@ function ActionDropdown({ handle, title, author }: { handle: string; title: stri
       </Dropdown>
 
       {/* DIALOG HIDE AUTHOR */}
-      <Dialog open={isOpenDialogHideAuthor} onClose={() => setIsOpenDialogHideAuthor(false)}>
+      {/* <Dialog open={isOpenDialogHideAuthor} onClose={() => setIsOpenDialogHideAuthor(false)}>
         <DialogTitle>
           Hide this author? <span className="font-semibold">({author.name.trim()})</span>
         </DialogTitle>
@@ -98,7 +97,7 @@ function ActionDropdown({ handle, title, author }: { handle: string; title: stri
           </Button>
           <Button onClick={() => setIsOpenDialogHideAuthor(false)}>Hide</Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
 
       {/* DIALOG REPORT POST */}
       <Dialog open={isOpenDialogReportPost} onClose={() => setIsOpenDialogReportPost(false)}>
@@ -120,7 +119,7 @@ function ActionDropdown({ handle, title, author }: { handle: string; title: stri
   )
 }
 
-function ShareDropdown({ handle }: { handle: string }) {
+function ShareDropdown({ handle, color }: { handle: string; color?: string }) {
   const socialsShare = [
     {
       name: 'Facebook',
@@ -143,7 +142,7 @@ function ShareDropdown({ handle }: { handle: string }) {
     <Dropdown>
       <DropdownButton
         as="button"
-        className="flex size-8.5 items-center justify-center rounded-full bg-neutral-50 transition-colors duration-300 hover:bg-neutral-100 dark:bg-white/10 dark:hover:bg-white/20"
+        className={`flex size-8.5 items-center justify-center rounded-full transition-colors duration-300 ${color || 'bg-neutral-50 hover:bg-neutral-100 dark:bg-white/10 dark:hover:bg-white/20'}`}
       >
         <HugeiconsIcon icon={Share03Icon} size={20} />
       </DropdownButton>
@@ -159,20 +158,20 @@ function ShareDropdown({ handle }: { handle: string }) {
   )
 }
 
-interface Props extends Pick<TPostDetail, 'likeCount' | 'liked' | 'commentCount' | 'handle' | 'title' | 'author'> {
+interface Props extends Pick<TPostDetail, 'likeCount' | 'liked' | 'commentCount' | 'handle' | 'title'> {
   className?: string
 }
 
-const SingleMetaAction: FC<Props> = ({ className, likeCount, liked, commentCount, handle, title, author }) => {
+const SingleMetaAction: FC<Props> = ({ className, likeCount, liked, commentCount, handle, title }) => {
   return (
     <div className={clsx('single-meta-action', className)}>
       <div className="flex flex-wrap items-center gap-x-2.5 gap-y-2">
-        <PostCardLikeBtn likeCount={likeCount} liked={liked} />
-        <PostCardCommentBtn commentCount={commentCount} handle={handle} />
-        <p className="font-light text-neutral-400 sm:mx-1">/</p>
-        <BookmarkBtn className="size-8.5!" />
-        <ShareDropdown handle={handle} />
-        <ActionDropdown handle={handle} title={title} author={author} />
+        <PostCardLikeBtn likeCount={likeCount} liked={liked} color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white"/>
+        {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
+        {/* <p className="font-light text-neutral-400 sm:mx-1">/</p> */}
+        <BookmarkBtn className="size-8.5!" color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white  relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-300 "/>
+        <ShareDropdown handle={handle} color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white" />
+        {/* <ActionDropdown handle={handle} title={title} /> */}
       </div>
     </div>
   )
