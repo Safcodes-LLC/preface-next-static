@@ -1,10 +1,8 @@
-import CategoryBadgeList from '@/components/CategoryBadgeList'
 import { TPostDetail } from '@/data/posts'
 import { Divider } from '@/shared/divider'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { FC } from 'react'
-import SingleMeta from './SingleMeta'
 import { SingleMetaAction } from './SingleMetaAction'
 import SingleTitle from './SingleTitle'
 
@@ -18,23 +16,32 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
   const { categories, date, author, readingTime, commentCount, handle, likeCount, liked, title, excerpt } = post
 
   return (
-    <div className={`single-header-meta space-y-5 ${className}`}>
-      <CategoryBadgeList categories={categories || []} />
-      <SingleTitle title={title} />
-      {excerpt && (
-        <p className="text-base/relaxed text-neutral-600 md:text-lg/relaxed dark:text-neutral-400">{excerpt}</p>
-      )}
-      <Divider />
-      <div className="flex flex-wrap gap-5">
-        <SingleMeta author={author} date={date} readingTime={readingTime} />
-        <SingleMetaAction
-          className="ms-auto"
-          commentCount={commentCount}
-          handle={handle}
-          likeCount={likeCount}
-          liked={liked}
-          title={title}
-        />
+    <div className={`text-white ${className}`}>
+      <div className="mb-4">{/* <CategoryBadgeList categories={categories || []} /> */}</div>
+      <SingleTitle title={title} className="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl" />
+      {/* {excerpt && (
+        <p className="text-base/relaxed text-white/80 mb-6 md:text-lg/relaxed">
+          {excerpt}
+        </p>
+      )} */}
+      <Divider className="my-6 border-white/20" />
+      <div className="flex flex-wrap items-center gap-4">
+        {/* <SingleMeta 
+          author={author} 
+          date={date} 
+          readingTime={readingTime} 
+          className="text-white/80"
+        /> */}
+        <div className="">
+          <SingleMetaAction
+            commentCount={commentCount}
+            handle={handle}
+            likeCount={likeCount}
+            liked={liked}
+            title={title}
+            className="text-white hover:text-white/80"
+          />
+        </div>
       </div>
     </div>
   )
@@ -48,13 +55,9 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
       <div className="container">
         <Divider />
       </div>
-      <header className={clsx('single-header-style-1 mt-8 lg:mt-16', className)}>
-        {/* <div className="mx-auto max-w-4xl">
-          <TitleAndMeta post={post} />
-        </div> */}
-
+      <header className={clsx('single-header-style-1', className)}>
         {featuredImage.src && (
-          <div className="relative mt-8 w-full sm:mt-12 sm:aspect-15/5">
+          <div className="aspect-video relative w-full sm:aspect-15/5">
             <Image
               alt={title}
               className="object-cover"
@@ -63,6 +66,18 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
               fill
               priority
             />
+            {/* Gradient Overlay */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: 'linear-gradient(0deg, #000000D9 0%, #61616100 100%)',
+              }}
+            />
+            <div className="absolute right-0 bottom-0 left-0">
+              <div className="container mx-auto px-4 pb-8">
+                <TitleAndMeta post={post} />
+              </div>
+            </div>
           </div>
         )}
       </header>
@@ -71,11 +86,7 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
 }
 
 const SingleHeaderContainer: FC<Props> = ({ className, post, headerStyle = 'style1' }) => {
-  return (
-    <>
-      {headerStyle === 'style1' && <HeaderStyle1 className={className} post={post} />}
-    </>
-  )
+  return <>{headerStyle === 'style1' && <HeaderStyle1 className={className} post={post} />}</>
 }
 
 export default SingleHeaderContainer

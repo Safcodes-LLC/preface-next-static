@@ -11,7 +11,7 @@ const SingleTitle: FC<Props> = ({ className, title }) => {
     <h1
       className={clsx(
         className,
-        'max-w-4xl text-3xl/tight font-semibold tracking-tight text-pretty md:text-4xl/tight lg:text-[2.5rem]/tight'
+        'max-w-4xl text-2xl/tight font-semibold tracking-tight text-pretty md:text-3xl/tight lg:text-[2rem]/tight'
       )}
       title={title}
     >
