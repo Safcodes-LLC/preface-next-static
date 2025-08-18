@@ -24,10 +24,15 @@ export async function generateMetadata({
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
+  
+  const subcategoryName = params.subcategory
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
 
   return {
     title: articleName,
-    description: `${articleName} - ${params.subcategory.split('-').join(' ')}`,
+    description: `${articleName} - ${subcategoryName}`,
   }
 }
 
@@ -37,7 +42,7 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
 
   // If article not found, return 404
   if (!article) {
-    notFound()
+    return notFound()
   }
 
   // Format article and category names for display
