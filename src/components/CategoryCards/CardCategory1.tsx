@@ -13,22 +13,29 @@ interface Props {
 const CardCategory1: FC<Props> = ({ className, size = 'normal', category }) => {
   const { count, name, handle, thumbnail } = category
   return (
-    <Link href={`/category/${handle}`} className={clsx('card-category-1 flex flex-col gap-2', className)}>
-      <NcImage
-        alt={name}
-        containerClassName={clsx('relative me-4 aspect-[3/2] w-32 shrink-0 overflow-hidden rounded-lg md:w-40')}
-        src={thumbnail || ''}
-        fill
-        className="object-cover"
-        sizes="80px"
-      />
-      <div>
-        <h2 className={clsx('nc-card-title text-sm font-medium text-neutral-900 dark:text-neutral-100')}>
-          {/* {name} */}
-          How to Pray that cleanse your body...
-        </h2>
-      </div>
-    </Link>
+    <div className={clsx('grid grid-cols-2 gap-4', className)}>
+      {[1, 2].map((item) => (
+        <Link 
+          key={item}
+          href={`/category/${handle}`} 
+          className="flex flex-col gap-2 p-3 "
+        >
+          <NcImage
+            alt={name}
+            containerClassName="relative aspect-[3/2] w-full overflow-hidden rounded-lg"
+            src={thumbnail || ''}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+          <div className="p-2">
+            <h2 className="text-sm font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2">
+              {name || 'How to Pray that cleanse your body...'}
+            </h2>
+          </div>
+        </Link>
+      ))}
+    </div>
   )
 }
 
