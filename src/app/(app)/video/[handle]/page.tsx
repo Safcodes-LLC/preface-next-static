@@ -9,6 +9,7 @@ import { Metadata } from 'next'
 import SingleContentContainer from '../SingleContentContainer'
 import SingleHeaderContainer from '../SingleHeaderContainer'
 import SingleRelatedPosts from '../SingleRelatedPosts'
+import SingleHeaderContainerVideo from '../SingleHeaderContainerVideo'
 
 export async function generateMetadata({ params }: { params: Promise<{ handle: string }> }): Promise<Metadata> {
   const { handle } = await params
@@ -39,10 +40,10 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
 
   return (
     <>
-      <div className="single-post-page">
-        <SingleHeaderContainer post={post} />
+      <div className="single-post-page mt-20">
+        <SingleHeaderContainerVideo post={post} />
 
-        <div className="container mt-12 flex flex-col lg:flex-row">
+        {/* <div className="container mt-12 flex flex-col lg:flex-row">
           <div className="w-full lg:w-3/5 xl:w-2/3 xl:pe-20">
             <SingleContentContainer post={post} comments={comments} />
           </div>
@@ -54,7 +55,7 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
               <WidgetPosts posts={widgetPosts} />
             </div>
           </div>
-        </div>
+        </div> */}
 
         <SingleRelatedPosts relatedPosts={relatedPosts} moreFromAuthorPosts={moreFromAuthorPosts} />
       </div>
