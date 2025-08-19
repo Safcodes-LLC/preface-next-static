@@ -18,9 +18,9 @@ const WidgetCategories: FC<Props> = ({ className = 'bg-white dark:bg-[#0D0D0D]',
       <WidgetHeading title="Continues Read" viewAll={{ label: 'View all', href: '/#' }} />
       <div className="flow-root">
         <div className={clsx(
-          'grid pb-4 grid-cols-2 gap-1',
+          'grid pb-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-1',
           shouldScroll 
-          ? 'overflow-y-auto max-h-[40vh] sm:max-h-[45vh] md:max-h-[90vh] pb-4 grid grid-cols-2' 
+          ? 'overflow-y-auto max-h-[70vh] md:max-h-[90vh] pb-4 grid grid-cols-2' 
           : 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2'
         )}>
           {categories?.map((category:any) => (

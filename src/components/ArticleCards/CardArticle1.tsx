@@ -44,9 +44,9 @@ const CardArticle1: FC<Props> = ({ className, article }) => {
       </div>
 
       <div>
-        <h2 className={clsx('nc-card-title text-sm font-medium text-neutral-900 dark:text-neutral-100')}>
+        <h2 className={clsx('nc-card-title text-sm font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2')}>
           {/* {name} */}
-          How to Pray that cleanse your body...
+          How to Pray that cleanse your body
         </h2>
       </div>
     </Link>
