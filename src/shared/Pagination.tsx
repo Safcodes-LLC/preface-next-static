@@ -15,13 +15,13 @@ export function Pagination({
 export function PaginationPrevious({
   href = null,
   className,
-  children = 'Previous',
+  children = 'Previous Page',
 }: React.PropsWithChildren<{ href?: string | null; className?: string }>) {
   return (
     <span className={clsx(className, 'grow basis-0')}>
       <Button
         {...(href === null ? { disabled: true } : { href })}
-        className="rounded-lg"
+        className="rounded-full !border !border-[#C7C7C7] !text-sm !font-normal !text-[#999999]"
         plain
         aria-label="Previous page"
       >
@@ -36,11 +36,16 @@ export function PaginationPrevious({
 export function PaginationNext({
   href = null,
   className,
-  children = 'Next',
+  children = 'Next Page',
 }: React.PropsWithChildren<{ href?: string | null; className?: string }>) {
   return (
     <span className={clsx(className, 'flex grow basis-0 justify-end')}>
-      <Button {...(href === null ? { disabled: true } : { href })} className="rounded-lg" plain aria-label="Next page">
+      <Button
+        {...(href === null ? { disabled: true } : { href })}
+        className="rounded-full !border !border-[#60A43A] !text-sm !font-normal !text-[#60A43A] hover:!bg-[#00652E] hover:!text-white hover:!border-[#00652E]"
+        plain
+        aria-label="Next page"
+      >
         {children}
         <HugeiconsIcon icon={ArrowRight02Icon} size={16} className="rtl:rotate-180" />
       </Button>
