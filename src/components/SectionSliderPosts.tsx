@@ -16,12 +16,13 @@ import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import { FC, useContext } from 'react'
 import Card10V5 from './PostCards/Card10V5'
+import Card16Podcast from './PostCards/Card16Podcast'
 
 interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
   className?: string
   heading?: string
   posts: TPost[]
-  postCardName?: 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card11' | 'card10V5'
+  postCardName?: 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card11' | 'card10V5' | 'card16Podcast'
   emblaOptions?: EmblaOptionsType
 }
 
@@ -56,6 +57,8 @@ const SectionSliderPosts: FC<Props> = ({
         return <Card10V5 key={index} post={item} />
       case 'card11':
         return <Card11 key={index} post={item} />
+      case 'card16Podcast':
+        return <Card16Podcast key={index} post={item} />
 
       default:
         return null

@@ -32,7 +32,7 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
   } = post
 
   return (
-    <div className={clsx('group post-card-16-podcast relative flex flex-col', className)}>
+    <div className={clsx('group post-card-16-podcast relative flex flex-col pb-6', className)}>
       <div className={`relative w-full shrink-0 ${ratio}`}>
         <Image
           fill
@@ -65,7 +65,7 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
           </div>
           <ButtonPlayMusicPlayer post={post} />
         </div> */}
-        <div className="mt-20 flex grow flex-col rounded-3xl rounded-ss-none bg-white p-5 shadow-xl dark:bg-[#0D0D0D] dark:shadow-2xl">
+        <div className="mt-20 flex grow flex-col rounded-3xl rounded-ss-none bg-white p-5 dark:bg-[#0D0D0D]">
           <h2 className="nc-card-title mb-2 block font-normal text-neutral-900 sm:text-base dark:text-neutral-100">
             <Link href={`/post/${handle}`} title={title} className="line-clamp-2">
               {title}
