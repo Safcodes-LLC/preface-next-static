@@ -1,12 +1,12 @@
 import '@/styles/tailwind.css'
 import { Metadata } from 'next'
-import { Be_Vietnam_Pro } from 'next/font/google'
+import { Noto_Serif } from 'next/font/google'
 import ThemeProvider from './theme-provider'
 
-const beVietnamPro = Be_Vietnam_Pro({
+const notoSerif = Noto_Serif({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700'], // Adjust as needed
 })
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={beVietnamPro.className}>
+    <html lang="en" className={notoSerif.className}>
       <body className="bg-[#F8F8F8] text-base text-neutral-900 dark:bg-[#000000] dark:text-neutral-200">
         <ThemeProvider>
           <div>{children}</div>
