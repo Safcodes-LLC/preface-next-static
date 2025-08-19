@@ -3,24 +3,31 @@ import clsx from 'clsx'
 import { FC } from 'react'
 import CardCategory1 from './CategoryCards/CardCategory1'
 import WidgetHeading from './WidgetHeading'
+import CardArticle1 from './ArticleCards/CardArticle1'
 
 interface Props {
   className?: string
-  categories: TCategory[]
+  categories: any
 }
 
 const WidgetCategories: FC<Props> = ({ className = 'bg-white dark:bg-[#0D0D0D]', categories }) => {
+  const shouldScroll = categories && categories.length > 6
+  
   return (
     <div className={clsx('widget-categories overflow-hidden rounded-3xl', className)}>
       <WidgetHeading title="Continues Read" viewAll={{ label: 'View all', href: '/#' }} />
       <div className="flow-root">
-        <div className="flex flex-col divide-y divide-neutral-200 dark:divide-neutral-700">
-          {categories?.map((category) => (
-            <CardCategory1
-              className="p-4 hover:bg-neutral-200 xl:p-5 dark:hover:bg-neutral-700"
+        <div className={clsx(
+          'grid pb-4 grid-cols-2 gap-1',
+          shouldScroll 
+          ? 'overflow-y-auto max-h-[40vh] sm:max-h-[45vh] md:max-h-[90vh] pb-4 grid grid-cols-2' 
+          : 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2'
+        )}>
+          {categories?.map((category:any) => (
+            <CardArticle1
               key={category.id}
-              category={category}
-              size="normal"
+              article={category}
+              className="p-4"
             />
           ))}
         </div>

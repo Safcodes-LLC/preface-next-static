@@ -50,8 +50,8 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
   const relatedPosts = (await getAllPosts()).slice(0, 6)
   const moreFromAuthorPosts = (await getAllPosts()).slice(1, 7)
 
-  const widgetPosts = (await getAllPosts()).slice(0, 6)
-  const widgetCategories = (await getCategories()).slice(0, 6)
+  const widgetPosts = (await getAllPosts()).slice(0, 12)
+  const widgetCategories = (await getCategories()).slice(0, 12)
   const widgetTags = (await getTags()).slice(0, 6)
   const widgetAuthors = (await getAuthors()).slice(0, 6)
 
