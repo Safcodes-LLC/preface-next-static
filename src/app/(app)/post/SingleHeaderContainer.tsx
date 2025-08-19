@@ -18,7 +18,7 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
   return (
     <div className={`text-white ${className}`}>
       <div className="mb-4">{/* <CategoryBadgeList categories={categories || []} /> */}</div>
-      <SingleTitle title={title} className="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl" />
+      <SingleTitle title={title} className="mb-4 text-2xl font-semibold sm:font-bold md:text-4xl lg:text-5xl" />
       {/* {excerpt && (
         <p className="text-base/relaxed text-white/80 mb-6 md:text-lg/relaxed">
           {excerpt}
@@ -57,7 +57,7 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
       </div>
       <header className={clsx('single-header-style-1', className)}>
         {featuredImage.src && (
-          <div className="aspect-video relative w-full sm:aspect-15/5">
+          <div className="aspect-square relative w-full sm:aspect-15/5">
             <Image
               alt={title}
               className="object-cover"
@@ -73,8 +73,8 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
                 background: 'linear-gradient(0deg, #000000D9 0%, #61616100 100%)',
               }}
             />
-            <div className="absolute right-0 bottom-0 left-0">
-              <div className="container mx-auto px-4 pb-8">
+            <div className="container absolute right-0 bottom-0 left-0">
+              <div className=" mx-auto px-4 pb-8">
                 <TitleAndMeta post={post} />
               </div>
             </div>
