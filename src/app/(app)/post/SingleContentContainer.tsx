@@ -51,7 +51,7 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className }) => {
 
       progressBarContent.innerText = scrolled.toFixed(0) + '%'
 
-      if (scrolled >= 100) {
+      if (scrolled >= 50) {
         setIsShowScrollToTop(true)
       } else {
         setIsShowScrollToTop(false)
