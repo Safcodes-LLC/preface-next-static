@@ -1,6 +1,4 @@
-import '@/styles/tailwind.css'
 import { Metadata } from 'next'
-import ClientLayout from './client-layout'
 
 export const metadata: Metadata = {
   title: {
@@ -9,12 +7,4 @@ export const metadata: Metadata = {
   },
   description: 'Ncmaz - Blog, News, Magazine template',
   keywords: ['Ncmaz', 'Blog', 'News', 'Magazine'],
-}
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return <ClientLayout>{children}</ClientLayout>
 }

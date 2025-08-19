@@ -7,30 +7,39 @@ interface ThemeContextValue {
   toggleDarkMode: () => void
   themeDir: 'rtl' | 'ltr'
   setThemeDir: (value: 'rtl' | 'ltr') => void
+  isForcedDarkMode?: boolean
 }
 
 export const ThemeContext = createContext<ThemeContextValue | null>(null)
 
-export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
+interface ThemeProviderProps {
+  children: React.ReactNode
+  forceDarkMode?: boolean
+}
+
+export default function ThemeProvider({ 
+  children, 
+  forceDarkMode = false 
+}: ThemeProviderProps) {
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(forceDarkMode)
   const [themeDir, setThemeDir] = useState<'rtl' | 'ltr'>('ltr')
 
   // themeMode
   useEffect(() => {
+    if (forceDarkMode) {
+      setIsDarkMode(true)
+      document.documentElement.classList.add('dark')
+      return
+    }
+
     if (localStorage.getItem('theme') === 'dark-mode') {
       setIsDarkMode(true)
-      const root = document.querySelector('html')
-      if (root && !root.classList.contains('dark')) {
-        root.classList.add('dark')
-      }
+      document.documentElement.classList.add('dark')
     } else {
       setIsDarkMode(false)
-      const root = document.querySelector('html')
-      if (root) {
-        root.classList.remove('dark')
-      }
+      document.documentElement.classList.remove('dark')
     }
-  }, [])
+  }, [forceDarkMode])
 
   // themeDir
   useEffect(() => {
@@ -73,10 +82,11 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
   return (
     <ThemeContext.Provider
       value={{
-        isDarkMode,
-        toggleDarkMode,
+        isDarkMode: forceDarkMode ? true : isDarkMode,
+        toggleDarkMode: forceDarkMode ? () => {} : toggleDarkMode,
         themeDir,
         setThemeDir,
+        isForcedDarkMode: forceDarkMode
       }}
     >
       {children}
