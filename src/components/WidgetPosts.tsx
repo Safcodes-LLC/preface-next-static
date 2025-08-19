@@ -20,7 +20,7 @@ const WidgetPosts: FC<Props> = ({
   const shouldScroll = posts && posts.length > 6
   return (
     <div className={clsx('widget-posts overflow-hidden rounded-3xl', className)}>
-      <WidgetHeading title="Popular posts" viewAll={{ label: 'View all', href: '/#' }} />
+      <WidgetHeading title="Other Topics" viewAll={{ label: 'View all', href: '/#' }} />
       <div
         className={clsx(
           'flex flex-col divide-y divide-neutral-200 dark:divide-neutral-700',
