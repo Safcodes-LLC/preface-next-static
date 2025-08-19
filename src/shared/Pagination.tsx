@@ -21,7 +21,7 @@ export function PaginationPrevious({
     <span className={clsx(className, 'grow basis-0')}>
       <Button
         {...(href === null ? { disabled: true } : { href })}
-        className="rounded-full !border !border-[#C7C7C7] !text-sm !font-normal !text-[#999999]"
+        className="rounded-full !border !border-[#C7C7C7] !text-sm !font-normal !text-[#999999] hover:!text-neutral-700"
         plain
         aria-label="Previous page"
       >
