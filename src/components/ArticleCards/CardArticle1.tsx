@@ -26,14 +26,20 @@ const CardArticle1: FC<Props> = ({ className, article }) => {
     >
       {/* Image Container */}
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
-        <NcImage
-          alt={title}
-          containerClassName="w-full h-full"
-          src={thumbnail || ''}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
+        {thumbnail ? (
+          <NcImage
+            alt={title || 'Article image'}
+            containerClassName="w-full h-full"
+            src={thumbnail}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-neutral-100 dark:bg-neutral-800">
+            <span className="text-neutral-400">No image</span>
+          </div>
+        )}
 
         
         {/* Linear Gradient Overlay */}
