@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 const TheContent = ({ content }: { content: string }) => {
   // for your content
   // return <div dangerouslySetInnerHTML={{ __html: content }} />
@@ -9,9 +7,10 @@ const TheContent = ({ content }: { content: string }) => {
     <>
       {/* THIS IS THE DEMP CONTENT - YOU CAN USE MARKDOWN, JSON ...*/}
       <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure vel officiis ipsum placeat itaque neque dolorem
-        modi perspiciatis dolor distinctio veritatis sapiente, minima corrupti dolores necessitatibus suscipit
-        accusantium dignissimos culpa cumque.
+        Now, let’s imagine standing in a crowd as the Final Messenger, the Chosen One ﷺ, begins to speak—his voice clear
+        and unwavering, each word resonating with purpose and compassion. He doesn’t just speak to his companions; he
+        reaches into their hearts, stirring emotions so strong that even children, watching with wide eyes, feel the
+        sincerity radiating from him. When he speaks, he isn’t simply addressing the community
       </p>
       <p>
         It is a long established fact that a <strong>reader</strong> will be distracted by the readable content of a
