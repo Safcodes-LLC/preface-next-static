@@ -1,16 +1,8 @@
 'use client'
 
-import CommentCard from '@/components/CommentCard/CommentCard'
-import PostCardCommentBtn from '@/components/PostCardCommentBtn'
 import PostCardLikeBtn from '@/components/PostCardLikeBtn'
-import SingleCommentForm from '@/components/SingleCommentForm'
 import { TComment, TPostDetail } from '@/data/posts'
 import useIntersectionObserver from '@/hooks/useIntersectionObserver'
-import Avatar from '@/shared/Avatar'
-import ButtonPrimary from '@/shared/ButtonPrimary'
-import SocialsList from '@/shared/SocialsList'
-import Tag from '@/shared/Tag'
-import { Link } from '@/shared/link'
 import { ArrowUp02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { FC, useEffect, useRef, useState } from 'react'
@@ -85,12 +77,16 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className }) => {
         {/* ENTRY CONTENT */}
         <div
           id="single-entry-content"
-          className=" prose max-w-(--breakpoint-md)! lg:prose-lg dark:prose-invert"
+          className="mx-auto prose max-w-(--breakpoint-md)! lg:prose-lg dark:prose-invert"
           ref={contentRef}
         >
           <TheContent content={content} />
         </div>
-      
+
+        {/* COMMENTS LIST */}
+        <div className="mx-auto max-w-(--breakpoint-md)">
+          <div ref={endedAnchorRef}></div>
+        </div>
       </div>
 
       {/* LIKE AND COMMENT STICKY */}
