@@ -85,7 +85,7 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className }) => {
         {/* ENTRY CONTENT */}
         <div
           id="single-entry-content"
-          className="mx-auto prose max-w-(--breakpoint-md)! lg:prose-lg dark:prose-invert"
+          className=" prose max-w-(--breakpoint-md)! lg:prose-lg dark:prose-invert"
           ref={contentRef}
         >
           <TheContent content={content} />

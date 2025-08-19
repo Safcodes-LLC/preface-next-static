@@ -74,7 +74,7 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
               }}
             />
             <div className="container absolute right-0 bottom-0 left-0">
-              <div className=" mx-auto px-4 pb-8">
+              <div className=" mx-auto  pb-8">
                 <TitleAndMeta post={post} />
               </div>
             </div>
