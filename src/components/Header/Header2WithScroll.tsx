@@ -118,7 +118,7 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
 
           <div className="flex flex-1 items-center justify-end gap-x-0.5">
             <div className="hidden sm:block">
-              <Button className="h-10 px-2!" href={'/submission'} color="logo-outline">
+              <Button className="h-10 px-2!" href={'/submission'} color="logooutline">
                 {/* <PlusIcon className="size-5!" /> */}
                 Sign in
               </Button>
