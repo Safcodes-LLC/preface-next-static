@@ -21,10 +21,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { category: string; subcategory: string }
+  params: Promise<{ category: string; subcategory: string }>
 }): Promise<Metadata> {
+  // Await the params before using them
+  const { subcategory } = await params
+  
   // Format subcategory name for display
-  const subcategoryName = params.subcategory
+  const subcategoryName = subcategory
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
@@ -35,7 +38,14 @@ export async function generateMetadata({
   }
 }
 
-const Page = async ({ params }: { params: { category: string; subcategory: string } }) => {
+const Page = async ({ 
+  params 
+}: { 
+  params: Promise<{ category: string; subcategory: string }> 
+}) => {
+  // Await the params before using them
+  const { category, subcategory } = await params
+  
   // Get all posts and filter by subcategory
   const allPosts = await getAllPosts()
 
@@ -50,13 +60,13 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
 
   console.log('Available categories:', Array.from(allCategories))
   console.log('Available tags:', Array.from(allTags))
-  console.log('Current subcategory:', params.subcategory.toLowerCase())
+  console.log('Current subcategory:', subcategory.toLowerCase())
 
   // If no matching subcategory found, show all posts for now
   const posts = allPosts.filter((post: any) => {
     // If subcategory is one of the available categories, filter by it
     const hasMatchingCategory = (post.categories || []).some(
-      (cat: { handle: string }) => cat.handle.toLowerCase() === params.subcategory.toLowerCase()
+      (cat: { handle: string }) => cat.handle.toLowerCase() === subcategory.toLowerCase()
     )
 
     // For now, show all posts if no matching category is found
@@ -64,7 +74,7 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
   })
 
   // Format subcategory name for display
-  const subcategoryName = params.subcategory
+  const subcategoryName = subcategory
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
@@ -82,7 +92,7 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
   ]
 
   return (
-    <div className={`page-subcategory-${params.subcategory}`}>
+    <div className={`page-subcategory-${subcategory}`}>
       <div className="container mx-auto mt-12 sm:mt-20">
         <Banner
           image="/images/banner/common-banner.png"
@@ -123,7 +133,7 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
           {/* <BackgroundSection /> */}
           <SectionSliderPosts
             postCardName="card10V5"
-            heading="POPULAR ARTICLES FROM THE MESSAGE OF MOHAMMED’S LIFE"
+            heading="POPULAR ARTICLES FROM THE MESSAGE OF MOHAMMED'S LIFE"
             subHeading="Over 10 Articles"
             posts={defaultPosts.slice(0, 6)}
           />
