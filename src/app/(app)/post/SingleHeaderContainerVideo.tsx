@@ -37,7 +37,6 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
           handle={handle}
           likeCount={likeCount}
           liked={liked}
-          author={author}
           title={title}
         />
       </div>
