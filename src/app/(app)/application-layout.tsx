@@ -51,7 +51,7 @@ const ApplicationLayout: React.FC<Props> = ({
   }, [])
 
   // Check if current page should hide Navbar2 and use header-scroll
-  const isSpecialPage = pathname === '/' || pathname === '/visuals' || pathname.startsWith('/video/')
+  const isSpecialPage = pathname === '/' || pathname === '/visuals' 
 
   // Determine which header to show
   const finalHeaderStyle = isSpecialPage ? 'header-scroll' : headerStyle

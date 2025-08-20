@@ -1,5 +1,6 @@
 import Banner from '@/components/Banner'
 import Card17 from '@/components/PostCards/Card17'
+import SectionSliderPosts from '@/components/SectionSliderPosts'
 import { getCategories, getCategoryByHandle } from '@/data/categories'
 import { getPostsDefault, getPostsGallery } from '@/data/posts'
 import { Metadata } from 'next'
@@ -70,6 +71,18 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
           {galleryPosts.slice(0, 8).map((post, index) => (
             <Card17 key={post.id} post={post} />
           ))}
+        </div>
+      </div>
+
+      <div className="container space-y-20 py-20 lg:space-y-28 lg:py-28">
+        <div className="relative ">
+          {/* <BackgroundSection /> */}
+          <SectionSliderPosts
+            postCardName="card10V5"
+            heading="POPULAR ARTICLES FROM MOHAMMED ﷺ"
+            subHeading="Over 10 Articles"
+            posts={defaultPosts.slice(0, 6)}
+          />
         </div>
       </div>
     </div>

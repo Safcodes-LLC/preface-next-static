@@ -1,5 +1,6 @@
+import SectionGridPosts from '@/components/SectionGridPosts'
 import SectionSliderPosts from '@/components/SectionSliderPosts'
-import { TPost } from '@/data/posts'
+import { getPostsDefault, getPostsVideo, TPost } from '@/data/posts'
 import { FC } from 'react'
 
 interface Props {
@@ -7,12 +8,24 @@ interface Props {
   moreFromAuthorPosts: TPost[]
 }
 
-const SingleRelatedPosts: FC<Props> = ({ relatedPosts, moreFromAuthorPosts }) => {
+const SingleRelatedPosts: FC<Props> = async ({ relatedPosts, moreFromAuthorPosts }) => {
+    const defaultPosts = await getPostsDefault()
+    const videoPosts = await getPostsVideo()
   return (
-    <div className="relative mt-16 bg-neutral-50 py-16 lg:mt-28 lg:py-24 dark:bg-neutral-800">
+    <div className="relative my-16">
       {/* RELATED  */}
       <div className="container space-y-16 lg:space-y-28">
-        <SectionSliderPosts posts={relatedPosts} heading="Don't miss these" postCardName="card16Podcast" />
+      <div className=" ">
+          <SectionGridPosts
+            postCardName="card10V6"
+            heading="STORYTELLING ISLAM"
+            subHeading="Understanding Islam through 1001 stories"
+            posts={videoPosts.slice(0, 8)}
+            gridClass="md:grid-cols-2 lg:grid-cols-3"
+            timeDuration={true}
+          />
+        </div>
+        {/* <SectionSliderPosts posts={relatedPosts} heading="Don't miss these" postCardName="card16Podcast" /> */}
         {/* <SectionSliderPosts posts={moreFromAuthorPosts} heading="More from author" /> */}
       </div>
     </div>

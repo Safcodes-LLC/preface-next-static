@@ -22,6 +22,7 @@ interface Props {
   heading?: ReactNode
   subHeading?: ReactNode
   headingIsCenter?: boolean
+  timeDuration?: boolean
   postCardName?: 'card3' | 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card10V6' | 'card11' | 'card14' | 'card15Podcast'
 }
 
@@ -32,7 +33,8 @@ const SectionGridPosts: FC<Props> = ({
   gridClass,
   heading,
   subHeading,
-  headingIsCenter,
+  timeDuration,
+  headingIsCenter
 }) => {
   const renderCard = (post: TPost) => {
     switch (postCardName) {
@@ -53,9 +55,9 @@ const SectionGridPosts: FC<Props> = ({
       case 'card10':
         return <Card10 key={post.id} post={post} />
       case 'card10V2':
-        return <Card10V6 key={post.id} post={post} ratio="aspect-16/9" />
-      case 'card10V2':
-        return <Card10V6 key={post.id} post={post} ratio="aspect-16/9" />
+        return <Card10V2 key={post.id} post={post} ratio="aspect-16/9" />
+      case 'card10V6':
+        return <Card10V6 key={post.id} post={post} ratio="aspect-16/9" timeDuration={timeDuration} />
       case 'card11':
         return <Card11 key={post.id} post={post} />
       case 'card14':

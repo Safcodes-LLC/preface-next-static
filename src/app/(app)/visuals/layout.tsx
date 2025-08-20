@@ -21,13 +21,14 @@ const Layout: React.FC<Props> = async ({ children }) => {
       {children}
 
       <div className="container space-y-20 py-16 lg:space-y-28 lg:py-20">
-        <div className="relative ">
+        <div className=" ">
           <SectionGridPosts
             postCardName="card10V6"
             heading="STORYTELLING ISLAM"
             subHeading="Understanding Islam through 1001 stories"
             posts={videoPosts.slice(0, 8)}
-            gridClass="md:grid-cols-2 lg:grid-cols-4"
+            gridClass="md:grid-cols-2 lg:grid-cols-3"
+            timeDuration={true}
           />
         </div>
 

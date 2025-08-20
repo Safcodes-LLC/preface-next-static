@@ -121,7 +121,7 @@ const PageVisuals = async ({
   return (
     <div className="stories-page">
       <VideoBanner videoSrc="/path/to/your/video.mp4" title="Your Title Here" alt="Descriptive alt text for the video">
-        <p>Additional content can go here</p>
+        {/* <p>Additional content can go here</p> */}
         <button className="mt-4 rounded-full bg-[#60A43A] px-6 py-2 text-white">Play now</button>
       </VideoBanner>
       <div className="container mx-auto mt-12 sm:mt-20">

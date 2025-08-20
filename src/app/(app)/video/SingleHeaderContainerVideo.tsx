@@ -25,7 +25,7 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
       {excerpt && (
         <p className="text-base/relaxed text-neutral-600 md:text-lg/relaxed dark:text-neutral-400">{excerpt}</p>
       )}
-      <Divider />
+      {/* <Divider /> */}
       <div className="flex flex-wrap items-center gap-4">
         <div className="">
           <SingleMetaAction
@@ -37,6 +37,9 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
             className=""
           />
         </div>
+      </div>
+      <div className='mt-8'>
+        <Divider />
       </div>
     </div>
   )

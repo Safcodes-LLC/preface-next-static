@@ -3,20 +3,19 @@
 import { TPost } from '@/data/posts'
 import clsx from 'clsx'
 import { FC, useState } from 'react'
-import PostCardMeta from '../PostCardMeta/PostCardMeta'
+import PostCardLikeBtn from '../PostCardLikeBtn'
+import PostCardMeta5 from '../PostCardMeta/PostCardMeta5'
 import PostCardSaveBtn from '../PostCardSaveBtn'
 import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
-import PostCardLikeBtn from '../PostCardLikeBtn'
-import PostCardMeta4 from '../PostCardMeta/PostCardMeta4'
-import PostCardMeta5 from '../PostCardMeta/PostCardMeta5'
 
 interface Props {
   className?: string
   post: TPost
   ratio?: string
+  timeDuration?: boolean
 }
 
-const Card10V6: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect-16/9' }) => {
+const Card10V6: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect-16/9', timeDuration=false }) => {
   const [isHover, setIsHover] = useState(false)
   const { categories, bookmarked, likeCount, liked } = post
 
@@ -32,13 +31,13 @@ const Card10V6: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
       <div className="absolute inset-x-3 top-4 z-10 flex items-start justify-between gap-x-4 p-2">
         {/* <CategoryBadgeList categories={categories} /> */}
 
-        <div className="absolute inset-x-0 top-0 z-10 flex flex-wrap gap-x-2 gap-y-1">
+        {/* <div className="absolute inset-x-0 top-0 z-10 flex flex-wrap gap-x-2 gap-y-1">
           <PostCardLikeBtn likeCount={likeCount} liked={liked} />
           <PostCardSaveBtn bookmarked={bookmarked} />
-        </div>
+        </div> */}
       </div>
 
-      <PostCardMeta5 meta={post} className="mt-4 mx-2" />
+      <PostCardMeta5 meta={post} className="mx-2 mt-4" timeDuration={timeDuration}/>
     </div>
   )
 }
