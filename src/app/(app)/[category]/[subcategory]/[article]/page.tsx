@@ -41,13 +41,7 @@ export async function generateMetadata({
   }
 }
 
-type PageProps = {
-  params: { category: string; subcategory: string; article: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
-
-export default async function Page(props: PageProps) {
-  const { params } = props;
+const Page = async ({ params }: { params: { category: string; subcategory: string; article: string } }) => {
   // Get the specific article by its handle (slug)
   const post = await getPostByHandle(params.article)
   const comments = await getCommentsByPostId(post.id)
@@ -90,3 +84,4 @@ export default async function Page(props: PageProps) {
   )
 }
 
+export default Page
