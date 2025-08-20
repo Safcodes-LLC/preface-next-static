@@ -20,21 +20,24 @@ export async function generateMetadata({ params }: { params: Promise<{ handle: s
   }
 
   return {
-    title: category?.name,
-    description: category?.description,
+    title: category.name,
+    description: category.description,
   }
 }
 
 const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
   const { handle } = await params
   const category = await getCategoryByHandle(handle)
-  const posts = category.posts || []
-  const categories = await getCategories()
-  const tags = await getTags()
 
+  // Check if category exists before accessing its properties
   if (!category) {
     return notFound()
   }
+
+  // Now we know category is not null, so we can safely access its properties
+  const posts = category.posts || []
+  const categories = await getCategories()
+  const tags = await getTags()
 
   const filterOptions = [
     { name: 'Most recent', value: 'most-recent' },
