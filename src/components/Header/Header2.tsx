@@ -26,7 +26,7 @@ const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, fe
   return (
     <div
       className={clsx(
-        'header-2 relative z-20 border-neutral-200 bg-white dark:border-neutral-100 dark:bg-[#0A0A0A]',
+        'header-2 sticky top-0 z-20 border-neutral-200 bg-white dark:border-neutral-100 dark:bg-[#0A0A0A]',
         bottomBorder && 'border-b',
         !bottomBorder && 'has-[.header-popover-full-panel]:border-b',
         className
