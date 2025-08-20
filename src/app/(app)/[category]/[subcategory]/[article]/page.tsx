@@ -24,9 +24,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { category: string; subcategory: string; article: string }
+  params: Promise<{ category: string; subcategory: string; article: string }>
 }): Promise<Metadata> {
-  const post = await getPostByHandle(params.article)
+  // Await the params before using them
+  const { article } = await params
+  const post = await getPostByHandle(article)
 
   if (!post) {
     return {
@@ -41,9 +43,22 @@ export async function generateMetadata({
   }
 }
 
-const Page = async ({ params }: { params: { category: string; subcategory: string; article: string } }) => {
+const Page = async ({ 
+  params 
+}: { 
+  params: Promise<{ category: string; subcategory: string; article: string }> 
+}) => {
+  // Await the params before using them
+  const { article } = await params
+  
   // Get the specific article by its handle (slug)
-  const post = await getPostByHandle(params.article)
+  const post = await getPostByHandle(article)
+  
+  // If article not found, return 404 early
+  if (!post) {
+    return notFound()
+  }
+
   const comments = await getCommentsByPostId(post.id)
   const relatedPosts = (await getAllPosts()).slice(0, 6)
   const moreFromAuthorPosts = (await getAllPosts()).slice(1, 7)
@@ -52,11 +67,6 @@ const Page = async ({ params }: { params: { category: string; subcategory: strin
   const widgetCategories = (await getCategories()).slice(0, 12)
   const widgetTags = (await getTags()).slice(0, 6)
   const widgetAuthors = (await getAuthors()).slice(0, 6)
-
-  // If article not found, return 404
-  if (!post) {
-    return notFound()
-  }
 
   return (
     <div className="single-post-page pt-8">
