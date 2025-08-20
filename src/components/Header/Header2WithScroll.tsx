@@ -93,11 +93,24 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
               <Navigation menu={navigationMenu} featuredPosts={featuredPosts} isScrolled={isScrolled} />
               <Link
                 href="/ask-the-scholar"
-                className="flex min-w-[155px] items-center gap-2 rounded-sm border border-white bg-white/80 px-5 py-2 text-sm font-medium text-neutral-900 shadow-sm transition-all duration-200 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900/80 dark:text-white"
+                className={clsx(
+                  'flex min-w-[155px] items-center gap-2 rounded-sm border px-5 py-2 text-sm font-medium transition-all duration-200 focus:outline-none hover:shadow-sm',
+                  'border-[#EEEEEE] dark:border-[#777777]',
+                  isScrolled 
+                    ? 'text-neutral-900 dark:text-neutral-900' 
+                    : 'text-white dark:text-white',
+                  'hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-700 dark:hover:text-neutral-200'
+                )}
                 aria-label="Ask the Scholar"
                 style={{ marginTop: 0 }}
               >
-                <ChatBubbleLeftRightIcon className="h-5 w-5" aria-hidden="true" />
+                <ChatBubbleLeftRightIcon 
+                  className={clsx(
+                    'h-5 w-5',
+                    isScrolled ? 'text-neutral-700' : 'text-white/90 dark:text-white/90'
+                  )} 
+                  aria-hidden="true" 
+                />
                 <span className="whitespace-nowrap">Ask the Scholar</span>
               </Link>
             </div>

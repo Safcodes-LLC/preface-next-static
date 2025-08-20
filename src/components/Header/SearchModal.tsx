@@ -119,7 +119,7 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false }) => {
       <>
         <div className="hidden md:block">
           <Button outline className="w-full justify-between px-4!" onClick={() => setOpen(true)}>
-            <span className="text-sm/6 font-normal text-neutral-500 dark:text-neutral-400">Type to search...</span>
+            <span className={`text-sm/6 font-normal  text-neutral-500 dark:text-neutral-400`}>Type to search...</span>
             <HugeiconsIcon icon={Search01Icon} size={24} className="ms-auto" />
           </Button>
         </div>
@@ -141,7 +141,7 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false }) => {
           ? "text-neutral-900 dark:text-neutral-100" 
           : "text-white"
       )}>
-        <HugeiconsIcon icon={Search01Icon} size={24}  className='text-black dark:text-white'/>
+        <HugeiconsIcon icon={Search01Icon} size={24}  className={clsx(`${isScrolled ? "text-black dark:text-white" : "text-white"}`)} />
       </ButtonCircle>
     )
   }
