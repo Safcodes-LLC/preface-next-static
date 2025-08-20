@@ -5,7 +5,7 @@ import Header2WithScroll from '@/components/Header/Header2WithScroll'
 import Header3 from '@/components/Header/Header3'
 import SocialSidebar from '@/components/SocialSidebar'
 import AsideSidebarNavigation from '@/components/aside-sidebar-navigation'
-import Banner from '@/shared/banner'
+import Navbar2 from '@/shared/Navbar2'
 import React, { ReactNode } from 'react'
 
 interface Props {
@@ -25,8 +25,9 @@ const ApplicationLayout: React.FC<Props> = ({
     <>
       {/* header - Chose header style here / header 1 or header 2*/}
       {/* {showBanner && <Banner />} */}
+      {/* this is not a banner it is navbar2 */}
       <div className="container">
-        <Banner />
+        <Navbar2 />
       </div>
       {headerStyle === 'header-scroll' && <Header2WithScroll bottomBorder={headerHasBorder} />}
       {headerStyle === 'header-3' && <Header3 bottomBorder={headerHasBorder} />}
