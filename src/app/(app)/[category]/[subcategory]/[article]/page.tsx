@@ -41,12 +41,12 @@ export async function generateMetadata({
   }
 }
 
-interface PageProps {
+type Props = {
   params: { category: string; subcategory: string; article: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
-const Page = async ({ params }: PageProps) => {
+const Page = async ({ params }: Props) => {
   // Get the specific article by its handle (slug)
   const post = await getPostByHandle(params.article)
   const comments = await getCommentsByPostId(post.id)
