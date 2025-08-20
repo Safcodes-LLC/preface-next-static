@@ -87,7 +87,7 @@ const TopNavbar: FC<TopNavbarProps> = ({ isScrolled, className }) => {
       )}
     >
       <div className="container">
-        <div className="flex h-12 items-center justify-end ">
+        <div className="flex h-12 items-center justify-start md:justify-end ">
           {/* Home Icon */}
           <Link
             href="/"
