@@ -9,7 +9,11 @@ import SocialSidebar from '@/components/SocialSidebar'
 import AsideSidebarNavigation from '@/components/aside-sidebar-navigation'
 import Navbar2 from '@/shared/Navbar2'
 import { usePathname } from 'next/navigation'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
+import { TNavigationItem } from '@/data/navigation'
+import { TPost } from '@/data/posts'
+import { getNavigation as fetchNavigation } from '@/data/navigation'
+import { getAllPosts } from '@/data/posts'
 
 interface Props {
   children: ReactNode
@@ -25,6 +29,26 @@ const ApplicationLayout: React.FC<Props> = ({
   showBanner = false,
 }) => {
   const pathname = usePathname()
+  const [navigationMenu, setNavigationMenu] = useState<TNavigationItem[]>([])
+  const [featuredPosts, setFeaturedPosts] = useState<TPost[]>([])
+
+  useEffect(() => {
+    // Fetch data on client side
+    const fetchData = async () => {
+      try {
+        const [navData, postsData] = await Promise.all([
+          fetchNavigation(),
+          getAllPosts()
+        ])
+        setNavigationMenu(navData)
+        setFeaturedPosts(postsData.slice(0, 2))
+      } catch (error) {
+        console.error('Error fetching navigation or posts:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   // Check if current page should hide Navbar2 and use header-scroll
   const isSpecialPage = pathname === '/' || pathname === '/visuals' || pathname.startsWith('/video/')
@@ -50,7 +74,13 @@ const ApplicationLayout: React.FC<Props> = ({
       {/* Headers based on page type and headerStyle */}
       {finalHeaderStyle === 'header-scroll' && <Header2WithScroll bottomBorder={headerHasBorder} />}
       {finalHeaderStyle === 'header-3' && <Header3 bottomBorder={headerHasBorder} />}
-      {showNavbar2AndHeader2 && <Header2 bottomBorder={headerHasBorder} />}
+      {showNavbar2AndHeader2 && (
+        <Header2 
+          bottomBorder={headerHasBorder} 
+          navigationMenu={navigationMenu}
+          featuredPosts={featuredPosts}
+        />
+      )}
       {finalHeaderStyle === 'header-1' && <Header bottomBorder={headerHasBorder} />}
 
       {children}

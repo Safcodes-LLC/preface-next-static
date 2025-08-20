@@ -1,13 +1,37 @@
-import { getNavigation } from '@/data/navigation'
+'use client'
+
+import { TNavigationItem } from '@/data/navigation'
+import { getNavigation as fetchNavigation } from '@/data/navigation'
 import SidebarNavigation from './Header/Navigation/SidebarNavigation'
 import Aside from './aside'
+import { useEffect, useState } from 'react'
 
 interface Props {
   className?: string
 }
 
-const AsideSidebarNavigation = async ({ className }: Props) => {
-  const navigationMenu = await getNavigation()
+const AsideSidebarNavigation = ({ className }: Props) => {
+  const [navigationMenu, setNavigationMenu] = useState<TNavigationItem[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const loadNavigation = async () => {
+      try {
+        const navData = await fetchNavigation()
+        setNavigationMenu(navData)
+      } catch (error) {
+        console.error('Error fetching navigation:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    loadNavigation()
+  }, [])
+
+  if (isLoading) {
+    return null // or return a loading spinner
+  }
 
   return (
     <Aside openFrom="right" type="sidebar-navigation" logoOnHeading contentMaxWidthClassName="max-w-md">

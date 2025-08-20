@@ -1,5 +1,5 @@
-import { getNavigation } from '@/data/navigation'
-import { getAllPosts } from '@/data/posts'
+import { TNavigationItem } from '@/data/navigation'
+import { TPost } from '@/data/posts'
 import { Button } from '@/shared/Button'
 import Logo from '@/shared/Logo'
 import { ChatBubbleLeftRightIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
@@ -16,9 +16,12 @@ interface Props {
   className?: string
 }
 
-const Header2: FC<Props> = async ({ bottomBorder, className }) => {
-  const navigationMenu = await getNavigation()
-  const featuredPosts = (await getAllPosts()).slice(0, 2)
+interface Header2Props extends Props {
+  navigationMenu: TNavigationItem[]
+  featuredPosts: TPost[]
+}
+
+const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, featuredPosts }) => {
 
   return (
     <div

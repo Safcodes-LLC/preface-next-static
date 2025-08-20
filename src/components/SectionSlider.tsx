@@ -104,15 +104,8 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
   const { autoSlide, autoSlideInterval, showButtons, loop, slidesToScroll } = mergedConfig
 
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [cardsPerView, setCardsPerView] = useState(() => {
-    if (typeof window === 'undefined') return 7 // SSR fallback
-    const width = window.innerWidth
-    if (width < 640) return 1
-    else if (width < 768) return 2
-    else if (width < 1024) return 3
-    else if (width < 1280) return 7
-    else return 7
-  })
+  const [cardsPerView, setCardsPerView] = useState(7) // Default value that matches server render
+  const [isClient, setIsClient] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [isInfiniteMode, setIsInfiniteMode] = useState(false)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
@@ -122,8 +115,9 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
   const totalSlides = categories.length
   const maxIndex = Math.max(0, totalSlides - cardsPerView)
 
-  // Create duplicated categories for infinite loop (maintain order)
+  // Only calculate duplicated categories on client side
   const duplicatedCategories = React.useMemo(() => {
+    if (!isClient) return categories;
     if (!autoSlide || !loop || categories.length === 0) return categories
 
     // Simply repeat the same sequence multiple times to maintain order
@@ -135,10 +129,12 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
     }
 
     return duplicates
-  }, [categories, autoSlide, loop, cardsPerView])
+  }, [categories, autoSlide, loop, cardsPerView, isClient])
 
-  // Update cards per view based on screen size
+  // Set isClient to true on mount
   useEffect(() => {
+    setIsClient(true)
+    
     const updateCardsPerView = () => {
       const width = window.innerWidth
       if (width < 640) setCardsPerView(1)
@@ -148,13 +144,14 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
       else setCardsPerView(7)
     }
 
+    // Only run on client side
     updateCardsPerView()
     window.addEventListener('resize', updateCardsPerView)
     return () => window.removeEventListener('resize', updateCardsPerView)
   }, [])
 
-  // Calculate card width percentage
-  const cardWidthPercentage = 100 / cardsPerView
+  // Calculate card width percentage, ensure no division by zero
+  const cardWidthPercentage = cardsPerView > 0 ? 100 / cardsPerView : 100
 
   // Infinite auto-sliding logic with Framer Motion
   useEffect(() => {
