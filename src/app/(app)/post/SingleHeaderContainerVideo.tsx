@@ -156,7 +156,6 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
             likeCount={likeCount}
             liked={liked}
             title={title}
-            author={author}
           />
         </div>
         <Divider className="mx-auto mt-10 max-w-4xl" />
@@ -185,7 +184,7 @@ const HeaderAudio = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
               likeCount={likeCount}
               liked={liked}
               title={title}
-              author={author}
+
             />
           </div>
         </div>
