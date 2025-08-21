@@ -14,6 +14,7 @@ import SearchModal from './SearchModal'
 interface Props {
   bottomBorder?: boolean
   className?: string
+  isTransparentHeader?: boolean
 }
 
 interface Header2Props extends Props {
@@ -21,24 +22,18 @@ interface Header2Props extends Props {
   featuredPosts: TPost[]
 }
 
-const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, featuredPosts }) => {
+const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, featuredPosts, isTransparentHeader }) => {
 
   return (
     <div
       className={clsx(
-        'header-2 sticky top-0 z-20 border-neutral-200 bg-white dark:border-neutral-100 dark:bg-[#0A0A0A]',
-        bottomBorder && 'border-b',
-        !bottomBorder && 'has-[.header-popover-full-panel]:border-b',
+        'header-2 sticky top-0 z-20  bg-white  dark:bg-[#0A0A0A]',
         className
       )}
     >
       <div className="container flex h-20 justify-between">
         <div className="flex flex-1 items-center gap-x-4 sm:gap-x-5 lg:gap-x-7">
           <Logo />
-          {/* <div className="h-8 border-l"></div> */}
-          {/* <div className="-ms-1.5">
-            <SearchModal type="type1" />
-          </div> */}
         </div>
 
         <div className="mx-4 hidden flex-2 justify-center lg:flex">
@@ -63,11 +58,9 @@ const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, fe
               href={'/login'}
               color="logooutline"
             >
-              {/* <PlusIcon className="size-5!" /> */}
               Sign in
             </Button>
           </div>
-          {/* <NotifyDropdown className="me-3" /> */}
           <SearchModal type="type1" />
           <AvatarDropdown
             trigger={

@@ -5,9 +5,13 @@ import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { CalendarIcon, ChevronDownIcon, HomeIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
-export default function Navbar2() {
+interface Navbar2Props {
+  isTransparentHeader?: boolean
+}
+
+const Navbar2: FC<Navbar2Props> = ({ isTransparentHeader }) => {
   const [currentTime, setCurrentTime] = useState<string>('')
   const [currentDate, setCurrentDate] = useState<string>('')
 
@@ -173,3 +177,5 @@ export default function Navbar2() {
     </div>
   )
 }
+
+export default Navbar2
