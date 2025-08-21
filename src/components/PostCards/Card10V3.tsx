@@ -16,7 +16,7 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1 }) => {
   const { title, handle, featuredImage, categories, postType, galleryImgs, author, date, readingTime, bookmarked } =
     post
   const [isHover, setIsHover] = useState(false)
-  console.log(post, 'posts')
+  // console.log(post, 'posts')
 
   const renderGallery2 = () => {
     if (!galleryImgs) return null
