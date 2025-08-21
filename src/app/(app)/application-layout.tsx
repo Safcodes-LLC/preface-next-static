@@ -17,7 +17,9 @@ interface Props {
   showBanner?: boolean
 }
 
-const ApplicationLayout: React.FC<Props> = ({ children }) => {
+const ApplicationLayout: React.FC<Props> = ({
+  children,
+}) => {
   const pathname = usePathname()
   const [navigationMenu, setNavigationMenu] = useState<TNavigationItem[]>([])
   const [featuredPosts, setFeaturedPosts] = useState<TPost[]>([])
@@ -42,22 +44,17 @@ const ApplicationLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-      <div className='relative'>
-        <Navbar2 isTransparentHeader={isTransparentHeader} />
+      <div className="container">
+        <Navbar2 isTransparentHeader={isTransparentHeader}/>
       </div>
 
-   {/* Header2 - adjust top padding when transparent to account for Navbar2 */}
-   <Header2
+      <Header2
         isTransparentHeader={isTransparentHeader}
         navigationMenu={navigationMenu}
         featuredPosts={featuredPosts}
-        className={isTransparentHeader ? 'top-12' : 'top-0'} // Adjust for navbar height
       />
 
-      {/* Main content */}
-      <main className={isTransparentHeader ? 'relative' : undefined}>
-        {children}
-      </main>
+      {children}
 
       <Footer />
 
