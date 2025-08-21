@@ -5,7 +5,7 @@ import Logo from '@/shared/Logo'
 import { ChatBubbleLeftRightIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Link from 'next/link'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import AvatarDropdown from './AvatarDropdown'
 import HamburgerBtnMenu from './HamburgerBtnMenu'
 import Navigation from './Navigation/Navigation'
@@ -22,12 +22,48 @@ interface Header2Props extends Props {
   featuredPosts: TPost[]
 }
 
-const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, featuredPosts, isTransparentHeader }) => {
+const Header2: FC<Header2Props> = ({ 
+  bottomBorder, 
+  className, 
+  navigationMenu, 
+  featuredPosts, 
+  isTransparentHeader = false 
+}) => {
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    // Only add scroll listener if this is a transparent header page
+    if (!isTransparentHeader) return
+
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      setIsScrolled(scrollTop >= 50)
+    }
+
+    // Add event listener
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    // Check initial scroll position
+    handleScroll()
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [isTransparentHeader])
+
+  // Determine if header should be transparent
+  const shouldBeTransparent = isTransparentHeader && !isScrolled
 
   return (
     <div
       className={clsx(
-        'header-2 sticky top-0 z-20  bg-white  dark:bg-[#0A0A0A]',
+        'header-2 transition-all duration-100',
+        // Dynamic positioning and z-index
+        shouldBeTransparent ? 'absolute z-10 w-full pt-2' : 'sticky z-20 top-0',
+        shouldBeTransparent 
+          ? 'bg-transparent backdrop-blur-none' 
+          : 'bg-white dark:bg-[#0A0A0A] backdrop-blur-sm',
         className
       )}
     >
@@ -41,7 +77,12 @@ const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, fe
             <Navigation menu={navigationMenu} featuredPosts={featuredPosts} />
             <Link
               href="/ask-the-scholar"
-              className="flex min-w-[155px] items-center gap-2 rounded-sm border border-[#EEEEEE] dark:border-[#777777] px-5 py-2 text-sm font-medium text-neutral-900 transition-all duration-200 focus:outline-none dark:text-white hover:shadow-sm"
+              className={clsx(
+                "flex min-w-[155px] items-center gap-2 rounded-sm border px-5 py-2 text-sm font-medium transition-all duration-200 focus:outline-none hover:shadow-sm",
+                shouldBeTransparent
+                  ? "border-white/20 text-white hover:border-white/40 hover:bg-white/10"
+                  : "border-[#EEEEEE] dark:border-[#777777] text-neutral-900 dark:text-white"
+              )}
               aria-label="Ask the Scholar"
               style={{ marginTop: 0 }}
             >
@@ -54,7 +95,12 @@ const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, fe
         <div className="flex flex-1 items-center justify-end gap-x-1">
           <div className="hidden sm:block">
             <Button
-              className="h-8 !border-[#60A43A] !px-4 dark:hover:!border-[#60A43A] hover:!bg-[#60A43A] hover:text-white dark:hover:!text-white"
+              className={clsx(
+                "h-8 !px-4 transition-all duration-200",
+                shouldBeTransparent
+                  ? "!border-white/40 !text-white hover:!border-[#60A43A] hover:!bg-[#60A43A] hover:text-white"
+                  : "!border-[#60A43A] dark:hover:!border-[#60A43A] hover:!bg-[#60A43A] hover:text-white dark:hover:!text-white"
+              )}
               href={'/login'}
               color="logooutline"
             >
@@ -70,7 +116,12 @@ const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, fe
                 className="flex cursor-pointer items-center justify-center rounded-full p-2 transition-all duration-200 focus:ring-2 focus:outline-none"
               >
                 <Cog6ToothIcon
-                  className={clsx('h-6 w-6 text-black dark:text-white transition-colors duration-200')}
+                  className={clsx(
+                    'h-6 w-6 transition-colors duration-200',
+                    shouldBeTransparent 
+                      ? 'text-white' 
+                      : 'text-black dark:text-white'
+                  )}
                   aria-hidden="true"
                 />
               </button>
