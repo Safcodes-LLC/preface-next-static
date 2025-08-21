@@ -24,19 +24,19 @@ interface Props {
 
 export default function AvatarDropdown({ className, trigger }: Props) {
   const user = {
-    name: 'John Doe',
+    name: 'Ajmal',
     email: 'john@gmail.com',
     avatar:
       'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     handle: 'john-doe',
-    location: 'Los Angeles, CA',
+    location: 'Dubai, UAE',
     bio: 'I am a software engineer and a writer. I love to write about technology and programming.',
   }
 
   return (
     <div className={className}>
       <Popover>
-      {/* <PopoverButton as={ButtonCircle} className="relative" plain>
+        {/* <PopoverButton as={ButtonCircle} className="relative" plain>
           <Avatar alt="avatar" src={user.avatar} width={32} height={32} className="size-8 rounded-full object-cover" />
         </PopoverButton> */}
         {trigger ? (
@@ -45,7 +45,13 @@ export default function AvatarDropdown({ className, trigger }: Props) {
           </PopoverButton>
         ) : (
           <PopoverButton as={ButtonCircle} className="relative" plain>
-            <Avatar alt="avatar" src={user.avatar} width={32} height={32} className="size-8 rounded-full object-cover" />
+            <Avatar
+              alt="avatar"
+              src={user.avatar}
+              width={32}
+              height={32}
+              className="size-8 rounded-full object-cover"
+            />
           </PopoverButton>
         )}
 
@@ -79,6 +85,17 @@ export default function AvatarDropdown({ className, trigger }: Props) {
 
             {/* ------------------ 1 --------------------- */}
             <Link
+              href={'/dashboard/posts'}
+              className="-m-3 flex items-center gap-x-4 rounded-lg p-2 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700"
+            >
+              <div className="flex shrink-0 items-center justify-center text-neutral-500 dark:text-neutral-300">
+                <HugeiconsIcon icon={Task01Icon} size={24} strokeWidth={1.5} />
+              </div>
+              <p className="text-sm font-medium">Dashboard</p>
+            </Link>
+
+            {/* ------------------ 2 --------------------- */}
+            <Link
               href={'/author/john-doe'}
               className="-m-3 flex items-center gap-x-4 rounded-lg p-2 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700"
             >
@@ -89,18 +106,7 @@ export default function AvatarDropdown({ className, trigger }: Props) {
             </Link>
 
             {/* ------------------ 2 --------------------- */}
-            <Link
-              href={'/dashboard/posts'}
-              className="-m-3 flex items-center gap-x-4 rounded-lg p-2 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700"
-            >
-              <div className="flex shrink-0 items-center justify-center text-neutral-500 dark:text-neutral-300">
-                <HugeiconsIcon icon={Task01Icon} size={24} strokeWidth={1.5} />
-              </div>
-              <p className="text-sm font-medium">My Posts</p>
-            </Link>
-
-            {/* ------------------ 2 --------------------- */}
-            <Link
+            {/* <Link
               href={`/author/${user.handle}?tab=favorites`}
               className="-m-3 flex items-center gap-x-4 rounded-lg p-2 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700"
             >
@@ -108,10 +114,10 @@ export default function AvatarDropdown({ className, trigger }: Props) {
                 <HugeiconsIcon icon={FavouriteIcon} size={24} strokeWidth={1.5} />
               </div>
               <p className="text-sm font-medium">Favorites</p>
-            </Link>
+            </Link> */}
 
             {/* ------------------ 2 --------------------- */}
-            <Link
+            {/* <Link
               href={`/submission`}
               className="-m-3 flex items-center gap-x-4 rounded-lg p-2 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700"
             >
@@ -119,7 +125,7 @@ export default function AvatarDropdown({ className, trigger }: Props) {
                 <HugeiconsIcon icon={PlusSignCircleIcon} size={24} strokeWidth={1.5} />
               </div>
               <p className="text-sm font-medium">Submission</p>
-            </Link>
+            </Link> */}
 
             <Divider />
 
