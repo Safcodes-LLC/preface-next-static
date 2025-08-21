@@ -1,5 +1,4 @@
 import BackgroundSection from '@/components/BackgroundSection'
-import CategoryLinks from '@/components/CategoryLinks'
 import ParallaxScrollSection from '@/components/ParallaxScrollSection '
 import SectionMagazine4 from '@/components/SectionMagazine4'
 import SectionMagazine7 from '@/components/SectionMagazine7'
@@ -8,6 +7,7 @@ import SectionSlider from '@/components/SectionSlider'
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
 import SectionTrending from '@/components/SectionTrending'
 import SwipableSliderPosts from '@/components/SwipableSliderPosts'
+import { getLatestArticles } from '@/data/api/articles'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
@@ -27,6 +27,11 @@ const Page = async () => {
   const galleryPosts = await getPostsGallery()
   const authors = await getAuthors()
   const categories = await getCategories()
+
+  // Other data fetches
+  const latestArticles = await getLatestArticles()
+
+  // console.log(latestArticles)
 
   // Create specific data for SectionMagazine10
   const magazine10Data = [
@@ -110,7 +115,7 @@ const Page = async () => {
         </div>
 
         <SectionTrending
-          posts={posts.slice(0, 8)}
+          posts={Array.isArray(latestArticles) ? latestArticles.slice(0, 8) : latestArticles.data?.slice(0, 8) || []}
           heading="LATEST ARTICLES"
           subHeading="Discover the most outstanding articles in all topics of life"
         />
@@ -132,8 +137,6 @@ const Page = async () => {
           />
         </div>
       </div>
-
-
     </div>
   )
 }
