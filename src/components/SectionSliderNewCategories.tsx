@@ -84,7 +84,7 @@ const SectionSliderNewCategories: FC<Props> = ({
       case 'card2':
         return <CardCategory2 key={index} badge={topIndex} category={item} />
       case 'card3':
-        return <CardCategory3 key={index} category={item} />
+        return <CardCategory3 key={item._id || item.id || index} category={item} />
       case 'card4':
         return <CardCategory4 key={index} badge={topIndex} category={item} />
       case 'card5':
@@ -118,7 +118,7 @@ const SectionSliderNewCategories: FC<Props> = ({
         >
           {categories.map((category, index) => (
             <motion.div
-              key={category.id}
+              key={category._id || category.id || index}
               className="embla__slide basis-[86%] ps-5 sm:basis-1/2 sm:ps-7 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
               variants={cardVariants}
             >

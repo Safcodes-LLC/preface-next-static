@@ -18,6 +18,11 @@ const nextConfig = {
         hostname: 'images.pexels.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'preface-drive.blr1.digitaloceanspaces.com',
+        pathname: '/**',
+      },
     ],
   },
 }

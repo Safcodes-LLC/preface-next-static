@@ -8,6 +8,7 @@ import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
 import SectionTrending from '@/components/SectionTrending'
 import SwipableSliderPosts from '@/components/SwipableSliderPosts'
 import { getLatestArticles } from '@/data/api/articles'
+import { getCategory } from '@/data/api/category'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
@@ -30,8 +31,9 @@ const Page = async () => {
 
   // Other data fetches
   const latestArticles = await getLatestArticles()
+  const storyTellingIslam = await getCategory()
 
-  // console.log(latestArticles)
+  console.log(storyTellingIslam,"storytelling")
 
   // Create specific data for SectionMagazine10
   const magazine10Data = [
@@ -63,7 +65,8 @@ const Page = async () => {
         <SectionSliderNewCategories
           heading="STORYTELLING ISLAM"
           subHeading="Understanding Islam through 1001 stories"
-          categories={categories.slice(0, 10)}
+          // categories={categories.slice(0, 10)}
+          categories={Array.isArray(storyTellingIslam) ? storyTellingIslam.slice(0, 10) : storyTellingIslam.data?.slice(0, 10) || []}
           categoryCardType="card3"
         />
 
