@@ -7,7 +7,7 @@ import SectionSlider from '@/components/SectionSlider'
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
 import SectionTrending from '@/components/SectionTrending'
 import SwipableSliderPosts from '@/components/SwipableSliderPosts'
-import { getLatestArticles } from '@/data/api/posts'
+import { getIslamForBeginners, getLatestArticles } from '@/data/api/posts'
 import { getCategory, getTopTrendingTopics } from '@/data/api/category'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
@@ -33,8 +33,9 @@ const Page = async () => {
   const latestArticles = await getLatestArticles()
   const storyTellingIslam = await getCategory()
   const topTrendingTopics = await getTopTrendingTopics()
+  const islamForBeginners = await getIslamForBeginners()
 
-  // console.log(topTrendingTopics,"topTrendingTopics444")
+  console.log(islamForBeginners,"islamForBeginners22")
 
   // Create specific data for SectionMagazine10
   const magazine10Data = [
@@ -107,7 +108,7 @@ const Page = async () => {
           <SwipableSliderPosts
             heading="ISLAM FOR BEGINNERS"
             subHeading="Over 100 Articles for beginners"
-            posts={defaultPosts.slice(0, 8)}
+            posts={islamForBeginners.slice(0, 8)}
             postCardName="card10V2"
             config={{
               autoSlide: false,

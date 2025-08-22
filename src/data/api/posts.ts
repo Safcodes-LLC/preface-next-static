@@ -12,3 +12,16 @@ export const getLatestArticles = async () => {
     return { data: [] };
   }
 };
+
+// islam for beginners under articles
+export const getIslamForBeginners = async () => {
+  try {
+    const response = await serverFetch.get<{ data: { latestArticles: any[] } }>('/api/frontend/islam-for-beginners', {
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
+    });
+    return response?.data?.latestArticles || [];
+  } catch (error) {
+    console.error('Failed to fetch islam for beginners articles', error);
+    return [];
+  }
+};
