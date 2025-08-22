@@ -56,6 +56,7 @@ export async function getPostsDefault() {
   return [
     {
       id: 'post-1',
+      _id: 'post-1',
       featuredImage: {
         src: "/images/banner/bannerarticle-2.png",
         alt: "Lenovo's smarter devices stoke professional passions",
@@ -69,6 +70,7 @@ export async function getPostsDefault() {
         height: 1080,
       },
       title: "PROMISES OF WHOLENESS",
+      name: "PROMISES OF WHOLENESS",
       handle: 'lenovo-smarter-devices-stoke-professional-passions',
       excerpt: 'WHAT ISLAM OFFERS IN A FRAGMENTED WORLD',
       date: '2025-06-10T12:00:00Z',
@@ -109,6 +111,7 @@ export async function getPostsDefault() {
     },
     {
       id: 'post-2',
+      _id: 'post-2',
       featuredImage: {
         src: "/images/banner/bannerarticle-3.png",
         alt: 'The Future of Remote Work in 2025',
@@ -122,6 +125,7 @@ export async function getPostsDefault() {
         height: 1080,
       },
       title: 'AI, RESURRECTION, AND THE QURAN',
+      name: 'AI, RESURRECTION, AND THE QURAN',
       handle: 'future-of-remote-work-2025',
       excerpt:
         'BRIDGING SCIENCE AND THE HEREAFTER',
@@ -163,6 +167,7 @@ export async function getPostsDefault() {
     },
     {
       id: 'post-3',
+      _id: 'post-3',
       featuredImage: {
         src: "/images/banner/bannerarticle-1.png",
         alt: 'Sustainable Living: - The Complete Guide',
@@ -176,6 +181,7 @@ export async function getPostsDefault() {
         height: 1080,
       },
       title: 'MOM, WHY IS THE PROPHET CALLING US?',
+      name: 'MOM, WHY IS THE PROPHET CALLING US?',
       handle: 'sustainable-living-complete-guide',
       excerpt:
         'A GLIMPSE INTO THE COMPASSIONATE SERMONS OF THE PROPHET ﷺ',
@@ -217,6 +223,7 @@ export async function getPostsDefault() {
     },
     {
       id: 'post-4',
+      _id: 'post-4',
       featuredImage: {
         src: _demo_post_image_urls[3],
         alt: 'AI Revolution: What to Expect in the Next Decade',
@@ -230,6 +237,7 @@ export async function getPostsDefault() {
         height: 1080,
       },
       title: 'AI Revolution: What to Expect in the Next Decade',
+      name: 'AI Revolution: What to Expect in the Next Decade',
       handle: 'ai-revolution-next-decade',
       excerpt: 'Exploring the potential impact of artificial intelligence on our daily lives and future society.',
       date: '2025-03-05T12:00:00Z',
@@ -270,6 +278,7 @@ export async function getPostsDefault() {
     },
     {
       id: 'post-5',
+      _id: 'post-5',
       featuredImage: {
         src: _demo_post_image_urls[4],
         alt: 'Fitness Trends That Will Dominate 2025',
@@ -283,6 +292,7 @@ export async function getPostsDefault() {
         height: 1080,
       },
       title: 'Fitness Trends That Will Dominate 2025 - A Complete Guide',
+      name: 'Fitness Trends That Will Dominate 2025 - A Complete Guide',
       handle: 'fitness-trends-2025',
       excerpt: 'Discover the latest fitness innovations and workout trends that are reshaping the fitness industry.',
       date: '2025-02-15T12:00:00Z',
@@ -323,6 +333,7 @@ export async function getPostsDefault() {
     },
     {
       id: 'post-6',
+      _id: 'post-6',
       featuredImage: {
         src: _demo_post_image_urls[5],
         alt: 'Understanding Cryptocurrency in 2025',
@@ -336,6 +347,7 @@ export async function getPostsDefault() {
         height: 1080,
       },
       title: 'Understanding Cryptocurrency in 2025 - A Complete Guide',
+      name: 'Understanding Cryptocurrency in 2025 - A Complete Guide',
       handle: 'understanding-cryptocurrency-2025',
       excerpt: 'A comprehensive guide to cryptocurrency trends, blockchain technology, and digital finance.',
       date: '2025-01-20T12:00:00Z',
@@ -380,6 +392,7 @@ export async function getPostsAudio() {
   return [
     {
       id: 'post-audio-1',
+      _id: 'post-audio-1',
       featuredImage: {
         src: _demo_post_image_urls[6],
         alt: "Lenovo's smarter devices stoke professional passions",
@@ -387,6 +400,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       title: 'Jacob Collier x Gen Music | Google Lab Sessions | Full Session',
+      name: 'Jacob Collier x Gen Music | Google Lab Sessions | Full Session',
       handle: 'jacob-collier-x-gen-music-google-lab-sessions-full-session',
       excerpt: 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
       date: '2025-06-10T12:00:00Z',
@@ -428,6 +442,7 @@ export async function getPostsAudio() {
     },
     {
       id: 'post-audio-2',
+      _id: 'post-audio-2',
       featuredImage: {
         src: _demo_post_image_urls[7],
         alt: 'Classical Music Masterpieces',
@@ -441,6 +456,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       title: 'Beethoven Symphony No. 9 - Complete Performance',
+      name: 'Beethoven Symphony No. 9 - Complete Performance',
       handle: 'beethoven-symphony-no-9-complete-performance',
       excerpt: "Experience the full majesty of Beethoven's Ninth Symphony in this complete performance.",
       date: '2025-05-15T12:00:00Z',
@@ -482,6 +498,7 @@ export async function getPostsAudio() {
     },
     {
       id: 'post-audio-3',
+      _id: 'post-audio-3',
       featuredImage: {
         src: _demo_post_image_urls[8],
         alt: 'Jazz Night Live',
@@ -495,6 +512,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       title: 'Jazz Night Live: Miles Davis Tribute',
+      name: 'Jazz Night Live: Miles Davis Tribute',
       handle: 'jazz-night-live-miles-davis-tribute',
       excerpt: 'A special tribute to Miles Davis featuring contemporary jazz artists.',
       date: '2025-04-20T12:00:00Z',
@@ -536,6 +554,7 @@ export async function getPostsAudio() {
     },
     {
       id: 'post-audio-4',
+      _id: 'post-audio-4',
       featuredImage: {
         src: _demo_post_image_urls[9],
         alt: 'Electronic Music Festival',
@@ -549,6 +568,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       title: 'Tomorrowland 2025: Best Sets Collection',
+      name: 'Tomorrowland 2025: Best Sets Collection',
       handle: 'tomorrowland-2025-best-sets-collection',
       excerpt: 'The most memorable sets from Tomorrowland 2025, featuring top electronic music artists.',
       date: '2025-03-05T12:00:00Z',
@@ -590,6 +610,7 @@ export async function getPostsAudio() {
     },
     {
       id: 'post-audio-5',
+      _id: 'post-audio-5',
       featuredImage: {
         src: _demo_post_image_urls[10],
         alt: 'Rock Concert Live',
@@ -603,6 +624,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       title: 'Rock Legends: Live at Madison Square Garden',
+      name: 'Rock Legends: Live at Madison Square Garden',
       handle: 'rock-legends-live-at-madison-square-garden',
       excerpt: 'Experience the electrifying performance of legendary rock bands at the iconic venue.',
       date: '2025-02-15T12:00:00Z',
@@ -644,6 +666,7 @@ export async function getPostsAudio() {
     },
     {
       id: 'post-audio-6',
+      _id: 'post-audio-6',
       featuredImage: {
         src: _demo_post_image_urls[11],
         alt: 'Hip Hop Studio Session',
@@ -657,6 +680,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       title: 'Behind the Beats: Hip Hop Production Masterclass',
+      name: 'Behind the Beats: Hip Hop Production Masterclass',
       handle: 'behind-the-beats-hip-hop-production-masterclass',
       excerpt: 'An exclusive look into the art of hip hop production with industry experts.',
       date: '2025-01-20T12:00:00Z',
@@ -698,6 +722,7 @@ export async function getPostsAudio() {
     },
     {
       id: 'post-audio-7',
+      _id: 'post-audio-7',
       featuredImage: {
         src: _demo_post_image_urls[12],
         alt: 'World Music Festival',
@@ -711,6 +736,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       title: 'Global Rhythms: World Music Festival Highlights',
+      name: 'Global Rhythms: World Music Festival Highlights',
       handle: 'global-rhythms-world-music-festival-highlights',
       excerpt: 'A celebration of diverse musical traditions from around the world.',
       date: '2025-01-05T12:00:00Z',
@@ -752,6 +778,7 @@ export async function getPostsAudio() {
     },
     {
       id: 'post-audio-8',
+      _id: 'post-audio-8',
       featuredImage: {
         src: _demo_post_image_urls[13],
         alt: 'Piano Concert',
@@ -765,6 +792,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       title: 'Piano Masterpieces: Chopin Nocturnes Collection',
+      name: 'Piano Masterpieces: Chopin Nocturnes Collection',
       handle: 'piano-masterpieces-chopin-nocturnes-collection',
       excerpt: "A mesmerizing collection of Chopin's most beautiful nocturnes performed by world-renowned pianists.",
       date: '2024-12-20T12:00:00Z',
@@ -806,6 +834,7 @@ export async function getPostsAudio() {
     },
     {
       id: 'post-audio-9',
+      _id: 'post-audio-9',
       featuredImage: {
         src: _demo_post_image_urls[14],
         alt: 'Podcast Studio',
@@ -819,6 +848,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       title: 'Tech Talk: The Future of Digital Innovation',
+      name: 'Tech Talk: The Future of Digital Innovation',
       handle: 'tech-talk-future-of-digital-innovation',
       excerpt: 'An insightful discussion about emerging technologies and their impact on our digital future.',
       date: '2024-12-15T12:00:00Z',
@@ -860,6 +890,7 @@ export async function getPostsAudio() {
     },
     {
       id: 'post-audio-10',
+      _id: 'post-audio-10',
       featuredImage: {
         src: _demo_post_image_urls[15],
         alt: 'Meditation Music',
@@ -873,6 +904,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       title: 'Peaceful Mind: Guided Meditation Collection',
+      name: 'Peaceful Mind: Guided Meditation Collection',
       handle: 'peaceful-mind-guided-meditation-collection',
       excerpt: 'A curated collection of calming meditation sessions for stress relief and mindfulness.',
       date: '2024-12-10T12:00:00Z',
@@ -914,6 +946,7 @@ export async function getPostsAudio() {
     },
     {
       id: 'post-audio-11',
+      _id: 'post-audio-11',
       featuredImage: {
         src: _demo_post_image_urls[16],
         alt: 'Podcast Studio',
@@ -927,6 +960,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       title: 'The Future of AI: A Deep Dive Discussion',
+      name: 'The Future of AI: A Deep Dive Discussion',
       handle: 'future-of-ai-deep-dive-discussion',
       excerpt: 'An in-depth conversation about artificial intelligence, its current state, and future implications.',
       date: '2024-12-05T12:00:00Z',
@@ -968,6 +1002,7 @@ export async function getPostsAudio() {
     },
     {
       id: 'post-audio-12',
+      _id: 'post-audio-12',
       featuredImage: {
         src: _demo_post_image_urls[17],
         alt: 'Meditation Music',
@@ -981,6 +1016,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       title: 'Mindful Living: Daily Meditation Guide',
+      name: 'Mindful Living: Daily Meditation Guide',
       handle: 'mindful-living-daily-meditation-guide',
       excerpt: 'A comprehensive guide to incorporating mindfulness and meditation into your daily routine.',
       date: '2024-12-01T12:00:00Z',
@@ -1026,6 +1062,7 @@ export async function getPostsVideo() {
   return [
     {
       id: 'post-video-1',
+      _id: 'post-video-1',
       featuredImage: {
         src: "/images/banner/bannervideo-1.png",
         alt: "Lenovo's smarter devices stoke professional passions",
@@ -1039,6 +1076,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       title: 'WHAT IF YOU COULD STEP INTO A RIVER OF RENEWAL FIVE TIMES A DAY?',
+      name: 'WHAT IF YOU COULD STEP INTO A RIVER OF RENEWAL FIVE TIMES A DAY?',
       handle: 'the-impact-of-covid-19-on-the-airport-business',
       excerpt: 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
       date: '2025-06-10',
@@ -1080,6 +1118,7 @@ export async function getPostsVideo() {
     },
     {
       id: 'post-video-2',
+      _id: 'post-video-2',
       featuredImage: {
         src: _demo_post_image_urls[19],
         alt: 'Space Exploration Documentary',
@@ -1093,6 +1132,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       title: 'Journey to Mars: The Future of Space Exploration',
+      name: 'Journey to Mars: The Future of Space Exploration',
       handle: 'journey-to-mars-future-of-space-exploration',
       excerpt: 'An in-depth look at the challenges and possibilities of human exploration of Mars.',
       date: '2025-05-15',
@@ -1134,6 +1174,7 @@ export async function getPostsVideo() {
     },
     {
       id: 'post-video-3',
+      _id: 'post-video-3',
       featuredImage: {
         src: _demo_post_image_urls[1],
         alt: 'Coding Tutorial',
@@ -1147,6 +1188,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       title: 'Mastering React: Advanced Patterns and Best Practices',
+      name: 'Mastering React: Advanced Patterns and Best Practices',
       handle: 'mastering-react-advanced-patterns',
       excerpt: 'Learn advanced React patterns and best practices from industry experts.',
       date: '2025-04-20',
@@ -1188,6 +1230,7 @@ export async function getPostsVideo() {
     },
     {
       id: 'post-video-4',
+      _id: 'post-video-4',
       featuredImage: {
         src: _demo_post_image_urls[2],
         alt: 'Cooking Show',
@@ -1201,6 +1244,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       title: 'Mastering French Cuisine: A Complete Guide',
+      name: 'Mastering French Cuisine: A Complete Guide',
       handle: 'mastering-french-cuisine-complete-guide',
       excerpt: 'Learn the art of French cooking with step-by-step tutorials from a master chef.',
       date: '2025-03-05',
@@ -1242,6 +1286,7 @@ export async function getPostsVideo() {
     },
     {
       id: 'post-video-5',
+      _id: 'post-video-5',
       featuredImage: {
         src: _demo_post_image_urls[10],
         alt: 'Wildlife Documentary',
@@ -1255,6 +1300,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       title: 'Wildlife Wonders: The Hidden Life of Rainforests',
+      name: 'Wildlife Wonders: The Hidden Life of Rainforests',
       handle: 'wildlife-wonders-hidden-life-of-rainforests',
       excerpt: "An extraordinary journey into the heart of the world's most diverse ecosystems.",
       date: '2025-02-15',
@@ -1296,6 +1342,7 @@ export async function getPostsVideo() {
     },
     {
       id: 'post-video-6',
+      _id: 'post-video-6',
       featuredImage: {
         src: _demo_post_image_urls[3],
         alt: 'AI Technology',
@@ -1309,6 +1356,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       title: 'The Future of AI: Breakthroughs and Challenges',
+      name: 'The Future of AI: Breakthroughs and Challenges',
       handle: 'future-of-ai-breakthroughs-and-challenges',
       excerpt: 'Exploring the latest developments in artificial intelligence and their implications.',
       date: '2025-01-20',
@@ -1350,6 +1398,7 @@ export async function getPostsVideo() {
     },
     {
       id: 'post-video-7',
+      _id: 'post-video-7',
       featuredImage: {
         src: _demo_post_image_urls[4],
         alt: 'Travel Documentary',
@@ -1363,6 +1412,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       title: 'Hidden Gems: Unexplored Destinations of Asia',
+      name: 'Hidden Gems: Unexplored Destinations of Asia',
       handle: 'hidden-gems-unexplored-destinations-of-asia',
       excerpt: "Discover the lesser-known treasures of Asia's most fascinating locations.",
       date: '2025-01-05',
@@ -1404,6 +1454,7 @@ export async function getPostsVideo() {
     },
     {
       id: 'post-video-8',
+      _id: 'post-video-8',
       featuredImage: {
         src: _demo_post_image_urls[5],
         alt: 'Ocean Documentary',
@@ -1417,6 +1468,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       title: 'Deep Blue: Mysteries of the Ocean',
+      name: 'Deep Blue: Mysteries of the Ocean',
       handle: 'deep-blue-mysteries-of-the-ocean',
       excerpt: 'An extraordinary journey into the depths of our oceans, revealing its hidden wonders.',
       date: '2024-12-20',
@@ -1458,6 +1510,7 @@ export async function getPostsVideo() {
     },
     {
       id: 'post-video-9',
+      _id: 'post-video-9',
       featuredImage: {
         src: _demo_post_image_urls[6],
         alt: 'Sports Documentary',
@@ -1471,6 +1524,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       title: 'Champions: The Making of Olympic Athletes',
+      name: 'Champions: The Making of Olympic Athletes',
       handle: 'champions-making-of-olympic-athletes',
       excerpt: 'An inspiring look at the dedication and training behind Olympic success stories.',
       date: '2024-12-15',
@@ -1512,6 +1566,7 @@ export async function getPostsVideo() {
     },
     {
       id: 'post-video-10',
+      _id: 'post-video-10',
       featuredImage: {
         src: _demo_post_image_urls[7],
         alt: 'History Documentary',
@@ -1525,6 +1580,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       title: 'Ancient Civilizations: Lost Cities Revealed',
+      name: 'Ancient Civilizations: Lost Cities Revealed',
       handle: 'ancient-civilizations-lost-cities-revealed',
       excerpt: 'Uncovering the mysteries of ancient civilizations through archaeological discoveries.',
       date: '2024-12-10',
@@ -1566,6 +1622,7 @@ export async function getPostsVideo() {
     },
     {
       id: 'post-video-11',
+      _id: 'post-video-11',
       featuredImage: {
         src: _demo_post_image_urls[8],
         alt: 'Education Documentary',
@@ -1579,6 +1636,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       title: 'The Evolution of Education: Past to Future',
+      name: 'The Evolution of Education: Past to Future',
       handle: 'evolution-of-education-past-to-future',
       excerpt: "A comprehensive look at how education has evolved and where it's heading in the digital age.",
       date: '2024-12-05',
@@ -1620,6 +1678,7 @@ export async function getPostsVideo() {
     },
     {
       id: 'post-video-12',
+      _id: 'post-video-12',
       featuredImage: {
         src: _demo_post_image_urls[9],
         alt: 'Photography Documentary',
@@ -1633,6 +1692,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       title: 'The Art of Photography: Masterclass Series',
+      name: 'The Art of Photography: Masterclass Series',
       handle: 'art-of-photography-masterclass-series',
       excerpt:
         'An exclusive masterclass series featuring renowned photographers sharing their techniques and insights.',
@@ -1679,6 +1739,7 @@ export async function getPostsGallery() {
   return [
     {
       id: 'post-gallery-1',
+      _id: 'post-gallery-1',
       featuredImage: {
         src: "/images/holyquran/holyquranmain1.png",
         alt: "Lenovo's smarter devices stoke professional passions",
@@ -1692,6 +1753,7 @@ export async function getPostsGallery() {
         height: 1080,
       },
       title: 'The symmetry of spider and Sura al Ankabooth',
+      name: 'The symmetry of spider and Sura al Ankabooth',
       handle: 'where-the-internet-lives-from-trauma-to-triumph-oval',
       excerpt: 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
       date: '2025-06-10',
@@ -1739,6 +1801,7 @@ export async function getPostsGallery() {
     },
     {
       id: 'post-gallery-2',
+      _id: 'post-gallery-2',
       featuredImage: {
         // src: _demo_post_image_urls[11],
         src: "/images/holyquran/holyquranmain1.png",
@@ -1753,6 +1816,7 @@ export async function getPostsGallery() {
         height: 1080,
       },
       title: 'The bee, honey and message from the God',
+      name: 'The bee, honey and message from the God',
       handle: 'ensure-that-interactive-elements-are-easy-to-identify',
       excerpt: 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
       date: '2025-06-10',
@@ -1800,6 +1864,7 @@ export async function getPostsGallery() {
     },
     {
       id: 'post-gallery-3',
+      _id: 'post-gallery-3',
       featuredImage: {
         src: _demo_post_image_urls[12],
         alt: "Lenovo's smarter devices stoke professional passions",
@@ -1813,6 +1878,7 @@ export async function getPostsGallery() {
         height: 1080,
       },
       title: 'Girls in Ocean Science Conference a First at Maritime Museum',
+      name: 'Girls in Ocean Science Conference a First at Maritime Museum',
       handle: 'girls-in-ocean-science-conference-a-first-at-maritime-museum',
       excerpt: 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
       date: '2025-06-10',
@@ -1860,6 +1926,7 @@ export async function getPostsGallery() {
     },
     {
       id: 'post-gallery-4',
+      _id: 'post-gallery-4',
       featuredImage: {
         src: _demo_post_image_urls[13],
         alt: "Lenovo's smarter devices stoke professional passions",
@@ -1873,6 +1940,7 @@ export async function getPostsGallery() {
         height: 1080,
       },
       title: 'The 2025 World Cup: A Look at the Teams and Players',
+      name: 'The 2025 World Cup: A Look at the Teams and Players',
       handle: 'the-2025-world-cup-a-look-at-the-teams-and-players',
       excerpt: 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
       date: '2025-06-10',
@@ -1920,6 +1988,7 @@ export async function getPostsGallery() {
     },
     {
       id: 'post-gallery-8',
+      _id: 'post-gallery-8',
       featuredImage: {
         src: _demo_post_image_urls[14],
         alt: 'Mountain Landscape',
@@ -1933,6 +2002,7 @@ export async function getPostsGallery() {
         height: 1080,
       },
       title: 'Majestic Mountains: A Photographic Journey',
+      name: 'Majestic Mountains: A Photographic Journey',
       handle: 'majestic-mountains-photographic-journey',
       excerpt: 'A stunning collection of mountain landscapes captured across different seasons and times of day.',
       date: '2024-12-20',
@@ -1980,6 +2050,7 @@ export async function getPostsGallery() {
     },
     {
       id: 'post-gallery-9',
+      _id: 'post-gallery-9',
       featuredImage: {
         src: _demo_post_image_urls[15],
         alt: 'Wildlife Photography',
@@ -1993,6 +2064,7 @@ export async function getPostsGallery() {
         height: 1080,
       },
       title: "Wildlife Wonders: Nature's Hidden Treasures",
+      name: "Wildlife Wonders: Nature's Hidden Treasures",
       handle: 'wildlife-wonders-natures-hidden-treasures',
       excerpt: 'Captivating moments of wildlife in their natural habitats, showcasing the beauty of nature.',
       date: '2024-12-15',
@@ -2039,6 +2111,7 @@ export async function getPostsGallery() {
     },
     {
       id: 'post-gallery-10',
+      _id: 'post-gallery-10',
       featuredImage: {
         src: _demo_post_image_urls[16],
         alt: 'Urban Architecture',
@@ -2052,6 +2125,7 @@ export async function getPostsGallery() {
         height: 1080,
       },
       title: 'Urban Perspectives: Modern Architecture',
+      name: 'Urban Perspectives: Modern Architecture',
       handle: 'urban-perspectives-modern-architecture',
       excerpt: 'A visual exploration of contemporary architecture and urban design from around the world.',
       date: '2024-12-10',
@@ -2235,6 +2309,7 @@ export type TPost = Awaited<ReturnType<typeof getAllPosts>>[number] & {
   audioUrl?: string
   videoUrl?: string
   galleryImgs?: string[]
+  totalArticles?: number
 }
 export type TPostDetail = Awaited<ReturnType<typeof getPostByHandle>>
 export type TComment = Awaited<ReturnType<typeof getCommentsByPostId>>[number]

@@ -25,3 +25,18 @@ export const getIslamForBeginners = async () => {
     return [];
   }
 };
+// /api/frontend/quran-latest-articles?lang=en&limit=4
+// holy quran latest articles
+export const getQuranLatestArticles = async (options?: { limit?: number }) => {
+  try {
+    const response = await serverFetch.get<{ data: any[] }>('/api/frontend/quran-latest-articles', {
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      limit: options?.limit
+    });
+    return response?.data || [];
+  } catch (error) {
+    console.error('Failed to fetch quran latest articles', error);
+    return [];
+  }
+};
+

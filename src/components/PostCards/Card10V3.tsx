@@ -9,11 +9,12 @@ import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
 interface Props {
   className?: string
   post: TPost
+  
   galleryType?: 1 | 2
 }
 
 const Card10V3: FC<Props> = ({ className, post, galleryType = 1 }) => {
-  const { title, handle, featuredImage, categories, postType, galleryImgs, author, date, readingTime, bookmarked } =
+  const { title, name, handle, featuredImage, categories, postType, galleryImgs, author, date, readingTime, bookmarked } =
     post
   const [isHover, setIsHover] = useState(false)
   // console.log(post, 'posts')
@@ -114,8 +115,8 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1 }) => {
 
       <div className="absolute right-0 bottom-0 left-0 p-6">
         <h2 className="block font-semibold text-[#FFFFFF] sm:text-lg dark:text-neutral-100 leading-snug max-w-[300px] line-clamp-2">
-          <Link href={`/post/${handle}`} title={title}>
-            {title}
+          <Link href={`/post/${handle}`} title={name ||title}>
+            {name || title}
           </Link>
         </h2>
       </div>

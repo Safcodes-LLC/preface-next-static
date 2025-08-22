@@ -11,11 +11,12 @@ import Card17Podcast from './PostCards/Card17Podcast'
 
 type Props = Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> & {
   posts: TPost[]
+  posts2: TPost[]
   className?: string
   heading?: string
 }
 
-const SectionMagazine7: FC<Props> = ({ posts, className, heading, subHeading, dimHeading }) => {
+const SectionMagazine7: FC<Props> = ({ posts, posts2, className, heading, subHeading, dimHeading }) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.2 })
 
@@ -115,10 +116,10 @@ const SectionMagazine7: FC<Props> = ({ posts, className, heading, subHeading, di
           className="grid gap-6 md:gap-8 lg:grid-cols-2"
         >
           <motion.div variants={mainCardVariants}>
-            <Card10V3 post={posts[0]} />
+            <Card10V3 post={posts2[0]} />
           </motion.div>
           <motion.div variants={mainCardVariants}>
-            <Card10V3 galleryType={2} post={posts[1]} />
+            <Card10V3 galleryType={2} post={posts2[1]} />
           </motion.div>
         </motion.div>
 
@@ -128,7 +129,7 @@ const SectionMagazine7: FC<Props> = ({ posts, className, heading, subHeading, di
           className="mt-3 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3"
         >
           {posts.slice(0, 6).map((p, index) => (
-            <motion.div key={p.id} variants={gridCardVariants}>
+            <motion.div key={p._id} variants={gridCardVariants}>
               <Card17Podcast post={p} />
             </motion.div>
           ))}

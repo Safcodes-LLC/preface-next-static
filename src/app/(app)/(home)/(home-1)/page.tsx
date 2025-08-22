@@ -7,8 +7,8 @@ import SectionSlider from '@/components/SectionSlider'
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
 import SectionTrending from '@/components/SectionTrending'
 import SwipableSliderPosts from '@/components/SwipableSliderPosts'
-import { getIslamForBeginners, getLatestArticles } from '@/data/api/posts'
-import { getCategory, getTopTrendingTopics } from '@/data/api/category'
+import { getIslamForBeginners, getLatestArticles, getQuranLatestArticles } from '@/data/api/posts'
+import { getCategory, getQuranSubcategories, getTopTrendingTopics } from '@/data/api/category'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
@@ -34,8 +34,11 @@ const Page = async () => {
   const storyTellingIslam = await getCategory()
   const topTrendingTopics = await getTopTrendingTopics()
   const islamForBeginners = await getIslamForBeginners()
+  const quranSubCategories = await getQuranSubcategories({limit:6});
+  const quranLatestArticles = await getQuranLatestArticles({limit:2});
 
-  console.log(islamForBeginners,"islamForBeginners22")
+
+  console.log(quranLatestArticles,"quranLatestArticles")
 
   // Create specific data for SectionMagazine10
   const magazine10Data = [
@@ -73,7 +76,8 @@ const Page = async () => {
         />
 
         <SectionMagazine7
-          posts={galleryPosts.slice(0, 8)}
+          posts={quranSubCategories.slice(0, 8)}
+          posts2={quranLatestArticles.slice(0, 8)}
           heading="HOLY QUR’AN"
           subHeading="Explore the lessons from Holy Quran"
         />

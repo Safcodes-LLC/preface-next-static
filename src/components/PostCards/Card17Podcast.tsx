@@ -14,7 +14,9 @@ interface Props {
 }
 
 const Card17Podcast: FC<Props> = ({ className, post }) => {
-  const { title, handle, featuredImage, postType, date, readingTime } = post
+  const { title, name, handle, thumbnail, featuredImage, postType, date, readingTime, totalArticles } = post
+  console.log(post, "subcategry");
+  
   const IS_AUDIO = postType === 'audio'
 
   return (
@@ -25,20 +27,20 @@ const Card17Podcast: FC<Props> = ({ className, post }) => {
       )}
     >
       <div className="flex items-center gap-x-4">
-        <div className="relative size-14 shrink-0 rounded-full shadow-lg sm:size-22">
+        <div className="relative size-14 shrink-0 rounded-[10px] shadow-lg sm:size-22">
           <Image
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="rounded-[10px] object-cover"
-            src={featuredImage}
+            src={thumbnail ||featuredImage}
             fill
-            alt={title}
+            alt={name || title}
           />
         </div>
 
         <div className="flex grow flex-col">
           <h2 className="block font-medium">
             {/* <Link href={`/post/${handle}`} className="absolute inset-0"></Link> */}
-            <span className="line-clamp-1">{title}</span>
+            <span className="line-clamp-1">{name || title}</span>
           </h2>
 
           <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -56,7 +58,7 @@ const Card17Podcast: FC<Props> = ({ className, post }) => {
                 {new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
               </time> */}
               {/* <span className="mx-1">/</span> */}
-              <span className="text-[12px] font-[400]"> 120 Articles</span>
+              <span className="text-[12px] font-[400]"> {totalArticles} Articles</span>
             </div>
           </div>
           <div className="flex shrink-0 items-center mt-[10px]">
