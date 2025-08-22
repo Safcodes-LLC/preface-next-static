@@ -4,6 +4,7 @@ const API_BASE_URL = 'https://king-prawn-app-x9z27.ondigitalocean.app';
 interface ApiOptions {
   requiresAuth?: boolean;
   headers?: Record<string, string>;
+  limit?: number;  // Add limit to the options
   next?: {
     revalidate?: number | false;
     tags?: string[];
@@ -15,12 +16,21 @@ export const serverFetch = {
     url: string,
     options: ApiOptions = {}
   ): Promise<T> => {
-    const { requiresAuth = false, headers = {}, next } = options;
+    const { requiresAuth = false, headers = {}, next, limit } = options;
     const language = 'en'; // Get from cookies/headers in server components
 
-    // Handle URL with language
+    // Build query parameters
+    const params = new URLSearchParams();
+    params.append('lang', language);
+    
+    // Add limit if provided
+    if (limit) {
+      params.append('limit', limit.toString());
+    }
+
+    // Handle URL with query parameters
     const hasQuery = url.includes('?');
-    const urlWithLang = `${url}${hasQuery ? '&' : '?'}lang=${encodeURIComponent(language)}`;
+    const urlWithParams = `${url}${hasQuery ? '&' : '?'}${params.toString()}`;
 
     // Set up headers
     const requestHeaders: Record<string, string> = {
@@ -29,15 +39,11 @@ export const serverFetch = {
     };
 
     if (requiresAuth) {
-      // Get token from cookies in server components
-      // const token = cookies().get('auth_token')?.value;
-      // if (token) {
-      //   requestHeaders['Authorization'] = `Bearer ${token}`;
-      // }
+      // Auth logic here
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}${urlWithLang}`, {
+      const response = await fetch(`${API_BASE_URL}${urlWithParams}`, {
         method: 'GET',
         headers: requestHeaders,
         next: next, // This works with Next.js fetch
