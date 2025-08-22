@@ -10,7 +10,7 @@ interface Props {
 }
 
 const CardCategory3: FC<Props> = ({ className = '', category }) => {
-  console.log(category,"category123")
+  // console.log(category,"category123")
   const {  name, thumbnail, featuredImage, featuredIcon, subCategory} = category
   return (
     <Link
