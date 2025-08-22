@@ -7,8 +7,8 @@ import SectionSlider from '@/components/SectionSlider'
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
 import SectionTrending from '@/components/SectionTrending'
 import SwipableSliderPosts from '@/components/SwipableSliderPosts'
-import { getLatestArticles } from '@/data/api/articles'
-import { getCategory } from '@/data/api/category'
+import { getLatestArticles } from '@/data/api/posts'
+import { getCategory, getTopTrendingTopics } from '@/data/api/category'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
@@ -32,8 +32,9 @@ const Page = async () => {
   // Other data fetches
   const latestArticles = await getLatestArticles()
   const storyTellingIslam = await getCategory()
+  const topTrendingTopics = await getTopTrendingTopics()
 
-  console.log(storyTellingIslam,"storytelling")
+  // console.log(topTrendingTopics,"topTrendingTopics444")
 
   // Create specific data for SectionMagazine10
   const magazine10Data = [
@@ -83,7 +84,7 @@ const Page = async () => {
         <SectionSlider
           heading="TRENDING CATEGORIES"
           subHeading="Discover over 100 Popular topics"
-          categories={categories.slice(0, 10)}
+          categories={Array.isArray(topTrendingTopics) ? topTrendingTopics.slice(0, 10) : topTrendingTopics.data?.slice(0, 10) || []}
           categoryCardType="card2"
           config={{
             autoSlide: true,

@@ -12,7 +12,8 @@ interface Props {
 }
 
 const CardCategory2: FC<Props> = ({ className, category, badge }) => {
-  const { count, name, handle, thumbnail, icon } = category
+  const { count, name, categoryName,  handle, thumbnail, icon , featuredImage, featuredIcon, postCount } = category
+  console.log(category,"category432")
   return (
     <div
       className={clsx(
@@ -26,17 +27,17 @@ const CardCategory2: FC<Props> = ({ className, category, badge }) => {
         </Badge>
       )} */}
       <NcImage
-        containerClassName="relative shrink-0 size-10 "
-        src={icon || thumbnail || ''}
+        containerClassName="relative shrink-0 size-12 "
+        src={featuredIcon ||  ''}
         fill
         sizes="80px"
-        alt={name}
+        alt={categoryName || ''}
         className="object-contain w-full h-full"
       />
       <div className="mt-3">
-        <h2 className={`text-base font-semibold`}>{name}</h2>
+        <h2 className={`text-base font-semibold line-clamp-1`}>{categoryName}</h2>
         <Link className="absolute inset-0" href={`/category/${handle}`} />
-        <span className={`mt-1 block text-xs text-[#666666] dark:text-[#DFDFDF]`}>{count} articles</span>
+        <span className={`mt-1 block text-xs text-[#666666] dark:text-[#DFDFDF]`}>{postCount} articles</span>
       </div>
     </div>
   )

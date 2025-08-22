@@ -42,6 +42,8 @@ export async function getCategories() {
         width: 1920,
         height: 1080,
       },
+      categoryName: 'Muhammed',
+      postCount: 13,
       featuredImage: {
         src: _demo_category_image_urls[0],
         alt: 'Muhammed',
