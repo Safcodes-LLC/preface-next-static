@@ -13,7 +13,7 @@ interface Props {
 
 const CardCategory2: FC<Props> = ({ className, category, badge }) => {
   const { count, name, categoryName,  handle, thumbnail, icon , featuredImage, featuredIcon, postCount } = category
-  console.log(category,"category432")
+  // console.log(category,"category432")
   return (
     <div
       className={clsx(
