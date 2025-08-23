@@ -24,24 +24,40 @@ export const metadata: Metadata = {
 }
 
 const Page = async () => {
-  // Get specific data instead of random posts
-  const posts = await getAllPosts()
-  const defaultPosts = await getPostsDefault()
-  const videoPosts = await getPostsVideo()
-  const audioPosts = await getPostsAudio()
-  const galleryPosts = await getPostsGallery()
-  const authors = await getAuthors()
-  const categories = await getCategories()
-
-  // Other data fetches
-  const latestArticles = await getLatestArticles()
-  const storyTellingIslam = await getCategory()
-  const topTrendingTopics = await getTopTrendingTopics()
-  const islamForBeginners = await getIslamForBeginners()
-  const quranSubCategories = await getQuranSubcategories({limit:6});
-  const quranLatestArticles = await getQuranLatestArticles({limit:2});
-  const bannerHighlightedVideos = await getBannerHighlightedVideos();
-  const bannerHighlightedArticles = await getBannerHighlightedArticles();
+  // Get all data in parallel using Promise.all for better performance
+  const [
+    posts,
+    defaultPosts,
+    videoPosts,
+    audioPosts,
+    galleryPosts,
+    authors,
+    categories,
+    latestArticles,
+    storyTellingIslam,
+    topTrendingTopics,
+    islamForBeginners,
+    quranSubCategories,
+    quranLatestArticles,
+    bannerHighlightedVideos,
+    bannerHighlightedArticles
+  ] = await Promise.all([
+    getAllPosts(),
+    getPostsDefault(),
+    getPostsVideo(),
+    getPostsAudio(),
+    getPostsGallery(),
+    getAuthors(),
+    getCategories(),
+    getLatestArticles(),
+    getCategory(),
+    getTopTrendingTopics(),
+    getIslamForBeginners(),
+    getQuranSubcategories({limit:6}),
+    getQuranLatestArticles({limit:2}),
+    getBannerHighlightedVideos(),
+    getBannerHighlightedArticles()
+  ]);
 
   // Extract the actual data arrays from the API responses
   const videoPostsArray = Array.isArray(bannerHighlightedVideos) ? bannerHighlightedVideos : bannerHighlightedVideos?.data || [];
