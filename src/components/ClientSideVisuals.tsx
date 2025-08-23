@@ -8,9 +8,9 @@ import { useLatestVideos } from "@/hooks/api";
 const ClientSideVisuals = () => {
 
     const { data: latestVideos, isLoading, error } = useLatestVideos(8);
-    console.log(latestVideos,"latestVideos");
+    // console.log(latestVideos,"latestVideos");
     const displayPosts = latestVideos?.data || [];
-    console.log(displayPosts);
+    // console.log(displayPosts);
     
   return (
     <div className="mt-28 bg-[#000000] py-16 lg:py-20 dark:bg-[#0D0D0D]">
