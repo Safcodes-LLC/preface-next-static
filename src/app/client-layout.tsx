@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation'
 import { ReactNode } from 'react'
 import ThemeProvider from './theme-provider'
+import QueryProvider from '@/providers/query-provider'
 import { Noto_Serif } from 'next/font/google'
 
 const notoSerif = Noto_Serif({
@@ -24,9 +25,11 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
       <body className={`bg-[#F8F8F8] text-base text-neutral-900 dark:bg-[#000000] dark:text-neutral-200 ${
         isForcedDarkMode ? 'dark' : ''
       }`}>
-        <ThemeProvider forceDarkMode={isForcedDarkMode}>
-          <div>{children}</div>
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider forceDarkMode={isForcedDarkMode}>
+            <div>{children}</div>
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   )

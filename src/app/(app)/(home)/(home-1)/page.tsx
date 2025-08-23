@@ -7,6 +7,8 @@ import SectionSlider from '@/components/SectionSlider'
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
 import SectionTrending from '@/components/SectionTrending'
 import SwipableSliderPosts from '@/components/SwipableSliderPosts'
+import InteractivePostsSection from '@/components/InteractivePostsSection'
+import TestReactQuery from '@/components/TestReactQuery'
 import { getIslamForBeginners, getLatestArticles, getQuranLatestArticles } from '@/data/api/posts'
 import { getCategory, getQuranSubcategories, getTopTrendingTopics } from '@/data/api/category'
 import { getAuthors } from '@/data/authors'
@@ -14,6 +16,7 @@ import { getCategories } from '@/data/categories'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
 import { Metadata } from 'next'
 import { getBannerHighlightedArticles, getBannerHighlightedVideos } from '@/data/api/banner'
+import ClientSideVisuals from '@/components/ClientSideVisuals'
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -105,6 +108,8 @@ const Page = async () => {
       </div>
 
       <div className="relative container space-y-28 lg:space-y-32">
+       
+
         <div className="relative py-16 lg:py-20">
           <BackgroundSection />
           {/* <SectionSliderPosts
@@ -133,6 +138,33 @@ const Page = async () => {
           subHeading="Discover the most outstanding articles in all topics of life"
         />
 
+         {/* React Query Test Component */}
+        {/* <div className="relative py-16 lg:py-20">
+          <BackgroundSection />
+          <div className="container">
+            <TestReactQuery />
+          </div>
+        </div> */}
+
+        {/* Interactive Posts Section with React Query */}
+        {/* <InteractivePostsSection
+          initialPosts={Array.isArray(latestArticles) ? latestArticles.slice(0, 8) : latestArticles.data?.slice(0, 8) || []}
+          initialVideos={Array.isArray(bannerHighlightedVideos) ? bannerHighlightedVideos.slice(0, 8) : bannerHighlightedVideos?.data || []}
+          heading="INTERACTIVE CONTENT"
+          subHeading="Like, bookmark, and interact with posts and videos in real-time using React Query"
+          contentType="mixed"
+          limit={8}
+        /> */}
+
+        {/* Interactive Videos Section - Video Only */}
+        {/* <InteractivePostsSection
+          initialVideos={[]} // We'll use React Query to fetch latest videos
+          heading="INTERACTIVE VIDEOS"
+          subHeading="Like, bookmark, and interact with videos in real-time using React Query"
+          contentType="videos"
+          limit={6}
+        /> */}
+
         {/* Dynamic Category Routing Demo */}
         {/* <div className="relative py-16 lg:py-20">
           <BackgroundSection />
@@ -142,12 +174,13 @@ const Page = async () => {
 
       <div className="mt-28 bg-[#000000] py-16 lg:py-20 dark:bg-[#0D0D0D]">
         <div className="relative container">
-          <SectionMagazine4
+          {/* <SectionMagazine4
             heading="VISUALS"
             subHeading="Hover on the post card and preview video"
             posts={videoPosts.slice(1, 8)}
             headingColor="light"
-          />
+          /> */}
+          <ClientSideVisuals />
         </div>
       </div>
     </div>
