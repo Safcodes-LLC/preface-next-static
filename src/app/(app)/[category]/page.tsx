@@ -69,20 +69,21 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
           image="/images/banner/common-banner.png"
           title={categoryData.data.name || categoryData.data.title}
           alt={`${categoryData.data.name || categoryData.data.title} banner`}
+          description={categoryData.data.subcategories.length ||  ""}
           // className=""
         />
-        <div className="w-full lg:max-w-4xl">
+        <div className="w-full lg:max-w-4xl mt-12">
           <p className="mt-6 text-sm text-[#444444] lg:text-base dark:text-[#DFDFDF]">
             {categoryData.data.description || categoryData.data.meta_description || ""}
           </p>
         </div>
         {/* Horizontal line - matching Figma design */}
-        <hr className="mt-8 w-full border-t border-[#E3E3E3] dark:border-[#2C2C2C]" />
+        <hr className="mt-12 w-full border-t border-[#E3E3E3] dark:border-[#2C2C2C]" />
       </div>
       <div className="container pt-6 lg:pt-10">
         {/* LOOP ITEMS - Use posts from API if available, otherwise fallback to gallery posts */}
         <div className="grid grid-cols-2 gap-6 md:gap-8 lg:grid-cols-3">
-          {(categoryData.data.subcategories.length > 0 ? categoryData.data.subcategories : galleryPosts.slice(0, 8)).map((post, index) => (
+          {(categoryData.data.subcategories.length > 0 ? categoryData.data.subcategories : galleryPosts.slice(0, 8)).map((post: any, index: number) => (
             <Card17 key={post._id || index} post={post} />
           ))}
         </div>
