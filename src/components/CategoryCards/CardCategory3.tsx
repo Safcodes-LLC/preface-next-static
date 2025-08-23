@@ -11,10 +11,12 @@ interface Props {
 
 const CardCategory3: FC<Props> = ({ className = '', category }) => {
   // console.log(category,"category123")
-  const {  name, thumbnail, featuredImage, featuredIcon, subCategory} = category
+  const {  name, thumbnail, featuredImage, slug, featuredIcon, subCategory} = category
+  console.log(category,"category123");
+  
   return (
     <Link
-      href={`/category`}
+      href={`/${slug}`}
       // href={`/category/${handle}`}
       className={`card-category-3 group flex flex-col rounded-[18px] bg-white p-[10px] dark:bg-[#0D0D0D] ${className}`}
     >

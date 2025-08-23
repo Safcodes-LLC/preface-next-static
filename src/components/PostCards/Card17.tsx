@@ -12,8 +12,11 @@ interface Props {
 }
 
 const Card17: FC<Props> = ({ className, post }) => {
-  const { title, handle, featuredImage, postType, icon, date, readingTime } = post
+  const { title, name, handle, featuredIcon, totalArticles, featuredImage, postType, icon, date, readingTime } = post
   const IS_AUDIO = postType === 'audio'
+
+  console.log(post,"post");
+  
 
   return (
     <div
@@ -25,10 +28,10 @@ const Card17: FC<Props> = ({ className, post }) => {
       <div className="relative h-[70px] w-[70px] shrink-0 rounded-full bg-[#F8F8F8] dark:bg-[#1A1A1A]">
         <Image
           sizes="70px"
-          className="rounded-full object-contain p-4"
-          src={icon?.src || '/images/placeholder-image.png'}
+          className="object-contain p-4"
+          src={featuredIcon|| icon?.src || '/images/placeholder-image.png'}
           fill
-          alt={title}
+          alt={name ||title}
         />
         {/* <NcImage
         alt={name}
@@ -44,10 +47,10 @@ const Card17: FC<Props> = ({ className, post }) => {
       </div>
       <div className="flex flex-col">
         <h2 className="block text-base font-medium text-[#000000] dark:text-white">
-          <span className="line-clamp-1">{title}</span>
+          <span className="line-clamp-1">{name || title}</span>
         </h2>
         <div className="mt-1">
-          <span className="text-[12px] font-[400] text-neutral-500 dark:text-neutral-400">120 Articles</span>
+          <span className="text-[12px] font-[400] text-neutral-500 dark:text-neutral-400">{totalArticles} Articles</span>
         </div>
       </div>
 

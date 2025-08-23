@@ -2310,9 +2310,11 @@ export type TPost = Awaited<ReturnType<typeof getAllPosts>>[number] & {
   postType?: any
   videoUrl?: string
   videoFile?: string
-  video_file?: string  // Add this to match API response
+  video_file?: string 
+  featuredIcon?: string
   galleryImgs?: string[]
   totalArticles?: number
+  articleCount?: number
 }
 export type TPostDetail = Awaited<ReturnType<typeof getPostByHandle>>
 export type TComment = Awaited<ReturnType<typeof getCommentsByPostId>>[number]

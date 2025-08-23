@@ -1,43 +1,60 @@
 import Banner from '@/components/Banner'
 import Card17 from '@/components/PostCards/Card17'
 import SectionSliderPosts from '@/components/SectionSliderPosts'
-import { getCategories, getCategoryByHandle } from '@/data/categories'
+import { serverFetch } from '@/lib/server/api'
 import { getPostsDefault, getPostsGallery } from '@/data/posts'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-// Generate static params for all categories
-export async function generateStaticParams() {
-  const categories = await getCategories()
-
-  return categories.map((category) => ({
-    category: category.handle,
-  }))
-}
+// Remove generateStaticParams to enable dynamic routing
 
 export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
   const { category } = await params
-  const categoryData = await getCategoryByHandle(category)
-
-  if (!categoryData) {
-    return {
-      title: 'Category not found',
-      description: 'Category not found',
+  
+  try {
+    const categoryData = await serverFetch.get(`/api/frontend/category/slug/${category}`)
+    
+    if (!categoryData) {
+      return {
+        title: 'Category not found',
+        description: 'Category not found',
+      }
     }
-  }
 
-  return {
-    title: categoryData?.name,
-    description: categoryData?.description,
+    return {
+      title: categoryData?.name || categoryData?.title,
+      description: categoryData?.description || categoryData?.meta_description,
+    }
+  } catch (error) {
+    console.error('Error fetching category metadata:', error)
+    return {
+      title: 'Category',
+      description: 'Category page',
+    }
   }
 }
 
 const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
   const { category } = await params
-  const categoryData = await getCategoryByHandle(category)
-  const posts = categoryData?.posts || []
+  
+  let categoryData: any = null
+  let posts: any[] = []
 
-  if (!categoryData) {
+  try {
+    // Fetch category data from API
+    categoryData = await serverFetch.get(`/api/frontend/category/slug/${category}`)
+    console.log(categoryData?.data,"categoryData");
+    
+    if (!categoryData) {
+      return notFound()
+    }
+
+    // If the API returns posts within the category data, use them
+    if (categoryData.posts && Array.isArray(categoryData.posts)) {
+      posts = categoryData.posts
+    }
+  } catch (error) {
+    console.error('Error fetching category data:', error)
     return notFound()
   }
 
@@ -50,26 +67,23 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
       <div className="container mx-auto mt-12 sm:mt-20">
         <Banner
           image="/images/banner/common-banner.png"
-          title={categoryData.name}
-          alt={`${categoryData.name} banner`}
+          title={categoryData.data.name || categoryData.data.title}
+          alt={`${categoryData.data.name || categoryData.data.title} banner`}
           // className=""
         />
         <div className="w-full lg:max-w-4xl">
           <p className="mt-6 text-sm text-[#444444] lg:text-base dark:text-[#DFDFDF]">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea, dolore error aperiam fugiat accusamus
-            voluptates quasi quod consectetur cupiditate suscipit praesentium inventore ab similique saepe placeat,
-            minima aliquid facilis nobis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam illo modi
-            nostrum esse
+            {categoryData.data.description || categoryData.data.meta_description || ""}
           </p>
         </div>
         {/* Horizontal line - matching Figma design */}
         <hr className="mt-8 w-full border-t border-[#E3E3E3] dark:border-[#2C2C2C]" />
       </div>
       <div className="container pt-6 lg:pt-10">
-        {/* LOOP ITEMS */}
+        {/* LOOP ITEMS - Use posts from API if available, otherwise fallback to gallery posts */}
         <div className="grid grid-cols-2 gap-6 md:gap-8 lg:grid-cols-3">
-          {galleryPosts.slice(0, 8).map((post, index) => (
-            <Card17 key={post.id} post={post} />
+          {(categoryData.data.subcategories.length > 0 ? categoryData.data.subcategories : galleryPosts.slice(0, 8)).map((post, index) => (
+            <Card17 key={post._id || index} post={post} />
           ))}
         </div>
       </div>
