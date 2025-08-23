@@ -15,7 +15,6 @@ interface Props {
 
 const Card17Podcast: FC<Props> = ({ className, post }) => {
   const { title, name, handle, thumbnail, featuredImage, postType, date, readingTime, totalArticles } = post
-  console.log(post, "subcategry");
   
   const IS_AUDIO = postType === 'audio'
 
