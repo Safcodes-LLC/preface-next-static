@@ -2309,6 +2309,8 @@ export type TPost = Awaited<ReturnType<typeof getAllPosts>>[number] & {
   audioUrl?: string
   postType?: any
   videoUrl?: string
+  videoFile?: string
+  video_file?: string  // Add this to match API response
   galleryImgs?: string[]
   totalArticles?: number
 }

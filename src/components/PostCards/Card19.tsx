@@ -12,7 +12,7 @@ interface Props {
   className?: string
   ratio?: string
   titleClass?: string
-  post: TPost
+  post?: TPost | any
   verticalLine?: boolean
   textCenter?: boolean
   autoPlay?: boolean
@@ -33,9 +33,9 @@ const Card19: FC<Props> = ({
   return (
     <div className={clsx('group post-card-19 relative flex flex-col overflow-hidden rounded-xl', className)}>
       <div className={clsx('relative size-full', ratio)}>
-        {postType === 'video' ? (
+        {postType?.name === 'Video' ? (
           <PostFeaturedMedia post={post} autoPlay={autoPlay} />
-        ) : postType === 'audio' ? (
+        ) : postType?.name === 'Podcast' ? (
           <PostFeaturedMedia post={post} />
         ) : (
           <>

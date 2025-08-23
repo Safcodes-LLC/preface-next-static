@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
+import PostTypeFeaturedIcon from '../PostTypeFeaturedIcon'
 
 interface Props {
   className?: string

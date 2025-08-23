@@ -16,7 +16,10 @@ interface Props {
 }
 
 const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPlay = false }) => {
-  const { featuredImage, thumbnail, postType, videoUrl, galleryImgs, audioUrl, handle, title } = post
+  const { featuredImage, thumbnail, postType, videoFile, videoUrl, video_file, galleryImgs, audioUrl, handle, title } = post
+
+  // Use video_file as primary, then videoFile, then videoUrl as fallbacks
+  const videoSource = video_file || videoFile || videoUrl;
 
   const renderPostGallery = () => {
     if (!galleryImgs) {
@@ -27,7 +30,7 @@ const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPl
   }
 
   const renderPostVideo = () => {
-    if (!videoUrl) {
+    if (!videoSource) {
       return (
         <>
           {renderImage()}
@@ -48,7 +51,7 @@ const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPl
             postType={postType}
           />
         )}
-        <MediaVideo isHover={isHover} videoUrl={videoUrl} handle={handle} autoPlay={autoPlay} />
+        <MediaVideo isHover={isHover} videoUrl={videoSource} handle={handle} autoPlay={autoPlay} />
       </>
     )
   }
@@ -81,10 +84,10 @@ const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPl
 
   return (
     <div className={clsx('relative size-full overflow-hidden', className)}>
-      {postType === 'gallery' && renderPostGallery()}
-      {postType === 'video' && renderPostVideo()}
-      {postType === 'audio' && renderPostAudio()}
-      {postType !== 'audio' && postType !== 'video' && postType !== 'gallery' && renderImage()}
+      {postType?.name === 'Gallery' && renderPostGallery()}
+      {postType?.name === 'Video' && renderPostVideo()}
+      {postType?.name === 'Podcast' && renderPostAudio()}
+      {postType?.name !== 'Podcast' && postType?.name !== 'Video' && postType?.name !== 'Gallery' && renderImage()}
     </div>
   )
 }

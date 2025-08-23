@@ -40,8 +40,9 @@ const Page = async () => {
   const bannerHighlightedVideos = await getBannerHighlightedVideos();
   const bannerHighlightedArticles = await getBannerHighlightedArticles();
 
-
-  console.log(bannerHighlightedArticles,"bannerHighlightedArticles")
+  // Extract the actual data arrays from the API responses
+  const videoPostsArray = Array.isArray(bannerHighlightedVideos) ? bannerHighlightedVideos : bannerHighlightedVideos?.data || [];
+  const articlesArray = Array.isArray(bannerHighlightedArticles) ? bannerHighlightedArticles : bannerHighlightedArticles?.data || [];
 
   // Create specific data for SectionMagazine10
   const magazine10Data = [
@@ -66,7 +67,7 @@ const Page = async () => {
       {/* <VideoHeroBanner /> */}
       {/* </div> */}
       {/* Parallax Scroll Section - VideoHeroBanner + SectionMagazine10 */}
-      <ParallaxScrollSection magazine10Data={bannerHighlightedArticles} />
+      <ParallaxScrollSection magazine10Data={articlesArray} videoPosts={videoPostsArray}/>
       <div className="relative container mt-28 space-y-28 lg:space-y-40">
         {/* <SectionMagazine10 posts={magazine10Data} /> */}
 

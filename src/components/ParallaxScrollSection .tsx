@@ -7,9 +7,11 @@ import SectionMagazine10 from '@/components/SectionMagazine10'
 
 interface ParallaxScrollSectionProps {
   magazine10Data: any // Replace with your actual post type
+  videoPosts: any // Replace with your actual post type
 }
 
-export default function ParallaxScrollSection({ magazine10Data }: ParallaxScrollSectionProps) {
+export default function ParallaxScrollSection({ magazine10Data, videoPosts }: ParallaxScrollSectionProps) {
+  
   // Create a ref for the entire scroll container
   const containerRef = useRef<HTMLDivElement>(null)
   
@@ -99,7 +101,7 @@ export default function ParallaxScrollSection({ magazine10Data }: ParallaxScroll
           }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <SectionMagazine10 posts={magazine10Data} />
+          <SectionMagazine10 posts={magazine10Data} videoPosts={videoPosts}/>
         </motion.div>
       </motion.div>
 
