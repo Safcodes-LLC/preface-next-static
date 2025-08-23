@@ -43,7 +43,7 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
   try {
     // Fetch category data from API
     categoryData = await serverFetch.get(`/api/frontend/category/slug/${category}`)
-    console.log(categoryData?.data,"categoryData");
+    // console.log(categoryData?.data,"categoryData");
     
     if (!categoryData) {
       return notFound()
