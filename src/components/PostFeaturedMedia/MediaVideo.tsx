@@ -12,9 +12,10 @@ interface Props {
   isHover: boolean
   handle: string
   autoPlay?: boolean
+  onStart?: () => void
 }
 
-const MediaVideo: FC<Props> = ({ videoUrl, isHover, handle, autoPlay = false }) => {
+const MediaVideo: FC<Props> = ({ videoUrl, isHover, handle, autoPlay = false, onStart }) => {
   const [isMuted, setIsMuted] = useState(true)
   const [showDescUnmuted, setShowDescUnmuted] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -79,6 +80,7 @@ const MediaVideo: FC<Props> = ({ videoUrl, isHover, handle, autoPlay = false }) 
           onStart={() => {
             setIsPlaying(true)
             setShowLoading(false) // Hide loading when video starts
+            onStart?.() // Call the onStart callback if provided
             __timeOut && clearTimeout(__timeOut)
             __timeOut = setTimeout(() => {
               setShowDescUnmuted(false)

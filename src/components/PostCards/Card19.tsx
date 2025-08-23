@@ -1,4 +1,5 @@
 import PostFeaturedMedia from '@/components/PostFeaturedMedia/PostFeaturedMedia'
+import VideoHoverPlayer from '@/components/PostFeaturedMedia/VideoHoverPlayer'
 import { TPost } from '@/data/posts'
 import ButtonPrimary from '@/shared/ButtonPrimary'
 import clsx from 'clsx'
@@ -15,7 +16,6 @@ interface Props {
   post?: TPost | any
   verticalLine?: boolean
   textCenter?: boolean
-  autoPlay?: boolean
 }
 
 const Card19: FC<Props> = ({
@@ -25,7 +25,6 @@ const Card19: FC<Props> = ({
   post,
   verticalLine = false,
   textCenter = false,
-  autoPlay = false,
 }) => {
   const { title, excerpt, handle, thumbnail, featuredImage, categories, postType, likeCount, liked, commentCount, bookmarked } =
     post
@@ -34,7 +33,7 @@ const Card19: FC<Props> = ({
     <div className={clsx('group post-card-19 relative flex flex-col overflow-hidden rounded-xl', className)}>
       <div className={clsx('relative size-full', ratio)}>
         {postType?.name === 'Video' ? (
-          <PostFeaturedMedia post={post} autoPlay={autoPlay} />
+          <VideoHoverPlayer post={post} />
         ) : postType?.name === 'Podcast' ? (
           <PostFeaturedMedia post={post} />
         ) : (
