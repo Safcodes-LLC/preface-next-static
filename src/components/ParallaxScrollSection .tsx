@@ -6,7 +6,7 @@ import VideoHeroBanner from '@/components/VideoHeroBanner'
 import SectionMagazine10 from '@/components/SectionMagazine10'
 
 interface ParallaxScrollSectionProps {
-  magazine10Data: any[] // Replace with your actual post type
+  magazine10Data: any // Replace with your actual post type
 }
 
 export default function ParallaxScrollSection({ magazine10Data }: ParallaxScrollSectionProps) {

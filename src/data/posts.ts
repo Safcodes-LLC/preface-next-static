@@ -2307,6 +2307,7 @@ export async function getCommentsByPostId(postId: string) {
 // Types
 export type TPost = Awaited<ReturnType<typeof getAllPosts>>[number] & {
   audioUrl?: string
+  postType?: any
   videoUrl?: string
   galleryImgs?: string[]
   totalArticles?: number

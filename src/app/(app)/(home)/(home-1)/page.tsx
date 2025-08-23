@@ -13,6 +13,7 @@ import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
 import { Metadata } from 'next'
+import { getBannerHighlightedArticles, getBannerHighlightedVideos } from '@/data/api/banner'
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -36,9 +37,11 @@ const Page = async () => {
   const islamForBeginners = await getIslamForBeginners()
   const quranSubCategories = await getQuranSubcategories({limit:6});
   const quranLatestArticles = await getQuranLatestArticles({limit:2});
+  const bannerHighlightedVideos = await getBannerHighlightedVideos();
+  const bannerHighlightedArticles = await getBannerHighlightedArticles();
 
 
-  console.log(quranLatestArticles,"quranLatestArticles")
+  console.log(bannerHighlightedArticles,"bannerHighlightedArticles")
 
   // Create specific data for SectionMagazine10
   const magazine10Data = [
@@ -63,7 +66,7 @@ const Page = async () => {
       {/* <VideoHeroBanner /> */}
       {/* </div> */}
       {/* Parallax Scroll Section - VideoHeroBanner + SectionMagazine10 */}
-      <ParallaxScrollSection magazine10Data={magazine10Data} />
+      <ParallaxScrollSection magazine10Data={bannerHighlightedArticles} />
       <div className="relative container mt-28 space-y-28 lg:space-y-40">
         {/* <SectionMagazine10 posts={magazine10Data} /> */}
 

@@ -27,7 +27,7 @@ const Card19: FC<Props> = ({
   textCenter = false,
   autoPlay = false,
 }) => {
-  const { title, excerpt, handle, featuredImage, categories, postType, likeCount, liked, commentCount, bookmarked } =
+  const { title, excerpt, handle, thumbnail, featuredImage, categories, postType, likeCount, liked, commentCount, bookmarked } =
     post
 
   return (
@@ -42,17 +42,17 @@ const Card19: FC<Props> = ({
             <Image
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="rounded-xl object-cover brightness-85 transition-[filter] duration-300 group-hover:brightness-60"
-              src={featuredImage}
+              src={thumbnail || featuredImage}
               alt={title}
               priority
               fill
             />
-            <PostTypeFeaturedIcon
+            {/* <PostTypeFeaturedIcon
               className="absolute end-4 top-4 group-hover:hidden"
               postType={postType}
               wrapSize="size-7"
               iconSize="size-4"
-            />
+            /> */}
             <Link href={`/post/${handle}`} className="absolute inset-0"></Link>
           </>
         )}

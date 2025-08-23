@@ -16,13 +16,13 @@ interface Props {
 }
 
 const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post }) => {
-  const { title, excerpt, handle, featuredImage, categories, postType, likeCount, liked, commentCount, bookmarked } =
+  const { title, excerpt, handle, thumbnail, featuredImage, categories, postType, likeCount, liked, commentCount, bookmarked } =
     post
-
+console.log(post,"post check in card18")
   return (
     <div className={clsx('group post-card-18 relative flex flex-col overflow-hidden rounded-xl', className)}>
       <div className={clsx('relative size-full', ratio)}>
-        {postType === 'audio' ? (
+        {postType?.name === 'Podcast' ? (
           <PostFeaturedMedia post={post} />
         ) : (
           <>
@@ -30,16 +30,16 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
               sizes="(max-width: 1024px) 100vw, 33vw"
               alt={title}
               className="size-full rounded-xl object-cover brightness-85 transition-[filter] duration-300 group-hover:brightness-60"
-              src={featuredImage}
+              src={thumbnail || featuredImage}
               priority
               fill
             />
-            <PostTypeFeaturedIcon
+            {/* <PostTypeFeaturedIcon
               className="absolute end-3.5 top-3.5 group-hover:hidden"
               postType={postType}
               wrapSize="size-7"
               iconSize="size-4"
-            />
+            /> */}
             <Link href={`/post/${handle}`} className="absolute inset-0"></Link>
           </>
         )}
