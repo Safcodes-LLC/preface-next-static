@@ -94,8 +94,8 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
           {/* <BackgroundSection /> */}
           <SectionSliderPosts
             postCardName="card10V5"
-            heading="POPULAR ARTICLES FROM MOHAMMED ﷺ"
-            subHeading="Over 10 Articles"
+            heading={`POPULAR ARTICLES FROM ${categoryData.data.name}`}
+            // subHeading="Over 10 Articles"
             posts={defaultPosts.slice(0, 6)}
           />
         </div>
