@@ -31,7 +31,10 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
     commentCount,
     bookmarked,
     readingTime,
+    slug
   } = post
+
+  console.log(post, 'post ')
 
   return (
     <div className={clsx('group post-card-16-podcast relative flex flex-col pb-6', className)}>
@@ -97,12 +100,15 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
             <PostCardLikeBtn likeCount={likeCount} liked={liked} />
             {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
             <PostCardSaveBtn className="" bookmarked={bookmarked} />
-            <div className="border-[#E2E2E2]transition-transform ms-auto flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border duration-200 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]">
+            <Link
+              href={`/${category?.parentCategory?.slug}/${category.slug}/${slug}`}
+              className="border-[#E2E2E2]transition-transform ms-auto flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border duration-200 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]"
+            >
               <ArrowRightIcon
                 strokeWidth={3}
                 className="h-3 w-3 text-[#C2C2C2] transition-colors duration-200 rtl:rotate-180 dark:text-[#707070]"
               />
-            </div>
+            </Link>
           </div>
         </div>
       </div>
