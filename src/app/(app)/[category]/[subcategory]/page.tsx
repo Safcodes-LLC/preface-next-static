@@ -98,17 +98,20 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string }> }) =>
         </div>
 
         <div className="pt-6 lg:pt-10">
-          {listPost.length > 0 ? (
+          {listPost.filter((p) => p.postType?.name === "Article").length > 0 ? (
             <>
               <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
-                {listPost.slice(0, 8).map((p) => (
-                  <Card16Podcast key={p._id} post={p} />
-                ))}
+                {listPost
+                  .filter((p) => p.postType?.name === "Article")
+                  .slice(0, 8)
+                  .map((p) => (
+                    <Card16Podcast key={p._id} post={p} />
+                  ))}
               </div>
             </>
           ) : (
             <div className="py-12 text-center">
-              <p className="text-gray-500">No posts found in this category.</p>
+              <p className="text-gray-500">No articles found in this category.</p>
             </div>
           )}
         </div>
