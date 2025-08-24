@@ -3,11 +3,13 @@ import { TPost } from '@/data/posts'
 import { FC } from 'react'
 
 interface Props {
-  relatedPosts: TPost[]
+  relatedPosts?: any
   moreFromAuthorPosts: TPost[]
 }
 
 const SingleRelatedPosts: FC<Props> = ({ relatedPosts, moreFromAuthorPosts }) => {
+  
+  
   return (
     <div className="relative mt-16 bg-neutral-50 py-16 lg:mt-28 lg:py-24 dark:bg-neutral-800">
       {/* RELATED  */}

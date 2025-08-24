@@ -9,7 +9,7 @@ import { notFound } from 'next/navigation'
 import SingleContentContainer from '../../../post/SingleContentContainer'
 import SingleHeaderContainer from '../../../post/SingleHeaderContainer'
 import SingleRelatedPosts from '../../../post/SingleRelatedPosts'
-import { getPostBySlug } from '@/data/api/posts'
+import { getPostBySlug, getSubcategoryPosts } from '@/data/api/posts'
 
 
 export async function generateMetadata({
@@ -37,14 +37,24 @@ export async function generateMetadata({
 const Page = async ({ 
   params 
 }: { 
-  params: Promise<{ category: string; subcategory: string; article: string }> 
+  params: Promise<{ article: string }> 
 }) => {
   // Await the params before using them
   const { article } = await params
   
+  
   const post = await getPostBySlug(article)
 
+
+  const subcategoryPosts = await getSubcategoryPosts(post?.categories[0]?.slug)
+
+  // Filter posts to only include those with postType.name === "Article"
+  const filteredSubcategoryPosts = subcategoryPosts?.list?.filter(post => post.postType?.name === "Article") || []
+
   console.log(post,"post");
+
+  
+  console.log(subcategoryPosts,"subcategoryPosts");
   
   
   // If article not found, return 404 early
@@ -76,13 +86,13 @@ const Page = async ({
           <div className="space-y-7 lg:sticky lg:top-7">
             {/* <WidgetAuthors authors={widgetAuthors} />
             <WidgetTags tags={widgetTags} /> */}
-            <WidgetCategories categories={widgetCategories} />
+            <WidgetCategories categories={filteredSubcategoryPosts} />
             <WidgetPosts posts={widgetPosts} />
           </div>
         </div>
       </div>
 
-      <SingleRelatedPosts relatedPosts={relatedPosts} moreFromAuthorPosts={moreFromAuthorPosts} />
+      <SingleRelatedPosts  moreFromAuthorPosts={moreFromAuthorPosts} />
     </div>
   )
 }

@@ -12,6 +12,9 @@ interface Props {
 
 const WidgetCategories: FC<Props> = ({ className = 'bg-white dark:bg-[#0D0D0D]', categories }) => {
   const shouldScroll = categories && categories.length > 6
+
+  console.log(categories,"catgeories");
+  
   
   return (
     <div className={clsx('widget-categories overflow-hidden rounded-3xl', className)}>
@@ -23,11 +26,12 @@ const WidgetCategories: FC<Props> = ({ className = 'bg-white dark:bg-[#0D0D0D]',
           ? 'overflow-y-auto max-h-[70vh] md:max-h-[90vh] pb-4 grid grid-cols-2' 
           : 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2'
         )}>
-          {categories?.map((category:any) => (
+          {categories?.map((category:any, index: number) => (
             <CardArticle1
-              key={category.id}
+              key={category._id}
               article={category}
               className="p-4"
+              index={index}
             />
           ))}
         </div>

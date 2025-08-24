@@ -14,9 +14,10 @@ interface Article {
 interface Props {
   className?: string
   article: Article
+  index?: number
 }
 
-const CardArticle1: FC<Props> = ({ className, article }) => {
+const CardArticle1: FC<Props> = ({ className, article, index }) => {
   const { title, handle, thumbnail, category } = article
 
   return (
@@ -46,13 +47,15 @@ const CardArticle1: FC<Props> = ({ className, article }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#2F2F2F] via-[#61616100] to-transparent opacity-100 transition-all duration-300 group-hover:from-[#2F2F2F] group-hover:via-[#616161aa] group-hover:to-[#61616166]"></div>
 
         {/* Article Number Badge */}
-        <div className="absolute bottom-3 left-1 px-2 py-1 text-xs font-medium text-white">Article 1</div>
+        <div className="absolute bottom-3 left-1 px-2 py-1 text-xs font-medium text-white">
+          {index !== undefined ? `Article ${index + 1}` : 'Article'}
+        </div>
       </div>
 
       <div>
         <h2 className={clsx('nc-card-title text-sm font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2')}>
           {/* {name} */}
-          How to Pray that cleanse your body
+         {title}
         </h2>
       </div>
     </Link>
