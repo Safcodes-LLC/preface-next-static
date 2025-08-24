@@ -81,7 +81,7 @@ const SectionSliderPosts: FC<Props> = ({
 
       <div className="embla" ref={emblaRef}>
         <div className="-ms-5 embla__container sm:-ms-7">
-          {posts.map((post, index) => (
+          {posts?.map((post, index) => (
             <div key={post._id} className="embla__slide basis-[86%] ps-5 sm:ps-7 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
               {renderCard(post, index)}
             </div>
