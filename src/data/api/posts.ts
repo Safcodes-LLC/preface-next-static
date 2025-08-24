@@ -40,3 +40,42 @@ export const getQuranLatestArticles = async (options?: { limit?: number }) => {
   }
 };
 
+// Dynamic subcategory posts
+// /api/frontend/list-posts?categorySlug=life-and-message&page=1&limit=100&lang=en
+export const getSubcategoryPosts = async (categorySlug: string, options?: { 
+  page?: number; 
+  limit?: number; 
+}) => {
+  try {
+    const response = await serverFetch.get<{ 
+      data: {
+        categories: Array<{
+          name: string;
+          slug: string;
+          shortDescription: string;
+          featuredImage: string;
+          featuredIcon: string;
+          isTrending: boolean;
+          language: { name: string; code: string };
+          parentCategory: { name: string };
+        }>;
+        list: any[];
+        pageMeta: {
+          size: number;
+          page: number;
+          total: number;
+          totalPages: number;
+        };
+      }
+    }>(`/api/frontend/list-posts?categorySlug=${categorySlug}`, {
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      page: options?.page || 1,
+      limit: options?.limit || 100
+    });
+    return response?.data || { categories: [], list: [], pageMeta: { size: 0, page: 1, total: 0, totalPages: 0 } };
+  } catch (error) {
+    console.error(`Failed to fetch posts for subcategory: ${categorySlug}`, error);
+    return { categories: [], list: [], pageMeta: { size: 0, page: 1, total: 0, totalPages: 0 } };
+  }
+};
+

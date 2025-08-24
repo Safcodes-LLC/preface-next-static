@@ -5,18 +5,8 @@ import Card16Podcast from '@/components/PostCards/Card16Podcast'
 import SectionSliderPosts from '@/components/SectionSliderPosts'
 import { getCategories, getTags } from '@/data/categories'
 import { getAllPosts, getPostsDefault } from '@/data/posts'
+import { getSubcategoryPosts } from '@/data/api/posts'
 import { Metadata } from 'next'
-
-// Generate static params for all subcategories
-export async function generateStaticParams() {
-  // This should return all possible [category]/[subcategory] pairs
-  // For now, we'll return some example subcategories
-  return [
-    { category: 'muhammed', subcategory: 'life-and-message' },
-    { category: 'islam-for-beginners', subcategory: 'common-questions' },
-    // Add more as needed
-  ]
-}
 
 export async function generateMetadata({
   params,
@@ -41,10 +31,16 @@ export async function generateMetadata({
 const Page = async ({ 
   params 
 }: { 
-  params: Promise<{ category: string; subcategory: string }> 
+  params: Promise<{ subcategory: string }> 
 }) => {
   // Await the params before using them
-  const { category, subcategory } = await params
+  const { subcategory } = await params
+  
+  // Call getSubcategoryPosts and log the results
+  const subcategoryPosts = await getSubcategoryPosts(subcategory)
+  console.log('getSubcategoryPosts result:', subcategoryPosts)
+
+ 
   
   // Get all posts and filter by subcategory
   const allPosts = await getAllPosts()
@@ -58,9 +54,6 @@ const Page = async ({
     // post.tags?.forEach((tag: any) => allTags.add(tag.handle.toLowerCase()))
   })
 
-  console.log('Available categories:', Array.from(allCategories))
-  console.log('Available tags:', Array.from(allTags))
-  console.log('Current subcategory:', subcategory.toLowerCase())
 
   // If no matching subcategory found, show all posts for now
   const posts = allPosts.filter((post: any) => {
@@ -74,11 +67,8 @@ const Page = async ({
   })
 
   // Format subcategory name for display
-  const subcategoryName = subcategory
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
-
+  const subcategoryName = subcategoryPosts?.categories?.[0]?.name
+const lengthTopics = subcategoryPosts?.list?.length
   const categories = await getCategories()
   const defaultPosts = await getPostsDefault()
   const tags = await getTags()
@@ -98,6 +88,7 @@ const Page = async ({
           image="/images/banner/common-banner.png"
           title={subcategoryName}
           alt={`${subcategoryName} banner`}
+          description={`${lengthTopics}`}
           // className=""
         />
       </div>

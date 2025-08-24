@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 interface BannerProps {
   image: string
-  title: string
+  title?: any
   alt?: string
   className?: string
   description?: string

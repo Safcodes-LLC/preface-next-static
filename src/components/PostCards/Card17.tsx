@@ -4,6 +4,7 @@ import { TPost } from '@/data/posts'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Image from 'next/image'
+import Link from 'next/link'
 import { FC } from 'react'
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
 }
 
 const Card17: FC<Props> = ({ className, post }) => {
-  const { title, name, handle, featuredIcon, totalArticles, featuredImage, postType, icon, date, readingTime } = post
+  const { title, name, handle, parentCategory, slug, featuredIcon, totalArticles, featuredImage, postType, icon, date, readingTime } = post
   const IS_AUDIO = postType === 'audio'
 
   console.log(post,"post");
@@ -56,9 +57,12 @@ const Card17: FC<Props> = ({ className, post }) => {
 
       {/* Arrow button on the far right */}
       <div className="flex shrink-0 items-center">
-        <div className="inline-flex cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] bg-white p-1.5 dark:border-[#505050] dark:bg-[#0D0D0D]">
+      <Link
+          href={`/${parentCategory?.slug}/${slug}`}
+          className="inline-flex cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] bg-white p-1.5 dark:border-[#505050] dark:bg-[#0D0D0D]"
+        >
           <ArrowRightIcon className="h-3 w-3 text-[#919191] rtl:rotate-180 dark:text-[#707070]" />
-        </div>
+        </Link>
       </div>
     </div>
   )

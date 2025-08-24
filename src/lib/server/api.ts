@@ -5,6 +5,7 @@ interface ApiOptions {
   requiresAuth?: boolean;
   headers?: Record<string, string>;
   limit?: number;  // Add limit to the options
+  page?: number;   // Add page to the options
   next?: {
     revalidate?: number | false;
     tags?: string[];
@@ -16,7 +17,7 @@ export const serverFetch = {
     url: string,
     options: ApiOptions = {}
   ): Promise<T> => {
-    const { requiresAuth = false, headers = {}, next, limit } = options;
+    const { requiresAuth = false, headers = {}, next, limit, page } = options;
     const language = 'en'; // Get from cookies/headers in server components
 
     // Build query parameters
@@ -26,6 +27,11 @@ export const serverFetch = {
     // Add limit if provided
     if (limit) {
       params.append('limit', limit.toString());
+    }
+
+    // Add page if provided
+    if (page) {
+      params.append('page', page.toString());
     }
 
     // Handle URL with query parameters
