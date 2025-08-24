@@ -33,18 +33,15 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
     readingTime,
   } = post
 
-  console.log(post, "postc check card16");
-  
-
   return (
     <div className={clsx('group post-card-16-podcast relative flex flex-col pb-6', className)}>
       <div className={`relative w-full shrink-0 ${ratio}`}>
         {(thumbnail || featuredImage) && (
           <Image
             fill
-            alt={title || ""}
+            alt={title || ''}
             sizes="(max-width: 1024px) 100vw, 50vw"
-            src={thumbnail || featuredImage || ""}
+            src={thumbnail || featuredImage || ''}
             className="rounded-3xl object-cover brightness-100 transition-[filter] duration-300 group-hover:brightness-75"
           />
         )}
@@ -52,7 +49,12 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
           <div className="absolute inset-0 flex items-center justify-center rounded-3xl bg-gray-200 dark:bg-gray-800">
             <div className="text-center text-gray-500 dark:text-gray-400">
               <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
               </svg>
               <p className="mt-2 text-sm">No image available</p>
             </div>
@@ -95,7 +97,7 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
             <PostCardLikeBtn likeCount={likeCount} liked={liked} />
             {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
             <PostCardSaveBtn className="" bookmarked={bookmarked} />
-            <div className="border-[#E2E2E2]transition-transform ms-auto flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border duration-200  hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]">
+            <div className="border-[#E2E2E2]transition-transform ms-auto flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border duration-200 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]">
               <ArrowRightIcon
                 strokeWidth={3}
                 className="h-3 w-3 text-[#C2C2C2] transition-colors duration-200 rtl:rotate-180 dark:text-[#707070]"
