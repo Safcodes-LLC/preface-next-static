@@ -2317,6 +2317,7 @@ export type TPost = Awaited<ReturnType<typeof getAllPosts>>[number] & {
   articleCount?: number
   parentCategory?: any
   slug?: string
+  category?: any
 }
 export type TPostDetail = Awaited<ReturnType<typeof getPostByHandle>>
 export type TComment = Awaited<ReturnType<typeof getCommentsByPostId>>[number]

@@ -3,9 +3,9 @@ import Banner from '@/components/Banner'
 import ModalCategories from '@/components/ModalCategories'
 import Card16Podcast from '@/components/PostCards/Card16Podcast'
 import SectionSliderPosts from '@/components/SectionSliderPosts'
+import { getSubcategoryPosts } from '@/data/api/posts'
 import { getCategories, getTags } from '@/data/categories'
 import { getAllPosts, getPostsDefault } from '@/data/posts'
-import { getSubcategoryPosts } from '@/data/api/posts'
 import { Metadata } from 'next'
 
 export async function generateMetadata({
@@ -15,7 +15,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   // Await the params before using them
   const { subcategory } = await params
-  
+
   // Format subcategory name for display
   const subcategoryName = subcategory
     .split('-')
@@ -28,20 +28,14 @@ export async function generateMetadata({
   }
 }
 
-const Page = async ({ 
-  params 
-}: { 
-  params: Promise<{ subcategory: string }> 
-}) => {
+const Page = async ({ params }: { params: Promise<{ subcategory: string }> }) => {
   // Await the params before using them
   const { subcategory } = await params
-  
+
   // Call getSubcategoryPosts and log the results
   const subcategoryPosts = await getSubcategoryPosts(subcategory)
   console.log('getSubcategoryPosts result:', subcategoryPosts)
 
- 
-  
   // Get all posts and filter by subcategory
   const allPosts = await getAllPosts()
 
@@ -53,7 +47,6 @@ const Page = async ({
     post.categories?.forEach((cat: any) => allCategories.add(cat.handle.toLowerCase()))
     // post.tags?.forEach((tag: any) => allTags.add(tag.handle.toLowerCase()))
   })
-
 
   // If no matching subcategory found, show all posts for now
   const posts = allPosts.filter((post: any) => {
@@ -68,7 +61,9 @@ const Page = async ({
 
   // Format subcategory name for display
   const subcategoryName = subcategoryPosts?.categories?.[0]?.name
-const lengthTopics = subcategoryPosts?.list?.length
+  const lengthTopics = subcategoryPosts?.list?.length
+  const listPost = subcategoryPosts?.list
+
   const categories = await getCategories()
   const defaultPosts = await getPostsDefault()
   const tags = await getTags()
@@ -103,11 +98,11 @@ const lengthTopics = subcategoryPosts?.list?.length
         </div>
 
         <div className="pt-6 lg:pt-10">
-          {posts.length > 0 ? (
+          {listPost.length > 0 ? (
             <>
               <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
-                {posts.slice(0, 8).map((p) => (
-                  <Card16Podcast key={p.id} post={p} />
+                {listPost.slice(0, 8).map((p) => (
+                  <Card16Podcast key={p._id} post={p} />
                 ))}
               </div>
             </>
