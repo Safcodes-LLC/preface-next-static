@@ -92,7 +92,7 @@ const Page = async ({
         </div>
       </div>
 
-      <SingleRelatedPosts  moreFromAuthorPosts={moreFromAuthorPosts} />
+      <SingleRelatedPosts relatedPosts={relatedPosts}  moreFromAuthorPosts={moreFromAuthorPosts} />
     </div>
   )
 }
