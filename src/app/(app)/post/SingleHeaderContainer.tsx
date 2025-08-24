@@ -48,7 +48,7 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
 }
 
 const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
-  const { featuredImage, title } = post
+  const { featuredImage, title , thumbnail } = post
 
   return (
     <>
@@ -56,12 +56,12 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
         <Divider />
       </div>
       <header className={clsx('single-header-style-1', className)}>
-        {featuredImage.src && (
+        {thumbnail || featuredImage?.src ? (
           <div className="aspect-square relative w-full sm:aspect-15/5">
             <Image
               alt={title}
               className="object-cover"
-              src={featuredImage}
+              src={thumbnail || featuredImage.src}
               sizes="(max-width: 1440px) 100vw, 1440px"
               fill
               priority
@@ -77,6 +77,13 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
               <div className=" mx-auto  pb-8">
                 <TitleAndMeta post={post} />
               </div>
+            </div>
+          </div>
+        ) : (
+          // Fallback layout when no featured image
+          <div className="bg-gray-900 py-16">
+            <div className="container">
+              <TitleAndMeta post={post} />
             </div>
           </div>
         )}
