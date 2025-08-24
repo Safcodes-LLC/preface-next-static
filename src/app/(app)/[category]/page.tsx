@@ -1,8 +1,8 @@
 import Banner from '@/components/Banner'
+import ClientSectionSliderPosts from '@/components/ClientSectionSliderPosts'
 import Card17 from '@/components/PostCards/Card17'
-import SectionSliderPosts from '@/components/SectionSliderPosts'
-import { serverFetch } from '@/lib/server/api'
 import { getPostsDefault, getPostsGallery } from '@/data/posts'
+import { serverFetch } from '@/lib/server/api'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -10,10 +10,10 @@ import { notFound } from 'next/navigation'
 
 export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
   const { category } = await params
-  
+
   try {
     const categoryData = await serverFetch.get(`/api/frontend/category/slug/${category}`)
-    
+
     if (!categoryData) {
       return {
         title: 'Category not found',
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
 
 const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
   const { category } = await params
-  
+
   let categoryData: any = null
   let posts: any[] = []
 
@@ -44,7 +44,7 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
     // Fetch category data from API
     categoryData = await serverFetch.get(`/api/frontend/category/slug/${category}`)
     // console.log(categoryData?.data,"categoryData");
-    
+
     if (!categoryData) {
       return notFound()
     }
@@ -61,20 +61,22 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
   const galleryPosts = await getPostsGallery()
   const defaultPosts = await getPostsDefault()
 
+  const categoryName = categoryData.data.name || ''
+
   return (
     <div className={`page-category-${category}`}>
       {/* <PageHeader category={categoryData} /> */}
       <div className="container mx-auto mt-12 sm:mt-20">
         <Banner
           image="/images/banner/common-banner.png"
-          title={categoryData.data.name || categoryData.data.title}
+          title={categoryName}
           alt={`${categoryData.data.name || categoryData.data.title} banner`}
-          description={categoryData.data.subcategories.length ||  ""}
+          description={categoryData.data.subcategories.length || ''}
           // className=""
         />
-        <div className="w-full lg:max-w-4xl mt-12">
+        <div className="mt-12 w-full lg:max-w-4xl">
           <p className="mt-6 text-sm text-[#444444] lg:text-base dark:text-[#DFDFDF]">
-            {categoryData.data.description || categoryData.data.meta_description || ""}
+            {categoryData.data.description || categoryData.data.meta_description || ''}
           </p>
         </div>
         {/* Horizontal line - matching Figma design */}
@@ -83,20 +85,31 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
       <div className="container pt-6 lg:pt-10">
         {/* LOOP ITEMS - Use posts from API if available, otherwise fallback to gallery posts */}
         <div className="grid grid-cols-2 gap-6 md:gap-8 lg:grid-cols-3">
-          {(categoryData.data.subcategories.length > 0 ? categoryData.data.subcategories : galleryPosts.slice(0, 8)).map((post: any, index: number) => (
+          {(categoryData.data.subcategories.length > 0
+            ? categoryData.data.subcategories
+            : galleryPosts.slice(0, 8)
+          ).map((post: any, index: number) => (
             <Card17 key={post._id || index} post={post} />
           ))}
         </div>
       </div>
 
       <div className="container space-y-20 py-20 lg:space-y-28 lg:py-28">
-        <div className="relative ">
+        <div className="relative">
           {/* <BackgroundSection /> */}
-          <SectionSliderPosts
+          {/* <SectionSliderPosts
             postCardName="card10V5"
             heading={`POPULAR ARTICLES FROM ${categoryData.data.name}`}
             // subHeading="Over 10 Articles"
             posts={defaultPosts.slice(0, 6)}
+          /> */}
+
+          <ClientSectionSliderPosts
+            postCardName="card10V5"
+            heading={`POPULAR ARTICLES FROM ${categoryName}`}
+            // subHeading="Over 10 Articles"
+            parentSlug={category}
+            limit={6}
           />
         </div>
       </div>

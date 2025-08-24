@@ -20,11 +20,12 @@ const ClientSectionSliderPosts: FC<Props> = ({
   limit = 6, 
   ...props 
 }) => {
-  const { data: popularArticles, isLoading, error } = usePopularArticles({
-    subcategorySlug,
-    parentSlug,
-    limit
-  })
+  // Determine which query to use based on available props
+  const queryParams = subcategorySlug 
+    ? { subcategorySlug, limit }  // Priority: subcategory-specific articles
+    : { parentSlug, limit }       // Fallback: parent category articles
+
+  const { data: popularArticles, isLoading, error } = usePopularArticles(queryParams)
 
   if (isLoading) {
     return <div className="animate-pulse">Loading...</div>
