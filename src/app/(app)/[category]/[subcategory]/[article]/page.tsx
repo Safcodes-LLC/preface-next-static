@@ -9,17 +9,8 @@ import { notFound } from 'next/navigation'
 import SingleContentContainer from '../../../post/SingleContentContainer'
 import SingleHeaderContainer from '../../../post/SingleHeaderContainer'
 import SingleRelatedPosts from '../../../post/SingleRelatedPosts'
+import { getPostBySlug } from '@/data/api/posts'
 
-// Generate static params for all articles
-export async function generateStaticParams() {
-  // In a real app, you would fetch all posts and generate params
-  // For now, we'll return some example articles
-  return [
-    { category: 'faith', subcategory: 'religion-and-reason', article: 'wisdom-and-worship' },
-    { category: 'muhammad', subcategory: 'life-and-message', article: 'the-message-of-mohammad-pbuhs-life' },
-    // Add more as needed
-  ]
-}
 
 export async function generateMetadata({
   params,
@@ -51,8 +42,10 @@ const Page = async ({
   // Await the params before using them
   const { article } = await params
   
-  // Get the specific article by its handle (slug)
-  const post = await getPostByHandle(article)
+  const post = await getPostBySlug(article)
+
+  console.log(post,"post");
+  
   
   // If article not found, return 404 early
   if (!post) {
