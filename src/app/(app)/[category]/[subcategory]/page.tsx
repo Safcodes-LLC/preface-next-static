@@ -2,10 +2,11 @@ import ArchiveSortByListBox from '@/components/ArchiveSortByListBox'
 import Banner from '@/components/Banner'
 import ModalCategories from '@/components/ModalCategories'
 import Card16Podcast from '@/components/PostCards/Card16Podcast'
-import SectionSliderPosts from '@/components/SectionSliderPosts'
+import ClientSectionSliderPosts from '@/components/ClientSectionSliderPosts'
 import { getSubcategoryPosts } from '@/data/api/posts'
 import { getCategories, getTags } from '@/data/categories'
 import { getAllPosts, getPostsDefault } from '@/data/posts'
+import { usePopularArticles } from '@/hooks/api'
 import { Metadata } from 'next'
 
 export async function generateMetadata({
@@ -67,6 +68,8 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string }> }) =>
   const categories = await getCategories()
   const defaultPosts = await getPostsDefault()
   const tags = await getTags()
+  
+  
 
   const filterOptions = [
     { name: 'Most recent', value: 'most-recent' },
@@ -117,14 +120,16 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string }> }) =>
         </div>
       </div>
 
+
       <div className="container space-y-20 py-20 lg:space-y-28 lg:py-28">
         <div className="relative">
           {/* <BackgroundSection /> */}
-          <SectionSliderPosts
+          <ClientSectionSliderPosts
             postCardName="card10V5"
-            heading="POPULAR ARTICLES FROM THE MESSAGE OF MOHAMMED'S LIFE"
-            subHeading="Over 10 Articles"
-            posts={defaultPosts.slice(0, 6)}
+            heading={`POPULAR ARTICLES FROM ${subcategoryName}`}
+            // subHeading="Over 10 Articles"
+            subcategorySlug={subcategory}
+            limit={6}
           />
         </div>
       </div>

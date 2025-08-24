@@ -230,3 +230,26 @@ export const useTrendingVideos = (limit?: number) => {
     gcTime: 1000 * 60 * 10,
   })
 }
+
+// Hook for fetching popular articles
+export const usePopularArticles = (params?: {
+  parentSlug?: string
+  subcategorySlug?: string
+  limit?: number
+}) => {
+  return useQuery({
+    queryKey: [...postKeys.all, 'popular-articles', params],
+    queryFn: async (): Promise<PostsResponse> => {
+      const response = await clientApi.get<Post[]>('/api/frontend/popular-articles', {
+        params: {
+          ...(params?.parentSlug && { parentSlug: params.parentSlug }),
+          ...(params?.subcategorySlug && { subcategorySlug: params.subcategorySlug }),
+          limit: params?.limit || 6
+        }
+      })
+      return response
+    },
+    staleTime: 1000 * 60 * 10, // 10 minutes
+    gcTime: 1000 * 60 * 20, // 20 minutes
+  })
+}
