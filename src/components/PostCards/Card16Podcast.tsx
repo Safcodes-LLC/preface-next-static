@@ -34,7 +34,16 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
     slug
   } = post
 
-  console.log(post, 'post ')
+  // Build the post URL safely
+  const getPostUrl = () => {
+    if (category?.slug && category?.parentCategory?.slug) {
+      return `/${category.parentCategory.slug}/${category.slug}/${slug}`
+    }
+    if (category?.slug) {
+      return `/${category.slug}/${slug}`
+    }
+    return `/post/${handle}`
+  }
 
   return (
     <div className={clsx('group post-card-16-podcast relative flex flex-col pb-6', className)}>
@@ -101,8 +110,8 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
             {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
             <PostCardSaveBtn className="" bookmarked={bookmarked} />
             <Link
-              href={`/${category?.parentCategory?.slug}/${category.slug}/${slug}`}
-              className="border-[#E2E2E2]transition-transform ms-auto flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border duration-200 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]"
+              href={getPostUrl()}
+              className="border-[#E2E2E2] transition-transform ms-auto flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border duration-200 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]"
             >
               <ArrowRightIcon
                 strokeWidth={3}
