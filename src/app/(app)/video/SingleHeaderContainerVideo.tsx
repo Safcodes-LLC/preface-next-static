@@ -103,7 +103,7 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
 
 const HeaderVideo = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
   // Use video_url if videoUrl is not available
-  const videoSource = post?.videoUrl || post.video_file || (post as any).video_url;
+  const videoSource = post?.video_url || post?.videoUrl || post.video_file || (post as any).video_url;
 console.log(videoSource, 'videoSource');
 
   if (!videoSource) {
@@ -125,7 +125,7 @@ console.log(videoSource, 'videoSource');
 }
 
 const SingleHeaderContainerVideo: FC<Props> = ({ className, post, headerStyle = 'style1' }) => {
-  if ((post.postType.name === 'Video' && (post.videoUrl || (post as any).video_url)) || headerStyle === 'video') {
+  if ((post.postType.name === 'Video' && (post.video_url || (post as any).videoUrl)) || headerStyle === 'video') {
     return <HeaderVideo className={className} post={post} />
   }
 

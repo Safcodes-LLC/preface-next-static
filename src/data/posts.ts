@@ -2319,6 +2319,7 @@ export type TPost = Awaited<ReturnType<typeof getAllPosts>>[number] & {
   parentCategory?: any
   slug?: string
   category?: any
+  video_url?: string
 }
 export type TPostDetail = Awaited<ReturnType<typeof getPostByHandle>>
 

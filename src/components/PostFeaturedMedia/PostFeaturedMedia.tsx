@@ -16,10 +16,10 @@ interface Props {
 }
 
 const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPlay = false }) => {
-  const { featuredImage, thumbnail, postType, videoFile, videoUrl, video_file, galleryImgs, audioUrl, handle, title } = post
+  const { featuredImage, thumbnail, postType, videoFile, video_url, videoUrl, video_file, galleryImgs, audioUrl, handle, title } = post
 
   // Use video_file as primary, then videoFile, then videoUrl as fallbacks
-  const videoSource = video_file || videoFile || videoUrl;
+  const videoSource = video_url ||videoUrl || video_file || videoFile || '';
 
   const renderPostGallery = () => {
     if (!galleryImgs) {
