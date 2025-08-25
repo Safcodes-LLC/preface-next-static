@@ -35,7 +35,7 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string }> }) =>
 
   // Call getSubcategoryPosts and log the results
   const subcategoryPosts = await getSubcategoryPosts(subcategory)
-  console.log('getSubcategoryPosts result:', subcategoryPosts)
+  // console.log('getSubcategoryPosts result:', subcategoryPosts)
 
   // Get all posts and filter by subcategory
   const allPosts = await getAllPosts()

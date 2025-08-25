@@ -188,17 +188,9 @@ const Page = async () => {
         </div> */}
       </div>
 
-      <div className="mt-28 bg-[#000000] py-16 lg:py-20 dark:bg-[#0D0D0D]">
-        <div className="relative container">
-          {/* <SectionMagazine4
-            heading="VISUALS"
-            subHeading="Hover on the post card and preview video"
-            posts={videoPosts.slice(1, 8)}
-            headingColor="light"
-          /> */}
-          <ClientSideVisuals />
-        </div>
-      </div>
+
+
+      <ClientSideVisuals />
     </div>
   )
 }

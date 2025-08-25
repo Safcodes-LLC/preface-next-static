@@ -76,7 +76,7 @@ const PageStories = async ({
     searchQuery || '',
     searchTab as 'posts' | 'categories' | 'tags' | 'authors'
   )
-  console.log(posts, 'postssss.. ')
+  // console.log(posts, 'postssss.. ')
 
   const renderLoopItems = () => {
     switch (searchTab) {
