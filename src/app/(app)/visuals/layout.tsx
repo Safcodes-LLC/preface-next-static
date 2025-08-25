@@ -2,6 +2,7 @@ import { ApplicationLayout } from '@/app/(app)/application-layout'
 import BackgroundSection from '@/components/BackgroundSection'
 import SectionGridPosts from '@/components/SectionGridPosts'
 import SwipableSliderPosts from '@/components/SwipableSliderPosts'
+import { getLatestVideos } from '@/data/api/posts'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getPostsDefault, getPostsVideo } from '@/data/posts'
@@ -15,7 +16,8 @@ const Layout: React.FC<Props> = async ({ children }) => {
   const categories = await getCategories()
   const authors = await getAuthors()
   const defaultPosts = await getPostsDefault()
-  const videoPosts = await getPostsVideo()
+  // const videoPosts = await getPostsVideo()
+  const videoPosts = await getLatestVideos()
   return (
     <ApplicationLayout>
       {children}
