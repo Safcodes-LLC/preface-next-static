@@ -20,10 +20,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   // Await the params before using them
   const { article } = await params
+  
+  // Validate the article parameter
+  if (!article || article.includes('.') || article.includes('com.chrome.devtools.json')) {
+    return {
+      title: 'Invalid Article',
+      description: 'The requested article URL is invalid',
+    }
+  }
+
   const post = await getPostByHandle(article)
 
-
-  
   if (!post) {
     return {
       title: 'Article not found',
@@ -45,8 +52,23 @@ const Page = async ({
   // Await the params before using them
   const { category, subcategory, article } = await params
 
+  console.log(`Processing article route: category=${category}, subcategory=${subcategory}, article=${article}`)
+
+  // Validate the article parameter - it should not contain invalid characters or be a Chrome DevTools request
+  if (!article || article.includes('.') || article.includes('com.chrome.devtools.json')) {
+    console.warn(`Invalid article slug: ${article} - returning 404`)
+    return notFound()
+  }
+
   const post = await getPostBySlug(article)
 
+  // If article not found, return 404 early
+  if (!post) {
+    console.warn(`Post not found for slug: ${article} - returning 404`)
+    return notFound()
+  }
+
+  console.log(`Successfully fetched post: ${post.title || post.name}`)
 
   const subcategoryPosts = await getSubcategoryPosts(post?.categories[0]?.slug)
 
@@ -59,11 +81,6 @@ const Page = async ({
   // console.log(subcategoryPosts,"subcategoryPosts");
   
   
-  // If article not found, return 404 early
-  if (!post) {
-    return notFound()
-  }
-
   const comments = await getCommentsByPostId(post.id)
   const relatedPosts = (await getAllPosts()).slice(0, 6)
   const moreFromAuthorPosts = (await getAllPosts()).slice(1, 7)

@@ -97,6 +97,12 @@ export const getSubcategoryPosts = async (categorySlug: string, options?: {
 // /api/frontend/posts/slug/{slug}
 export const getPostBySlug = async (slug: string) => {
   try {
+    // Validate the slug parameter
+    if (!slug || slug.includes('.') || slug.includes('com.chrome.devtools.json')) {
+      console.warn(`Invalid slug parameter: ${slug}`)
+      return null
+    }
+
     // console.log(`Fetching post with slug: ${slug}`)
     const response = await serverFetch.get<{ data: any }>(`/api/frontend/posts/slug/${slug}`, {
       next: { revalidate: 60 }, // Revalidate every 60 seconds

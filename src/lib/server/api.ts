@@ -49,6 +49,8 @@ export const serverFetch = {
     }
 
     try {
+      console.log(`Making API request to: ${API_BASE_URL}${urlWithParams}`)
+      
       const response = await fetch(`${API_BASE_URL}${urlWithParams}`, {
         method: 'GET',
         headers: requestHeaders,
@@ -56,10 +58,14 @@ export const serverFetch = {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorMessage = `HTTP error! status: ${response.status} for URL: ${urlWithParams}`
+        console.error(errorMessage)
+        throw new Error(errorMessage);
       }
 
-      return await response.json();
+      const data = await response.json();
+      console.log(`API response received for: ${urlWithParams}`)
+      return data;
     } catch (error) {
       console.error('API Fetch Error:', error);
       throw error;

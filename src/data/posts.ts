@@ -2181,12 +2181,18 @@ export async function getAllPosts() {
 }
 
 export async function getPostByHandle(handle: string) {
+  // Validate the handle parameter
+  if (!handle || handle.includes('.') || handle.includes('com.chrome.devtools.json')) {
+    console.warn(`Invalid handle parameter: ${handle}`)
+    return null
+  }
+
   const posts = await getAllPosts()
   let post = posts.find((post) => post.handle === handle) as TPost
+  
   if (!post) {
-    // only for demo purposes, if the post is not found, return the first post
-    console.warn(`Post with handle "${handle}" not found. Returning the first post as a fallback.`)
-    post = posts[0]
+    console.warn(`Post with handle "${handle}" not found.`)
+    return null
   }
 
   return {
