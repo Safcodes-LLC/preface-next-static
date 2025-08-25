@@ -97,12 +97,12 @@ export const getSubcategoryPosts = async (categorySlug: string, options?: {
 // /api/frontend/posts/slug/{slug}
 export const getPostBySlug = async (slug: string) => {
   try {
-    console.log(`Fetching post with slug: ${slug}`)
+    // console.log(`Fetching post with slug: ${slug}`)
     const response = await serverFetch.get<{ data: any }>(`/api/frontend/posts/slug/${slug}`, {
       next: { revalidate: 60 }, // Revalidate every 60 seconds
     });
     
-    console.log(`API response for slug ${slug}:`, response)
+    // console.log(`API response for slug ${slug}:`, response)
     
     if (!response?.data) {
       console.warn(`No data returned for slug: ${slug}`)

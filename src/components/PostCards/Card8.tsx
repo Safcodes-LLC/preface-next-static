@@ -32,16 +32,7 @@ const Card8: FC<Props> = ({ className, post, ratio = 'aspect-3/4 sm:aspect-2/1' 
   } = post
 
   const [isHover, setIsHover] = useState(false)
-
-  // Safely access category and parent category information
-  const mainCategory = post?.categories?.[0]
-  const parentCategorySlug = (mainCategory as any)?.parentCategory?.slug
-  const subCategorySlug = (mainCategory as any)?.slug
   const articleSlug = post?.slug
-
-  console.log(parentCategorySlug, 'parentCategorySlug')
-  console.log(subCategorySlug, 'subCategorySlug')
-  console.log(articleSlug, 'articleSlug')
 
   return (
     <div
