@@ -101,7 +101,7 @@ console.log(otherTopics,"otherTopics");
         </div>
       </div>
 
-      <SingleRelatedPosts relatedPosts={relatedPosts}  moreFromAuthorPosts={moreFromAuthorPosts} />
+      <SingleRelatedPosts  moreFromAuthorPosts={moreFromAuthorPosts} />
     </div>
   )
 }
