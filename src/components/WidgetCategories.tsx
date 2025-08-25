@@ -13,9 +13,6 @@ interface Props {
 const WidgetCategories: FC<Props> = ({ className = 'bg-white dark:bg-[#0D0D0D]', categories }) => {
   const shouldScroll = categories && categories.length > 6
 
-  console.log(categories,"catgeories");
-  
-  
   return (
     <div className={clsx('widget-categories overflow-hidden rounded-3xl', className)}>
       <WidgetHeading title="Continues Read" viewAll={{ label: 'View all', href: '/#' }} />
