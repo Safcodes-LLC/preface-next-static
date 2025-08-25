@@ -39,7 +39,8 @@ const Layout: React.FC<Props> = async ({ children }) => {
           <SwipableSliderPosts
             heading="TOP RATED ON PREFACE"
             subHeading="Over 100 Articles for beginners"
-            posts={defaultPosts.slice(0, 8)}
+            // posts={defaultPosts.slice(0, 8)}
+            posts={videoPosts.slice(0, 8)}
             postCardName="card10V6"
             config={{
               autoSlide: false,
