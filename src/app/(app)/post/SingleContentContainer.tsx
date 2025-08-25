@@ -5,9 +5,36 @@ import { TComment, TPostDetail } from '@/data/posts'
 import useIntersectionObserver from '@/hooks/useIntersectionObserver'
 import { ArrowUp02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useMemo, useRef, useState } from 'react'
 import { ShareDropdown } from './SingleMetaAction'
-import TheContent from './TheContent'
+import draftToHtml from 'draftjs-to-html'
+
+interface RawDraftInlineStyleRange {
+  offset: number
+  length: number
+  style: string
+}
+
+interface RawDraftEntityRange {
+  key: number
+  length: number
+  offset: number
+}
+
+interface RawDraftContentBlock {
+  key: string
+  text: string
+  type: string
+  depth: number
+  inlineStyleRanges: RawDraftInlineStyleRange[]
+  entityRanges: RawDraftEntityRange[]
+  data?: Record<string, unknown>
+}
+
+interface RawDraftContentState {
+  blocks: RawDraftContentBlock[]
+  entityMap: Record<string, unknown>
+}
 
 interface Props {
   post: TPostDetail
@@ -24,6 +51,18 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className }) => {
   //
 
   const { tags, author, content, likeCount, commentCount, liked, handle } = post
+  const renderedHtml = useMemo(() => {
+    const str = typeof content === 'string' ? content : String(content ?? '')
+    try {
+      const parsed = JSON.parse(str) as unknown
+      if (parsed && typeof parsed === 'object' && Array.isArray((parsed as { blocks?: unknown }).blocks)) {
+        return draftToHtml(parsed as unknown as RawDraftContentState)
+      }
+      return str
+    } catch {
+      return str
+    }
+  }, [content])
 
   const endedAnchorEntry = useIntersectionObserver(endedAnchorRef, {
     threshold: 0,
@@ -80,7 +119,7 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className }) => {
           className="mx-auto prose max-w-(--breakpoint-md)! lg:prose-lg dark:prose-invert"
           ref={contentRef}
         >
-          <TheContent content={content} />
+          <div dangerouslySetInnerHTML={{ __html: renderedHtml }} />
         </div>
 
         {/* COMMENTS LIST */}
