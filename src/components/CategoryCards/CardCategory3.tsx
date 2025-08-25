@@ -27,14 +27,14 @@ const CardCategory3: FC<Props> = ({ className = '', category }) => {
         <span className="absolute inset-0 bg-black/30 opacity-0 transition-opacity group-hover:opacity-100"></span>
 
         {/* Arrow overlay - ONLY clickable link */}
-        <Link
-          href={`/${slug}`}
+        <div
           className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100"
         >
-          <div className="transform rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-white hover:scale-110 dark:bg-gray-800/90 dark:hover:bg-gray-800">
+          <Link
+          href={`/${slug}`} className="transform rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-white hover:scale-110 dark:bg-gray-800/90 dark:hover:bg-gray-800">
             <ArrowRightIcon className="h-5 w-5 text-gray-700 dark:text-gray-200 rtl:rotate-180" />
-          </div>
-        </Link>
+          </Link>
+        </div>
       </div>
       <div className="mt-4 text-center">
         <h2 className={`text-lg font-medium text-neutral-900 dark:text-neutral-100`}>{name}</h2>
