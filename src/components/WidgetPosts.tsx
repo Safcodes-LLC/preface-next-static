@@ -28,11 +28,12 @@ const WidgetPosts: FC<Props> = ({
             `${maxHeight} scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 dark:scrollbar-thumb-gray-600 dark:scrollbar-track-gray-800 overflow-y-auto`
         )}
       >
-        {posts?.map((post) => (
+        {posts?.map((post, index) => (
           <Card3Small
             className="p-4 hover:bg-neutral-200 xl:px-5 xl:py-6 dark:hover:bg-neutral-700"
-            key={post.id}
+            key={post._id}
             post={post}
+            index={index}
           />
         ))}
       </div>

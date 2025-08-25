@@ -7,21 +7,22 @@ import { FC } from 'react'
 interface Props {
   className?: string
   post: TPost
+  index: number
 }
 
-const Card3Small: FC<Props> = ({ className, post }) => {
-  const { title, handle, featuredImage } = post
+const Card3Small: FC<Props> = ({ className, post, index }) => {
+  const {name, title, handle, featuredImage } = post
 
   return (
     <div className={clsx('post-card-3-small group relative flex items-center justify-between gap-4', className)}>
       <div className="relative aspect-[4/3]  w-28 shrink-0">
         <Image
-          alt={title}
+          alt={name || title}
           sizes="100px"
           className="rounded-lg object-cover brightness-100 transition-[filter] duration-300 group-hover:brightness-75"
           src={featuredImage}
           fill
-          title={title}
+          title={name || title}
         />
       </div>
 
@@ -29,13 +30,13 @@ const Card3Small: FC<Props> = ({ className, post }) => {
         {/* <PostCardMeta meta={{ ...post }} /> */}
         <h2 className="nc-card-title block text-sm font-normal sm:text-base ">
           <p className="line-clamp-1" title={title}>
-            {title}
+            {name || title}
           </p>
         </h2>
-        <div className=" text-xs font-medium text-neutral-500">Article 1</div>
+        <div className=" text-xs font-medium text-neutral-500">Article {index + 1}</div>
       </div>
 
-      <Link href={`/post/${handle}`} className="absolute inset-0" title={title}></Link>
+      <Link href={`/post/${handle}`} className="absolute inset-0" title={name || title}></Link>
     </div>
   )
 }

@@ -10,6 +10,7 @@ import SingleContentContainer from '../../../post/SingleContentContainer'
 import SingleHeaderContainer from '../../../post/SingleHeaderContainer'
 import SingleRelatedPosts from '../../../post/SingleRelatedPosts'
 import { getPostBySlug, getSubcategoryPosts } from '@/data/api/posts'
+import { serverFetch } from '@/lib/server/api'
 
 
 export async function generateMetadata({
@@ -21,6 +22,8 @@ export async function generateMetadata({
   const { article } = await params
   const post = await getPostByHandle(article)
 
+
+  
   if (!post) {
     return {
       title: 'Article not found',
@@ -36,13 +39,12 @@ export async function generateMetadata({
 
 const Page = async ({ 
   params 
-}: { 
-  params: Promise<{ article: string }> 
+}: {  
+  params: Promise<{ category: string; subcategory: string; article: string }> 
 }) => {
   // Await the params before using them
-  const { article } = await params
-  
-  
+  const { category, subcategory, article } = await params
+
   const post = await getPostBySlug(article)
 
 
@@ -51,10 +53,10 @@ const Page = async ({
   // Filter posts to only include those with postType.name === "Article"
   const filteredSubcategoryPosts = subcategoryPosts?.list?.filter(post => post.postType?.name === "Article") || []
 
-  console.log(post,"post");
+  console.log(post,"post checking articlezs");
 
   
-  console.log(subcategoryPosts,"subcategoryPosts");
+  // console.log(subcategoryPosts,"subcategoryPosts");
   
   
   // If article not found, return 404 early
@@ -66,10 +68,17 @@ const Page = async ({
   const relatedPosts = (await getAllPosts()).slice(0, 6)
   const moreFromAuthorPosts = (await getAllPosts()).slice(1, 7)
 
+  const subcategoryList = await serverFetch.get(`/api/frontend/category/slug/${category}`)
+
+console.log(subcategoryList,"subcategoryList");
+
+const otherTopics = subcategoryList.data.subcategories
+
+console.log(otherTopics,"otherTopics");
+
+
   const widgetPosts = (await getAllPosts()).slice(0, 12)
-  const widgetCategories = (await getCategories()).slice(0, 12)
-  const widgetTags = (await getTags()).slice(0, 6)
-  const widgetAuthors = (await getAuthors()).slice(0, 6)
+
 
   return (
     <div className="single-post-page pt-8">
@@ -87,7 +96,7 @@ const Page = async ({
             {/* <WidgetAuthors authors={widgetAuthors} />
             <WidgetTags tags={widgetTags} /> */}
             <WidgetCategories categories={filteredSubcategoryPosts} />
-            <WidgetPosts posts={widgetPosts} />
+            <WidgetPosts posts={otherTopics} />
           </div>
         </div>
       </div>
