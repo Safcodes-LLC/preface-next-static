@@ -23,7 +23,7 @@ const SingleRelatedPosts: FC<Props> = async ({ relatedPosts, moreFromAuthorPosts
             heading="STORYTELLING ISLAM"
             subHeading="Understanding Islam through 1001 stories"
             posts={(await getLatestVideos()).slice(0, 8)}
-            gridClass="md:grid-cols-2 lg:grid-cols-3"
+            gridClass="md:grid-cols-2 lg:grid-cols-2"
             timeDuration={true}
           />
         </div>

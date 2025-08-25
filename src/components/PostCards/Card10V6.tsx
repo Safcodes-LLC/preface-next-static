@@ -37,7 +37,7 @@ const Card10V6: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
         </div> */}
       </div>
 
-      <PostCardMeta5 meta={post} className="mx-2 mt-4" timeDuration={timeDuration}/>
+      <PostCardMeta5 meta={post} className="mx-2 mt-6" timeDuration={timeDuration}/>
     </div>
   )
 }
