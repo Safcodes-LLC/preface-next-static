@@ -16,8 +16,8 @@ interface Props {
 }
 
 const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'aspect-5/3' }) => {
-  const { title, featuredImage, handle, categories, date, likeCount, liked, commentCount, readingTime, bookmarked } = post
-  // console.log(post, 'post check')
+  const { title, subCategory, name, featuredImage, handle, categories, date, likeCount, liked, commentCount, readingTime, bookmarked } = post
+  console.log(post, 'post check')
 
   const [isHover, setIsHover] = useState(false)
 
@@ -49,11 +49,11 @@ const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'asp
         {/* Left content: text (title + topic count) */}
         <div className="flex-1">
           <h3 className="nc-card-title block text-base font-normal text-neutral-900 dark:text-neutral-100">
-            <Link href={`/post/${post.handle}`} className="line-clamp-2" title={title}>
-              {title}
+            <Link href={`/post/${post.handle}`} className="line-clamp-2" title={name || title}>
+              {name || title}
             </Link>
           </h3>
-          <span className="text-xs font-normal">7 topics</span>
+          <span className="text-xs font-normal">{subCategory?.length} topics</span>
         </div>
 
         {/* Right content: arrow icon (fixed size) */}

@@ -1,10 +1,8 @@
 import Banner from '@/components/Banner'
-import CardAuthorBox2 from '@/components/CardAuthorBoxs/CardAuthorBox2'
-import CardCategory2 from '@/components/CategoryCards/CardCategory2'
 import Card11 from '@/components/PostCards/Card11'
+import { getCategory } from '@/data/api/category'
 import { getSearchResults } from '@/data/search'
 import ButtonSecondary from '@/shared/ButtonSecondary'
-import Tag from '@/shared/Tag'
 import { ArrowDownIcon } from '@heroicons/react/24/outline'
 import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
 import { Metadata } from 'next'
@@ -47,6 +45,9 @@ const PageStories = async ({
   params: Promise<{ query: string }>
   searchParams: SearchParams
 }) => {
+
+   const category = await getCategory()
+  //  console.log(category, 'category')
   async function handleSearch(formData: FormData) {
     'use server'
 
@@ -78,44 +79,14 @@ const PageStories = async ({
   )
   // console.log(posts, 'postssss.. ')
 
-  const renderLoopItems = () => {
-    switch (searchTab) {
-      case 'categories':
-        return (
-          <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 md:gap-8 lg:mt-10 lg:grid-cols-4 xl:grid-cols-5">
-            {categories?.map((category) => (
-              <CardCategory2 key={category.id} category={category} />
-            ))}
-          </div>
-        )
-
-      case 'tags':
-        return (
-          <div className="mt-12 flex flex-wrap gap-3">
-            {tags?.map((tag) => (
-              <Tag key={tag.id} href={`/tag/${tag.handle}`}>
-                {tag.name}
-              </Tag>
-            ))}
-          </div>
-        )
-      case 'authors':
-        return (
-          <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 md:gap-8 lg:mt-10 lg:grid-cols-4 xl:grid-cols-5">
-            {authors?.map((author) => (
-              <CardAuthorBox2 className="border border-dashed" key={author.id} author={author} />
-            ))}
-          </div>
-        )
-      default:
-        return (
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-8 lg:mt-10 lg:grid-cols-3 xl:grid-cols-3">
-            {posts?.slice(0,9)?.map((post) => (
-              <Card11 key={post.id} post={post} />
-            ))}
-          </div>
-        )
-    }
+  const renderLoopItems = (category: any) => {
+    return (
+      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-8 lg:mt-10 lg:grid-cols-3 xl:grid-cols-3">
+        {category?.data?.map((post:any) => (
+          <Card11 key={post._id} post={post} />
+        ))}
+      </div>
+    )
   }
 
   return (
@@ -144,6 +115,7 @@ const PageStories = async ({
         <Banner
           image="/images/banner/common-banner.png"
           title="Stories"
+          description={category?.data?.length}
           alt="Stories banner"
           // className=""
         />
@@ -197,7 +169,7 @@ const PageStories = async ({
         </div> */}
 
         {/* LOOP ITEMS */}
-        {renderLoopItems()}
+        {renderLoopItems(category)}
         <div className="mx-auto mt-10 text-center md:mt-16">
           <ButtonSecondary>
             Load More <ArrowDownIcon className="h-6 w-6 text-[#444444] dark:text-white" />

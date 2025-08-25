@@ -5,7 +5,7 @@ interface BannerProps {
   title?: any
   alt?: string
   className?: string
-  description?: string
+  description?: any
 }
 
 const Banner = ({ image, title, alt, className = '', description }: BannerProps) => {
