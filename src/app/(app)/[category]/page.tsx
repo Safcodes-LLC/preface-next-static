@@ -62,7 +62,6 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
   const defaultPosts = await getPostsDefault()
 
   const categoryName = categoryData.data.name || ''
-console.log(categoryData.data.featuredImage,"catgep");
 
   return (
     <div className={`page-category-${category}`}>
