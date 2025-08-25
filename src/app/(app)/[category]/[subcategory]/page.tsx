@@ -62,6 +62,7 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string }> }) =>
 
   // Format subcategory name for display
   const subcategoryName = subcategoryPosts?.categories?.[0]?.name
+  const subcategoryImage = subcategoryPosts?.categories[0]?.featuredImage
   const lengthTopics = subcategoryPosts?.list?.length
   const listPost = subcategoryPosts?.list
 
@@ -70,6 +71,7 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string }> }) =>
   const tags = await getTags()
   
   
+// console.log(subcategoryImage,"images fopr sub category");
 
   const filterOptions = [
     { name: 'Most recent', value: 'most-recent' },
@@ -83,7 +85,7 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string }> }) =>
     <div className={`page-subcategory-${subcategory}`}>
       <div className="container mx-auto mt-12 sm:mt-20">
         <Banner
-          image="/images/banner/common-banner.png"
+          image={subcategoryImage}
           title={subcategoryName}
           alt={`${subcategoryName} banner`}
           description={`${lengthTopics}`}
