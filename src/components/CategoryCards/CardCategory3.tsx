@@ -10,34 +10,39 @@ interface Props {
 }
 
 const CardCategory3: FC<Props> = ({ className = '', category }) => {
-  // console.log(category,"category123")
-  const {  name, thumbnail, featuredImage, slug, featuredIcon, subCategory} = category
-  console.log(category,"category123");
-  
+  const { name, thumbnail, featuredImage, slug, featuredIcon, subCategory } = category
+
   return (
-    <Link
-      href={`/${slug}`}
-      // href={`/category/${handle}`}
+    <div
       className={`card-category-3 group flex flex-col rounded-[18px] bg-white p-[10px] dark:bg-[#0D0D0D] ${className}`}
     >
       <div className="aspect-w-5 relative h-0 w-full shrink-0 overflow-hidden rounded-2xl aspect-h-5">
         <Image
-          src={featuredImage || featuredIcon|| thumbnail || ''}
+          src={featuredImage || featuredIcon || thumbnail || ''}
           className="h-full w-full rounded-2xl object-cover"
           sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
           fill
           alt={name || ''}
         />
-        <span className="absolute inset-0 bg-black/10 opacity-0 transition-opacity group-hover:opacity-100"></span>
+        <span className="absolute inset-0 bg-black/30 opacity-0 transition-opacity group-hover:opacity-100"></span>
+
+        {/* Arrow overlay - ONLY clickable link */}
+        <Link
+          href={`/${slug}`}
+          className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100"
+        >
+          <div className="transform rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-white hover:scale-110 dark:bg-gray-800/90 dark:hover:bg-gray-800">
+            <ArrowRightIcon className="h-5 w-5 text-gray-700 dark:text-gray-200 rtl:rotate-180" />
+          </div>
+        </Link>
       </div>
       <div className="mt-4 text-center">
         <h2 className={`text-lg font-medium text-neutral-900 dark:text-neutral-100`}>{name}</h2>
-        <span className={`mt-1 block text-sm text-neutral-600 dark:text-neutral-400`}>{subCategory?.length} Articles</span>
-        <div className="my-[10px] hidden cursor-pointer items-center justify-center rounded-full bg-[#00652E] p-2 transition-all duration-200 group-hover:inline-flex dark:bg-[#60A43A]">
-          <ArrowRightIcon className="h-5 w-5 text-white rtl:rotate-180" />
-        </div>
+        <span className={`mt-1 block text-sm text-neutral-600 dark:text-neutral-400`}>
+          {subCategory?.length} Articles
+        </span>
       </div>
-    </Link>
+    </div>
   )
 }
 
