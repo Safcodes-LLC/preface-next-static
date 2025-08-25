@@ -33,6 +33,15 @@ const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post }) => {
   } = post
 
   const [isHover, setIsHover] = useState(false)
+  // Safely access category and parent category information
+  const mainCategory = post?.categories?.[0]
+  const parentCategorySlug = (mainCategory as any)?.parentCategory?.slug
+  const subCategorySlug = (mainCategory as any)?.slug
+  const articleSlug = post?.slug
+
+  console.log(parentCategorySlug, 'parentCategorySlug')
+  console.log(subCategorySlug, 'subCategorySlug')
+  console.log(articleSlug, 'articleSlug')
 
   return (
     <div
@@ -44,7 +53,7 @@ const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post }) => {
         <PostFeaturedMedia post={post} isHover={isHover} />
 
         {/* Single Link wrapping media */}
-        <Link href={`/post/${handle}`} className="absolute inset-0" />
+        <Link href={`/video/${parentCategorySlug}/${subCategorySlug}/${articleSlug}`} className="absolute inset-0" />
         {postType === 'audio' && (
           <ButtonPlayMusicPlayer className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4" post={post} />
         )}
