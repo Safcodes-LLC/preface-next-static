@@ -14,7 +14,7 @@ const SingleRelatedPosts: FC<Props> = ({ relatedPosts, moreFromAuthorPosts }) =>
   
   const { data, isLoading, error } = usePopularArticles()
   const popularArticles = data?.data
-  console.log(popularArticles,"popular articles");
+  // console.log(popularArticles,"popular articles");
   return (
     <div className="relative mt-16 bg-neutral-50 py-16 lg:mt-28 lg:py-24 dark:bg-neutral-800">
       {/* RELATED  */}

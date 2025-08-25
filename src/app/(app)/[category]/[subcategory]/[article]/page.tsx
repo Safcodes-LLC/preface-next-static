@@ -52,7 +52,7 @@ const Page = async ({
   // Await the params before using them
   const { category, subcategory, article } = await params
 
-  console.log(`Processing article route: category=${category}, subcategory=${subcategory}, article=${article}`)
+  // console.log(`Processing article route: category=${category}, subcategory=${subcategory}, article=${article}`)
 
   // Validate the article parameter - it should not contain invalid characters or be a Chrome DevTools request
   if (!article || article.includes('.') || article.includes('com.chrome.devtools.json')) {
@@ -68,14 +68,14 @@ const Page = async ({
     return notFound()
   }
 
-  console.log(`Successfully fetched post: ${post.title || post.name}`)
+  // console.log(`Successfully fetched post: ${post.title || post.name}`)
 
   const subcategoryPosts = await getSubcategoryPosts(post?.categories[0]?.slug)
 
   // Filter posts to only include those with postType.name === "Article"
   const filteredSubcategoryPosts = subcategoryPosts?.list?.filter(post => post.postType?.name === "Article") || []
 
-  console.log(post,"post checking articlezs");
+  // console.log(post,"post checking articlezs");
 
   
   // console.log(subcategoryPosts,"subcategoryPosts");
@@ -87,11 +87,11 @@ const Page = async ({
 
   const subcategoryList = await serverFetch.get(`/api/frontend/category/slug/${category}`)
 
-console.log(subcategoryList,"subcategoryList");
+// console.log(subcategoryList,"subcategoryList");
 
 const otherTopics = subcategoryList.data.subcategories
 
-console.log(otherTopics,"otherTopics");
+// console.log(otherTopics,"otherTopics");
 
 
   const widgetPosts = (await getAllPosts()).slice(0, 12)

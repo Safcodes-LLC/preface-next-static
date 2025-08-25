@@ -104,7 +104,7 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
 const HeaderVideo = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
   // Use video_url if videoUrl is not available
   const videoSource = post?.video_url || post?.videoUrl || post.video_file || (post as any).video_url;
-console.log(videoSource, 'videoSource');
+// console.log(videoSource, 'videoSource');
 
   if (!videoSource) {
     return (
