@@ -18,7 +18,7 @@ const ClientSideVisuals = () => {
         <SectionMagazine4
           heading="VISUALS"
           subHeading="Hover on the post card and preview video"
-          posts={displayPosts.slice(0, 8) as any}
+          posts={displayPosts.slice(0, 6) as any}
           headingColor="light"
         />
       </div>

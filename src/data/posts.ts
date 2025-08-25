@@ -1,4 +1,5 @@
 import { _demo_author_image_urls } from './authors'
+import { getPostBySlug as fetchPostBySlug } from './api/posts'
 
 // TODO: replace with actual images
 // TODO: replace with actual images
@@ -2320,4 +2321,54 @@ export type TPost = Awaited<ReturnType<typeof getAllPosts>>[number] & {
   category?: any
 }
 export type TPostDetail = Awaited<ReturnType<typeof getPostByHandle>>
+
+export async function getPostBySlug(slug: string): Promise<TPost | null> {
+  try {
+    const post = await fetchPostBySlug(slug);
+    if (!post) return null;
+
+    // Transform the API response to match the TPost type
+    return {
+      id: post._id,
+      title: post.title,
+      slug: post.slug,
+      excerpt: post.excerpt || '',
+      content: post.content,
+      thumbnail: {
+        src: post.thumbnail || '',
+        alt: post.title,
+        width: 1200,
+        height: 630,
+      },
+      videoUrl: post.video_file || post.videoFile || '',
+      video_file: post.video_file || post.videoFile || '',
+      author: {
+        id: post.author?._id || '',
+        name: post.author?.name || 'Unknown',
+        handle: post.author?.username || 'unknown',
+        avatar: {
+          src: post.author?.profile_pic || '',
+          alt: post.author?.name || 'Author',
+          width: 200,
+          height: 200,
+        },
+        bio: post.author?.bio || '',
+      },
+      categories: post.categories || [],
+      tags: [],
+      date: post.createdAt || new Date().toISOString(),
+      readingTime: 5, // Default value
+      bookmarkCount: 0,
+      bookmarked: false,
+      likeCount: 0,
+      liked: false,
+      postType: 'video',
+      status: post.status || 'published',
+      ...post, // Spread the rest of the post properties
+    };
+  } catch (error) {
+    console.error('Error in getPostBySlug:', error);
+    return null;
+  }
+}
 export type TComment = Awaited<ReturnType<typeof getCommentsByPostId>>[number]

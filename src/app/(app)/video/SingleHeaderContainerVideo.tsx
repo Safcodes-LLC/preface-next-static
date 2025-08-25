@@ -102,9 +102,21 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
 }
 
 const HeaderVideo = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
+  // Use video_url if videoUrl is not available
+  const videoSource = post?.videoUrl || post.video_file || (post as any).video_url;
+console.log(videoSource, 'videoSource');
+
+  if (!videoSource) {
+    return (
+      <div className="container py-10 text-center">
+        <p className="text-lg text-red-500">No video source found for this post</p>
+      </div>
+    );
+  }
+  
   return (
     <div className={clsx('single-header-style-video', className)}>
-      <VideoPlayer videoUrl={post.videoUrl} />
+      <VideoPlayer videoUrl={videoSource} />
       <div className="container mt-10 pb-5">
         <TitleAndMeta post={post} />
       </div>
@@ -113,7 +125,7 @@ const HeaderVideo = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
 }
 
 const SingleHeaderContainerVideo: FC<Props> = ({ className, post, headerStyle = 'style1' }) => {
-  if ((post.postType === 'video' && post.videoUrl) || headerStyle === 'video') {
+  if ((post.postType.name === 'Video' && (post.videoUrl || (post as any).video_url)) || headerStyle === 'video') {
     return <HeaderVideo className={className} post={post} />
   }
 

@@ -1,16 +1,18 @@
 import SectionGridPosts from '@/components/SectionGridPosts'
 import SectionSliderPosts from '@/components/SectionSliderPosts'
+import { getLatestVideos } from '@/data/api/posts'
 import { getPostsDefault, getPostsVideo, TPost } from '@/data/posts'
 import { FC } from 'react'
 
 interface Props {
-  relatedPosts: TPost[]
-  moreFromAuthorPosts: TPost[]
+  relatedPosts?: TPost[]
+  moreFromAuthorPosts?: TPost[]
 }
 
 const SingleRelatedPosts: FC<Props> = async ({ relatedPosts, moreFromAuthorPosts }) => {
     const defaultPosts = await getPostsDefault()
     const videoPosts = await getPostsVideo()
+    const latestVideos = await getLatestVideos()
   return (
     <div className="relative my-16">
       {/* RELATED  */}
@@ -20,7 +22,7 @@ const SingleRelatedPosts: FC<Props> = async ({ relatedPosts, moreFromAuthorPosts
             postCardName="card10V6"
             heading="STORYTELLING ISLAM"
             subHeading="Understanding Islam through 1001 stories"
-            posts={videoPosts.slice(0, 8)}
+            posts={(await getLatestVideos()).slice(0, 8)}
             gridClass="md:grid-cols-2 lg:grid-cols-3"
             timeDuration={true}
           />

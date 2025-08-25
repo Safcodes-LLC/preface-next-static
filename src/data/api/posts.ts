@@ -13,6 +13,20 @@ export const getLatestArticles = async () => {
   }
 };
 
+// Add this to your posts.ts file
+export const getLatestVideos = async (options?: { limit?: number }) => {
+  try {
+    const response = await serverFetch.get<{ data: any[] }>('/api/frontend/latest-videos', {
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      limit: options?.limit
+    });
+    return response?.data || [];
+  } catch (error) {
+    console.error('Failed to fetch latest videos:', error);
+    return [];
+  }
+};
+
 // islam for beginners under articles
 export const getIslamForBeginners = async () => {
   try {
