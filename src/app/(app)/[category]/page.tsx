@@ -62,16 +62,17 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
   const defaultPosts = await getPostsDefault()
 
   const categoryName = categoryData.data.name || ''
+console.log(categoryData.data.featuredImage,"catgep");
 
   return (
     <div className={`page-category-${category}`}>
       {/* <PageHeader category={categoryData} /> */}
       <div className="container mx-auto mt-12 sm:mt-20">
         <Banner
-          image="/images/banner/common-banner.png"
+          image={categoryData?.data?.featuredImage}
           title={categoryName}
-          alt={`${categoryData.data.name || categoryData.data.title} banner`}
-          description={categoryData.data.subcategories.length || ''}
+          alt={`${categoryData?.data?.name || categoryData.data.title} banner`}
+          description={categoryData?.data?.subcategories?.length || ''}
           // className=""
         />
         <div className="mt-12 w-full lg:max-w-4xl">
