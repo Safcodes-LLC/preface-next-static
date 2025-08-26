@@ -1,3 +1,5 @@
+import { USFlag } from "@/components/Header/FlagIcons"
+
 export async function getNavigation(): Promise<TNavigationItem[]> {
   return [
     // {
@@ -473,6 +475,7 @@ export const getLanguages = async () => {
       id: 'English',
       name: 'English',
       description: 'United State',
+      FlagComponent: USFlag,
       href: '#',
       active: true,
     },

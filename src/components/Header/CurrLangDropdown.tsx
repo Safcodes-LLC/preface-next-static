@@ -8,18 +8,25 @@ import {
   PopoverButton,
   PopoverPanel,
   PopoverPanelProps,
-  Tab,
   TabGroup,
-  TabList,
   TabPanel,
   TabPanels,
 } from '@headlessui/react'
-import { BanknotesIcon, GlobeAltIcon, SlashIcon } from '@heroicons/react/24/outline'
+import { GlobeAltIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
-import { FC } from 'react'
+import { FC, ComponentType, SVGProps } from 'react'
 
-const Languages = ({ languages }: { languages: Awaited<ReturnType<typeof getLanguages>> }) => {
+type LanguageItem = {
+  id: string;
+  name: string;
+  description: string;
+  href: string;
+  active?: boolean;
+  FlagComponent?: React.FC<any>;
+};
+
+const Languages = ({ languages }: { languages: LanguageItem[] }) => {
   return (
     <div className="grid gap-6">
       {languages.map((item, index) => (
@@ -33,7 +40,10 @@ const Languages = ({ languages }: { languages: Awaited<ReturnType<typeof getLang
           )}
         >
           <div>
-            <p className="text-sm font-medium">{item.name}</p>
+            <div className="flex items-center gap-x-2">
+              {item.FlagComponent && <item.FlagComponent className="" />}
+              <p className="text-sm font-medium">{item.name}</p>
+            </div>
             <p className="text-xs text-neutral-500 dark:text-neutral-400">{item.description}</p>
           </div>
         </CloseButton>
@@ -48,7 +58,7 @@ interface Props {
 
   className?: string
   currencies?: Awaited<ReturnType<typeof getCurrencies>>
-  languages: Awaited<ReturnType<typeof getLanguages>>
+  languages: LanguageItem[]
 }
 
 const CurrLangDropdown: FC<Props> = ({
@@ -59,11 +69,11 @@ const CurrLangDropdown: FC<Props> = ({
   className,
   languages,
   currencies,
-  panelClassName = 'w-sm',
+  panelClassName = 'w-xs',
 }) => {
   return (
     <Popover className={clsx('group', className)}>
-      <PopoverButton className="-m-2.5 flex items-center p-2.5 text-sm font-medium text-neutral-600 group-hover:text-neutral-950 focus:outline-hidden focus-visible:outline-hidden dark:text-neutral-200 dark:group-hover:text-neutral-100">
+      <PopoverButton className=" flex items-center p-2.5 text-sm font-medium text-neutral-600 group-hover:text-neutral-950 focus:outline-hidden focus-visible:outline-hidden dark:text-neutral-200 dark:group-hover:text-neutral-100">
         <GlobeAltIcon className="size-5" />
         <ChevronDownIcon className="ms-1 size-4 group-data-open:rotate-180" aria-hidden="true" />
       </PopoverButton>
@@ -72,7 +82,7 @@ const CurrLangDropdown: FC<Props> = ({
         anchor={panelAnchor}
         transition
         className={clsx(
-          'z-40 rounded-2xl bg-white p-4 ring-1 ring-black/5 transition duration-200 ease-in-out data-closed:translate-y-1 data-closed:opacity-0 dark:bg-neutral-800',
+          'z-40 rounded-2xl bg-white p-4 ring-1 ring-black/5 transition duration-200 ease-in-out data-closed:translate-y-1 data-closed:opacity-0 dark:bg-[#0D0D0D]',
           panelClassName
         )}
       >

@@ -1,5 +1,6 @@
 'use client'
 
+import CurrLangDropdown from '@/components/Header/CurrLangDropdown'
 import { INFlag, SAFlag, USFlag } from '@/components/Header/FlagIcons'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { CalendarIcon, ChevronDownIcon, HomeIcon } from '@heroicons/react/24/outline'
@@ -76,7 +77,7 @@ const Navbar2: FC<Navbar2Props> = ({ isTransparentHeader }) => {
   const activeLanguage = languages.find((lang) => lang.active) || languages[0]
 
   return (
-    <div className="relative flex items-center gap-x-6 overflow-visible px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
+    <div className="relative flex items-center gap-x-6 overflow-hidden px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
       <div
         aria-hidden="true"
         className="absolute top-1/2 left-[max(-7rem,calc(50%-52rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl"
@@ -125,7 +126,7 @@ const Navbar2: FC<Navbar2Props> = ({ isTransparentHeader }) => {
         </Link>
 
         {/* Language Dropdown - Fixed with higher z-index */}
-        <div className="relative z-50">
+        {/* <div className="relative z-50">
           <Popover>
             <PopoverButton
               className={clsx(
@@ -160,9 +161,9 @@ const Navbar2: FC<Navbar2Props> = ({ isTransparentHeader }) => {
               </div>
             </PopoverPanel>
           </Popover>
-        </div>
+        </div> */}
 
-        {/* <CurrLangDropdown languages={languages} /> */}
+        <CurrLangDropdown languages={languages} />
 
         {/* Calendar with Date and Time */}
         <div className={clsx('flex items-center gap-x-2 text-sm font-medium text-[#000000] dark:text-white')}>
