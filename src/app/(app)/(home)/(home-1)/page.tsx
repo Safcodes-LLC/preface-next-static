@@ -76,7 +76,7 @@ const Page = async () => {
   ]
 
   return (
-    <div className="relative pb-28 lg:pb-32">
+    <div className="relative pb-28 lg:pb-32 overflow-hidden">
       {/* Video Hero Banner */}
       {/* <VideoHeroBanner /> */}
       {/* <div className="relative">
