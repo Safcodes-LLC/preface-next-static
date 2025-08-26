@@ -40,7 +40,7 @@ const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, fe
           <div className="flex items-center gap-x-2">
             <Navigation menu={navigationMenu} featuredPosts={featuredPosts} />
             <Link
-              href="/ask-the-scholar"
+              href="#"
               className="flex min-w-[155px] items-center gap-2 rounded-sm border border-[#EEEEEE] dark:border-[#777777] px-5 py-2 text-sm font-medium text-neutral-900 transition-all duration-200 focus:outline-none dark:text-white hover:shadow-sm"
               aria-label="Ask the Scholar"
               style={{ marginTop: 0 }}
