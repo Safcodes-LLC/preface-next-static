@@ -1,5 +1,6 @@
 import CardAuthorBox2 from '@/components/CardAuthorBoxs/CardAuthorBox2'
 import CardCategory2 from '@/components/CategoryCards/CardCategory2'
+import ImageHeroBanner from '@/components/ImageHeroBanner'
 import Card11 from '@/components/PostCards/Card11'
 import VideoBanner from '@/components/VideoBanner'
 import { getSearchResults } from '@/data/search'
@@ -120,10 +121,7 @@ const PageVisuals = async ({
 
   return (
     <div className="stories-page">
-      <VideoBanner videoSrc="/path/to/your/video.mp4" title="Your Title Here" alt="Descriptive alt text for the video">
-        {/* <p>Additional content can go here</p> */}
-        <button className="mt-4 rounded-full bg-[#60A43A] px-6 py-2 text-white">Play now</button>
-      </VideoBanner>
+    <ImageHeroBanner />
       <div className="container mx-auto mt-12 sm:mt-20">
         {/* HEADER */}
         {/* <div className="relative aspect-16/9 lg:aspect-16/5">
