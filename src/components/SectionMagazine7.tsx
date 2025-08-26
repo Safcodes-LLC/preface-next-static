@@ -16,9 +16,14 @@ type Props = Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> & {
   heading?: string
 }
 
-const SectionMagazine7: FC<Props> = ({ posts, posts2, className, heading, subHeading, dimHeading }) => {
+const SectionMagazine7: FC<Props> = ({ posts = [], posts2 = [], className, heading, subHeading, dimHeading }) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.2 })
+  
+  // If no posts are available, don't render the section
+  if (!posts?.length && !posts2?.length) {
+    return null
+  }
 
   // Animation variants for the main section
   const containerVariants: Variants = {
@@ -115,12 +120,23 @@ const SectionMagazine7: FC<Props> = ({ posts, posts2, className, heading, subHea
           variants={mainCardVariants}
           className="grid gap-6 md:gap-8 lg:grid-cols-2"
         >
-          <motion.div variants={mainCardVariants}>
-            <Card10V3 post={posts2[0]} />
-          </motion.div>
-          <motion.div variants={mainCardVariants}>
-            <Card10V3 galleryType={2} post={posts2[1]} />
-          </motion.div>
+          {posts2[0] && (
+            <motion.div variants={mainCardVariants}>
+              <Card10V3 post={posts2[0]} />
+            </motion.div>
+          )}
+          {posts2[1] ? (
+            <motion.div variants={mainCardVariants}>
+              <Card10V3 galleryType={2} post={posts2[1]} />
+            </motion.div>
+          ) : posts2[0] ? (
+            // If only one post is available, show a placeholder for the second card
+            <motion.div variants={mainCardVariants} className="opacity-0 pointer-events-none">
+              <div className="invisible">
+                <Card10V3 galleryType={2} post={posts2[0]} />
+              </div>
+            </motion.div>
+          ) : null}
         </motion.div>
 
         {/* Grid of smaller cards - slide up from bottom */}
@@ -128,11 +144,21 @@ const SectionMagazine7: FC<Props> = ({ posts, posts2, className, heading, subHea
           variants={gridVariants}
           className="mt-3 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3"
         >
-          {posts.slice(0, 6).map((p, index) => (
-            <motion.div key={p._id} variants={gridCardVariants}>
-              <Card17Podcast post={p} />
+          {posts.length > 0 ? (
+            posts.slice(0, 6).map((p) => (
+              <motion.div key={p._id} variants={gridCardVariants}>
+                <Card17Podcast post={p} />
+              </motion.div>
+            ))
+          ) : (
+            // Show a message when there are no posts
+            <motion.div 
+              className="col-span-full py-10 text-center text-neutral-500 dark:text-neutral-400"
+              variants={gridCardVariants}
+            >
+              No content available at the moment. Please check back later.
             </motion.div>
-          ))}
+          )}
         </motion.div>
       </motion.div>
     </div>
