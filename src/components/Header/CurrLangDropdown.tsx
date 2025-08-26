@@ -15,26 +15,26 @@ import {
 import { GlobeAltIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
-import { FC, ComponentType, SVGProps } from 'react'
+import { FC, ComponentType, SVGProps, useState, useEffect } from 'react'
 
 type LanguageItem = {
   id: string;
   name: string;
   description: string;
   href: string;
+  code: string;
   active?: boolean;
   FlagComponent?: React.FC<any>;
 };
 
-const Languages = ({ languages }: { languages: LanguageItem[] }) => {
+const Languages = ({ languages , onSelectLanguage }: { languages: LanguageItem[]; onSelectLanguage: (lang: LanguageItem) => void; }) => {
   return (
     <div className="grid gap-6">
-      {languages.map((item, index) => (
+      {languages.map((item) => (
         <CloseButton
-          as={Link}
-          href={item.href}
-          key={index}
-          className={clsx(
+          key={item.code}
+          onClick={() => onSelectLanguage(item)}
+          className={clsx(  
             '-m-2.5 flex items-center rounded-lg p-2.5 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden dark:hover:bg-neutral-700',
             item.active ? 'bg-neutral-100 dark:bg-neutral-700' : 'opacity-80'
           )}
@@ -71,6 +71,34 @@ const CurrLangDropdown: FC<Props> = ({
   currencies,
   panelClassName = 'w-xs',
 }) => {
+
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageItem | null>(null);
+
+  // Initialize language from localStorage or default to English
+  useEffect(() => {
+    const savedLangCode = typeof window !== 'undefined' ? localStorage.getItem('selectedLanguage') : null;
+    const defaultLang = languages.find(lang => lang.code === 'en') || languages[0];
+    const initialLang = savedLangCode 
+      ? languages.find(lang => lang.code === savedLangCode) || defaultLang
+      : defaultLang;
+    
+    setSelectedLanguage(initialLang);
+    
+    // Ensure default is set in localStorage
+    if (typeof window !== 'undefined' && !savedLangCode) {
+      localStorage.setItem('selectedLanguage', defaultLang.code);
+    }
+  }, [languages]);
+
+  const handleLanguageSelect = (language: LanguageItem) => {
+    setSelectedLanguage(language);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('selectedLanguage', language.code);
+    }
+  };
+
+  if (!selectedLanguage) return null;
+
   return (
     <Popover className={clsx('group', className)}>
       <PopoverButton className=" flex items-center p-2.5 text-sm font-medium text-neutral-600 group-hover:text-neutral-950 focus:outline-hidden focus-visible:outline-hidden dark:text-neutral-200 dark:group-hover:text-neutral-100">
@@ -106,7 +134,7 @@ const CurrLangDropdown: FC<Props> = ({
           </TabList> */}
           <TabPanels className="mt-5">
             <TabPanel className="rounded-xl p-3 focus:ring-0 focus:outline-hidden">
-              <Languages languages={languages} />
+              <Languages languages={languages} onSelectLanguage={handleLanguageSelect} />
             </TabPanel>
             {/* <TabPanel className="rounded-xl p-3 focus:ring-0 focus:outline-hidden">
               <Currencies currencies={currencies || []} />

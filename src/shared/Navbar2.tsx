@@ -24,6 +24,7 @@ const Navbar2: FC<Navbar2Props> = ({ isTransparentHeader }) => {
       description: 'United States',
       href: '#',
       active: true,
+      code: 'en',
       FlagComponent: USFlag,
     },
     {
@@ -31,6 +32,7 @@ const Navbar2: FC<Navbar2Props> = ({ isTransparentHeader }) => {
       name: 'العربية',
       description: 'Saudi Arabia',
       href: '#',
+      code: 'ar',
       FlagComponent: SAFlag,
     },
     {
@@ -38,6 +40,7 @@ const Navbar2: FC<Navbar2Props> = ({ isTransparentHeader }) => {
       name: 'മലയാളം',
       description: 'India',
       href: '#',
+      code: 'ml',
       FlagComponent: INFlag,
     },
   ]
