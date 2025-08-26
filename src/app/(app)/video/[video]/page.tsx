@@ -37,7 +37,12 @@ export async function generateMetadata({ params }: { params: { video: string } }
   }
 }
 
-const Page = async ({ params }: { params: { video: string } }) => {
+interface PageProps {
+  params: { video: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+const Page = async ({ params }: PageProps) => {
   const post = await getPostBySlug(params.video) as TPost | null;
   
   if (!post) {
