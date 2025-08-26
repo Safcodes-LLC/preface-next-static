@@ -141,7 +141,7 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false }) => {
           ? "text-neutral-900 dark:text-neutral-100" 
           : "text-white"
       )}>
-        <HugeiconsIcon icon={Search01Icon} size={24}  className={clsx(`${isScrolled ? "text-black dark:text-white" : "text-white"}`)} />
+        <HugeiconsIcon icon={Search01Icon} size={24}  className={clsx(`${isScrolled ? "text-black dark:text-white" : " text-black dark:text-white"}`)} />
       </ButtonCircle>
     )
   }
