@@ -44,7 +44,7 @@ const Languages = ({ languages , onSelectLanguage }: { languages: LanguageItem[]
               {item.FlagComponent && <item.FlagComponent className="" />}
               <p className="text-sm font-medium">{item.name}</p>
             </div>
-            <p className="text-xs text-neutral-500 dark:text-neutral-400">{item.description}</p>
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 text-left rtl:text-right">{item.description}</p>
           </div>
         </CloseButton>
       ))}
