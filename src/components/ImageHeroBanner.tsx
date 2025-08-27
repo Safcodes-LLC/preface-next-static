@@ -94,7 +94,7 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
   }
 
   return (
-    <div className={`relative h-[88vh] w-full overflow-hidden ${className}`}>
+    <div className={`relative h-screen w-full overflow-hidden ${className}`}>
       {/* Background Images with Transitions */}
       <div className="absolute inset-0">
         {slides.map((slide, index) => (

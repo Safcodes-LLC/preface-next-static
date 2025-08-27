@@ -15,6 +15,7 @@ interface Props {
   bottomBorder?: boolean
   className?: string
   isTransparentHeader?: boolean
+  home?: boolean
 }
 
 interface Header2Props extends Props {
@@ -22,15 +23,16 @@ interface Header2Props extends Props {
   featuredPosts: TPost[]
 }
 
-const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, featuredPosts, isTransparentHeader }) => {
-
+const Header2: FC<Header2Props> = ({
+  bottomBorder,
+  className,
+  navigationMenu,
+  featuredPosts,
+  isTransparentHeader,
+  home,
+}) => {
   return (
-    <div
-      className={clsx(
-        'header-2 sticky top-0 z-20  bg-white  dark:bg-[#0A0A0A]',
-        className
-      )}
-    >
+    <div className={clsx('header-2', className)}>
       <div className="container flex h-20 justify-between">
         <div className="flex flex-1 items-center gap-x-4 sm:gap-x-5 lg:gap-x-7">
           <Logo />
@@ -41,7 +43,7 @@ const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, fe
             <Navigation menu={navigationMenu} featuredPosts={featuredPosts} />
             <Link
               href="#"
-              className="flex min-w-[155px] items-center gap-2 rounded-sm border border-[#EEEEEE] dark:border-[#777777] px-5 py-2 text-sm font-medium text-neutral-900 transition-all duration-200 focus:outline-none dark:text-white hover:shadow-sm"
+              className="flex min-w-[155px] items-center gap-2 rounded-sm border border-[#EEEEEE] px-5 py-2 text-sm font-medium text-neutral-900 transition-all duration-200 hover:shadow-sm focus:outline-none dark:border-[#777777] dark:text-white"
               aria-label="Ask the Scholar"
               style={{ marginTop: 0 }}
             >
@@ -54,7 +56,7 @@ const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, fe
         <div className="flex flex-1 items-center justify-end gap-x-1">
           <div className="hidden sm:block">
             <Button
-              className="h-8 !border-[#60A43A] !px-4 dark:hover:!border-[#60A43A] hover:!bg-[#60A43A] hover:text-white dark:hover:!text-white"
+              className="h-8 !border-[#60A43A] !px-4 hover:!bg-[#60A43A] hover:text-white dark:hover:!border-[#60A43A] dark:hover:!text-white"
               href={'/login'}
               color="logooutline"
             >
@@ -70,7 +72,9 @@ const Header2: FC<Header2Props> = ({ bottomBorder, className, navigationMenu, fe
                 className="flex cursor-pointer items-center justify-center rounded-full p-2 transition-all duration-200 focus:ring-2 focus:outline-none"
               >
                 <Cog6ToothIcon
-                  className={clsx('h-6 w-6 text-black dark:text-white transition-colors duration-200')}
+                  className={clsx(
+                    `h-6 w-6 transition-colors duration-200 ${home ? (isTransparentHeader ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000]') : 'text-[#000000] dark:text-white'}`
+                  )}
                   aria-hidden="true"
                 />
               </button>

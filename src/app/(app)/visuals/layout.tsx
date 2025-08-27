@@ -19,7 +19,7 @@ const Layout: React.FC<Props> = async ({ children }) => {
   // const videoPosts = await getPostsVideo()
   const videoPosts = await getLatestVideos()
   return (
-    <ApplicationLayout>
+    <ApplicationLayout home={true}>
       {children}
 
       <div className="container space-y-20 py-16 lg:space-y-28 lg:py-20">

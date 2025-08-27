@@ -15,11 +15,10 @@ interface Props {
   headerHasBorder?: boolean
   headerStyle?: 'header-1' | 'header-2' | 'header-scroll' | 'header-3'
   showBanner?: boolean
+  home?: boolean
 }
 
-const ApplicationLayout: React.FC<Props> = ({
-  children,
-}) => {
+const ApplicationLayout: React.FC<Props> = ({ children, home }) => {
   const pathname = usePathname()
   const [navigationMenu, setNavigationMenu] = useState<TNavigationItem[]>([])
   const [featuredPosts, setFeaturedPosts] = useState<TPost[]>([])
@@ -44,15 +43,20 @@ const ApplicationLayout: React.FC<Props> = ({
 
   return (
     <>
-      <div className="container">
-        <Navbar2 isTransparentHeader={isTransparentHeader}/>
-      </div>
+      {home ? null : (
+        <div className="container">
+          <Navbar2 />
+        </div>
+      )}
 
-      <Header2
-        isTransparentHeader={isTransparentHeader}
-        navigationMenu={navigationMenu}
-        featuredPosts={featuredPosts}
-      />
+      {home ? null : (
+        <Header2
+          isTransparentHeader={isTransparentHeader}
+          navigationMenu={navigationMenu}
+          featuredPosts={featuredPosts}
+          className='sticky top-0 z-40 bg-white dark:bg-[#000000]'
+        />
+      )}
 
       {children}
 
