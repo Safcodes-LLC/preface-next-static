@@ -12,13 +12,10 @@ interface Props {
 const Card5: FC<Props> = ({ className, post }) => {
   const { author, title, handle, slug, date, categories, readingTime } = post
 
-  console.log((categories[0] as any)?.parentCategory?.slug, "post test for link latest articles");
-
   const parentCategorySlug = (categories[0] as any)?.parentCategory?.slug
   const categorySlug = (categories[0] as any)?.slug
   const articleSlug = slug
-  
-  
+
   return (
     <div
       className={clsx(
@@ -26,7 +23,10 @@ const Card5: FC<Props> = ({ className, post }) => {
         className
       )}
     >
-      <Link href={`/${parentCategorySlug}/${categorySlug}/${articleSlug}`} className="absolute inset-0 rounded-lg"></Link>
+      <Link
+        href={`/${parentCategorySlug}/${categorySlug}/${articleSlug}`}
+        className="absolute inset-0 rounded-lg"
+      ></Link>
 
       <div className="flex flex-col">
         <CategoryBadgeList categories={categories} />
