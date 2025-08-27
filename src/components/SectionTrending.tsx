@@ -1,11 +1,10 @@
-"use client"
+'use client'
 
 import { TPost } from '@/data/posts'
 import HeadingWithSub, { HeadingWithSubProps } from '@/shared/Heading'
 import clsx from 'clsx'
-import { FC } from 'react'
 import { motion, useInView, Variants } from 'framer-motion'
-import { useRef } from 'react'
+import { FC, useRef } from 'react'
 import Card5 from './PostCards/Card5'
 
 type Props = Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading' | 'isCenter'> & {
@@ -27,16 +26,16 @@ const SectionTrending: FC<Props> = ({ posts, heading, subHeading, isCenter, clas
         staggerChildren: 0.1,
         delayChildren: 0.2,
         duration: 0.6,
-        ease: "easeOut"
-      }
-    }
+        ease: 'easeOut',
+      },
+    },
   }
 
   const cardVariants: Variants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       scale: 0.8,
-      y: 30
+      y: 30,
     },
     visible: {
       opacity: 1,
@@ -44,9 +43,9 @@ const SectionTrending: FC<Props> = ({ posts, heading, subHeading, isCenter, clas
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
-    }
+        ease: 'easeOut',
+      },
+    },
   }
 
   return (
@@ -55,23 +54,23 @@ const SectionTrending: FC<Props> = ({ posts, heading, subHeading, isCenter, clas
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
         >
           <HeadingWithSub subHeading={subHeading} isCenter={isCenter}>
             {heading}
           </HeadingWithSub>
         </motion.div>
       )}
-      <motion.div 
+      <motion.div
         ref={containerRef}
         variants={containerVariants}
         initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        animate={isInView ? 'visible' : 'hidden'}
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:md:grid-cols-3 xl:grid-cols-4"
         aria-live="polite"
       >
         {posts.map((post) => (
-          <motion.div key={post.id} variants={cardVariants}>
+          <motion.div key={post._id} variants={cardVariants}>
             <Card5 post={post} />
           </motion.div>
         ))}
