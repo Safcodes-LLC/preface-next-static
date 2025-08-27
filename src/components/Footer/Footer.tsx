@@ -60,7 +60,6 @@ const Footer: React.FC = () => {
   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
     return (
       <div key={index} className="text-sm">
-  
         <h2 className="font-semibold text-neutral-700 dark:text-neutral-200">Top 5</h2>
         <h2 className="font-semibold text-neutral-700 dark:text-neutral-200">{menu.title}</h2>
         <ul className="mt-5 space-y-4">
