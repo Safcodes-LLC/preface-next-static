@@ -6,9 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "format:check": "prettier --check app",
-    "format:write": "prettier --write app"
+    "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
