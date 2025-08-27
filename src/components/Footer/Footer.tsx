@@ -11,7 +11,7 @@ export interface WidgetFooterMenu {
 
 const widgetMenus: WidgetFooterMenu[] = [
   {
-    id: '5',
+    id: '1',
     title: 'Categories',
     menus: [
       { href: '/', label: 'Belief' },
@@ -22,7 +22,7 @@ const widgetMenus: WidgetFooterMenu[] = [
     ],
   },
   {
-    id: '1',
+    id: '2',
     title: 'Topics',
     menus: [
       { href: '/', label: 'Hadith in Daily Life' },
@@ -33,19 +33,19 @@ const widgetMenus: WidgetFooterMenu[] = [
     ],
   },
   {
-    id: '2',
-    title: 'Authors',
+    id: '3',
+    title: 'Islam for beginners',
     menus: [
-      { href: '/', label: 'Masroor Amani' },
-      { href: '/', label: 'Vahab Aqafi' },
-      { href: '/', label: 'Niyas Baqavi' },
-      { href: '/', label: 'Nousahd Amani' },
-      { href: '/', label: 'Rasheed Latheefi' },
+      { href: '/', label: 'Zakat' },
+      { href: '/', label: 'Hajj' },
+      { href: '/', label: 'Umra' },
+      { href: '/', label: 'Fasting' },
+      { href: '/', label: 'Pray' },
     ],
   },
   {
     id: '4',
-    title: 'Most Engages',
+    title: 'Most Engaged',
     menus: [
       { href: '/', label: 'Belief Articles' },
       { href: '/', label: 'Quraan Audio' },
@@ -60,6 +60,8 @@ const Footer: React.FC = () => {
   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
     return (
       <div key={index} className="text-sm">
+  
+        <h2 className="font-semibold text-neutral-700 dark:text-neutral-200">Top 5</h2>
         <h2 className="font-semibold text-neutral-700 dark:text-neutral-200">{menu.title}</h2>
         <ul className="mt-5 space-y-4">
           {menu.menus.map((item, index) => (
