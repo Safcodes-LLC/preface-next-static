@@ -8,16 +8,12 @@ type AuthContextType = {
   isAuthenticated: boolean;
   user: UserData | null;
   isLoading: boolean;
-  login: (token: string, userData: UserData) => void;
-  logout: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
   user: null,
   isLoading: true,
-  login: () => {},
-  logout: async () => {},
 });
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
@@ -26,53 +22,20 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const login = (token: string, userData: UserData) => {
-    localStorage.setItem('authToken', token);
-    localStorage.setItem('user', JSON.stringify(userData));
-    setUser(userData);
-    // Trigger storage event to update other tabs
-    window.dispatchEvent(new Event('storage'));
-  };
-
-  const logout = async () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
-    setUser(null);
-    // Trigger storage event to update other tabs
-    window.dispatchEvent(new Event('storage'));
-    router.push('/login');
-  };
-
   useEffect(() => {
     const checkAuth = () => {
       const token = getAuthToken();
       const userData = getCurrentUser();
       
       // Update the auth state
-      const newUser = userData || null;
-      setUser(newUser);
+      setUser(userData || null);
       
-      // Check if we need to redirect
+      // Check if we're on an auth page and user is logged in
       const isAuthPage = ['/login', '/signup'].includes(pathname);
-      
-      if (token) {
-        // If we have a token but no user data, something went wrong
-        if (!userData) {
-          localStorage.removeItem('authToken');
-          setUser(null);
-          setIsLoading(false);
-          return;
-        }
-        
-        // Redirect away from auth pages if logged in
-        if (isAuthPage) {
-          router.push('/');
-          return;
-        }
-      } else if (!isAuthPage) {
-        // Redirect to login if not on an auth page and not logged in
-        router.push('/login');
-        return;
+      if (token && isAuthPage) {
+        // Only redirect if we're on an auth page and have a valid token
+        router.push('/');
+        return; // Prevent further execution
       }
       
       setIsLoading(false);
@@ -86,19 +49,17 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         checkAuth();
       }
     };
-
+    
     window.addEventListener('storage', handleStorageChange);
     return () => window.removeEventListener('storage', handleStorageChange);
   }, [pathname, router]);
 
   return (
-    <AuthContext.Provider 
-      value={{ 
-        isAuthenticated: !!user, 
-        user, 
-        isLoading, 
-        login, 
-        logout 
+    <AuthContext.Provider
+      value={{
+        isAuthenticated: !!user,
+        user,
+        isLoading,
       }}
     >
       {children}
@@ -106,25 +67,44 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
+export const useAuth = () => {
+  return useContext(AuthContext);
 };
 
-// Protected route component - for client-side route protection
-export function ProtectedRoute({ children }: { children: ReactNode }) {
+// Protected route component
+export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
+  const { isAuthenticated, isLoading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.push('/login');
+    }
+  }, [isAuthenticated, isLoading, router]);
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Or your custom loading component
+  }
+
+  return isAuthenticated ? <>{children}</> : null;
+};
+
+// Guest route component
+export const GuestRoute = ({ children }: { children: ReactNode }) => {
   const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      // Store the current path to redirect back after login
-      const redirectPath = pathname !== '/' ? `?redirect=${encodeURIComponent(pathname)}` : '';
-      router.push(`/login${redirectPath}`);
+    // Only run this effect after initial load and when not loading
+    if (isLoading) return;
+    
+    // Get the token directly from localStorage to avoid stale state
+    const token = getAuthToken();
+    
+    // If we have a token and we're on an auth page, redirect to home
+    if (token && ['/login', '/signup'].includes(pathname)) {
+      router.push('/');
     }
   }, [isAuthenticated, isLoading, router, pathname]);
 
