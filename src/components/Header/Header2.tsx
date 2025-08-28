@@ -10,6 +10,7 @@ import AvatarDropdown from './AvatarDropdown'
 import HamburgerBtnMenu from './HamburgerBtnMenu'
 import Navigation from './Navigation/Navigation'
 import SearchModal from './SearchModal'
+import SignInButton from '../SignInButton'
 
 interface Props {
   bottomBorder?: boolean
@@ -55,15 +56,7 @@ const Header2: FC<Header2Props> = ({
         </div>
 
         <div className="flex flex-1 items-center justify-end gap-x-1">
-          <div className="hidden sm:block">
-            <Button
-              className="h-8 !border-[#60A43A] !px-4 hover:!bg-[#60A43A] hover:text-white dark:hover:!border-[#60A43A] dark:hover:!text-white"
-              href={'/login'}
-              color="logooutline"
-            >
-              Sign in
-            </Button>
-          </div>
+          <SignInButton/>
           <SearchModal type="type1" isTransparentHeader={isTransparentHeader} home={home}/>
           <AvatarDropdown
             trigger={
