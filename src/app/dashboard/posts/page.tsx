@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import LocalDate from '@/components/LocalDate'
 import PaginationWrapper from '@/components/PaginationWrapper'
 import { getAllPosts } from '@/data/posts'
@@ -5,12 +6,18 @@ import { Badge } from '@/shared/Badge'
 import Image from 'next/image'
 import Link from 'next/link'
 
+// Dynamically import with no SSR
+const ProtectedRoute = dynamic(
+  () => import('@/contexts/AuthContext').then((mod) => mod.ProtectedRoute),
+  { ssr: false }
+)
+
 export const metadata = {
   title: 'Dashboard - Posts',
   description: 'Dashboard - Posts',
 }
 
-const Page = async () => {
+async function DashboardPostsPage() {
   const posts = (await getAllPosts()).slice(0, 10)
   return (
     <div className="flow-root">
@@ -87,4 +94,10 @@ const Page = async () => {
   )
 }
 
-export default Page
+export default function Page() {
+  return (
+    <ProtectedRoute>
+      <DashboardPostsPage />
+    </ProtectedRoute>
+  )
+}

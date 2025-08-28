@@ -1,7 +1,21 @@
 import { redirect } from 'next/navigation'
+import dynamic from 'next/dynamic'
 
-const Page = () => {
+// Dynamically import with no SSR
+const ProtectedRoute = dynamic(
+  () => import('@/contexts/AuthContext').then((mod) => mod.ProtectedRoute),
+  { ssr: false }
+)
+
+function DashboardPage() {
   redirect('/dashboard/posts')
+  return null
 }
 
-export default Page
+export default function Page() {
+  return (
+    <ProtectedRoute>
+      <DashboardPage />
+    </ProtectedRoute>
+  )
+}

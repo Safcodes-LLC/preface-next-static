@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import { ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
 import ThemeProvider from './theme-provider'
+import AuthProvider from '@/contexts/AuthContext'
 import QueryProvider from '@/providers/query-provider'
 import { Noto_Serif } from 'next/font/google'
 
@@ -26,42 +27,39 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
       <body className={`bg-[#F8F8F8] text-base text-neutral-900 dark:bg-[#000000] dark:text-neutral-200 ${
         isForcedDarkMode ? 'dark' : ''
       }`}>
-        <QueryProvider>
-          <ThemeProvider forceDarkMode={isForcedDarkMode}>
-            <div>{children}</div>
-            <Toaster 
-              position="top-center"
-              toastOptions={{
-                style: {
-                  background: 'var(--color-bg-elevated)',
-                  color: 'var(--color-text)',
-                  border: '1px solid var(--color-border)',
-                  padding: '16px',
-                  fontSize: '14px',
-                  maxWidth: '500px',
-                  width: 'auto',
-                },
-                success: {
-                  iconTheme: {
-                    primary: '#10B981',
-                    secondary: 'white',
-                  },
-                },
-                error: {
+        <AuthProvider>
+          <QueryProvider>
+            <ThemeProvider forceDarkMode={isForcedDarkMode}>
+              <div>{children}</div>
+              <Toaster 
+                position="top-center"
+                toastOptions={{
                   style: {
-                    background: '#FEF2F2',
-                    color: '#B91C1C',
-                    border: '1px solid #FECACA',
+                    background: 'var(--color-bg-elevated)',
+                    color: 'var(--color-text)',
+                    border: '1px solid var(--color-border)',
+                    padding: '16px',
+                    fontSize: '14px',
+                    maxWidth: '500px',
+                    width: 'auto',
                   },
-                  iconTheme: {
-                    primary: '#DC2626',
-                    secondary: 'white',
+                  success: {
+                    iconTheme: {
+                      primary: '#10B981',
+                      secondary: 'white',
+                    },
                   },
-                },
-              }}
-            />
-          </ThemeProvider>
-        </QueryProvider>
+                  error: {
+                    iconTheme: {
+                      primary: '#EF4444',
+                      secondary: 'white',
+                    },
+                  },
+                }}
+              />
+            </ThemeProvider>
+          </QueryProvider>
+        </AuthProvider>
       </body>
     </html>
   )

@@ -2,8 +2,9 @@ import ButtonPrimary from '@/shared/ButtonPrimary'
 import { Field, Fieldset, Label } from '@/shared/fieldset'
 import Input from '@/shared/Input'
 import Select from '@/shared/Select'
+import ProtectedPage from '../_components/ProtectedPage'
 
-const page = () => {
+function BillingAddressContent() {
   return (
     <form className="max-w-4xl rounded-xl md:border md:p-6" action="#" method="post">
       <Fieldset className="grid gap-6 md:grid-cols-2">
@@ -54,4 +55,10 @@ const page = () => {
   )
 }
 
-export default page
+export default function BillingAddressPage() {
+  return (
+    <ProtectedPage>
+      <BillingAddressContent />
+    </ProtectedPage>
+  )
+}

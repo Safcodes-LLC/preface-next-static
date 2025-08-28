@@ -1,25 +1,20 @@
-import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
-import SignupForm from '@/components/auth/SignupForm'
-import SocialLogin from '@/components/auth/SocialLogin'
-import Logo from '@/shared/Logo'
-import Image from 'next/image'
-import Link from 'next/link'
+'use client';
+
+import dynamic from 'next/dynamic';
+import { ReactNode } from 'react';
+import SignupForm from '@/components/auth/SignupForm';
+import SocialLogin from '@/components/auth/SocialLogin';
+import Logo from '@/shared/Logo';
+import Image from 'next/image';
+import Link from 'next/link';
 
 // Dynamically import with no SSR
 const GuestRoute = dynamic(
   () => import('@/contexts/AuthContext').then((mod) => mod.GuestRoute),
   { ssr: false }
-)
-
-export const metadata: Metadata = {
-  title: 'Sign Up',
-  description: 'Create a new account and join our blog magazine community',
-}
+);
 
 function SignupPageContent() {
-  // This component will only be rendered if GuestRoute allows it
-  // (i.e., when user is not authenticated)
   return (
     <div className="grid min-h-screen grid-cols-1 md:grid-cols-[3fr_2fr]">
       {/* LEFT SIDE - Content */}
@@ -35,27 +30,35 @@ function SignupPageContent() {
         </div>
 
         <div className="mx-auto max-w-md space-y-6">
-          {/* Signup Form Component - No onSubmit prop */}
           <SignupForm />
-          
-          {/* Social Login Component */}
-          <SocialLogin />
-          
-          {/* Footer link */}
-          <div className="mb-16 block text-center text-sm text-[#404040] dark:text-neutral-300">
-            Already have an account? {` `}
-            <Link 
-              href="/login" 
-              className="font-medium text-[#00652E] underline hover:no-underline transition-all"
-            >
-              Sign In
-            </Link>
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300 dark:border-neutral-600"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="bg-white px-2 text-gray-500 dark:bg-black dark:text-gray-400">
+                Or continue with
+              </span>
+            </div>
           </div>
+
+          <SocialLogin />
+
+          <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
+            Already have an account?{' '}
+            <Link
+              href="/login"
+              className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+            >
+              Sign in
+            </Link>
+          </p>
         </div>
       </div>
-      
-      {/* RIGHT SIDE - Background image */}
-      <div className="relative hidden min-h-screen md:block">
+
+      {/* RIGHT SIDE - Image */}
+      <div className="relative hidden md:block">
         <Image
           src="/images/login-bg.png"
           alt="Sign up background"
@@ -66,14 +69,13 @@ function SignupPageContent() {
         />
       </div>
     </div>
-  )
+  );
 }
 
-export default function SignupPage() {
-  // The GuestRoute will handle the redirection if user is already authenticated
+export default function SignupClient() {
   return (
     <GuestRoute>
       <SignupPageContent />
     </GuestRoute>
-  )
+  );
 }

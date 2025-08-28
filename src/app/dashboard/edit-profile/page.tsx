@@ -1,8 +1,9 @@
 import ButtonPrimary from '@/shared/ButtonPrimary'
 import { Field, Fieldset, Label } from '@/shared/fieldset'
 import Input from '@/shared/Input'
+import ProtectedPage from '../_components/ProtectedPage'
 
-const DashboardEditProfile = () => {
+function EditProfileContent() {
   return (
     <form className="max-w-4xl rounded-xl md:border md:p-6" action="#" method="post">
       <Fieldset className="grid gap-6 md:grid-cols-2">
@@ -34,4 +35,10 @@ const DashboardEditProfile = () => {
   )
 }
 
-export default DashboardEditProfile
+export default function EditProfilePage() {
+  return (
+    <ProtectedPage>
+      <EditProfileContent />
+    </ProtectedPage>
+  )
+}

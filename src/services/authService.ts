@@ -89,18 +89,39 @@ export const login = async (credentials: LoginCredentials): Promise<LoginRespons
 
 export const getAuthToken = (): string | null => {
   if (typeof window === 'undefined') return null;
-  return localStorage.getItem('authToken');
+  try {
+    return localStorage.getItem('authToken');
+  } catch (error) {
+    console.error('Error accessing localStorage:', error);
+    return null;
+  }
 };
 
 export const getCurrentUser = (): UserData | null => {
   if (typeof window === 'undefined') return null;
-  const user = localStorage.getItem('user');
-  return user ? JSON.parse(user) : null;
+  try {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  } catch (error) {
+    console.error('Error parsing user data from localStorage:', error);
+    return null;
+  }
 };
 
 export const logout = (): void => {
-  if (typeof window !== 'undefined') {
+  if (typeof window === 'undefined') return;
+  
+  try {
+    // Clear auth data from localStorage
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
+    
+    // Dispatch a custom event that other tabs can listen for
+    window.dispatchEvent(new Event('storage'));
+    
+    // Force a full page reload to clear any application state
+    window.location.href = '/';
+  } catch (error) {
+    console.error('Error during logout:', error);
   }
 };
