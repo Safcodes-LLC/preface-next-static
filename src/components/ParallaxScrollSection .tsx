@@ -65,7 +65,7 @@ export default function ParallaxScrollSection({ magazine10Data, videoPosts }: Pa
   )
 
   return (
-    <div ref={containerRef} className="relative min-h-[200vh]">
+    <div ref={containerRef} className="relative h-screen">
       {/* VideoHeroBanner with parallax effects */}
       <motion.div
         className="sticky top-0 w-full"

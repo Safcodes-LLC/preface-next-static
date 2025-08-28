@@ -10,6 +10,7 @@ import { ArrowDownIcon } from '@heroicons/react/24/outline'
 import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
+import HomeHeader from '../(home)/(home-1)/components/homeHeader'
 
 const sortByOptions = [
   { name: 'Most recent', value: 'most-recent' },
@@ -121,6 +122,7 @@ const PageVisuals = async ({
 
   return (
     <div className="stories-page">
+      <HomeHeader />
     <ImageHeroBanner />
       <div className="container mx-auto mt-12 sm:mt-20">
         {/* HEADER */}

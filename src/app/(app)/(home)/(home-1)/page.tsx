@@ -1,22 +1,21 @@
 import BackgroundSection from '@/components/BackgroundSection'
-import ParallaxScrollSection from '@/components/ParallaxScrollSection '
-import SectionMagazine4 from '@/components/SectionMagazine4'
 import SectionMagazine7 from '@/components/SectionMagazine7'
 import SectionSlider from '@/components/SectionSlider'
 
+import ClientSideVisuals from '@/components/ClientSideVisuals'
+import SectionMagazine10 from '@/components/SectionMagazine10'
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
 import SectionTrending from '@/components/SectionTrending'
 import SwipableSliderPosts from '@/components/SwipableSliderPosts'
-import InteractivePostsSection from '@/components/InteractivePostsSection'
-import TestReactQuery from '@/components/TestReactQuery'
-import { getIslamForBeginners, getLatestArticles, getQuranLatestArticles } from '@/data/api/posts'
+import VideoHeroBanner from '@/components/VideoHeroBanner'
+import { getBannerHighlightedArticles, getBannerHighlightedVideos } from '@/data/api/banner'
 import { getCategory, getQuranSubcategories, getTopTrendingTopics } from '@/data/api/category'
+import { getIslamForBeginners, getLatestArticles, getQuranLatestArticles } from '@/data/api/posts'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
 import { Metadata } from 'next'
-import { getBannerHighlightedArticles, getBannerHighlightedVideos } from '@/data/api/banner'
-import ClientSideVisuals from '@/components/ClientSideVisuals'
+import HomeHeader from './components/homeHeader'
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -40,7 +39,7 @@ const Page = async () => {
     quranSubCategories,
     quranLatestArticles,
     bannerHighlightedVideos,
-    bannerHighlightedArticles
+    bannerHighlightedArticles,
   ] = await Promise.all([
     getAllPosts(),
     getPostsDefault(),
@@ -53,15 +52,19 @@ const Page = async () => {
     getCategory(),
     getTopTrendingTopics(),
     getIslamForBeginners(),
-    getQuranSubcategories({limit:6}),
-    getQuranLatestArticles({limit:2}),
+    getQuranSubcategories({ limit: 6 }),
+    getQuranLatestArticles({ limit: 2 }),
     getBannerHighlightedVideos(),
-    getBannerHighlightedArticles()
-  ]);
+    getBannerHighlightedArticles(),
+  ])
 
   // Extract the actual data arrays from the API responses
-  const videoPostsArray = Array.isArray(bannerHighlightedVideos) ? bannerHighlightedVideos : bannerHighlightedVideos?.data || [];
-  const articlesArray = Array.isArray(bannerHighlightedArticles) ? bannerHighlightedArticles : bannerHighlightedArticles?.data || [];
+  const videoPostsArray = Array.isArray(bannerHighlightedVideos)
+    ? bannerHighlightedVideos
+    : bannerHighlightedVideos?.data || []
+  const articlesArray = Array.isArray(bannerHighlightedArticles)
+    ? bannerHighlightedArticles
+    : bannerHighlightedArticles?.data || []
 
   // Create specific data for SectionMagazine10
   const magazine10Data = [
@@ -76,7 +79,7 @@ const Page = async () => {
   ]
 
   return (
-    <div className="relative pb-28 lg:pb-32 overflow-hidden">
+    <div className="relative overflow-hidden pb-28 lg:pb-32">
       {/* Video Hero Banner */}
       {/* <VideoHeroBanner /> */}
       {/* <div className="relative">
@@ -86,7 +89,12 @@ const Page = async () => {
       {/* <VideoHeroBanner /> */}
       {/* </div> */}
       {/* Parallax Scroll Section - VideoHeroBanner + SectionMagazine10 */}
-      <ParallaxScrollSection magazine10Data={articlesArray} videoPosts={videoPostsArray}/>
+      <HomeHeader />
+      <VideoHeroBanner />
+      <div className="container pt-[60px]">
+        <SectionMagazine10 posts={magazine10Data} videoPosts={videoPosts} />
+      </div>
+      {/* <ParallaxScrollSection magazine10Data={articlesArray} videoPosts={videoPostsArray} /> */}
       <div className="relative container mt-28 space-y-28 lg:space-y-40">
         {/* <SectionMagazine10 posts={magazine10Data} /> */}
 
@@ -94,7 +102,11 @@ const Page = async () => {
           heading="STORYTELLING ISLAM"
           subHeading="Understanding Islam through 1001 stories"
           // categories={categories.slice(0, 10)}
-          categories={Array.isArray(storyTellingIslam) ? storyTellingIslam.slice(0, 10) : storyTellingIslam.data?.slice(0, 10) || []}
+          categories={
+            Array.isArray(storyTellingIslam)
+              ? storyTellingIslam.slice(0, 10)
+              : storyTellingIslam.data?.slice(0, 10) || []
+          }
           categoryCardType="card3"
         />
 
@@ -112,7 +124,11 @@ const Page = async () => {
         <SectionSlider
           heading="TRENDING CATEGORIES"
           subHeading="Discover over 100 Popular topics"
-          categories={Array.isArray(topTrendingTopics) ? topTrendingTopics.slice(0, 10) : topTrendingTopics.data?.slice(0, 10) || []}
+          categories={
+            Array.isArray(topTrendingTopics)
+              ? topTrendingTopics.slice(0, 10)
+              : topTrendingTopics.data?.slice(0, 10) || []
+          }
           categoryCardType="card2"
           config={{
             autoSlide: true,
@@ -124,8 +140,6 @@ const Page = async () => {
       </div>
 
       <div className="relative container space-y-28 lg:space-y-32">
-       
-
         <div className="relative py-16 lg:py-20">
           <BackgroundSection />
           {/* <SectionSliderPosts
@@ -154,7 +168,7 @@ const Page = async () => {
           subHeading="Discover the most outstanding articles in all topics of life"
         />
 
-         {/* React Query Test Component */}
+        {/* React Query Test Component */}
         {/* <div className="relative py-16 lg:py-20">
           <BackgroundSection />
           <div className="container">
@@ -187,8 +201,6 @@ const Page = async () => {
           <CategoryLinks className="container" />
         </div> */}
       </div>
-
-
 
       <ClientSideVisuals />
     </div>

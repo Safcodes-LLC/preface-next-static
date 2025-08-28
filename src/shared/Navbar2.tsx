@@ -9,10 +9,10 @@ import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
 
 interface Navbar2Props {
-  isTransparentHeader?: boolean
+  home?: boolean
 }
 
-const Navbar2: FC<Navbar2Props> = ({ isTransparentHeader }) => {
+const Navbar2: FC<Navbar2Props> = ({ home }) => {
   const [currentTime, setCurrentTime] = useState<string>('')
   const [currentDate, setCurrentDate] = useState<string>('')
 
@@ -122,7 +122,7 @@ const Navbar2: FC<Navbar2Props> = ({ isTransparentHeader }) => {
         <Link
           href="/about"
           className={clsx(
-            'rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap text-[#000000] transition-colors dark:text-white'
+            `rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors ${home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'}`
           )}
         >
           About
