@@ -8,6 +8,7 @@ import { Link } from '@/shared/link'
 import SwitchDarkMode2 from '@/shared/SwitchDarkMode2'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { logout } from '@/services/authService'
+import { useAuth } from '@/contexts/AuthContext'
 import {
   BulbChargingIcon,
   FavouriteIcon,
@@ -36,6 +37,7 @@ export default function AvatarDropdown({ className, trigger }: Props) {
   }
 
   const router = useRouter()
+  const { isAuthenticated } = useAuth()
 
   const handleLogout = () => {
     logout()
@@ -165,15 +167,17 @@ export default function AvatarDropdown({ className, trigger }: Props) {
             </Link> */}
 
             {/* ------------------ 2 --------------------- */}
-            <button
-              onClick={handleLogout}
-              className="w-full -m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700 text-left"
-            >
-              <div className="flex shrink-0 items-center justify-center text-neutral-500 dark:text-neutral-300">
-                <HugeiconsIcon icon={Logout01Icon} size={24} strokeWidth={1.5} />
-              </div>
-              <p className="ms-4 text-sm font-medium">{'Log out'}</p>
-            </button>
+            {isAuthenticated && (
+              <button
+                onClick={handleLogout}
+                className="w-full -m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700 text-left"
+              >
+                <div className="flex shrink-0 items-center justify-center text-neutral-500 dark:text-neutral-300">
+                  <HugeiconsIcon icon={Logout01Icon} size={24} strokeWidth={1.5} />
+                </div>
+                <p className="ms-4 text-sm font-medium">{'Log out'}</p>
+              </button>
+            )}
           </div>
         </PopoverPanel>
       </Popover>
