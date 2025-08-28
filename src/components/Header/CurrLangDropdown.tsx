@@ -110,7 +110,7 @@ const CurrLangDropdown: FC<Props> = ({
   return (
     <Popover className={clsx('group', className)}>
       <PopoverButton
-        className={`flex items-center p-2.5 text-sm font-medium focus:outline-hidden focus-visible:outline-hidden cursor-pointer ${home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'}`}
+        className={`flex items-center p-2.5 text-sm font-medium focus:outline-hidden focus-visible:outline-hidden hover:bg-white/10 hover:rounded-full cursor-pointer ${home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'}`}
       >
         <GlobeAltIcon className="size-5" />
         <ChevronDownIcon className="ms-1 size-4 group-data-open:rotate-180" aria-hidden="true" />

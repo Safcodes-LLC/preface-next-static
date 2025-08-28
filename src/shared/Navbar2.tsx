@@ -2,8 +2,7 @@
 
 import CurrLangDropdown from '@/components/Header/CurrLangDropdown'
 import { INFlag, SAFlag, USFlag } from '@/components/Header/FlagIcons'
-import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
-import { CalendarIcon, ChevronDownIcon, HomeIcon } from '@heroicons/react/24/outline'
+import { CalendarIcon, HomeIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
@@ -111,7 +110,8 @@ const Navbar2: FC<Navbar2Props> = ({ home }) => {
         <Link
           href="/"
           className={clsx(
-            'flex items-center gap-x-1 rounded-full px-3 py-2 text-sm font-medium text-[#000000] transition-colors hover:bg-white/10 dark:text-white'
+            'flex items-center gap-x-1 rounded-full px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10',
+             home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
           )}
           title="Home"
         >
@@ -122,7 +122,7 @@ const Navbar2: FC<Navbar2Props> = ({ home }) => {
         <Link
           href="/about"
           className={clsx(
-            `rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors ${home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'}`
+            `rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap hover:bg-white/10 transition-colors ${home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'}`
           )}
         >
           About
@@ -166,10 +166,15 @@ const Navbar2: FC<Navbar2Props> = ({ home }) => {
           </Popover>
         </div> */}
 
-        <CurrLangDropdown languages={languages} home={home}/>
+        <CurrLangDropdown languages={languages} home={home} />
 
         {/* Calendar with Date and Time */}
-        <div className={clsx('flex items-center gap-x-2 text-sm font-medium text-[#000000] dark:text-white')}>
+        <div
+          className={clsx(
+            'flex items-center gap-x-2 text-sm font-medium',
+            home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
+          )}
+        >
           <CalendarIcon className="h-5 w-5" />
           <div className="flex flex-col leading-none">
             <span className="text-xs">{currentDate}</span>
