@@ -40,10 +40,11 @@ const Header2: FC<Header2Props> = ({
 
         <div className="mx-4 hidden flex-2 justify-center lg:flex">
           <div className="flex items-center gap-x-2">
-            <Navigation menu={navigationMenu} featuredPosts={featuredPosts} />
+            <Navigation menu={navigationMenu} featuredPosts={featuredPosts} isTransparentHeader={isTransparentHeader} home={home}/>
             <Link
               href="#"
-              className="flex min-w-[155px] items-center gap-2 rounded-sm border border-[#EEEEEE] px-5 py-2 text-sm font-medium text-neutral-900 transition-all duration-200 hover:shadow-sm focus:outline-none dark:border-[#777777] dark:text-white"
+              className={`flex min-w-[155px] items-center gap-2 transition-all duration-200 hover:shadow-sm focus:outline-none dark:border-[#777777] rounded-sm border border-[#EEEEEE] px-5 py-2 text-sm font-medium 
+              ${home ? (isTransparentHeader ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000]') : 'text-[#000000] dark:text-white'}`}
               aria-label="Ask the Scholar"
               style={{ marginTop: 0 }}
             >
@@ -63,7 +64,7 @@ const Header2: FC<Header2Props> = ({
               Sign in
             </Button>
           </div>
-          <SearchModal type="type1" />
+          <SearchModal type="type1" isTransparentHeader={isTransparentHeader} home={home}/>
           <AvatarDropdown
             trigger={
               <button

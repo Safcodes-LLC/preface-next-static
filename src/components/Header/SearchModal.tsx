@@ -15,7 +15,7 @@ import {
 } from '@headlessui/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { ArrowUpRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { FolderDetailsIcon, Search01Icon, Tag02Icon, UserSearchIcon } from '@hugeicons/core-free-icons'
+import { Search01Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon, IconSvgElement } from '@hugeicons/react'
 import clsx from 'clsx'
 import _ from 'lodash'
@@ -93,9 +93,11 @@ const quickActions: Option[] = [
 interface Props {
   type: 'type1' | 'type2'
   isScrolled?: boolean
+  isTransparentHeader?: boolean
+  home?: boolean
 }
 
-const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false }) => {
+const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false, home, isTransparentHeader }) => {
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
@@ -119,7 +121,7 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false }) => {
       <>
         <div className="hidden md:block">
           <Button outline className="w-full justify-between px-4!" onClick={() => setOpen(true)}>
-            <span className={`text-sm/6 font-normal  text-neutral-500 dark:text-neutral-400`}>Type to search...</span>
+            <span className={`text-sm/6 font-normal text-neutral-500 dark:text-neutral-400`}>Type to search...</span>
             <HugeiconsIcon icon={Search01Icon} size={24} className="ms-auto" />
           </Button>
         </div>
@@ -135,13 +137,21 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false }) => {
 
   const buttonOpenModal1 = () => {
     return (
-      <ButtonCircle plain onClick={() => setOpen(true)} className={clsx(
-        "transition-colors duration-200",
-        isScrolled 
-          ? "text-neutral-900 dark:text-neutral-100" 
-          : "text-white"
-      )}>
-        <HugeiconsIcon icon={Search01Icon} size={24}  className={clsx(`${isScrolled ? "text-black dark:text-white" : " text-black dark:text-white"}`)} />
+      <ButtonCircle
+        plain
+        onClick={() => setOpen(true)}
+        className={clsx(
+          'transition-colors duration-200',
+          isScrolled ? 'text-neutral-900 dark:text-neutral-100' : 'text-white'
+        )}
+      >
+        <HugeiconsIcon
+          icon={Search01Icon}
+          size={24}
+          className={clsx(
+            `transition-colors duration-200 ${home ? (isTransparentHeader ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000]') : 'text-[#000000] dark:text-white'}`
+          )}
+        />
       </ButtonCircle>
     )
   }
@@ -285,9 +295,9 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false }) => {
                 )}
 
                 <li className="p-2">
-                <h2 className="mt-4 mb-2 px-3 text-xs font-medium text-gray-500 dark:text-gray-300">
-                      Popular Categories
-                    </h2>
+                  <h2 className="mt-4 mb-2 px-3 text-xs font-medium text-gray-500 dark:text-gray-300">
+                    Popular Categories
+                  </h2>
                   <ul className="text-sm text-gray-700 dark:text-gray-300">
                     {quickActions.map((action) => (
                       <ComboboxOption

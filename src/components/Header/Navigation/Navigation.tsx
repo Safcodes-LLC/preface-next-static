@@ -6,20 +6,32 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
 
-const Lv1MenuItem = ({ menuItem, isScrolled = false }: { menuItem: TNavigationItem; isScrolled?: boolean }) => {
+const Lv1MenuItem = ({
+  menuItem,
+  isScrolled = false,
+  isTransparentHeader,
+  home,
+}: {
+  menuItem: TNavigationItem
+  isScrolled?: boolean
+  isTransparentHeader?: boolean
+  home?: boolean
+}) => {
   return (
     <Link
       className={clsx(
         'flex items-center self-center rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap lg:text-[15px] xl:px-5',
         'hover:bg-neutral-100 hover:text-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-neutral-200',
-        isScrolled ? 'text-[#000000]' : 'dark:text-white',
-        'dark:text-white' // Keep white text in dark mode regardless of scroll state
+        home ? isTransparentHeader ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000]' : 'text-[#000000] dark:text-white' // Keep white text in dark mode regardless of scroll state
       )}
       href={menuItem.href || '#'}
     >
       {menuItem.name}
       {menuItem.children?.length && (
-        <ChevronDownIcon className={`ms-1 -me-1 size-4 ${isScrolled ? 'text-neutral-400' : 'text-white/70'}`} aria-hidden="true" />
+        <ChevronDownIcon
+          className={`ms-1 -me-1 size-4 ${isScrolled ? 'text-neutral-400' : 'text-white/70'}`}
+          aria-hidden="true"
+        />
       )}
     </Link>
   )
@@ -114,10 +126,10 @@ const renderDropdown = (menuItem: TNavigationItem, level = 2) => (
   </li>
 )
 
-const DropdownMenu = ({ menuItem, isScrolled }: { menuItem: TNavigationItem; isScrolled?: boolean }) => {
+const DropdownMenu = ({ menuItem, isScrolled, home, isTransparentHeader }: { menuItem: TNavigationItem; isScrolled?: boolean; home?: boolean; isTransparentHeader?: boolean }) => {
   return (
     <li className="menu-dropdown relative menu-item flex">
-      <Lv1MenuItem menuItem={menuItem} isScrolled={isScrolled} />
+      <Lv1MenuItem menuItem={menuItem} isScrolled={isScrolled} home={home} isTransparentHeader={isTransparentHeader} />
       {menuItem.children?.length && menuItem.type === 'dropdown' ? (
         <div className="absolute top-full left-0 z-50 sub-menu w-56">
           <ul className="relative grid space-y-1 rounded-lg bg-white py-3 text-sm shadow-lg ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/10">
@@ -142,27 +154,34 @@ export interface Props {
   className?: string
   featuredPosts: TPost[]
   isScrolled?: boolean
+  isTransparentHeader?: boolean
+  home?: boolean
 }
-const Navigation: FC<Props> = ({ menu, className, featuredPosts, isScrolled }) => {
+const Navigation: FC<Props> = ({ menu, className, featuredPosts, isScrolled, isTransparentHeader, home }) => {
   return (
     <ul className={clsx('flex', className)}>
       {menu.map((menuItem) => {
         if (menuItem.type === 'dropdown') {
-          return <DropdownMenu key={`nav-${menuItem.id}`} menuItem={menuItem} isScrolled={isScrolled} />
+          return <DropdownMenu key={`nav-${menuItem.id}`} menuItem={menuItem} isScrolled={isScrolled} home={home} isTransparentHeader={isTransparentHeader}/>
         }
         if (menuItem.type === 'mega-menu') {
           return (
-            <MegaMenu 
-              featuredPosts={featuredPosts} 
-              key={`mega-${menuItem.id}`} 
-              menuItem={menuItem} 
-              isScrolled={isScrolled} 
+            <MegaMenu
+              featuredPosts={featuredPosts}
+              key={`mega-${menuItem.id}`}
+              menuItem={menuItem}
+              isScrolled={isScrolled}
             />
           )
         }
         return (
           <li key={`item-${menuItem.id}`} className="relative menu-item flex">
-            <Lv1MenuItem menuItem={menuItem} isScrolled={isScrolled} />
+            <Lv1MenuItem
+              menuItem={menuItem}
+              isScrolled={isScrolled}
+              isTransparentHeader={isTransparentHeader}
+              home={home}
+            />
           </li>
         )
       })}
