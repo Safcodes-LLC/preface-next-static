@@ -16,6 +16,7 @@ import { getCategories } from '@/data/categories'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
 import { Metadata } from 'next'
 import HomeHeader from './components/homeHeader'
+import ParallaxScrollSection from '@/components/ParallaxScrollSection '
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -92,7 +93,7 @@ const Page = async () => {
       <HomeHeader />
       <VideoHeroBanner />
       <div className="container pt-[60px]">
-        <SectionMagazine10 posts={magazine10Data} videoPosts={videoPosts} />
+        <SectionMagazine10 posts={articlesArray} videoPosts={videoPostsArray} />
       </div>
       {/* <ParallaxScrollSection magazine10Data={articlesArray} videoPosts={videoPostsArray} /> */}
       <div className="relative container mt-28 space-y-28 lg:space-y-40">
