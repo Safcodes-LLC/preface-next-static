@@ -166,7 +166,7 @@ const Navbar2: FC<Navbar2Props> = ({ home }) => {
           </Popover>
         </div> */}
 
-        <CurrLangDropdown languages={languages} />
+        <CurrLangDropdown languages={languages} home={home}/>
 
         {/* Calendar with Date and Time */}
         <div className={clsx('flex items-center gap-x-2 text-sm font-medium text-[#000000] dark:text-white')}>

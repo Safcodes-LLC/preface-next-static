@@ -1,7 +1,6 @@
 'use client'
 
-import { getCurrencies, getLanguages } from '@/data/navigation'
-import { Link } from '@/shared/link'
+import { getCurrencies } from '@/data/navigation'
 import {
   CloseButton,
   Popover,
@@ -15,26 +14,32 @@ import {
 import { GlobeAltIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
-import { FC, ComponentType, SVGProps, useState, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 type LanguageItem = {
-  id: string;
-  name: string;
-  description: string;
-  href: string;
-  code: string;
-  active?: boolean;
-  FlagComponent?: React.FC<any>;
-};
+  id: string
+  name: string
+  description: string
+  href: string
+  code: string
+  active?: boolean
+  FlagComponent?: React.FC<any>
+}
 
-const Languages = ({ languages , onSelectLanguage }: { languages: LanguageItem[]; onSelectLanguage: (lang: LanguageItem) => void; }) => {
+const Languages = ({
+  languages,
+  onSelectLanguage,
+}: {
+  languages: LanguageItem[]
+  onSelectLanguage: (lang: LanguageItem) => void
+}) => {
   return (
     <div className="grid gap-6">
       {languages.map((item) => (
         <CloseButton
           key={item.code}
           onClick={() => onSelectLanguage(item)}
-          className={clsx(  
+          className={clsx(
             '-m-2.5 flex items-center rounded-lg p-2.5 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden dark:hover:bg-neutral-700',
             item.active ? 'bg-neutral-100 dark:bg-neutral-700' : 'opacity-80'
           )}
@@ -44,7 +49,9 @@ const Languages = ({ languages , onSelectLanguage }: { languages: LanguageItem[]
               {item.FlagComponent && <item.FlagComponent className="" />}
               <p className="text-sm font-medium">{item.name}</p>
             </div>
-            <p className="text-xs text-neutral-500 dark:text-neutral-400 text-left rtl:text-right">{item.description}</p>
+            <p className="text-left text-xs text-neutral-500 rtl:text-right dark:text-neutral-400">
+              {item.description}
+            </p>
           </div>
         </CloseButton>
       ))}
@@ -59,6 +66,7 @@ interface Props {
   className?: string
   currencies?: Awaited<ReturnType<typeof getCurrencies>>
   languages: LanguageItem[]
+  home?: boolean
 }
 
 const CurrLangDropdown: FC<Props> = ({
@@ -69,39 +77,41 @@ const CurrLangDropdown: FC<Props> = ({
   className,
   languages,
   currencies,
+  home,
   panelClassName = 'w-xs',
 }) => {
-
-  const [selectedLanguage, setSelectedLanguage] = useState<LanguageItem | null>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageItem | null>(null)
 
   // Initialize language from localStorage or default to English
   useEffect(() => {
-    const savedLangCode = typeof window !== 'undefined' ? localStorage.getItem('selectedLanguage') : null;
-    const defaultLang = languages.find(lang => lang.code === 'en') || languages[0];
-    const initialLang = savedLangCode 
-      ? languages.find(lang => lang.code === savedLangCode) || defaultLang
-      : defaultLang;
-    
-    setSelectedLanguage(initialLang);
-    
+    const savedLangCode = typeof window !== 'undefined' ? localStorage.getItem('selectedLanguage') : null
+    const defaultLang = languages.find((lang) => lang.code === 'en') || languages[0]
+    const initialLang = savedLangCode
+      ? languages.find((lang) => lang.code === savedLangCode) || defaultLang
+      : defaultLang
+
+    setSelectedLanguage(initialLang)
+
     // Ensure default is set in localStorage
     if (typeof window !== 'undefined' && !savedLangCode) {
-      localStorage.setItem('selectedLanguage', defaultLang.code);
+      localStorage.setItem('selectedLanguage', defaultLang.code)
     }
-  }, [languages]);
+  }, [languages])
 
   const handleLanguageSelect = (language: LanguageItem) => {
-    setSelectedLanguage(language);
+    setSelectedLanguage(language)
     if (typeof window !== 'undefined') {
-      localStorage.setItem('selectedLanguage', language.code);
+      localStorage.setItem('selectedLanguage', language.code)
     }
-  };
+  }
 
-  if (!selectedLanguage) return null;
+  if (!selectedLanguage) return null
 
   return (
     <Popover className={clsx('group', className)}>
-      <PopoverButton className=" flex items-center p-2.5 text-sm font-medium text-neutral-600 group-hover:text-neutral-950 focus:outline-hidden focus-visible:outline-hidden dark:text-neutral-200 dark:group-hover:text-neutral-100">
+      <PopoverButton
+        className={`flex items-center p-2.5 text-sm font-medium focus:outline-hidden focus-visible:outline-hidden cursor-pointer ${home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'}`}
+      >
         <GlobeAltIcon className="size-5" />
         <ChevronDownIcon className="ms-1 size-4 group-data-open:rotate-180" aria-hidden="true" />
       </PopoverButton>
