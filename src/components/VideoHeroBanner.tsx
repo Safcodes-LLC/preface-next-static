@@ -38,7 +38,7 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
           style={{
             opacity: isPlaying ? 1 : 0,
           }}
-          className="absolute inset-0 bg-neutral-900 transition-opacity"
+          className="absolute inset-0 bg-[#000000] transition-opacity"
           width="100%"
           height="100%"
           onStart={() => {
