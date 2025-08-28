@@ -5,7 +5,9 @@ import Input from '@/shared/Input'
 import { Field, Label } from '@/shared/fieldset'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { login } from '@/services/authService'
 
 interface LoginFormProps {
   className?: string
@@ -13,45 +15,35 @@ interface LoginFormProps {
 
 export default function LoginForm({ className = '' }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false)
+  const router = useRouter()
   const [formData, setFormData] = useState({
-    email: '',
+    emailOrUsername: '',
     password: '',
   })
   const [isLoading, setIsLoading] = useState(false)
 
-  // Handle form submission internally
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!formData.email || !formData.password) return
+    if (!formData.emailOrUsername || !formData.password) return
 
     setIsLoading(true)
     try {
       console.log('Login attempt:', formData)
+      
+      // Call the login API
+      await login({
+        emailOrUsername: formData.emailOrUsername,
+        password: formData.password
+      })
 
-      // TODO: Add your login logic here
-      // Example API call:
-      // const response = await fetch('/api/auth/login', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // })
-
-      // Example with NextAuth:
-      // import { signIn } from 'next-auth/react'
-      // const result = await signIn('credentials', {
-      //   email: formData.email,
-      //   password: formData.password,
-      //   redirect: false,
-      // })
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      // Handle success - redirect or show success message
-      console.log('Login successful!')
-    } catch (error) {
+      // Redirect to home page on successful login
+      router.push('/')
+      
+    } catch (error: any) {
       console.error('Login error:', error)
-      // Handle error - show error message
+      // You can add error handling here (e.g., show toast notification)
+      alert(error.message || 'Login failed. Please try again.')
     } finally {
       setIsLoading(false)
     }
@@ -131,8 +123,16 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
     // </form>
     <form className={`grid grid-cols-1 gap-6 ${className}`} onSubmit={handleSubmit}>
       <Field className="block">
-        <Label className="text-[#868686] dark:text-[#B7B7B7]">Email or Mobile Number</Label>
-        <Input type="email" placeholder="" className="mt-1" />
+        <Label className="text-[#868686] dark:text-[#B7B7B7]">Email or Username</Label>
+        <Input 
+          type="text" 
+          placeholder="Enter your email or username" 
+          className="mt-1"
+          value={formData.emailOrUsername}
+          onChange={handleInputChange('emailOrUsername')}
+          required
+          disabled={isLoading}
+        />
       </Field>
       <Field className="block">
         <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">Password</Label>
@@ -140,7 +140,7 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
           <Input
             type={showPassword ? 'text' : 'password'}
             className="pr-10"
-            placeholder=""
+            placeholder="Enter your password"
             value={formData.password}
             onChange={handleInputChange('password')}
             required
@@ -164,8 +164,12 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
           </Link>
         </div>
       </Field>
-      <ButtonPrimary type="submit" color="loginbtn">
-        Login
+      <ButtonPrimary 
+        type="submit" 
+        color="loginbtn"
+        disabled={isLoading || !formData.emailOrUsername || !formData.password}
+      >
+        {isLoading ? 'Logging in...' : 'Login'}
       </ButtonPrimary>
     </form>
   )

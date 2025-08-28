@@ -1,11 +1,13 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import Avatar from '@/shared/Avatar'
 import ButtonCircle from '@/shared/ButtonCircle'
 import { Divider } from '@/shared/divider'
 import { Link } from '@/shared/link'
 import SwitchDarkMode2 from '@/shared/SwitchDarkMode2'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
+import { logout } from '@/services/authService'
 import {
   BulbChargingIcon,
   FavouriteIcon,
@@ -31,6 +33,14 @@ export default function AvatarDropdown({ className, trigger }: Props) {
     handle: 'john-doe',
     location: 'Dubai, UAE',
     bio: 'I am a software engineer and a writer. I love to write about technology and programming.',
+  }
+
+  const router = useRouter()
+
+  const handleLogout = () => {
+    logout()
+    // Refresh the page to clear any client-side state
+    window.location.href = '/'  // Using window.location to ensure full page refresh
   }
 
   return (
@@ -155,15 +165,15 @@ export default function AvatarDropdown({ className, trigger }: Props) {
             </Link> */}
 
             {/* ------------------ 2 --------------------- */}
-            <Link
-              href={'#'}
-              className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700"
+            <button
+              onClick={handleLogout}
+              className="w-full -m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700 text-left"
             >
               <div className="flex shrink-0 items-center justify-center text-neutral-500 dark:text-neutral-300">
                 <HugeiconsIcon icon={Logout01Icon} size={24} strokeWidth={1.5} />
               </div>
               <p className="ms-4 text-sm font-medium">{'Log out'}</p>
-            </Link>
+            </button>
           </div>
         </PopoverPanel>
       </Popover>
