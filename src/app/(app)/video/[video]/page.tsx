@@ -11,8 +11,9 @@ import SingleHeaderContainer from '../SingleHeaderContainer'
 import SingleRelatedPosts from '../SingleRelatedPosts'
 import SingleHeaderContainerVideo from '../SingleHeaderContainerVideo'
 
-export async function generateMetadata({ params }: { params: { video: string } }): Promise<Metadata> {
-  const post = await getPostBySlug(params.video)
+export async function generateMetadata({ params }: { params: Promise<{ video: string }> }): Promise<Metadata> {
+  const resolvedParams = await params
+  const post = await getPostBySlug(resolvedParams.video)
   if (!post) {
     return {
       title: 'Video not found',
@@ -38,12 +39,13 @@ export async function generateMetadata({ params }: { params: { video: string } }
 }
 
 interface PageProps {
-  params: { video: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: Promise<{ video: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 const Page = async ({ params }: PageProps) => {
-  const post = await getPostBySlug(params.video) as TPost | null;
+  const resolvedParams = await params
+  const post = await getPostBySlug(resolvedParams.video) as TPost | null;
   
   if (!post) {
     return (
