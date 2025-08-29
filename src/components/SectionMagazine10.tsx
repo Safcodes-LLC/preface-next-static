@@ -6,7 +6,7 @@ import Card19 from './PostCards/Card19'
 
 interface Props {
   posts: TPost[]
-  videoPosts: any
+  videoPosts?: any
   className?: string
 }
 
