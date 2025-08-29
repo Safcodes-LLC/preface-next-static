@@ -7,7 +7,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
-import PostTypeFeaturedIcon from '../PostTypeFeaturedIcon'
 
 interface Props {
   className?: string
@@ -26,8 +25,30 @@ const Card19: FC<Props> = ({
   verticalLine = false,
   textCenter = false,
 }) => {
-  const { title, excerpt, handle, thumbnail, featuredImage, categories, postType, likeCount, liked, commentCount, bookmarked } =
-    post
+  const {
+    title,
+    excerpt,
+    slug,
+    handle,
+    thumbnail,
+    featuredImage,
+    categories,
+    postType,
+    likeCount,
+    liked,
+    commentCount,
+    bookmarked,
+  } = post
+
+  console.log(post, 'post...')
+
+  const parentCategorySlug = categories[0]?.parentCategory?.slug
+  const categorySlug = categories[0]?.slug
+
+  console.log(parentCategorySlug, 'parentCategorySlug');
+  console.log(categorySlug, 'categorySlug');
+  console.log(slug, 'slug');
+  
 
   return (
     <div className={clsx('group post-card-19 relative flex flex-col overflow-hidden rounded-xl', className)}>
@@ -52,15 +73,12 @@ const Card19: FC<Props> = ({
               wrapSize="size-7"
               iconSize="size-4"
             /> */}
-            <Link href={`/post/${handle}`} className="absolute inset-0"></Link>
+            <span className="absolute inset-0"></span>
           </>
         )}
       </div>
 
-      <Link
-        href={`/post/${handle}`}
-        className="absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80"
-      />
+      <span className="absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80" />
 
       {/* <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:px-7">
         <CategoryBadgeList categories={categories} />
@@ -87,10 +105,12 @@ const Card19: FC<Props> = ({
         {/* Button above title */}
         {textCenter && (
           <div className="relative z-10">
-            <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
-              Watch full video
-              {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}
-            </ButtonPrimary>
+            <Link href={`/video/${slug}`}>
+              <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
+                Watch full video
+                {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}
+              </ButtonPrimary>
+            </Link>
           </div>
         )}
 
@@ -110,13 +130,15 @@ const Card19: FC<Props> = ({
             <p className={clsx('line-clamp-2 flex-1 text-[12px] leading-snug font-medium text-white sm:text-sm')}>
               {excerpt}
             </p>
-            <ButtonPrimary color="logo-colors" className="flex-shrink-0 !px-4 !py-1 !text-[12px]">
-              Start Reading
-            </ButtonPrimary>
+            <Link href={`/${parentCategorySlug}/${categorySlug}/${slug}`}>
+              <ButtonPrimary color="logo-colors" className="flex-shrink-0 !px-4 !py-1 !text-[12px]">
+                Start Reading
+              </ButtonPrimary>
+            </Link>
           </div>
         )}
 
-        <Link href={`/post/${handle}`} className="absolute inset-0 z-0" />
+        <span className="absolute inset-0 z-0" />
       </div>
     </div>
   )

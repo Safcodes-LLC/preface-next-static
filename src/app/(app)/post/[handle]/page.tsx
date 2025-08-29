@@ -9,6 +9,7 @@ import { Metadata } from 'next'
 import SingleContentContainer from '../SingleContentContainer'
 import SingleHeaderContainer from '../SingleHeaderContainer'
 import SingleRelatedPosts from '../SingleRelatedPosts'
+import Link from 'next/link'
 
 export async function generateMetadata({ params }: { params: Promise<{ handle: string }> }): Promise<Metadata> {
   const { handle } = await params
@@ -28,6 +29,18 @@ export async function generateMetadata({ params }: { params: Promise<{ handle: s
 const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
   const { handle } = await params
   const post = await getPostByHandle(handle)
+   // Add this null check
+   if (!post) {
+    return (
+      <div className="container mx-auto px-4 py-16 text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Post Not Found</h1>
+        <p className="text-gray-600 mb-8">The post youre looking for doesnt exist or has been removed.</p>
+        <Link href="/" className="text-blue-600 hover:text-blue-800 underline">
+          Return to Home
+        </Link>
+      </div>
+    )
+  }
   const comments = await getCommentsByPostId(post.id)
   const relatedPosts = (await getAllPosts()).slice(0, 6)
   const moreFromAuthorPosts = (await getAllPosts()).slice(1, 7)
@@ -36,6 +49,8 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
   const widgetCategories = (await getCategories()).slice(0, 6)
   const widgetTags = (await getTags()).slice(0, 6)
   const widgetAuthors = (await getAuthors()).slice(0, 6)
+
+  
 
   return (
     <>

@@ -107,7 +107,7 @@ const VideoHoverPlayer: FC<Props> = ({ className, post }) => {
       )}
 
       {/* Link overlay */}
-      <Link href={`/post/${handle}`} className="absolute inset-0 z-10" />
+      <Link href={`/video/${post.slug}`} className="absolute inset-0 z-10" />
     </div>
   )
 }
