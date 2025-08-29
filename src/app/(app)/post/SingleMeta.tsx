@@ -5,8 +5,11 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
 
-interface Props extends Pick<TPostDetail, 'date' | 'author' | 'readingTime'> {
+interface Props {
   className?: string
+  date?: any
+  author?: any
+  readingTime?: number
 }
 
 const SingleMeta: FC<Props> = ({ className, date, author, readingTime }) => {
