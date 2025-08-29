@@ -32,7 +32,7 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
         <SingleHeaderContainer post={post} headerStyle="style3" />
 
         <div className="container mt-12">
-          {/* <SingleContentContainer post={post} comments={comments} /> */}
+          <SingleContentContainer post={post} />
         </div>
 
         <SingleRelatedPosts relatedPosts={relatedPosts} moreFromAuthorPosts={moreFromAuthorPosts} />
