@@ -10,7 +10,7 @@ import { ShareDropdown } from './SingleMetaAction'
 import TheContent from './TheContent'
 
 interface Props {
-  post: TPostDetail
+  post: TPostDetail | any
   comments: TComment[]
   className?: string
 }
