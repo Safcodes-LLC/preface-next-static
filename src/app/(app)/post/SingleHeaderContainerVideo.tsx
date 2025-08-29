@@ -14,7 +14,7 @@ import VideoPlayer from './VideoPlayer'
 
 interface Props {
   className?: string
-  post: TPostDetail
+  post: TPostDetail | any
   headerStyle?: 'style1' | 'style2' | 'style3' | 'audio' | 'video' | 'gallery'
 }
 
