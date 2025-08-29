@@ -1,16 +1,10 @@
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import SignupForm from '@/components/auth/SignupForm'
 import SocialLogin from '@/components/auth/SocialLogin'
 import Logo from '@/shared/Logo'
 import Image from 'next/image'
 import Link from 'next/link'
-
-// Dynamically import with no SSR
-const GuestRoute = dynamic(
-  () => import('@/contexts/AuthContext').then((mod) => mod.GuestRoute),
-  { ssr: false }
-)
+import { GuestRoute } from '@/contexts/AuthContext'
 
 export const metadata: Metadata = {
   title: 'Sign Up',
