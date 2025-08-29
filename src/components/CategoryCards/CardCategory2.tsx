@@ -7,13 +7,17 @@ import { FC } from 'react'
 
 interface Props {
   className?: string
-  category: TCategory
+  category: TCategory | any
   badge?: string
 }
 
 const CardCategory2: FC<Props> = ({ className, category, badge }) => {
-  const { count, name, categoryName,  handle, thumbnail, icon , featuredImage, featuredIcon, postCount } = category
-  // console.log(category,"category432")
+  const { count, name, categoryName, parentCategory, slug, handle, thumbnail, icon , featuredImage, featuredIcon, postCount } = category
+  console.log(category,"category432")
+  console.log(parentCategory,"parentCategory")
+
+
+  
   return (
     <div
       className={clsx(
@@ -36,7 +40,7 @@ const CardCategory2: FC<Props> = ({ className, category, badge }) => {
       />
       <div className="mt-3">
         <h2 className={`text-base font-semibold line-clamp-1`}>{categoryName}</h2>
-        <Link className="absolute inset-0" href={`/category/${handle}`} />
+        <Link className="absolute inset-0" href={`/${parentCategory?.slug}/${slug}`} />
         <span className={`mt-1 block text-xs text-[#666666] dark:text-[#DFDFDF]`}>{postCount} articles</span>
       </div>
     </div>
