@@ -40,15 +40,8 @@ const Card19: FC<Props> = ({
     bookmarked,
   } = post
 
-  console.log(post, 'post...')
-
   const parentCategorySlug = categories[0]?.parentCategory?.slug
   const categorySlug = categories[0]?.slug
-
-  console.log(parentCategorySlug, 'parentCategorySlug');
-  console.log(categorySlug, 'categorySlug');
-  console.log(slug, 'slug');
-  
 
   return (
     <div className={clsx('group post-card-19 relative flex flex-col overflow-hidden rounded-xl', className)}>
