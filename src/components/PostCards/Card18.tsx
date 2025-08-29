@@ -12,7 +12,7 @@ interface Props {
   className?: string
   ratio?: string
   titleClass?: string
-  post: TPost
+  post?: TPost | any
 }
 
 const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post }) => {
@@ -20,6 +20,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
     title,
     excerpt,
     handle,
+    slug,
     thumbnail,
     featuredImage,
     categories,
@@ -29,6 +30,10 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
     commentCount,
     bookmarked,
   } = post
+  
+  const parentCategorySlug = categories[0]?.parentCategory?.slug
+  const categorySlug = categories[0]?.slug
+
   return (
     <div className={clsx('group post-card-18 relative flex flex-col overflow-hidden rounded-xl', className)}>
       <div className={clsx('relative size-full', ratio)}>
@@ -88,10 +93,13 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
             {excerpt}
           </p>
           <div className="relative z-10">
+            <Link href={`/${parentCategorySlug}/${categorySlug}/${slug}`}>
+            
             <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
               Start Reading
               {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}
             </ButtonPrimary>
+            </Link>
           </div>
         </div>
       </div>
