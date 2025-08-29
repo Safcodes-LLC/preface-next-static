@@ -5,12 +5,13 @@ import { getAllPosts } from '@/data/posts'
 import { Badge } from '@/shared/Badge'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ProtectedRoute } from '@/contexts/AuthContext'
 
 // Dynamically import with no SSR
-const ProtectedRoute = dynamic(
-  () => import('@/contexts/AuthContext').then((mod) => mod.ProtectedRoute),
-  { ssr: false }
-)
+// const ProtectedRoute = dynamic(
+//   () => import('@/contexts/AuthContext').then((mod) => mod.ProtectedRoute),
+//   { ssr: false }
+// )
 
 export const metadata = {
   title: 'Dashboard - Posts',
