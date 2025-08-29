@@ -16,8 +16,10 @@ interface Props {
 }
 
 const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
-  const { categories, date, author, readingTime, commentCount, handle, likeCount, liked, title, excerpt } = post
+  const {  date, author, readingTime, commentCount, handle, likeCount, liked, title, excerpt } = post
 
+    // Use post.categories if it exists, otherwise fallback to empty array
+  const categories = post.categories || []
   return (
     <div className={`single-header-meta space-y-5 ${className}`}>
       {/* <CategoryBadgeList categories={categories || []} /> */}
