@@ -1,35 +1,47 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { locales, defaultLocale } from './i18n/settings'
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Handle Chrome DevTools requests
   if (pathname.startsWith('/.well-known/appspecific/com.chrome.devtools.json')) {
-    return NextResponse.json({
-      name: "Preface to Islam",
-      short_name: "Preface",
-      description: "Islamic knowledge and insights",
-      start_url: "/",
-      display: "standalone",
-      theme_color: "#16a34a",
-      background_color: "#ffffff"
-    })
-  }
-
-  // Handle other .well-known requests
-  if (pathname.startsWith('/.well-known/')) {
     return new NextResponse('Not Found', { status: 404 })
   }
 
-  // Validate article routes - they should not contain dots or invalid characters
-  if (pathname.match(/\/[^\/]+\/[^\/]+\/[^\/]+$/)) {
-    const segments = pathname.split('/')
-    const article = segments[segments.length - 1]
-    
-    // Check if the article segment contains invalid characters
-    if (article.includes('.') || article.includes('com.chrome.devtools.json')) {
-      return new NextResponse('Invalid article URL', { status: 400 })
+  // Skip API routes and static files
+  if (
+    pathname.startsWith('/api/') ||
+    pathname.startsWith('/_next/') ||
+    pathname.match(/\.(ico|svg|png|jpg|jpeg|gif|webp|css|js|json)$/)
+  ) {
+    return NextResponse.next()
+  }
+
+  const pathSegments = pathname.split('/')
+  const pathLocale = pathSegments[1]
+
+  // If the first segment is a valid locale
+  if (locales.includes(pathLocale)) {
+    // If it's the default locale, redirect to remove it from URL
+    if (pathLocale === defaultLocale) {
+      const newPathname = `/${pathSegments.slice(2).join('/')}`
+      return NextResponse.redirect(new URL(newPathname || '/', request.url))
+    }
+    return NextResponse.next()
+  }
+
+  // If no locale in URL and not the root path
+  if (pathname !== '/') {
+    // Get the locale from cookie or accept-language header
+    const acceptLanguage = request.headers.get('accept-language')?.split(',')?.[0] || defaultLocale
+    const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value
+    const locale = cookieLocale || acceptLanguage || defaultLocale
+
+    // Only redirect if the detected locale is not the default
+    if (locale !== defaultLocale) {
+      return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url))
     }
   }
 
@@ -38,7 +50,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Match all routes except static files, api routes, and _next routes
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|js|json)$).*)',
   ],
 }
