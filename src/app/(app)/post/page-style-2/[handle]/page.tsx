@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ handle: s
 const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
   const { handle } = await params
   const post = await getPostByHandle(handle)
-  const comments = await getCommentsByPostId(post.id)
+  // const comments = await getCommentsByPostId(post.id)
   const relatedPosts = (await getAllPosts()).slice(0, 6)
   const moreFromAuthorPosts = (await getAllPosts()).slice(1, 7)
 
@@ -32,7 +32,7 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
         <SingleHeaderContainer post={post} headerStyle="style2" />
 
         <div className="container mt-12">
-          <SingleContentContainer post={post} comments={comments} />
+          <SingleContentContainer post={post}  />
         </div>
 
         <SingleRelatedPosts relatedPosts={relatedPosts} moreFromAuthorPosts={moreFromAuthorPosts} />

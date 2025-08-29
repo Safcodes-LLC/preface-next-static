@@ -38,7 +38,7 @@ interface RawDraftContentState {
 
 interface Props {
   post: TPostDetail | any
-  comments: TComment[]
+  comments?: TComment[]
   className?: string
 }
 
