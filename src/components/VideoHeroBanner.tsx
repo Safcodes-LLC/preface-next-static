@@ -10,8 +10,8 @@ interface VideoHeroBannerProps {
 }
 
 const VideoHeroBanner: FC<VideoHeroBannerProps> = ({ 
-  // videoUrl = 'https://www.youtube.com/watch?v=vHBodN0Mirs',
-  videoUrl = '/videos/advideo.mp4',
+  videoUrl = 'https://www.youtube.com/watch?v=vHBodN0Mirs',
+  // videoUrl = '/videos/advideo.mp4',
   heading = 'VIDEO',
   className = ''
 }) => {

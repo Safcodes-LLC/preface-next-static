@@ -11,7 +11,7 @@ import TheContent from './TheContent'
 
 interface Props {
   post: TPostDetail | any
-  comments: TComment[]
+  comments?: TComment[]
   className?: string
 }
 

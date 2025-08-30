@@ -17,13 +17,13 @@ export const metadata: Metadata = {
 }
 
 const Page = async () => {
-  const posts = await getAllPosts()
-  const authors = await getAuthors()
-  const categories = await getCategoriesWithPosts()
+  const posts = (await getAllPosts()) || []
+  const authors = (await getAuthors()) || []
+  const categories = (await getCategoriesWithPosts()) || []
 
   return (
     <div className="relative container space-y-28 pb-28 lg:space-y-32 lg:pb-32">
-      <SectionMagazine10 posts={posts.slice(0, 8)} />
+      {/* <SectionMagazine10 posts={posts.slice(0, 8)} /> */}
 
       <SectionMagazine9
         heading="Latest articles"

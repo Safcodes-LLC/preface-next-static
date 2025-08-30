@@ -1,5 +1,4 @@
-import CategoryBadgeList from '@/components/CategoryBadgeList'
-import { TPostDetail } from '@/data/posts'
+import { TPost, TPostDetail } from '@/data/posts'
 import { Divider } from '@/shared/divider'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -11,18 +10,15 @@ import VideoPlayer from './VideoPlayer'
 
 interface Props {
   className?: string
-  post?: TPostDetail | any
+  post: TPost | any
   headerStyle?: 'style1' | 'style2' | 'style3' | 'audio' | 'video' | 'gallery'
 }
 
 const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
-  const {  date, author, readingTime, commentCount, handle, likeCount, liked, title, excerpt } = post
+  const {  commentCount, handle, likeCount, liked, title, excerpt } = post
 
-    // Use post.categories if it exists, otherwise fallback to empty array
-  const categories = post.categories || []
   return (
     <div className={`single-header-meta space-y-5 ${className}`}>
-      {/* <CategoryBadgeList categories={categories || []} /> */}
       <SingleTitle title={title} />
       {excerpt && (
         <p className="text-base/relaxed text-neutral-600 md:text-lg/relaxed dark:text-neutral-400">{excerpt}</p>
@@ -55,7 +51,6 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
     liked,
     title,
     excerpt,
-    categories,
     date,
     author,
     readingTime,
@@ -67,7 +62,6 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
 
       <div className="relative container rounded-xl pt-10 lg:pt-16">
         <div className="relative mx-auto max-w-4xl space-y-5 text-neutral-100">
-          <CategoryBadgeList categories={categories || []} />
           <SingleTitle title={title} />
           {excerpt && <p className="text-base text-neutral-300 md:text-lg/relaxed">{excerpt}</p>}
         </div>

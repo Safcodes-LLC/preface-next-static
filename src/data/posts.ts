@@ -2371,6 +2371,8 @@ export async function getPostBySlug(slug: string): Promise<TPost | null> {
       likeCount: 0,
       liked: false,
       postType: 'video',
+      commentCount: post.commentCount || 0,
+      
       status: post.status || 'published',
       ...post, // Spread the rest of the post properties
     };

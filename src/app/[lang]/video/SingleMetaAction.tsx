@@ -158,8 +158,13 @@ function ShareDropdown({ handle, color }: { handle: string; color?: string }) {
   )
 }
 
-interface Props extends Pick<TPostDetail, 'likeCount' | 'liked' | 'commentCount' | 'handle' | 'title'> {
+interface Props  {
   className?: string
+  likeCount?: number | any
+  liked?: boolean | any
+  commentCount?: number | any
+  handle?: string | any
+  title?: string | any
 }
 
 const SingleMetaAction: FC<Props> = ({ className, likeCount, liked, commentCount, handle, title }) => {
