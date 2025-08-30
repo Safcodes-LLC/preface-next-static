@@ -11,23 +11,12 @@ import VideoPlayer from './VideoPlayer'
 
 interface Props {
   className?: string
-  post?:  any
+  post: TPostDetail
   headerStyle?: 'style1' | 'style2' | 'style3' | 'audio' | 'video' | 'gallery'
 }
 
 const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
-  // Only destructure properties that always exist, use optional chaining for others
-  const title = post?.title;
-  const excerpt = post?.excerpt;
-  const commentCount = post?.commentCount;
-  const handle = post?.handle;
-  const likeCount = post?.likeCount;
-  const liked = post?.liked;
-  // Access categories, date, author, readingTime safely
-  const categories = post?.categories;
-  const date = post?.date;
-  const author = post?.author;
-  const readingTime = post?.readingTime;
+  const { categories, date, author, readingTime, commentCount, handle, likeCount, liked, title, excerpt } = post
 
   return (
     <div className={`single-header-meta space-y-5 ${className}`}>
