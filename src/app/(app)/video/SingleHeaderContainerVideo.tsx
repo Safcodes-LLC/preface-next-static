@@ -1,5 +1,5 @@
 import CategoryBadgeList from '@/components/CategoryBadgeList'
-import { TPostDetail } from '@/data/posts'
+import { TPost, TPostDetail } from '@/data/posts'
 import { Divider } from '@/shared/divider'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -11,12 +11,12 @@ import VideoPlayer from './VideoPlayer'
 
 interface Props {
   className?: string
-  post: TPostDetail
+  post: TPost | any
   headerStyle?: 'style1' | 'style2' | 'style3' | 'audio' | 'video' | 'gallery'
 }
 
 const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
-  const { categories, date, author, readingTime, commentCount, handle, likeCount, liked, title, excerpt } = post
+  const {  date, author, readingTime, commentCount, handle, likeCount, liked, title, excerpt } = post
 
   return (
     <div className={`single-header-meta space-y-5 ${className}`}>
