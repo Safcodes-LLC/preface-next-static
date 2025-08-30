@@ -23,7 +23,8 @@ export const metadata: Metadata = {
   description: 'Home page of the application showcasing various sections and posts.',
 }
 
-const Page = async () => {
+const Page = async ({params}: {params: Promise<{lang: string}>}) => {
+  const {lang} = await params
   // Get all data in parallel using Promise.all for better performance
   const [
     posts,
@@ -50,8 +51,8 @@ const Page = async () => {
     getAuthors(),
     getCategories(),
     getLatestArticles(),
-    getCategory(),
-    getTopTrendingTopics(),
+    getCategory(lang || 'en'),
+    getTopTrendingTopics(lang || 'en'),
     getIslamForBeginners(),
     getQuranSubcategories({ limit: 6 }),
     getQuranLatestArticles({ limit: 2 }),

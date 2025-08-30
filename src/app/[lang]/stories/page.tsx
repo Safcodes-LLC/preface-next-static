@@ -42,11 +42,11 @@ const PageStories = async ({
   params,
   searchParams,
 }: {
-  params: Promise<{ query: string }>
+  params: Promise<{ query: string ,lang: string}>
   searchParams: SearchParams
 }) => {
 
-   const category = await getCategory()
+   const category = await getCategory((await params).lang || 'en')
   //  console.log(category, 'category')
   async function handleSearch(formData: FormData) {
     'use server'

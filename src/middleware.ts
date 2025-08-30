@@ -33,18 +33,23 @@ export function middleware(request: NextRequest) {
   }
 
   // If no locale in URL and not the root path
-  if (pathname !== '/') {
-    // Get the locale from cookie or accept-language header
-    const acceptLanguage = request.headers.get('accept-language')?.split(',')?.[0] || defaultLocale
-    const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value
-    const locale = cookieLocale || acceptLanguage || defaultLocale
+  // if (pathname !== '/') {
+  //   // Get the locale from cookie or accept-language header
+  //   const acceptLanguage = request.headers.get('accept-language')?.split(',')?.[0] || defaultLocale
+  //   const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value
+  //   const locale = cookieLocale || acceptLanguage || defaultLocale
 
-    // Only redirect if the detected locale is not the default
-    if (locale !== defaultLocale) {
-      return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url))
-    }
-  }
-
+  //   // Only redirect if the detected locale is not the default
+  //   if (locale !== defaultLocale) {
+  //     return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url))
+  //   }
+  // }
+   // If no locale is provided, assume English and rewrite URL internally
+   if (!pathname.startsWith("/ml") && !pathname.startsWith("/ar")) {
+    const rewrittenPath = new URL(`/en${pathname}`, request.url);
+    console.log("Rewriting path to:", rewrittenPath.pathname);
+    return NextResponse.rewrite(rewrittenPath);
+}
   return NextResponse.next()
 }
 
