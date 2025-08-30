@@ -56,7 +56,7 @@ const widgetMenus: WidgetFooterMenu[] = [
   },
 ]
 
-const Footer: React.FC = () => {
+const Footer: React.FC<{lang: string}> = ({lang}) => {
   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
     return (
       <div key={index} className="text-sm">
@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
   return (
     <>
       {/* footer */}
-      <div className="nc-Footer relative border-t border-neutral-200 py-16 lg:py-28 dark:border-neutral-700">
+      <div className="nc-Footer relative border-t border-neutral-200 py-16 lg:py-28 dark:border-neutral-700" dir={lang === "ar" ? "rtl" : "ltr"}>
         <div className="container grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10">
           <div className="col-span-2 grid grid-cols-4 gap-5 md:col-span-4 lg:flex lg:flex-col lg:md:col-span-1">
             <div className="col-span-2 md:col-span-1">

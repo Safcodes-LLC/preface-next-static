@@ -90,7 +90,7 @@ const PageStories = async ({
   }
 
   return (
-    <div className="stories-page">
+    <div className="stories-page" dir={(await params).lang === "ar" ? "rtl" : "ltr"}>
       <div className="container mx-auto mt-12 sm:mt-20">
         {/* HEADER */}
         {/* <div className="relative aspect-16/9 lg:aspect-16/5">
