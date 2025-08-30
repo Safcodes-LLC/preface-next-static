@@ -4,7 +4,12 @@ import { locales, defaultLocale } from './i18n/settings'
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
+  const allowedExtensions = [".xml", ".txt", ".xml.gz"];
+  const allowedRoutes = ["/sitemap.xml", "/robots.txt", "/login","/forgot-password","/signup"];
 
+  if (allowedRoutes.includes(pathname) || allowedExtensions.some(ext => pathname.endsWith(ext))) {
+    return NextResponse.next();
+  }
   // Handle Chrome DevTools requests
   if (pathname.startsWith('/.well-known/appspecific/com.chrome.devtools.json')) {
     return new NextResponse('Not Found', { status: 404 })
