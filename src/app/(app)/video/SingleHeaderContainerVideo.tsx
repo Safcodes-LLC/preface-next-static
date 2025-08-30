@@ -53,7 +53,7 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
     liked,
     title,
     excerpt,
-    categories,
+    // categories,
     date,
     author,
     readingTime,
@@ -66,7 +66,7 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
 
       <div className="relative container rounded-xl pt-10 lg:pt-16">
         <div className="relative mx-auto max-w-4xl space-y-5 text-neutral-100">
-          {categories && <CategoryBadgeList categories={categories} />}
+          {/* {categories && <CategoryBadgeList categories={categories} />} */}
           <SingleTitle title={title} />
           {excerpt && <p className="text-base text-neutral-300 md:text-lg/relaxed">{excerpt}</p>}
         </div>
