@@ -1,4 +1,3 @@
-import CategoryBadgeList from '@/components/CategoryBadgeList'
 import { TPost, TPostDetail } from '@/data/posts'
 import { Divider } from '@/shared/divider'
 import clsx from 'clsx'
@@ -11,34 +10,33 @@ import VideoPlayer from './VideoPlayer'
 
 interface Props {
   className?: string
-  post: TPost | TPostDetail | any
+  post: TPost | any
   headerStyle?: 'style1' | 'style2' | 'style3' | 'audio' | 'video' | 'gallery'
 }
 
 const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
-  const { date, author, readingTime, commentCount, handle, likeCount, liked, title, excerpt } = post
+  const {  commentCount, handle, likeCount, liked, title, excerpt } = post
 
   return (
     <div className={`single-header-meta space-y-5 ${className}`}>
-      {/* categories intentionally removed here since not always available */}
       <SingleTitle title={title} />
       {excerpt && (
-        <p className="text-base/relaxed text-neutral-600 md:text-lg/relaxed dark:text-neutral-400">
-          {excerpt}
-        </p>
+        <p className="text-base/relaxed text-neutral-600 md:text-lg/relaxed dark:text-neutral-400">{excerpt}</p>
       )}
+      {/* <Divider /> */}
       <div className="flex flex-wrap items-center gap-4">
-        <div>
+        <div className="">
           <SingleMetaAction
             commentCount={commentCount}
             handle={handle}
             likeCount={likeCount}
             liked={liked}
             title={title}
+            className=""
           />
         </div>
       </div>
-      <div className="mt-8">
+      <div className='mt-8'>
         <Divider />
       </div>
     </div>
@@ -53,27 +51,24 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
     liked,
     title,
     excerpt,
-    // categories,
     date,
     author,
     readingTime,
     featuredImage,
   } = post
-
   return (
     <header className={clsx('single-header-style-3 relative', className)}>
       <div className="absolute inset-x-0 top-0 h-[480px] bg-neutral-900 md:h-[600px] lg:h-[700px] xl:h-[95vh] dark:bg-black/30" />
 
       <div className="relative container rounded-xl pt-10 lg:pt-16">
         <div className="relative mx-auto max-w-4xl space-y-5 text-neutral-100">
-          {/* {categories && <CategoryBadgeList categories={categories} />} */}
           <SingleTitle title={title} />
           {excerpt && <p className="text-base text-neutral-300 md:text-lg/relaxed">{excerpt}</p>}
         </div>
 
         {/* FEATURED IMAGE */}
         <div className="relative my-10 aspect-square lg:aspect-16/9">
-          {featuredImage?.src && (
+          {featuredImage.src && (
             <Image
               alt="post"
               className="rounded-3xl object-cover shadow-xl"
@@ -103,17 +98,18 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
 }
 
 const HeaderVideo = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
-  const videoSource =
-    post?.video_url || post?.videoUrl || post?.video_file || (post as any).video_url
+  // Use video_url if videoUrl is not available
+  const videoSource = post?.video_url || post?.videoUrl || post.video_file || (post as any).video_url;
+// console.log(videoSource, 'videoSource');
 
   if (!videoSource) {
     return (
       <div className="container py-10 text-center">
         <p className="text-lg text-red-500">No video source found for this post</p>
       </div>
-    )
+    );
   }
-
+  
   return (
     <div className={clsx('single-header-style-video', className)}>
       <VideoPlayer videoUrl={videoSource} />
@@ -124,15 +120,8 @@ const HeaderVideo = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
   )
 }
 
-const SingleHeaderContainerVideo: FC<Props> = ({
-  className,
-  post,
-  headerStyle = 'style1',
-}) => {
-  if (
-    (post.postType?.name === 'Video' && (post.video_url || (post as any).videoUrl)) ||
-    headerStyle === 'video'
-  ) {
+const SingleHeaderContainerVideo: FC<Props> = ({ className, post, headerStyle = 'style1' }) => {
+  if ((post.postType.name === 'Video' && (post.video_url || (post as any).videoUrl)) || headerStyle === 'video') {
     return <HeaderVideo className={className} post={post} />
   }
 
