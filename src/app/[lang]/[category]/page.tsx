@@ -8,11 +8,12 @@ import { notFound } from 'next/navigation'
 
 // Remove generateStaticParams to enable dynamic routing
 
-export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
-  const { category } = await params
+export async function generateMetadata({ params }: { params: Promise<{ category: string, lang: string }> }): Promise<Metadata> {
+  const { category, lang } = await params
 
   try {
-    const categoryData = await serverFetch.get(`/api/frontend/category/slug/${category}`)
+    const categoryData = await serverFetch.get(`/api/frontend/category/slug/${category}`,{language:lang
+    })
 
     if (!categoryData) {
       return {
