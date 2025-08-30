@@ -18,8 +18,7 @@ interface Props {
 const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
   const {  date, author, readingTime, commentCount, handle, likeCount, liked, title, excerpt } = post
 
-    // Use post.categories if it exists, otherwise fallback to empty array
-  const categories = post.categories || []
+
   return (
     <div className={`single-header-meta space-y-5 ${className}`}>
       {/* <CategoryBadgeList categories={categories || []} /> */}
@@ -55,7 +54,7 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
     liked,
     title,
     excerpt,
-    categories,
+    // categories,
     date,
     author,
     readingTime,
@@ -67,7 +66,7 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
 
       <div className="relative container rounded-xl pt-10 lg:pt-16">
         <div className="relative mx-auto max-w-4xl space-y-5 text-neutral-100">
-          <CategoryBadgeList categories={categories || []} />
+          {/* <CategoryBadgeList categories={categories || []} /> */}
           <SingleTitle title={title} />
           {excerpt && <p className="text-base text-neutral-300 md:text-lg/relaxed">{excerpt}</p>}
         </div>
