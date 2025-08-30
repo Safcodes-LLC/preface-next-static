@@ -18,7 +18,7 @@ export const serverFetch = {
     options: ApiOptions = {}
   ): Promise<T> => {
     const { requiresAuth = false, headers = {}, next, limit, page } = options;
-    const language = 'ml'; // Get from cookies/headers in server components
+    const language = 'ar'; // Get from cookies/headers in server components
 
     // Build query parameters
     const params = new URLSearchParams();
