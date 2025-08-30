@@ -56,7 +56,7 @@ class ApiClient {
     }
 
     // Add default language parameter
-    url.searchParams.append('lang', 'ar')
+    url.searchParams.append('lang', 'en')
 
     // Prepare headers
     const requestHeaders = {
