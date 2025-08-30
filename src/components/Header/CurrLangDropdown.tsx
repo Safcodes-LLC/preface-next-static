@@ -100,6 +100,7 @@ const CurrLangDropdown: FC<Props> = ({
   const handleLanguageSelect = (language: LanguageItem) => {
     setSelectedLanguage(language)
     
+    localStorage.setItem("selectedLanguage", language.code)
     // Get current path without locale
     const pathSegments = pathname.split('/').filter(Boolean)
     const currentPath = locales.includes(pathSegments[0]) 

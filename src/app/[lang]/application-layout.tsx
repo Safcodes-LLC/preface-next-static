@@ -22,8 +22,13 @@ const ApplicationLayout: React.FC<Props> = ({ children, home }) => {
   const pathname = usePathname()
   const [navigationMenu, setNavigationMenu] = useState<TNavigationItem[]>([])
   const [featuredPosts, setFeaturedPosts] = useState<TPost[]>([])
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("en")
 
   useEffect(() => {
+    const storedLang = localStorage.getItem('selectedLanguage')
+    if (storedLang) {
+      setSelectedLanguage(storedLang)
+    }
     // Fetch data on client side
     const fetchData = async () => {
       try {
@@ -45,7 +50,7 @@ const ApplicationLayout: React.FC<Props> = ({ children, home }) => {
     <>
       {home ? null : (
         <div className="container">
-          <Navbar2 />
+          <Navbar2 lang={selectedLanguage}/>
         </div>
       )}
 
@@ -55,12 +60,13 @@ const ApplicationLayout: React.FC<Props> = ({ children, home }) => {
           navigationMenu={navigationMenu}
           featuredPosts={featuredPosts}
           className='sticky top-0 z-40 bg-white dark:bg-[#000000]'
+          lang={selectedLanguage}
         />
       )}
 
       {children}
 
-      <Footer />
+      <Footer lang={selectedLanguage}/>
 
       <AsideSidebarNavigation />
       <SocialSidebar />

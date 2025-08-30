@@ -5,7 +5,7 @@ import { TPost, getAllPosts } from '@/data/posts'
 import Navbar2 from '@/shared/Navbar2'
 import Header2 from '@/components/Header/Header2'
 
-const HomeHeader = () => {
+const HomeHeader = ({lang}: {lang?: string}) => {
   const [navigationMenu, setNavigationMenu] = useState<TNavigationItem[]>([])
   const [featuredPosts, setFeaturedPosts] = useState<TPost[]>([])
   const [scrolled, setScrolled] = useState(false)
@@ -58,7 +58,7 @@ const HomeHeader = () => {
     <React.Fragment>
       <div className={`w-full fixed top-0 z-30 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="container">
-          <Navbar2 home={true} />
+          <Navbar2 home={true} lang={lang}/>
         </div>
       </div>
       <Header2 
@@ -67,6 +67,7 @@ const HomeHeader = () => {
         navigationMenu={navigationMenu} 
         featuredPosts={featuredPosts} 
         home={true}
+        lang={lang}
       />
     </React.Fragment>
   )

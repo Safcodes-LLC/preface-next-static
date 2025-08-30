@@ -14,17 +14,18 @@ import { getIslamForBeginners, getLatestArticles, getQuranLatestArticles } from 
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
+import { getDictionary } from '@/i18n'
 import { Metadata } from 'next'
 import HomeHeader from './components/homeHeader'
-import ParallaxScrollSection from '@/components/ParallaxScrollSection '
 
 export const metadata: Metadata = {
   title: 'Home',
   description: 'Home page of the application showcasing various sections and posts.',
 }
 
-const Page = async ({params}: {params: Promise<{lang: string}>}) => {
-  const {lang} = await params
+const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
+  const { lang } = await params
+  const dict = await getDictionary(lang)
   // Get all data in parallel using Promise.all for better performance
   const [
     posts,
@@ -81,7 +82,7 @@ const Page = async ({params}: {params: Promise<{lang: string}>}) => {
   ]
 
   return (
-    <div className="relative overflow-hidden pb-28 lg:pb-32">
+    <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className="relative overflow-hidden pb-28 lg:pb-32">
       {/* Video Hero Banner */}
       {/* <VideoHeroBanner /> */}
       {/* <div className="relative">
@@ -91,7 +92,7 @@ const Page = async ({params}: {params: Promise<{lang: string}>}) => {
       {/* <VideoHeroBanner /> */}
       {/* </div> */}
       {/* Parallax Scroll Section - VideoHeroBanner + SectionMagazine10 */}
-      <HomeHeader />
+      <HomeHeader lang={lang} />
       <VideoHeroBanner />
       <div className="container pt-[60px]">
         <SectionMagazine10 posts={articlesArray} videoPosts={videoPostsArray} />
@@ -101,8 +102,8 @@ const Page = async ({params}: {params: Promise<{lang: string}>}) => {
         {/* <SectionMagazine10 posts={magazine10Data} /> */}
 
         <SectionSliderNewCategories
-          heading="STORYTELLING ISLAM"
-          subHeading="Understanding Islam through 1001 stories"
+          heading={dict.sections.storytelling.heading}
+          subHeading={dict.sections.storytelling.description}
           // categories={categories.slice(0, 10)}
           categories={
             Array.isArray(storyTellingIslam)
@@ -110,6 +111,7 @@ const Page = async ({params}: {params: Promise<{lang: string}>}) => {
               : storyTellingIslam.data?.slice(0, 10) || []
           }
           categoryCardType="card3"
+          lang={lang}
         />
 
         <SectionMagazine7

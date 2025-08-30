@@ -22,7 +22,8 @@ interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
   heading?: string
   categories: TCategory[]
   categoryCardType?: 'card1' | 'card2' | 'card3' | 'card4' | 'card5'
-  emblaOptions?: EmblaOptionsType
+  emblaOptions?: EmblaOptionsType,
+  lang?: string
 }
 
 const SectionSliderNewCategories: FC<Props> = ({
@@ -35,6 +36,7 @@ const SectionSliderNewCategories: FC<Props> = ({
   emblaOptions = {
     slidesToScroll: 'auto',
   },
+  lang
 }) => {
   const theme = useContext(ThemeContext)
   const [emblaRef, emblaApi] = useEmblaCarousel({ ...emblaOptions, direction: theme?.themeDir })
@@ -84,7 +86,7 @@ const SectionSliderNewCategories: FC<Props> = ({
       case 'card2':
         return <CardCategory2 key={index} badge={topIndex} category={item} />
       case 'card3':
-        return <CardCategory3 key={item._id || item.id || index} category={item} />
+        return <CardCategory3 key={item._id || item.id || index} lang={lang} category={item} />
       case 'card4':
         return <CardCategory4 key={index} badge={topIndex} category={item} />
       case 'card5':

@@ -7,9 +7,10 @@ import { FC } from 'react'
 interface Props {
   className?: string
   category: TCategory
+  lang?: string
 }
 
-const CardCategory3: FC<Props> = ({ className = '', category }) => {
+const CardCategory3: FC<Props> = ({ className = '', category, lang }) => {
   const { name, thumbnail, featuredImage, slug, featuredIcon, subCategory } = category
 
   return (
@@ -27,12 +28,12 @@ const CardCategory3: FC<Props> = ({ className = '', category }) => {
         <span className="absolute inset-0 bg-black/30 opacity-0 transition-opacity group-hover:opacity-100"></span>
 
         {/* Arrow overlay - ONLY clickable link */}
-        <div
-          className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100"
-        >
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
           <Link
-          href={`/${slug}`} className="transform rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-white hover:scale-110 dark:bg-gray-800/90 dark:hover:bg-gray-800">
-            <ArrowRightIcon className="h-5 w-5 text-gray-700 dark:text-gray-200 rtl:rotate-180" />
+            href={lang === 'en' ? `/${slug}` : `/${lang}/${slug}`}
+            className="transform rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white dark:bg-gray-800/90 dark:hover:bg-gray-800"
+          >
+            <ArrowRightIcon className="h-5 w-5 text-gray-700 rtl:rotate-180 dark:text-gray-200" />
           </Link>
         </div>
       </div>

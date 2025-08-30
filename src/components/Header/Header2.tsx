@@ -17,6 +17,7 @@ interface Props {
   className?: string
   isTransparentHeader?: boolean
   home?: boolean
+  lang?: string
 }
 
 interface Header2Props extends Props {
@@ -31,9 +32,10 @@ const Header2: FC<Header2Props> = ({
   featuredPosts,
   isTransparentHeader,
   home,
+  lang,
 }) => {
   return (
-    <div className={clsx('header-2', className)}>
+    <div className={clsx('header-2', className)} dir={lang === "ar" ? "rtl" : "ltr"}>
       <div className="container flex h-20 justify-between">
         <div className="flex flex-1 items-center gap-x-4 sm:gap-x-5 lg:gap-x-7">
           <Logo />
@@ -41,7 +43,7 @@ const Header2: FC<Header2Props> = ({
 
         <div className="mx-4 hidden flex-2 justify-center lg:flex">
           <div className="flex items-center gap-x-2">
-            <Navigation menu={navigationMenu} featuredPosts={featuredPosts} isTransparentHeader={isTransparentHeader} home={home}/>
+            <Navigation lang={lang} menu={navigationMenu} featuredPosts={featuredPosts} isTransparentHeader={isTransparentHeader} home={home}/>
             <Link
               href="#"
               className={`flex min-w-[155px] items-center gap-2 transition-all duration-200 hover:shadow-sm focus:outline-none dark:border-[#777777] rounded-sm border border-[#EEEEEE] px-5 py-2 text-sm font-medium 
