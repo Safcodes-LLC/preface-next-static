@@ -1,9 +1,9 @@
 // src/data/api/posts.ts
 import { serverFetch } from '@/lib/server/api';
 
-export const getLatestArticles = async () => {
+export const getLatestArticles = async (lang?: string) => {
   try {
-    const data = await serverFetch.get<{ data: any[] }>('/api/frontend/latest-articles', {
+    const data = await serverFetch.get<{ data: any[] }>('/api/frontend/latest-articles',  {language:lang,
       next: { revalidate: 60 }, // Revalidate every 60 seconds
     });
     return data;

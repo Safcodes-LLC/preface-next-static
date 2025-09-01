@@ -51,7 +51,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
     getPostsGallery(),
     getAuthors(),
     getCategories(),
-    getLatestArticles(),
+    getLatestArticles(lang || 'en'),
     getCategory(lang || 'en'),
     getTopTrendingTopics(lang || 'en'),
     getIslamForBeginners(),
