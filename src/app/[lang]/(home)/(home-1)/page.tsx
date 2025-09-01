@@ -59,8 +59,8 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
     getIslamForBeginners(),
     getQuranSubcategories({ limit: 6 }),
     getQuranLatestArticles({ limit: 2 }),
-    getBannerHighlightedVideos(),
-    getBannerHighlightedArticles(),
+    getBannerHighlightedVideos(lang || 'en'),
+    getBannerHighlightedArticles(lang || 'en'),
   ])
 
   // Extract the actual data arrays from the API responses
