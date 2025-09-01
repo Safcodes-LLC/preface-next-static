@@ -5,11 +5,11 @@ import SectionMagazine4 from "./SectionMagazine4"; // adjust the path
 import { useLatestVideos } from "@/hooks/api";
 
 
-const ClientSideVisuals = ({dict}: {dict: any}) => {
+const ClientSideVisuals = ({dict, posts}: {dict: any, posts: any}) => {
 
-    const { data: latestVideos, isLoading, error } = useLatestVideos(8);
+    // const { data: latestVideos, isLoading, error } = useLatestVideos(8);
     // console.log(latestVideos,"latestVideos");
-    const displayPosts = latestVideos?.data || [];
+    // const displayPosts = latestVideos?.data || [];
     // console.log(displayPosts);
     
   return (
@@ -18,7 +18,8 @@ const ClientSideVisuals = ({dict}: {dict: any}) => {
         <SectionMagazine4
           heading={dict.sections.visuals.heading}
           subHeading={dict.sections.visuals.description}
-          posts={displayPosts.slice(0, 6) as any}
+          // posts={displayPosts.slice(0, 6) as any}
+          posts={posts.slice(0, 6) as any}
           headingColor="light"
         />
       </div>

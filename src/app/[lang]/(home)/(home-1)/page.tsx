@@ -10,7 +10,7 @@ import SwipableSliderPosts from '@/components/SwipableSliderPosts'
 import VideoHeroBanner from '@/components/VideoHeroBanner'
 import { getBannerHighlightedArticles, getBannerHighlightedVideos } from '@/data/api/banner'
 import { getCategory, getQuranSubcategories, getTopTrendingTopics } from '@/data/api/category'
-import { getIslamForBeginners, getLatestArticles, getQuranLatestArticles } from '@/data/api/posts'
+import { getIslamForBeginners, getLatestArticles, getLatestVideos, getQuranLatestArticles } from '@/data/api/posts'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
@@ -36,6 +36,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
     authors,
     categories,
     latestArticles,
+    latestVideos,
     storyTellingIslam,
     topTrendingTopics,
     islamForBeginners,
@@ -52,6 +53,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
     getAuthors(),
     getCategories(),
     getLatestArticles(lang || 'en'),
+    getLatestVideos(lang || 'en'),
     getCategory(lang || 'en'),
     getTopTrendingTopics(lang || 'en'),
     getIslamForBeginners(),
@@ -206,7 +208,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
         </div> */}
       </div>
 
-      <ClientSideVisuals dict={dict}/>
+      <ClientSideVisuals dict={dict} posts={latestVideos}/>
     </div>
   )
 }

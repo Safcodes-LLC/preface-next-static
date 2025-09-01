@@ -14,9 +14,9 @@ export const getLatestArticles = async (lang?: string) => {
 };
 
 // Add this to your posts.ts file
-export const getLatestVideos = async (options?: { limit?: number }) => {
+export const getLatestVideos = async (lang?: string, options?: { limit?: number }) => {
   try {
-    const response = await serverFetch.get<{ data: any[] }>('/api/frontend/latest-videos', {
+    const response = await serverFetch.get<{ data: any[] }>('/api/frontend/latest-videos', {language:lang,
       next: { revalidate: 60 }, // Revalidate every 60 seconds
       limit: options?.limit
     });
