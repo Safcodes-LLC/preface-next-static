@@ -1,17 +1,15 @@
 import { TNavigationItem } from '@/data/navigation'
 import { TPost } from '@/data/posts'
-import { Button } from '@/shared/Button'
 import Logo from '@/shared/Logo'
-import { ChatBubbleLeftRightIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
+import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import Link from 'next/link'
 import { FC } from 'react'
+import SignInButton from '../SignInButton'
 import AvatarDropdown from './AvatarDropdown'
 import HamburgerBtnMenu from './HamburgerBtnMenu'
+import AskScholarButton from './Navigation/AskScholarButton'
 import Navigation from './Navigation/Navigation'
 import SearchModal from './SearchModal'
-import SignInButton from '../SignInButton'
-import AskScholarButton from './Navigation/AskScholarButton'
 
 interface Props {
   bottomBorder?: boolean
@@ -36,7 +34,7 @@ const Header2: FC<Header2Props> = ({
   lang,
 }) => {
   return (
-    <div className={clsx('header-2', className)} dir={lang === "ar" ? "rtl" : "ltr"}>
+    <div className={clsx('header-2', className)} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="container flex h-20 justify-between">
         <div className="flex flex-1 items-center gap-x-4 sm:gap-x-5 lg:gap-x-7">
           <Logo />
@@ -44,14 +42,20 @@ const Header2: FC<Header2Props> = ({
 
         <div className="mx-4 hidden flex-2 justify-center lg:flex">
           <div className="flex items-center gap-x-2">
-            <Navigation lang={lang} menu={navigationMenu} featuredPosts={featuredPosts} isTransparentHeader={isTransparentHeader} home={home}/>
-           <AskScholarButton home={home} isTransparentHeader={isTransparentHeader} />
+            <Navigation
+              lang={lang}
+              menu={navigationMenu}
+              featuredPosts={featuredPosts}
+              isTransparentHeader={isTransparentHeader}
+              home={home}
+            />
+            <AskScholarButton home={home} isTransparentHeader={isTransparentHeader} />
           </div>
         </div>
 
         <div className="flex flex-1 items-center justify-end gap-x-1">
-          <SignInButton/>
-          <SearchModal type="type1" isTransparentHeader={isTransparentHeader} home={home}/>
+          <SignInButton />
+          <SearchModal type="type1" isTransparentHeader={isTransparentHeader} home={home} />
           <AvatarDropdown
             trigger={
               <button

@@ -1,5 +1,6 @@
 'use client'
 
+import { useSubmitScholarQuestion } from '@/hooks/api/use-scholar-questions'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion, Variants } from 'framer-motion'
 import { FC, useEffect, useState } from 'react'
@@ -65,6 +66,8 @@ const ModalAskTheScholar: FC<Props> = ({ isOpen, onClose }) => {
     question: '',
   })
 
+  const { mutate: submitQuestion, isPending } = useSubmitScholarQuestion()
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({
@@ -75,8 +78,28 @@ const ModalAskTheScholar: FC<Props> = ({ isOpen, onClose }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    onClose()
+    submitQuestion(
+      {
+        ...formData,
+        mobileNumber: formData.mobile,
+      },
+      {
+        onSuccess: () => {
+          setFormData({
+            name: '',
+            email: '',
+            mobile: '',
+            question: '',
+          })
+          alert('Your question has been submitted successfully!')
+          onClose()
+        },
+        onError: (error) => {
+          console.error('Submission failed:', error)
+          alert('Failed to submit question. Please try again.')
+        },
+      }
+    )
   }
 
   const handleBackdropClick = (e: React.MouseEvent) => {
@@ -108,7 +131,7 @@ const ModalAskTheScholar: FC<Props> = ({ isOpen, onClose }) => {
     <AnimatePresence mode="wait">
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50"
+          className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center"
           onClick={handleBackdropClick}
           variants={backdropVariants}
           initial="hidden"
@@ -191,9 +214,10 @@ const ModalAskTheScholar: FC<Props> = ({ isOpen, onClose }) => {
                 <div className="flex justify-center">
                   <button
                     type="submit"
-                    className="rounded-[25px] bg-[#60A43A] px-10 py-3 text-base font-medium text-white transition-colors duration-200 hover:bg-green-700 focus:ring-1 focus:ring-neutral-300 focus:ring-offset-2 focus:outline-none"
+                    disabled={isPending}
+                    className="rounded-[25px] bg-[#60A43A] px-10 py-3 text-base font-medium text-white transition-colors duration-200 hover:bg-green-700 focus:ring-1 focus:ring-neutral-300 focus:ring-offset-2 focus:outline-none disabled:opacity-70"
                   >
-                    Submit to the Scholar
+                    {isPending ? 'Submitting...' : 'Submit to the Scholar'}
                   </button>
                 </div>
               </form>
