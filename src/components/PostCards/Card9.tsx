@@ -14,9 +14,10 @@ interface Props {
   className?: string
   ratio?: string
   post: TPost
+  lang?: string
 }
 
-const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post }) => {
+const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post, lang }) => {
   const {
     title,
     handle,
@@ -45,7 +46,10 @@ const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post }) => {
         <PostFeaturedMedia post={post} isHover={isHover} />
 
         {/* Single Link wrapping media */}
-        <Link href={`/video/${articleSlug}`} className="absolute inset-0" />
+        <Link
+          href={lang === 'en' ? `/video/${articleSlug}` : `/${lang}/video/${articleSlug}`}
+          className="absolute inset-0"
+        />
         {postType === 'audio' && (
           <ButtonPlayMusicPlayer className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4" post={post} />
         )}
@@ -60,7 +64,7 @@ const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post }) => {
         <CategoryBadgeList categories={categories} />
 
         <div className="mt-3.5 text-neutral-300">
-          <h2 className="!line-clamp-2 block text-base xl:text-lg/6 font-medium text-white" title={title}>
+          <h2 className="!line-clamp-2 block text-base font-medium text-white xl:text-lg/6" title={title}>
             {title}
           </h2>
         </div>

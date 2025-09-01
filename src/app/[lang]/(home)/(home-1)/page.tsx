@@ -208,7 +208,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
         </div> */}
       </div>
 
-      <ClientSideVisuals dict={dict} posts={latestVideos}/>
+      <ClientSideVisuals dict={dict} posts={latestVideos}  lang={lang}/>
     </div>
   )
 }

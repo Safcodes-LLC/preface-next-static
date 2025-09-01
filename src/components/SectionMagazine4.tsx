@@ -16,9 +16,10 @@ type Props = Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> & {
   className?: string
   heading?: string
   headingColor?: string
+  lang?: string
 }
 
-const SectionMagazine4: FC<Props> = ({ posts, heading, className, subHeading, dimHeading, headingColor }) => {
+const SectionMagazine4: FC<Props> = ({ posts, heading, className, subHeading, dimHeading, headingColor, lang }) => {
   const firstSectionRef = useRef<HTMLDivElement | null>(null)
   const secondSectionRef = useRef<HTMLDivElement | null>(null)
   
@@ -48,8 +49,8 @@ const SectionMagazine4: FC<Props> = ({ posts, heading, className, subHeading, di
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7 xl:grid-cols-4"
         aria-live="polite"
       >
-        {posts[0] && <Card8 className="sm:col-span-2" post={posts[0]} />}
-        {posts.slice(1, 3).map((item, index) => (<Card9 key={`first-${item.id || index}`} post={item} />))}
+        {posts[0] && <Card8 className="sm:col-span-2" post={posts[0]} lang={lang}/>}
+        {posts.slice(1, 3).map((item, index) => (<Card9 key={`first-${item.id || index}`} post={item} lang={lang}/>))}
       </motion.div>
 
       {/* Second Section - Fade in from right with stagger */}
@@ -61,8 +62,8 @@ const SectionMagazine4: FC<Props> = ({ posts, heading, className, subHeading, di
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7 xl:grid-cols-4 mt-6"
         aria-live="polite"
       >
-        {posts.slice(3, 5).map((item, index) => (<Card9 key={`second-${item.id || index}`} post={item} />))}
-        {posts[5] && <Card8 className="sm:col-span-2" post={posts[5]} />}
+        {posts.slice(3, 5).map((item, index) => (<Card9 key={`second-${item.id || index}`} post={item} lang={lang}/>))}
+        {posts[5] && <Card8 className="sm:col-span-2" post={posts[5]} lang={lang}/>}
       </motion.div>
 
       {/* <div className="mt-20 flex justify-center">
