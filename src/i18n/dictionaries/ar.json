@@ -10,53 +10,53 @@
     "nextpage": "Next Page"
   },
   "navigation": {
-    "about": "About",
-    "stories": "Stories",
-    "visuals": "Visuals",
-    "knowledgehub": "Knowledge Hub",
-    "quicklook": "Quick Look",
-    "topics": "Topics",
-    "askthescholar": "Ask the Scholar",
-    "dashboard": "Dashboard",
-    "myaccount": "My Account",
+    "about": "عن الموقع",
+    "stories": "القصص",
+    "visuals": "فيديوهات",
+    "knowledgehub": "مركز المعرفة",
+    "quicklook": "نظرة سريعة",
+    "topics": "الموضوعات",
+    "askthescholar": "اسأل العالِم",
+    "dashboard": "لوحة الرئيسية",
+    "myaccount": "حسابي",
     "sign in": "Sign In",
     "logout": "Logout"
   },
   "sections":{
     "storytelling": {
-      "heading": "STORYTELLING ISLAM",
-      "description": "Understanding Islam through 1001 Stories"
+      "heading": "الاسلام يحكي قصته",
+      "description": "فهم الإسلام من خلال ألف قصة وقصة"
     },
     "holyquran": {
-      "heading": "HOLY QUR’AN",
-      "description": "Explore the lessons from Holy Quran"
+      "heading": "القرآن الكريم",
+      "description": "اكتشف العناويه من القرآن الكريم"
     },
     "trendingcategories": {
-      "heading": "TRENDING CATEGORIES",
-      "description": "Discover over 100 Popular topics"
+      "heading": "الفئات الشئعة",
+      "description": "اكتشف اكثر من 100 موضوع شائع"
     },
     "islamforbeginners": {
-      "heading": "ISLAM FOR BEGINNERS",
-      "description": "Over 100 Articles for beginners"
+      "heading": "الاسلام للمبتدئين",
+      "description": " اكثر من 100 مقالة للمبتدئين"
     },
     "latestarticles": {
-      "heading": "LATEST ARTICLES",
-      "description": "Discover the most outstanding articles in all topics of life"
+      "heading": "أحدث المقالات",
+      "description": "اطّلع على المقالات المميزة"
     },
     "visuals": {
-      "heading": "VISUALS",
-      "description": "Hover on the post card and preview video"
+      "heading": "فيديوهات",
+      "description": "مرّر المؤشر فوق البطاقة وشاهد معاينة الفيديو"
     },
     "topratedonpreface": {
-      "heading": "TOP RATED ON PREFACE",
-      "description": "Over 100 Articles for beginners"
+      "heading": "الاعلى تقييماََ في الموقع",
+      "description": " اكثر من 100 مقالة للمبتدئين"
     },
     "populararticlesfrom": {
-      "heading": "POPULAR ARTICLES FROM",
-      "description": ""
+      "heading": "لمقالات الشهيرة عن",
+      "description": "اكثر من100 مقالات"
     },
     "populararticles": {
-      "heading": "POPULAR ARTICLES",
+      "heading": "المقالات الشهيرة",
       "description": ""
     }
 

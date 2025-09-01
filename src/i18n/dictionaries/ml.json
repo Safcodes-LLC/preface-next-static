@@ -11,8 +11,8 @@
   },
   "navigation": {
     "about": "About",
-    "stories": "Stories",
-    "visuals": "Visuals",
+    "stories": "സ്റ്റോറീസ്",
+    "visuals": "വീഡിയോകൾ",
     "knowledgehub": "Knowledge Hub",
     "quicklook": "Quick Look",
     "topics": "Topics",
@@ -24,16 +24,16 @@
   },
   "sections":{
     "storytelling": {
-      "heading": "ഇസ്ലാമിന്റെ കഥ",
-      "description": "കഥകളിലൂടെ ഇസ്ലാമിനെ മനസ്സിലാക്കൽ"
+      "heading": "ഇസ്‌ലാം കഥ പറയുന്നു",
+      "description": "1001 കഥകളിലൂടെ ഇസ്‌ലാമിനെ അറിയുക "
     },
     "holyquran": {
       "heading": "വിശുദ്ധ ഖുർആൻ",
-      "description": "വിശുദ്ധ ഖുർആനിലെ പാഠങ്ങൾ പര്യവേക്ഷണം ചെയ്യുക"
+      "description": "ഖുർആനിനെ അടുത്തറിയുക"
     },
     "trendingcategories": {
-      "heading": "ട്രെൻഡിംഗ് വിഭാഗങ്ങൾ",
-      "description": "100-ലധികം ജനപ്രിയ വിഷയങ്ങൾ കണ്ടെത്തുക"
+      "heading": "ട്രെൻഡിങ് കാറ്റഗറികൾ",
+      "description": "നൂറിലധികം പോപ്പുലർ വിഷയങ്ങൾ "
     },
     "islamforbeginners": {
       "heading": "തുടക്കക്കാർക്ക് ഇസ്ലാം",
@@ -48,15 +48,15 @@
       "description": "പോസ്റ്റ് കാർഡിൽ ഹോവർ ചെയ്ത് വീഡിയോ പ്രിവ്യൂ ചെയ്യുക"
     },
     "topratedonpreface": {
-      "heading": "TOP RATED ON PREFACE",
-      "description": "Over 100 Articles for beginners"
+      "heading": "പ്രിഫേസിലെ ടോപ് റേറ്റുള്ളത് ",
+      "description": "പുതിയ സുഹൃത്തുക്കൾക്ക് വേണ്ടി നൂറിലധികം വിഷയങ്ങൾ "
     },
     "populararticlesfrom": {
-      "heading": "യുടെ ജനപ്രിയ ലേഖനങ്ങൾ",
+      "heading": "കുറിച്ച് ഏറ്റവും പുതിയ ലേഖനങ്ങൾ ",
       "description": ""
     },
     "populararticles": {
-      "heading": "ജനപ്രിയ ലേഖനങ്ങൾ",
+      "heading": "ഏറ്റവും പുതിയ ലേഖനങ്ങൾ ",
       "description": ""
     }
 

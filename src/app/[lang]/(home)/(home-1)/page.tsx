@@ -117,8 +117,8 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
         <SectionMagazine7
           posts={quranSubCategories.slice(0, 8)}
           posts2={quranLatestArticles.slice(0, 8)}
-          heading="HOLY QUR’AN"
-          subHeading="Explore the lessons from Holy Quran"
+          heading={dict.sections.holyquran.heading}
+          subHeading={dict.sections.holyquran.description}
         />
       </div>
 
@@ -126,8 +126,8 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
         {/* <SectionSliderNewCategories   heading="STORYTELLING ISLAM"
           subHeading="Understanding Islam through 1001 stories" categories={categories.slice(0, 10)} categoryCardType="card2" /> */}
         <SectionSlider
-          heading="TRENDING CATEGORIES"
-          subHeading="Discover over 100 Popular topics"
+          heading={dict.sections.trendingcategories.heading}
+          subHeading={dict.sections.trendingcategories.description}
           categories={
             Array.isArray(topTrendingTopics)
               ? topTrendingTopics.slice(0, 10)
@@ -153,8 +153,8 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
             posts={defaultPosts.slice(0, 6)}
           /> */}
           <SwipableSliderPosts
-            heading="ISLAM FOR BEGINNERS"
-            subHeading="Over 100 Articles for beginners"
+            heading={dict.sections.islamforbeginners.heading}
+            subHeading={dict.sections.islamforbeginners.description}
             posts={islamForBeginners.slice(0, 8)}
             postCardName="card10V2"
             config={{
@@ -168,8 +168,8 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
 
         <SectionTrending
           posts={Array.isArray(latestArticles) ? latestArticles.slice(0, 8) : latestArticles.data?.slice(0, 8) || []}
-          heading="LATEST ARTICLES"
-          subHeading="Discover the most outstanding articles in all topics of life"
+          heading={dict.sections.latestarticles.heading}
+          subHeading={dict.sections.latestarticles.description}
         />
 
         {/* React Query Test Component */}
@@ -206,7 +206,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
         </div> */}
       </div>
 
-      <ClientSideVisuals />
+      <ClientSideVisuals dict={dict}/>
     </div>
   )
 }
