@@ -2,9 +2,9 @@
 import { serverFetch } from '@/lib/server/api';
 
 //all categories | storytelling islam
-export const getCategory = async () => {
+export const getCategory = async (lang?: string) => {
   try {
-    const data = await serverFetch.get<{ data: any[] }>('/api/frontend/all-category-list', {
+    const data = await serverFetch.get<{ data: any[] }>('/api/frontend/all-category-list', {language:lang,
       next: { revalidate: 60 }, // Revalidate every 60 seconds
     });
     return data;
@@ -15,9 +15,9 @@ export const getCategory = async () => {
 };
 
 //top trending topics
-export const getTopTrendingTopics = async () => {
+export const getTopTrendingTopics = async (lang?: string) => {
   try {
-    const data = await serverFetch.get<{ data: any[] }>('/api/frontend/top-trending-topics', {
+    const data = await serverFetch.get<{ data: any[] }>('/api/frontend/top-trending-topics', {language:lang,
       next: { revalidate: 60 }, // Revalidate every 60 seconds
     });
     return data;

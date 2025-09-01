@@ -9,9 +9,10 @@ import { FC, useEffect, useState } from 'react'
 
 interface Navbar2Props {
   home?: boolean
+  lang?: string
 }
 
-const Navbar2: FC<Navbar2Props> = ({ home }) => {
+const Navbar2: FC<Navbar2Props> = ({ home, lang }) => {
   const [currentTime, setCurrentTime] = useState<string>('')
   const [currentDate, setCurrentDate] = useState<string>('')
 
@@ -79,7 +80,7 @@ const Navbar2: FC<Navbar2Props> = ({ home }) => {
   const activeLanguage = languages.find((lang) => lang.active) || languages[0]
 
   return (
-    <div className="relative flex items-center gap-x-6 overflow-hidden px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
+    <div dir={lang === "ar" ? "rtl" : "ltr"} className="relative flex items-center gap-x-6 overflow-hidden px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
       <div
         aria-hidden="true"
         className="absolute top-1/2 left-[max(-7rem,calc(50%-52rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl"

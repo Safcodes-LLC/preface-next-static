@@ -1,4 +1,5 @@
 // src/lib/server/api.ts
+
 const API_BASE_URL = 'https://king-prawn-app-x9z27.ondigitalocean.app';
 
 interface ApiOptions {
@@ -15,10 +16,9 @@ interface ApiOptions {
 export const serverFetch = {
   get: async <T = any>(
     url: string,
-    options: ApiOptions = {}
+    options: ApiOptions & { language?: string } = {}
   ): Promise<T> => {
-    const { requiresAuth = false, headers = {}, next, limit, page } = options;
-    const language = 'en'; // Get from cookies/headers in server components
+    const { requiresAuth = false, headers = {}, next, limit, page, language = 'en' } = options;
 
     // Build query parameters
     const params = new URLSearchParams();

@@ -13,8 +13,8 @@ interface Props {
 
 const CardCategory2: FC<Props> = ({ className, category, badge }) => {
   const { count, name, categoryName, parentCategory, slug, handle, thumbnail, icon , featuredImage, featuredIcon, postCount } = category
-  console.log(category,"category432")
-  console.log(parentCategory,"parentCategory")
+  // console.log(category,"category432")
+  // console.log(parentCategory,"parentCategory")
 
 
   

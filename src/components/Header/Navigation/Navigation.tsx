@@ -11,11 +11,13 @@ const Lv1MenuItem = ({
   isScrolled = false,
   isTransparentHeader,
   home,
+  lang,
 }: {
   menuItem: TNavigationItem
   isScrolled?: boolean
   isTransparentHeader?: boolean
   home?: boolean
+  lang?: string
 }) => {
   return (
     <Link
@@ -24,7 +26,7 @@ const Lv1MenuItem = ({
         'hover:bg-neutral-100 hover:text-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-neutral-200',
         home ? isTransparentHeader ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000]' : 'text-[#000000] dark:text-white' // Keep white text in dark mode regardless of scroll state
       )}
-      href={menuItem.href || '#'}
+      href={lang === 'en' ? `${menuItem.href}` || '#' : `/${lang}${menuItem.href}`}
     >
       {menuItem.name}
       {menuItem.children?.length && (
@@ -41,17 +43,19 @@ const MegaMenu = ({
   menuItem,
   featuredPosts,
   isScrolled,
+  lang,
 }: {
   menuItem: TNavigationItem
   featuredPosts: TPost[]
   isScrolled?: boolean
+  lang?: string
 }) => {
   const renderNavlink = (item: TNavigationItem) => {
     return (
       <li key={item.id} className={clsx('menu-item', item.isNew && 'menuIsNew')}>
         <Link
           className="font-normal text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white"
-          href={item.href || '#'}
+          href={lang === 'en' ? `${item.href}` || '#' : `/${lang}${item.href}`}
         >
           {item.name}
         </Link>
@@ -61,7 +65,7 @@ const MegaMenu = ({
 
   return (
     <li className="menu-megamenu menu-item flex">
-      <Lv1MenuItem menuItem={menuItem} isScrolled={isScrolled} />
+      <Lv1MenuItem menuItem={menuItem} isScrolled={isScrolled} lang={lang}/>
 
       {menuItem.children?.length && menuItem.type === 'mega-menu' ? (
         <div className="absolute inset-x-0 top-full z-50 sub-menu">
@@ -156,8 +160,9 @@ export interface Props {
   isScrolled?: boolean
   isTransparentHeader?: boolean
   home?: boolean
+  lang?: string
 }
-const Navigation: FC<Props> = ({ menu, className, featuredPosts, isScrolled, isTransparentHeader, home }) => {
+const Navigation: FC<Props> = ({ menu, className, featuredPosts, isScrolled, isTransparentHeader, home, lang }) => {
   return (
     <ul className={clsx('flex', className)}>
       {menu.map((menuItem) => {
@@ -181,6 +186,7 @@ const Navigation: FC<Props> = ({ menu, className, featuredPosts, isScrolled, isT
               isScrolled={isScrolled}
               isTransparentHeader={isTransparentHeader}
               home={home}
+              lang={lang}
             />
           </li>
         )
