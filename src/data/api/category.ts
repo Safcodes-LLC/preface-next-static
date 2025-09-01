@@ -28,13 +28,13 @@ export const getTopTrendingTopics = async (lang?: string) => {
 };
 
 //quran subcategories
-export const getQuranSubcategories = async (options?: { limit?: number }) => {
+export const getQuranSubcategories = async (lang?: string ,options?: { limit?: number }) => {
   try {
     const response = await serverFetch.get<{ 
       data: Array<{ 
         subcategories: any[] 
       }> 
-    }>('/api/frontend/quran-categories', {
+    }>('/api/frontend/quran-categories', {language:lang,
       next: { revalidate: 60 },
       limit: options?.limit
     });

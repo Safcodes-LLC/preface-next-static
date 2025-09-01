@@ -28,9 +28,9 @@ export const getLatestVideos = async (lang?: string, options?: { limit?: number 
 };
 
 // islam for beginners under articles
-export const getIslamForBeginners = async () => {
+export const getIslamForBeginners = async (lang?: string) => {
   try {
-    const response = await serverFetch.get<{ data: { latestArticles: any[] } }>('/api/frontend/islam-for-beginners', {
+    const response = await serverFetch.get<{ data: { latestArticles: any[] } }>('/api/frontend/islam-for-beginners', {language:lang,
       next: { revalidate: 60 }, // Revalidate every 60 seconds
     });
     return response?.data?.latestArticles || [];
@@ -41,9 +41,9 @@ export const getIslamForBeginners = async () => {
 };
 // /api/frontend/quran-latest-articles?lang=en&limit=4
 // holy quran latest articles
-export const getQuranLatestArticles = async (options?: { limit?: number }) => {
+export const getQuranLatestArticles = async (lang?: string ,options?: { limit?: number }) => {
   try {
-    const response = await serverFetch.get<{ data: any[] }>('/api/frontend/quran-latest-articles', {
+    const response = await serverFetch.get<{ data: any[] }>('/api/frontend/quran-latest-articles', {language:lang,
       next: { revalidate: 60 }, // Revalidate every 60 seconds
       limit: options?.limit
     });

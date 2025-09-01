@@ -56,9 +56,9 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
     getLatestVideos(lang || 'en'),
     getCategory(lang || 'en'),
     getTopTrendingTopics(lang || 'en'),
-    getIslamForBeginners(),
-    getQuranSubcategories({ limit: 6 }),
-    getQuranLatestArticles({ limit: 2 }),
+    getIslamForBeginners(lang || 'en'),
+    getQuranSubcategories(lang || 'en', { limit: 6 }),
+    getQuranLatestArticles(lang || 'en', { limit: 2 }),
     getBannerHighlightedVideos(lang || 'en'),
     getBannerHighlightedArticles(lang || 'en'),
   ])
