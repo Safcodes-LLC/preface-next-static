@@ -11,6 +11,7 @@ import HamburgerBtnMenu from './HamburgerBtnMenu'
 import Navigation from './Navigation/Navigation'
 import SearchModal from './SearchModal'
 import SignInButton from '../SignInButton'
+import AskScholarButton from './Navigation/AskScholarButton'
 
 interface Props {
   bottomBorder?: boolean
@@ -44,16 +45,7 @@ const Header2: FC<Header2Props> = ({
         <div className="mx-4 hidden flex-2 justify-center lg:flex">
           <div className="flex items-center gap-x-2">
             <Navigation lang={lang} menu={navigationMenu} featuredPosts={featuredPosts} isTransparentHeader={isTransparentHeader} home={home}/>
-            <Link
-              href="#"
-              className={`flex min-w-[155px] items-center gap-2 transition-all duration-200 hover:shadow-sm focus:outline-none dark:border-[#777777] rounded-sm border border-[#EEEEEE] px-5 py-2 text-sm font-medium 
-              ${home ? (isTransparentHeader ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000]') : 'text-[#000000] dark:text-white'}`}
-              aria-label="Ask the Scholar"
-              style={{ marginTop: 0 }}
-            >
-              <ChatBubbleLeftRightIcon className="h-5 w-5" aria-hidden="true" />
-              <span className="whitespace-nowrap">Ask the Scholar</span>
-            </Link>
+           <AskScholarButton home={home} isTransparentHeader={isTransparentHeader} />
           </div>
         </div>
 
