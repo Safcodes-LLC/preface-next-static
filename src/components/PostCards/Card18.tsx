@@ -6,7 +6,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
-import PostTypeFeaturedIcon from '../PostTypeFeaturedIcon'
 
 interface Props {
   className?: string
@@ -30,7 +29,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
     commentCount,
     bookmarked,
   } = post
-  
+
   const parentCategorySlug = categories[0]?.parentCategory?.slug
   const categorySlug = categories[0]?.slug
 
@@ -59,7 +58,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
               wrapSize="size-7"
               iconSize="size-4"
             /> */}
-            <Link href={`/post/${handle}`} className="absolute inset-0"></Link>
+            <span className="absolute inset-0"></span>
           </>
         )}
       </div>
@@ -71,13 +70,12 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         <CategoryBadgeList categories={categories} />
       </div>
 
-      <Link
-        href={`/post/${handle}`}
+      <span
         className="absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80"
       />
 
       <div className="absolute inset-x-0 bottom-0 flex grow flex-col p-6">
-        <Link href={`/post/${handle}`} className="absolute inset-0" />
+        <span className="absolute inset-0" />
         {/* <CategoryBadgeList categories={categories} /> */}
         <div className="flex items-start gap-3">
           {/* vertical line */}
@@ -94,11 +92,10 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
           </p>
           <div className="relative z-10">
             <Link href={`/${parentCategorySlug}/${categorySlug}/${slug}`}>
-            
-            <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
-              Start Reading
-              {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}
-            </ButtonPrimary>
+              <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
+                Start Reading
+                {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}
+              </ButtonPrimary>
             </Link>
           </div>
         </div>
