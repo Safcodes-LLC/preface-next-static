@@ -14,9 +14,10 @@ interface Props {
   className?: string
   post: TPost
   ratio?: string
+  lang?: string
 }
 
-const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => {
+const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang }) => {
   const {
     title,
     handle,
@@ -75,7 +76,7 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
       </div>
 
       {/* ABSOLUTE */}
-      <Link href={`/post/${handle}`} className="absolute inset-0"></Link>
+      {/* <Link href={`/post/${handle}`} className="absolute inset-0"></Link> */}
 
       <CategoryBadgeList className="absolute inset-x-3 top-3" categories={category} />
 
@@ -98,9 +99,9 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
         </div> */}
         <div className="mt-20 flex grow flex-col rounded-3xl rounded-ss-none bg-white p-5 dark:bg-[#0D0D0D]">
           <h2 className="nc-card-title mb-2 block font-normal text-neutral-900 sm:text-base dark:text-neutral-100">
-            <Link href={`/post/${handle}`} title={title} className="line-clamp-2">
+            <span title={title} className="line-clamp-2">
               {title}
-            </Link>
+            </span>
           </h2>
           {/* <p className="mt-3 mb-5 block text-sm/6 text-neutral-600 dark:text-neutral-400">
             <span className="line-clamp-2">{excerpt}</span>
@@ -110,7 +111,8 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3' }) => 
             {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
             <PostCardSaveBtn className="" bookmarked={bookmarked} />
             <Link
-              href={getPostUrl()}
+              // href={getPostUrl()}
+              href={lang === 'en' ? getPostUrl() : `/${lang}/${getPostUrl()}`}
               className="border-[#E2E2E2] transition-transform ms-auto flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border duration-200 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]"
             >
               <ArrowRightIcon

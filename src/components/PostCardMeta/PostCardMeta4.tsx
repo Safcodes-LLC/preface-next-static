@@ -17,9 +17,12 @@ const PostCardMeta4: FC<Props> = ({ meta, className, avatarSize }) => {
       {/* <Avatar className={clsx(avatarSize, 'mt-1 size-9 shrink-0')} src={author.avatar.src} /> */}
       <div>
         <h2 className={clsx('block text-base font-medium')}>
-          <Link href={`/post/${handle}`} className="line-clamp-1">
+        {/* <Link href={`/post/${handle}`} className="line-clamp-1">
             {title}
-          </Link>
+          </Link> */}
+          <span className="line-clamp-1">
+            {title}
+          </span>
         </h2>
         <span className="block font-normal text-xs pt-1 text-[#60A43A] dark:text-neutral-300">Muhammad ﷺ</span>
         {/* <Link href={`/author/${author.handle}`} className="mt-2 flex">

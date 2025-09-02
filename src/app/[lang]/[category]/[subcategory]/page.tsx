@@ -1,14 +1,12 @@
-import ArchiveSortByListBox from '@/components/ArchiveSortByListBox'
 import Banner from '@/components/Banner'
+import ClientSectionSliderPosts from '@/components/ClientSectionSliderPosts'
 import ModalCategories from '@/components/ModalCategories'
 import Card16Podcast from '@/components/PostCards/Card16Podcast'
-import ClientSectionSliderPosts from '@/components/ClientSectionSliderPosts'
 import { getSubcategoryPosts } from '@/data/api/posts'
 import { getCategories, getTags } from '@/data/categories'
 import { getAllPosts, getPostsDefault } from '@/data/posts'
-import { usePopularArticles } from '@/hooks/api'
-import { Metadata } from 'next'
 import { getDictionary } from '@/i18n'
+import { Metadata } from 'next'
 
 export async function generateMetadata({
   params,
@@ -33,8 +31,8 @@ export async function generateMetadata({
 const Page = async ({ params }: { params: Promise<{ subcategory: string; lang: string }> }) => {
   // Await the params before using them
   const { subcategory } = await params
-    const { lang } = await params
-    const dict = await getDictionary(lang)
+  const { lang } = await params
+  const dict = await getDictionary(lang)
 
   // Call getSubcategoryPosts and log the results
   const subcategoryPosts = await getSubcategoryPosts(subcategory, lang)
@@ -72,9 +70,8 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string; lang: s
   const categories = await getCategories()
   const defaultPosts = await getPostsDefault()
   const tags = await getTags()
-  
-  
-// console.log(subcategoryImage,"images fopr sub category");
+
+  // console.log(subcategoryImage,"images fopr sub category");
 
   const filterOptions = [
     { name: 'Most recent', value: 'most-recent' },
@@ -106,14 +103,14 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string; lang: s
         </div>
 
         <div className="pt-6 lg:pt-10">
-          {listPost.filter((p) => p.postType?.name === "Article").length > 0 ? (
+          {listPost.filter((p) => p.postType?.name === 'Article').length > 0 ? (
             <>
               <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
                 {listPost
-                  .filter((p) => p.postType?.name === "Article")
+                  .filter((p) => p.postType?.name === 'Article')
                   .slice(0, 8)
                   .map((p) => (
-                    <Card16Podcast key={p._id} post={p} />
+                    <Card16Podcast key={p._id} post={p} lang={lang} />
                   ))}
               </div>
             </>
@@ -125,7 +122,6 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string; lang: s
         </div>
       </div>
 
-
       <div className="container space-y-20 py-20 lg:space-y-28 lg:py-28">
         <div className="relative">
           {/* <BackgroundSection /> */}
@@ -135,6 +131,7 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string; lang: s
             // subHeading="Over 10 Articles"
             subcategorySlug={subcategory}
             limit={6}
+            lang={lang}
           />
         </div>
       </div>

@@ -13,9 +13,10 @@ interface Props {
   className?: string
   post: TPost
   ratio?: string
+  lang?: string
 }
 
-const Card10V5: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect-6/5' }) => {
+const Card10V5: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect-6/5', lang }) => {
   const [isHover, setIsHover] = useState(false)
   const { categories, bookmarked, likeCount, liked } = post
 
