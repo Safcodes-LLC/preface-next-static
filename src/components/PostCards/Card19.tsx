@@ -15,6 +15,7 @@ interface Props {
   post?: TPost | any
   verticalLine?: boolean
   textCenter?: boolean
+  lang?: string
 }
 
 const Card19: FC<Props> = ({
@@ -24,6 +25,7 @@ const Card19: FC<Props> = ({
   post,
   verticalLine = false,
   textCenter = false,
+  lang,
 }) => {
   const {
     title,
@@ -102,7 +104,7 @@ const Card19: FC<Props> = ({
         {/* Button above title */}
         {textCenter && (
           <div className="relative z-10">
-            <Link href={`/video/${slug}`}>
+            <Link href={lang === 'en' ? `/video/${slug}` : `/${lang}/video/${slug}`}>
               <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
                 Watch full video
                 {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}
@@ -127,7 +129,7 @@ const Card19: FC<Props> = ({
             <p className={clsx('line-clamp-2 flex-1 text-[12px] leading-snug font-medium text-white sm:text-sm')}>
               {excerpt}
             </p>
-            <Link href={`/${parentCategorySlug}/${categorySlug}/${slug}`}>
+            <Link href={lang === 'en' ? `/${parentCategorySlug}/${categorySlug}/${slug}` : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`}>
               <ButtonPrimary color="logo-colors" className="flex-shrink-0 !px-4 !py-1 !text-[12px]">
                 Start Reading
               </ButtonPrimary>

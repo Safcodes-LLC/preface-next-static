@@ -12,9 +12,10 @@ interface Props {
   ratio?: string
   titleClass?: string
   post?: TPost | any
+  lang?: string
 }
 
-const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post }) => {
+const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post, lang }) => {
   const {
     title,
     excerpt,
@@ -91,7 +92,8 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
             {excerpt}
           </p>
           <div className="relative z-10">
-            <Link href={`/${parentCategorySlug}/${categorySlug}/${slug}`}>
+           
+            <Link href={lang === 'en' ? `/${parentCategorySlug}/${categorySlug}/${slug}` : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`}>
               <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
                 Start Reading
                 {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}

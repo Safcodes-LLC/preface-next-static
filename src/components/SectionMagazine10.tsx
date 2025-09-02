@@ -8,15 +8,16 @@ interface Props {
   posts: TPost[]
   videoPosts?: any
   className?: string
+  lang?: string
 }
 
-const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className }) => {
+const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang }) => {
   
   return (
     <div className={clsx('section-magazine-10 relative', className)}>
       {!posts.length && <span>Nothing we found!</span>}
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
-        {videoPosts[0] && <Card19 post={videoPosts[0]} titleClass="text-lg sm:text-xl" ratio='aspect-4/3 sm:aspect-1/1 md:aspect-4/1 lg:aspect-4/2 xl:aspect-1/1' textCenter={true}/>}
+        {videoPosts[0] && <Card19 post={videoPosts[0]} titleClass="text-lg sm:text-xl" ratio='aspect-4/3 sm:aspect-1/1 md:aspect-4/1 lg:aspect-4/2 xl:aspect-1/1' textCenter={true} lang={lang}/>}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:grid-rows-5">
           {posts[0] && (
             <Card19
@@ -25,12 +26,13 @@ const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className }) => {
               titleClass="text-lg sm:text-xl "
               post={posts[0]}
               verticalLine={true}
+              lang={lang}
             />
           )}
           {posts
             .filter((_, i) => i < 3 && i >= 1)
             .map((item, index) => (
-              <Card18 className="col-span-1 sm:row-span-3" key={index} post={item} />
+              <Card18 className="col-span-1 sm:row-span-3" key={index} post={item} lang={lang} />
             ))}
         </div>
       </div>

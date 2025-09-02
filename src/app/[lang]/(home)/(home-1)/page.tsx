@@ -97,7 +97,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
       <HomeHeader lang={lang} />
       <VideoHeroBanner />
       <div className="container pt-[60px]">
-        <SectionMagazine10 posts={articlesArray} videoPosts={videoPostsArray} />
+        <SectionMagazine10 posts={articlesArray} videoPosts={videoPostsArray}  lang={lang}/>
       </div>
       {/* <ParallaxScrollSection magazine10Data={articlesArray} videoPosts={videoPostsArray} /> */}
       <div className="relative container mt-28 space-y-28 lg:space-y-40">
