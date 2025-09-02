@@ -6,9 +6,14 @@ import { Toaster } from 'react-hot-toast'
 import ThemeProvider from './theme-provider'
 import AuthProvider from '@/contexts/AuthContext'
 import QueryProvider from '@/providers/query-provider'
-import { Noto_Serif } from 'next/font/google'
+import { Noto_Serif, Noto_Kufi_Arabic } from 'next/font/google'
 
 const notoSerif = Noto_Serif({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+const notoKufiArabic = Noto_Kufi_Arabic({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400', '500', '600', '700'],
@@ -16,14 +21,26 @@ const notoSerif = Noto_Serif({
 
 const FORCE_DARK_PATHS = ['/visuals', '/video']
 
-export default function ClientLayout({ children }: { children: ReactNode }) {
-  const pathname = usePathname()
-  const isForcedDarkMode = FORCE_DARK_PATHS.some(path => 
-    pathname?.startsWith(path)
+const storedLang = localStorage.getItem('selectedLanguage')
+console.log("storedLang",storedLang)
+// useEffect(() => {
+  //     const currentLocale = getCurrentLocale()
+  //     const lang = languages.find(lang => lang.code === currentLocale) || 
+  //                 languages.find(lang => lang.code === defaultLocale) || 
+  //                 languages[0]
+  //     setSelectedLanguage(lang)
+  //   }, [pathname, languages])
+  
+  export default function ClientLayout({ children }: { children: ReactNode }) {
+    const pathname = usePathname()
+    console.log("pathname",pathname) 
+    const currentLang= pathname?.startsWith('/ar')||pathname?.startsWith('/ar/')
+    const isForcedDarkMode = FORCE_DARK_PATHS.some(path => 
+      pathname?.startsWith(path)
   )
   
   return (
-    <html lang="en" className={notoSerif.className}>
+    <html lang="en" className={currentLang ? notoKufiArabic.className : notoSerif.className}>
       <body className={`bg-[#F8F8F8] text-base text-neutral-900 dark:bg-[#000000] dark:text-neutral-200 ${
         isForcedDarkMode ? 'dark' : ''
       }`}>
