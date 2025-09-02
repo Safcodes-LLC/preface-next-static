@@ -50,16 +50,16 @@ export async function getNavigation(): Promise<TNavigationItem[]> {
       href: '/visuals',
       name: 'Visuals',
     },
-    {
-      id: '3',
-      href: '/knowledge-hub',
-      name: 'Knowledge Hub',
-    },
-    {
-      id: '4',
-      href: '/quick-look',
-      name: 'Quick Look',
-    },
+    // {
+    //   id: '3',
+    //   href: '/knowledge-hub',
+    //   name: 'Knowledge Hub',
+    // },
+    // {
+    //   id: '4',
+    //   href: '/quick-look',
+    //   name: 'Quick Look',
+    // },
     {
       id: '5',
       href: '/',
