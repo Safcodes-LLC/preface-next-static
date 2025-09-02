@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
 import ThemeProvider from './theme-provider'
 import AuthProvider from '@/contexts/AuthContext'
@@ -21,23 +21,21 @@ const notoKufiArabic = Noto_Kufi_Arabic({
 
 const FORCE_DARK_PATHS = ['/visuals', '/video']
 
-const storedLang = localStorage.getItem('selectedLanguage')
-console.log("storedLang",storedLang)
-// useEffect(() => {
-  //     const currentLocale = getCurrentLocale()
-  //     const lang = languages.find(lang => lang.code === currentLocale) || 
-  //                 languages.find(lang => lang.code === defaultLocale) || 
-  //                 languages[0]
-  //     setSelectedLanguage(lang)
-  //   }, [pathname, languages])
-  
-  export default function ClientLayout({ children }: { children: ReactNode }) {
-    const pathname = usePathname()
-    console.log("pathname",pathname) 
-    const currentLang= pathname?.startsWith('/ar')||pathname?.startsWith('/ar/')
-    const isForcedDarkMode = FORCE_DARK_PATHS.some(path => 
-      pathname?.startsWith(path)
+export default function ClientLayout({ children }: { children: ReactNode }) {
+  const pathname = usePathname()
+  console.log("pathname",pathname) 
+  const currentLang= pathname?.startsWith('/ar')||pathname?.startsWith('/ar/')
+  const isForcedDarkMode = FORCE_DARK_PATHS.some(path => 
+    pathname?.startsWith(path)
   )
+  const [storedLang, setStoredLang] = useState<string | null>(null);
+
+  useEffect(() => {
+    // This code runs only on the client side
+    const lang = localStorage.getItem('selectedLanguage');
+    console.log("storedLang", lang);
+    setStoredLang(lang);
+  }, []); // Empty dependency array means this runs once on mount
   
   return (
     <html lang="en" className={currentLang ? notoKufiArabic.className : notoSerif.className}>
