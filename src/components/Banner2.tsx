@@ -1,4 +1,5 @@
-import { SingleMetaAction } from '@/app /[lang]/post/SingleMetaAction'
+
+import { SingleMetaAction } from '@/app/[lang]/post/SingleMetaAction'
 import Image from 'next/image'
 
 interface Banner2Props {
