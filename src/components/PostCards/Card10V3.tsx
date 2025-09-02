@@ -103,7 +103,7 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1 }) => {
         {postType === 'gallery' && galleryImgs?.length && (
           <Link
             href={`/post/${handle}`}
-            className="absolute inset-0 bg-neutral-900/20 opacity-100 transition-opacity group-hover:opacity-75"
+            className="absolute inset-0 bg-neutral-900/20 opacity-75 transition-opacity group-hover:opacity-100"
           />
         )}
       </div>
