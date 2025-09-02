@@ -56,7 +56,7 @@ export const getQuranLatestArticles = async (lang?: string ,options?: { limit?: 
 
 // Dynamic subcategory posts
 // /api/frontend/list-posts?categorySlug=life-and-message&page=1&limit=100&lang=en
-export const getSubcategoryPosts = async (categorySlug: string, options?: { 
+export const getSubcategoryPosts = async (categorySlug: string,lang?: string, options?: { 
   page?: number; 
   limit?: number; 
 }) => {
@@ -82,6 +82,7 @@ export const getSubcategoryPosts = async (categorySlug: string, options?: {
         };
       }
     }>(`/api/frontend/list-posts?categorySlug=${categorySlug}`, {
+      language:lang,
       next: { revalidate: 60 }, // Revalidate every 60 seconds
       page: options?.page || 1,
       limit: options?.limit || 100

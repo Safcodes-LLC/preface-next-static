@@ -8,6 +8,7 @@ import { getCategories, getTags } from '@/data/categories'
 import { getAllPosts, getPostsDefault } from '@/data/posts'
 import { usePopularArticles } from '@/hooks/api'
 import { Metadata } from 'next'
+import { getDictionary } from '@/i18n'
 
 export async function generateMetadata({
   params,
@@ -29,12 +30,14 @@ export async function generateMetadata({
   }
 }
 
-const Page = async ({ params }: { params: Promise<{ subcategory: string }> }) => {
+const Page = async ({ params }: { params: Promise<{ subcategory: string; lang: string }> }) => {
   // Await the params before using them
   const { subcategory } = await params
+    const { lang } = await params
+    const dict = await getDictionary(lang)
 
   // Call getSubcategoryPosts and log the results
-  const subcategoryPosts = await getSubcategoryPosts(subcategory)
+  const subcategoryPosts = await getSubcategoryPosts(subcategory, lang)
   // console.log('getSubcategoryPosts result:', subcategoryPosts)
 
   // Get all posts and filter by subcategory
@@ -97,9 +100,9 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string }> }) =>
         <div className="flex flex-wrap gap-x-2 gap-y-4">
           <ModalCategories categories={categories} />
           {/* <ModalTags tags={tags} /> */}
-          <div className="ms-auto">
+          {/* <div className="ms-auto">
             <ArchiveSortByListBox filterOptions={filterOptions} />
-          </div>
+          </div> */}
         </div>
 
         <div className="pt-6 lg:pt-10">
@@ -128,7 +131,7 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string }> }) =>
           {/* <BackgroundSection /> */}
           <ClientSectionSliderPosts
             postCardName="card10V5"
-            heading={`POPULAR ARTICLES FROM ${subcategoryName}`}
+            heading={`${dict.sections.populararticlesfrom.heading} ${subcategoryName}`}
             // subHeading="Over 10 Articles"
             subcategorySlug={subcategory}
             limit={6}

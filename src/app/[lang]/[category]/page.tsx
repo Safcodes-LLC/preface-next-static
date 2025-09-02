@@ -2,13 +2,18 @@ import Banner from '@/components/Banner'
 import ClientSectionSliderPosts from '@/components/ClientSectionSliderPosts'
 import Card17 from '@/components/PostCards/Card17'
 import { getPostsDefault, getPostsGallery } from '@/data/posts'
+import { getDictionary } from '@/i18n'
 import { serverFetch } from '@/lib/server/api'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 // Remove generateStaticParams to enable dynamic routing
 
-export async function generateMetadata({ params }: { params: Promise<{ category: string, lang: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string; lang: string }>
+}): Promise<Metadata> {
   const { category, lang } = await params
 
   try {
@@ -35,15 +40,18 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   }
 }
 
-const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
+const Page = async ({ params }: { params: Promise<{ category: string; lang: string }> }) => {
   const { category } = await params
+  const { lang } = await params
+  const dict = await getDictionary(lang)
 
   let categoryData: any = null
   let posts: any[] = []
 
   try {
     // Fetch category data from API
-    categoryData = await serverFetch.get(`/api/frontend/category/slug/${category}`)
+    categoryData = await serverFetch.get(`/api/frontend/category/slug/${category}`, {language:lang
+    })
     // console.log(categoryData?.data,"categoryData");
 
     if (!categoryData) {
@@ -65,7 +73,7 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
   const categoryName = categoryData.data.name || ''
 
   return (
-    <div className={`page-category-${category}`}>
+    <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className={`page-category-${category}`}>
       {/* <PageHeader category={categoryData} /> */}
       <div className="container mx-auto mt-12 sm:mt-20">
         <Banner
@@ -90,7 +98,7 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
             ? categoryData.data.subcategories
             : galleryPosts.slice(0, 8)
           ).map((post: any, index: number) => (
-            <Card17 key={post._id || index} post={post} />
+            <Card17 key={post._id || index} post={post} lang={lang}/>
           ))}
         </div>
       </div>
@@ -107,7 +115,8 @@ const Page = async ({ params }: { params: Promise<{ category: string }> }) => {
 
           <ClientSectionSliderPosts
             postCardName="card10V5"
-            heading={`POPULAR ARTICLES FROM ${categoryName}`}
+            // heading={`POPULAR ARTICLES FROM ${categoryName}`}
+            heading={`${dict.sections.populararticlesfrom.heading} ${categoryName}`}
             // subHeading="Over 10 Articles"
             parentSlug={category}
             limit={6}

@@ -10,9 +10,10 @@ import { FC } from 'react'
 interface Props {
   className?: string
   post: TPost
+  lang?: string
 }
 
-const Card17: FC<Props> = ({ className, post }) => {
+const Card17: FC<Props> = ({ className, post, lang }) => {
   const {
     title,
     name,
@@ -70,7 +71,8 @@ const Card17: FC<Props> = ({ className, post }) => {
       {/* Arrow button on the far right */}
       <div className="flex shrink-0 items-center">
         <Link
-          href={`/${parentCategory?.slug}/${slug}`}
+          href={lang === 'en' ? `/${parentCategory?.slug}/${slug}` : `/${lang}/${parentCategory?.slug}/${slug}`}
+          // href={lang === 'en' ? `/${slug}` : `/${lang}/${slug}`}
           className="inline-flex cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] bg-white p-1.5 dark:border-[#505050] dark:bg-[#0D0D0D]"
         >
           <ArrowRightIcon className="h-3 w-3 text-[#919191] rtl:rotate-180 dark:text-[#707070]" />

@@ -12,12 +12,14 @@ interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
   subcategorySlug?: string
   parentSlug?: string
   limit?: number
+  lang?: string
 }
 
 const ClientSectionSliderPosts: FC<Props> = ({ 
   subcategorySlug, 
   parentSlug, 
   limit = 6, 
+  lang,
   ...props 
 }) => {
   // Determine which query to use based on available props
