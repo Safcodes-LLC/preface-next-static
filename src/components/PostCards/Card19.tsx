@@ -52,14 +52,18 @@ const Card19: FC<Props> = ({
           <PostFeaturedMedia post={post} />
         ) : (
           <>
-            <Image
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="rounded-xl object-cover brightness-85 transition-[filter] duration-300 group-hover:brightness-60"
-              src={thumbnail || featuredImage}
-              alt={title}
-              priority
-              fill
-            />
+            {thumbnail || featuredImage ? (
+              <Image
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="rounded-xl object-cover brightness-85 transition-[filter] duration-300 group-hover:brightness-60"
+                src={thumbnail || featuredImage}
+                alt={title}
+                priority
+                fill
+              />
+            ) : (
+              <div className="h-full w-full rounded-xl bg-gray-200" /> // fallback placeholder
+            )}
             {/* <PostTypeFeaturedIcon
               className="absolute end-4 top-4 group-hover:hidden"
               postType={postType}
