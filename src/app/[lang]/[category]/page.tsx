@@ -93,7 +93,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
       </div>
       <div className="container pt-6 lg:pt-10">
         {/* LOOP ITEMS - Use posts from API if available, otherwise fallback to gallery posts */}
-        <div className="grid grid-cols-2 gap-6 md:gap-8 lg:grid-cols-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 lg:grid-cols-3">
           {(categoryData.data.subcategories.length > 0
             ? categoryData.data.subcategories
             : galleryPosts.slice(0, 8)
