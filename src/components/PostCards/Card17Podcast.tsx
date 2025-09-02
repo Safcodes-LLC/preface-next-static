@@ -19,12 +19,12 @@ const Card17Podcast: FC<Props> = ({ className, post }) => {
   const IS_AUDIO = postType === 'audio'
 
   return (
-    <div
-      className={clsx(
-        'post-card-17-podcast relative flex items-center justify-between gap-x-5 rounded-xl  bg-white p-2.5 dark:bg-[#0D0D0D]',
-        className
-      )}
-    >
+<div
+  className={clsx(
+    'post-card-17-podcast relative flex items-center justify-between gap-x-5 rounded-xl bg-white p-2.5 dark:bg-[#0D0D0D] transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg hover:bg-neutral-50 dark:hover:bg-[#1A1A1A]',
+    className
+  )}
+>
       <div className="flex items-center gap-x-4">
         <div className="relative size-14 shrink-0 rounded-[10px] shadow-lg sm:size-22">
           <Image
