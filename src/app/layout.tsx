@@ -1,6 +1,6 @@
 import '@/styles/tailwind.css'
 import { Metadata } from 'next'
-import ClientLayout from './client-layout'
+import ClientLayout from './[lang]/client-layout'
 
 export const metadata: Metadata = {
   title: {

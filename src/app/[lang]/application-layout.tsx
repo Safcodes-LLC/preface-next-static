@@ -1,5 +1,5 @@
 'use client'
-
+import React, { ReactNode, useEffect, useState } from 'react'
 import Footer from '@/components/Footer/Footer'
 import Header2 from '@/components/Header/Header2'
 import SocialSidebar from '@/components/SocialSidebar'
@@ -7,8 +7,8 @@ import AsideSidebarNavigation from '@/components/aside-sidebar-navigation'
 import { TNavigationItem, getNavigation as fetchNavigation } from '@/data/navigation'
 import { TPost, getAllPosts } from '@/data/posts'
 import Navbar2 from '@/shared/Navbar2'
+import { Noto_Kufi_Arabic, Noto_Serif } from 'next/font/google'
 import { usePathname } from 'next/navigation'
-import React, { ReactNode, useEffect, useState } from 'react'
 
 interface Props {
   children: ReactNode
@@ -17,12 +17,22 @@ interface Props {
   showBanner?: boolean
   home?: boolean
 }
+const notoSerif = Noto_Serif({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+const notoKufiArabic = Noto_Kufi_Arabic({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
 
 const ApplicationLayout: React.FC<Props> = ({ children, home }) => {
   const pathname = usePathname()
   const [navigationMenu, setNavigationMenu] = useState<TNavigationItem[]>([])
   const [featuredPosts, setFeaturedPosts] = useState<TPost[]>([])
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("en")
+  const [selectedLanguage, setSelectedLanguage] = useState<string>('en')
 
   useEffect(() => {
     const storedLang = localStorage.getItem('selectedLanguage')
@@ -45,12 +55,12 @@ const ApplicationLayout: React.FC<Props> = ({ children, home }) => {
 
   // Check if current page should hide Navbar2 and use header-scroll
   const isTransparentHeader = pathname === '/' || pathname === '/visuals'
-
+  const currentLang = pathname?.startsWith('/ar') || pathname?.startsWith('/ar/')
   return (
-    <>
+    <div className={currentLang ? notoKufiArabic.className : notoSerif.className}>
       {home ? null : (
         <div className="container">
-          <Navbar2 lang={selectedLanguage}/>
+          <Navbar2 lang={selectedLanguage} />
         </div>
       )}
 
@@ -59,18 +69,18 @@ const ApplicationLayout: React.FC<Props> = ({ children, home }) => {
           isTransparentHeader={isTransparentHeader}
           navigationMenu={navigationMenu}
           featuredPosts={featuredPosts}
-          className='sticky top-0 z-40 bg-white dark:bg-[#000000]'
+          className="sticky top-0 z-40 bg-white dark:bg-[#000000]"
           lang={selectedLanguage}
         />
       )}
 
       {children}
 
-      <Footer lang={selectedLanguage}/>
+      <Footer lang={selectedLanguage} />
 
       <AsideSidebarNavigation />
       <SocialSidebar />
-    </>
+    </div>
   )
 }
 
