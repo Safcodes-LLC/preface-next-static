@@ -22,7 +22,7 @@ const Layout: React.FC<Props> = async ({ children }) => {
     <ApplicationLayout home={true}>
       {children}
 
-      <div className="container space-y-8 md:space-y-12 lg:space-y-16 py-8 md:py-12 lg:py-16">
+      <div className="container space-y-10 md:space-y-14 lg:space-y-20 py-10 md:py-14 lg:py-20">
  
 
         <div className="relative ">

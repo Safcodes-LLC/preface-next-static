@@ -80,46 +80,6 @@ const PageVisuals = async ({
   )
   // console.log(posts, 'postssss.. ')
 
-  const renderLoopItems = () => {
-    switch (searchTab) {
-      case 'categories':
-        return (
-          <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 md:gap-8 lg:mt-10 lg:grid-cols-4 xl:grid-cols-5">
-            {categories?.map((category) => (
-              <CardCategory2 key={category.id} category={category} />
-            ))}
-          </div>
-        )
-
-      case 'tags':
-        return (
-          <div className="mt-12 flex flex-wrap gap-3">
-            {tags?.map((tag) => (
-              <Tag key={tag.id} href={`/tag/${tag.handle}`}>
-                {tag.name}
-              </Tag>
-            ))}
-          </div>
-        )
-      case 'authors':
-        return (
-          <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 md:gap-8 lg:mt-10 lg:grid-cols-4 xl:grid-cols-5">
-            {authors?.map((author) => (
-              <CardAuthorBox2 className="border border-dashed" key={author.id} author={author} />
-            ))}
-          </div>
-        )
-      default:
-        return (
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-8 lg:mt-10 lg:grid-cols-3 xl:grid-cols-3">
-            {posts?.slice(0, 9)?.map((post) => (
-              <Card11 key={post.id} post={post} />
-            ))}
-          </div>
-        )
-    }
-  }
-
   return (
     <div className="visuals-page">
       <HomeHeader />
