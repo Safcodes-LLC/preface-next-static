@@ -1,11 +1,10 @@
 import { TPost } from '@/data/posts'
-import ButtonPrimary from '@/shared/ButtonPrimary'
 import HeadingWithSub from '@/shared/Heading'
-import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { FC, ReactNode } from 'react'
 import Card10 from './PostCards/Card10'
 import Card10V2 from './PostCards/Card10V2'
+import Card10V6 from './PostCards/Card10V6'
 import Card11 from './PostCards/Card11'
 import Card14 from './PostCards/Card14'
 import Card15Podcast from './PostCards/Card15Podcast'
@@ -13,7 +12,6 @@ import Card3 from './PostCards/Card3'
 import Card4 from './PostCards/Card4'
 import Card7 from './PostCards/Card7'
 import Card9 from './PostCards/Card9'
-import Card10V6 from './PostCards/Card10V6'
 
 interface Props {
   posts?: TPost[]
@@ -23,7 +21,17 @@ interface Props {
   subHeading?: ReactNode
   headingIsCenter?: boolean
   timeDuration?: boolean
-  postCardName?: 'card3' | 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card10V6' | 'card11' | 'card14' | 'card15Podcast'
+  postCardName?:
+    | 'card3'
+    | 'card4'
+    | 'card7'
+    | 'card9'
+    | 'card10'
+    | 'card10V2'
+    | 'card10V6'
+    | 'card11'
+    | 'card14'
+    | 'card15Podcast'
 }
 
 const SectionGridPosts: FC<Props> = ({
@@ -34,7 +42,7 @@ const SectionGridPosts: FC<Props> = ({
   heading,
   subHeading,
   timeDuration,
-  headingIsCenter
+  headingIsCenter,
 }) => {
   const renderCard = (post: TPost) => {
     switch (postCardName) {
@@ -74,7 +82,7 @@ const SectionGridPosts: FC<Props> = ({
       <HeadingWithSub subHeading={subHeading as string} isCenter={headingIsCenter}>
         {heading}
       </HeadingWithSub>
-      <div className={clsx('mt-16 grid gap-x-6 gap-y-8 md:gap-x-7 md:gap-y-10 lg:mt-20', gridClass)}>
+      <div className={clsx('grid gap-x-6 gap-y-8 md:gap-x-7 md:gap-y-10', gridClass)}>
         {posts?.map((post) => renderCard(post))}
       </div>
       {/* <div className="mt-20 flex items-center justify-center">

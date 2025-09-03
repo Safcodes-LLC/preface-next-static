@@ -22,19 +22,10 @@ const Layout: React.FC<Props> = async ({ children }) => {
     <ApplicationLayout home={true}>
       {children}
 
-      <div className="container space-y-20 py-16 lg:space-y-28 lg:py-20">
-        <div className=" ">
-          <SectionGridPosts
-            postCardName="card10V6"
-            heading="STORYTELLING ISLAM"
-            subHeading="Understanding Islam through 1001 stories"
-            posts={videoPosts.slice(0, 8)}
-            gridClass="md:grid-cols-2 lg:grid-cols-3"
-            timeDuration={true}
-          />
-        </div>
+      <div className="container space-y-8 md:space-y-12 lg:space-y-16 py-8 md:py-12 lg:py-16">
+ 
 
-        <div className="relative py-16 lg:py-20">
+        <div className="relative ">
           <BackgroundSection />
           <SwipableSliderPosts
             heading="TOP RATED ON PREFACE"
@@ -53,6 +44,16 @@ const Layout: React.FC<Props> = async ({ children }) => {
                 default: 1, // It's good practice to include a default value
               },
             }}
+          />
+        </div>
+        <div className="relative ">
+          <SectionGridPosts
+            postCardName="card10V6"
+            heading="STORYTELLING ISLAM"
+            subHeading="Understanding Islam through 1001 stories"
+            posts={videoPosts.slice(0, 8)}
+            gridClass="md:grid-cols-2 lg:grid-cols-3"
+            timeDuration={true}
           />
         </div>
       </div>
