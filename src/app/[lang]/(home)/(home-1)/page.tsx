@@ -123,7 +123,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
         />
       </div>
 
-      <div className="relative py-8 md:py-12 lg:py-16">
+      <div className="relative pt-8 md:pt-12 lg:pt-16">
         {/* <SectionSliderNewCategories   heading="STORYTELLING ISLAM"
           subHeading="Understanding Islam through 1001 stories" categories={categories.slice(0, 10)} categoryCardType="card2" /> */}
         <SectionSlider
