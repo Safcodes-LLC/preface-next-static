@@ -76,7 +76,7 @@ const CurrLangDropdown: FC<Props> = ({
   languages,
   currencies,
   home,
-  panelClassName = 'w-xs',
+  panelClassName = 'w-44',
 }) => {
   const router = useRouter()
   const pathname = usePathname()
@@ -136,7 +136,7 @@ const CurrLangDropdown: FC<Props> = ({
         anchor={panelAnchor}
         transition
         className={clsx(
-          'z-40 rounded-2xl bg-white p-4 ring-1 ring-black/5 transition duration-200 ease-in-out data-closed:translate-y-1 data-closed:opacity-0 dark:bg-[#0D0D0D]',
+          'z-40 rounded-2xl bg-white p-2 ring-1 ring-black/5 transition duration-200 ease-in-out data-closed:translate-y-1 data-closed:opacity-0 dark:bg-[#0D0D0D]',
           panelClassName
         )}
       >
