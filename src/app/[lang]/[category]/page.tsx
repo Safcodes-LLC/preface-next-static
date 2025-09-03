@@ -103,16 +103,8 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
         </div>
       </div>
 
-      <div className="container space-y-20 py-20 lg:space-y-28 lg:py-28">
+      <div className="container py-10 md:py-14 lg:py-20">
         <div className="relative">
-          {/* <BackgroundSection /> */}
-          {/* <SectionSliderPosts
-            postCardName="card10V5"
-            heading={`POPULAR ARTICLES FROM ${categoryData.data.name}`}
-            // subHeading="Over 10 Articles"
-            posts={defaultPosts.slice(0, 6)}
-          /> */}
-
           <ClientSectionSliderPosts
             postCardName="card10V5"
             // heading={`POPULAR ARTICLES FROM ${categoryName}`}
