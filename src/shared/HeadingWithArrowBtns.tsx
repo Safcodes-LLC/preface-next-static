@@ -26,7 +26,7 @@ const HeadingWithArrowBtns: React.FC<Props> = ({
   className,
 }) => {
   return (
-    <div className={clsx('relative mb-12 flex flex-wrap items-end gap-4', className)}>
+    <div className={clsx('relative mb-10 flex flex-wrap items-end gap-4', className)}>
       <HeadingWithSub className="mb-0!" level={level} subHeading={subHeading} dimHeading={dimHeading}>
         {children}
       </HeadingWithSub>

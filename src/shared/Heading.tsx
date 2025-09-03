@@ -57,7 +57,7 @@ export default function HeadingWithSub({
   ...props
 }: HeadingWithSubProps) {
   return (
-    <div className={clsx(className, 'relative mb-12', isCenter && 'mx-auto w-full text-center text-pretty')}>
+    <div className={clsx(className, 'relative mb-10', isCenter && 'mx-auto w-full text-center text-pretty')}>
       <Heading level={level} {...props}>
         {children}
       </Heading>
