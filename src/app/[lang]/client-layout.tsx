@@ -26,7 +26,7 @@ export default async function ClientLayout({ children }: { children: ReactNode; 
     <html
       lang="en"
       className={notoSerif.className}
-      // className={currentLang ? notoKufiArabic.className : notoSerif.className}
+      suppressHydrationWarning
     >
       <body className={`bg-[#F8F8F8] text-base text-neutral-900 dark:bg-[#000000] dark:text-neutral-200`}>
         <AuthProvider>
