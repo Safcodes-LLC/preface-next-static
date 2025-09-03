@@ -84,7 +84,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
   ]
 
   return (
-    <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className="relative overflow-hidden pb-8 md:pb-12 lg:pb-16">
+    <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className="relative overflow-hidden pb-10 md:pb-14 lg:pb-20">
       {/* Video Hero Banner */}
       {/* <VideoHeroBanner /> */}
       {/* <div className="relative">
@@ -96,11 +96,11 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
       {/* Parallax Scroll Section - VideoHeroBanner + SectionMagazine10 */}
       <HomeHeader lang={lang} />
       <VideoHeroBanner />
-      <div className="container pt-8 md:pt-12 lg:pt-16">
+      <div className="container pt-10 md:pt-14 lg:pt-20">
         <SectionMagazine10 posts={articlesArray} videoPosts={videoPostsArray} lang={lang} />
       </div>
       {/* <ParallaxScrollSection magazine10Data={articlesArray} videoPosts={videoPostsArray} /> */}
-      <div className="relative container space-y-8 md:space-y-12 lg:space-y-16 pt-8 md:pt-12 lg:pt-16">
+      <div className="relative container space-y-8 md:space-y-12 lg:space-y-16 pt-10 md:pt-14 lg:pt-20">
         {/* <SectionMagazine10 posts={magazine10Data} /> */}
         <SectionSliderNewCategories
           heading={dict.sections.storytelling.heading}
@@ -123,7 +123,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
         />
       </div>
 
-      <div className="relative pt-8 md:pt-12 lg:pt-16">
+      <div className="relative pt-10 md:pt-14 lg:pt-20">
         {/* <SectionSliderNewCategories   heading="STORYTELLING ISLAM"
           subHeading="Understanding Islam through 1001 stories" categories={categories.slice(0, 10)} categoryCardType="card2" /> */}
         <SectionSlider
@@ -143,7 +143,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
           }}
         />
       </div>
-      <div className="relative  py-8 md:py-12 lg:py-16">
+      <div className="relative  py-10 md:py-14 lg:py-20">
         <BackgroundSection />
         {/* <SectionSliderPosts
             postCardName="card10V2"
@@ -167,7 +167,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
         </div>
       </div>
 
-      <div className="relative container py-8 md:py-12 lg:py-16">
+      <div className="relative container py-10 md:py-14 lg:py-20">
         <SectionTrending
           posts={Array.isArray(latestArticles) ? latestArticles.slice(0, 8) : latestArticles.data?.slice(0, 8) || []}
           heading={dict.sections.latestarticles.heading}

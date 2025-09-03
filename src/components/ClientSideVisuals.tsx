@@ -9,7 +9,7 @@ const ClientSideVisuals = ({ dict, posts, lang }: { dict: any; posts: any; lang:
   // console.log(displayPosts);
 
   return (
-    <div className="bg-[#000000] py-8 md:py-12 lg:py-16 dark:bg-[#0D0D0D]">
+    <div className="bg-[#000000] py-10 md:py-14 lg:py-20 dark:bg-[#0D0D0D]">
       <div className="relative container">
         <SectionMagazine4
           heading={dict.sections.visuals.heading}
