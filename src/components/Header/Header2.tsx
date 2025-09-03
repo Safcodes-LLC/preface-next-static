@@ -65,7 +65,7 @@ const Header2: FC<Header2Props> = ({
               >
                 <Cog6ToothIcon
                   className={clsx(
-                    `h-6 w-6 transition-colors duration-200 ${home ? (isTransparentHeader ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000]') : 'text-[#000000] dark:text-white'}`
+                    `h-6 w-6 transition-colors duration-200 ${home ? (isTransparentHeader ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white') : 'text-[#000000] dark:text-white'}`
                   )}
                   aria-hidden="true"
                 />

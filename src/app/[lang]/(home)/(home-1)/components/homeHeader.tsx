@@ -62,7 +62,7 @@ const HomeHeader = ({lang}: {lang?: string}) => {
         </div>
       </div>
       <Header2 
-        className={`z-40 w-full transition-all duration-300 ${scrolled ? 'fixed top-0 bg-white shadow-md' : 'fixed top-[60px]'}`} 
+        className={`z-40 w-full transition-all duration-300 ${scrolled ? 'fixed top-0 bg-white dark:bg-black shadow-md' : 'fixed top-[60px]'}`} 
         isTransparentHeader={!scrolled} 
         navigationMenu={navigationMenu} 
         featuredPosts={featuredPosts} 
