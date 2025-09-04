@@ -13,9 +13,10 @@ interface Props {
   post: TPost
   isHover?: boolean
   autoPlay?: boolean
+  href?: string
 }
 
-const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPlay = false }) => {
+const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPlay = false, href }) => {
   const { featuredImage, thumbnail, postType, videoFile, video_url, videoUrl, video_file, galleryImgs, audioUrl, handle, title } = post
 
   // Use video_file as primary, then videoFile, then videoUrl as fallbacks
@@ -75,7 +76,7 @@ const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPl
     const imageSrc = featuredImage || thumbnail;
     if (!imageSrc) return null;
     return (
-      <Link href={`/post/${handle}`}>
+      <Link href={href || `/post/${handle}`}>
         <Image alt={title} fill className="object-cover" src={imageSrc} sizes="(max-width: 600px) 100vw, 50vw" />
         <div className="absolute inset-0 bg-black/25 opacity-100 transition-opacity group-hover:opacity-75" />
       </Link>

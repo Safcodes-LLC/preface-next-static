@@ -132,7 +132,6 @@ export const getTopicsWithArticles = async (lang?: string) => {
     return response?.data || [];
   } catch (error) {
     console.error('Failed to fetch topics with articles:', error);
-    alert('Failed to fetch topics with articles:' + error)
     return [];
   }
 };

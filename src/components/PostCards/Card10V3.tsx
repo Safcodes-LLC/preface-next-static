@@ -9,15 +9,26 @@ import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
 interface Props {
   className?: string
   post: TPost
-  
+
   galleryType?: 1 | 2
 }
 
 const Card10V3: FC<Props> = ({ className, post, galleryType = 1 }) => {
-  const { title, name, handle, featuredImage, categories, postType, galleryImgs, author, date, readingTime, bookmarked } =
-    post
+  const {
+    title,
+    name,
+    handle,
+    featuredImage,
+    categories,
+    postType,
+    galleryImgs,
+    slug,
+    author,
+    date,
+    readingTime,
+    bookmarked,
+  } = post
   const [isHover, setIsHover] = useState(false)
-  // console.log(post, 'posts')
 
   const renderGallery2 = () => {
     if (!galleryImgs) return null
@@ -93,7 +104,11 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1 }) => {
     >
       <div className="relative aspect-square w-full overflow-hidden rounded-3xl sm:aspect-16/9">
         {postType !== 'gallery' || !galleryImgs?.length ? (
-          <PostFeaturedMedia post={post} isHover={isHover} />
+          <PostFeaturedMedia
+            post={post}
+            isHover={isHover}
+            href={`/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`}
+          />
         ) : galleryType === 1 ? (
           renderGallery()
         ) : (
@@ -102,7 +117,7 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1 }) => {
 
         {postType === 'gallery' && galleryImgs?.length && (
           <Link
-            href={`/post/${handle}`}
+            href={`/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`}
             className="absolute inset-0 bg-neutral-900/20 opacity-75 transition-opacity group-hover:opacity-100"
           />
         )}
@@ -114,8 +129,12 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1 }) => {
       </div> */}
 
       <div className="absolute right-0 bottom-0 left-0 p-6">
-        <h2 className="block font-semibold text-[#FFFFFF] sm:text-lg dark:text-neutral-100 leading-snug max-w-[300px] line-clamp-2">
-          <Link href={`/post/${handle}`} title={name ||title} className='line-clamp-2'>
+        <h2 className="line-clamp-2 block max-w-[300px] leading-snug font-semibold text-[#FFFFFF] sm:text-lg dark:text-neutral-100">
+          <Link
+            href={`/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`}
+            title={name || title}
+            className="line-clamp-2"
+          >
             {name || title}
           </Link>
         </h2>

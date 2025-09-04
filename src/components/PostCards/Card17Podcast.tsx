@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Card17Podcast: FC<Props> = ({ className, post }) => {
-  const { title, name, handle, thumbnail, featuredImage, postType, date, readingTime, totalArticles } = post
+  const { title, name, handle, slug, thumbnail, parentCategory, featuredImage, postType, date, readingTime, totalArticles } = post
   
   const IS_AUDIO = postType === 'audio'
 
@@ -61,9 +61,9 @@ const Card17Podcast: FC<Props> = ({ className, post }) => {
             </div>
           </div>
           <div className="flex shrink-0 items-center mt-[10px]">
-        <div className="inline-flex cursor-pointer items-center justify-center rounded-full bg-white p-1.5 border border-[#E2E2E2] dark:border-[#505050] dark:bg-[#0D0D0D]">
+        <Link href={`/${parentCategory.slug}/${slug}`} className="inline-flex cursor-pointer items-center justify-center rounded-full bg-white p-1.5 border border-[#E2E2E2] dark:border-[#505050] dark:bg-[#0D0D0D]">
           <ArrowRightIcon className="h-3 w-3 text-[#919191] dark:text-[#707070] rtl:rotate-180" />
-        </div>
+        </Link>
       </div>
         </div>
       </div>

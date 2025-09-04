@@ -123,7 +123,7 @@ const HomePage = async ({ params }: { params: Promise<{ lang: string }> }) => {
         />
       </div>
 
-      <div className="relative pt-10 md:pt-14 lg:pt-20">
+      <div className="relative py-10 md:py-14 lg:py-20">
         {/* <SectionSliderNewCategories   heading="STORYTELLING ISLAM"
           subHeading="Understanding Islam through 1001 stories" categories={categories.slice(0, 10)} categoryCardType="card2" /> */}
         <SectionSlider
@@ -143,14 +143,8 @@ const HomePage = async ({ params }: { params: Promise<{ lang: string }> }) => {
           }}
         />
       </div>
-      <div className="relative  py-10 md:py-14 lg:py-20">
+      <div className="relative py-10 md:py-14 lg:py-20">
         <BackgroundSection />
-        {/* <SectionSliderPosts
-            postCardName="card10V2"
-            heading="ISLAM FOR BEGINNERS"
-            subHeading="Over 100 Articles for beginners"
-            posts={defaultPosts.slice(0, 6)}
-          /> */}
         <div className="container">
           <SwipableSliderPosts
             heading={dict.sections.islamforbeginners.heading}
