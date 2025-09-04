@@ -33,7 +33,7 @@ const ApplicationLayout = async ({ children, home, params }: Props) => {
   // Check if current page should hide Navbar2 and use header-scroll
   const isTransparentHeader = (await params).pathname === '/' || (await params).pathname === '/visuals'
   return (
-    <div className={(await params).lang === 'ar' ? notoKufiArabic.className : notoSerif.className}>
+    <div className={(await params).lang === 'ar' ? notoKufiArabic.className : notoSerif.className} dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}>
       {home ? null : (
         <div className="container">
           <Navbar2 lang={(await params).lang} />

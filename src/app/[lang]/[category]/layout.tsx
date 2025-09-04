@@ -6,13 +6,14 @@ import { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
+  params: Promise<{ lang: string }>
 }
 
-const Layout: React.FC<Props> = async ({ children }) => {
+const Layout: React.FC<Props> = async ({ children, params }) => {
   const authors = await getAuthors()
   const defaultPosts = await getPostsDefault()
   return (
-    <ApplicationLayout>
+    <ApplicationLayout params={params}>
       {children}
 
      
