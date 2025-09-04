@@ -11,13 +11,13 @@ interface Props {
   className?: string
   post: TPost
   ratio?: string
+  lang?: string
 }
 
-const Card10V2: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect-11/12' }) => {
-  const { handle, categories, bookmarked } = post
-  console.log(post,"post");
-  
-  
+const Card10V2: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect-11/12', lang }) => {
+  const { handle, categories, bookmarked, slug } = post
+  console.log(post, 'post')
+
   const [isHover, setIsHover] = useState(false)
 
   return (
@@ -27,7 +27,15 @@ const Card10V2: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
       onMouseLeave={() => setIsHover(false)}
     >
       <div className={clsx('relative w-full shrink-0 overflow-hidden rounded-[15px]', ratio)}>
-        <PostFeaturedMedia post={post} isHover={isHover} />
+        <PostFeaturedMedia
+          post={post}
+          isHover={isHover}
+          href={
+            lang === 'en'
+              ? `/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`
+              : `/${lang}/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`
+          }
+        />
       </div>
       <div className="absolute inset-x-3 top-3 flex items-start gap-2">
         <CategoryBadgeList categories={categories} />
