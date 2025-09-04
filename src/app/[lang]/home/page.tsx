@@ -1,32 +1,30 @@
-import BackgroundSection from '@/components/BackgroundSection'
-import SectionMagazine7 from '@/components/SectionMagazine7'
-import SectionSlider from '@/components/SectionSlider'
-
-import ClientSideVisuals from '@/components/ClientSideVisuals'
-import SectionMagazine10 from '@/components/SectionMagazine10'
-import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
-import SectionTrending from '@/components/SectionTrending'
-import SwipableSliderPosts from '@/components/SwipableSliderPosts'
-import VideoHeroBanner from '@/components/VideoHeroBanner'
+import { Metadata } from 'next' 
 import { getBannerHighlightedArticles, getBannerHighlightedVideos } from '@/data/api/banner'
 import { getCategory, getQuranSubcategories, getTopTrendingTopics } from '@/data/api/category'
 import { getIslamForBeginners, getLatestArticles, getLatestVideos, getQuranLatestArticles } from '@/data/api/posts'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
-import { getDictionary } from '@/i18n'
-import { Metadata } from 'next'
 import HomeHeader from './components/homeHeader'
+import BackgroundSection from '@/components/BackgroundSection'
+import SectionMagazine7 from '@/components/SectionMagazine7'
+import SectionSlider from '@/components/SectionSlider'
+import ClientSideVisuals from '@/components/ClientSideVisuals'
+import SectionMagazine10 from '@/components/SectionMagazine10'
+import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
+import SectionTrending from '@/components/SectionTrending'
+import SwipableSliderPosts from '@/components/SwipableSliderPosts'
+import VideoHeroBanner from '@/components/VideoHeroBanner'
+import { ApplicationLayout } from '../application-layout'
 
 export const metadata: Metadata = {
-  title: 'Home',
-  description: 'Home page of the application showcasing various sections and posts.',
+  title: 'Preface Islam',
+  description: 'Preface Islam is a platform for Muslims to learn about Islam and its teachings.',
 }
 
-const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
-  const { lang } = await params
-  const dict = await getDictionary(lang)
-  // Get all data in parallel using Promise.all for better performance
+ 
+const HomePage = async ({ params, dict }: { params: Promise<{ lang: string }>, dict: any }) => {
+  const { lang } = await params 
   const [
     posts,
     defaultPosts,
@@ -84,6 +82,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
   ]
 
   return (
+    <ApplicationLayout home={true} headerHasBorder={true} params={params}>
     <div dir={lang === 'ar' ? 'rtl' : 'ltr'} className="relative overflow-hidden pb-10 md:pb-14 lg:pb-20">
       {/* Video Hero Banner */}
       {/* <VideoHeroBanner /> */}
@@ -173,7 +172,8 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
 
       <ClientSideVisuals dict={dict} posts={latestVideos} lang={lang} />
     </div>
+    </ApplicationLayout>
   )
 }
 
-export default Page
+export default HomePage

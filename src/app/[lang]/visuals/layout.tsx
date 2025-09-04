@@ -10,16 +10,17 @@ import { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
+  params: Promise<{ lang: string }>
 }
 
-const Layout: React.FC<Props> = async ({ children }) => {
+const Layout: React.FC<Props> = async ({ children, params }) => {
   const categories = await getCategories()
   const authors = await getAuthors()
   const defaultPosts = await getPostsDefault()
   // const videoPosts = await getPostsVideo()
   const videoPosts = await getLatestVideos()
   return (
-    <ApplicationLayout home={true}>
+    <ApplicationLayout home={true} params={params}>
       {children}
 
       <div className="container space-y-10 md:space-y-14 lg:space-y-20 py-10 md:py-14 lg:py-20">

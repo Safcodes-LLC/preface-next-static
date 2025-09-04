@@ -1,16 +1,9 @@
-import CardAuthorBox2 from '@/components/CardAuthorBoxs/CardAuthorBox2'
-import CardCategory2 from '@/components/CategoryCards/CardCategory2'
-import ImageHeroBanner from '@/components/ImageHeroBanner'
-import Card11 from '@/components/PostCards/Card11'
-import VideoBanner from '@/components/VideoBanner'
-import { getSearchResults } from '@/data/search'
-import ButtonSecondary from '@/shared/ButtonSecondary'
-import Tag from '@/shared/Tag'
-import { ArrowDownIcon } from '@heroicons/react/24/outline'
-import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
-import HomeHeader from '../(home)/(home-1)/components/homeHeader'
+import { getSearchResults } from '@/data/search' 
+import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
+import ImageHeroBanner from '@/components/ImageHeroBanner'
+import HomeHeader from '../home/components/homeHeader'
 
 const sortByOptions = [
   { name: 'Most recent', value: 'most-recent' },
@@ -82,7 +75,7 @@ const PageVisuals = async ({
 
   return (
     <div className="visuals-page" dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}>
-      <HomeHeader />
+      <HomeHeader lang={(await params).lang} />
     <ImageHeroBanner />
     </div>
   )
