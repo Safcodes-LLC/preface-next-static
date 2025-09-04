@@ -7,9 +7,10 @@ import CategoryBadgeList from '../CategoryBadgeList'
 interface Props {
   className?: string
   post: TPost
+  lang?: string
 }
 
-const Card5: FC<Props> = ({ className, post }) => {
+const Card5: FC<Props> = ({ className, post, lang }) => {
   const { author, title, handle, slug, date, categories, readingTime } = post
 
   const parentCategorySlug = (categories[0] as any)?.parentCategory?.slug
@@ -24,7 +25,11 @@ const Card5: FC<Props> = ({ className, post }) => {
       )}
     >
       <Link
-        href={`/${parentCategorySlug}/${categorySlug}/${articleSlug}`}
+        href={
+          lang === 'en'
+            ? `/${parentCategorySlug}/${categorySlug}/${articleSlug}`
+            : `/${lang}/${parentCategorySlug}/${categorySlug}/${articleSlug}`
+        }
         className="absolute inset-0 rounded-lg"
       ></Link>
 

@@ -11,9 +11,10 @@ type Props = Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading' | 'isCenter'>
   posts: TPost[]
   className?: string
   heading?: string
+  lang?: string
 }
 
-const SectionTrending: FC<Props> = ({ posts, heading, subHeading, isCenter, className }) => {
+const SectionTrending: FC<Props> = ({ posts, heading, subHeading, isCenter, className, lang }) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.2 })
 
@@ -71,7 +72,7 @@ const SectionTrending: FC<Props> = ({ posts, heading, subHeading, isCenter, clas
       >
         {posts.map((post) => (
           <motion.div key={post._id} variants={cardVariants}>
-            <Card5 post={post} />
+            <Card5 post={post} lang={lang}/>
           </motion.div>
         ))}
       </motion.div>

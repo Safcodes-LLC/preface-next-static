@@ -153,6 +153,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
             subHeading={dict.sections.islamforbeginners.description}
             posts={islamForBeginners.slice(0, 8)}
             postCardName="card10V2"
+            lang={lang}
             config={{
               autoSlide: false,
               autoSlideInterval: 4000,
@@ -168,6 +169,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
           posts={Array.isArray(latestArticles) ? latestArticles.slice(0, 8) : latestArticles.data?.slice(0, 8) || []}
           heading={dict.sections.latestarticles.heading}
           subHeading={dict.sections.latestarticles.description}
+          lang={lang}
         />
       </div>
 
