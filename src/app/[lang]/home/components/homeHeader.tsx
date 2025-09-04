@@ -5,27 +5,17 @@ import { TPost, getAllPosts } from '@/data/posts'
 import Navbar2 from '@/shared/Navbar2'
 import React, { useEffect, useState } from 'react'
 
-const HomeHeader = ({ lang }: { lang?: string }) => {
-  const [navigationMenu, setNavigationMenu] = useState<TNavigationItem[]>([])
-  const [featuredPosts, setFeaturedPosts] = useState<TPost[]>([])
+type Props = {
+  lang?: string
+  dict?: any
+  navigationMenu: TNavigationItem[]
+  featuredPosts: TPost[]
+}
+
+const HomeHeader = ({ lang, dict, navigationMenu, featuredPosts }: Props) => {
   const [scrolled, setScrolled] = useState(false)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
-
-  useEffect(() => {
-    // Fetch data on client side
-    const fetchData = async () => {
-      try {
-        const [navData, postsData] = await Promise.all([fetchNavigation(lang), getAllPosts()])
-        setNavigationMenu(navData)
-        setFeaturedPosts(postsData.slice(0, 2))
-      } catch (error) {
-        console.error('Error fetching navigation or posts:', error)
-      }
-    }
-
-    fetchData()
-  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,7 +50,7 @@ const HomeHeader = ({ lang }: { lang?: string }) => {
         className={`fixed top-0 z-30 w-full transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}
       >
         <div className="container">
-          <Navbar2 home={true} lang={lang} />
+          <Navbar2 home={true} lang={lang} dict={dict}/>
         </div>
       </div>
       <Header2
@@ -70,6 +60,7 @@ const HomeHeader = ({ lang }: { lang?: string }) => {
         featuredPosts={featuredPosts}
         home={true}
         lang={lang}
+        dict={dict}
       />
     </React.Fragment>
   )

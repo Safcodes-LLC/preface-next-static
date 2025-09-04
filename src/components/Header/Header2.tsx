@@ -1,3 +1,4 @@
+"use client"
 import { TNavigationItem } from '@/data/navigation'
 import { TPost } from '@/data/posts'
 import Logo from '@/shared/Logo'
@@ -9,7 +10,7 @@ import AvatarDropdown from './AvatarDropdown'
 import HamburgerBtnMenu from './HamburgerBtnMenu'
 import AskScholarButton from './Navigation/AskScholarButton'
 import Navigation from './Navigation/Navigation'
-import SearchModal from './SearchModal'
+import SearchModal from './SearchModal' 
 
 interface Props {
   bottomBorder?: boolean
@@ -17,6 +18,7 @@ interface Props {
   isTransparentHeader?: boolean
   home?: boolean
   lang?: string
+  dict?: any
 }
 
 interface Header2Props extends Props {
@@ -32,6 +34,7 @@ const Header2: FC<Header2Props> = ({
   isTransparentHeader,
   home,
   lang,
+  dict,
 }) => {
   return (
     <div className={clsx('header-2', className)} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
@@ -49,12 +52,12 @@ const Header2: FC<Header2Props> = ({
               isTransparentHeader={isTransparentHeader}
               home={home}
             />
-            <AskScholarButton home={home} isTransparentHeader={isTransparentHeader} />
+            <AskScholarButton home={home} isTransparentHeader={isTransparentHeader} dict={dict}/>
           </div>
         </div>
 
         <div className="flex flex-1 items-center justify-end gap-x-1">
-          <SignInButton />
+          <SignInButton dict={dict} />
           <SearchModal type="type1" isTransparentHeader={isTransparentHeader} home={home} />
           <AvatarDropdown
             trigger={

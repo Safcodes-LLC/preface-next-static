@@ -82,6 +82,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
           alt={`${categoryData?.data?.name || categoryData.data.title} banner`}
           description={categoryData?.data?.subcategories?.length || ''}
           // className=""
+          dict={dict}
         />
         <div className="mt-12 w-full lg:max-w-4xl">
           <p className="mt-6 text-sm text-[#444444] lg:text-base dark:text-[#DFDFDF]">

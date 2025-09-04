@@ -3,7 +3,7 @@
 import { Button } from '@/shared/Button';
 import { useEffect, useState } from 'react';
 
-export default function SignInButton() {
+export default function SignInButton({ dict }: { dict: any }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
@@ -24,7 +24,7 @@ export default function SignInButton() {
         href={'/login'}
         color="logooutline"
       >
-        Sign in
+        {dict.navigation.signin}
       </Button>
     </div>
   );

@@ -19,8 +19,8 @@
     "askthescholar": "اسأل العالِم",
     "dashboard": "لوحة الرئيسية",
     "myaccount": "حسابي",
-    "sign in": "Sign In",
-    "logout": "Logout"
+    "signin": "تسجيل الدخول",
+    "logout": "تسجيل الخروج"
   },
   "sections":{
     "storytelling": {

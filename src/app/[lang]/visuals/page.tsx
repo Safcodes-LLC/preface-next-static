@@ -3,8 +3,10 @@ import { getSearchResults } from '@/data/search'
 import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation' 
-import { getLatestVideos } from '@/data/api/posts'
+import { getLatestVideos, getLatestArticles } from '@/data/api/posts'
+import { getNavigation } from '@/data/navigation'
 import HomeHeader from '../home/components/homeHeader'
+import { getDictionary } from '@/i18n'
 
 const sortByOptions = [
   { name: 'Most recent', value: 'most-recent' },
@@ -50,7 +52,13 @@ const PageVisuals = async ({
     const searchTab = formData.get('tab') as string
     redirect(`/search?s=${searchQuery}&tab=${searchTab}`)
   }
-    const videoPosts = await getLatestVideos()
+    const [videoPosts, articles, navigationMenu] = await Promise.all([
+    getLatestVideos(),
+    getLatestArticles(),
+    getNavigation((await params).lang)
+  ])
+  
+  const featuredPosts = articles.data.slice(0, 2)
 
   let searchQuery = (await searchParams)['s']
   let searchTab = (await searchParams)['tab']
@@ -74,10 +82,16 @@ const PageVisuals = async ({
     searchTab as 'posts' | 'categories' | 'tags' | 'authors'
   )
   // console.log(posts, 'postssss.. ')
+  const dict = await getDictionary((await params).lang)
 
   return (
     <div className="visuals-page" dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}>
-      <HomeHeader lang={(await params).lang} />
+      <HomeHeader 
+        lang={(await params).lang} 
+        navigationMenu={navigationMenu} 
+        featuredPosts={featuredPosts}
+        dict={dict}
+      />
     <ImageHeroBanner />
     </div>
   )

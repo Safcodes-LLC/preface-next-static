@@ -90,6 +90,7 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string; lang: s
           alt={`${subcategoryName} banner`}
           description={`${lengthTopics}`}
           // className=""
+          dict={dict}
         />
       </div>
 

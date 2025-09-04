@@ -6,9 +6,10 @@ interface BannerProps {
   alt?: string
   className?: string
   description?: any
+  dict?: any
 }
 
-const Banner = ({ image, title, alt, className = '', description }: BannerProps) => {
+const Banner = ({ image, title, alt, className = '', description, dict }: BannerProps) => {
   return (
     <div className={`relative aspect-16/9 lg:aspect-16/5 ${className}`}>
       <Image
@@ -30,7 +31,7 @@ const Banner = ({ image, title, alt, className = '', description }: BannerProps)
       {/* Title */}
       <div className="items-left absolute inset-0 flex flex-col justify-center gap-2 px-10">
         <h1 className="text-2xl font-bold text-white md:text-3xl">{title}</h1>
-        <p className="text-sm text-white md:text-base">{description} Topics</p>
+        <p className="text-sm text-white md:text-base">{description} {dict.navigation.topics}</p>
       </div>
     </div>
   )

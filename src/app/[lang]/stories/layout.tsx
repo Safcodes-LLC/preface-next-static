@@ -1,12 +1,12 @@
+import { ReactNode } from 'react'
 import { ApplicationLayout } from '@/app/[lang]/application-layout'
-import BackgroundSection from '@/components/BackgroundSection'
-import SectionGridCategoryBox from '@/components/SectionGridCategoryBox'
-import SectionSliderNewAuthors from '@/components/SectionSliderNewAuthors'
-import SectionSubscribe2 from '@/components/SectionSubscribe2'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
-import ButtonSecondary from '@/shared/ButtonSecondary'
-import { ReactNode } from 'react'
+// import BackgroundSection from '@/components/BackgroundSection'
+// import SectionGridCategoryBox from '@/components/SectionGridCategoryBox'
+// import SectionSliderNewAuthors from '@/components/SectionSliderNewAuthors'
+// import SectionSubscribe2 from '@/components/SectionSubscribe2'
+// import ButtonSecondary from '@/shared/ButtonSecondary'
 
 interface Props {
   children: ReactNode

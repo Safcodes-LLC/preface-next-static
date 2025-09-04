@@ -8,9 +8,10 @@ interface Props {
   className?: string
   home?: boolean
   isTransparentHeader?: boolean
+  dict?: any
 }
 
-const AskScholarButton = ({ className, home, isTransparentHeader }: Props) => {
+const AskScholarButton = ({ className, home, isTransparentHeader, dict }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleAskScholarClick = () => {
@@ -31,7 +32,7 @@ const AskScholarButton = ({ className, home, isTransparentHeader }: Props) => {
         style={{ marginTop: 0 }}
       >
         <ChatBubbleLeftRightIcon className="h-5 w-5" aria-hidden="true" />
-        <span className="whitespace-nowrap">Ask the Scholar</span>
+        <span className="whitespace-nowrap">{dict.navigation.askthescholar}</span>
       </button>
 
       <ModalAskTheScholar 

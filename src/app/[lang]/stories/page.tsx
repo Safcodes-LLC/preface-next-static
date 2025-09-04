@@ -1,19 +1,20 @@
-import Banner from '@/components/Banner'
-import Card11 from '@/components/PostCards/Card11'
-import { getCategory } from '@/data/api/category'
-import ButtonSecondary from '@/shared/ButtonSecondary'
-import { ArrowDownIcon } from '@heroicons/react/24/outline'
-import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
 import { Metadata } from 'next'
+import ButtonSecondary from '@/shared/ButtonSecondary'
+import Card11 from '@/components/PostCards/Card11'
+import Banner from '@/components/Banner'
+import { getCategory } from '@/data/api/category'
+import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
+import { ArrowDownIcon } from '@heroicons/react/24/outline'
+import { getDictionary } from '@/i18n'
 
-const sortByOptions = [
-  { name: 'Most recent', value: 'most-recent' },
-  { name: 'Curated by admin', value: 'curated-by-admin' },
-  { name: 'Most appreciated', value: 'most-appreciated' },
-  { name: 'Most discussed', value: 'most-discussed' },
-  { name: 'Most viewed', value: 'most-viewed' },
-  { name: 'Most liked', value: 'most-liked' },
-]
+// const sortByOptions = [
+//   { name: 'Most recent', value: 'most-recent' },
+//   { name: 'Curated by admin', value: 'curated-by-admin' },
+//   { name: 'Most appreciated', value: 'most-appreciated' },
+//   { name: 'Most discussed', value: 'most-discussed' },
+//   { name: 'Most viewed', value: 'most-viewed' },
+//   { name: 'Most liked', value: 'most-liked' },
+// ]
 const filterTabs = [
   {
     name: 'Articles',
@@ -70,7 +71,7 @@ const PageStories = async ({
       </div>
     )
   }
-
+const dict = await getDictionary((await params).lang)
   return (
     <div className="stories-page" dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="container mx-auto mt-10 md:mt-14 lg:mt-20">
@@ -78,9 +79,10 @@ const PageStories = async ({
 
         <Banner
           image="/images/banner/common-banner.png"
-          title="Stories"
+          title={dict.navigation.stories}
           description={category?.data?.length}
           alt="Stories banner"
+          dict={dict}
           // className=""
         />
       </div>
