@@ -36,6 +36,7 @@ interface SectionSliderProps {
   categories: TCategory[]
   categoryCardType?: 'card1' | 'card2' | 'card3' | 'card4' | 'card5'
   config?: SliderConfig
+  lang?: string
 }
 
 // Default configuration
@@ -99,6 +100,7 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
   categories,
   categoryCardType = 'card3',
   config = {},
+  lang
 }) => {
   const mergedConfig = { ...defaultConfig, ...config }
   const { autoSlide, autoSlideInterval, showButtons, loop, slidesToScroll } = mergedConfig
@@ -260,7 +262,7 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
       case 'card1':
         return <CardCategory1 key={`${item.id}-${index}`} category={item} />
       case 'card2':
-        return <CardCategory2 key={`${item.id}-${index}`} badge={topIndex} category={item} />
+        return <CardCategory2 key={`${item.id}-${index}`} badge={topIndex} category={item} lang={lang}/>
       case 'card3':
         return <CardCategory3 key={`${item.id}-${index}`} category={item} />
       case 'card4':

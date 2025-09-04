@@ -129,6 +129,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
         <SectionSlider
           heading={dict.sections.trendingcategories.heading}
           subHeading={dict.sections.trendingcategories.description}
+          lang={lang}
           categories={
             Array.isArray(topTrendingTopics)
               ? topTrendingTopics.slice(0, 10)
