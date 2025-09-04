@@ -96,7 +96,7 @@ export default function AvatarDropdown({ className, trigger }: Props) {
             <Divider />
 
             {/* ------------------ 1 --------------------- */}
-            <Link
+            {/* <Link
               // href={'/dashboard/posts'}
               href={'/'}
               className="-m-3 flex items-center gap-x-4 rounded-lg p-2 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700"
@@ -105,10 +105,10 @@ export default function AvatarDropdown({ className, trigger }: Props) {
                 <HugeiconsIcon icon={Task01Icon} size={24} strokeWidth={1.5} />
               </div>
               <p className="text-sm font-medium">Dashboard</p>
-            </Link>
+            </Link> */}
 
             {/* ------------------ 2 --------------------- */}
-            <Link
+            {/* <Link
               // href={'/author/john-doe'}
               href={'/'}
               className="-m-3 flex items-center gap-x-4 rounded-lg p-2 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700"
@@ -117,7 +117,7 @@ export default function AvatarDropdown({ className, trigger }: Props) {
                 <HugeiconsIcon icon={UserIcon} size={24} strokeWidth={1.5} />
               </div>
               <p className="text-sm font-medium">My Account</p>
-            </Link>
+            </Link> */}
 
             {/* ------------------ 2 --------------------- */}
             {/* <Link
@@ -141,7 +141,7 @@ export default function AvatarDropdown({ className, trigger }: Props) {
               <p className="text-sm font-medium">Submission</p>
             </Link> */}
 
-            <Divider />
+            {/* <Divider /> */}
 
             {/* ------------------ 2 --------------------- */}
             <div className="focus-visible:ring-opacity-50 -m-3 flex items-center justify-between rounded-lg p-2 hover:bg-neutral-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 dark:hover:bg-neutral-700">
