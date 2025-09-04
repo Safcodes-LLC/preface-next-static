@@ -1,12 +1,5 @@
-import CardAuthorBox2 from '@/components/CardAuthorBoxs/CardAuthorBox2'
-import CardCategory2 from '@/components/CategoryCards/CardCategory2'
 import ImageHeroBanner from '@/components/ImageHeroBanner'
-import Card11 from '@/components/PostCards/Card11'
-import VideoBanner from '@/components/VideoBanner'
 import { getSearchResults } from '@/data/search'
-import ButtonSecondary from '@/shared/ButtonSecondary'
-import Tag from '@/shared/Tag'
-import { ArrowDownIcon } from '@heroicons/react/24/outline'
 import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
@@ -83,7 +76,7 @@ const PageVisuals = async ({
   return (
     <div className="visuals-page">
       <HomeHeader />
-    <ImageHeroBanner />
+      <ImageHeroBanner />
     </div>
   )
 }

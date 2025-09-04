@@ -1,11 +1,11 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import Header2 from '@/components/Header/Header2'
 import { TNavigationItem, getNavigation as fetchNavigation } from '@/data/navigation'
 import { TPost, getAllPosts } from '@/data/posts'
 import Navbar2 from '@/shared/Navbar2'
-import Header2 from '@/components/Header/Header2'
+import React, { useEffect, useState } from 'react'
 
-const HomeHeader = ({lang}: {lang?: string}) => {
+const HomeHeader = ({ lang }: { lang?: string }) => {
   const [navigationMenu, setNavigationMenu] = useState<TNavigationItem[]>([])
   const [featuredPosts, setFeaturedPosts] = useState<TPost[]>([])
   const [scrolled, setScrolled] = useState(false)
@@ -40,12 +40,12 @@ const HomeHeader = ({lang}: {lang?: string}) => {
       // Scrolling down
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false)
-      } 
+      }
       // Scrolling up
       else if (currentScrollY < lastScrollY) {
         setIsVisible(true)
       }
-      
+
       setScrolled(currentScrollY > 10)
       setLastScrollY(currentScrollY)
     }
@@ -56,16 +56,18 @@ const HomeHeader = ({lang}: {lang?: string}) => {
 
   return (
     <React.Fragment>
-      <div className={`w-full fixed top-0 z-30 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+      <div
+        className={`fixed top-0 z-30 w-full transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}
+      >
         <div className="container">
-          <Navbar2 home={true} lang={lang}/>
+          <Navbar2 home={true} lang={lang} />
         </div>
       </div>
-      <Header2 
-        className={`z-40 w-full transition-all duration-300 ${scrolled ? 'fixed top-0 bg-white dark:bg-black shadow-md' : 'fixed top-[60px]'}`} 
-        isTransparentHeader={!scrolled} 
-        navigationMenu={navigationMenu} 
-        featuredPosts={featuredPosts} 
+      <Header2
+        className={`z-40 w-full transition-all duration-300 ${scrolled ? 'fixed top-0 bg-white shadow-md dark:bg-black' : 'fixed top-[60px]'}`}
+        isTransparentHeader={!scrolled}
+        navigationMenu={navigationMenu}
+        featuredPosts={featuredPosts}
         home={true}
         lang={lang}
       />
