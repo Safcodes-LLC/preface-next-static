@@ -1,455 +1,43 @@
 import { USFlag } from "@/components/Header/FlagIcons"
+import { getTopicsWithArticles } from "./api/posts"
 
-export async function getNavigation(): Promise<TNavigationItem[]> {
+export async function getNavigation(lang: string = "en"): Promise<TNavigationItem[]> {
+  const topicsWithArticles = await getTopicsWithArticles(lang);
+
+  const topicsNav = topicsWithArticles.map((topic: any) => ({
+    id: topic?.id,
+    href: `${lang ==="en" ? "/" : "/" + lang}${topic?.slug}`,
+    name: topic?.name,
+    type: 'dropdown',
+    children:
+      topic?.subcategories?.map((sub: any) => ({
+        id: sub.id,
+        href: `${lang ==="en" ? "/" : "/" + lang}${topic?.slug}/${sub.slug}`,
+        name: sub.name,
+        type: 'dropdown',
+        children:
+          sub.articles?.map((article: any) => ({
+            id: article.id,
+            href: `${lang ==="en" ? "/" : "/" + lang}${topic?.slug}/${sub.slug}/${article.slug}`,
+            name: article.title,
+            type: 'link', // ✅ explicitly mark as leaf link
+          })) || [],
+      })) || [],
+  }));
+
   return [
-    // {
-    //   id: '1',
-    //   href: '/',
-    //   name: 'Home',
-    //   type: 'dropdown',
-    //   children: [
-    //     {
-    //       id: '1-0',
-    //       href: '/',
-    //       name: 'Home demo 1',
-    //     },
-    //     {
-    //       id: '1-1',
-    //       href: '/home-2',
-    //       name: 'Home demo 2',
-    //     },
-    //     {
-    //       id: '1-2',
-    //       href: '/home-3',
-    //       name: 'Home demo 3 ',
-    //     },
-    //     {
-    //       id: '1-3',
-    //       href: '/home-4',
-    //       name: 'Home demo 4 ',
-    //     },
-    //     {
-    //       id: '1-4',
-    //       href: '/home-5',
-    //       name: 'Home demo 5',
-    //     },
-    //     {
-    //       id: '1-5',
-    //       href: '/home-3',
-    //       name: 'Header style 2',
-    //     },
-    //   ],
-    // },
+    { id: '1', href: '/stories', name: 'Stories' },
+    { id: '2', href: '/visuals', name: 'Visuals' },
     {
-      id: '1',
-      href: '/stories',
-      name: 'Stories',
-    },
-    {
-      id: '2',
-      href: '/visuals',
-      name: 'Visuals',
-    },
-    // {
-    //   id: '3',
-    //   href: '/knowledge-hub',
-    //   name: 'Knowledge Hub',
-    // },
-    // {
-    //   id: '4',
-    //   href: '/quick-look',
-    //   name: 'Quick Look',
-    // },
-    {
-      id: '5',
+      id: '3',
       href: '/',
       name: 'Topics',
       type: 'dropdown',
-      children: [
-        {
-          id: '1-0',
-          href: '/category/muhammad',
-          name: 'Muhammad ﷺ',
-          type: 'dropdown',
-          children: [
-            {
-              id: '1-0-1',
-              href: '/category/muhammad/biography',
-              name: 'Biography',
-            },
-            {
-              id: '1-0-2',
-              href: '/category/muhammad/teachings',
-              name: 'Teachings',
-            },
-            {
-              id: '1-0-3',
-              href: '/category/muhammad/hadith',
-              name: 'Hadith',
-            },
-            {
-              id: '1-0-4',
-              href: '/category/muhammad/miracles',
-              name: 'Miracles',
-            },
-            {
-              id: '1-0-5',
-              href: '/category/muhammad/character',
-              name: 'Character & Ethics',
-            }
-          ]
-        },
-        {
-          id: '1-1',
-          href: '/category/quran',
-          name: 'Quran',
-          type: 'dropdown',
-          children: [
-            {
-              id: '1-1-1',
-              href: '/category/quran/tafsir',
-              name: 'Tafsir',
-            },
-            {
-              id: '1-1-2',
-              href: '/category/quran/memorization',
-              name: 'Memorization',
-            },
-            {
-              id: '1-1-3',
-              href: '/category/quran/recitation',
-              name: 'Recitation',
-            },
-            {
-              id: '1-1-4',
-              href: '/category/quran/verses',
-              name: 'Selected Verses',
-            }
-          ]
-        },
-        {
-          id: '1-2',
-          href: '/category/islamic-law',
-          name: 'Islamic Law',
-          type: 'dropdown',
-          children: [
-            {
-              id: '1-2-1',
-              href: '/category/islamic-law/fiqh',
-              name: 'Fiqh',
-            },
-            {
-              id: '1-2-2',
-              href: '/category/islamic-law/prayer',
-              name: 'Prayer',
-            },
-            {
-              id: '1-2-3',
-              href: '/category/islamic-law/fasting',
-              name: 'Fasting',
-            },
-            {
-              id: '1-2-4',
-              href: '/category/islamic-law/zakat',
-              name: 'Zakat',
-            },
-            {
-              id: '1-2-5',
-              href: '/category/islamic-law/hajj',
-              name: 'Hajj',
-            }
-          ]
-        },
-        {
-          id: '1-3',
-          href: '/category/islamic-history',
-          name: 'Islamic History',
-          type: 'dropdown',
-          children: [
-            {
-              id: '1-3-1',
-              href: '/category/islamic-history/caliphs',
-              name: 'Rightly Guided Caliphs',
-            },
-            {
-              id: '1-3-2',
-              href: '/category/islamic-history/companions',
-              name: 'Companions',
-            },
-            {
-              id: '1-3-3',
-              href: '/category/islamic-history/scholars',
-              name: 'Islamic Scholars',
-            },
-            {
-              id: '1-3-4',
-              href: '/category/islamic-history/civilization',
-              name: 'Islamic Civilization',
-            }
-          ]
-        },
-        {
-          id: '1-4',
-          href: '/category/spirituality',
-          name: 'Spirituality',
-          type: 'dropdown',
-          children: [
-            {
-              id: '1-4-1',
-              href: '/category/spirituality/tawheed',
-              name: 'Tawheed',
-            },
-            {
-              id: '1-4-2',
-              href: '/category/spirituality/dua',
-              name: 'Dua & Supplications',
-            },
-            {
-              id: '1-4-3',
-              href: '/category/spirituality/akhlaq',
-              name: 'Akhlaq (Character)',
-            },
-            {
-              id: '1-4-4',
-              href: '/category/spirituality/tasawwuf',
-              name: 'Tasawwuf',
-            }
-          ]
-        },
-        {
-          id: '1-5',
-          href: '/category/family',
-          name: 'Family & Society',
-          type: 'dropdown',
-          children: [
-            {
-              id: '1-5-1',
-              href: '/category/family/marriage',
-              name: 'Marriage',
-            },
-            {
-              id: '1-5-2',
-              href: '/category/family/parenting',
-              name: 'Parenting',
-            },
-            {
-              id: '1-5-3',
-              href: '/category/family/women',
-              name: 'Women in Islam',
-            },
-            {
-              id: '1-5-4',
-              href: '/category/family/community',
-              name: 'Community',
-            }
-          ]
-        }
-      ],
+      children: topicsNav,
     },
-    // {
-    //   id: '2',
-    //   href: '/search?s=technology',
-    //   name: 'Search',
-    // },
-    // {
-    //   id: '4',
-    //   href: '/category/travel',
-    //   name: 'Travel',
-    // },
-    // {
-    //   id: '5',
-    //   href: '/',
-    //   name: 'Templates',
-    //   type: 'mega-menu',
-    //   children: [
-    //     {
-    //       id: '1',
-    //       href: '#',
-    //       name: 'Home pages',
-    //       children: [
-    //         {
-    //           id: '1-0',
-    //           href: '/',
-    //           name: 'Home 1',
-    //         },
-    //         {
-    //           id: '1-1',
-    //           href: '/home-2',
-    //           name: 'Home 2',
-    //         },
-    //         {
-    //           id: '1-2',
-    //           href: '/home-3',
-    //           name: 'Home 3 ',
-    //         },
-    //         {
-    //           id: '1-3',
-    //           href: '/home-4',
-    //           name: 'Home 4 ',
-    //         },
-    //         {
-    //           id: '1-4',
-    //           href: '/home-5',
-    //           name: 'Home 5',
-    //         },
-    //         {
-    //           id: '1-5',
-    //           href: '/home-3',
-    //           name: 'Header style 2',
-    //         },
-    //         {
-    //           id: '1-6',
-    //           href: '#',
-    //           name: 'Coming soon',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       id: '2',
-    //       href: '#',
-    //       name: 'Archive pages',
-    //       children: [
-    //         {
-    //           id: '2-0',
-    //           href: '/category/technology',
-    //           name: 'Category',
-    //         },
-    //         {
-    //           id: '2-1',
-    //           href: '/tag/food',
-    //           name: 'Tag page',
-    //         },
-    //         {
-    //           id: '2-2',
-    //           href: '/author/john-doe',
-    //           name: 'Author page',
-    //         },
-    //         {
-    //           id: '2-3',
-    //           href: '/search?s=technology',
-    //           name: 'Search page',
-    //         },
-    //         {
-    //           id: '2-4',
-    //           href: '/search-2?s=technology',
-    //           name: 'Search page 2',
-    //         },
-    //         {
-    //           id: '2-5',
-    //           href: '/search-2?s=john&tab=authors',
-    //           name: 'Search author',
-    //         },
-    //         {
-    //           id: '2-6',
-    //           href: '/search-2?s=technology&tab=categories',
-    //           name: 'Search categories',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       id: '3',
-    //       href: '#',
-    //       name: 'Single pages',
-    //       children: [
-    //         {
-    //           id: '3-0',
-    //           href: '/post/page-style-3/future-of-remote-work-2025',
-    //           name: 'Single type 1',
-    //         },
-    //         {
-    //           id: '3-1',
-    //           href: '/post/jazz-night-live-miles-davis-tribute',
-    //           name: 'Single audio',
-    //         },
-    //         {
-    //           id: '3-2',
-    //           href: '/post/wildlife-wonders-hidden-life-of-rainforests',
-    //           name: 'Single video',
-    //         },
-    //         {
-    //           id: '3-3',
-    //           href: '/post/girls-in-ocean-science-conference-a-first-at-maritime-museum',
-    //           name: 'Single gallery',
-    //         },
-    //         {
-    //           id: '3-4',
-    //           href: '/post/page-style-2/future-of-remote-work-2025',
-    //           name: 'Single type 2',
-    //         },
-    //         {
-    //           id: '3-5',
-    //           href: '/post/future-of-remote-work-2025',
-    //           name: 'Single type 3',
-    //         },
-    //         {
-    //           id: '3-6',
-    //           href: '#',
-    //           name: 'Coming soon',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       id: '4',
-    //       href: '/#',
-    //       name: 'Other pages',
-    //       type: 'dropdown',
-    //       children: [
-    //         { id: '4-1', href: '/contact', name: 'Contact' },
-    //         { id: '4-2', href: '/login', name: 'Login/signup' },
-    //         { id: '4-3', href: '/search', name: 'Search' },
-    //         { id: '4-4', href: '/submission', name: '+ Submission' },
-    //         { id: '4-5', href: '/dashboard/posts', name: 'Dashboard' },
-    //         { id: '4-6', href: '/author/john-doe', name: 'Account' },
-    //         { id: '4-7', href: '/about', name: 'About us' },
-    //       ],
-    //     },
-    //   ],
-    // },
-    // {
-    //   id: '6',
-    //   href: '/',
-    //   name: 'Explore',
-    //   type: 'dropdown',
-    //   children: [
-    //     {
-    //       id: '1',
-    //       href: '/category/technology',
-    //       name: 'Category page',
-    //     },
-    //     {
-    //       id: '2',
-    //       href: '/author/john-doe',
-    //       name: 'Author page',
-    //     },
-    //     {
-    //       id: '3',
-    //       href: '/search?s=technology',
-    //       name: 'Search page',
-    //     },
-    //     {
-    //       id: '4',
-    //       href: '/search-2?s=technology',
-    //       name: 'Search page 2',
-    //     },
-    //     {
-    //       id: '5',
-    //       href: '/submission',
-    //       name: '+ Submission',
-    //     },
-    //     {
-    //       id: '6',
-    //       href: '/post/page-style-3/future-of-remote-work-2025',
-    //       name: 'Single page',
-    //     },
-    //     {
-    //       id: '7',
-    //       href: '/login',
-    //       name: 'Login/Signup',
-    //     },
-    //   ],
-    // },
-  ]
+  ];
 }
+
 
 export async function getNavMegaMenu(): Promise<TNavigationItem> {
   const navigation = await getNavigation()
@@ -464,9 +52,9 @@ export type TNavigationItem = Partial<{
   id: string
   href: string
   name: string
-  type?: 'dropdown' | 'mega-menu'
+  type?: 'dropdown' | 'mega-menu' | 'link'
   isNew?: boolean
-  children?: TNavigationItem[]
+  children?: TNavigationItem[] | any[]
 }>
 
 export const getLanguages = async () => {
@@ -630,4 +218,8 @@ export const getHeaderDropdownCategories = async () => {
      `,
     },
   ]
+}
+
+export const data = async () => {
+  return []
 }

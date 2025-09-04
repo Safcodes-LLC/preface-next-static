@@ -123,3 +123,16 @@ export const getPostBySlug = async (slug: string) => {
   }
 };
 
+export const getTopicsWithArticles = async (lang?: string) => {
+  try {
+    const response = await serverFetch.get<{ data: any[] }>('/api/frontend/topics-with-articles', {
+      language: lang,
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
+    });
+    return response?.data || [];
+  } catch (error) {
+    console.error('Failed to fetch topics with articles:', error);
+    alert('Failed to fetch topics with articles:' + error)
+    return [];
+  }
+};
