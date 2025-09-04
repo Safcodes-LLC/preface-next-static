@@ -56,7 +56,7 @@ const widgetMenus: WidgetFooterMenu[] = [
   },
 ]
 
-const Footer: React.FC<{lang: string}> = ({lang}) => {
+const Footer: React.FC<{lang?: string}> = ({lang}) => {
   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
     return (
       <div key={index} className="text-sm">

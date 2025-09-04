@@ -2,11 +2,12 @@ import { ApplicationLayout } from '@/app/[lang]/application-layout'
 import { ReactNode } from 'react'
 
 interface Props {
-  children: ReactNode
+  children: ReactNode 
+  params: Promise<{ lang: string }>
 }
 
-const Layout: React.FC<Props> = ({ children }) => {
-  return <ApplicationLayout>{children}</ApplicationLayout>
+const Layout: React.FC<Props> = ({ children, params }) => {
+  return <ApplicationLayout params={params}>{children}</ApplicationLayout>
 }
 
 export default Layout

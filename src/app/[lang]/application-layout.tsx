@@ -1,14 +1,12 @@
-'use client'
-import React, { ReactNode, useEffect, useState } from 'react'
-import Footer from '@/components/Footer/Footer'
+import { ReactNode } from 'react'
+import { Noto_Kufi_Arabic, Noto_Serif } from 'next/font/google'
 import Header2 from '@/components/Header/Header2'
 import SocialSidebar from '@/components/SocialSidebar'
 import AsideSidebarNavigation from '@/components/aside-sidebar-navigation'
-import { TNavigationItem, getNavigation as fetchNavigation } from '@/data/navigation'
-import { TPost, getAllPosts } from '@/data/posts'
 import Navbar2 from '@/shared/Navbar2'
-import { Noto_Kufi_Arabic, Noto_Serif } from 'next/font/google'
-import { usePathname } from 'next/navigation'
+import Footer from '@/components/Footer/Footer'
+import { getNavigation as fetchNavigation } from '@/data/navigation'
+import { getAllPosts } from '@/data/posts'
 
 interface Props {
   children: ReactNode
@@ -16,6 +14,7 @@ interface Props {
   headerStyle?: 'header-1' | 'header-2' | 'header-scroll' | 'header-3'
   showBanner?: boolean
   home?: boolean
+  params?: any
 }
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
@@ -28,56 +27,30 @@ const notoKufiArabic = Noto_Kufi_Arabic({
   weight: ['400', '500', '600', '700'],
 })
 
-const ApplicationLayout: React.FC<Props> = ({ children, home }) => {
-  const pathname = usePathname()
-  const [navigationMenu, setNavigationMenu] = useState<TNavigationItem[]>([])
-  const [featuredPosts, setFeaturedPosts] = useState<TPost[]>([])
-  const [selectedLanguage, setSelectedLanguage] = useState<string>('en')
-
-  useEffect(() => {
-    const storedLang = localStorage.getItem('selectedLanguage')
-    if (storedLang) {
-      setSelectedLanguage(storedLang)
-    }
-    // Fetch data on client side
-    const fetchData = async () => {
-      try {
-        const [navData, postsData] = await Promise.all([fetchNavigation(selectedLanguage), getAllPosts()])
-        setNavigationMenu(navData)
-        setFeaturedPosts(postsData.slice(0, 2))
-      } catch (error) {
-        console.error('Error fetching navigation or posts:', error)
-      }
-    }
-
-    fetchData()
-  }, [])
+const ApplicationLayout = async ({ children, home, params }: Props) => {
+  const fetchNavigationData = await fetchNavigation((await params).lang)
+  const postsData = await getAllPosts()
 
   // Check if current page should hide Navbar2 and use header-scroll
-  const isTransparentHeader = pathname === '/' || pathname === '/visuals'
-  const currentLang = pathname?.startsWith('/ar') || pathname?.startsWith('/ar/')
+  const isTransparentHeader = (await params).pathname === '/' || (await params).pathname === '/visuals'
   return (
-    <div className={currentLang ? notoKufiArabic.className : notoSerif.className}>
+    <div className={(await params).lang === 'ar' ? notoKufiArabic.className : notoSerif.className} dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}>
       {home ? null : (
         <div className="container">
-          <Navbar2 lang={selectedLanguage} />
+          <Navbar2 lang={(await params).lang} />
         </div>
       )}
-
       {home ? null : (
         <Header2
           isTransparentHeader={isTransparentHeader}
-          navigationMenu={navigationMenu}
-          featuredPosts={featuredPosts}
+          navigationMenu={fetchNavigationData}
+          featuredPosts={postsData.slice(0, 2)}
           className="sticky top-0 z-40 bg-white dark:bg-[#000000]"
-          lang={selectedLanguage}
+          lang={(await params).lang}
         />
       )}
-
       {children}
-
-      <Footer lang={selectedLanguage} />
-
+      <Footer lang={(await params).lang} />
       <AsideSidebarNavigation />
       <SocialSidebar />
     </div>

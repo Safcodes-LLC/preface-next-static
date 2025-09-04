@@ -7,13 +7,14 @@ import { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
+  params: Promise<{ lang: string }>
 }
 
-const Layout: React.FC<Props> = async ({ children }) => {
+const Layout: React.FC<Props> = async ({ children, params }) => {
   const authors = await getAuthors()
 
   return (
-    <ApplicationLayout>
+    <ApplicationLayout params={params}>
       {children}
 
       <div className="container space-y-20 py-20 lg:space-y-28 lg:py-28">

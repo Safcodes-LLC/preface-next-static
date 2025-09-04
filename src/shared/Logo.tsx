@@ -6,11 +6,12 @@ import Image from 'next/image'
 interface Props extends React.SVGProps<SVGSVGElement> {
   className?: string
   size?: string
+  lang?: string
 }
 
-const Logo: React.FC<Props> = ({ className }) => {
+const Logo: React.FC<Props> = ({ className, lang }) => {
   return (
-    <Link href="/" className={clsx('inline-block shrink-0', className)}>
+    <Link href={`/${lang}`}className={clsx('inline-block shrink-0', className)}>
       <Image
         src="/preface-logo.svg"
         alt="Preface Logo"
