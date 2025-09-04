@@ -120,7 +120,7 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80" />
 
       {/* Main Content */}
-      <div className="absolute inset-0 container flex items-end pb-40">
+      <div className="absolute inset-0 container flex items-end pb-24">
         {/* Left Content */}
         <div className="flex flex-1 flex-col pr-2 md:pr-8">
           <h1 className="mb-4 text-2xl font-semibold tracking-wider text-white md:text-3xl md:font-bold max-w-full md:max-w-2xl">
