@@ -24,6 +24,7 @@ interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
   posts: TPost[]
   postCardName?: 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card11' | 'card10V5' | 'card16Podcast'
   emblaOptions?: EmblaOptionsType
+  lang?: string
 }
 
 const SectionSliderPosts: FC<Props> = ({
@@ -32,6 +33,7 @@ const SectionSliderPosts: FC<Props> = ({
   dimHeading,
   className,
   posts,
+  lang,
   postCardName = 'card4',
   emblaOptions = {
     slidesToScroll: 'auto',
@@ -54,7 +56,7 @@ const SectionSliderPosts: FC<Props> = ({
       case 'card10V2':
         return <Card10V2 key={index} post={item} />
       case 'card10V5':
-        return <Card10V5 key={index} post={item} />
+        return <Card10V5 key={index} post={item} lang={lang}/>
       case 'card11':
         return <Card11 key={index} post={item} />
       case 'card16Podcast':
