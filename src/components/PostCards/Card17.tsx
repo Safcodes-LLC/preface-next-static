@@ -57,7 +57,7 @@ const Card17: FC<Props> = ({ className, post, lang }) => {
         sizes="80px"
       /> */}
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col flex-1 text-left">
         <h2 className="block text-base font-medium text-[#000000] dark:text-white">
           <span className="line-clamp-1">{name || title}</span>
         </h2>
