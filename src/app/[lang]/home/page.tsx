@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   description: 'Home page of the application showcasing various sections and posts.',
 }
 
-const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
+const HomePage = async ({ params }: { params: Promise<{ lang: string }> }) => {
   const { lang } = await params
   const dict = await getDictionary(lang)
   // Get all data in parallel using Promise.all for better performance
@@ -180,4 +180,4 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
   )
 }
 
-export default Page
+export default HomePage

@@ -10,7 +10,7 @@ import { ArrowDownIcon } from '@heroicons/react/24/outline'
 import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
-import HomeHeader from '../(home)/(home-1)/components/homeHeader'
+import HomeHeader from '../home/components/homeHeader'
 
 const sortByOptions = [
   { name: 'Most recent', value: 'most-recent' },

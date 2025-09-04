@@ -17,7 +17,7 @@ const Logo: React.FC<Props> = ({ className }) => {
         width={157}
         height={51}
         className="block w-full h-auto"
-        priority
+        fetchPriority="high"
       />
     </Link>
   )
