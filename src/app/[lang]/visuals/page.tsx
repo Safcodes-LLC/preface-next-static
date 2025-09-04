@@ -46,7 +46,7 @@ const PageVisuals = async ({
   params,
   searchParams,
 }: {
-  params: Promise<{ query: string }>
+  params: Promise<{ query: string, lang: string }>
   searchParams: SearchParams
 }) => {
   async function handleSearch(formData: FormData) {
@@ -81,7 +81,7 @@ const PageVisuals = async ({
   // console.log(posts, 'postssss.. ')
 
   return (
-    <div className="visuals-page">
+    <div className="visuals-page" dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}>
       <HomeHeader />
     <ImageHeroBanner />
     </div>
