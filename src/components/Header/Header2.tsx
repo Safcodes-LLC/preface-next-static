@@ -37,7 +37,7 @@ const Header2: FC<Header2Props> = ({
     <div className={clsx('header-2', className)} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="container flex h-20 justify-between">
         <div className="flex flex-1 items-center gap-x-4 sm:gap-x-5 lg:gap-x-7">
-          <Logo lang={lang} />
+          <Logo />
         </div>
 
         <div className="mx-4 hidden flex-2 justify-center lg:flex">

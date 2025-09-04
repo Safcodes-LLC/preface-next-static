@@ -167,7 +167,7 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang }) => {
           </Popover>
         </div> */}
 
-        <CurrLangDropdown languages={languages} home={home} lang={lang} />
+        <CurrLangDropdown languages={languages} home={home} />
 
         {/* Calendar with Date and Time */}
         <div

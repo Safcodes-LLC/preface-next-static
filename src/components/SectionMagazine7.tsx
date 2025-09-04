@@ -14,9 +14,10 @@ type Props = Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> & {
   posts2: TPost[]
   className?: string
   heading?: string
+  lang?: string
 }
 
-const SectionMagazine7: FC<Props> = ({ posts = [], posts2 = [], className, heading, subHeading, dimHeading }) => {
+const SectionMagazine7: FC<Props> = ({ posts = [], posts2 = [], className, heading, subHeading, dimHeading, lang }) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.2 })
   
@@ -122,18 +123,18 @@ const SectionMagazine7: FC<Props> = ({ posts = [], posts2 = [], className, headi
         >
           {posts2[0] && (
             <motion.div variants={mainCardVariants}>
-              <Card10V3 post={posts2[0]} />
+              <Card10V3 post={posts2[0]} lang={lang}/>
             </motion.div>
           )}
           {posts2[1] ? (
             <motion.div variants={mainCardVariants}>
-              <Card10V3 galleryType={2} post={posts2[1]} />
+              <Card10V3 galleryType={2} post={posts2[1]} lang={lang}/>
             </motion.div>
           ) : posts2[0] ? (
             // If only one post is available, show a placeholder for the second card
             <motion.div variants={mainCardVariants} className="opacity-0 pointer-events-none">
               <div className="invisible">
-                <Card10V3 galleryType={2} post={posts2[0]} />
+                <Card10V3 galleryType={2} post={posts2[0]} lang={lang}/>
               </div>
             </motion.div>
           ) : null}
@@ -147,7 +148,7 @@ const SectionMagazine7: FC<Props> = ({ posts = [], posts2 = [], className, headi
           {posts.length > 0 ? (
             posts.slice(0, 6).map((p) => (
               <motion.div key={p._id} variants={gridCardVariants}>
-                <Card17Podcast post={p} />
+                <Card17Podcast post={p} lang={lang}/>
               </motion.div>
             ))
           ) : (

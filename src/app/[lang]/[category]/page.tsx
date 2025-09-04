@@ -112,6 +112,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
             // subHeading="Over 10 Articles"
             parentSlug={category}
             limit={6}
+            lang={lang}
           />
         </div>
       </div>

@@ -9,11 +9,11 @@ import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
 interface Props {
   className?: string
   post: TPost
-
+lang?: string
   galleryType?: 1 | 2
 }
 
-const Card10V3: FC<Props> = ({ className, post, galleryType = 1 }) => {
+const Card10V3: FC<Props> = ({ className, post, galleryType = 1, lang }) => {
   const {
     title,
     name,
@@ -117,7 +117,7 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1 }) => {
 
         {postType === 'gallery' && galleryImgs?.length && (
           <Link
-            href={`/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`}
+            href={lang === 'en' ? `/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}` : `/${lang}/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`}
             className="absolute inset-0 bg-neutral-900/20 opacity-75 transition-opacity group-hover:opacity-100"
           />
         )}
@@ -131,7 +131,7 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1 }) => {
       <div className="absolute right-0 bottom-0 left-0 p-6">
         <h2 className="line-clamp-2 block max-w-[300px] leading-snug font-semibold text-[#FFFFFF] sm:text-lg dark:text-neutral-100">
           <Link
-            href={`/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`}
+            href={lang === 'en' ? `/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}` : `/${lang}/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`}
             title={name || title}
             className="line-clamp-2"
           >

@@ -148,7 +148,7 @@ const ModalAskTheScholar: FC<Props> = ({ isOpen, onClose }) => {
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute -top-12 left-1/2 z-20 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full bg-[#00652E] transition-colors hover:bg-green-700"
+              className="absolute -top-12 left-1/2 z-20 flex h-8 w-8 -translate-x-1/2 cursor-pointer items-center justify-center rounded-full bg-[#00652E] transition-colors hover:bg-green-700"
               aria-label="Close modal"
             >
               <XMarkIcon className="h-5 w-5 text-white" />
@@ -215,7 +215,7 @@ const ModalAskTheScholar: FC<Props> = ({ isOpen, onClose }) => {
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="rounded-[25px] bg-[#60A43A] px-10 py-3 text-base font-medium text-white transition-colors duration-200 hover:bg-green-700 focus:ring-1 focus:ring-neutral-300 focus:ring-offset-2 focus:outline-none disabled:opacity-70"
+                    className="cursor-pointer rounded-[25px] bg-[#60A43A] px-10 py-3 text-base font-medium text-white transition-colors duration-200 hover:bg-green-700 focus:ring-1 focus:ring-neutral-300 focus:ring-offset-2 focus:outline-none disabled:opacity-70"
                   >
                     {isPending ? 'Submitting...' : 'Submit to the Scholar'}
                   </button>

@@ -1,16 +1,10 @@
-import CardAuthorBox2 from '@/components/CardAuthorBoxs/CardAuthorBox2'
-import CardCategory2 from '@/components/CategoryCards/CardCategory2'
 import ImageHeroBanner from '@/components/ImageHeroBanner'
-import Card11 from '@/components/PostCards/Card11'
-import VideoBanner from '@/components/VideoBanner'
 import { getSearchResults } from '@/data/search'
-import ButtonSecondary from '@/shared/ButtonSecondary'
-import Tag from '@/shared/Tag'
-import { ArrowDownIcon } from '@heroicons/react/24/outline'
 import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import HomeHeader from '../(home)/(home-1)/components/homeHeader'
+import { getLatestVideos } from '@/data/api/posts'
 
 const sortByOptions = [
   { name: 'Most recent', value: 'most-recent' },
@@ -46,7 +40,7 @@ const PageVisuals = async ({
   params,
   searchParams,
 }: {
-  params: Promise<{ query: string, lang: string }>
+  params: Promise<{ query: string }>
   searchParams: SearchParams
 }) => {
   async function handleSearch(formData: FormData) {
@@ -56,6 +50,7 @@ const PageVisuals = async ({
     const searchTab = formData.get('tab') as string
     redirect(`/search?s=${searchQuery}&tab=${searchTab}`)
   }
+    const videoPosts = await getLatestVideos()
 
   let searchQuery = (await searchParams)['s']
   let searchTab = (await searchParams)['tab']

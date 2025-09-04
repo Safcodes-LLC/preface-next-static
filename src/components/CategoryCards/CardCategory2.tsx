@@ -1,6 +1,5 @@
 import NcImage from '@/components/NcImage/NcImage'
 import { TCategory } from '@/data/categories'
-import { Badge } from '@/shared/Badge'
 import { Link } from '@/shared/link'
 import clsx from 'clsx'
 import { FC } from 'react'
@@ -9,19 +8,30 @@ interface Props {
   className?: string
   category: TCategory | any
   badge?: string
+  lang?: string
 }
 
-const CardCategory2: FC<Props> = ({ className, category, badge }) => {
-  const { count, name, categoryName, parentCategory, slug, handle, thumbnail, icon , featuredImage, featuredIcon, postCount } = category
+const CardCategory2: FC<Props> = ({ className, category, badge, lang }) => {
+  const {
+    count,
+    name,
+    categoryName,
+    parentCategory,
+    slug,
+    handle,
+    thumbnail,
+    icon,
+    featuredImage,
+    featuredIcon,
+    postCount,
+  } = category
   // console.log(category,"category432")
   // console.log(parentCategory,"parentCategory")
 
-
-  
   return (
     <div
       className={clsx(
-        `card-category-2 relative flex flex-col items-center justify-center rounded-3xl  bg-white px-3 py-3 text-center sm:p-3 dark:bg-[#0D0D0D]`,
+        `card-category-2 relative flex flex-col items-center justify-center rounded-3xl bg-white px-3 py-3 text-center sm:p-3 dark:bg-[#0D0D0D]`,
         className
       )}
     >
@@ -32,15 +42,18 @@ const CardCategory2: FC<Props> = ({ className, category, badge }) => {
       )} */}
       <NcImage
         containerClassName="relative shrink-0 size-12 "
-        src={featuredIcon ||  ''}
+        src={featuredIcon || ''}
         fill
         sizes="80px"
         alt={categoryName || ''}
-        className="object-contain w-full h-full"
+        className="h-full w-full object-contain"
       />
       <div className="mt-3">
-        <h2 className={`text-base font-semibold line-clamp-1`}>{categoryName}</h2>
-        <Link className="absolute inset-0" href={`/${parentCategory?.slug}/${slug}`} />
+        <h2 className={`line-clamp-1 text-base font-semibold`}>{categoryName}</h2>
+        <Link
+          className="absolute inset-0"
+          href={lang === 'en' ? `/${parentCategory?.slug}/${slug}` : `/${lang}/${parentCategory?.slug}/${slug}`}
+        />
         <span className={`mt-1 block text-xs text-[#666666] dark:text-[#DFDFDF]`}>{postCount} articles</span>
       </div>
     </div>
