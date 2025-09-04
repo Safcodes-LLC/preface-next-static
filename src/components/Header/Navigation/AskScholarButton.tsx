@@ -26,7 +26,7 @@ const AskScholarButton = ({ className, home, isTransparentHeader }: Props) => {
       <button
         onClick={handleAskScholarClick}
         className={`flex min-w-[155px] cursor-pointer items-center gap-2 transition-all duration-200 hover:shadow-sm focus:outline-none dark:border-[#777777] rounded-sm border border-[#EEEEEE] px-5 py-2 text-sm font-medium 
-        ${home ? (isTransparentHeader ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000]') : 'text-[#000000] dark:text-white'} ${className}`}
+        ${home ? (isTransparentHeader ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white') : 'text-[#000000] dark:text-white'} ${className}`}
         aria-label="Ask the Scholar"
         style={{ marginTop: 0 }}
       >

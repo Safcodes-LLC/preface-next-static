@@ -31,7 +31,7 @@ export default async function ClientLayout({ children }: { children: ReactNode; 
       <body className={`bg-[#F8F8F8] text-base text-neutral-900 dark:bg-[#000000] dark:text-neutral-200`}>
         <AuthProvider>
           <QueryProvider>
-            <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
               <div>{children}</div>
               <Toaster
                 position="top-center"

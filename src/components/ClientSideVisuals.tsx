@@ -1,19 +1,15 @@
-"use client";
+'use client'
 
-import React from "react";
-import SectionMagazine4 from "./SectionMagazine4"; // adjust the path
-import { useLatestVideos } from "@/hooks/api";
+import SectionMagazine4 from './SectionMagazine4' // adjust the path
 
+const ClientSideVisuals = ({ dict, posts, lang }: { dict: any; posts: any; lang: string }) => {
+  // const { data: latestVideos, isLoading, error } = useLatestVideos(8);
+  // console.log(latestVideos,"latestVideos");
+  // const displayPosts = latestVideos?.data || [];
+  // console.log(displayPosts);
 
-const ClientSideVisuals = ({dict, posts, lang}: {dict: any, posts: any, lang: string}) => {
-
-    // const { data: latestVideos, isLoading, error } = useLatestVideos(8);
-    // console.log(latestVideos,"latestVideos");
-    // const displayPosts = latestVideos?.data || [];
-    // console.log(displayPosts);
-    
   return (
-    <div className="mt-28 bg-[#000000] py-16 lg:py-20 dark:bg-[#0D0D0D]">
+    <div className="bg-[#000000] py-10 md:py-14 lg:py-20 dark:bg-[#0D0D0D]">
       <div className="relative container">
         <SectionMagazine4
           heading={dict.sections.visuals.heading}
@@ -25,7 +21,7 @@ const ClientSideVisuals = ({dict, posts, lang}: {dict: any, posts: any, lang: st
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ClientSideVisuals;
+export default ClientSideVisuals

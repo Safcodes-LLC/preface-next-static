@@ -24,7 +24,7 @@ const Lv1MenuItem = ({
       className={clsx(
         'flex items-center self-center rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap lg:text-[15px] xl:px-5',
         'hover:bg-neutral-100 hover:text-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-neutral-200',
-        home ? isTransparentHeader ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000]' : 'text-[#000000] dark:text-white' // Keep white text in dark mode regardless of scroll state
+        home ? isTransparentHeader ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white' : 'text-[#000000] dark:text-white' // Keep white text in dark mode regardless of scroll state
       )}
       href={lang === 'en' ? `${menuItem.href}` || '#' : `/${lang}${menuItem.href}`}
     >

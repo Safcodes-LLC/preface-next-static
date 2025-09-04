@@ -9,13 +9,14 @@ interface VideoHeroBannerProps {
   className?: string
 }
 
-const VideoHeroBanner: FC<VideoHeroBannerProps> = ({ 
+const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
   // videoUrl = 'https://www.youtube.com/watch?v=vHBodN0Mirs',
-  videoUrl = 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/PREFACE_(A%20STREAM%20WITH%20MANY%20CURRENTS%20)%20(2).mp4',
+  // videoUrl = 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/PREFACE_(A%20STREAM%20WITH%20MANY%20CURRENTS%20)%20(2).mp4',
+  videoUrl = 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/PREFACE_SEP_04(A%20STREAM%20WITH%20MANY%20CURRENTS_FINAL%20).mp4',
   heading = 'VIDEO',
-  className = ''
+  className = '',
 }) => {
-  const [isMuted, setIsMuted] = useState(true)
+  // const [isMuted, setIsMuted] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isRendered, setIsRendered] = useState(false)
   const playerRef = useRef<ReactPlayer | null>(null)
@@ -32,9 +33,13 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
         <ReactPlayer
           ref={playerRef}
           url={videoUrl}
-          muted={isMuted}
+          // muted={isMuted}
+          muted={true}
           playing={isPlaying}
           loop={true}
+          controls={false}
+          disablePictureInPicture={true}
+          controlsList="nodownload nofullscreen noremoteplayback"
           style={{
             opacity: isPlaying ? 1 : 0,
           }}
@@ -43,6 +48,15 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
           height="100%"
           onStart={() => {
             setIsPlaying(true)
+          }}
+          config={{
+            file: {
+              attributes: {
+                controlsList: 'nodownload nofullscreen noremoteplayback',
+                disablePictureInPicture: true,
+                playsInline: true,
+              },
+            },
           }}
         />
       )}
@@ -58,7 +72,7 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
       </div> */}
 
       {/* Mute/Unmute Button */}
-      {isPlaying && (
+      {/* {isPlaying && (
         <button
           className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-white transition-all hover:scale-110 hover:bg-black/80"
           onClick={() => setIsMuted(!isMuted)}
@@ -75,9 +89,9 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
             </svg>
           )}
         </button>
-      )}
+      )} */}
     </div>
   )
 }
 
-export default VideoHeroBanner 
+export default VideoHeroBanner

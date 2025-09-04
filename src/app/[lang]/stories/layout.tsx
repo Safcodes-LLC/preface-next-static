@@ -19,24 +19,6 @@ const Layout: React.FC<Props> = async ({ children }) => {
   return (
     <ApplicationLayout>
       {children}
-
-      {/* <div className="container space-y-20 py-20 lg:space-y-28 lg:pb-28">
-        <div className="relative py-16 lg:py-20">
-          <BackgroundSection />
-          <SectionGridCategoryBox categories={categories.slice(0, 10)} />
-          <div className="mx-auto mt-10 text-center md:mt-16">
-            <ButtonSecondary>Show me more</ButtonSecondary>
-          </div>
-        </div>
-
-        <SectionSliderNewAuthors
-          heading="Top elite authors"
-          subHeading="Discover our elite writers"
-          authors={authors.slice(0, 10)}
-        />
-
-        <SectionSubscribe2 />
-      </div> */}
     </ApplicationLayout>
   )
 }
