@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { Noto_Kufi_Arabic, Noto_Serif } from 'next/font/google'
 import Header2 from '@/components/Header/Header2'
 import SocialSidebar from '@/components/SocialSidebar'
@@ -8,7 +9,7 @@ import { getNavigation as fetchNavigation } from '@/data/navigation'
 import { getAllPosts } from '@/data/posts'
 
 interface Props {
-  children: any
+  children: ReactNode
   headerHasBorder?: boolean
   headerStyle?: 'header-1' | 'header-2' | 'header-scroll' | 'header-3'
   showBanner?: boolean

@@ -1,12 +1,12 @@
+import { ReactNode } from 'react'
 import { ApplicationLayout } from '@/app/[lang]/application-layout'
 import BackgroundSection from '@/components/BackgroundSection'
 import SectionGridPosts from '@/components/SectionGridPosts'
 import SwipableSliderPosts from '@/components/SwipableSliderPosts'
 import { getLatestVideos } from '@/data/api/posts'
-import { getAuthors } from '@/data/authors'
-import { getCategories } from '@/data/categories'
-import { getPostsDefault, getPostsVideo } from '@/data/posts'
-import { ReactNode } from 'react'
+// import { getAuthors } from '@/data/authors'
+// import { getCategories } from '@/data/categories'
+// import { getPostsDefault, getPostsVideo } from '@/data/posts'
 
 interface Props {
   children: ReactNode
@@ -14,18 +14,15 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = async ({ children, params }) => {
-  const categories = await getCategories()
-  const authors = await getAuthors()
-  const defaultPosts = await getPostsDefault()
+  // const categories = await getCategories()
+  // const authors = await getAuthors()
+  // const defaultPosts = await getPostsDefault()
   // const videoPosts = await getPostsVideo()
   const videoPosts = await getLatestVideos()
   return (
     <ApplicationLayout home={true} params={params}>
       {children}
-
       <div className="container space-y-10 md:space-y-14 lg:space-y-20 py-10 md:py-14 lg:py-20">
- 
-
         <div className="relative ">
           <BackgroundSection />
           <SwipableSliderPosts
