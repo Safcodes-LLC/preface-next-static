@@ -6,15 +6,7 @@ import { TPost } from '@/data/posts'
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 import Link from 'next/link'
-import React, {
-  FC,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react'
+import { FC, ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 /* ------------------------------- Utilities ------------------------------- */
@@ -26,7 +18,7 @@ const useIsClient = () => {
 }
 
 type Point = { top: number; left: number }
-type PanelSide = 'right' | 'down'
+type PanelSide = 'left' | 'right' | 'down'
 
 const getRect = (el: HTMLElement | null) => el?.getBoundingClientRect()
 
@@ -75,10 +67,15 @@ const FloatingPanel: FC<{
   const update = useCallback(() => {
     if (!anchor) return
     const r = anchor.getBoundingClientRect()
+  
     if (side === 'down') {
       setPos({ top: r.bottom + gap, left: r.left })
-    } else {
+    } else if (side === 'right') {
+      // default (LTR)
       setPos({ top: r.top, left: r.right + gap })
+    } else if (side === 'left') {
+      // RTL (Arabic) → submenu opens to the left of the anchor
+      setPos({ top: r.top, left: r.left - gap })
     }
   }, [anchor, side, gap])
 
@@ -129,22 +126,24 @@ const MenuLink = ({
     <Link
       href={href}
       className={clsx(
-        'flex items-center w-full rounded-md px-4 py-2 font-normal',
+        'flex w-full items-center justify-between rounded-md px-4 py-2 font-normal',
         'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-700',
-        'dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200'
+        'dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200',
+        'whitespace-normal break-words' // <-- wrap long text
       )}
     >
-      {item.name}
+      <span className="flex-1">{item.name}</span>
       {item.children?.length ? (
         level === 1 ? (
-          <ChevronDownIcon className="ms-auto h-4 w-4 text-neutral-500 -rotate-90" />
+          <ChevronDownIcon className={`ms-auto h-4 w-4 text-neutral-500  ${lang === 'ar' ? 'rotate-90' : '-rotate-90'}`} />
         ) : (
-          <ChevronRightIcon className="ms-auto h-4 w-4 text-neutral-500" />
+          <ChevronRightIcon className={`ms-auto h-4 w-4 text-neutral-500 ${lang === 'ar' ? 'rotate-180' : 'rotate-0'}`} />
         )
       ) : null}
     </Link>
   )
 }
+
 
 /* ----------------------------- Top Level Item ---------------------------- */
 
@@ -161,12 +160,11 @@ const Lv1MenuItem = ({
   home?: boolean
   lang?: string
 }) => {
-  const href =
-    lang && lang !== 'en' ? `/${lang}${menuItem.href}` : menuItem.href || '#'
+  const href = lang && lang !== 'en' ? `/${lang}${menuItem.href}` : menuItem.href || '#'
   return (
     <Link
       className={clsx(
-        'flex items-center w-full self-center rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap lg:text-[15px] xl:px-5',
+        'flex w-full items-center self-center rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap lg:text-[15px] xl:px-5',
         'hover:bg-neutral-100 hover:text-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-neutral-200',
         home
           ? isTransparentHeader
@@ -199,11 +197,14 @@ const NestedMenuList: FC<{
   return (
     <ul
       className={clsx(
-        'relative grid space-y-1 rounded-lg bg-white dark:bg-[#0D0D0D] py-3 text-sm shadow-lg',
-        'ring-1 ring-black/5 dark:ring-white/10',
-        // Scroll only when needed – vertical only
-        'max-h-[80vh] overflow-y-auto overflow-x-hidden w-56'
+        'relative grid space-y-1 rounded-lg bg-white py-3 text-sm shadow-lg',
+        'ring-1 ring-black/5 dark:bg-[#0D0D0D] dark:ring-white/10',
+        'max-h-[70vh] overflow-y-auto',
+        level >= 3
+          ? 'w-80 whitespace-normal break-words' // wider + allow wrapping for 3rd level+
+          : 'w-56 overflow-x-hidden'
       )}
+      dir={lang === 'ar' ? 'rtl' : 'ltr'}
     >
       {items.map((item) => (
         <NestedMenuItem key={item.id} item={item} lang={lang} level={level} />
@@ -233,17 +234,9 @@ const NestedMenuItem: FC<{
 
       {/* Submenu in a portal so it’s never clipped by parent scroll */}
       {hasChildren && open && (
-        <FloatingPanel anchor={liRef.current} side="right" gap={8}>
-          <div
-            onMouseEnter={cancel}
-            onMouseLeave={closeLater}
-            className="w-56"
-          >
-            <NestedMenuList
-              items={item.children as TNavigationItem[]}
-              lang={lang}
-              level={level + 1}
-            />
+        <FloatingPanel anchor={liRef.current} side={lang ==="ar" ? "left" : "right"} gap={lang ==="ar" ? level === 1 ? 250 : 330 : 8}>
+          <div onMouseEnter={cancel} onMouseLeave={closeLater} className="w-56">
+            <NestedMenuList items={item.children as TNavigationItem[]} lang={lang} level={level + 1} />
           </div>
         </FloatingPanel>
       )}
@@ -270,12 +263,7 @@ const DropdownMenu = ({
   const { open, openNow, closeLater, cancel } = useHoverIntent()
 
   return (
-    <li
-      ref={liRef}
-      className="menu-dropdown relative menu-item flex"
-      onMouseEnter={openNow}
-      onMouseLeave={closeLater}
-    >
+    <li ref={liRef} className="menu-dropdown relative menu-item flex" onMouseEnter={openNow} onMouseLeave={closeLater}>
       <Lv1MenuItem
         menuItem={menuItem}
         isScrolled={isScrolled}
@@ -287,11 +275,7 @@ const DropdownMenu = ({
       {menuItem.children?.length && menuItem.type === 'dropdown' && open && (
         <FloatingPanel anchor={liRef.current} side="down" gap={6}>
           <div onMouseEnter={cancel} onMouseLeave={closeLater}>
-            <NestedMenuList
-              items={menuItem.children as TNavigationItem[]}
-              lang={lang}
-              level={1}
-            />
+            <NestedMenuList items={menuItem.children as TNavigationItem[]} lang={lang} level={1} />
           </div>
         </FloatingPanel>
       )}
@@ -313,8 +297,7 @@ const MegaMenu = ({
   lang?: string
 }) => {
   const renderNavlink = (item: TNavigationItem) => {
-    const href =
-      lang && lang !== 'en' ? `/${lang}${item.href || '#'}` : item.href || '#'
+    const href = lang && lang !== 'en' ? `/${lang}${item.href || '#'}` : item.href || '#'
     return (
       <li key={item.id} className={clsx('menu-item', item.isNew && 'menuIsNew')}>
         <Link
@@ -328,33 +311,25 @@ const MegaMenu = ({
   }
 
   return (
-    <li className="menu-megamenu menu-item flex relative">
+    <li className="menu-megamenu relative menu-item flex">
       <Lv1MenuItem menuItem={menuItem} isScrolled={isScrolled} lang={lang} />
 
       {menuItem.children?.length && menuItem.type === 'mega-menu' ? (
         <div className="absolute inset-x-0 top-full z-50 sub-menu">
           <div className="bg-white shadow-lg dark:bg-[#0D0D0D]">
             <div className="container">
-              <div className="flex border-t border-neutral-200 py-11 text-sm dark:border-neutral-700">
+              <div className="flex border-t border-neutral-200 py-11 text-sm dark:border-neutral-700" >
                 <div className="grid flex-1 grid-cols-4 gap-6 pe-10 xl:gap-8 2xl:pe-14">
                   {menuItem.children?.map((menuChild, index) => (
                     <div key={index}>
-                      <p className="font-medium text-neutral-900 dark:text-neutral-200">
-                        {menuChild.name}
-                      </p>
-                      <ul className="mt-4 grid space-y-1">
-                        {menuChild.children?.map(renderNavlink)}
-                      </ul>
+                      <p className="font-medium text-neutral-900 dark:text-neutral-200">{menuChild.name}</p>
+                      <ul className="mt-4 grid space-y-1" dir={lang === 'ar' ? 'rtl' : 'ltr'}>{menuChild.children?.map(renderNavlink)}</ul>
                     </div>
                   ))}
                 </div>
                 <div className="grid w-2/7 grid-cols-1 gap-5 xl:w-4/9 xl:grid-cols-2">
                   {featuredPosts.map((post, index) => (
-                    <Card20
-                      key={post.id}
-                      post={post}
-                      className={clsx(index === 0 ? '' : 'hidden xl:block')}
-                    />
+                    <Card20 key={post.id} post={post} className={clsx(index === 0 ? '' : 'hidden xl:block')} />
                   ))}
                 </div>
               </div>
@@ -378,17 +353,9 @@ export interface Props {
   lang?: string
 }
 
-const Navigation: FC<Props> = ({
-  menu,
-  className,
-  featuredPosts,
-  isScrolled,
-  isTransparentHeader,
-  home,
-  lang,
-}) => {
+const Navigation: FC<Props> = ({ menu, className, featuredPosts, isScrolled, isTransparentHeader, home, lang }) => {
   return (
-    <ul className={clsx('flex', className)}>
+    <ul className={clsx('flex', className)} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       {menu.map((menuItem) => {
         if (menuItem.type === 'dropdown') {
           return (

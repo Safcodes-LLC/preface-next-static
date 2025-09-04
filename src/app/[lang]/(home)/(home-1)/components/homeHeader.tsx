@@ -16,7 +16,7 @@ const HomeHeader = ({lang}: {lang?: string}) => {
     // Fetch data on client side
     const fetchData = async () => {
       try {
-        const [navData, postsData] = await Promise.all([fetchNavigation(), getAllPosts()])
+        const [navData, postsData] = await Promise.all([fetchNavigation(lang), getAllPosts()])
         setNavigationMenu(navData)
         setFeaturedPosts(postsData.slice(0, 2))
       } catch (error) {

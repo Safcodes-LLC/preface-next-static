@@ -1,9 +1,10 @@
 import { USFlag } from "@/components/Header/FlagIcons"
-import { getTopicsWithArticles } from "./api/posts"
+import { getTopicsWithArticles } from "./api/posts" 
+import { getDictionary } from "@/i18n";
 
 export async function getNavigation(lang: string = "en"): Promise<TNavigationItem[]> {
   const topicsWithArticles = await getTopicsWithArticles(lang);
-
+  const dict = await getDictionary(lang) 
   const topicsNav = topicsWithArticles.map((topic: any) => ({
     id: topic?.id,
     href: `${lang ==="en" ? "/" : "/" + lang}${topic?.slug}`,
@@ -26,12 +27,12 @@ export async function getNavigation(lang: string = "en"): Promise<TNavigationIte
   }));
 
   return [
-    { id: '1', href: '/stories', name: 'Stories' },
-    { id: '2', href: '/visuals', name: 'Visuals' },
+    { id: '1', href: '/stories', name: dict?.navigation?.stories },
+    { id: '2', href: '/visuals', name: dict?.navigation?.visuals },
     {
       id: '3',
       href: '/',
-      name: 'Topics',
+      name: dict?.navigation?.topics,
       type: 'dropdown',
       children: topicsNav,
     },
