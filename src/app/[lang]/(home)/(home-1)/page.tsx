@@ -120,6 +120,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
           posts2={quranLatestArticles.slice(0, 8)}
           heading={dict.sections.holyquran.heading}
           subHeading={dict.sections.holyquran.description}
+          lang={lang}
         />
       </div>
 
