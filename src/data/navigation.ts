@@ -2,9 +2,9 @@ import { USFlag } from "@/components/Header/FlagIcons"
 import { getTopicsWithArticles } from "./api/posts" 
 import { getDictionary } from "@/i18n";
 
-export async function getNavigation(lang?: string): Promise<TNavigationItem[]> {
+export async function getNavigation(lang: string = "en"): Promise<TNavigationItem[]> {
   const topicsWithArticles = await getTopicsWithArticles(lang);
-  const dict = await getDictionary(lang || "en") 
+  const dict = await getDictionary(lang) 
   const topicsNav = topicsWithArticles.map((topic: any) => ({
     id: topic?.id,
     href: `${lang ==="en" ? "/" : "/" + lang}${topic?.slug}`,

@@ -40,7 +40,7 @@ const ClientSectionSliderPosts: FC<Props> = ({
   const posts = popularArticles?.data || []
 
   // Type assertion to convert Post[] to TPost[]
-  return <SectionSliderPosts {...props} posts={posts as unknown as any[]} />
+  return <SectionSliderPosts {...props} posts={posts as unknown as any[]} lang={lang} />
 }
 
 export default ClientSectionSliderPosts

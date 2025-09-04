@@ -40,6 +40,7 @@ interface SwipableSliderPostsProps {
   subHeading?: string
   dimHeading?: boolean
   posts: TPost[]
+  lang?: string
   postCardName?: 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card11' | 'card10V5' | 'card10V6'
   config?: SliderConfig
 }
@@ -58,6 +59,7 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
   subHeading,
   dimHeading,
   posts,
+  lang,
   postCardName = 'card4',
   config = {},
 }) => {
@@ -208,7 +210,7 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
       case 'card10':
         return <Card10 key={index} post={post} />
       case 'card10V2':
-        return <Card10V2 key={index} post={post} />
+        return <Card10V2 key={index} post={post} lang={lang}/>
       case 'card10V5':
         return <Card10V5 key={index} post={post} />
       case 'card10V6':

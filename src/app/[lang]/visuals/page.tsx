@@ -1,9 +1,10 @@
+import ImageHeroBanner from '@/components/ImageHeroBanner'
+import { getSearchResults } from '@/data/search'
+import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
-import { getSearchResults } from '@/data/search' 
-import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
-import ImageHeroBanner from '@/components/ImageHeroBanner'
-import HomeHeader from '../home/components/homeHeader'
+import HomeHeader from '../(home)/(home-1)/components/homeHeader'
+import { getLatestVideos } from '@/data/api/posts'
 
 const sortByOptions = [
   { name: 'Most recent', value: 'most-recent' },
@@ -49,6 +50,7 @@ const PageVisuals = async ({
     const searchTab = formData.get('tab') as string
     redirect(`/search?s=${searchQuery}&tab=${searchTab}`)
   }
+    const videoPosts = await getLatestVideos()
 
   let searchQuery = (await searchParams)['s']
   let searchTab = (await searchParams)['tab']

@@ -18,7 +18,9 @@ interface Props {
 
 const Card10V5: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect-6/5', lang }) => {
   const [isHover, setIsHover] = useState(false)
-  const { categories, bookmarked, likeCount, liked } = post
+  const { categories, bookmarked, likeCount, liked, slug } = post
+  console.log(post,"post check for popular articles");
+  
 
   return (
     <div
@@ -27,7 +29,7 @@ const Card10V5: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
       onMouseLeave={() => setIsHover(false)}
     >
       <div className={clsx('relative z-0 w-full shrink-0 overflow-hidden rounded-3xl', ratio)}>
-        <PostFeaturedMedia post={post} isHover={isHover} />
+        <PostFeaturedMedia post={post} isHover={isHover} href={lang === 'en' ? `/${categories[0].parentCategory.slug}/${categories[0].slug}/${slug}` : `/${lang}/${categories[0].parentCategory.slug}/${categories[0].slug}/${slug}`}/>
       </div>
       <div className="absolute inset-x-3 top-4 z-10 flex items-start justify-between gap-x-4 p-2">
         {/* <CategoryBadgeList categories={categories} /> */}
