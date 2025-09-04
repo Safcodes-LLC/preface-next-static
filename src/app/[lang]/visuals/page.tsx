@@ -82,7 +82,7 @@ const PageVisuals = async ({
 
   return (
     <div className="visuals-page" dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}>
-      <HomeHeader />
+      <HomeHeader lang={(await params).lang} />
     <ImageHeroBanner />
     </div>
   )
