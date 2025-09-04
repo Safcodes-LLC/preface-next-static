@@ -40,7 +40,7 @@ const PageVisuals = async ({
   params,
   searchParams,
 }: {
-  params: Promise<{ query: string }>
+  params: Promise<{ query: string, lang: string }>
   searchParams: SearchParams
 }) => {
   async function handleSearch(formData: FormData) {
