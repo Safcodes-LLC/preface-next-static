@@ -7,6 +7,7 @@ import Navbar2 from '@/shared/Navbar2'
 import Footer from '@/components/Footer/Footer'
 import { getNavigation as fetchNavigation } from '@/data/navigation'
 import { getAllPosts } from '@/data/posts'
+import { getDictionary } from '@/i18n'
 
 interface Props {
   children: ReactNode
@@ -28,16 +29,16 @@ const notoKufiArabic = Noto_Kufi_Arabic({
 })
 
 const ApplicationLayout = async ({ children, home, params }: Props) => {
+  const dict = await getDictionary((await params).lang)
   const fetchNavigationData = await fetchNavigation((await params).lang)
   const postsData = await getAllPosts()
-
   // Check if current page should hide Navbar2 and use header-scroll
   const isTransparentHeader = (await params).pathname === '/' || (await params).pathname === '/visuals'
   return (
     <div className={(await params).lang === 'ar' ? notoKufiArabic.className : notoSerif.className} dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}>
       {home ? null : (
         <div className="container">
-          <Navbar2 lang={(await params).lang} />
+          <Navbar2 lang={(await params).lang} dict={dict} />
         </div>
       )}
       {home ? null : (
@@ -47,6 +48,7 @@ const ApplicationLayout = async ({ children, home, params }: Props) => {
           featuredPosts={postsData.slice(0, 2)}
           className="sticky top-0 z-40 bg-white dark:bg-[#000000]"
           lang={(await params).lang}
+          dict={dict}
         />
       )}
       {children}

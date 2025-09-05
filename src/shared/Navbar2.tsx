@@ -10,9 +10,10 @@ import { FC, useEffect, useState } from 'react'
 interface Navbar2Props {
   home?: boolean
   lang?: string
+  dict?: any
 }
 
-const Navbar2: FC<Navbar2Props> = ({ home, lang }) => {
+const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
   const [currentTime, setCurrentTime] = useState<string>('')
   const [currentDate, setCurrentDate] = useState<string>('')
 
@@ -80,7 +81,10 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang }) => {
   const activeLanguage = languages.find((lang) => lang.active) || languages[0]
 
   return (
-    <div dir={lang === "ar" ? "rtl" : "ltr"} className="relative flex items-center gap-x-6 overflow-hidden px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
+    <div
+      dir={lang === 'ar' ? 'rtl' : 'ltr'}
+      className="relative flex items-center gap-x-6 overflow-hidden px-6 py-2.5 sm:px-3.5 sm:before:flex-1"
+    >
       <div
         aria-hidden="true"
         className="absolute top-1/2 left-[max(-7rem,calc(50%-52rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl"
@@ -112,7 +116,7 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang }) => {
           href="/"
           className={clsx(
             'flex items-center gap-x-1 rounded-full px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10',
-             home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
+            home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
           )}
           title="Home"
         >
@@ -123,10 +127,10 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang }) => {
         <Link
           href="/about"
           className={clsx(
-            `rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap hover:bg-white/10 transition-colors ${home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'}`
+            `rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors hover:bg-white/10 ${home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'}`
           )}
         >
-          About
+          {dict.navigation.about}
         </Link>
 
         {/* Language Dropdown - Fixed with higher z-index */}
