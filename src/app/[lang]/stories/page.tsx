@@ -44,7 +44,9 @@ const PageStories = async ({
   params: Promise<{ query: string; lang: string }>
   searchParams: SearchParams
 }) => {
-  const category = await getCategory((await params).lang || 'en')
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
+  const category = await getCategory(lang || 'en')
   let searchQuery = (await searchParams)['s']
   let searchTab = (await searchParams)['tab']
   // example: /search?s=text1&s=text2 => searchQuery = 'text1'
@@ -62,18 +64,18 @@ const PageStories = async ({
     searchTab = filterTabs[0].value // default tab is posts
   }
 
-  const renderLoopItems = (category: any) => {
+  const renderLoopItems = (category: any, lang: string) => {
     return (
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
         {category?.data?.map((post: any) => (
-          <Card11 key={post._id} post={post} />
+          <Card11 key={post._id} post={post} lang={lang}/>
         ))}
       </div>
     )
   }
-const dict = await getDictionary((await params).lang)
+  const dict = await getDictionary(lang)
   return (
-    <div className="stories-page" dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="stories-page" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="container mx-auto mt-10 md:mt-14 lg:mt-20">
         {/* HEADER */}
 
@@ -89,7 +91,7 @@ const dict = await getDictionary((await params).lang)
 
       <div className="container py-10 md:py-14 lg:py-20">
         {/* LOOP ITEMS */}
-        {renderLoopItems(category)}
+        {renderLoopItems(category, lang)}
         <div className="mx-auto mt-8 text-center md:mt-10 lg:mt-12">
           <ButtonSecondary>
             Load More <ArrowDownIcon className="h-6 w-6 text-[#444444] dark:text-white" />
