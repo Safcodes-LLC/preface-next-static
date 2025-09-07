@@ -14,7 +14,6 @@ import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getNavigation } from '@/data/navigation'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
-import { getDictionary } from '@/i18n'
 import { Metadata } from 'next'
 import { ApplicationLayout } from '../application-layout'
 import HomeHeader from './components/homeHeader'
@@ -24,9 +23,13 @@ export const metadata: Metadata = {
   description: 'Preface Islam is a platform for Muslims to learn about Islam and its teachings.',
 }
 
-const HomePage = async ({ params }: { params: Promise<{ lang: string }> }) => {
+interface HomePageProps {
+  params: Promise<{ lang: string }>;
+  dict: any; // You might want to replace 'any' with a proper type for your dictionary
+}
+
+const HomePage = async ({ params, dict }: HomePageProps) => {
   const { lang } = await params
-  const dict = await getDictionary(lang)
   const [
     posts,
     defaultPosts,
