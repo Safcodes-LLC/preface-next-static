@@ -1,24 +1,16 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useAuth } from '@/contexts/AuthContext'
+import { logout } from '@/services/authService'
 import Avatar from '@/shared/Avatar'
 import ButtonCircle from '@/shared/ButtonCircle'
+import SwitchDarkMode2 from '@/shared/SwitchDarkMode2'
 import { Divider } from '@/shared/divider'
 import { Link } from '@/shared/link'
-import SwitchDarkMode2 from '@/shared/SwitchDarkMode2'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
-import { logout } from '@/services/authService'
-import { useAuth } from '@/contexts/AuthContext'
-import {
-  BulbChargingIcon,
-  FavouriteIcon,
-  Idea01Icon,
-  Logout01Icon,
-  PlusSignCircleIcon,
-  Task01Icon,
-  UserIcon,
-} from '@hugeicons/core-free-icons'
+import { Idea01Icon, Logout01Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
+import { useRouter } from 'next/navigation'
 
 interface Props {
   className?: string
@@ -37,12 +29,13 @@ export default function AvatarDropdown({ className, trigger }: Props) {
   }
 
   const router = useRouter()
-  const { isAuthenticated } = useAuth()
+  const { user: authUser, isAuthenticated } = useAuth()
+  const { name, email } = authUser || {}
 
   const handleLogout = () => {
     logout()
     // Refresh the page to clear any client-side state
-    window.location.href = '/'  // Using window.location to ensure full page refresh
+    window.location.href = '/' // Using window.location to ensure full page refresh
   }
 
   return (
@@ -86,7 +79,7 @@ export default function AvatarDropdown({ className, trigger }: Props) {
               />
               <div className="grow">
                 <h4 className="font-semibold">
-                  {user.name}
+                  {name || user.name}
                   <Link href={`/author/${user.handle}`} className="absolute inset-0" />
                 </h4>
                 <p className="text-xs/6">{user.location}</p>
@@ -170,7 +163,7 @@ export default function AvatarDropdown({ className, trigger }: Props) {
             {isAuthenticated && (
               <button
                 onClick={handleLogout}
-                className="w-full -m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700 text-left"
+                className="-m-3 flex w-full items-center rounded-lg p-2 text-left transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700"
               >
                 <div className="flex shrink-0 items-center justify-center text-neutral-500 dark:text-neutral-300">
                   <HugeiconsIcon icon={Logout01Icon} size={24} strokeWidth={1.5} />
