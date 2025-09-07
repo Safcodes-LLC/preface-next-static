@@ -19,7 +19,7 @@ interface Props {
 const Card10V5: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect-6/5', lang }) => {
   const [isHover, setIsHover] = useState(false)
   const { categories, bookmarked, likeCount, liked, slug } = post
-  console.log(post,"post check for popular articles");
+  // console.log(post,"post check for popular articles");
   
 
   return (

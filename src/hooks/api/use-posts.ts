@@ -236,6 +236,7 @@ export const usePopularArticles = (params?: {
   parentSlug?: string
   subcategorySlug?: string
   limit?: number
+  lang?: string
 }) => {
   return useQuery({
     queryKey: [...postKeys.all, 'popular-articles', params],
@@ -244,7 +245,8 @@ export const usePopularArticles = (params?: {
         params: {
           ...(params?.parentSlug && { parentSlug: params.parentSlug }),
           ...(params?.subcategorySlug && { subcategorySlug: params.subcategorySlug }),
-          limit: params?.limit || 6
+          limit: params?.limit || 6,
+          ...(params?.lang && { lang: params.lang }) // Only include lang if it exists
         }
       })
       return response

@@ -135,3 +135,16 @@ export const getTopicsWithArticles = async (lang?: string) => {
     return [];
   }
 };
+
+export const getPopularArticles = async (lang?: string) => {
+  try {
+    const response = await serverFetch.get<{ data: any[] }>('/api/frontend/popular-articles', {
+      language: lang,
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
+    });
+    return response?.data || [];
+  } catch (error) {
+    console.error('Failed to fetch popular articles:', error);
+    return [];
+  }
+};
