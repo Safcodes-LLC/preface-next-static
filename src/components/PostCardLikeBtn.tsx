@@ -8,24 +8,28 @@ import { useAuth } from '@/contexts/AuthContext'
 import AuthRequiredModal from './ui/AuthRequiredModal'
 import { useRouter } from 'next/navigation'
 import ButtonPrimary from '@/shared/ButtonPrimary'
-
+import { useFavourite } from '@/hooks/api/use-favourite'
+import { toast } from 'react-hot-toast'
 
 interface Props {
   className?: string
   likeCount: number
   liked?: boolean
   color?: string
+  post?: any
 }
 
-const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked, color }) => {
-  const { isAuthenticated } = useAuth()
+const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, color, post }) => {
+  const { isAuthenticated, user } = useAuth()
   const [isLiked, setIsLiked] = useState(liked)
+  const [optimisticLikeCount, setOptimisticLikeCount] = useState(likeCount)
   const [showAuthModal, setShowAuthModal] = useState(false)
   const router = useRouter()
+  const { mutate: toggleFavorite } = useFavourite()
 
   // Default color classes
   const defaultClasses =
-    'bg-neutral-50 hover:bg-rose-50 hover:text-rose-600 dark:bg-white/10 dark:hover:bg-white/10 dark:hover:text-rose-400'
+    'bg-neutral-50 hover:bg-rose-50 hover:text-rose-600 dark:bg-white/10 dark:hover:bg-white/10 dark:hover:bg-rose-400'
   // If color is provided, use it, otherwise use default classes
   const colorClasses = color ? color : defaultClasses
 
@@ -34,8 +38,33 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked, color }) 
       setShowAuthModal(true)
       return
     }
-    setIsLiked(!isLiked)
-    // TODO: Add API call to save the like status
+
+    // Optimistic update
+    const newLikedState = !isLiked
+    setIsLiked(newLikedState)
+    setOptimisticLikeCount(prev => newLikedState ? prev + 1 : prev - 1)
+
+    if (post?._id && user?._id) {
+      toggleFavorite(
+        {
+          userId: user._id,
+          postId: post._id,
+          postType: post.postType?._id
+        },
+        {
+          onError: (error) => {
+            // Revert on error
+            console.error('Error updating favorite:', error)
+            setIsLiked(!newLikedState)
+            setOptimisticLikeCount(prev => newLikedState ? prev - 1 : prev + 1)
+            toast.error('Failed to update favorite status')
+          },
+          onSuccess: () => {
+            toast.success(newLikedState ? 'Added to favorites' : 'Removed from favorites')
+          }
+        }
+      )
+    }
   }
 
   const handleLogin = () => {
@@ -53,11 +82,12 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked, color }) 
         )}
         onClick={handleLikeClick}
         title={isLiked ? 'Unlike' : 'Like'}
+        disabled={!post?._id} // Disable if no post ID is available
       >
         <HeartIcon className="size-4" strokeWidth={1} fill={isLiked ? 'currentColor' : 'none'} />
 
         <span className={clsx('ms-1', isLiked && 'text-[#00652E]')}>
-          {convertNumbThousand(isLiked ? likeCount + 1 : likeCount)}
+          { post?.favoriteCount || convertNumbThousand(optimisticLikeCount)}
         </span>
       </button>
 
