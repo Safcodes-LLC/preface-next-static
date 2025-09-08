@@ -11,7 +11,8 @@ interface Props {
 }
 
 const Card3Small: FC<Props> = ({ className, post, index }) => {
-  const {name, title, handle, featuredImage } = post
+  const {name, title, handle, featuredImage, parentCategory, slug } = post
+console.log(post,"post checking articlezs");
 
   return (
     <div className={clsx('post-card-3-small group relative flex items-center justify-between gap-4', className)}>
@@ -36,7 +37,7 @@ const Card3Small: FC<Props> = ({ className, post, index }) => {
         <div className=" text-xs font-medium text-neutral-500">Article {index + 1}</div>
       </div>
 
-      <Link href={`/post/${handle}`} className="absolute inset-0" title={name || title}></Link>
+      <Link href={`/${parentCategory?.slug}/${slug}`} className="absolute inset-0" title={name || title}></Link>
     </div>
   )
 }
