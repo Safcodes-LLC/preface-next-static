@@ -6,6 +6,7 @@ import { ThemeProvider } from 'next-themes'
 import { Noto_Serif } from 'next/font/google'
 import { ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
+import ThemeToggle from '@/shared/ThemeToggle'
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   },
                 }}
               />
+              <ThemeToggle />
             </ThemeProvider>
           </QueryProvider>
         </AuthProvider>
