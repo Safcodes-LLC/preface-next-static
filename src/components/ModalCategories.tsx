@@ -17,9 +17,6 @@ interface Props {
 const ModalCategories: FC<Props> = ({ categories }) => {
   let [isOpen, setIsOpen] = useState(false)
 
-  console.log(categories,"categories");
-  
-
   return (
     <div className="modal-categories">
       <>

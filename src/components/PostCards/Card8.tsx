@@ -33,8 +33,6 @@ const Card8: FC<Props> = ({ className, post, ratio = 'aspect-3/4 sm:aspect-2/1',
     readingTime,
   } = post
 
-  console.log(post,"post checked");
-  
   const [isHover, setIsHover] = useState(false)
   const articleSlug = post?.slug
 
@@ -52,7 +50,7 @@ const Card8: FC<Props> = ({ className, post, ratio = 'aspect-3/4 sm:aspect-2/1',
           className="absolute inset-x-0 top-1/3 bottom-0 bg-linear-to-t from-black opacity-60 transition-opacity duration-300 group-hover:top-0 group-hover:opacity-70"
         />
         <div className="absolute inset-x-0 top-0 z-10 flex flex-wrap gap-x-2 gap-y-1 p-4 sm:px-5">
-          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post}/>
+          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
           <PostCardSaveBtn bookmarked={bookmarked} />
         </div>
       </div>

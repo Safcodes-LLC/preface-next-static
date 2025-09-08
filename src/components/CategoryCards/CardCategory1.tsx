@@ -12,8 +12,6 @@ interface Props {
 
 const CardCategory1: FC<Props> = ({ className, size = 'normal', category }) => {
   const { count, name, handle, parentCategory, thumbnail, featuredImage, slug } = category
- 
- console.log(parentCategory,"parentCategory")
   return (
     <Link href={`/${parentCategory?.slug}/${slug}`} className={clsx('card-category-1 flex flex-col gap-2', className)}>
       <NcImage
