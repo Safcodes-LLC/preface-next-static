@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import type React from 'react'
 import { Button } from './Button'
 import { useMarkPostRead } from '@/hooks/api'
+import { useAuth } from '@/contexts/AuthContext'
 
 export function Pagination({
   'aria-label': ariaLabel = 'Page navigation',
@@ -40,10 +41,11 @@ export function PaginationNext({
   children = 'Next Page',
   postId,
 }: React.PropsWithChildren<{ href?: string | null; className?: string; postId?: string }>) {
+  const { isAuthenticated } = useAuth()
   const markAsRead = useMarkPostRead()
 
   const handleClick = (e: React.MouseEvent) => {
-    if (postId) {
+    if (postId && isAuthenticated) {
       markAsRead.mutate(postId)
     }
     // Continue with normal navigation
