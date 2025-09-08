@@ -52,7 +52,7 @@ export const serverFetch = {
     }
 
     try {
-      console.log(`Making API request to: ${API_BASE_URL}${urlWithParams}`)
+      // console.log(`Making API request to: ${API_BASE_URL}${urlWithParams}`)
       
       const response = await fetch(`${API_BASE_URL}${urlWithParams}`, {
         method: 'GET',
@@ -67,7 +67,7 @@ export const serverFetch = {
       }
 
       const data = await response.json();
-      console.log(`API response received for: ${urlWithParams}`)
+      // console.log(`API response received for: ${urlWithParams}`)
       return data;
     } catch (error) {
       console.error('API Fetch Error:', error);
