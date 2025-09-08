@@ -214,7 +214,7 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
       case 'card10V5':
         return <Card10V5 key={index} post={post} />
       case 'card10V6':
-        return <Card10V6 key={index} post={post} />
+        return <Card10V6 key={index} post={post} lang={lang}/>
       case 'card11':
         return <Card11 key={index} post={post} />
       default:

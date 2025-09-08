@@ -7,16 +7,17 @@ interface Props {
   className?: string
   avatarSize?: string
   timeDuration?: boolean
+  lang?: string
 }
 
-const PostCardMeta5: FC<Props> = ({ meta, className, avatarSize, timeDuration=false }) => {
-  const { date, author, title, handle, categories } = meta
+const PostCardMeta5: FC<Props> = ({ meta, className, avatarSize, timeDuration=false, lang }) => {
+  const { date, author, title, handle, categories, slug } = meta
 
   return (
     <div className={clsx('post-card-meta-2 relative flex gap-2 text-xs/6', className)}>
       <div>
         <h2 className={clsx('block text-base font-medium')}>
-          <Link href={`/post/${handle}`} className="line-clamp-2">
+          <Link href={lang === 'en' ? `/video/${slug}` : `/${lang}/video/${slug}`} className="line-clamp-2">
             {title}
           </Link>
         </h2>
