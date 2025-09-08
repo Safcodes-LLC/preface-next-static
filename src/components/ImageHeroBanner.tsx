@@ -98,7 +98,7 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
     }
   }, [posts, imageUrl])
 
-  console.log(slides, 'slides')
+  // console.log(slides, 'slides')
 
   // Auto-slide functionality with hover pause
   useEffect(() => {
