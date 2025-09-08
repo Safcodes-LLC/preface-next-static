@@ -3,6 +3,7 @@ import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import type React from 'react'
 import { Button } from './Button'
+import { useMarkPostRead } from '@/hooks/api'
 
 export function Pagination({
   'aria-label': ariaLabel = 'Page navigation',
@@ -37,12 +38,26 @@ export function PaginationNext({
   href = null,
   className,
   children = 'Next Page',
-}: React.PropsWithChildren<{ href?: string | null; className?: string }>) {
+  postId,
+}: React.PropsWithChildren<{ href?: string | null; className?: string; postId?: string }>) {
+  const markAsRead = useMarkPostRead()
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (postId) {
+      markAsRead.mutate(postId)
+    }
+    // Continue with normal navigation
+    if (href === null) {
+      e.preventDefault()
+    }
+  }
+
   return (
     <span className={clsx(className, 'flex grow basis-0 justify-end')}>
       <Button
         {...(href === null ? { disabled: true } : { href })}
-        className="rounded-full !border !border-[#60A43A] !text-sm !font-normal !text-[#60A43A] hover:!bg-[#00652E] hover:!text-white hover:!border-[#00652E]"
+        onClick={handleClick}
+        className="rounded-full !border !border-[#60A43A] !text-sm !font-normal !text-[#60A43A] hover:!border-[#00652E] hover:!bg-[#00652E] hover:!text-white"
         plain
         aria-label="Next page"
       >

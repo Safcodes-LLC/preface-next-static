@@ -14,9 +14,10 @@ import { Suspense, useCallback } from 'react'
 interface Props {
   totalPages?: number
   className?: string
+  post?: any
 }
 
-function PaginationComponent({ totalPages = 10, className }: Props) {
+function PaginationComponent({ totalPages = 10, className, post }: Props) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
@@ -48,6 +49,7 @@ function PaginationComponent({ totalPages = 10, className }: Props) {
           href={
             currentPage < totalPages ? pathname + '?' + createQueryString('page', (currentPage + 1).toString()) : null
           }
+          postId={post?._id}
         />
       </Pagination>
     </div>
