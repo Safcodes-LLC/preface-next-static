@@ -13,7 +13,8 @@ interface Article {
   title: string
   handle: string
   thumbnail?: string
-  category?: string
+  category?: any
+  slug?: string
 }
 
 interface Props {
@@ -23,13 +24,17 @@ interface Props {
 }
 
 const CardArticle1: FC<Props> = ({ className, article, index }) => {
-  const { title, handle, thumbnail, category, _id } = article
+  const { title, handle, thumbnail, category, _id, slug } = article
   const { data: readPosts = [] } = useFetchReadPosts()
   const isRead = readPosts?.some((post: any) => post._id === _id)
 
+  const parentSlug = category?.parentCategory?.slug
+  const subSlug = category?.slug
+  const articleSlug = slug
+  
   return (
     <Link
-      href={`/article/${handle}`}
+      href={`/${parentSlug}/${subSlug}/${articleSlug}`}
       className={clsx('card-article-1 group flex cursor-pointer flex-col gap-3', className)}
     >
       {/* Image Container */}
