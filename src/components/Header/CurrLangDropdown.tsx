@@ -151,7 +151,13 @@ const CurrLangDropdown: FC<Props> = ({
           home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
         )}
       >
-        <GlobeAltIcon className="size-5" />
+        <div className="flex items-center justify-center rounded-full px-1 h-5 text-xs font-medium text-white">
+          {selectedLanguage?.FlagComponent && (
+            <selectedLanguage.FlagComponent className="h-3 w-3 me-1" />
+          )}
+          {selectedLanguage?.name}
+        </div>
+        {/* <GlobeAltIcon className="size-5" /> */}
         <ChevronDownIcon className="ms-1 size-4 group-data-open:rotate-180" aria-hidden="true" />
       </PopoverButton>
 
