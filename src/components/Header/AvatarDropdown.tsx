@@ -80,7 +80,7 @@ export default function AvatarDropdown({ className, trigger }: Props) {
               <div className="grow">
                 <h4 className="font-semibold">
                   {name || user.name}
-                  <Link href={`/author/${user.handle}`} className="absolute inset-0" />
+                  {/* <Link href={`/author/${user.handle}`} className="absolute inset-0" /> */}
                 </h4>
                 <p className="text-xs/6">{user.location}</p>
               </div>

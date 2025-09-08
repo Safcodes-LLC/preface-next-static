@@ -52,7 +52,7 @@ const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPl
             postType={postType}
           />
         )}
-        <MediaVideo isHover={isHover} videoUrl={videoSource} handle={handle} autoPlay={autoPlay} />
+        <MediaVideo isHover={isHover} videoUrl={videoSource} handle={handle} autoPlay={autoPlay} href={href}/>
       </>
     )
   }
@@ -76,7 +76,7 @@ const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPl
     const imageSrc = featuredImage || thumbnail;
     if (!imageSrc) return null;
     return (
-      <Link href={href || `/post/${handle}`}>
+      <Link href={href || `/abcd/${handle}`}>
         <Image alt={title} fill className="object-cover" src={imageSrc} sizes="(max-width: 600px) 100vw, 50vw" />
         <div className="absolute inset-0 bg-black/25 opacity-100 transition-opacity group-hover:opacity-75" />
       </Link>

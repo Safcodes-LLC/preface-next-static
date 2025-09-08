@@ -11,21 +11,22 @@ interface Props {
 }
 
 const CardCategory1: FC<Props> = ({ className, size = 'normal', category }) => {
-  const { count, name, handle, thumbnail } = category
+  const { count, name, handle, parentCategory, thumbnail, featuredImage, slug } = category
+ 
+ console.log(parentCategory,"parentCategory")
   return (
-    <Link href={`/category/${handle}`} className={clsx('card-category-1 flex flex-col gap-2', className)}>
+    <Link href={`/${parentCategory?.slug}/${slug}`} className={clsx('card-category-1 flex flex-col gap-2', className)}>
       <NcImage
         alt={name}
         containerClassName={clsx('relative me-4 aspect-[3/2] w-32 shrink-0 overflow-hidden rounded-lg md:w-40')}
-        src={thumbnail || ''}
+        src={thumbnail || featuredImage || ''}
         fill
         className="object-cover"
         sizes="80px"
       />
       <div>
         <h2 className={clsx('nc-card-title text-sm font-medium text-neutral-900 dark:text-neutral-100')}>
-          {/* {name} */}
-          How to Pray that cleanse your body...
+          {name}
         </h2>
       </div>
     </Link>

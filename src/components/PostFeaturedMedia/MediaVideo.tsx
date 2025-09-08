@@ -13,9 +13,10 @@ interface Props {
   handle: string
   autoPlay?: boolean
   onStart?: () => void
+  href?: string
 }
 
-const MediaVideo: FC<Props> = ({ videoUrl, isHover, handle, autoPlay = false, onStart }) => {
+const MediaVideo: FC<Props> = ({ videoUrl, isHover, handle, autoPlay = false, onStart, href }) => {
   const [isMuted, setIsMuted] = useState(true)
   const [showDescUnmuted, setShowDescUnmuted] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -90,7 +91,7 @@ const MediaVideo: FC<Props> = ({ videoUrl, isHover, handle, autoPlay = false, on
       )}
 
       <Link
-        href={`/post/${handle}`}
+        href={href || `/post/${handle}`}
         className={clsx(
           'absolute inset-0 flex items-center justify-center transition-opacity duration-300',
           (isPlaying || !showLoading) ? 'opacity-0' : 'opacity-100'
