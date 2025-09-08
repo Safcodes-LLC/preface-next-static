@@ -43,22 +43,9 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string; lang: s
 
   // Debug: Log all unique categories and tags
   const allCategories = new Set<string>()
-  const allTags = new Set<string>()
 
   allPosts.forEach((post) => {
     post.categories?.forEach((cat: any) => allCategories.add(cat.handle.toLowerCase()))
-    // post.tags?.forEach((tag: any) => allTags.add(tag.handle.toLowerCase()))
-  })
-
-  // If no matching subcategory found, show all posts for now
-  const posts = allPosts.filter((post: any) => {
-    // If subcategory is one of the available categories, filter by it
-    const hasMatchingCategory = (post.categories || []).some(
-      (cat: { handle: string }) => cat.handle.toLowerCase() === subcategory.toLowerCase()
-    )
-
-    // For now, show all posts if no matching category is found
-    return hasMatchingCategory || true
   })
 
   // Format subcategory name for display
@@ -68,18 +55,6 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string; lang: s
   const listPost = subcategoryPosts?.list
 
   const categories = await getCategories()
-  const defaultPosts = await getPostsDefault()
-  const tags = await getTags()
-
-  // console.log(subcategoryImage,"images fopr sub category");
-
-  const filterOptions = [
-    { name: 'Most recent', value: 'most-recent' },
-    { name: 'Curated by admin', value: 'curated-by-admin' },
-    { name: 'Most appreciated', value: 'most-appreciated' },
-    { name: 'Most discussed', value: 'most-discussed' },
-    { name: 'Most viewed', value: 'most-viewed' },
-  ]
 
   return (
     <div className={`page-subcategory-${subcategory}`}>
@@ -97,10 +72,6 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string; lang: s
       <div className="container pt-10 lg:pt-20">
         <div className="flex flex-wrap gap-x-2 gap-y-4">
           <ModalCategories categories={categories} />
-          {/* <ModalTags tags={tags} /> */}
-          {/* <div className="ms-auto">
-            <ArchiveSortByListBox filterOptions={filterOptions} />
-          </div> */}
         </div>
 
         <div className="pt-6 lg:pt-10">
