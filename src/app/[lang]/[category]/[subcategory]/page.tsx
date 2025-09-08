@@ -2,7 +2,7 @@ import Banner from '@/components/Banner'
 import ClientSectionSliderPosts from '@/components/ClientSectionSliderPosts'
 import ModalCategories from '@/components/ModalCategories'
 import Card16Podcast from '@/components/PostCards/Card16Podcast'
-import { getSubcategoryPosts } from '@/data/api/posts'
+import { getCategoryBySlug, getSubcategoryPosts } from '@/data/api/posts'
 import { getCategories, getTags } from '@/data/categories'
 import { getAllPosts, getPostsDefault } from '@/data/posts'
 import { getDictionary } from '@/i18n'
@@ -28,9 +28,9 @@ export async function generateMetadata({
   }
 }
 
-const Page = async ({ params }: { params: Promise<{ subcategory: string; lang: string }> }) => {
+const Page = async ({ params }: { params: Promise<{ category: string; subcategory: string; lang: string }> }) => {
   // Await the params before using them
-  const { subcategory } = await params
+  const { category, subcategory } = await params
   const { lang } = await params
   const dict = await getDictionary(lang)
 
@@ -54,7 +54,10 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string; lang: s
   const lengthTopics = subcategoryPosts?.list?.length
   const listPost = subcategoryPosts?.list
 
-  const categories = await getCategories()
+  // const categories = await getCategories()
+  const categories2 = await getCategoryBySlug(category, lang)
+
+  console.log(categories2.subcategories ,"categories2")
 
   return (
     <div className={`page-subcategory-${subcategory}`}>
@@ -71,7 +74,7 @@ const Page = async ({ params }: { params: Promise<{ subcategory: string; lang: s
 
       <div className="container pt-10 lg:pt-20">
         <div className="flex flex-wrap gap-x-2 gap-y-4">
-          <ModalCategories categories={categories} />
+          <ModalCategories categories={categories2.subcategories} />
         </div>
 
         <div className="pt-6 lg:pt-10">

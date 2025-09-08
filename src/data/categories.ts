@@ -1235,6 +1235,7 @@ export async function getTagByHandle(handle: string) {
 export type TCategory = Awaited<ReturnType<typeof getCategories>>[number] & {
   posts?: TPost[]
   slug?: string
+  parentCategory?: any
 }
 
 export type TTag = Awaited<ReturnType<typeof getTags>>[number] & {
