@@ -105,7 +105,7 @@ const otherTopics = subcategoryList.data.subcategories
         <div className="w-full lg:w-3/5 xl:w-2/3 xl:pe-20">
           <SingleContentContainer post={post} comments={comments} />
           <div className="mt-12">
-            <PaginationWrapper2 />
+            <PaginationWrapper2 post={post}/> 
           </div>
         </div>
         <div className="mt-12 w-full lg:mt-0 lg:w-2/5 lg:ps-10 xl:w-1/3 xl:ps-0">

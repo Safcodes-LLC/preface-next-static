@@ -1,14 +1,20 @@
+'use client'
+
 import NcImage from '@/components/NcImage/NcImage'
+import { useFetchReadPosts } from '@/hooks/api'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
+import { CheckIcon } from '@heroicons/react/24/outline'
 
 interface Article {
+  _id: string
   id: string
   title: string
   handle: string
   thumbnail?: string
-  category?: string
+  category?: any
+  slug?: string
 }
 
 interface Props {
@@ -18,15 +24,30 @@ interface Props {
 }
 
 const CardArticle1: FC<Props> = ({ className, article, index }) => {
-  const { title, handle, thumbnail, category } = article
+  const { title, handle, thumbnail, category, _id, slug } = article
+  const { data: readPosts = [] } = useFetchReadPosts()
+  const isRead = readPosts?.some((post: any) => post._id === _id)
 
+  const parentSlug = category?.parentCategory?.slug
+  const subSlug = category?.slug
+  const articleSlug = slug
+  
   return (
     <Link
-      href={`/article/${handle}`}
+      href={`/${parentSlug}/${subSlug}/${articleSlug}`}
       className={clsx('card-article-1 group flex cursor-pointer flex-col gap-3', className)}
     >
       {/* Image Container */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
+      <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl">
+        {/* Read Indicator */}
+        {isRead && (
+          <div className="absolute bottom-3 right-2 z-10">
+            <div className="flex items-center gap-1 rounded-full bg-black/30 px-2 py-0.5 text-xs font-medium text-[#CBDB2A]">
+              <CheckIcon className="h-3 w-3 stroke-[3]" />
+              <span>Read</span>
+            </div>
+          </div>
+        )}
         {thumbnail ? (
           <NcImage
             alt={title || 'Article image'}
@@ -42,9 +63,15 @@ const CardArticle1: FC<Props> = ({ className, article, index }) => {
           </div>
         )}
 
+        {/* Linear Gradient Overlay - Only show when isRead is true */}
+        {isRead && (
+          <div
+            className="absolute inset-0 bg-gradient-to-t from-[#2F2F2F] to-[#616161] opacity-70 transition-all duration-300"
+          ></div>
+        )}
         
-        {/* Linear Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#2F2F2F] via-[#61616100] to-transparent opacity-100 transition-all duration-300 group-hover:from-[#2F2F2F] group-hover:via-[#616161aa] group-hover:to-[#61616166]"></div>
+        {/* Hover Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2F2F2F] via-[#61616100] to-transparent opacity-0 transition-all duration-300 group-hover:opacity-30 group-hover:from-[#2F2F2F] group-hover:via-[#616161aa] group-hover:to-[#61616166]"></div>
 
         {/* Article Number Badge */}
         <div className="absolute bottom-3 left-1 px-2 py-1 text-xs font-medium text-white">
@@ -53,9 +80,9 @@ const CardArticle1: FC<Props> = ({ className, article, index }) => {
       </div>
 
       <div>
-        <h2 className={clsx('nc-card-title text-sm font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2')}>
+        <h2 className={clsx('nc-card-title line-clamp-2 text-sm font-medium text-neutral-900 dark:text-neutral-100')}>
           {/* {name} */}
-         {title}
+          {title}
         </h2>
       </div>
     </Link>

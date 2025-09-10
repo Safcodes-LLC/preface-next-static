@@ -1,15 +1,14 @@
 'use client'
 
+import { useAuth } from '@/contexts/AuthContext'
+import { useFavourite, useGetUserFavourites, useRemoveFavourite } from '@/hooks/api/use-favourite'
 import convertNumbThousand from '@/utils/convertNumbThousand'
 import { HeartIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import { FC, useState } from 'react'
-import { useAuth } from '@/contexts/AuthContext'
-import AuthRequiredModal from './ui/AuthRequiredModal'
 import { useRouter } from 'next/navigation'
-import ButtonPrimary from '@/shared/ButtonPrimary'
-import { useFavourite } from '@/hooks/api/use-favourite'
+import { FC, useState, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
+import AuthRequiredModal from './ui/AuthRequiredModal'
 
 interface Props {
   className?: string
@@ -26,6 +25,29 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, c
   const [showAuthModal, setShowAuthModal] = useState(false)
   const router = useRouter()
   const { mutate: toggleFavorite } = useFavourite()
+  const { data } = useGetUserFavourites()
+
+  const removeFavourite = useRemoveFavourite();
+
+  type Favorite = {
+    postId: {
+      _id: string;
+    };
+    // Add other properties from your favorite object if needed
+  };
+
+  const userFavourites = data?.favorites as Favorite[] | undefined
+
+  // Update liked state based on user's favorites
+  useEffect(() => {
+    if (userFavourites && post?._id) {
+      const isPostLiked = userFavourites.some((fav: Favorite) => fav.postId?._id === post._id);
+      setIsLiked(isPostLiked);
+    }
+  }, [userFavourites, post?._id]);
+
+  console.log(post,"post findee");
+  
 
   // Default color classes
   const defaultClasses =
@@ -33,39 +55,45 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, c
   // If color is provided, use it, otherwise use default classes
   const colorClasses = color ? color : defaultClasses
 
-  const handleLikeClick = () => {
+  const handleLikeClick = async () => {
     if (!isAuthenticated) {
-      setShowAuthModal(true)
-      return
+      setShowAuthModal(true);
+      return;
     }
-
+  
+    if (!post?._id || !user?._id) return;
+  
+    const newLikedState = !isLiked;
+    
     // Optimistic update
-    const newLikedState = !isLiked
-    setIsLiked(newLikedState)
-    setOptimisticLikeCount(prev => newLikedState ? prev + 1 : prev - 1)
-
-    if (post?._id && user?._id) {
-      toggleFavorite(
-        {
+    setIsLiked(newLikedState);
+    setOptimisticLikeCount(prev => newLikedState ? prev + 1 : prev - 1);
+  
+    try {
+      if (newLikedState) {
+        // Add to favorites
+        await toggleFavorite({
           userId: user._id,
           postId: post._id,
-          postType: post.postType?._id
-        },
-        {
-          onError: (error) => {
-            // Revert on error
-            console.error('Error updating favorite:', error)
-            setIsLiked(!newLikedState)
-            setOptimisticLikeCount(prev => newLikedState ? prev - 1 : prev + 1)
-            toast.error('Failed to update favorite status')
-          },
-          onSuccess: () => {
-            toast.success(newLikedState ? 'Added to favorites' : 'Removed from favorites')
-          }
-        }
-      )
+          postType: post.postType?._id,
+        });
+        // toast.success('Added to favorites');
+      } else {
+        // Remove from favorites
+        await removeFavourite.mutateAsync({
+          userId: user._id,
+          postId: post._id
+        });
+        // toast.success('Removed from favorites');
+      }
+    } catch (error) {
+      // Revert on error
+      console.error('Error updating favorite:', error);
+      setIsLiked(!newLikedState);
+      setOptimisticLikeCount(prev => newLikedState ? prev - 1 : prev + 1);
+      toast.error(`Failed to ${newLikedState ? 'add to' : 'remove from'} favorites`);
     }
-  }
+  };
 
   const handleLogin = () => {
     router.push('/login')
@@ -87,7 +115,7 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, c
         <HeartIcon className="size-4" strokeWidth={1} fill={isLiked ? 'currentColor' : 'none'} />
 
         <span className={clsx('ms-1', isLiked && 'text-[#00652E]')}>
-          { post?.favoriteCount || convertNumbThousand(optimisticLikeCount)}
+          {post?.favoriteCount || convertNumbThousand(optimisticLikeCount)}
         </span>
       </button>
 
