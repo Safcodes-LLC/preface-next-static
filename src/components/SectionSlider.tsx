@@ -83,7 +83,7 @@ const SliderHeading: React.FC<HeadingProps> = ({ heading, subHeading, dimHeading
   const HeadingTag = level
 
   return (
-    <div className={clsx('container mb-12', isCenter && 'text-center')}>
+    <div className={clsx('mb-12', isCenter && 'text-center')}>
       <HeadingWithSub className="mb-0!" subHeading={subHeading}>
         {heading}
       </HeadingWithSub>
@@ -142,8 +142,8 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
       if (width < 640) setCardsPerView(1)
       else if (width < 768) setCardsPerView(2)
       else if (width < 1024) setCardsPerView(3)
-      else if (width < 1280) setCardsPerView(7)
-      else setCardsPerView(7)
+      else if (width < 1280) setCardsPerView(5)
+      else setCardsPerView(5)
     }
 
     // Only run on client side
@@ -289,7 +289,7 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
 
       {/* Slider Section */}
       <div
-        className="relative px-4 md:px-8"
+        className="relative"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >

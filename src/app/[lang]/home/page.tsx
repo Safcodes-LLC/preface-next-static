@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 }
 
 interface HomePageProps {
-  params: Promise<{ lang: string }>;
-  dict: any; // You might want to replace 'any' with a proper type for your dictionary
+  params: Promise<{ lang: string }>
+  dict: any // You might want to replace 'any' with a proper type for your dictionary
 }
 
 const HomePage = async ({ params, dict }: HomePageProps) => {
@@ -108,7 +108,7 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
           <SectionMagazine10 posts={articlesArray} videoPosts={videoPostsArray} lang={lang} />
         </div>
         {/* <ParallaxScrollSection magazine10Data={articlesArray} videoPosts={videoPostsArray} /> */}
-        <div className="relative container space-y-8 pt-10 md:space-y-12 md:pt-14 lg:space-y-16 lg:pt-20">
+        <div className="relative container space-y-8 py-10 md:space-y-12 md:py-14 lg:space-y-16 lg:py-20">
           {/* <SectionMagazine10 posts={magazine10Data} /> */}
           <SectionSliderNewCategories
             heading={dict.sections.storytelling.heading}
@@ -132,9 +132,7 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
           />
         </div>
 
-        <div className="relative py-10 md:py-14 lg:py-20">
-          {/* <SectionSliderNewCategories   heading="STORYTELLING ISLAM"
-          subHeading="Understanding Islam through 1001 stories" categories={categories.slice(0, 10)} categoryCardType="card2" /> */}
+        {/* <div className="relative container py-10 md:py-14 lg:py-20">
           <SectionSlider
             heading={dict.sections.trendingcategories.heading}
             subHeading={dict.sections.trendingcategories.description}
@@ -152,7 +150,7 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
               loop: true,
             }}
           />
-        </div>
+        </div> */}
         <div className="relative py-10 md:py-14 lg:py-20">
           <BackgroundSection />
           <div className="container">
@@ -179,6 +177,28 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
             subHeading={dict.sections.latestarticles.description}
             lang={lang}
           />
+        </div>
+
+        <div className="bg-neutral-100/70 py-10 md:py-14 lg:py-20 dark:bg-black/10">
+          <div className="relative container">
+            <SectionSlider
+              heading={dict.sections.trendingcategories.heading}
+              subHeading={dict.sections.trendingcategories.description}
+              lang={lang}
+              categories={
+                Array.isArray(topTrendingTopics)
+                  ? topTrendingTopics.slice(0, 10)
+                  : topTrendingTopics.data?.slice(0, 10) || []
+              }
+              categoryCardType="card2"
+              config={{
+                autoSlide: true,
+                autoSlideInterval: 5000,
+                showButtons: false,
+                loop: true,
+              }}
+            />
+          </div>
         </div>
 
         <ClientSideVisuals dict={dict} posts={latestVideos} lang={lang} />
