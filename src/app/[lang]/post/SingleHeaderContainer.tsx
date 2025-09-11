@@ -48,7 +48,7 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
 }
 
 const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
-  const { featuredImage, title , thumbnail } = post
+  const { featuredImage, title, thumbnail } = post
 
   return (
     <>
@@ -57,7 +57,7 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
       </div>
       <header className={clsx('single-header-style-1', className)}>
         {thumbnail || featuredImage?.src ? (
-          <div className="aspect-square relative w-full sm:aspect-15/5">
+          <div className="relative aspect-square w-full sm:aspect-15/5">
             <Image
               alt={title}
               className="object-cover"
@@ -68,13 +68,13 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
             />
             {/* Gradient Overlay */}
             <div
-              className="absolute inset-0"
+              className="absolute right-0 bottom-0 left-0 h-1/2"
               style={{
                 background: 'linear-gradient(0deg, #000000D9 0%, #61616100 100%)',
               }}
             />
-            <div className="container absolute right-0 bottom-0 left-0">
-              <div className=" mx-auto  pb-8">
+            <div className="absolute right-0 bottom-0 left-0 container">
+              <div className="mx-auto pb-8">
                 <TitleAndMeta post={post} />
               </div>
             </div>
