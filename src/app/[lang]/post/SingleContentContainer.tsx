@@ -119,7 +119,10 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className }) => {
           className="mx-auto prose max-w-(--breakpoint-md)! lg:prose-lg dark:prose-invert"
           ref={contentRef}
         >
-          <div dangerouslySetInnerHTML={{ __html: renderedHtml }} />
+          <div 
+            dangerouslySetInnerHTML={{ __html: renderedHtml }} 
+            className="dark:[&_*]:!text-white"
+          />
         </div>
 
         {/* COMMENTS LIST */}
