@@ -8,6 +8,7 @@ interface CategoryItem {
   slug?: string
   color?: string
   _id?: string
+  parentCategory?: any
 }
 
 interface Props {
@@ -29,6 +30,9 @@ const CategoryBadgeList: FC<Props> = ({ className, itemClass, categories }) => {
     return null // Don't render anything if no valid categories
   }
 
+  console.log(validCategories,"validCategories");
+  
+
   const getCategoryHandle = (category: CategoryItem): string => {
     return category.handle || category.slug || category._id || ''
   }
@@ -47,7 +51,7 @@ const CategoryBadgeList: FC<Props> = ({ className, itemClass, categories }) => {
           <BadgeButton
             className={itemClass}
             key={`${categoryHandle}-${index}`}
-            href={`/category/${categoryHandle}`}
+            href={`/${validCategories[0]?.parentCategory?.slug}/${categoryHandle}`}
             color={categoryColor as any}
           >
             {category.name}
