@@ -179,7 +179,7 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
           />
         </div>
 
-        <div className="bg-neutral-100/70 py-10 md:py-14 lg:py-20 dark:bg-black/10">
+        <div className="bg-[#F3F4F6] py-10 md:py-14 lg:py-20 dark:bg-[#0D0D0D]">
           <div className="relative container">
             <SectionSlider
               heading={dict.sections.trendingcategories.heading}

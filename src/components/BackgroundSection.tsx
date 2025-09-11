@@ -5,7 +5,7 @@ interface Props {
   className?: string
 }
 
-const BackgroundSection: FC<Props> = ({ className = 'bg-neutral-100/70 dark:bg-black/10' }) => {
+const BackgroundSection: FC<Props> = ({ className = 'bg-[#F3F4F6] dark:bg-[#0D0D0D]' }) => {
   return (
     <div
       className={clsx(
