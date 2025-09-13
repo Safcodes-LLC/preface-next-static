@@ -16,10 +16,10 @@ import { serverFetch } from '@/lib/server/api'
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ category: string; subcategory: string; article: string }>
+  params: Promise<{ category: string; subcategory: string; article: string; lang: string }>
 }): Promise<Metadata> {
   // Await the params before using them
-  const { article } = await params
+  const { article, lang } = await params
   
   // Validate the article parameter
   if (!article || article.includes('.') || article.includes('com.chrome.devtools.json')) {
@@ -47,10 +47,10 @@ export async function generateMetadata({
 const Page = async ({ 
   params 
 }: {  
-  params: Promise<{ category: string; subcategory: string; article: string }> 
+  params: Promise<{ category: string; subcategory: string; article: string; lang: string }> 
 }) => {
   // Await the params before using them
-  const { category, subcategory, article } = await params
+  const { category, subcategory, article, lang } = await params
 
   // console.log(`Processing article route: category=${category}, subcategory=${subcategory}, article=${article}`)
 
@@ -103,7 +103,7 @@ const otherTopics = subcategoryList.data.subcategories
 
       <div className="container mt-12 flex flex-col lg:flex-row">
         <div className="w-full lg:w-3/5 xl:w-2/3 xl:pe-20">
-          <SingleContentContainer post={post} comments={comments} />
+          <SingleContentContainer post={post} comments={comments} lang={lang}/>
           <div className="mt-12">
             <PaginationWrapper2 post={post}/> 
           </div>

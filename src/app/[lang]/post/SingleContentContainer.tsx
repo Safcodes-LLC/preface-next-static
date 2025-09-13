@@ -8,6 +8,13 @@ import { HugeiconsIcon } from '@hugeicons/react'
 import { FC, useEffect, useMemo, useRef, useState } from 'react'
 import { ShareDropdown } from './SingleMetaAction'
 import draftToHtml from 'draftjs-to-html'
+import { Noto_Serif } from 'next/font/google'
+
+const notoSerif = Noto_Serif({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
 
 interface RawDraftInlineStyleRange {
   offset: number
@@ -40,9 +47,10 @@ interface Props {
   post: TPostDetail | any
   comments?: TComment[]
   className?: string
+  lang?: string
 }
 
-const SingleContentContainer: FC<Props> = ({ post, comments, className }) => {
+const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) => {
   const endedAnchorRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const progressRef = useRef<HTMLButtonElement>(null)
@@ -122,6 +130,7 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className }) => {
           <div 
             dangerouslySetInnerHTML={{ __html: renderedHtml }} 
             className="dark:[&_*]:!text-white"
+            style={{fontFamily: notoSerif.style.fontFamily}}
           />
         </div>
 
