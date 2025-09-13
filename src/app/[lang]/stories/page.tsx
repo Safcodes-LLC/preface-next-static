@@ -66,7 +66,7 @@ const PageStories = async ({
 
   const renderLoopItems = (category: any, lang: string) => {
     return (
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-8 lg:grid-cols-4">
         {category?.data?.map((post: any) => (
           <Card11 key={post._id} post={post} lang={lang}/>
         ))}
