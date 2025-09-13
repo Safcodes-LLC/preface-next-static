@@ -6,7 +6,7 @@ import convertNumbThousand from '@/utils/convertNumbThousand'
 import { HeartIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
-import { FC, useState, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import AuthRequiredModal from './ui/AuthRequiredModal'
 
@@ -27,27 +27,24 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, c
   const { mutate: toggleFavorite } = useFavourite()
   const { data } = useGetUserFavourites()
 
-  const removeFavourite = useRemoveFavourite();
+  const removeFavourite = useRemoveFavourite()
 
   type Favorite = {
     postId: {
-      _id: string;
-    };
+      _id: string
+    }
     // Add other properties from your favorite object if needed
-  };
+  }
 
   const userFavourites = data?.favorites as Favorite[] | undefined
 
   // Update liked state based on user's favorites
   useEffect(() => {
     if (userFavourites && post?._id) {
-      const isPostLiked = userFavourites.some((fav: Favorite) => fav.postId?._id === post._id);
-      setIsLiked(isPostLiked);
+      const isPostLiked = userFavourites.some((fav: Favorite) => fav.postId?._id === post._id)
+      setIsLiked(isPostLiked)
     }
-  }, [userFavourites, post?._id]);
-
-  console.log(post,"post findee");
-  
+  }, [userFavourites, post?._id])
 
   // Default color classes
   const defaultClasses =
@@ -57,18 +54,18 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, c
 
   const handleLikeClick = async () => {
     if (!isAuthenticated) {
-      setShowAuthModal(true);
-      return;
+      setShowAuthModal(true)
+      return
     }
-  
-    if (!post?._id || !user?._id) return;
-  
-    const newLikedState = !isLiked;
-    
+
+    if (!post?._id || !user?._id) return
+
+    const newLikedState = !isLiked
+
     // Optimistic update
-    setIsLiked(newLikedState);
-    setOptimisticLikeCount(prev => newLikedState ? prev + 1 : prev - 1);
-  
+    setIsLiked(newLikedState)
+    setOptimisticLikeCount((prev) => (newLikedState ? prev + 1 : prev - 1))
+
     try {
       if (newLikedState) {
         // Add to favorites
@@ -76,24 +73,24 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, c
           userId: user._id,
           postId: post._id,
           postType: post.postType?._id,
-        });
+        })
         // toast.success('Added to favorites');
       } else {
         // Remove from favorites
         await removeFavourite.mutateAsync({
           userId: user._id,
-          postId: post._id
-        });
+          postId: post._id,
+        })
         // toast.success('Removed from favorites');
       }
     } catch (error) {
       // Revert on error
-      console.error('Error updating favorite:', error);
-      setIsLiked(!newLikedState);
-      setOptimisticLikeCount(prev => newLikedState ? prev - 1 : prev + 1);
-      toast.error(`Failed to ${newLikedState ? 'add to' : 'remove from'} favorites`);
+      console.error('Error updating favorite:', error)
+      setIsLiked(!newLikedState)
+      setOptimisticLikeCount((prev) => (newLikedState ? prev - 1 : prev + 1))
+      toast.error(`Failed to ${newLikedState ? 'add to' : 'remove from'} favorites`)
     }
-  };
+  }
 
   const handleLogin = () => {
     router.push('/login')
