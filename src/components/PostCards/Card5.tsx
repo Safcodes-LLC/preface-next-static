@@ -8,10 +8,15 @@ interface Props {
   className?: string
   post: TPost
   lang?: string
+  index1?: number
+  dualColor?: boolean
 }
 
-const Card5: FC<Props> = ({ className, post, lang }) => {
+const Card5: FC<Props> = ({ className, post, lang, index1, dualColor }) => {
   const { author, title, handle, slug, date, categories, readingTime } = post
+
+  // console.log(index1,"habeeebib in card5....");
+  
 
   const parentCategorySlug = (categories[0] as any)?.parentCategory?.slug
   const categorySlug = (categories[0] as any)?.slug
@@ -34,7 +39,7 @@ const Card5: FC<Props> = ({ className, post, lang }) => {
       ></Link>
 
       <div className="flex flex-col">
-        <CategoryBadgeList categories={categories} />
+        <CategoryBadgeList categories={categories} index1={index1} dualColor={dualColor}/>
         <h2 className="my-4 block text-base text-neutral-800 dark:text-neutral-300" title={title}>
           <Link href={`/${parentCategorySlug}/${categorySlug}/${articleSlug}`} className="line-clamp-2" title={title}>
             {title}

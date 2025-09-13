@@ -15,11 +15,16 @@ interface Props {
   className?: string
   itemClass?: string
   categories: CategoryItem | CategoryItem[]
+  index1?: number
+  dualColor?: boolean
 }
 
-const CategoryBadgeList: FC<Props> = ({ className, itemClass, categories }) => {
+const CategoryBadgeList: FC<Props> = ({ className, itemClass, categories, index1, dualColor }) => {
   // Handle both single category object and array of categories
   const categoriesArray = Array.isArray(categories) ? categories : [categories]
+
+  // console.log(index1,"catagory index in categoryBadgeList....");
+  
 
   // Filter out any undefined or null items for safety
   const validCategories = categoriesArray.filter((item): item is CategoryItem => 
@@ -53,6 +58,8 @@ const CategoryBadgeList: FC<Props> = ({ className, itemClass, categories }) => {
             key={`${categoryHandle}-${index}`}
             href={`/${validCategories[0]?.parentCategory?.slug}/${categoryHandle}`}
             color={categoryColor as any}
+            index1={index1}
+            dualColor={dualColor}
           >
             {category.name}
           </BadgeButton>

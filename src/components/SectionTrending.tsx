@@ -12,9 +12,10 @@ type Props = Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading' | 'isCenter'>
   className?: string
   heading?: string
   lang?: string
+  dualColor?: boolean
 }
 
-const SectionTrending: FC<Props> = ({ posts, heading, subHeading, isCenter, className, lang }) => {
+const SectionTrending: FC<Props> = ({ posts, heading, subHeading, isCenter, className, lang, dualColor }) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.2 })
 
@@ -70,9 +71,9 @@ const SectionTrending: FC<Props> = ({ posts, heading, subHeading, isCenter, clas
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:md:grid-cols-3 xl:grid-cols-4"
         aria-live="polite"
       >
-        {posts.map((post) => (
+        {posts.map((post, index) => (
           <motion.div key={post._id} variants={cardVariants}>
-            <Card5 post={post} lang={lang}/>
+            <Card5 post={post} lang={lang} index1={index} dualColor={dualColor}/>
           </motion.div>
         ))}
       </motion.div>

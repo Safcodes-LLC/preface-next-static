@@ -176,6 +176,7 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
             heading={dict.sections.latestarticles.heading}
             subHeading={dict.sections.latestarticles.description}
             lang={lang}
+            dualColor={true}
           />
         </div>
 
