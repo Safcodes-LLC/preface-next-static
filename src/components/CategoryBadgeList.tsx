@@ -15,15 +15,15 @@ interface Props {
   className?: string
   itemClass?: string
   categories: CategoryItem | CategoryItem[]
-  index1?: number
+  index?: number
   dualColor?: boolean
 }
 
-const CategoryBadgeList: FC<Props> = ({ className, itemClass, categories, index1, dualColor }) => {
+const CategoryBadgeList: FC<Props> = ({ className, itemClass, categories, index, dualColor }) => {
   // Handle both single category object and array of categories
   const categoriesArray = Array.isArray(categories) ? categories : [categories]
 
-  // console.log(index1,"catagory index in categoryBadgeList....");
+  // console.log(index,"catagory index in categoryBadgeList....");
   
 
   // Filter out any undefined or null items for safety
@@ -48,17 +48,17 @@ const CategoryBadgeList: FC<Props> = ({ className, itemClass, categories, index1
 
   return (
     <div className={clsx('category-badge-list flex flex-wrap gap-x-2 gap-y-1', className)}>
-      {validCategories.map((category, index) => {
+      {validCategories.map((category , index1) => {
         const categoryHandle = getCategoryHandle(category)
         const categoryColor = getCategoryColor(category)
 
         return (
           <BadgeButton
             className={itemClass}
-            key={`${categoryHandle}-${index}`}
+            key={`${categoryHandle}-${index}` || `${categoryHandle}-${index1}`}
             href={`/${validCategories[0]?.parentCategory?.slug}/${categoryHandle}`}
             color={categoryColor as any}
-            index1={index1}
+            index={index}
             dualColor={dualColor}
           >
             {category.name}

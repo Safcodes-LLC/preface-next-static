@@ -73,7 +73,7 @@ const SectionTrending: FC<Props> = ({ posts, heading, subHeading, isCenter, clas
       >
         {posts.map((post, index) => (
           <motion.div key={post._id} variants={cardVariants}>
-            <Card5 post={post} lang={lang} index1={index} dualColor={dualColor}/>
+            <Card5 post={post} lang={lang} index={index} dualColor={dualColor}/>
           </motion.div>
         ))}
       </motion.div>
