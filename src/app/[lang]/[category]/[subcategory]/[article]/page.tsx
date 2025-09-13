@@ -1,17 +1,14 @@
 import PaginationWrapper2 from '@/components/PaginationWrapper2'
 import WidgetCategories from '@/components/WidgetCategories'
 import WidgetPosts from '@/components/WidgetPosts'
-import { getAuthors } from '@/data/authors'
-import { getCategories, getTags } from '@/data/categories'
+import { getPostBySlug, getSubcategoryPosts } from '@/data/api/posts'
 import { getAllPosts, getCommentsByPostId, getPostByHandle } from '@/data/posts'
+import { serverFetch } from '@/lib/server/api'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import SingleContentContainer from '../../../post/SingleContentContainer'
 import SingleHeaderContainer from '../../../post/SingleHeaderContainer'
 import SingleRelatedPosts from '../../../post/SingleRelatedPosts'
-import { getPostBySlug, getSubcategoryPosts } from '@/data/api/posts'
-import { serverFetch } from '@/lib/server/api'
-
 
 export async function generateMetadata({
   params,
@@ -20,7 +17,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   // Await the params before using them
   const { article, lang } = await params
-  
+
   // Validate the article parameter
   if (!article || article.includes('.') || article.includes('com.chrome.devtools.json')) {
     return {
@@ -44,10 +41,10 @@ export async function generateMetadata({
   }
 }
 
-const Page = async ({ 
-  params 
-}: {  
-  params: Promise<{ category: string; subcategory: string; article: string; lang: string }> 
+const Page = async ({
+  params,
+}: {
+  params: Promise<{ category: string; subcategory: string; article: string; lang: string }>
 }) => {
   // Await the params before using them
   const { category, subcategory, article, lang } = await params
@@ -73,29 +70,25 @@ const Page = async ({
   const subcategoryPosts = await getSubcategoryPosts(post?.categories[0]?.slug)
 
   // Filter posts to only include those with postType.name === "Article"
-  const filteredSubcategoryPosts = subcategoryPosts?.list?.filter(post => post.postType?.name === "Article") || []
+  const filteredSubcategoryPosts = subcategoryPosts?.list?.filter((post) => post.postType?.name === 'Article') || []
 
   // console.log(post,"post checking articlezs");
 
-  
   // console.log(subcategoryPosts,"subcategoryPosts");
-  
-  
+
   const comments = await getCommentsByPostId(post.id)
   const relatedPosts = (await getAllPosts()).slice(0, 6)
   const moreFromAuthorPosts = (await getAllPosts()).slice(1, 7)
 
   const subcategoryList = await serverFetch.get(`/api/frontend/category/slug/${category}`)
 
-// console.log(subcategoryList,"subcategoryList");
+  // console.log(subcategoryList,"subcategoryList");
 
-const otherTopics = subcategoryList.data.subcategories
+  const otherTopics = subcategoryList.data.subcategories
 
-// console.log(otherTopics,"otherTopics");
-
+  // console.log(otherTopics,"otherTopics");
 
   const widgetPosts = (await getAllPosts()).slice(0, 12)
-
 
   return (
     <div className="single-post-page pt-8">
@@ -103,9 +96,9 @@ const otherTopics = subcategoryList.data.subcategories
 
       <div className="container mt-12 flex flex-col lg:flex-row">
         <div className="w-full lg:w-3/5 xl:w-2/3 xl:pe-20">
-          <SingleContentContainer post={post} comments={comments} lang={lang}/>
+          <SingleContentContainer post={post} comments={comments} lang={lang} />
           <div className="mt-12">
-            <PaginationWrapper2 post={post}/> 
+            <PaginationWrapper2 post={post} />
           </div>
         </div>
         <div className="mt-12 w-full lg:mt-0 lg:w-2/5 lg:ps-10 xl:w-1/3 xl:ps-0">
@@ -118,7 +111,7 @@ const otherTopics = subcategoryList.data.subcategories
         </div>
       </div>
 
-      <SingleRelatedPosts  moreFromAuthorPosts={moreFromAuthorPosts} />
+      <SingleRelatedPosts moreFromAuthorPosts={moreFromAuthorPosts} />
     </div>
   )
 }

@@ -9,6 +9,7 @@ import { Dropdown, DropdownButton, DropdownItem, DropdownMenu } from '@/shared/d
 import {
   ClipboardIcon,
   Comment01Icon,
+  CopyIcon,
   Facebook01Icon,
   Flag03Icon,
   Mail01Icon,
@@ -16,6 +17,7 @@ import {
   NewTwitterIcon,
   Share03Icon,
   ViewOffSlashIcon,
+  WhatsappIcon,
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
@@ -136,6 +138,16 @@ function ShareDropdown({ handle, color }: { handle: string; color?: string }) {
       href: '#',
       icon: NewTwitterIcon,
     },
+    {
+      name: 'WhatsApp',
+      href: '#',
+      icon: WhatsappIcon,
+    },
+    {
+      name: 'Copy Link',
+      href: '#',
+      icon: CopyIcon,
+    },
   ]
 
   return (
@@ -177,6 +189,7 @@ const SingleMetaAction: FC<Props> = ({ className, likeCount, liked, commentCount
         <BookmarkBtn className="size-8.5!" color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white  relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-300 "/>
         <ShareDropdown handle={handle} color="bg-transparent cursor-pointer border border-white text-white hover:bg-white/10 hover:text-white" />
         {/* <ActionDropdown handle={handle} title={title} /> */}
+     
       </div>
     </div>
   )
