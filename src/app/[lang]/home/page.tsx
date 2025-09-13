@@ -1,6 +1,6 @@
 import BackgroundSection from '@/components/BackgroundSection'
-import ClientSideVisuals from '@/components/ClientSideVisuals'
 import SectionMagazine10 from '@/components/SectionMagazine10'
+import SectionMagazine4 from '@/components/SectionMagazine4'
 import SectionMagazine7 from '@/components/SectionMagazine7'
 import SectionSlider from '@/components/SectionSlider'
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
@@ -202,7 +202,19 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
           </div>
         </div>
 
-        <ClientSideVisuals dict={dict} posts={latestVideos} lang={lang} />
+        {/* <ClientSideVisuals dict={dict} posts={latestVideos} lang={lang} /> */}
+        <div className="bg-[#000000] py-10 md:py-14 lg:py-20 dark:bg-[#0D0D0D]">
+          <div className="relative container">
+            <SectionMagazine4
+              heading={dict.sections.visuals.heading}
+              subHeading={dict.sections.visuals.description}
+              // posts={displayPosts.slice(0, 6) as any}
+              posts={latestVideos.slice(0, 6) as any}
+              headingColor="light"
+              lang={lang}
+            />
+          </div>
+        </div>
       </div>
     </ApplicationLayout>
   )
