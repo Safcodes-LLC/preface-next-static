@@ -13,9 +13,10 @@ interface Props {
   titleClass?: string
   post?: TPost | any
   lang?: string
+  yellowColor?: boolean
 }
 
-const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post, lang }) => {
+const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post, lang , yellowColor }) => {
   const {
     title,
     excerpt,
@@ -68,7 +69,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
-        <CategoryBadgeList categories={categories} />
+        <CategoryBadgeList categories={categories} yellowColor={yellowColor}/>
       </div>
 
       <span

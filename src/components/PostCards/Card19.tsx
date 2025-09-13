@@ -16,6 +16,7 @@ interface Props {
   verticalLine?: boolean
   textCenter?: boolean
   lang?: string
+  yellowColor?: boolean
 }
 
 const Card19: FC<Props> = ({
@@ -23,6 +24,7 @@ const Card19: FC<Props> = ({
   titleClass = 'text-xl sm:text-2xl xl:text-3xl',
   ratio = 'aspect-4/3 sm:aspect-1/1',
   post,
+  yellowColor = false,
   verticalLine = false,
   textCenter = false,
   lang,
@@ -90,7 +92,7 @@ const Card19: FC<Props> = ({
         {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
-        <CategoryBadgeList categories={categories} />
+        <CategoryBadgeList categories={categories} yellowColor={yellowColor}/>
       </div>
 
       <div

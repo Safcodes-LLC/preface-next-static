@@ -26,9 +26,10 @@ type BadgeProps = {
   color?: keyof typeof colors,
   index?: number,
   dualColor?: boolean
+  yellowColor?: boolean
 }
 
-export function Badge({ color = 'zinc', className, index, dualColor, ...props }: BadgeProps & React.ComponentPropsWithoutRef<'span'>) {
+export function Badge({ color = 'zinc', className, index, dualColor, yellowColor, ...props }: BadgeProps & React.ComponentPropsWithoutRef<'span'>) {
   
   console.log(index,"badge index iss ss s ");
   console.log(dualColor,"dualColor index iss ss s ");
@@ -39,6 +40,7 @@ export function Badge({ color = 'zinc', className, index, dualColor, ...props }:
       className={clsx(
         className,
         'inline-flex items-center gap-x-1.5 bg-[#B2F0CE] text-[#00652E] rounded-full px-2.5 py-0.5 text-[10px] forced-colors:outline',
+        yellowColor ? 'bg-[#EAF482]' : 'bg-[#B2F0CE]',
         dualColor && (index !== undefined && (index+1) % 2 === 0 ? 'bg-[#EAF482]' : 'bg-[#B2F0CE]')
       )}
     />
@@ -52,6 +54,7 @@ export const BadgeButton = forwardRef(function BadgeButton(
     children,
     index,
     dualColor,
+    yellowColor,
     ...props
   }: BadgeProps & { className?: string; children: React.ReactNode } & (
       | Omit<Headless.ButtonProps, 'as' | 'className'>
@@ -69,13 +72,13 @@ export const BadgeButton = forwardRef(function BadgeButton(
   return 'href' in props ? (
     <Link {...props} className={classes} ref={ref as React.ForwardedRef<HTMLAnchorElement>}>
       <TouchTarget>
-        <Badge color={color} index={index} dualColor={dualColor}>{children}</Badge>
+        <Badge color={color} index={index} dualColor={dualColor} yellowColor={yellowColor}>{children}</Badge>
       </TouchTarget>
     </Link>
   ) : (
     <Headless.Button {...props} className={classes} ref={ref}>
       <TouchTarget>
-        <Badge color={color} index={index} dualColor={dualColor}>{children}</Badge>
+        <Badge color={color} index={index} dualColor={dualColor} yellowColor={yellowColor}>{children}</Badge>
       </TouchTarget>
     </Headless.Button>
   )
