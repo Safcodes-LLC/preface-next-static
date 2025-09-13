@@ -30,7 +30,7 @@ export function Badge({ color = 'zinc', className, ...props }: BadgeProps & Reac
       {...props}
       className={clsx(
         className,
-        'inline-flex items-center gap-x-1.5 bg-[#B2F0CE] text-[#00652E] rounded-full px-2.5 py-0.5 text-xs/5 font-medium forced-colors:outline',
+        'inline-flex items-center gap-x-1.5 bg-[#B2F0CE] text-[#00652E] rounded-full px-2.5 py-0.5 text-[10px] font-medium forced-colors:outline',
         // colors[color] || colors.zinc
       )}
     />
