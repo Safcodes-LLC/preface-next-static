@@ -66,7 +66,8 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
           image={subcategoryImage}
           title={subcategoryName}
           alt={`${subcategoryName} banner`}
-          description={`${lengthTopics}`}
+          // description={`${lengthTopics}`}
+          description={`${listPost.filter(p => p.postType?.name === 'Article').length}`}
           // className=""
           dict={dict}
         />
@@ -83,7 +84,6 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
               <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
                 {listPost
                   .filter((p) => p.postType?.name === 'Article')
-                  .slice(0, 8)
                   .map((p) => (
                     <Card16Podcast key={p._id} post={p} lang={lang} />
                   ))}
