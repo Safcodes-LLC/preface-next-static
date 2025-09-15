@@ -1,11 +1,10 @@
 'use client'
-
 import { TPost } from '@/data/posts'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { FC, useState } from 'react'
-import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
+// import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
 import Image from 'next/image'
 
 interface Props {
