@@ -20,7 +20,7 @@ const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'asp
 
   const [isHover, setIsHover] = useState(false)
 
-  console.log(lang,"lang");
+  // console.log(lang,"lang");
   
 
   return (
