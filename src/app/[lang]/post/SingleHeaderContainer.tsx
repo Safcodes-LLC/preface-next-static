@@ -56,12 +56,12 @@ const HeaderStyle1 = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
         <Divider />
       </div>
       <header className={clsx('single-header-style-1', className)}>
-        {thumbnail || featuredImage?.src ? (
+        {thumbnail || featuredImage ? (
           <div className="relative aspect-square w-full sm:aspect-15/5">
             <Image
               alt={title}
               className="object-cover"
-              src={thumbnail || featuredImage.src}
+              src={featuredImage ? featuredImage : thumbnail}
               sizes="(max-width: 1440px) 100vw, 1440px"
               fill
               priority

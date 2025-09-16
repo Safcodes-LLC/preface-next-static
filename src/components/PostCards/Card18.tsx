@@ -6,6 +6,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
+import PostCardLikeBtn from '../PostCardLikeBtn'
+import PostCardSaveBtn from '../PostCardSaveBtn'
 
 interface Props {
   className?: string
@@ -30,6 +32,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
     liked,
     commentCount,
     bookmarked,
+    favoriteCount,
   } = post
 
   const parentCategorySlug = categories[0]?.parentCategory?.slug
@@ -43,14 +46,16 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         ) : (
           <>
             {thumbnail || featuredImage ? (
-              <Image
-                sizes="(max-width: 1024px) 100vw, 33vw"
-                alt={title}
-                className="size-full rounded-xl object-cover brightness-85 transition-[filter] duration-300 group-hover:brightness-60"
-                src={thumbnail || featuredImage}
-                priority
-                fill
-              />
+              <div className="relative h-full w-full overflow-hidden rounded-xl">
+                <Image
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  alt={title}
+                  className="h-full w-full rounded-xl object-cover brightness-85 transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-60"
+                  src={thumbnail || featuredImage}
+                  priority
+                  fill
+                />
+              </div>
             ) : (
               <div className="size-full rounded-xl bg-gray-200" /> // fallback placeholder
             )}
@@ -70,6 +75,11 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
         <CategoryBadgeList categories={categories} yellowColor={yellowColor}/>
+        <div className="ms-auto flex gap-1">
+          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
+          <PostCardSaveBtn bookmarked={bookmarked} />
+        </div>
+      
       </div>
 
       <span

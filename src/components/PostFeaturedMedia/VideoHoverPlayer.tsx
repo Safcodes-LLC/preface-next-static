@@ -50,7 +50,7 @@ const VideoHoverPlayer: FC<Props> = ({ className, post }) => {
       <Image 
         alt={title} 
         fill 
-        className="object-cover" 
+        className="object-cover transition-transform duration-600 ease-in-out group-hover:scale-110" 
         src={imageSrc} 
         sizes="(max-width: 600px) 100vw, 50vw" 
       />
