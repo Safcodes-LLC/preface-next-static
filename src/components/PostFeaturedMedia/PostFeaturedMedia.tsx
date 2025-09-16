@@ -77,7 +77,7 @@ const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPl
     if (!imageSrc) return null;
     return (
       <Link href={href || `/abcd/${handle}`}>
-        <Image alt={title} fill className="object-cover" src={imageSrc} sizes="(max-width: 600px) 100vw, 50vw" />
+        <Image alt={title} fill className="object-cover transition-transform duration-600 ease-in-out group-hover:scale-110" src={imageSrc} sizes="(max-width: 600px) 100vw, 50vw" />
         <div className="absolute inset-0 bg-black/25 opacity-100 transition-opacity group-hover:opacity-75" />
       </Link>
     )
