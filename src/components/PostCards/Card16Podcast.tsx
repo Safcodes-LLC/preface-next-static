@@ -32,7 +32,8 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang 
     commentCount,
     bookmarked,
     readingTime,
-    slug
+    slug,
+    favoriteCount,
   } = post
 
   // Build the post URL safely
@@ -106,14 +107,13 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang 
           {/* <p className="mt-3 mb-5 block text-sm/6 text-neutral-600 dark:text-neutral-400">
             <span className="line-clamp-2">{excerpt}</span>
           </p> */}
-          <div className="relative mt-auto flex flex-wrap gap-x-2 gap-y-1">
-            <PostCardLikeBtn likeCount={likeCount} liked={liked} />
-            {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
-            <PostCardSaveBtn className="" bookmarked={bookmarked} />
+          <div className="relative mt-auto flex items-center flex-nowrap gap-x-2">
+            <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
+            <PostCardSaveBtn bookmarked={bookmarked} />
             <Link
               // href={getPostUrl()}
               href={lang === 'en' ? getPostUrl() : `/${lang}/${getPostUrl()}`}
-              className="border-[#E2E2E2] transition-transform ms-auto flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border duration-200 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]"
+              className="ms-auto flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-transform duration-200 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]"
             >
               <ArrowRightIcon
                 strokeWidth={3}
