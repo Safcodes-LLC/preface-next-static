@@ -1,9 +1,9 @@
 'use client'
 
+import { usePopularArticles } from '@/hooks/api'
+import { HeadingWithSubProps } from '@/shared/Heading'
 import { FC } from 'react'
 import SectionSliderPosts from './SectionSliderPosts'
-import { HeadingWithSubProps } from '@/shared/Heading'
-import { usePopularArticles, type Post } from '@/hooks/api'
 
 interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
   className?: string
@@ -15,17 +15,11 @@ interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
   lang?: string
 }
 
-const ClientSectionSliderPosts: FC<Props> = ({ 
-  subcategorySlug, 
-  parentSlug, 
-  limit = 6, 
-  lang,
-  ...props 
-}) => {
+const ClientSectionSliderPosts: FC<Props> = ({ subcategorySlug, parentSlug, limit = 6, lang, ...props }) => {
   // Determine which query to use based on available props
-  const queryParams = subcategorySlug 
-    ? { subcategorySlug, limit }  // Priority: subcategory-specific articles
-    : { parentSlug, limit }       // Fallback: parent category articles
+  const queryParams = subcategorySlug
+    ? { subcategorySlug, limit } // Priority: subcategory-specific articles
+    : { parentSlug, limit } // Fallback: parent category articles
 
   const { data: popularArticles, isLoading, error } = usePopularArticles(queryParams)
 
@@ -44,4 +38,3 @@ const ClientSectionSliderPosts: FC<Props> = ({
 }
 
 export default ClientSectionSliderPosts
-

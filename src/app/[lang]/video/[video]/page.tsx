@@ -1,15 +1,7 @@
-import WidgetAuthors from '@/components/WidgetAuthors'
-import WidgetCategories from '@/components/WidgetCategories'
-import WidgetPosts from '@/components/WidgetPosts'
-import WidgetTags from '@/components/WidgetTags'
-import { getAuthors } from '@/data/authors'
-import { getCategories, getTags } from '@/data/categories'
-import { getAllPosts, getCommentsByPostId, getPostBySlug, TPost } from '@/data/posts'
+import { TPost, getPostBySlug } from '@/data/posts'
 import { Metadata } from 'next'
-import SingleContentContainer from '../SingleContentContainer'
-import SingleHeaderContainer from '../SingleHeaderContainer'
-import SingleRelatedPosts from '../SingleRelatedPosts'
 import SingleHeaderContainerVideo from '../SingleHeaderContainerVideo'
+import SingleRelatedPosts from '../SingleRelatedPosts'
 
 export async function generateMetadata({ params }: { params: Promise<{ video: string }> }): Promise<Metadata> {
   const resolvedParams = await params
@@ -39,14 +31,14 @@ export async function generateMetadata({ params }: { params: Promise<{ video: st
 }
 
 interface PageProps {
-  params: Promise<{ video: string }>;
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: Promise<{ video: string }>
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 const Page = async ({ params }: PageProps) => {
   const resolvedParams = await params
-  const post = await getPostBySlug(resolvedParams.video) as TPost | null;
-  
+  const post = (await getPostBySlug(resolvedParams.video)) as TPost | null
+
   if (!post) {
     return (
       <div className="container py-20 text-center">
@@ -56,11 +48,10 @@ const Page = async ({ params }: PageProps) => {
     )
   }
 
-
   return (
     <div className="single-post-page mt-20">
       <SingleHeaderContainerVideo post={post as any} />
-      
+
       {/* Uncomment if you want to show the content container */}
       {/* <div className="container mt-12 flex flex-col lg:flex-row">
         <div className="w-full lg:w-3/5 xl:w-2/3 xl:pe-20">

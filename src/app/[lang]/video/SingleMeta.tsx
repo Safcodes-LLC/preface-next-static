@@ -1,11 +1,10 @@
 import LocalDate from '@/components/LocalDate'
-import { TPostDetail } from '@/data/posts'
 import Avatar from '@/shared/Avatar'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
 
-interface Props  {
+interface Props {
   className?: string
   date?: any
   author?: any

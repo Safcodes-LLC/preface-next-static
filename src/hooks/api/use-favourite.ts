@@ -1,6 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { clientApi } from '@/lib/client/api'
 import { useAuth } from '@/contexts/AuthContext'
+import { clientApi } from '@/lib/client/api'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 interface FavouriteData {
   userId: string
@@ -19,11 +19,11 @@ export const useFavourite = () => {
       const token = localStorage.getItem('authToken') // Make sure to store the token in localStorage after login
       return clientApi.post('/api/favorites/', data, {
         headers: {
-          'Authorization': token || '',
-          'Content-Type': 'application/json'
-        }
+          Authorization: token || '',
+          'Content-Type': 'application/json',
+        },
       })
-    }
+    },
   })
 }
 
@@ -31,18 +31,18 @@ export const useFavourite = () => {
 export const useGetUserFavourites = () => {
   const { user } = useAuth()
   const userId = user?._id
-  
+
   return useQuery({
     queryKey: ['favorites', 'user', userId],
     queryFn: async (): Promise<any> => {
       if (!userId) return null
-      
+
       const token = localStorage.getItem('authToken')
       const response = await clientApi.get<any[]>(`/api/favorites/${userId}`, {
         headers: {
-          'Authorization': token || '',
-          'Content-Type': 'application/json'
-        }
+          Authorization: token || '',
+          'Content-Type': 'application/json',
+        },
       })
       return response
     },
@@ -54,16 +54,16 @@ export const useGetUserFavourites = () => {
 
 export const useRemoveFavourite = () => {
   const queryClient = useQueryClient()
-  
+
   return useMutation({
     mutationFn: async (data: RemoveFavouriteData) => {
       const token = localStorage.getItem('authToken')
       return clientApi.delete('/api/favorites/remove', {
         headers: {
-          'Authorization': token || '',
-          'Content-Type': 'application/json'
+          Authorization: token || '',
+          'Content-Type': 'application/json',
         },
-        body: data
+        body: data,
       })
     },
     onSuccess: () => {
@@ -72,6 +72,6 @@ export const useRemoveFavourite = () => {
     },
     onError: (error) => {
       console.error('Failed to remove favorite:', error)
-    }
+    },
   })
 }

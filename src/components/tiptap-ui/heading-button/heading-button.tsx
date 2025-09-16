@@ -1,29 +1,29 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { isNodeSelection, type Editor } from "@tiptap/react"
+import { isNodeSelection, type Editor } from '@tiptap/react'
+import * as React from 'react'
 
 // --- Hooks ---
-import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useTiptapEditor } from '@/hooks/use-tiptap-editor'
 
 // --- Icons ---
-import { HeadingOneIcon } from "@/components/tiptap-icons/heading-one-icon"
-import { HeadingTwoIcon } from "@/components/tiptap-icons/heading-two-icon"
-import { HeadingThreeIcon } from "@/components/tiptap-icons/heading-three-icon"
-import { HeadingFourIcon } from "@/components/tiptap-icons/heading-four-icon"
-import { HeadingFiveIcon } from "@/components/tiptap-icons/heading-five-icon"
-import { HeadingSixIcon } from "@/components/tiptap-icons/heading-six-icon"
+import { HeadingFiveIcon } from '@/components/tiptap-icons/heading-five-icon'
+import { HeadingFourIcon } from '@/components/tiptap-icons/heading-four-icon'
+import { HeadingOneIcon } from '@/components/tiptap-icons/heading-one-icon'
+import { HeadingSixIcon } from '@/components/tiptap-icons/heading-six-icon'
+import { HeadingThreeIcon } from '@/components/tiptap-icons/heading-three-icon'
+import { HeadingTwoIcon } from '@/components/tiptap-icons/heading-two-icon'
 
 // --- Lib ---
-import { isNodeInSchema } from "@/lib/tiptap-utils"
+import { isNodeInSchema } from '@/lib/tiptap-utils'
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
-import { Button } from "@/components/tiptap-ui-primitive/button"
+import type { ButtonProps } from '@/components/tiptap-ui-primitive/button'
+import { Button } from '@/components/tiptap-ui-primitive/button'
 
 export type Level = 1 | 2 | 3 | 4 | 5 | 6
 
-export interface HeadingButtonProps extends Omit<ButtonProps, "type"> {
+export interface HeadingButtonProps extends Omit<ButtonProps, 'type'> {
   /**
    * The TipTap editor instance.
    */
@@ -53,19 +53,19 @@ export const headingIcons = {
 }
 
 export const headingShortcutKeys: Partial<Record<Level, string>> = {
-  1: "Ctrl-Alt-1",
-  2: "Ctrl-Alt-2",
-  3: "Ctrl-Alt-3",
-  4: "Ctrl-Alt-4",
-  5: "Ctrl-Alt-5",
-  6: "Ctrl-Alt-6",
+  1: 'Ctrl-Alt-1',
+  2: 'Ctrl-Alt-2',
+  3: 'Ctrl-Alt-3',
+  4: 'Ctrl-Alt-4',
+  5: 'Ctrl-Alt-5',
+  6: 'Ctrl-Alt-6',
 }
 
 export function canToggleHeading(editor: Editor | null, level: Level): boolean {
   if (!editor) return false
 
   try {
-    return editor.can().toggleNode("heading", "paragraph", { level })
+    return editor.can().toggleNode('heading', 'paragraph', { level })
   } catch {
     return false
   }
@@ -73,24 +73,20 @@ export function canToggleHeading(editor: Editor | null, level: Level): boolean {
 
 export function isHeadingActive(editor: Editor | null, level: Level): boolean {
   if (!editor) return false
-  return editor.isActive("heading", { level })
+  return editor.isActive('heading', { level })
 }
 
 export function toggleHeading(editor: Editor | null, level: Level): void {
   if (!editor) return
 
-  if (editor.isActive("heading", { level })) {
-    editor.chain().focus().setNode("paragraph").run()
+  if (editor.isActive('heading', { level })) {
+    editor.chain().focus().setNode('paragraph').run()
   } else {
-    editor.chain().focus().toggleNode("heading", "paragraph", { level }).run()
+    editor.chain().focus().toggleNode('heading', 'paragraph', { level }).run()
   }
 }
 
-export function isHeadingButtonDisabled(
-  editor: Editor | null,
-  level: Level,
-  userDisabled: boolean = false
-): boolean {
+export function isHeadingButtonDisabled(editor: Editor | null, level: Level, userDisabled: boolean = false): boolean {
   if (!editor) return true
   if (userDisabled) return true
   if (!canToggleHeading(editor, level)) return true
@@ -122,12 +118,8 @@ export function getFormattedHeadingName(level: Level): string {
   return `Heading ${level}`
 }
 
-export function useHeadingState(
-  editor: Editor | null,
-  level: Level,
-  disabled: boolean = false
-) {
-  const headingInSchema = isNodeInSchema("heading", editor)
+export function useHeadingState(editor: Editor | null, level: Level, disabled: boolean = false) {
+  const headingInSchema = isNodeInSchema('heading', editor)
   const isDisabled = isHeadingButtonDisabled(editor, level, disabled)
   const isActive = isHeadingActive(editor, level)
 
@@ -145,17 +137,14 @@ export function useHeadingState(
   }
 }
 
-export const HeadingButton = React.forwardRef<
-  HTMLButtonElement,
-  HeadingButtonProps
->(
+export const HeadingButton = React.forwardRef<HTMLButtonElement, HeadingButtonProps>(
   (
     {
       editor: providedEditor,
       level,
       text,
       hideWhenUnavailable = false,
-      className = "",
+      className = '',
       disabled,
       onClick,
       children,
@@ -165,14 +154,11 @@ export const HeadingButton = React.forwardRef<
   ) => {
     const editor = useTiptapEditor(providedEditor)
 
-    const {
-      headingInSchema,
-      isDisabled,
-      isActive,
-      Icon,
-      shortcutKey,
-      formattedName,
-    } = useHeadingState(editor, level, disabled)
+    const { headingInSchema, isDisabled, isActive, Icon, shortcutKey, formattedName } = useHeadingState(
+      editor,
+      level,
+      disabled
+    )
 
     const handleClick = React.useCallback(
       (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -204,7 +190,7 @@ export const HeadingButton = React.forwardRef<
         className={className.trim()}
         disabled={isDisabled}
         data-style="ghost"
-        data-active-state={isActive ? "on" : "off"}
+        data-active-state={isActive ? 'on' : 'off'}
         data-disabled={isDisabled}
         role="button"
         tabIndex={-1}
@@ -227,6 +213,6 @@ export const HeadingButton = React.forwardRef<
   }
 )
 
-HeadingButton.displayName = "HeadingButton"
+HeadingButton.displayName = 'HeadingButton'
 
 export default HeadingButton

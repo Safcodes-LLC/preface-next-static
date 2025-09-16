@@ -1,13 +1,6 @@
 'use client'
 
-import {
-  Pagination,
-  PaginationGap,
-  PaginationList,
-  PaginationNext,
-  PaginationPage,
-  PaginationPrevious,
-} from '@/shared/Pagination'
+import { Pagination, PaginationNext, PaginationPrevious } from '@/shared/Pagination'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { Suspense, useCallback } from 'react'
 
@@ -39,7 +32,7 @@ function PaginationComponent({ totalPages = 10, className, post }: Props) {
 
   return (
     <div className="w-full">
-      <Pagination className='!flex !justify-start gap-4'>
+      <Pagination className="!flex !justify-start gap-4">
         <PaginationPrevious
           className="!grow-0 !basis-auto"
           href={currentPage > 1 ? pathname + '?' + createQueryString('page', (currentPage - 1).toString()) : null}

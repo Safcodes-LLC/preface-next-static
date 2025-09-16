@@ -4,8 +4,6 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { FC, useState } from 'react'
 import NcImage from '../NcImage/NcImage'
-import PostCardLikeBtn from '../PostCardLikeBtn'
-import PostCardSaveBtn from '../PostCardSaveBtn'
 import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
 
 interface Props {
@@ -25,9 +23,6 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1, lang }) => {
     postType,
     galleryImgs,
     slug,
-    favoriteCount,
-    likeCount,
-    liked,
     author,
     date,
     readingTime,
@@ -132,11 +127,10 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1, lang }) => {
         )}
       </div>
 
-      <div className="absolute inset-x-3 top-3 flex items-start gap-2">
-        {/* <CategoryBadgeList categories={categories} /> */}
-        <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
+      {/* <div className="absolute inset-x-3 top-3 flex items-start justify-between space-x-4">
+        <CategoryBadgeList categories={categories} />
         <PostCardSaveBtn bookmarked={bookmarked} />
-      </div>
+      </div> */}
 
       <div className="absolute right-0 bottom-0 left-0 p-6">
         <h2 className="line-clamp-2 block max-w-[300px] leading-snug font-semibold text-[#FFFFFF] sm:text-lg dark:text-neutral-100">

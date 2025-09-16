@@ -19,10 +19,11 @@ export function Alert({
   className,
   children,
   ...props
-}: { size?: keyof typeof sizes; className?: string; children: React.ReactNode } & Omit<
-  Headless.DialogProps,
-  'as' | 'className'
->) {
+}: {
+  size?: keyof typeof sizes
+  className?: string
+  children: React.ReactNode
+} & Omit<Headless.DialogProps, 'as' | 'className'>) {
   return (
     <Headless.Dialog {...props}>
       <Headless.DialogBackdrop

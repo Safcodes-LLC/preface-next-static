@@ -1,20 +1,20 @@
-'use client';
+'use client'
 
-import { Button } from '@/shared/Button';
-import { useEffect, useState } from 'react';
+import { Button } from '@/shared/Button'
+import { useEffect, useState } from 'react'
 
 export default function SignInButton({ dict }: { dict: any }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isClient, setIsClient] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
-    setIsClient(true);
-    const token = localStorage.getItem('authToken');
-    setIsAuthenticated(!!token);
-  }, []);
+    setIsClient(true)
+    const token = localStorage.getItem('authToken')
+    setIsAuthenticated(!!token)
+  }, [])
 
   if (!isClient || isAuthenticated) {
-    return null;
+    return null
   }
 
   return (
@@ -27,5 +27,5 @@ export default function SignInButton({ dict }: { dict: any }) {
         {dict.navigation.signin}
       </Button>
     </div>
-  );
+  )
 }

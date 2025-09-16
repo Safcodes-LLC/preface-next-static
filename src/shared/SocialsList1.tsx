@@ -38,7 +38,7 @@ const SocialsList1: FC<Props> = ({ className, socials = socialsDemo }) => {
       {socials.map((item, index) => (
         <Link
           href={item.href}
-          className="group flex items-center gap-x-2.5 text-sm text-neutral-700 mx-1 border border-[#CDCDCD] rounded-full p-1 hover:text-black dark:text-neutral-300 dark:hover:text-white"
+          className="group mx-1 flex items-center gap-x-2.5 rounded-full border border-[#CDCDCD] p-1 text-sm text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-white"
           key={index}
           target="_blank"
           rel="noopener noreferrer"

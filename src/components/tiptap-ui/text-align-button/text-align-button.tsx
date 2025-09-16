@@ -1,22 +1,22 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { type Editor, type ChainedCommands } from "@tiptap/react"
+import { type ChainedCommands, type Editor } from '@tiptap/react'
+import * as React from 'react'
 
 // --- Hooks ---
-import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
+import { useTiptapEditor } from '@/hooks/use-tiptap-editor'
 
 // --- Icons ---
-import { AlignCenterIcon } from "@/components/tiptap-icons/align-center-icon"
-import { AlignJustifyIcon } from "@/components/tiptap-icons/align-justify-icon"
-import { AlignLeftIcon } from "@/components/tiptap-icons/align-left-icon"
-import { AlignRightIcon } from "@/components/tiptap-icons/align-right-icon"
+import { AlignCenterIcon } from '@/components/tiptap-icons/align-center-icon'
+import { AlignJustifyIcon } from '@/components/tiptap-icons/align-justify-icon'
+import { AlignLeftIcon } from '@/components/tiptap-icons/align-left-icon'
+import { AlignRightIcon } from '@/components/tiptap-icons/align-right-icon'
 
 // --- UI Primitives ---
-import type { ButtonProps } from "@/components/tiptap-ui-primitive/button"
-import { Button } from "@/components/tiptap-ui-primitive/button"
+import type { ButtonProps } from '@/components/tiptap-ui-primitive/button'
+import { Button } from '@/components/tiptap-ui-primitive/button'
 
-export type TextAlign = "left" | "center" | "right" | "justify"
+export type TextAlign = 'left' | 'center' | 'right' | 'justify'
 
 export interface TextAlignButtonProps extends ButtonProps {
   /**
@@ -46,49 +46,38 @@ export const textAlignIcons = {
 }
 
 export const textAlignShortcutKeys: Partial<Record<TextAlign, string>> = {
-  left: "Ctrl-Shift-l",
-  center: "Ctrl-Shift-e",
-  right: "Ctrl-Shift-r",
-  justify: "Ctrl-Shift-j",
+  left: 'Ctrl-Shift-l',
+  center: 'Ctrl-Shift-e',
+  right: 'Ctrl-Shift-r',
+  justify: 'Ctrl-Shift-j',
 }
 
 export const textAlignLabels: Record<TextAlign, string> = {
-  left: "Align left",
-  center: "Align center",
-  right: "Align right",
-  justify: "Align justify",
+  left: 'Align left',
+  center: 'Align center',
+  right: 'Align right',
+  justify: 'Align justify',
 }
 
-export function hasSetTextAlign(
-  commands: ChainedCommands
-): commands is ChainedCommands & {
+export function hasSetTextAlign(commands: ChainedCommands): commands is ChainedCommands & {
   setTextAlign: (align: TextAlign) => ChainedCommands
 } {
-  return "setTextAlign" in commands
+  return 'setTextAlign' in commands
 }
 
 export function checkTextAlignExtension(editor: Editor | null): boolean {
   if (!editor) return false
 
-  const hasExtension = editor.extensionManager.extensions.some(
-    (extension) => extension.name === "textAlign"
-  )
+  const hasExtension = editor.extensionManager.extensions.some((extension) => extension.name === 'textAlign')
 
   if (!hasExtension) {
-    console.warn(
-      "TextAlign extension is not available. " +
-        "Make sure it is included in your editor configuration."
-    )
+    console.warn('TextAlign extension is not available. ' + 'Make sure it is included in your editor configuration.')
   }
 
   return hasExtension
 }
 
-export function canSetTextAlign(
-  editor: Editor | null,
-  align: TextAlign,
-  alignAvailable: boolean
-): boolean {
+export function canSetTextAlign(editor: Editor | null, align: TextAlign, alignAvailable: boolean): boolean {
   if (!editor || !alignAvailable) return false
 
   try {
@@ -98,10 +87,7 @@ export function canSetTextAlign(
   }
 }
 
-export function isTextAlignActive(
-  editor: Editor | null,
-  align: TextAlign
-): boolean {
+export function isTextAlignActive(editor: Editor | null, align: TextAlign): boolean {
   if (!editor) return false
   return editor.isActive({ textAlign: align })
 }
@@ -144,22 +130,11 @@ export function useTextAlign(
   disabled: boolean = false,
   hideWhenUnavailable: boolean = false
 ) {
-  const alignAvailable = React.useMemo(
-    () => checkTextAlignExtension(editor),
-    [editor]
-  )
+  const alignAvailable = React.useMemo(() => checkTextAlignExtension(editor), [editor])
 
-  const canAlign = React.useMemo(
-    () => canSetTextAlign(editor, align, alignAvailable),
-    [editor, align, alignAvailable]
-  )
+  const canAlign = React.useMemo(() => canSetTextAlign(editor, align, alignAvailable), [editor, align, alignAvailable])
 
-  const isDisabled = isTextAlignButtonDisabled(
-    editor,
-    alignAvailable,
-    canAlign,
-    disabled
-  )
+  const isDisabled = isTextAlignButtonDisabled(editor, alignAvailable, canAlign, disabled)
   const isActive = isTextAlignActive(editor, align)
 
   const handleAlignment = React.useCallback(() => {
@@ -189,17 +164,14 @@ export function useTextAlign(
   }
 }
 
-export const TextAlignButton = React.forwardRef<
-  HTMLButtonElement,
-  TextAlignButtonProps
->(
+export const TextAlignButton = React.forwardRef<HTMLButtonElement, TextAlignButtonProps>(
   (
     {
       editor: providedEditor,
       align,
       text,
       hideWhenUnavailable = false,
-      className = "",
+      className = '',
       disabled,
       onClick,
       children,
@@ -209,15 +181,12 @@ export const TextAlignButton = React.forwardRef<
   ) => {
     const editor = useTiptapEditor(providedEditor)
 
-    const {
-      isDisabled,
-      isActive,
-      handleAlignment,
-      shouldShow,
-      Icon,
-      shortcutKey,
-      label,
-    } = useTextAlign(editor, align, disabled, hideWhenUnavailable)
+    const { isDisabled, isActive, handleAlignment, shouldShow, Icon, shortcutKey, label } = useTextAlign(
+      editor,
+      align,
+      disabled,
+      hideWhenUnavailable
+    )
 
     const handleClick = React.useCallback(
       (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -240,7 +209,7 @@ export const TextAlignButton = React.forwardRef<
         className={className.trim()}
         disabled={isDisabled}
         data-style="ghost"
-        data-active-state={isActive ? "on" : "off"}
+        data-active-state={isActive ? 'on' : 'off'}
         data-disabled={isDisabled}
         role="button"
         tabIndex={-1}
@@ -263,6 +232,6 @@ export const TextAlignButton = React.forwardRef<
   }
 )
 
-TextAlignButton.displayName = "TextAlignButton"
+TextAlignButton.displayName = 'TextAlignButton'
 
 export default TextAlignButton

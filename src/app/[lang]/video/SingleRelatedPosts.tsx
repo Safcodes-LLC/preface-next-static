@@ -1,5 +1,4 @@
 import SectionGridPosts from '@/components/SectionGridPosts'
-import SectionSliderPosts from '@/components/SectionSliderPosts'
 import { getLatestVideos } from '@/data/api/posts'
 import { getPostsDefault, getPostsVideo, TPost } from '@/data/posts'
 import { FC } from 'react'
@@ -10,14 +9,14 @@ interface Props {
 }
 
 const SingleRelatedPosts: FC<Props> = async ({ relatedPosts, moreFromAuthorPosts }) => {
-    const defaultPosts = await getPostsDefault()
-    const videoPosts = await getPostsVideo()
-    const latestVideos = await getLatestVideos()
+  const defaultPosts = await getPostsDefault()
+  const videoPosts = await getPostsVideo()
+  const latestVideos = await getLatestVideos()
   return (
     <div className="relative my-16">
       {/* RELATED  */}
       <div className="container space-y-16 lg:space-y-28">
-      <div className=" ">
+        <div className=" ">
           <SectionGridPosts
             postCardName="card10V6"
             heading="STORYTELLING ISLAM"

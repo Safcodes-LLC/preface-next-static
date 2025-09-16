@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 const TheContent = ({ content }: { content: string }) => {
   // for your content
   // return <div dangerouslySetInnerHTML={{ __html: content }} />

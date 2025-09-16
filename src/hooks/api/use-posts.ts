@@ -1,6 +1,6 @@
 // src/hooks/api/use-posts.ts
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { clientApi, type ApiError } from '@/lib/client/api'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 // Types for posts
 export interface Post {
@@ -67,7 +67,7 @@ export const useLatestArticles = (limit?: number) => {
     queryKey: postKeys.latest(),
     queryFn: async (): Promise<PostsResponse> => {
       const response = await clientApi.get<Post[]>('/api/frontend/latest-articles', {
-        params: { limit: limit || 10 }
+        params: { limit: limit || 10 },
       })
       return response
     },
@@ -82,7 +82,7 @@ export const useTrendingPosts = (limit?: number) => {
     queryKey: postKeys.trending(),
     queryFn: async (): Promise<PostsResponse> => {
       const response = await clientApi.get<Post[]>('/api/frontend/trending-posts', {
-        params: { limit: limit || 10 }
+        params: { limit: limit || 10 },
       })
       return response
     },
@@ -97,7 +97,7 @@ export const usePostsByCategory = (categoryId: string, limit?: number) => {
     queryKey: postKeys.byCategory(categoryId),
     queryFn: async (): Promise<PostsResponse> => {
       const response = await clientApi.get<Post[]>(`/api/frontend/categories/${categoryId}/posts`, {
-        params: { limit: limit || 10 }
+        params: { limit: limit || 10 },
       })
       return response
     },
@@ -124,7 +124,7 @@ export const usePost = (postId: string) => {
 // Hook for liking/unliking a post
 export const useTogglePostLike = () => {
   const queryClient = useQueryClient()
-  
+
   return useMutation({
     mutationFn: async ({ postId, action }: { postId: string; action: 'like' | 'unlike' }) => {
       const endpoint = action === 'like' ? 'like' : 'unlike'
@@ -135,30 +135,30 @@ export const useTogglePostLike = () => {
       // Optimistically update the post in cache
       queryClient.setQueryData(postKeys.detail(postId), (old: PostResponse | undefined) => {
         if (!old) return old
-        
+
         return {
           ...old,
           data: {
             ...old.data,
             isLiked: action === 'like',
-            likeCount: (old.data.likeCount || 0) + (action === 'like' ? 1 : -1)
-          }
+            likeCount: (old.data.likeCount || 0) + (action === 'like' ? 1 : -1),
+          },
         }
       })
-      
+
       // Invalidate related queries to refetch fresh data
       queryClient.invalidateQueries({ queryKey: postKeys.lists() })
     },
     onError: (error: ApiError) => {
       console.error('Failed to toggle post like:', error)
-    }
+    },
   })
 }
 
 // Hook for bookmarking/unbookmarking a post
 export const useTogglePostBookmark = () => {
   const queryClient = useQueryClient()
-  
+
   return useMutation({
     mutationFn: async ({ postId, action }: { postId: string; action: 'bookmark' | 'unbookmark' }) => {
       const endpoint = action === 'bookmark' ? 'bookmark' : 'unbookmark'
@@ -169,22 +169,22 @@ export const useTogglePostBookmark = () => {
       // Optimistically update the post in cache
       queryClient.setQueryData(postKeys.detail(postId), (old: PostResponse | undefined) => {
         if (!old) return old
-        
+
         return {
           ...old,
           data: {
             ...old.data,
-            isBookmarked: action === 'bookmark'
-          }
+            isBookmarked: action === 'bookmark',
+          },
         }
       })
-      
+
       // Invalidate related queries
       queryClient.invalidateQueries({ queryKey: postKeys.lists() })
     },
     onError: (error: ApiError) => {
       console.error('Failed to toggle post bookmark:', error)
-    }
+    },
   })
 }
 
@@ -197,7 +197,7 @@ export const useIncrementViewCount = () => {
     },
     onError: (error: ApiError) => {
       console.error('Failed to increment view count:', error)
-    }
+    },
   })
 }
 
@@ -207,7 +207,7 @@ export const useLatestVideos = (limit?: number) => {
     queryKey: [...postKeys.latest(), 'videos', limit],
     queryFn: async (): Promise<PostsResponse> => {
       const response = await clientApi.get<Post[]>('/api/frontend/latest-videos', {
-        params: { limit: limit || 8 }
+        params: { limit: limit || 8 },
       })
       return response
     },
@@ -222,7 +222,7 @@ export const useTrendingVideos = (limit?: number) => {
     queryKey: [...postKeys.trending(), 'videos', limit],
     queryFn: async (): Promise<PostsResponse> => {
       const response = await clientApi.get<Post[]>('/api/frontend/trending-videos', {
-        params: { limit: limit || 8 }
+        params: { limit: limit || 8 },
       })
       return response
     },
@@ -244,10 +244,12 @@ export const usePopularArticles = (params?: {
       const response = await clientApi.get<Post[]>('/api/frontend/popular-articles', {
         params: {
           ...(params?.parentSlug && { parentSlug: params.parentSlug }),
-          ...(params?.subcategorySlug && { subcategorySlug: params.subcategorySlug }),
+          ...(params?.subcategorySlug && {
+            subcategorySlug: params.subcategorySlug,
+          }),
           limit: params?.limit || 6,
-          ...(params?.lang && { lang: params.lang }) // Only include lang if it exists
-        }
+          ...(params?.lang && { lang: params.lang }), // Only include lang if it exists
+        },
       })
       return response
     },

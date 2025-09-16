@@ -1,9 +1,7 @@
 import { TPost } from '@/data/posts'
-import Avatar from '@/shared/Avatar'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
-import LocalDate from '../LocalDate'
 
 interface Props {
   meta: Pick<TPost, 'date' | 'author' | 'title' | 'handle'>

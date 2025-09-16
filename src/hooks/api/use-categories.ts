@@ -1,6 +1,6 @@
 // src/hooks/api/use-categories.ts
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { clientApi, type ApiError } from '@/lib/client/api'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 // Types for categories
 export interface Category {
@@ -48,7 +48,7 @@ export const useTrendingCategories = (limit?: number) => {
     queryKey: categoryKeys.trending(),
     queryFn: async (): Promise<CategoriesResponse> => {
       const response = await clientApi.get<Category[]>('/api/frontend/trending-topics', {
-        params: { limit: limit || 10 }
+        params: { limit: limit || 10 },
       })
       return response
     },
@@ -63,7 +63,7 @@ export const useQuranSubcategories = (limit?: number) => {
     queryKey: categoryKeys.quranSubcategories(),
     queryFn: async (): Promise<CategoriesResponse> => {
       const response = await clientApi.get<Category[]>('/api/frontend/quran-subcategories', {
-        params: { limit: limit || 6 }
+        params: { limit: limit || 6 },
       })
       return response
     },
@@ -78,7 +78,7 @@ export const useCategories = (filters?: Record<string, any>) => {
     queryKey: categoryKeys.list(filters || {}),
     queryFn: async (): Promise<CategoriesResponse> => {
       const response = await clientApi.get<Category[]>('/api/frontend/categories', {
-        params: filters
+        params: filters,
       })
       return response
     },
@@ -104,7 +104,7 @@ export const useCategory = (categoryId: string) => {
 // Hook for creating a category (admin only)
 export const useCreateCategory = () => {
   const queryClient = useQueryClient()
-  
+
   return useMutation({
     mutationFn: async (categoryData: Partial<Category>) => {
       const response = await clientApi.post<Category>('/api/admin/categories', categoryData)
@@ -116,14 +116,14 @@ export const useCreateCategory = () => {
     },
     onError: (error: ApiError) => {
       console.error('Failed to create category:', error)
-    }
+    },
   })
 }
 
 // Hook for updating a category (admin only)
 export const useUpdateCategory = () => {
   const queryClient = useQueryClient()
-  
+
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: Partial<Category> }) => {
       const response = await clientApi.put<Category>(`/api/admin/categories/${id}`, data)
@@ -137,14 +137,14 @@ export const useUpdateCategory = () => {
     },
     onError: (error: ApiError) => {
       console.error('Failed to update category:', error)
-    }
+    },
   })
 }
 
 // Hook for deleting a category (admin only)
 export const useDeleteCategory = () => {
   const queryClient = useQueryClient()
-  
+
   return useMutation({
     mutationFn: async (categoryId: string) => {
       const response = await clientApi.delete<{ success: boolean }>(`/api/admin/categories/${categoryId}`)
@@ -156,6 +156,6 @@ export const useDeleteCategory = () => {
     },
     onError: (error: ApiError) => {
       console.error('Failed to delete category:', error)
-    }
+    },
   })
 }

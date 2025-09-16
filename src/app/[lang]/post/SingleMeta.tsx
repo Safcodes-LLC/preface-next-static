@@ -1,5 +1,4 @@
 import LocalDate from '@/components/LocalDate'
-import { TPostDetail } from '@/data/posts'
 import Avatar from '@/shared/Avatar'
 import clsx from 'clsx'
 import Link from 'next/link'

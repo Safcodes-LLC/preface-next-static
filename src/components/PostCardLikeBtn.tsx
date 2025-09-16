@@ -101,7 +101,7 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, c
     <>
       <button
         className={clsx(
-          'post-card-like-btn group flex h-5 cursor-pointer items-center rounded-full ps-1 pe-2 text-xs leading-none transition-colors',
+          'post-card-like-btn group flex h-8 cursor-pointer items-center rounded-full ps-2 pe-3 text-xs leading-none transition-colors',
           className,
           isLiked ? 'bg-[#D6F2E2] text-[#00652E]' : colorClasses
         )}
@@ -109,7 +109,7 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, c
         title={isLiked ? 'Unlike' : 'Like'}
         disabled={!post?._id} // Disable if no post ID is available
       >
-        <HeartIcon className="size-3" strokeWidth={1} fill={isLiked ? 'currentColor' : 'none'} />
+        <HeartIcon className="size-4" strokeWidth={1} fill={isLiked ? 'currentColor' : 'none'} />
 
         <span className={clsx('ms-1', isLiked && 'text-[#00652E]')}>
           {post?.favoriteCount || convertNumbThousand(optimisticLikeCount)}

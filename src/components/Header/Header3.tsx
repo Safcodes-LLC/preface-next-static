@@ -23,7 +23,7 @@ const Header3: FC<Props> = async ({ bottomBorder, className }) => {
   return (
     <div
       className={clsx(
-        'header-3 sticky top-0 z-50 backdrop-blur bg-transparent/70 border-neutral-200 dark:border-neutral-700',
+        'header-3 sticky top-0 z-50 border-neutral-200 bg-transparent/70 backdrop-blur dark:border-neutral-700',
         bottomBorder && 'border-b',
         !bottomBorder && 'has-[.header-popover-full-panel]:border-b',
         className

@@ -1,6 +1,6 @@
 'use client'
-import { useMemo } from 'react'
 import draftToHtml from 'draftjs-to-html'
+import { useMemo } from 'react'
 
 interface RawDraftInlineStyleRange {
   offset: number
@@ -52,5 +52,3 @@ const TheContent = ({ content }: { content: string }) => {
 }
 
 export default TheContent
-
-

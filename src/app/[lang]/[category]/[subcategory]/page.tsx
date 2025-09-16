@@ -3,8 +3,7 @@ import ClientSectionSliderPosts from '@/components/ClientSectionSliderPosts'
 import ModalCategories from '@/components/ModalCategories'
 import Card16Podcast from '@/components/PostCards/Card16Podcast'
 import { getCategoryBySlug, getSubcategoryPosts } from '@/data/api/posts'
-import { getCategories, getTags } from '@/data/categories'
-import { getAllPosts, getPostsDefault } from '@/data/posts'
+import { getAllPosts } from '@/data/posts'
 import { getDictionary } from '@/i18n'
 import { Metadata } from 'next'
 
@@ -57,7 +56,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
   // const categories = await getCategories()
   const categories2 = await getCategoryBySlug(category, lang)
 
-  console.log(categories2.subcategories ,"categories2")
+  console.log(categories2.subcategories, 'categories2')
 
   return (
     <div className={`page-subcategory-${subcategory}`}>
@@ -67,7 +66,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
           title={subcategoryName}
           alt={`${subcategoryName} banner`}
           // description={`${lengthTopics}`}
-          description={`${listPost.filter(p => p.postType?.name === 'Article').length}`}
+          description={`${listPost.filter((p) => p.postType?.name === 'Article').length}`}
           // className=""
           dict={dict}
         />

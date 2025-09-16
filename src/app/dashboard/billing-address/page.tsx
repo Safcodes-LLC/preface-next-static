@@ -1,7 +1,7 @@
 import ButtonPrimary from '@/shared/ButtonPrimary'
-import { Field, Fieldset, Label } from '@/shared/fieldset'
 import Input from '@/shared/Input'
 import Select from '@/shared/Select'
+import { Field, Fieldset, Label } from '@/shared/fieldset'
 import ProtectedPage from '../_components/ProtectedPage'
 
 function BillingAddressContent() {

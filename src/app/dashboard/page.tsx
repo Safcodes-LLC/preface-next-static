@@ -1,6 +1,5 @@
-import { redirect } from 'next/navigation'
-import dynamic from 'next/dynamic'
 import { ProtectedRoute } from '@/contexts/AuthContext'
+import { redirect } from 'next/navigation'
 
 // Dynamically import with no SSR
 

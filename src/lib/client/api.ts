@@ -33,17 +33,8 @@ class ApiClient {
     }
   }
 
-  private async request<T>(
-    endpoint: string,
-    options: ApiOptions = {}
-  ): Promise<ApiResponse<T>> {
-    const {
-      method = 'GET',
-      headers = {},
-      body,
-      params,
-      signal,
-    } = options
+  private async request<T>(endpoint: string, options: ApiOptions = {}): Promise<ApiResponse<T>> {
+    const { method = 'GET', headers = {}, body, params, signal } = options
 
     // Build URL with query parameters
     const url = new URL(endpoint, this.baseURL)
@@ -81,9 +72,7 @@ class ApiClient {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}))
-        throw new Error(
-          errorData.message || `HTTP error! status: ${response.status}`
-        ) as ApiError
+        throw new Error(errorData.message || `HTTP error! status: ${response.status}`) as ApiError
       }
 
       const data = await response.json()
@@ -102,10 +91,7 @@ class ApiClient {
   }
 
   // GET request
-  async get<T>(
-    endpoint: string,
-    options: Omit<ApiOptions, 'method' | 'body'> = {}
-  ): Promise<ApiResponse<T>> {
+  async get<T>(endpoint: string, options: Omit<ApiOptions, 'method' | 'body'> = {}): Promise<ApiResponse<T>> {
     return this.request<T>(endpoint, { ...options, method: 'GET' })
   }
 
@@ -128,10 +114,7 @@ class ApiClient {
   }
 
   // DELETE request
-  async delete<T>(
-    endpoint: string,
-    options: Omit<ApiOptions, 'method'> = {}
-  ): Promise<ApiResponse<T>> {
+  async delete<T>(endpoint: string, options: Omit<ApiOptions, 'method'> = {}): Promise<ApiResponse<T>> {
     return this.request<T>(endpoint, { ...options, method: 'DELETE' })
   }
 

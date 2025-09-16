@@ -1,7 +1,7 @@
 'use client'
 import Header2 from '@/components/Header/Header2'
-import { TNavigationItem, getNavigation as fetchNavigation } from '@/data/navigation'
-import { TPost, getAllPosts } from '@/data/posts'
+import { TNavigationItem } from '@/data/navigation'
+import { TPost } from '@/data/posts'
 import Navbar2 from '@/shared/Navbar2'
 import React, { useEffect, useState } from 'react'
 
@@ -47,14 +47,18 @@ const HomeHeader = ({ lang, dict, navigationMenu, featuredPosts }: Props) => {
   return (
     <React.Fragment>
       <div
-        className={`fixed top-0 z-30 w-full transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}
+        className={`fixed top-0 z-30 w-full transition-transform duration-300 ${
+          isVisible ? 'translate-y-0' : '-translate-y-full'
+        }`}
       >
         <div className="container">
-          <Navbar2 home={true} lang={lang} dict={dict}/>
+          <Navbar2 home={true} lang={lang} dict={dict} />
         </div>
       </div>
       <Header2
-        className={`z-40 w-full transition-all duration-300 ${scrolled ? 'fixed top-0 bg-white shadow-md dark:bg-black' : 'fixed top-[60px]'}`}
+        className={`z-40 w-full transition-all duration-300 ${
+          scrolled ? 'fixed top-0 bg-white shadow-md dark:bg-black' : 'fixed top-[60px]'
+        }`}
         isTransparentHeader={!scrolled}
         navigationMenu={navigationMenu}
         featuredPosts={featuredPosts}

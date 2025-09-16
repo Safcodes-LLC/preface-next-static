@@ -1,30 +1,30 @@
-import { USFlag } from "@/components/Header/FlagIcons"
-import { getTopicsWithArticles } from "./api/posts" 
-import { getDictionary } from "@/i18n";
+import { USFlag } from '@/components/Header/FlagIcons'
+import { getDictionary } from '@/i18n'
+import { getTopicsWithArticles } from './api/posts'
 
-export async function getNavigation(lang: string = "en"): Promise<TNavigationItem[]> {
-  const topicsWithArticles = await getTopicsWithArticles(lang);
-  const dict = await getDictionary(lang) 
+export async function getNavigation(lang: string = 'en'): Promise<TNavigationItem[]> {
+  const topicsWithArticles = await getTopicsWithArticles(lang)
+  const dict = await getDictionary(lang)
   const topicsNav = topicsWithArticles.map((topic: any) => ({
     id: topic?.id,
-    href: `${lang ==="en" ? "/" : "/" + lang}${topic?.slug}`,
+    href: `${lang === 'en' ? '/' : '/' + lang}${topic?.slug}`,
     name: topic?.name,
     type: 'dropdown',
     children:
       topic?.subcategories?.map((sub: any) => ({
         id: sub.id,
-        href: `${lang ==="en" ? "/" : "/" + lang}${topic?.slug}/${sub.slug}`,
+        href: `${lang === 'en' ? '/' : '/' + lang}${topic?.slug}/${sub.slug}`,
         name: sub.name,
         type: 'dropdown',
         children:
           sub.articles?.map((article: any) => ({
             id: article.id,
-            href: `${lang ==="en" ? "/" : "/" + lang}${topic?.slug}/${sub.slug}/${article.slug}`,
+            href: `${lang === 'en' ? '/' : '/' + lang}${topic?.slug}/${sub.slug}/${article.slug}`,
             name: article.title,
             type: 'link', // ✅ explicitly mark as leaf link
           })) || [],
       })) || [],
-  }));
+  }))
 
   return [
     { id: '1', href: '/stories', name: dict?.navigation?.stories },
@@ -36,9 +36,8 @@ export async function getNavigation(lang: string = "en"): Promise<TNavigationIte
       type: 'dropdown',
       children: topicsNav,
     },
-  ];
+  ]
 }
-
 
 export async function getNavMegaMenu(): Promise<TNavigationItem> {
   const navigation = await getNavigation()

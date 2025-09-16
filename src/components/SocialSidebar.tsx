@@ -93,12 +93,11 @@ const SocialSidebar: FC<Props> = ({ className }) => {
   return (
     <div className={clsx('fixed top-1/2 right-0 z-50 -translate-y-1/2 transform', className)}>
       <div className="relative flex flex-col items-center space-y-2 rounded-l-lg p-3">
-        
         {/* Top Vertical Line */}
-        <div className="absolute left-1/2 top-[-60px] h-16 w-0.5 -translate-x-1/2 bg-[#60A43A]"></div>
+        <div className="absolute top-[-60px] left-1/2 h-16 w-0.5 -translate-x-1/2 bg-[#60A43A]"></div>
 
         {/* Bottom Vertical Line */}
-        <div className="absolute left-1/2 bottom-[-60px] h-14 w-0.5 -translate-x-1/2 bg-[#60A43A]"></div>
+        <div className="absolute bottom-[-60px] left-1/2 h-14 w-0.5 -translate-x-1/2 bg-[#60A43A]"></div>
 
         {/* Social Media Icons */}
         {visibleItems.map((item, index) => (
@@ -107,7 +106,7 @@ const SocialSidebar: FC<Props> = ({ className }) => {
             href={item.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#60A43A] text-white transition-opacity duration-200 hover:opacity-80 z-10"
+            className="relative z-10 flex h-9 w-9 items-center justify-center rounded-full bg-[#60A43A] text-white transition-opacity duration-200 hover:opacity-80"
             aria-label={`Follow us on ${item.name}`}
           >
             {item.useHugeicons ? (
@@ -121,7 +120,7 @@ const SocialSidebar: FC<Props> = ({ className }) => {
         {/* Toggle Button */}
         <button
           onClick={toggleExpanded}
-          className="relative flex h-7 w-7 items-center cursor-pointer justify-center rounded-full border border-[#D9D9D9] bg-transparent text-[#B3B3B3] transition-colors duration-200 hover:bg-white/10 z-10"
+          className="relative z-10 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-[#D9D9D9] bg-transparent text-[#B3B3B3] transition-colors duration-200 hover:bg-white/10"
           aria-label={isExpanded ? 'Collapse social media bar' : 'Expand social media bar'}
         >
           <span className="text-lg font-bold">{isExpanded ? '×' : '+'}</span>

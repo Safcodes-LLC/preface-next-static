@@ -33,7 +33,6 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang 
     bookmarked,
     readingTime,
     slug,
-    favoriteCount,
   } = post
 
   // Build the post URL safely
@@ -107,9 +106,10 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang 
           {/* <p className="mt-3 mb-5 block text-sm/6 text-neutral-600 dark:text-neutral-400">
             <span className="line-clamp-2">{excerpt}</span>
           </p> */}
-          <div className="relative mt-auto flex items-center flex-nowrap gap-x-2">
-            <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-            <PostCardSaveBtn bookmarked={bookmarked} />
+          <div className="relative mt-auto flex flex-wrap gap-x-2 gap-y-1">
+            <PostCardLikeBtn likeCount={likeCount} liked={liked} />
+            {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
+            <PostCardSaveBtn className="" bookmarked={bookmarked} />
             <Link
               // href={getPostUrl()}
               href={lang === 'en' ? getPostUrl() : `/${lang}/${getPostUrl()}`}

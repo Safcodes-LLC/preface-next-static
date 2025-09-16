@@ -127,7 +127,9 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
         <Link
           href="/about"
           className={clsx(
-            `rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors hover:bg-white/10 ${home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'}`
+            `rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors hover:bg-white/10 ${
+              home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
+            }`
           )}
         >
           {dict.navigation.about}

@@ -1,13 +1,13 @@
 'use client'
 
+import { signup } from '@/services/authService'
 import ButtonPrimary from '@/shared/ButtonPrimary'
-import { Field, Label } from '@/shared/fieldset'
 import Input from '@/shared/Input'
+import { Field, Label } from '@/shared/fieldset'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { signup } from '@/services/authService'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 interface SignupFormData {
@@ -32,7 +32,7 @@ export default function SignupForm({ className = '' }: SignupFormProps) {
     password: '',
     confirmPassword: '',
     username: '',
-    surname: ''
+    surname: '',
   })
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState<Partial<SignupFormData>>({})
@@ -69,25 +69,25 @@ export default function SignupForm({ className = '' }: SignupFormProps) {
   const signupMutation = useMutation({
     mutationFn: (data: Omit<SignupFormData, 'confirmPassword'>) => signup(data),
     onSuccess: (data) => {
-      toast.success('Verification email sent! Please check your inbox.');
+      toast.success('Verification email sent! Please check your inbox.')
       // Redirect to login after a short delay
       setTimeout(() => {
-        router.push('/login');
-      }, 2000);
+        router.push('/login')
+      }, 2000)
     },
     onError: (error: Error) => {
       // Clear the email field if email is already registered
       if (error.message.toLowerCase().includes('email already')) {
-        setFormData(prev => ({ ...prev, email: '' }));
+        setFormData((prev) => ({ ...prev, email: '' }))
         // Focus on the email field
         setTimeout(() => {
-          const emailInput = document.querySelector('input[type="email"]') as HTMLInputElement;
-          emailInput?.focus();
-        }, 100);
+          const emailInput = document.querySelector('input[type="email"]') as HTMLInputElement
+          emailInput?.focus()
+        }, 100)
       }
-      
+
       // Show error message
-      toast.error(error.message || 'Signup failed. Please try again.');
+      toast.error(error.message || 'Signup failed. Please try again.')
     },
   })
 
@@ -98,10 +98,10 @@ export default function SignupForm({ className = '' }: SignupFormProps) {
     if (!validateForm()) return
 
     const { confirmPassword, ...signupData } = formData
-    
+
     // Generate username from name if not provided
     const username = formData.username || formData.name.toLowerCase().replace(/\s+/g, '')
-    
+
     // Generate surname from name if not provided
     const surname = formData.surname || formData.name.split(' ').slice(1).join(' ') || formData.name
 
@@ -130,13 +130,15 @@ export default function SignupForm({ className = '' }: SignupFormProps) {
     }
   }
 
-  const isFormValid = formData.name && formData.email && formData.password && formData.confirmPassword && formData.password === formData.confirmPassword
+  const isFormValid =
+    formData.name &&
+    formData.email &&
+    formData.password &&
+    formData.confirmPassword &&
+    formData.password === formData.confirmPassword
 
   return (
-    <form
-      className={`grid grid-cols-1 gap-6 ${className}`}
-      onSubmit={handleSubmit}
-    >
+    <form className={`grid grid-cols-1 gap-6 ${className}`} onSubmit={handleSubmit}>
       <Field className="block">
         <Label className="text-[#868686] dark:text-[#B7B7B7]">Full Name</Label>
         <Input
@@ -148,7 +150,7 @@ export default function SignupForm({ className = '' }: SignupFormProps) {
           required
           disabled={signupMutation.isPending}
         />
-        {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+        {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
       </Field>
 
       <Field className="block">
@@ -162,7 +164,7 @@ export default function SignupForm({ className = '' }: SignupFormProps) {
           required
           disabled={signupMutation.isPending}
         />
-        {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+        {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
       </Field>
 
       <Field className="block">
@@ -175,17 +177,15 @@ export default function SignupForm({ className = '' }: SignupFormProps) {
           onChange={handleInputChange('username')}
           disabled={signupMutation.isPending}
         />
-        <p className="text-xs text-gray-500 mt-1">If left empty, a username will be generated from your name</p>
+        <p className="mt-1 text-xs text-gray-500">If left empty, a username will be generated from your name</p>
       </Field>
 
       <Field className="block">
-        <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">
-          Password
-        </Label>
+        <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">Password</Label>
         <div className="relative mt-1">
           <Input
             type={showPassword ? 'text' : 'password'}
-            className="pr-10 w-full"
+            className="w-full pr-10"
             placeholder="Enter your password (min 8 characters)"
             value={formData.password}
             onChange={handleInputChange('password')}
@@ -195,15 +195,15 @@ export default function SignupForm({ className = '' }: SignupFormProps) {
           />
           <button
             type="button"
-            onClick={() => setShowPassword(prev => !prev)}
-            className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="absolute inset-y-0 right-3 flex items-center text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
             aria-label={showPassword ? 'Hide password' : 'Show password'}
             disabled={signupMutation.isPending}
           >
             {showPassword ? <FaEye className="h-5 w-5" /> : <FaEyeSlash className="h-5 w-5" />}
           </button>
         </div>
-        {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+        {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
       </Field>
 
       <Field className="block">
@@ -213,7 +213,7 @@ export default function SignupForm({ className = '' }: SignupFormProps) {
         <div className="relative mt-1">
           <Input
             type={showConfirmPassword ? 'text' : 'password'}
-            className="pr-10 w-full"
+            className="w-full pr-10"
             placeholder="Confirm your password"
             value={formData.confirmPassword}
             onChange={handleInputChange('confirmPassword')}
@@ -222,15 +222,15 @@ export default function SignupForm({ className = '' }: SignupFormProps) {
           />
           <button
             type="button"
-            onClick={() => setShowConfirmPassword(prev => !prev)}
-            className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+            onClick={() => setShowConfirmPassword((prev) => !prev)}
+            className="absolute inset-y-0 right-3 flex items-center text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
             aria-label={showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'}
             disabled={signupMutation.isPending}
           >
             {showConfirmPassword ? <FaEye className="h-5 w-5" /> : <FaEyeSlash className="h-5 w-5" />}
           </button>
         </div>
-        {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
+        {errors.confirmPassword && <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>}
       </Field>
 
       <ButtonPrimary

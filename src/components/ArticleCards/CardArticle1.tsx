@@ -2,10 +2,10 @@
 
 import NcImage from '@/components/NcImage/NcImage'
 import { useFetchReadPosts } from '@/hooks/api'
+import { CheckIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
-import { CheckIcon } from '@heroicons/react/24/outline'
 
 interface Article {
   _id: string
@@ -31,7 +31,7 @@ const CardArticle1: FC<Props> = ({ className, article, index }) => {
   const parentSlug = category?.parentCategory?.slug
   const subSlug = category?.slug
   const articleSlug = slug
-  
+
   return (
     <Link
       href={`/${parentSlug}/${subSlug}/${articleSlug}`}
@@ -41,7 +41,7 @@ const CardArticle1: FC<Props> = ({ className, article, index }) => {
       <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl">
         {/* Read Indicator */}
         {isRead && (
-          <div className="absolute bottom-3 right-2 z-10">
+          <div className="absolute right-2 bottom-3 z-10">
             <div className="flex items-center gap-1 rounded-full bg-black/30 px-2 py-0.5 text-xs font-medium text-[#CBDB2A]">
               <CheckIcon className="h-3 w-3 stroke-[3]" />
               <span>Read</span>
@@ -65,13 +65,11 @@ const CardArticle1: FC<Props> = ({ className, article, index }) => {
 
         {/* Linear Gradient Overlay - Only show when isRead is true */}
         {isRead && (
-          <div
-            className="absolute inset-0 bg-gradient-to-t from-[#2F2F2F] to-[#616161] opacity-70 transition-all duration-300"
-          ></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#2F2F2F] to-[#616161] opacity-70 transition-all duration-300"></div>
         )}
-        
+
         {/* Hover Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#2F2F2F] via-[#61616100] to-transparent opacity-0 transition-all duration-300 group-hover:opacity-30 group-hover:from-[#2F2F2F] group-hover:via-[#616161aa] group-hover:to-[#61616166]"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2F2F2F] via-[#61616100] to-transparent opacity-0 transition-all duration-300 group-hover:from-[#2F2F2F] group-hover:via-[#616161aa] group-hover:to-[#61616166] group-hover:opacity-30"></div>
 
         {/* Article Number Badge */}
         <div className="absolute bottom-3 left-1 px-2 py-1 text-xs font-medium text-white">

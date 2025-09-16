@@ -183,7 +183,6 @@ const HeaderAudio = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
               likeCount={likeCount}
               liked={liked}
               title={title}
-
             />
           </div>
         </div>

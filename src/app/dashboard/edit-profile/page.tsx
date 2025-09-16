@@ -1,6 +1,6 @@
 import ButtonPrimary from '@/shared/ButtonPrimary'
-import { Field, Fieldset, Label } from '@/shared/fieldset'
 import Input from '@/shared/Input'
+import { Field, Fieldset, Label } from '@/shared/fieldset'
 import ProtectedPage from '../_components/ProtectedPage'
 
 function EditProfileContent() {

@@ -1,6 +1,6 @@
-import React from 'react';
-import Skeleton from '../Skeleton';
-import clsx from 'clsx';
+import clsx from 'clsx'
+import React from 'react'
+import Skeleton from '../Skeleton'
 
 const Card11Skeleton: React.FC<{ className?: string }> = ({ className }) => {
   return (
@@ -11,8 +11,8 @@ const Card11Skeleton: React.FC<{ className?: string }> = ({ className }) => {
       )}
     >
       {/* Image placeholder */}
-      <div className="relative w-full overflow-hidden rounded-t-3xl aspect-5/3">
-        <Skeleton className="w-full h-full" />
+      <div className="relative aspect-5/3 w-full overflow-hidden rounded-t-3xl">
+        <Skeleton className="h-full w-full" />
       </div>
 
       {/* Content area */}
@@ -29,7 +29,7 @@ const Card11Skeleton: React.FC<{ className?: string }> = ({ className }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Card11Skeleton;
+export default Card11Skeleton

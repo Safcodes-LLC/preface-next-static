@@ -40,7 +40,10 @@ const SectionSliderPosts: FC<Props> = ({
   },
 }) => {
   const theme = useContext(ThemeContext)
-  const [emblaRef, emblaApi] = useEmblaCarousel({ ...emblaOptions, direction: theme?.themeDir })
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    ...emblaOptions,
+    direction: theme?.themeDir,
+  })
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = useCarouselArrowButtons(emblaApi)
 
   const renderCard = (item: TPost, index: number) => {
@@ -56,7 +59,7 @@ const SectionSliderPosts: FC<Props> = ({
       case 'card10V2':
         return <Card10V2 key={index} post={item} />
       case 'card10V5':
-        return <Card10V5 key={index} post={item} lang={lang}/>
+        return <Card10V5 key={index} post={item} lang={lang} />
       case 'card11':
         return <Card11 key={index} post={item} />
       case 'card16Podcast':
@@ -84,7 +87,10 @@ const SectionSliderPosts: FC<Props> = ({
       <div className="embla" ref={emblaRef}>
         <div className="-ms-5 embla__container sm:-ms-7">
           {posts?.map((post, index) => (
-            <div key={post._id} className="embla__slide basis-[86%] ps-5 sm:ps-7 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+            <div
+              key={post._id}
+              className="embla__slide basis-[86%] ps-5 sm:ps-7 md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+            >
               {renderCard(post, index)}
             </div>
           ))}

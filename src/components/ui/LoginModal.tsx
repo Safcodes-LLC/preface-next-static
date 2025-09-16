@@ -1,15 +1,15 @@
 'use client'
 
-import { Dialog } from '@headlessui/react'
+import SocialLogin from '@/components/auth/SocialLogin'
+import { login } from '@/services/authService'
 import ButtonPrimary from '@/shared/ButtonPrimary'
 import Input from '@/shared/Input'
 import { Field, Label } from '@/shared/fieldset'
+import { Dialog } from '@headlessui/react'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { login } from '@/services/authService'
-import SocialLogin from '@/components/auth/SocialLogin'
 
 interface LoginModalProps {
   isOpen: boolean
@@ -52,15 +52,14 @@ const LoginModal = ({
     setIsLoading(true)
     try {
       console.log('Login attempt:', formData)
-      
+
       await login({
         emailOrUsername: formData.emailOrUsername,
-        password: formData.password
+        password: formData.password,
       })
 
       handleLoginSuccess()
       router.push('/')
-      
     } catch (error: any) {
       console.error('Login error:', error)
       alert(error.message || 'Login failed. Please try again.')
@@ -80,19 +79,17 @@ const LoginModal = ({
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
       <div className="fixed inset-0 flex items-center justify-center p-4">
-        <Dialog.Panel className="mx-auto max-w-md rounded-xl bg-white p-6 dark:bg-neutral-900 w-full max-h-[90vh] overflow-y-auto">
-          <Dialog.Title className="text-2xl font-semibold text-center text-gray-900 dark:text-white">
+        <Dialog.Panel className="mx-auto max-h-[90vh] w-full max-w-md overflow-y-auto rounded-xl bg-white p-6 dark:bg-neutral-900">
+          <Dialog.Title className="text-center text-2xl font-semibold text-gray-900 dark:text-white">
             {title}
           </Dialog.Title>
-          <Dialog.Description className="mt-2 text-sm text-center text-gray-600 dark:text-gray-300">
+          <Dialog.Description className="mt-2 text-center text-sm text-gray-600 dark:text-gray-300">
             {description}
           </Dialog.Description>
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-6">
             <Field className="block">
-              <Label className="text-[#868686] dark:text-[#B7B7B7]">
-                Email or Username
-              </Label>
+              <Label className="text-[#868686] dark:text-[#B7B7B7]">Email or Username</Label>
               <Input
                 type="text"
                 placeholder="Enter your email or username"
@@ -105,13 +102,11 @@ const LoginModal = ({
             </Field>
 
             <Field className="block">
-              <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">
-                Password
-              </Label>
+              <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">Password</Label>
               <div className="relative mt-1">
                 <Input
                   type={showPassword ? 'text' : 'password'}
-                  className="pr-10 w-full"
+                  className="w-full pr-10"
                   placeholder="Enter your password"
                   value={formData.password}
                   onChange={handleInputChange('password')}
@@ -120,8 +115,8 @@ const LoginModal = ({
                 />
                 <button
                   type="button"
-                  onClick={() => setShowPassword(prev => !prev)}
-                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                   disabled={isLoading}
                 >
@@ -132,10 +127,7 @@ const LoginModal = ({
 
             <Field className="block">
               <div className="flex items-center justify-end text-[#00652E] dark:text-[#60A43A]">
-                <Link
-                  href="/forgot-password"
-                  className="text-sm font-medium underline hover:no-underline"
-                >
+                <Link href="/forgot-password" className="text-sm font-medium underline hover:no-underline">
                   Forgot password?
                 </Link>
               </div>

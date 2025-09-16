@@ -8,21 +8,20 @@ import HeadingWithArrowBtns from '@/shared/HeadingWithArrowBtns'
 import clsx from 'clsx'
 import type { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
-import { FC, useContext } from 'react'
+import { Variants, motion, useInView } from 'framer-motion'
+import { FC, useContext, useRef } from 'react'
 import CardCategory1 from './CategoryCards/CardCategory1'
 import CardCategory2 from './CategoryCards/CardCategory2'
 import CardCategory3 from './CategoryCards/CardCategory3'
 import CardCategory4 from './CategoryCards/CardCategory4'
 import CardCategory5 from './CategoryCards/CardCategory5'
-import { motion, useInView, Variants } from 'framer-motion'
-import { useRef } from 'react'
 
 interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
   className?: string
   heading?: string
   categories: TCategory[]
   categoryCardType?: 'card1' | 'card2' | 'card3' | 'card4' | 'card5'
-  emblaOptions?: EmblaOptionsType,
+  emblaOptions?: EmblaOptionsType
   lang?: string
 }
 
@@ -36,10 +35,13 @@ const SectionSliderNewCategories: FC<Props> = ({
   emblaOptions = {
     slidesToScroll: 'auto',
   },
-  lang
+  lang,
 }) => {
   const theme = useContext(ThemeContext)
-  const [emblaRef, emblaApi] = useEmblaCarousel({ ...emblaOptions, direction: theme?.themeDir })
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    ...emblaOptions,
+    direction: theme?.themeDir,
+  })
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = useCarouselArrowButtons(emblaApi)
 
   // Animation setup

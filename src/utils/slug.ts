@@ -34,10 +34,7 @@ export function validateSlug(slug: string, name: string): boolean {
  * @param items - Array of items that have `handle` and `name`
  * @returns The matching item or null
  */
-export function findBySlug<T extends { handle?: string; name: string }>(
-  slug: string,
-  items: T[],
-): T | null {
+export function findBySlug<T extends { handle?: string; name: string }>(slug: string, items: T[]): T | null {
   const normalized = slug.toLowerCase().trim()
 
   // First try exact handle match
@@ -53,11 +50,9 @@ export function findBySlug<T extends { handle?: string; name: string }>(
     item = items.find(
       (it) =>
         it.name.toLowerCase().replace(/\s+/g, '-') === normalized ||
-        it.name.toLowerCase().replace(/\s+/g, '') === normalized,
+        it.name.toLowerCase().replace(/\s+/g, '') === normalized
     )
   }
 
   return item ?? null
 }
-
-

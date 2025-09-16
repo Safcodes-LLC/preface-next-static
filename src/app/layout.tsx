@@ -1,12 +1,12 @@
 import AuthProvider from '@/contexts/AuthContext'
 import QueryProvider from '@/providers/query-provider'
+import ThemeToggle from '@/shared/ThemeToggle'
 import '@/styles/tailwind.css'
 import { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { Noto_Serif } from 'next/font/google'
 import { ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
-import ThemeToggle from '@/shared/ThemeToggle'
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],

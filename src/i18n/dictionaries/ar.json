@@ -24,7 +24,7 @@
     "signin": "تسجيل الدخول",
     "logout": "تسجيل الخروج"
   },
-  "sections":{
+  "sections": {
     "storytelling": {
       "heading": "الاسلام يحكي قصته",
       "description": "فهم الإسلام من خلال ألف قصة وقصة"
@@ -61,6 +61,5 @@
       "heading": "المقالات الشهيرة",
       "description": ""
     }
-
   }
 }

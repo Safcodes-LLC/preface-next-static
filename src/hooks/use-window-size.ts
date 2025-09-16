@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import * as React from "react"
+import * as React from 'react'
 
 interface WindowSizeState {
   width: number
@@ -23,7 +23,7 @@ export function useWindowSize(): WindowSizeState {
     handleResize()
 
     function handleResize() {
-      if (typeof window === "undefined") return
+      if (typeof window === 'undefined') return
 
       const vp = window.visualViewport
       if (!vp) return
@@ -32,11 +32,7 @@ export function useWindowSize(): WindowSizeState {
 
       // Only update state if values have changed
       setWindowSize((state) => {
-        if (
-          width === state.width &&
-          height === state.height &&
-          offsetTop === state.offsetTop
-        ) {
+        if (width === state.width && height === state.height && offsetTop === state.offsetTop) {
           return state
         }
 
@@ -46,14 +42,14 @@ export function useWindowSize(): WindowSizeState {
 
     const visualViewport = window.visualViewport
     if (visualViewport) {
-      visualViewport.addEventListener("resize", handleResize)
-      visualViewport.addEventListener("scroll", handleResize)
+      visualViewport.addEventListener('resize', handleResize)
+      visualViewport.addEventListener('scroll', handleResize)
     }
 
     return () => {
       if (visualViewport) {
-        visualViewport.removeEventListener("resize", handleResize)
-        visualViewport.removeEventListener("scroll", handleResize)
+        visualViewport.removeEventListener('resize', handleResize)
+        visualViewport.removeEventListener('scroll', handleResize)
       }
     }
   }, [])

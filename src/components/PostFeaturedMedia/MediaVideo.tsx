@@ -2,7 +2,7 @@
 
 import { Link } from '@/shared/link'
 import SpinLoading from '@/shared/spin-loading'
-import { SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/outline'
+import { SpeakerWaveIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { FC, useEffect, useRef, useState } from 'react'
 import ReactPlayer from 'react-player'
@@ -35,12 +35,12 @@ const MediaVideo: FC<Props> = ({ videoUrl, isHover, handle, autoPlay = false, on
     } else if (isHover) {
       // For hover play, show loading first, then render video
       setShowLoading(true)
-      
+
       // Clear any existing loading timeout
       if (__loadingTimeoutRef.current) {
         clearTimeout(__loadingTimeoutRef.current)
       }
-      
+
       // Show loading for 800ms before rendering video
       __loadingTimeoutRef.current = setTimeout(() => {
         setIsRendered(true)
@@ -94,7 +94,7 @@ const MediaVideo: FC<Props> = ({ videoUrl, isHover, handle, autoPlay = false, on
         href={href || `/post/${handle}`}
         className={clsx(
           'absolute inset-0 flex items-center justify-center transition-opacity duration-300',
-          (isPlaying || !showLoading) ? 'opacity-0' : 'opacity-100'
+          isPlaying || !showLoading ? 'opacity-0' : 'opacity-100'
         )}
       >
         <SpinLoading />

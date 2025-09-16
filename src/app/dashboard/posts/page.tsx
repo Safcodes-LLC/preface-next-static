@@ -1,11 +1,10 @@
-import dynamic from 'next/dynamic'
 import LocalDate from '@/components/LocalDate'
 import PaginationWrapper from '@/components/PaginationWrapper'
+import { ProtectedRoute } from '@/contexts/AuthContext'
 import { getAllPosts } from '@/data/posts'
 import { Badge } from '@/shared/Badge'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ProtectedRoute } from '@/contexts/AuthContext'
 
 // Dynamically import with no SSR
 // const ProtectedRoute = dynamic(

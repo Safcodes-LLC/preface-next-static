@@ -1,5 +1,6 @@
 'use client'
 
+import { login } from '@/services/authService'
 import ButtonPrimary from '@/shared/ButtonPrimary'
 import Input from '@/shared/Input'
 import { Field, Label } from '@/shared/fieldset'
@@ -7,7 +8,6 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { login } from '@/services/authService'
 
 interface LoginFormProps {
   className?: string
@@ -30,16 +30,15 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
     setIsLoading(true)
     try {
       console.log('Login attempt:', formData)
-      
+
       // Call the login API
       await login({
         emailOrUsername: formData.emailOrUsername,
-        password: formData.password
+        password: formData.password,
       })
 
       // Redirect to home page on successful login
       router.push('/')
-      
     } catch (error: any) {
       console.error('Login error:', error)
       // You can add error handling here (e.g., show toast notification)
@@ -124,9 +123,9 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
     <form className={`grid grid-cols-1 gap-6 ${className}`} onSubmit={handleSubmit}>
       <Field className="block">
         <Label className="text-[#868686] dark:text-[#B7B7B7]">Email or Username</Label>
-        <Input 
-          type="text" 
-          placeholder="Enter your email or username" 
+        <Input
+          type="text"
+          placeholder="Enter your email or username"
           className="mt-1"
           value={formData.emailOrUsername}
           onChange={handleInputChange('emailOrUsername')}
@@ -164,8 +163,8 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
           </Link>
         </div>
       </Field>
-      <ButtonPrimary 
-        type="submit" 
+      <ButtonPrimary
+        type="submit"
         color="loginbtn"
         disabled={isLoading || !formData.emailOrUsername || !formData.password}
       >
