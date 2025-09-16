@@ -46,14 +46,16 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         ) : (
           <>
             {thumbnail || featuredImage ? (
-              <Image
-                sizes="(max-width: 1024px) 100vw, 33vw"
-                alt={title}
-                className="size-full rounded-xl object-cover brightness-85 transition-[filter] duration-300 group-hover:brightness-60"
-                src={thumbnail || featuredImage}
-                priority
-                fill
-              />
+              <div className="relative h-full w-full overflow-hidden rounded-xl">
+                <Image
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  alt={title}
+                  className="h-full w-full rounded-xl object-cover brightness-85 transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-60"
+                  src={thumbnail || featuredImage}
+                  priority
+                  fill
+                />
+              </div>
             ) : (
               <div className="size-full rounded-xl bg-gray-200" /> // fallback placeholder
             )}

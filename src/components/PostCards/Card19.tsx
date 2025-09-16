@@ -60,14 +60,16 @@ const Card19: FC<Props> = ({
         ) : (
           <>
             {thumbnail || featuredImage ? (
-              <Image
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="rounded-xl object-cover brightness-85 transition-[filter] duration-300 group-hover:brightness-60"
-                src={thumbnail || featuredImage}
-                alt={title}
-                priority
-                fill
-              />
+              <div className="relative h-full w-full overflow-hidden rounded-xl">
+                <Image
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="h-full w-full rounded-xl object-cover brightness-85 transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-60"
+                  src={thumbnail || featuredImage}
+                  alt={title}
+                  priority
+                  fill
+                />
+              </div>
             ) : (
               <div className="h-full w-full rounded-xl bg-gray-200" /> // fallback placeholder
             )}
