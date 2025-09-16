@@ -6,7 +6,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useState } from 'react'
 // import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
-import Image from 'next/image'
 
 interface Props {
   className?: string
