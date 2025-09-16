@@ -7,7 +7,9 @@
     "othertopics": "Other Topics",
     "viewall": "View All",
     "previouspage": "Previous Page",
-    "nextpage": "Next Page"
+    "nextpage": "Next Page",
+    "loadMore": "Load More",
+    "loading": "Loading"
   },
   "navigation": {
     "about": "About",

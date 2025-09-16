@@ -1,11 +1,11 @@
 'use client'
-
 import { TPost } from '@/data/posts'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useState } from 'react'
+// import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
 
 interface Props {
   className?: string
@@ -34,7 +34,8 @@ const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'asp
 
   const [isHover, setIsHover] = useState(false)
 
-  console.log(lang, 'lang')
+  // console.log(lang,"lang");
+  
 
   return (
     <div

@@ -7,7 +7,9 @@
     "othertopics": "Other Topics",
     "viewall": "View All",
     "previouspage": "Previous Page",
-    "nextpage": "Next Page"
+    "nextpage": "Next Page",
+    "loadMore": "تحميل المزيد",
+    "loading": "تحميل"
   },
   "navigation": {
     "about": "عن الموقع",
