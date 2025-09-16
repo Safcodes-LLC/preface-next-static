@@ -20,7 +20,7 @@ const CardCategory3: FC<Props> = ({ className = '', category, lang }) => {
       <div className="aspect-w-5 relative h-0 w-full shrink-0 overflow-hidden rounded-2xl aspect-h-5">
         <Image
           src={featuredImage || featuredIcon || thumbnail || ''}
-          className="h-full w-full rounded-2xl object-cover"
+          className="h-full w-full rounded-2xl object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
           sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
           fill
           alt={name || ''}
@@ -38,7 +38,9 @@ const CardCategory3: FC<Props> = ({ className = '', category, lang }) => {
         </div>
       </div>
       <div className="mt-4 text-center">
-        <h2 className={`text-lg font-medium text-neutral-900 dark:text-neutral-100 line-clamp-2`}>{name}</h2>
+        <Link href={lang === 'en' ? `/${slug}` : `/${lang}/${slug}`}>
+          <h2 className={`line-clamp-2 text-lg font-medium text-neutral-900 dark:text-neutral-100`}>{name}</h2>
+        </Link>
         <span className={`mt-1 block text-sm text-neutral-600 dark:text-neutral-400`}>
           {subCategory?.length} Articles
         </span>
