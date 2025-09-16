@@ -6,6 +6,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
+import PostCardLikeBtn from '../PostCardLikeBtn'
+import PostCardSaveBtn from '../PostCardSaveBtn'
 
 interface Props {
   className?: string
@@ -30,6 +32,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
     liked,
     commentCount,
     bookmarked,
+    favoriteCount,
   } = post
 
   const parentCategorySlug = categories[0]?.parentCategory?.slug
@@ -70,6 +73,11 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
         <CategoryBadgeList categories={categories} yellowColor={yellowColor}/>
+        <div className="ms-auto flex gap-1">
+          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
+          <PostCardSaveBtn bookmarked={bookmarked} />
+        </div>
+      
       </div>
 
       <span

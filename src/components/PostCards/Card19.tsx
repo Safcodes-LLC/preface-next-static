@@ -7,6 +7,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
+import PostCardLikeBtn from '../PostCardLikeBtn'
+import PostCardSaveBtn from '../PostCardSaveBtn'
 
 interface Props {
   className?: string
@@ -42,6 +44,7 @@ const Card19: FC<Props> = ({
     liked,
     commentCount,
     bookmarked,
+    favoriteCount,
   } = post
 
   const parentCategorySlug = categories[0]?.parentCategory?.slug
@@ -92,7 +95,11 @@ const Card19: FC<Props> = ({
         {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
-        <CategoryBadgeList categories={categories} yellowColor={yellowColor}/>
+        <CategoryBadgeList categories={categories} yellowColor={yellowColor} />
+        <div className="ms-auto flex gap-1">
+          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
+          <PostCardSaveBtn bookmarked={bookmarked} />
+        </div>
       </div>
 
       <div
@@ -131,7 +138,13 @@ const Card19: FC<Props> = ({
             <p className={clsx('line-clamp-2 flex-1 text-[12px] leading-snug font-medium text-white sm:text-sm')}>
               {excerpt}
             </p>
-            <Link href={lang === 'en' ? `/${parentCategorySlug}/${categorySlug}/${slug}` : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`}>
+            <Link
+              href={
+                lang === 'en'
+                  ? `/${parentCategorySlug}/${categorySlug}/${slug}`
+                  : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`
+              }
+            >
               <ButtonPrimary color="logo-colors" className="flex-shrink-0 !px-4 !py-1 !text-[12px]">
                 Start Reading
               </ButtonPrimary>
