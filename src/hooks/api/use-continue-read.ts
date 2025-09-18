@@ -1,6 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { clientApi } from '@/lib/client/api'
 import { useAuth } from '@/contexts/AuthContext'
+import { clientApi } from '@/lib/client/api'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 interface MarkPostReadData {
   postId: string
@@ -8,7 +8,7 @@ interface MarkPostReadData {
 
 export const useMarkPostRead = () => {
   const queryClient = useQueryClient()
-  
+
   return useMutation({
     mutationFn: async (postId: string) => {
       const token = localStorage.getItem('authToken')
@@ -17,9 +17,9 @@ export const useMarkPostRead = () => {
         {},
         {
           headers: {
-            'Authorization': token || '',
-            'Content-Type': 'application/json'
-          }
+            Authorization: token || '',
+            'Content-Type': 'application/json',
+          },
         }
       )
     },
@@ -30,25 +30,25 @@ export const useMarkPostRead = () => {
     },
     onError: (error) => {
       console.error('Failed to mark post as read:', error)
-    }
+    },
   })
 }
 
 export const useFetchReadPosts = () => {
   const { user } = useAuth()
   const userId = user?._id
-  
+
   return useQuery({
     queryKey: ['readPosts', 'user', userId],
     queryFn: async (): Promise<any> => {
       if (!userId) return null
-      
+
       const token = localStorage.getItem('authToken')
       const response = await clientApi.get<any[]>(`/api/user/read-posts/${userId}`, {
         headers: {
-          'Authorization': token || '',
-          'Content-Type': 'application/json'
-        }
+          Authorization: token || '',
+          'Content-Type': 'application/json',
+        },
       })
       return response.data
     },

@@ -3,7 +3,7 @@ import { Button, ButtonProps } from './Button'
 
 const ButtonPrimary: React.FC<ButtonProps> = ({ color, outline, plain, children, ...props }) => {
   return (
-    <Button color={color || "dark/white"} {...props}>
+    <Button color={color || 'dark/white'} {...props}>
       {children}
     </Button>
   )

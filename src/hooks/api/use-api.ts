@@ -1,6 +1,6 @@
 // src/hooks/api/use-api.ts
-import { useQuery, useMutation, useQueryClient, type UseQueryOptions, type UseMutationOptions } from '@tanstack/react-query'
 import { clientApi, type ApiError, type ApiResponse } from '@/lib/client/api'
+import { useMutation, useQuery, type UseMutationOptions, type UseQueryOptions } from '@tanstack/react-query'
 
 // Generic hook factory for GET requests
 export function createUseQuery<TData>(

@@ -20,24 +20,22 @@ interface Props {
   yellowColor?: boolean
 }
 
-const CategoryBadgeList: FC<Props> = ({ className, itemClass, categories, index, dualColor , yellowColor }) => {
+const CategoryBadgeList: FC<Props> = ({ className, itemClass, categories, index, dualColor, yellowColor }) => {
   // Handle both single category object and array of categories
   const categoriesArray = Array.isArray(categories) ? categories : [categories]
 
   // console.log(index,"catagory index in categoryBadgeList....");
-  
 
   // Filter out any undefined or null items for safety
-  const validCategories = categoriesArray.filter((item): item is CategoryItem => 
-    item !== null && item !== undefined && typeof item === 'object' && 'name' in item
+  const validCategories = categoriesArray.filter(
+    (item): item is CategoryItem => item !== null && item !== undefined && typeof item === 'object' && 'name' in item
   )
 
   if (validCategories.length === 0) {
     return null // Don't render anything if no valid categories
   }
 
-  console.log(validCategories,"validCategories");
-  
+  console.log(validCategories, 'validCategories')
 
   const getCategoryHandle = (category: CategoryItem): string => {
     return category.handle || category.slug || category._id || ''
@@ -49,7 +47,7 @@ const CategoryBadgeList: FC<Props> = ({ className, itemClass, categories, index,
 
   return (
     <div className={clsx('category-badge-list flex flex-wrap gap-x-2 gap-y-1', className)}>
-      {validCategories.map((category , index1) => {
+      {validCategories.map((category, index1) => {
         const categoryHandle = getCategoryHandle(category)
         const categoryColor = getCategoryColor(category)
 

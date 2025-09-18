@@ -31,7 +31,9 @@ const Banner = ({ image, title, alt, className = '', description, dict }: Banner
       {/* Title */}
       <div className="items-left absolute inset-0 flex flex-col justify-center gap-2 px-10">
         <h1 className="text-2xl font-bold text-white md:text-3xl">{title}</h1>
-        <p className="text-sm text-white md:text-base">{description} {dict.navigation.topics}</p>
+        <p className="text-sm text-white md:text-base">
+          {description} {dict.navigation.topics}
+        </p>
       </div>
     </div>
   )

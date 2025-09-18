@@ -1,10 +1,9 @@
 'use client'
 
-import { TNavigationItem } from '@/data/navigation'
-import { getNavigation as fetchNavigation } from '@/data/navigation'
+import { TNavigationItem, getNavigation as fetchNavigation } from '@/data/navigation'
+import { useEffect, useState } from 'react'
 import SidebarNavigation from './Header/Navigation/SidebarNavigation'
 import Aside from './aside'
-import { useEffect, useState } from 'react'
 
 interface Props {
   className?: string

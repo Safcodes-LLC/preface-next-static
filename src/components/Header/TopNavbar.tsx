@@ -1,11 +1,11 @@
 'use client'
 
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
-import { CalendarIcon, ChevronDownIcon, GlobeAltIcon, HomeIcon } from '@heroicons/react/24/outline'
+import { CalendarIcon, ChevronDownIcon, HomeIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
-import { USFlag, SAFlag, INFlag } from './FlagIcons'
+import { INFlag, SAFlag, USFlag } from './FlagIcons'
 
 // Language data with country flags
 const languages = [
@@ -87,14 +87,14 @@ const TopNavbar: FC<TopNavbarProps> = ({ isScrolled, className }) => {
       )}
     >
       <div className="container">
-        <div className="flex h-12 items-center justify-start md:justify-end ">
+        <div className="flex h-12 items-center justify-start md:justify-end">
           {/* Home Icon */}
           <Link
             href="/"
             className={clsx(
-              'flex items-center gap-x-1 text-sm font-medium transition-colors rounded-full px-3 py-2',
-              isScrolled 
-                ? 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200' 
+              'flex items-center gap-x-1 rounded-full px-3 py-2 text-sm font-medium transition-colors',
+              isScrolled
+                ? 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200'
                 : 'text-white/90 hover:bg-white/10 hover:text-white'
             )}
             title="Home"
@@ -106,9 +106,9 @@ const TopNavbar: FC<TopNavbarProps> = ({ isScrolled, className }) => {
           <Link
             href="/about"
             className={clsx(
-              'text-sm font-medium transition-colors rounded-full px-4 py-2.5 whitespace-nowrap',
-              isScrolled 
-                ? 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200' 
+              'rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors',
+              isScrolled
+                ? 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200'
                 : 'text-white/90 hover:bg-white/10 hover:text-white'
             )}
           >
@@ -119,9 +119,9 @@ const TopNavbar: FC<TopNavbarProps> = ({ isScrolled, className }) => {
           <Popover className="relative">
             <PopoverButton
               className={clsx(
-                'flex items-center gap-x-1 text-sm font-medium transition-colors rounded-full px-4 py-2.5 whitespace-nowrap focus:outline-hidden',
-                isScrolled 
-                  ? 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200' 
+                'flex items-center gap-x-1 rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors focus:outline-hidden',
+                isScrolled
+                  ? 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200'
                   : 'text-white/90 hover:bg-white/10 hover:text-white'
               )}
             >
@@ -137,7 +137,7 @@ const TopNavbar: FC<TopNavbarProps> = ({ isScrolled, className }) => {
                     key={language.id}
                     href={language.href}
                     className={clsx(
-                      'flex items-center gap-x-3 rounded-md mx-2 px-4 py-2 text-sm transition-colors hover:bg-neutral-100 hover:text-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-neutral-200',
+                      'mx-2 flex items-center gap-x-3 rounded-md px-4 py-2 text-sm transition-colors hover:bg-neutral-100 hover:text-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-neutral-200',
                       language.active
                         ? 'bg-neutral-100 font-medium text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100'
                         : 'font-normal text-neutral-600 dark:text-neutral-300'

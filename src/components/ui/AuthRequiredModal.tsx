@@ -1,8 +1,8 @@
 'use client'
 
+import ButtonPrimary from '@/shared/ButtonPrimary'
 import { useState } from 'react'
 import LoginModal from './LoginModal'
-import ButtonPrimary from '@/shared/ButtonPrimary'
 
 interface AuthRequiredModalProps {
   isOpen: boolean
@@ -47,23 +47,17 @@ const AuthRequiredModal = ({
         onLoginSuccess={handleLoginSuccess}
         redirectPath={redirectPath}
       />
-      
+
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="fixed inset-0 bg-black/30" aria-hidden="true" onClick={onClose} />
-          <div className="relative mx-auto max-w-sm w-full rounded-xl bg-white p-6 dark:bg-neutral-900">
+          <div className="relative mx-auto w-full max-w-sm rounded-xl bg-white p-6 dark:bg-neutral-900">
             <h3 className="text-lg font-medium">{title}</h3>
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-              {description}
-            </p>
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{description}</p>
 
             <div className="mt-6 flex justify-end space-x-3">
-            <ButtonPrimary onClick={onClose}>
-                {cancelText}
-                </ButtonPrimary>
-              <ButtonPrimary onClick={handleAction}>
-              {actionText}
-            </ButtonPrimary>
+              <ButtonPrimary onClick={onClose}>{cancelText}</ButtonPrimary>
+              <ButtonPrimary onClick={handleAction}>{actionText}</ButtonPrimary>
             </div>
           </div>
         </div>

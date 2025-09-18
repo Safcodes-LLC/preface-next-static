@@ -12,7 +12,7 @@ const socials = [
     name: 'Login with Facebook',
     href: '/auth/facebook', // Replace with your actual OAuth URL
     icon: () => (
-      <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#1877F2]">
+      <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#1877F2]">
         <FaFacebookF size={12} color="white" />
       </span>
     ),
@@ -40,10 +40,10 @@ export default function SocialLogin({ className = '' }: SocialLoginProps) {
           <Link
             key={index}
             href={item.href}
-            className="flex items-center w-full rounded-full border border-[#E2E2E2] bg-white px-4 py-3 transition-transform hover:translate-y-0.5 dark:border-[#363636] dark:bg-[#000000]"
+            className="flex w-full items-center rounded-full border border-[#E2E2E2] bg-white px-4 py-3 transition-transform hover:translate-y-0.5 dark:border-[#363636] dark:bg-[#000000]"
           >
             <item.icon className="size-5 shrink-0" />
-            <span className="flex-1 text-center text-sm font-medium text-[#404040] dark:text-white ml-3 whitespace-nowrap">
+            <span className="ml-3 flex-1 text-center text-sm font-medium whitespace-nowrap text-[#404040] dark:text-white">
               {item.name}
             </span>
           </Link>

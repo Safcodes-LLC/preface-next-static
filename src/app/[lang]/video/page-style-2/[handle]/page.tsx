@@ -1,4 +1,4 @@
-import { getAllPosts, getCommentsByPostId, getPostByHandle } from '@/data/posts'
+import { getAllPosts, getPostByHandle } from '@/data/posts'
 import { Metadata } from 'next'
 import SingleContentContainer from '../../SingleContentContainer'
 import SingleHeaderContainer from '../../SingleHeaderContainer'

@@ -24,7 +24,7 @@
     "signin": "Sign In",
     "logout": "Logout"
   },
-  "sections":{
+  "sections": {
     "storytelling": {
       "heading": "STORYTELLING ISLAM",
       "description": "Understanding Islam through 1001 Stories"
@@ -61,6 +61,5 @@
       "heading": "POPULAR ARTICLES",
       "description": ""
     }
-
   }
 }

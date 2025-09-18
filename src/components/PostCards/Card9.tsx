@@ -57,7 +57,7 @@ const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post, lang }) => {
       </div>
 
       <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-3">
-        <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post}/>
+        <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
         <PostCardSaveBtn bookmarked={bookmarked} />
       </div>
 

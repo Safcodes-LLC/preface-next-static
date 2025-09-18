@@ -1,5 +1,5 @@
-import { _demo_author_image_urls } from './authors'
 import { getPostBySlug as fetchPostBySlug } from './api/posts'
+import { _demo_author_image_urls } from './authors'
 
 // TODO: replace with actual images
 // TODO: replace with actual images
@@ -59,19 +59,19 @@ export async function getPostsDefault() {
       id: 'post-1',
       _id: 'post-1',
       featuredImage: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
       },
-      title: "PROMISES OF WHOLENESS",
-      name: "PROMISES OF WHOLENESS",
+      title: 'PROMISES OF WHOLENESS',
+      name: 'PROMISES OF WHOLENESS',
       handle: 'lenovo-smarter-devices-stoke-professional-passions',
       excerpt: 'WHAT ISLAM OFFERS IN A FRAGMENTED WORLD',
       date: '2025-06-10T12:00:00Z',
@@ -81,7 +81,7 @@ export async function getPostsDefault() {
       bookmarkCount: 3007,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -114,13 +114,13 @@ export async function getPostsDefault() {
       id: 'post-2',
       _id: 'post-2',
       featuredImage: {
-        src: "/images/banner/bannerarticle-3.png",
+        src: '/images/banner/bannerarticle-3.png',
         alt: 'The Future of Remote Work in 2025',
         width: 1920,
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_2.png",
+        src: '/images/categories/category_2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -128,8 +128,7 @@ export async function getPostsDefault() {
       title: 'AI, RESURRECTION, AND THE QURAN',
       name: 'AI, RESURRECTION, AND THE QURAN',
       handle: 'future-of-remote-work-2025',
-      excerpt:
-        'BRIDGING SCIENCE AND THE HEREAFTER',
+      excerpt: 'BRIDGING SCIENCE AND THE HEREAFTER',
       date: '2025-05-15T12:00:00Z',
       readingTime: 4,
       commentCount: 23,
@@ -137,7 +136,7 @@ export async function getPostsDefault() {
       bookmarkCount: 1500,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -170,13 +169,13 @@ export async function getPostsDefault() {
       id: 'post-3',
       _id: 'post-3',
       featuredImage: {
-        src: "/images/banner/bannerarticle-1.png",
+        src: '/images/banner/bannerarticle-1.png',
         alt: 'Sustainable Living: - The Complete Guide',
         width: 1920,
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_3.png",
+        src: '/images/categories/category_3.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -184,8 +183,7 @@ export async function getPostsDefault() {
       title: 'MOM, WHY IS THE PROPHET CALLING US?',
       name: 'MOM, WHY IS THE PROPHET CALLING US?',
       handle: 'sustainable-living-complete-guide',
-      excerpt:
-        'A GLIMPSE INTO THE COMPASSIONATE SERMONS OF THE PROPHET ﷺ',
+      excerpt: 'A GLIMPSE INTO THE COMPASSIONATE SERMONS OF THE PROPHET ﷺ',
       date: '2025-04-20T12:00:00Z',
       readingTime: 6,
       commentCount: 45,
@@ -193,7 +191,7 @@ export async function getPostsDefault() {
       bookmarkCount: 2200,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -232,7 +230,7 @@ export async function getPostsDefault() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_4.png",
+        src: '/images/categories/category_4.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -248,7 +246,7 @@ export async function getPostsDefault() {
       bookmarkCount: 2800,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -287,7 +285,7 @@ export async function getPostsDefault() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_5.png",
+        src: '/images/categories/category_5.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -303,7 +301,7 @@ export async function getPostsDefault() {
       bookmarkCount: 1900,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -342,7 +340,7 @@ export async function getPostsDefault() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -358,7 +356,7 @@ export async function getPostsDefault() {
       bookmarkCount: 3600,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -411,7 +409,7 @@ export async function getPostsAudio() {
       bookmarkCount: 3007,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -451,7 +449,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -467,7 +465,7 @@ export async function getPostsAudio() {
       bookmarkCount: 1500,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -507,7 +505,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -523,7 +521,7 @@ export async function getPostsAudio() {
       bookmarkCount: 1200,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -563,7 +561,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -579,7 +577,7 @@ export async function getPostsAudio() {
       bookmarkCount: 2300,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -619,7 +617,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -635,7 +633,7 @@ export async function getPostsAudio() {
       bookmarkCount: 1900,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -675,7 +673,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -691,7 +689,7 @@ export async function getPostsAudio() {
       bookmarkCount: 2100,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -731,7 +729,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -747,7 +745,7 @@ export async function getPostsAudio() {
       bookmarkCount: 1800,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -787,7 +785,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -803,7 +801,7 @@ export async function getPostsAudio() {
       bookmarkCount: 2100,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -843,7 +841,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -859,7 +857,7 @@ export async function getPostsAudio() {
       bookmarkCount: 2400,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -899,7 +897,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -915,7 +913,7 @@ export async function getPostsAudio() {
       bookmarkCount: 1800,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -955,7 +953,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -971,7 +969,7 @@ export async function getPostsAudio() {
       bookmarkCount: 2100,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1011,7 +1009,7 @@ export async function getPostsAudio() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1027,7 +1025,7 @@ export async function getPostsAudio() {
       bookmarkCount: 1900,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1065,13 +1063,13 @@ export async function getPostsVideo() {
       id: 'post-video-1',
       _id: 'post-video-1',
       featuredImage: {
-        src: "/images/banner/bannervideo-1.png",
+        src: '/images/banner/bannervideo-1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1087,7 +1085,7 @@ export async function getPostsVideo() {
       bookmarkCount: 3007,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1127,7 +1125,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1143,7 +1141,7 @@ export async function getPostsVideo() {
       bookmarkCount: 2100,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1183,7 +1181,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1199,7 +1197,7 @@ export async function getPostsVideo() {
       bookmarkCount: 1900,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1239,7 +1237,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1255,7 +1253,7 @@ export async function getPostsVideo() {
       bookmarkCount: 2600,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1295,7 +1293,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1311,7 +1309,7 @@ export async function getPostsVideo() {
       bookmarkCount: 2400,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1351,7 +1349,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1367,7 +1365,7 @@ export async function getPostsVideo() {
       bookmarkCount: 2250,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1407,7 +1405,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1423,7 +1421,7 @@ export async function getPostsVideo() {
       bookmarkCount: 2550,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1463,7 +1461,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1479,7 +1477,7 @@ export async function getPostsVideo() {
       bookmarkCount: 2250,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1519,7 +1517,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1535,7 +1533,7 @@ export async function getPostsVideo() {
       bookmarkCount: 2550,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1575,7 +1573,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1591,7 +1589,7 @@ export async function getPostsVideo() {
       bookmarkCount: 2400,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1631,7 +1629,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1647,7 +1645,7 @@ export async function getPostsVideo() {
       bookmarkCount: 2350,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1687,7 +1685,7 @@ export async function getPostsVideo() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1704,7 +1702,7 @@ export async function getPostsVideo() {
       bookmarkCount: 2250,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1742,13 +1740,13 @@ export async function getPostsGallery() {
       id: 'post-gallery-1',
       _id: 'post-gallery-1',
       featuredImage: {
-        src: "/images/holyquran/holyquranmain1.png",
+        src: '/images/holyquran/holyquranmain1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1764,7 +1762,7 @@ export async function getPostsGallery() {
       bookmarkCount: 3007,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1805,13 +1803,13 @@ export async function getPostsGallery() {
       _id: 'post-gallery-2',
       featuredImage: {
         // src: _demo_post_image_urls[11],
-        src: "/images/holyquran/holyquranmain1.png",
+        src: '/images/holyquran/holyquranmain1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1827,7 +1825,7 @@ export async function getPostsGallery() {
       bookmarkCount: 3007,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1873,7 +1871,7 @@ export async function getPostsGallery() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1889,7 +1887,7 @@ export async function getPostsGallery() {
       bookmarkCount: 3007,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1935,7 +1933,7 @@ export async function getPostsGallery() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1951,7 +1949,7 @@ export async function getPostsGallery() {
       bookmarkCount: 3007,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -1997,7 +1995,7 @@ export async function getPostsGallery() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -2013,7 +2011,7 @@ export async function getPostsGallery() {
       bookmarkCount: 2300,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -2059,7 +2057,7 @@ export async function getPostsGallery() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -2075,7 +2073,7 @@ export async function getPostsGallery() {
       bookmarkCount: 2450,
       bookmarked: false,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -2120,7 +2118,7 @@ export async function getPostsGallery() {
         height: 1080,
       },
       icon: {
-        src: "/images/categories/category_1.png",
+        src: '/images/categories/category_1.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -2136,7 +2134,7 @@ export async function getPostsGallery() {
       bookmarkCount: 2150,
       bookmarked: true,
       thumbnail: {
-        src: "/images/banner/bannerarticle-2.png",
+        src: '/images/banner/bannerarticle-2.png',
         alt: "Lenovo's smarter devices stoke professional passions",
         width: 1920,
         height: 1080,
@@ -2189,7 +2187,7 @@ export async function getPostByHandle(handle: string) {
 
   const posts = await getAllPosts()
   let post = posts.find((post) => post.handle === handle) as TPost
-  
+
   if (!post) {
     console.warn(`Post with handle "${handle}" not found.`)
     return null
@@ -2317,7 +2315,7 @@ export type TPost = Awaited<ReturnType<typeof getAllPosts>>[number] & {
   postType?: any
   videoUrl?: string
   videoFile?: string
-  video_file?: string 
+  video_file?: string
   featuredIcon?: string
   galleryImgs?: string[]
   totalArticles?: number
@@ -2334,8 +2332,8 @@ export type TPostDetail = Awaited<ReturnType<typeof getPostByHandle>>
 
 export async function getPostBySlug(slug: string): Promise<TPost | null> {
   try {
-    const post = await fetchPostBySlug(slug);
-    if (!post) return null;
+    const post = await fetchPostBySlug(slug)
+    if (!post) return null
 
     // Transform the API response to match the TPost type
     return {
@@ -2374,13 +2372,13 @@ export async function getPostBySlug(slug: string): Promise<TPost | null> {
       liked: false,
       postType: 'video',
       commentCount: post.commentCount || 0,
-      
+
       status: post.status || 'published',
       ...post, // Spread the rest of the post properties
-    };
+    }
   } catch (error) {
-    console.error('Error in getPostBySlug:', error);
-    return null;
+    console.error('Error in getPostBySlug:', error)
+    return null
   }
 }
 export type TComment = Awaited<ReturnType<typeof getCommentsByPostId>>[number]

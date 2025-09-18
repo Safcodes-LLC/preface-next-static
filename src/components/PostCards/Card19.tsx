@@ -7,8 +7,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
-import PostCardLikeBtn from '../PostCardLikeBtn'
-import PostCardSaveBtn from '../PostCardSaveBtn'
 
 interface Props {
   className?: string
@@ -44,7 +42,6 @@ const Card19: FC<Props> = ({
     liked,
     commentCount,
     bookmarked,
-    favoriteCount,
   } = post
 
   const parentCategorySlug = categories[0]?.parentCategory?.slug
@@ -60,16 +57,14 @@ const Card19: FC<Props> = ({
         ) : (
           <>
             {thumbnail || featuredImage ? (
-              <div className="relative h-full w-full overflow-hidden rounded-xl">
-                <Image
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="h-full w-full rounded-xl object-cover brightness-85 transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-60"
-                  src={thumbnail || featuredImage}
-                  alt={title}
-                  priority
-                  fill
-                />
-              </div>
+              <Image
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="rounded-xl object-cover brightness-85 transition-[filter] duration-300 group-hover:brightness-60"
+                src={thumbnail || featuredImage}
+                alt={title}
+                priority
+                fill
+              />
             ) : (
               <div className="h-full w-full rounded-xl bg-gray-200" /> // fallback placeholder
             )}
@@ -98,10 +93,6 @@ const Card19: FC<Props> = ({
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
         <CategoryBadgeList categories={categories} yellowColor={yellowColor} />
-        <div className="ms-auto flex gap-1">
-          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-          <PostCardSaveBtn bookmarked={bookmarked} />
-        </div>
       </div>
 
       <div

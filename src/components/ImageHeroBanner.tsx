@@ -1,7 +1,7 @@
 'use client'
 import { PlayIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
-import { FC, useEffect, useState, useRef } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 
 interface SlideContent {
   _id: string
@@ -51,14 +51,14 @@ const defaultSlides: SlideContent[] = [
 // Function to convert YouTube URL to embed URL
 const getYouTubeEmbedUrl = (url: string): string => {
   if (!url) return ''
-  
+
   const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/
   const match = url.match(regex)
-  
+
   if (match && match[1]) {
     return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&controls=0&loop=1&playlist=${match[1]}`
   }
-  
+
   return url
 }
 
@@ -91,7 +91,7 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
         createdAt: item.createdAt || new Date().toISOString(),
         updatedAt: item.updatedAt || new Date().toISOString(),
       }))
-      
+
       setSlides(mappedSlides)
     } else {
       setSlides(defaultSlides)
@@ -155,7 +155,7 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
           <iframe
             ref={videoRef}
             src={getYouTubeEmbedUrl(currentSlideData.video_url)}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -165,17 +165,17 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
       )}
 
       {/* Linear Gradient Overlay - Center to Bottom */}
-      <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 ${
-        isHoveringPlayButton ? 'z-30' : 'z-10'
-      }`} />
+      <div
+        className={`absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 ${
+          isHoveringPlayButton ? 'z-30' : 'z-10'
+        }`}
+      />
 
       {/* Main Content */}
-      <div className={`absolute inset-0 container flex items-end pb-24 ${
-        isHoveringPlayButton ? 'z-40' : 'z-20'
-      }`}>
+      <div className={`absolute inset-0 container flex items-end pb-24 ${isHoveringPlayButton ? 'z-40' : 'z-20'}`}>
         {/* Left Content */}
         <div className="flex flex-1 flex-col pr-2 md:pr-8">
-          <h1 className="mb-4 text-2xl font-semibold tracking-wider text-white md:text-3xl md:font-bold max-w-full md:max-w-2xl">
+          <h1 className="mb-4 max-w-full text-2xl font-semibold tracking-wider text-white md:max-w-2xl md:text-3xl md:font-bold">
             {currentSlideData?.title || heading}
           </h1>
           {/* <p className="mb-6 max-w-md text-sm leading-relaxed text-white/90 md:text-base">
@@ -189,8 +189,8 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
           </p> */}
 
           {/* Animated Play Now Button */}
-          <button 
-            className="animated-play-button inline-flex cursor-pointer w-fit items-center gap-2 text-white whitespace-nowrap relative font-medium text-lg px-4 py-3"
+          <button
+            className="animated-play-button relative inline-flex w-fit cursor-pointer items-center gap-2 px-4 py-3 text-lg font-medium whitespace-nowrap text-white"
             onMouseEnter={handlePlayButtonHover}
             onMouseLeave={handlePlayButtonLeave}
           >
@@ -200,7 +200,7 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
         </div>
 
         {/* Right Side - Content Info */}
-        <div className="hidden md:flex flex-1 justify-end">
+        <div className="hidden flex-1 justify-end md:flex">
           <div className="relative">
             {/* Pagination Dots */}
             {slides.length > 1 && (
@@ -227,10 +227,10 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
           position: relative;
           transition: all 0.3s ease;
         }
-        
+
         .animated-play-button::after {
           content: '';
-          background: #60A43A;
+          background: #60a43a;
           position: absolute;
           bottom: 0;
           height: 3px;
@@ -238,14 +238,14 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
           width: 0;
           transition: all cubic-bezier(0.17, 0.54, 0.58, 1.1) 1s;
         }
-        
+
         .animated-play-button:hover::after {
           width: 100%;
           transition: all cubic-bezier(0.17, 0.54, 0.58, 1.1) 1s;
         }
-        
+
         .animated-play-button:hover {
-          color: #60A43A;
+          color: #60a43a;
           transform: translateY(-2px);
         }
       `}</style>

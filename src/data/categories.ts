@@ -1,5 +1,4 @@
 import { getAllPosts, getPostsDefault, TPost } from './posts'
-import { generateSlug } from '@/utils/slug'
 
 // TODO: replace with actual images
 // TODO: replace with actual images
@@ -59,19 +58,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-2',
@@ -79,7 +80,7 @@ export async function getCategories() {
       name: `Holy Qur'an`,
       handle: 'holy-quran',
       description:
-        'Explore the divine revelations, wisdom, and guidance found in the Holy Qur\'an. Discover its teachings, interpretations, and spiritual significance.',
+        "Explore the divine revelations, wisdom, and guidance found in the Holy Qur'an. Discover its teachings, interpretations, and spiritual significance.",
       color: 'blue',
       count: 25,
       date: '2025-05-15',
@@ -110,19 +111,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-3',
@@ -161,19 +164,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-4',
@@ -212,19 +217,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-5',
@@ -263,19 +270,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-6',
@@ -314,19 +323,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-7',
@@ -365,19 +376,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-8',
@@ -416,19 +429,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-9',
@@ -467,19 +482,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-10',
@@ -518,19 +535,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-11',
@@ -569,19 +588,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-12',
@@ -620,19 +641,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-13',
@@ -671,19 +694,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-14',
@@ -722,19 +747,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-15',
@@ -773,19 +800,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-16',
@@ -824,19 +853,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-17',
@@ -875,19 +906,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-18',
@@ -926,19 +959,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
     {
       id: 'category-19',
@@ -977,19 +1012,21 @@ export async function getCategories() {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
-      ]
+      ],
     },
   ]
 }
@@ -1037,17 +1074,19 @@ export async function getCategoryByHandle(handle: string) {
       subCategory: [
         {
           _id: '689d968acaf50515b99b0ac9',
-          name: 'Life and Message', 
+          name: 'Life and Message',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
-          shortDescription: 'Life and Message'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/1_Life_and_Message.png',
+          shortDescription: 'Life and Message',
         },
         {
           _id: '689d9c5bcaf50515b99b0ad5',
           name: 'Signs of Prophethood',
           featuredImage: '',
-          featuredIcon: 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
-          shortDescription: 'Signs of Prophethood'
+          featuredIcon:
+            'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/categories/icons/2_Signs_of_Prophethood.png',
+          shortDescription: 'Signs of Prophethood',
         },
       ],
       cover: {
@@ -1063,15 +1102,15 @@ export async function getCategoryByHandle(handle: string) {
 
   // get all categories
   const categories = await getCategories()
-  
+
   // Use the slug utility for better matching
   const { findBySlug } = await import('@/utils/slug')
   const category = findBySlug(handle, categories)
-  
+
   if (!category) {
     return null // Return null for proper 404 handling
   }
-  
+
   return {
     ...category,
     posts,

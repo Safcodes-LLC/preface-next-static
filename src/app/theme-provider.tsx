@@ -17,10 +17,7 @@ interface ThemeProviderProps {
   forceDarkMode?: boolean
 }
 
-export default function ThemeProvider({ 
-  children, 
-  forceDarkMode = false 
-}: ThemeProviderProps) {
+export default function ThemeProvider({ children, forceDarkMode = false }: ThemeProviderProps) {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(forceDarkMode)
   const [themeDir, setThemeDir] = useState<'rtl' | 'ltr'>('ltr')
 
@@ -86,7 +83,7 @@ export default function ThemeProvider({
         toggleDarkMode: forceDarkMode ? () => {} : toggleDarkMode,
         themeDir,
         setThemeDir,
-        isForcedDarkMode: forceDarkMode
+        isForcedDarkMode: forceDarkMode,
       }}
     >
       {children}

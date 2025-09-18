@@ -30,6 +30,6 @@ export function useScroll({ threshold = 50 }: UseScrollOptions = {}) {
   return {
     scrollY,
     isScrolled,
-    isAtTop: scrollY <= threshold
+    isAtTop: scrollY <= threshold,
   }
-} 
+}

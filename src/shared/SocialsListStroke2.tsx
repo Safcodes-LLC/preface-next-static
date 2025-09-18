@@ -11,14 +11,7 @@ interface Props {
 
 // Custom LinkedIn stroke icon since it's not available in Hugeicons
 const LinkedinStrokeIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className="w-5 h-5"
-  >
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5">
     <path
       d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8V8Z"
       stroke="currentColor"
@@ -26,13 +19,7 @@ const LinkedinStrokeIcon = () => (
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path
-      d="M6 9H2V21H6V9Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+    <path d="M6 9H2V21H6V9Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     <path
       d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z"
       stroke="currentColor"
@@ -83,23 +70,16 @@ const SocialsListStroke2: FC<Props> = ({ className, socials = socialsDemo }) => 
       {socials.map((item, index) => (
         <Link
           href={item.href}
-          className="group flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full border border-neutral-300 hover:border-neutral-400 transition-colors duration-200 dark:border-neutral-600 dark:hover:border-neutral-500"
+          className="group flex h-8 w-8 items-center justify-center rounded-full border border-neutral-300 transition-colors duration-200 hover:border-neutral-400 md:h-10 md:w-10 dark:border-neutral-600 dark:hover:border-neutral-500"
           key={index}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Follow us on ${item.name}`}
         >
           {item.useHugeicons ? (
-            <HugeiconsIcon 
-              icon={item.icon} 
-              size={20} 
-              color="currentColor" 
-              strokeWidth={1.5} 
-            />
+            <HugeiconsIcon icon={item.icon} size={20} color="currentColor" strokeWidth={1.5} />
           ) : (
-            <div className="w-5 h-5">
-              {React.createElement(item.icon)}
-            </div>
+            <div className="h-5 w-5">{React.createElement(item.icon)}</div>
           )}
         </Link>
       ))}
@@ -107,4 +87,4 @@ const SocialsListStroke2: FC<Props> = ({ className, socials = socialsDemo }) => 
   )
 }
 
-export default SocialsListStroke2 
+export default SocialsListStroke2

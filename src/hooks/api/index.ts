@@ -20,4 +20,4 @@ export * from './use-favourite'
 export * from './use-continue-read'
 
 // Re-export types for convenience
-export type { ApiError, ApiResponse, ApiOptions } from '@/lib/client/api'
+export type { ApiError, ApiOptions, ApiResponse } from '@/lib/client/api'

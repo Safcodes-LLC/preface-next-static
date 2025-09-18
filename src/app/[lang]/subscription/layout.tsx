@@ -7,7 +7,11 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = ({ children, params }) => {
-  return <ApplicationLayout params={params} headerHasBorder>{children}</ApplicationLayout>
+  return (
+    <ApplicationLayout params={params} headerHasBorder>
+      {children}
+    </ApplicationLayout>
+  )
 }
 
 export default Layout

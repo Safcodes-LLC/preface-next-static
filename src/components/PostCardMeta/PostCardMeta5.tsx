@@ -10,7 +10,7 @@ interface Props {
   lang?: string
 }
 
-const PostCardMeta5: FC<Props> = ({ meta, className, avatarSize, timeDuration=false, lang }) => {
+const PostCardMeta5: FC<Props> = ({ meta, className, avatarSize, timeDuration = false, lang }) => {
   const { date, author, title, handle, categories, slug } = meta
 
   return (

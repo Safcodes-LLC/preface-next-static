@@ -1,5 +1,5 @@
-import { ReactNode } from 'react'
 import { ApplicationLayout } from '@/app/[lang]/application-layout'
+import { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
@@ -7,12 +7,7 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = async ({ children, params }) => {
-
-  return (
-    <ApplicationLayout params={params}>
-      {children}
-    </ApplicationLayout>
-  )
+  return <ApplicationLayout params={params}>{children}</ApplicationLayout>
 }
 
 export default Layout

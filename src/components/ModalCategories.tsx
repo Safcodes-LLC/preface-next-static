@@ -6,8 +6,6 @@ import { Button } from '@/shared/Button'
 import { Dialog, DialogActions, DialogBody, DialogTitle } from '@/shared/dialog'
 import { Divider } from '@/shared/divider'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import { NotificationSquareIcon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
 import { FC, useState } from 'react'
 
 interface Props {

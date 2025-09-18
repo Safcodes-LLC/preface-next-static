@@ -6,7 +6,6 @@ import CategoryBadgeList from '../CategoryBadgeList'
 import PostCardMeta2 from '../PostCardMeta/PostCardMeta2'
 import PostCardSaveBtn from '../PostCardSaveBtn'
 import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
-import PostCardLikeBtn from '../PostCardLikeBtn'
 
 interface Props {
   className?: string
@@ -16,7 +15,7 @@ interface Props {
 }
 
 const Card10V2: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect-11/12', lang }) => {
-  const { handle, categories, bookmarked, slug, favoriteCount, likeCount, liked } = post
+  const { handle, categories, bookmarked, slug } = post
 
   const [isHover, setIsHover] = useState(false)
 
@@ -39,10 +38,7 @@ const Card10V2: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
       </div>
       <div className="absolute inset-x-3 top-3 flex items-start gap-2">
         <CategoryBadgeList categories={categories} />
-        <div className="ms-auto flex gap-1">
-          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-          <PostCardSaveBtn bookmarked={bookmarked} />
-        </div>
+        <PostCardSaveBtn bookmarked={bookmarked} className="ms-auto" />
       </div>
 
       <PostCardMeta2 meta={post} className="mt-4" />

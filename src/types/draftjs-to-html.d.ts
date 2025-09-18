@@ -29,5 +29,3 @@ declare module 'draftjs-to-html' {
   function draftToHtml(contentState: RawDraftContentState): string
   export default draftToHtml
 }
-
-

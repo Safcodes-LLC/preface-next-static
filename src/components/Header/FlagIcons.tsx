@@ -5,13 +5,7 @@ interface FlagIconProps {
 }
 
 export const USFlag: FC<FlagIconProps> = ({ className }) => (
-  <svg
-    className={className}
-    width="16"
-    height="12"
-    viewBox="0 0 16 12"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg className={className} width="16" height="12" viewBox="0 0 16 12" xmlns="http://www.w3.org/2000/svg">
     <rect width="16" height="12" fill="#B22234" />
     <rect width="16" height="0.92" y="0" fill="#FFFFFF" />
     <rect width="16" height="0.92" y="1.85" fill="#FFFFFF" />
@@ -25,33 +19,13 @@ export const USFlag: FC<FlagIconProps> = ({ className }) => (
 )
 
 export const SAFlag: FC<FlagIconProps> = ({ className }) => (
-  <svg
-    className={className}
-    width="16"
-    height="12"
-    viewBox="0 0 16 12"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg className={className} width="16" height="12" viewBox="0 0 16 12" xmlns="http://www.w3.org/2000/svg">
     <rect width="16" height="12" fill="#006C35" />
     <g transform="translate(4, 3)">
-      <text
-        x="4"
-        y="2.4"
-        fontSize="2.4"
-        fill="white"
-        textAnchor="middle"
-        fontFamily="Arial"
-      >
+      <text x="4" y="2.4" fontSize="2.4" fill="white" textAnchor="middle" fontFamily="Arial">
         لا إله إلا الله
       </text>
-      <text
-        x="4"
-        y="5.4"
-        fontSize="2.4"
-        fill="white"
-        textAnchor="middle"
-        fontFamily="Arial"
-      >
+      <text x="4" y="5.4" fontSize="2.4" fill="white" textAnchor="middle" fontFamily="Arial">
         محمد رسول الله
       </text>
     </g>
@@ -59,13 +33,7 @@ export const SAFlag: FC<FlagIconProps> = ({ className }) => (
 )
 
 export const INFlag: FC<FlagIconProps> = ({ className }) => (
-  <svg
-    className={className}
-    width="16"
-    height="12"
-    viewBox="0 0 16 12"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg className={className} width="16" height="12" viewBox="0 0 16 12" xmlns="http://www.w3.org/2000/svg">
     <rect width="16" height="4" fill="#FF9933" />
     <rect width="16" height="4" y="4" fill="#FFFFFF" />
     <rect width="16" height="4" y="8" fill="#138808" />

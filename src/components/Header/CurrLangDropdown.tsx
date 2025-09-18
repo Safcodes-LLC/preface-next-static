@@ -12,7 +12,6 @@ import {
   TabPanel,
   TabPanels,
 } from '@headlessui/react'
-import { GlobeAltIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 import { usePathname, useRouter } from 'next/navigation'
@@ -42,14 +41,14 @@ const Languages = ({
   const router = useRouter()
   const [isLang, setIsLang] = useState<string>('en')
   useEffect(() => {
-    const storedLang = localStorage.getItem('selectedLanguage') 
-    setIsLang(storedLang || 'en') 
+    const storedLang = localStorage.getItem('selectedLanguage')
+    setIsLang(storedLang || 'en')
   }, [])
   const pagesWithLanguage =
     pathname === `/` ||
     pathname === `/${isLang}` ||
     pathname === `/${isLang}/visuals` ||
-    pathname ===`/stories`||
+    pathname === `/stories` ||
     pathname === `/${isLang}/stories` ||
     pathname === `/about` ||
     pathname === `/${isLang}/about`
@@ -134,7 +133,7 @@ const CurrLangDropdown: FC<Props> = ({
       newPath = `/${currentPath}`
     } else {
       // For other languages, add the locale to the URL
-   newPath = `/${language.code}${currentPath ? `/${currentPath}` : ''}`
+      newPath = `/${language.code}${currentPath ? `/${currentPath}` : ''}`
     }
 
     // Update URL
@@ -151,10 +150,8 @@ const CurrLangDropdown: FC<Props> = ({
           home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
         )}
       >
-        <div className="flex items-center justify-center rounded-full px-1 h-5 text-xs font-medium text-white">
-          {selectedLanguage?.FlagComponent && (
-            <selectedLanguage.FlagComponent className="h-3 w-3 me-1" />
-          )}
+        <div className="flex h-5 items-center justify-center rounded-full px-1 text-xs font-medium text-white">
+          {selectedLanguage?.FlagComponent && <selectedLanguage.FlagComponent className="me-1 h-3 w-3" />}
           {selectedLanguage?.name}
         </div>
         {/* <GlobeAltIcon className="size-5" /> */}

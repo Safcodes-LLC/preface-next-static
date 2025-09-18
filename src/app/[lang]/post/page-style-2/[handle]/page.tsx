@@ -1,4 +1,4 @@
-import { getAllPosts, getCommentsByPostId, getPostByHandle } from '@/data/posts'
+import { getAllPosts, getPostByHandle } from '@/data/posts'
 import { Metadata } from 'next'
 import SingleContentContainer from '../../SingleContentContainer'
 import SingleHeaderContainer from '../../SingleHeaderContainer'
@@ -32,7 +32,7 @@ const Page = async ({ params }: { params: Promise<{ handle: string }> }) => {
         <SingleHeaderContainer post={post} headerStyle="style2" />
 
         <div className="container mt-12">
-          <SingleContentContainer post={post}  />
+          <SingleContentContainer post={post} />
         </div>
 
         <SingleRelatedPosts relatedPosts={relatedPosts} moreFromAuthorPosts={moreFromAuthorPosts} />

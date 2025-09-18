@@ -17,7 +17,9 @@ const SectionGridAuthorBox: FC<Props> = ({ className = '', authors, heading, sub
         {heading}
       </HeadingWithSub>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-8 lg:grid-cols-4 xl:grid-cols-5">
-        {authors?.map((author) => <CardAuthorBox key={author.id} author={author} />)}
+        {authors?.map((author) => (
+          <CardAuthorBox key={author.id} author={author} />
+        ))}
       </div>
     </div>
   )

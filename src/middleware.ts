@@ -1,14 +1,14 @@
-import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { locales, defaultLocale } from './i18n/settings'
+import { NextResponse } from 'next/server'
+import { defaultLocale, locales } from './i18n/settings'
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const allowedExtensions = [".xml", ".txt", ".xml.gz"];
-  const allowedRoutes = ["/sitemap.xml", "/robots.txt", "/login","/forgot-password","/signup"];
+  const allowedExtensions = ['.xml', '.txt', '.xml.gz']
+  const allowedRoutes = ['/sitemap.xml', '/robots.txt', '/login', '/forgot-password', '/signup']
 
-  if (allowedRoutes.includes(pathname) || allowedExtensions.some(ext => pathname.endsWith(ext))) {
-    return NextResponse.next();
+  if (allowedRoutes.includes(pathname) || allowedExtensions.some((ext) => pathname.endsWith(ext))) {
+    return NextResponse.next()
   }
   // Handle Chrome DevTools requests
   if (pathname.startsWith('/.well-known/appspecific/com.chrome.devtools.json')) {
@@ -49,17 +49,15 @@ export function middleware(request: NextRequest) {
   //     return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url))
   //   }
   // }
-   // If no locale is provided, assume English and rewrite URL internally
-   if (!pathname.startsWith("/ml") && !pathname.startsWith("/ar")) {
-    const rewrittenPath = new URL(`/en${pathname}`, request.url);
-    console.log("Rewriting path to:", rewrittenPath.pathname);
-    return NextResponse.rewrite(rewrittenPath);
-}
+  // If no locale is provided, assume English and rewrite URL internally
+  if (!pathname.startsWith('/ml') && !pathname.startsWith('/ar')) {
+    const rewrittenPath = new URL(`/en${pathname}`, request.url)
+    console.log('Rewriting path to:', rewrittenPath.pathname)
+    return NextResponse.rewrite(rewrittenPath)
+  }
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|js|json)$).*)',
-  ],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|js|json)$).*)'],
 }

@@ -1,4 +1,3 @@
-
 import { SingleMetaAction } from '@/app/[lang]/post/SingleMetaAction'
 import Image from 'next/image'
 

@@ -130,9 +130,7 @@ const SectionVideos: FC<SectionVideosProps> = ({ videos = VIDEOS_DEMO, className
         <div className="relative grow pb-2 sm:pb-4 lg:pr-5 lg:pb-0 xl:pr-6">{renderMainVideo()}</div>
         <div className="grid shrink-0 grid-cols-4 gap-2 sm:gap-6 lg:w-36 lg:grid-cols-1 xl:w-40">
           {videos.map((video) => (
-            <div key={video.id}>
-              {renderSubVideo(video)}
-            </div>
+            <div key={video.id}>{renderSubVideo(video)}</div>
           ))}
         </div>
       </div>

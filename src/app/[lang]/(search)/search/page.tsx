@@ -88,7 +88,9 @@ const PageSearch = async ({
       case 'categories':
         return (
           <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 md:gap-8 lg:mt-10 lg:grid-cols-4 xl:grid-cols-5">
-            {categories?.map((category) => <CardCategory2 key={category.id} category={category} />)}
+            {categories?.map((category) => (
+              <CardCategory2 key={category.id} category={category} />
+            ))}
           </div>
         )
 
@@ -113,7 +115,9 @@ const PageSearch = async ({
       default:
         return (
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-8 lg:mt-10 lg:grid-cols-3 xl:grid-cols-4">
-            {posts?.map((post) => <Card11 key={post.id} post={post} />)}
+            {posts?.map((post) => (
+              <Card11 key={post.id} post={post} />
+            ))}
           </div>
         )
     }

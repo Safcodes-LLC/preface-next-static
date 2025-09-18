@@ -1,4 +1,4 @@
-import { TPost, TPostDetail } from '@/data/posts'
+import { TPost } from '@/data/posts'
 import { Divider } from '@/shared/divider'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
-  const {  commentCount, handle, likeCount, liked, title, excerpt } = post
+  const { commentCount, handle, likeCount, liked, title, excerpt } = post
 
   return (
     <div className={`single-header-meta space-y-5 ${className}`}>
@@ -36,7 +36,7 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
           />
         </div>
       </div>
-      <div className='mt-8'>
+      <div className="mt-8">
         <Divider />
       </div>
     </div>
@@ -44,18 +44,7 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
 }
 
 const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
-  const {
-    commentCount,
-    handle,
-    likeCount,
-    liked,
-    title,
-    excerpt,
-    date,
-    author,
-    readingTime,
-    featuredImage,
-  } = post
+  const { commentCount, handle, likeCount, liked, title, excerpt, date, author, readingTime, featuredImage } = post
   return (
     <header className={clsx('single-header-style-3 relative', className)}>
       <div className="absolute inset-x-0 top-0 h-[480px] bg-neutral-900 md:h-[600px] lg:h-[700px] xl:h-[95vh] dark:bg-black/30" />
@@ -99,17 +88,17 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
 
 const HeaderVideo = ({ className, post }: Omit<Props, 'defaultStyle'>) => {
   // Use video_url if videoUrl is not available
-  const videoSource = post?.video_url || post?.videoUrl || post.video_file || (post as any).video_url;
-// console.log(videoSource, 'videoSource');
+  const videoSource = post?.video_url || post?.videoUrl || post.video_file || (post as any).video_url
+  // console.log(videoSource, 'videoSource');
 
   if (!videoSource) {
     return (
       <div className="container py-10 text-center">
         <p className="text-lg text-red-500">No video source found for this post</p>
       </div>
-    );
+    )
   }
-  
+
   return (
     <div className={clsx('single-header-style-video', className)}>
       <VideoPlayer videoUrl={videoSource} />

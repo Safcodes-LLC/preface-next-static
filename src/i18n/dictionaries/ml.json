@@ -24,7 +24,7 @@
     "signin": "Sign In",
     "logout": "Logout"
   },
-  "sections":{
+  "sections": {
     "storytelling": {
       "heading": "ഇസ്‌ലാം കഥ പറയുന്നു",
       "description": "1001 കഥകളിലൂടെ ഇസ്‌ലാമിനെ അറിയുക "
@@ -61,6 +61,5 @@
       "heading": "ഏറ്റവും പുതിയ ലേഖനങ്ങൾ ",
       "description": ""
     }
-
   }
 }

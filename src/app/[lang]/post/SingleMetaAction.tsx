@@ -2,7 +2,6 @@
 
 import BookmarkBtn from '@/components/BookmarkBtn'
 import PostCardLikeBtn from '@/components/PostCardLikeBtn'
-import { TPostDetail } from '@/data/posts'
 import { Button } from '@/shared/Button'
 import { Dialog, DialogActions, DialogBody, DialogTitle } from '@/shared/dialog'
 import { Dropdown, DropdownButton, DropdownItem, DropdownMenu } from '@/shared/dropdown'
@@ -154,7 +153,9 @@ function ShareDropdown({ handle, color }: { handle: string; color?: string }) {
     <Dropdown>
       <DropdownButton
         as="button"
-        className={`flex size-8.5 items-center justify-center rounded-full transition-colors duration-300 ${color || 'bg-neutral-50 hover:bg-neutral-100 dark:bg-white/10 dark:hover:bg-white/20'}`}
+        className={`flex size-8.5 items-center justify-center rounded-full transition-colors duration-300 ${
+          color || 'bg-neutral-50 hover:bg-neutral-100 dark:bg-white/10 dark:hover:bg-white/20'
+        }`}
       >
         <HugeiconsIcon icon={Share03Icon} size={20} />
       </DropdownButton>
@@ -183,13 +184,22 @@ const SingleMetaAction: FC<Props> = ({ className, likeCount, liked, commentCount
   return (
     <div className={clsx('single-meta-action', className)}>
       <div className="flex flex-wrap items-center gap-x-2.5 gap-y-2">
-        <PostCardLikeBtn likeCount={likeCount} liked={liked} color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white"/>
+        <PostCardLikeBtn
+          likeCount={likeCount}
+          liked={liked}
+          color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white"
+        />
         {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
         {/* <p className="font-light text-neutral-400 sm:mx-1">/</p> */}
-        <BookmarkBtn className="size-8.5!" color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white  relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-300 "/>
-        <ShareDropdown handle={handle} color="bg-transparent cursor-pointer border border-white text-white hover:bg-white/10 hover:text-white" />
+        <BookmarkBtn
+          className="size-8.5!"
+          color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white  relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-300 "
+        />
+        <ShareDropdown
+          handle={handle}
+          color="bg-transparent cursor-pointer border border-white text-white hover:bg-white/10 hover:text-white"
+        />
         {/* <ActionDropdown handle={handle} title={title} /> */}
-     
       </div>
     </div>
   )

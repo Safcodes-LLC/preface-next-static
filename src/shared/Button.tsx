@@ -157,14 +157,10 @@ const styles = {
     ],
     transparent: [
       '!bg-transparent !border-[#DBDBDB] dark:!border-[#5B5B5B]',
-      'text-[#444444] dark:text-[#C2C2C2] text-sm font-normal'
+      'text-[#444444] dark:text-[#C2C2C2] text-sm font-normal',
     ],
-    logooutline: [
-      'text-[#60A43A] border border-[#60A43A] px-2 rounded-full'
-    ],
-    loginbtn: [
-      'text-white bg-[#01662F] dark:bg-[#60A43A]'
-    ],
+    logooutline: ['text-[#60A43A] border border-[#60A43A] px-2 rounded-full'],
+    loginbtn: ['text-white bg-[#01662F] dark:bg-[#60A43A]'],
     'logo-colors': [
       'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:#60A43A] [--btn-border:#60A43A]/90',
       '[--btn-icon:var(--color-white)]/60 data-active:[--btn-icon:var(--color-white)]/80 data-hover:[--btn-icon:var(--color-white)]/80',

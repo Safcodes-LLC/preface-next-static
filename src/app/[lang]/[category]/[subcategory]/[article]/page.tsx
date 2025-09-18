@@ -13,7 +13,12 @@ import SingleRelatedPosts from '../../../post/SingleRelatedPosts'
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ category: string; subcategory: string; article: string; lang: string }>
+  params: Promise<{
+    category: string
+    subcategory: string
+    article: string
+    lang: string
+  }>
 }): Promise<Metadata> {
   // Await the params before using them
   const { article, lang } = await params
@@ -44,7 +49,12 @@ export async function generateMetadata({
 const Page = async ({
   params,
 }: {
-  params: Promise<{ category: string; subcategory: string; article: string; lang: string }>
+  params: Promise<{
+    category: string
+    subcategory: string
+    article: string
+    lang: string
+  }>
 }) => {
   // Await the params before using them
   const { category, subcategory, article, lang } = await params

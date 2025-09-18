@@ -6,13 +6,13 @@ import { Button } from '@/shared/Button'
 import Logo from '@/shared/Logo'
 import { ChatBubbleLeftRightIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
+import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
 import AvatarDropdown from './AvatarDropdown'
 import HamburgerBtnMenu from './HamburgerBtnMenu'
 import Navigation from './Navigation/Navigation'
 import SearchModal from './SearchModal'
 import TopNavbar from './TopNavbar'
-import Link from 'next/link'
 
 interface Header2WithScrollProps {
   bottomBorder?: boolean
@@ -94,22 +94,17 @@ const Header2WithScroll: FC<Header2WithScrollProps> = ({ bottomBorder, className
               <Link
                 href="/ask-the-scholar"
                 className={clsx(
-                  'flex min-w-[155px] items-center gap-2 rounded-sm border px-5 py-2 text-sm font-medium transition-all duration-200 focus:outline-none hover:shadow-sm',
+                  'flex min-w-[155px] items-center gap-2 rounded-sm border px-5 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm focus:outline-none',
                   'border-[#EEEEEE] dark:border-[#777777]',
-                  isScrolled 
-                    ? 'text-neutral-900 dark:text-neutral-900' 
-                    : 'text-white dark:text-white',
-                  'hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-700 dark:hover:text-neutral-200'
+                  isScrolled ? 'text-neutral-900 dark:text-neutral-900' : 'text-white dark:text-white',
+                  'hover:bg-neutral-100 hover:text-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-neutral-200'
                 )}
                 aria-label="Ask the Scholar"
                 style={{ marginTop: 0 }}
               >
-                <ChatBubbleLeftRightIcon 
-                  className={clsx(
-                    'h-5 w-5',
-                    isScrolled ? 'text-neutral-700' : 'text-white/90 dark:text-white/90'
-                  )} 
-                  aria-hidden="true" 
+                <ChatBubbleLeftRightIcon
+                  className={clsx('h-5 w-5', isScrolled ? 'text-neutral-700' : 'text-white/90 dark:text-white/90')}
+                  aria-hidden="true"
                 />
                 <span className="whitespace-nowrap">Ask the Scholar</span>
               </Link>

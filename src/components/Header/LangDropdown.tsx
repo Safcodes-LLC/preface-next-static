@@ -11,15 +11,15 @@ import {
   TabPanels,
   Transition,
 } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/24/solid'
-import { GlobeAltIcon } from '@heroicons/react/24/outline'
 import {
-  CurrencyDollarIcon,
   CurrencyBangladeshiIcon,
+  CurrencyDollarIcon,
   CurrencyEuroIcon,
   CurrencyPoundIcon,
   CurrencyRupeeIcon,
+  GlobeAltIcon,
 } from '@heroicons/react/24/outline'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import { FC, Fragment } from 'react'
 
 export const headerCurrency = [

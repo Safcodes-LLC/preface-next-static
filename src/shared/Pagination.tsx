@@ -1,10 +1,10 @@
+import { useAuth } from '@/contexts/AuthContext'
+import { useMarkPostRead } from '@/hooks/api'
 import { ArrowLeft02Icon, ArrowRight02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import type React from 'react'
 import { Button } from './Button'
-import { useMarkPostRead } from '@/hooks/api'
-import { useAuth } from '@/contexts/AuthContext'
 
 export function Pagination({
   'aria-label': ariaLabel = 'Page navigation',
@@ -40,7 +40,11 @@ export function PaginationNext({
   className,
   children = 'Next Page',
   postId,
-}: React.PropsWithChildren<{ href?: string | null; className?: string; postId?: string }>) {
+}: React.PropsWithChildren<{
+  href?: string | null
+  className?: string
+  postId?: string
+}>) {
   const { isAuthenticated } = useAuth()
   const markAsRead = useMarkPostRead()
 
@@ -79,7 +83,11 @@ export function PaginationPage({
   className,
   current = false,
   children,
-}: React.PropsWithChildren<{ href: string; className?: string; current?: boolean }>) {
+}: React.PropsWithChildren<{
+  href: string
+  className?: string
+  current?: boolean
+}>) {
   return (
     <Button
       href={href}

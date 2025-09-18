@@ -1,5 +1,5 @@
-import { Metadata } from 'next'
 import { getDictionary } from '@/i18n'
+import { Metadata } from 'next'
 import HomePage from './home/page'
 
 export const metadata: Metadata = {
@@ -9,10 +9,8 @@ export const metadata: Metadata = {
 
 const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
   const { lang } = await params
-  const dict = await getDictionary(lang) 
-  return (
-     <HomePage params={params} dict={dict} />
-  )
+  const dict = await getDictionary(lang)
+  return <HomePage params={params} dict={dict} />
 }
 
 export default Page

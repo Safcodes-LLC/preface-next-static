@@ -5,10 +5,10 @@ import { TComment, TPostDetail } from '@/data/posts'
 import useIntersectionObserver from '@/hooks/useIntersectionObserver'
 import { ArrowUp02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { FC, useEffect, useMemo, useRef, useState } from 'react'
-import { ShareDropdown } from './SingleMetaAction'
 import draftToHtml from 'draftjs-to-html'
 import { Noto_Serif } from 'next/font/google'
+import { FC, useEffect, useMemo, useRef, useState } from 'react'
+import { ShareDropdown } from './SingleMetaAction'
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
@@ -127,10 +127,10 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
           className="mx-auto prose max-w-(--breakpoint-md)! lg:prose-lg dark:prose-invert"
           ref={contentRef}
         >
-          <div 
-            dangerouslySetInnerHTML={{ __html: renderedHtml }} 
+          <div
+            dangerouslySetInnerHTML={{ __html: renderedHtml }}
             className="dark:[&_*]:!text-white"
-            style={{fontFamily: notoSerif.style.fontFamily}}
+            style={{ fontFamily: notoSerif.style.fontFamily }}
           />
         </div>
 

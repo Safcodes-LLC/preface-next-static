@@ -100,7 +100,7 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
   categories,
   categoryCardType = 'card3',
   config = {},
-  lang
+  lang,
 }) => {
   const mergedConfig = { ...defaultConfig, ...config }
   const { autoSlide, autoSlideInterval, showButtons, loop, slidesToScroll } = mergedConfig
@@ -119,7 +119,7 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
 
   // Only calculate duplicated categories on client side
   const duplicatedCategories = React.useMemo(() => {
-    if (!isClient) return categories;
+    if (!isClient) return categories
     if (!autoSlide || !loop || categories.length === 0) return categories
 
     // Simply repeat the same sequence multiple times to maintain order
@@ -136,7 +136,7 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
   // Set isClient to true on mount
   useEffect(() => {
     setIsClient(true)
-    
+
     const updateCardsPerView = () => {
       const width = window.innerWidth
       if (width < 640) setCardsPerView(1)
@@ -262,7 +262,7 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
       case 'card1':
         return <CardCategory1 key={`${item.id}-${index}`} category={item} />
       case 'card2':
-        return <CardCategory2 key={`${item.id}-${index}`} badge={topIndex} category={item} lang={lang}/>
+        return <CardCategory2 key={`${item.id}-${index}`} badge={topIndex} category={item} lang={lang} />
       case 'card3':
         return <CardCategory3 key={`${item.id}-${index}`} category={item} />
       case 'card4':
@@ -288,11 +288,7 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
       <SliderHeading heading={heading} subHeading={subHeading} dimHeading={dimHeading} />
 
       {/* Slider Section */}
-      <div
-        className="relative"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
+      <div className="relative" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
         {/* Navigation Buttons */}
         {showButtons && totalSlides > cardsPerView && (
           <>

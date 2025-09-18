@@ -67,7 +67,7 @@ const FloatingPanel: FC<{
   const update = useCallback(() => {
     if (!anchor) return
     const r = anchor.getBoundingClientRect()
-  
+
     if (side === 'down') {
       setPos({ top: r.bottom + gap, left: r.left })
     } else if (side === 'right') {
@@ -111,17 +111,8 @@ const FloatingPanel: FC<{
 
 /* ------------------------------ Basic Links ------------------------------ */
 
-const MenuLink = ({
-  item,
-  lang,
-  level,
-}: {
-  item: TNavigationItem
-  lang?: string
-  level: number
-}) => {
-  const href =
-    lang && lang !== 'en' ? `/${lang}${item.href || '#'}` : item.href || '#'
+const MenuLink = ({ item, lang, level }: { item: TNavigationItem; lang?: string; level: number }) => {
+  const href = lang && lang !== 'en' ? `/${lang}${item.href || '#'}` : item.href || '#'
   return (
     <Link
       href={href}
@@ -129,21 +120,24 @@ const MenuLink = ({
         'flex w-full items-center justify-between rounded-md px-4 py-2 font-normal',
         'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-700',
         'dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200',
-        'whitespace-normal break-words' // <-- wrap long text
+        'break-words whitespace-normal' // <-- wrap long text
       )}
     >
       <span className="flex-1">{item.name}</span>
       {item.children?.length ? (
         level === 1 ? (
-          <ChevronDownIcon className={`ms-auto h-4 w-4 text-neutral-500  ${lang === 'ar' ? 'rotate-90' : '-rotate-90'}`} />
+          <ChevronDownIcon
+            className={`ms-auto h-4 w-4 text-neutral-500 ${lang === 'ar' ? 'rotate-90' : '-rotate-90'}`}
+          />
         ) : (
-          <ChevronRightIcon className={`ms-auto h-4 w-4 text-neutral-500 ${lang === 'ar' ? 'rotate-180' : 'rotate-0'}`} />
+          <ChevronRightIcon
+            className={`ms-auto h-4 w-4 text-neutral-500 ${lang === 'ar' ? 'rotate-180' : 'rotate-0'}`}
+          />
         )
       ) : null}
     </Link>
   )
 }
-
 
 /* ----------------------------- Top Level Item ---------------------------- */
 
@@ -201,7 +195,7 @@ const NestedMenuList: FC<{
         'ring-1 ring-black/5 dark:bg-[#0D0D0D] dark:ring-white/10',
         'max-h-[70vh] overflow-y-auto',
         level >= 3
-          ? 'w-80 whitespace-normal break-words' // wider + allow wrapping for 3rd level+
+          ? 'w-80 break-words whitespace-normal' // wider + allow wrapping for 3rd level+
           : 'w-56 overflow-x-hidden'
       )}
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
@@ -234,7 +228,11 @@ const NestedMenuItem: FC<{
 
       {/* Submenu in a portal so it’s never clipped by parent scroll */}
       {hasChildren && open && (
-        <FloatingPanel anchor={liRef.current} side={lang ==="ar" ? "left" : "right"} gap={lang ==="ar" ? level === 1 ? 250 : 330 : 8}>
+        <FloatingPanel
+          anchor={liRef.current}
+          side={lang === 'ar' ? 'left' : 'right'}
+          gap={lang === 'ar' ? (level === 1 ? 250 : 330) : 8}
+        >
           <div onMouseEnter={cancel} onMouseLeave={closeLater} className="w-56">
             <NestedMenuList items={item.children as TNavigationItem[]} lang={lang} level={level + 1} />
           </div>
@@ -318,12 +316,14 @@ const MegaMenu = ({
         <div className="absolute inset-x-0 top-full z-50 sub-menu">
           <div className="bg-white shadow-lg dark:bg-[#0D0D0D]">
             <div className="container">
-              <div className="flex border-t border-neutral-200 py-11 text-sm dark:border-neutral-700" >
+              <div className="flex border-t border-neutral-200 py-11 text-sm dark:border-neutral-700">
                 <div className="grid flex-1 grid-cols-4 gap-6 pe-10 xl:gap-8 2xl:pe-14">
                   {menuItem.children?.map((menuChild, index) => (
                     <div key={index}>
                       <p className="font-medium text-neutral-900 dark:text-neutral-200">{menuChild.name}</p>
-                      <ul className="mt-4 grid space-y-1" dir={lang === 'ar' ? 'rtl' : 'ltr'}>{menuChild.children?.map(renderNavlink)}</ul>
+                      <ul className="mt-4 grid space-y-1" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+                        {menuChild.children?.map(renderNavlink)}
+                      </ul>
                     </div>
                   ))}
                 </div>

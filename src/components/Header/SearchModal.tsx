@@ -149,7 +149,13 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false, home, isTr
           icon={Search01Icon}
           size={24}
           className={clsx(
-            `transition-colors duration-200 ${home ? (isTransparentHeader ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white') : 'text-[#000000] dark:text-white'}`
+            `transition-colors duration-200 ${
+              home
+                ? isTransparentHeader
+                  ? 'text-[#fff] dark:text-[#fff]'
+                  : 'text-[#000000] dark:text-white'
+                : 'text-[#000000] dark:text-white'
+            }`
           )}
         />
       </ButtonCircle>

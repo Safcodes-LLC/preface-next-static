@@ -1,41 +1,32 @@
-import React from "react";
-
 const SectionGridPostsSkeleton = () => {
   return (
     <div className="section-grid-posts relative">
       {/* Heading skeleton */}
-      <div
-        className="mb-10 flex flex-col items-start space-y-2"
-      >
-        <div className="h-6 w-48 md:h-8 md:w-64 bg-gray-700 rounded animate-pulse" />
-        <div className="h-4 w-32 bg-gray-600 rounded animate-pulse" />
+      <div className="mb-10 flex flex-col items-start space-y-2">
+        <div className="h-6 w-48 animate-pulse rounded bg-neutral-400 md:h-8 md:w-64 dark:bg-neutral-800" />
+        <div className="h-4 w-32 animate-pulse rounded bg-neutral-400 dark:bg-neutral-800" />
       </div>
 
       {/* Grid skeleton */}
-      <div
-        className="grid gap-x-6 gap-y-8 md:gap-x-7 md:gap-y-10 grid-cols-12"
-      >
+      <div className="grid grid-cols-12 gap-x-6 gap-y-8 md:gap-x-7 md:gap-y-10">
         {Array.from({ length: 5 }).map((_, index) => (
-          <div
-            key={index}
-            className="col-span-4 max-md:col-span-full flex flex-col overflow-hidden animate-pulse"
-          >
+          <div key={index} className="col-span-4 flex animate-pulse flex-col overflow-hidden max-md:col-span-full">
             {/* Thumbnail */}
-            <div className="w-full h-48 md:h-48 bg-gray-700 rounded-lg" />
+            <div className="h-48 w-full rounded-lg bg-neutral-200 md:h-48 dark:bg-neutral-700" />
 
             {/* Title */}
-            <div className="pt-4 space-y-3">
-              <div className="h-4 w-3/4 bg-gray-600 rounded" />
-              <div className="flex items-center gap-2">
-                <div className="h-3 w-3 bg-gray-500 rounded-full" />
-                <div className="h-3 w-1/3 bg-gray-500 rounded" />
+            <div className="space-y-3 pt-4">
+              <div className="h-4 w-3/4 rounded bg-neutral-400 dark:bg-neutral-800" />
+              <div className="flex items-center gap-1">
+                <div className="h-3 w-3 rounded-full bg-neutral-500 dark:bg-neutral-900" />
+                <div className="h-3 w-1/3 rounded bg-neutral-400 dark:bg-neutral-800" />
               </div>
             </div>
           </div>
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SectionGridPostsSkeleton;
+export default SectionGridPostsSkeleton

@@ -1,13 +1,13 @@
-import { ReactNode } from 'react'
-import { Noto_Kufi_Arabic, Noto_Serif } from 'next/font/google'
+import Footer from '@/components/Footer/Footer'
 import Header2 from '@/components/Header/Header2'
 import SocialSidebar from '@/components/SocialSidebar'
 import AsideSidebarNavigation from '@/components/aside-sidebar-navigation'
-import Navbar2 from '@/shared/Navbar2'
-import Footer from '@/components/Footer/Footer'
 import { getNavigation as fetchNavigation } from '@/data/navigation'
 import { getAllPosts } from '@/data/posts'
 import { getDictionary } from '@/i18n'
+import Navbar2 from '@/shared/Navbar2'
+import { Noto_Kufi_Arabic, Noto_Serif } from 'next/font/google'
+import { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
@@ -35,7 +35,10 @@ const ApplicationLayout = async ({ children, home, params }: Props) => {
   // Check if current page should hide Navbar2 and use header-scroll
   const isTransparentHeader = (await params).pathname === '/' || (await params).pathname === '/visuals'
   return (
-    <div className={(await params).lang === 'ar' ? notoKufiArabic.className : notoSerif.className} dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div
+      className={(await params).lang === 'ar' ? notoKufiArabic.className : notoSerif.className}
+      dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}
+    >
       {home ? null : (
         <div className="container">
           <Navbar2 lang={(await params).lang} dict={dict} />

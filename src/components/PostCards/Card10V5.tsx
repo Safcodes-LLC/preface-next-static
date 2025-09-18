@@ -3,11 +3,10 @@
 import { TPost } from '@/data/posts'
 import clsx from 'clsx'
 import { FC, useState } from 'react'
-import PostCardMeta from '../PostCardMeta/PostCardMeta'
-import PostCardSaveBtn from '../PostCardSaveBtn'
-import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardMeta4 from '../PostCardMeta/PostCardMeta4'
+import PostCardSaveBtn from '../PostCardSaveBtn'
+import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
 
 interface Props {
   className?: string
@@ -20,7 +19,6 @@ const Card10V5: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
   const [isHover, setIsHover] = useState(false)
   const { categories, bookmarked, likeCount, liked, slug } = post
   // console.log(post,"post check for popular articles");
-  
 
   return (
     <div
@@ -29,7 +27,15 @@ const Card10V5: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
       onMouseLeave={() => setIsHover(false)}
     >
       <div className={clsx('relative z-0 w-full shrink-0 overflow-hidden rounded-3xl', ratio)}>
-        <PostFeaturedMedia post={post} isHover={isHover} href={lang === 'en' ? `/${categories[0].parentCategory.slug}/${categories[0].slug}/${slug}` : `/${lang}/${categories[0].parentCategory.slug}/${categories[0].slug}/${slug}`}/>
+        <PostFeaturedMedia
+          post={post}
+          isHover={isHover}
+          href={
+            lang === 'en'
+              ? `/${categories[0].parentCategory.slug}/${categories[0].slug}/${slug}`
+              : `/${lang}/${categories[0].parentCategory.slug}/${categories[0].slug}/${slug}`
+          }
+        />
       </div>
       <div className="absolute inset-x-3 top-4 z-10 flex items-start justify-between gap-x-4 p-2">
         {/* <CategoryBadgeList categories={categories} /> */}
@@ -40,7 +46,7 @@ const Card10V5: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
         </div>
       </div>
 
-      <PostCardMeta4 meta={post} className="mt-4 mx-2" />
+      <PostCardMeta4 meta={post} className="mx-2 mt-4" />
     </div>
   )
 }
