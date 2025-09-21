@@ -31,7 +31,7 @@ const CardCategory2: FC<Props> = ({ className, category, badge, lang }) => {
   return (
     <div
       className={clsx(
-        `card-category-2 relative flex flex-col items-center justify-center rounded-3xl bg-white px-3 py-3 text-center sm:p-3 dark:bg-[#0D0D0D]`,
+        `card-category-2 relative flex flex-col items-center justify-center rounded-3xl bg-white px-3 py-3 text-center sm:p-3 dark:bg-[#0D0D0D] group`,
         className
       )}
     >
@@ -41,7 +41,7 @@ const CardCategory2: FC<Props> = ({ className, category, badge, lang }) => {
         </Badge>
       )} */}
       <NcImage
-        containerClassName="relative shrink-0 size-12 "
+        containerClassName="relative shrink-0 size-12 transition-transform duration-500 group-hover:scale-90"
         src={featuredIcon || ''}
         fill
         sizes="80px"
@@ -49,10 +49,15 @@ const CardCategory2: FC<Props> = ({ className, category, badge, lang }) => {
         className="h-full w-full object-contain"
       />
       <div className="mt-3">
-        <h2 className={`line-clamp-1 text-base font-semibold`}>{categoryName}</h2>
         <Link
-          className="absolute inset-0"
           href={lang === 'en' ? `/${parentCategory?.slug}/${slug}` : `/${lang}/${parentCategory?.slug}/${slug}`}
+          className={`line-clamp-1 text-base font-semibold relative z-10 inset-0 text-[#2a2a2a2] hover:text-[#3a3a3a]`}
+        >
+          {categoryName}
+        </Link>
+        <div
+          className="absolute inset-0"
+          // href={lang === 'en' ? `/${parentCategory?.slug}/${slug}` : `/${lang}/${parentCategory?.slug}/${slug}`}
         />
         <span className={`mt-1 block text-xs text-[#666666] dark:text-[#DFDFDF]`}>{postCount} articles</span>
       </div>
