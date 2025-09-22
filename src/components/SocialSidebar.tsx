@@ -1,6 +1,6 @@
 'use client'
 
-import { Facebook01Icon, InstagramIcon, YoutubeIcon } from '@hugeicons/core-free-icons'
+import { Facebook02Icon, InstagramIcon, YoutubeIcon, Linkedin02Icon, SnapchatIcon, NewTwitterIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import Link from 'next/link'
@@ -9,39 +9,6 @@ import React, { FC, useState } from 'react'
 interface Props {
   className?: string
 }
-
-// Custom LinkedIn icon since it's not available in Hugeicons
-const LinkedinIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5">
-    <path
-      d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8V8Z"
-      fill="currentColor"
-    />
-    <path d="M6 9H2V21H6V9Z" fill="currentColor" />
-    <path
-      d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z"
-      fill="currentColor"
-    />
-  </svg>
-)
-
-// Custom Snapchat ghost icon (monochrome, follows currentColor)
-const SnapchatIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
-  >
-    {/* Simplified Snapchat ghost shape */}
-    <path
-      fill="currentColor"
-      d="M12 3c-3.3 0-6 2.6-6 5.9 0 1.1.3 2 .7 2.7-.6.2-1.2.5-1.6.9-.3.3-.5.7-.5 1.1 0 .8.7 1.4 1.5 1.4.6 0 1.2-.2 1.7-.5.1.4.2.8.4 1.1.5.9 1.4 1.4 2.4 1.4.8 0 1.5-.3 2-.8.5.5 1.2.8 2 .8 1 0 1.9-.6 2.4-1.4.2-.3.3-.7.4-1.1.5.3 1.1.5 1.7.5.8 0 1.5-.6 1.5-1.4 0-.4-.2-.8-.5-1.1-.4-.4-1-.7-1.6-.9.4-.7.7-1.6.7-2.7C18 5.6 15.3 3 12 3zm-3.2 14.8c-.6 0-1.2.3-1.7.6-.3.2-.6.3-.9.3-.5 0-.9-.3-.9-.7 0-.4.3-.7.7-.8.9-.2 1.6-.6 2.2-1.2.1.4.3.8.5 1.1.2.3.4.5.7.7-.2.1-.4 0-.6 0zm9.9.9c-.3 0-.6-.1-.9-.3-.5-.3-1.1-.6-1.7-.6-.2 0-.4 0-.6 0 .3-.2.5-.4.7-.7.2-.3.4-.7.5-1.1.6.6 1.3 1 2.2 1.2.4.1.7.4.7.8 0 .4-.4.7-.9.7z"
-    />
-  </svg>
-)
 
 type SocialItem = {
   name: string
@@ -62,7 +29,7 @@ const socialItems: SocialItem[] = [
   {
     name: 'Facebook',
     href: 'https://www.facebook.com/',
-    icon: Facebook01Icon,
+    icon: Facebook02Icon,
     useHugeicons: true,
     color: '#60A43A',
   },
@@ -76,15 +43,23 @@ const socialItems: SocialItem[] = [
   {
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/example',
-    icon: LinkedinIcon,
-    useHugeicons: false,
+    icon: Linkedin02Icon,
+    useHugeicons: true,
     color: '#60A43A',
   },
   {
     name: 'Snapchat',
     href: 'https://www.snapchat.com/add/example',
     icon: SnapchatIcon,
-    useHugeicons: false,
+    useHugeicons: true,
+    color: '#60A43A',
+  },
+  // add x icon
+  {
+    name: 'X',
+    href: 'https://www.x.com/',
+    icon: NewTwitterIcon,
+    useHugeicons: true,
     color: '#60A43A',
   },
 ]
