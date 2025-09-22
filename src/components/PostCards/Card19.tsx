@@ -106,22 +106,10 @@ const Card19: FC<Props> = ({
         className={clsx(
           'absolute inset-x-0 bottom-0 flex grow flex-col',
           textCenter
-            ? 'w-full gap-2 p-5 text-left sm:gap-4 sm:p-6 xl:mx-auto xl:my-8 xl:w-[80%] xl:text-center'
+            ? 'w-full gap-2 p-5 text-left sm:gap-4 sm:p-6 xl:my-1 xl:text-left'
             : 'p-5 text-left sm:p-6'
         )}
       >
-        {/* Button above title */}
-        {textCenter && (
-          <div className="relative z-10">
-            <Link href={lang === 'en' ? `/video/${slug}` : `/${lang}/video/${slug}`}>
-              <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
-                Watch full video
-                {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}
-              </ButtonPrimary>
-            </Link>
-          </div>
-        )}
-
         <div className="relative z-10 flex items-end">
           <h2
             className={clsx(
@@ -136,6 +124,19 @@ const Card19: FC<Props> = ({
             {title}
           </h2>
         </div>
+
+        {/* Button above title */}
+        {textCenter && (
+          <div className="relative z-10 text-center">
+            <Link href={lang === 'en' ? `/video/${slug}` : `/${lang}/video/${slug}`}>
+              <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
+                Watch full video
+                {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}
+              </ButtonPrimary>
+            </Link>
+          </div>
+        )}
+
         {!textCenter && (
           <div className="relative z-10 mt-3 flex flex-col items-center justify-between gap-4 sm:flex-row">
             <p className={clsx('line-clamp-2 flex-1 text-[12px] leading-snug font-medium text-white sm:text-sm')}>

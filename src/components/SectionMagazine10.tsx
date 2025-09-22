@@ -22,6 +22,7 @@ const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang }) =>
             titleClass="text-lg sm:text-xl"
             ratio="aspect-4/3 sm:aspect-1/1 md:aspect-4/1 lg:aspect-4/2 xl:aspect-1/1"
             textCenter={true}
+            verticalLine={true}
             lang={lang}
           />
         )}
