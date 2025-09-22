@@ -197,6 +197,8 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
                 autoSlideInterval: 5000,
                 showButtons: false,
                 loop: true,
+                marquee: true,
+                marqueeSpeed: 65,
               }}
             />
           </div>

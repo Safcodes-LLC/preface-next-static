@@ -3,9 +3,7 @@
 import { TCategory } from '@/data/categories'
 import HeadingWithSub from '@/shared/Heading'
 import clsx from 'clsx'
-import { motion, useAnimationControls } from 'framer-motion'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useSwipeable } from 'react-swipeable'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import CardCategory1 from './CategoryCards/CardCategory1'
 import CardCategory2 from './CategoryCards/CardCategory2'
 import CardCategory3 from './CategoryCards/CardCategory3'
@@ -17,15 +15,8 @@ interface SliderConfig {
   autoSlideInterval?: number
   showButtons?: boolean
   loop?: boolean
-  slidesToScroll?: number
-}
-
-interface HeadingProps {
-  heading?: string
-  subHeading?: string
-  dimHeading?: boolean
-  level?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-  isCenter?: boolean
+  marquee?: boolean
+  marqueeSpeed?: number
 }
 
 interface SectionSliderProps {
@@ -39,290 +30,428 @@ interface SectionSliderProps {
   lang?: string
 }
 
-// Default configuration
 const defaultConfig: SliderConfig = {
-  autoSlide: false,
-  autoSlideInterval: 3000,
+  autoSlide: true,
+  autoSlideInterval: 4000,
   showButtons: true,
   loop: true,
-  slidesToScroll: 1,
+  marquee: false,
+  marqueeSpeed: 50,
 }
 
-// Navigation Button Component
-const NavigationButton: React.FC<{
-  direction: 'prev' | 'next'
-  onClick: () => void
-  disabled: boolean
-  className?: string
-}> = ({ direction, onClick, disabled, className }) => (
-  <button
-    onClick={onClick}
-    disabled={disabled}
-    className={clsx(
-      'absolute top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow-lg transition-all duration-200 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50',
-      direction === 'prev' ? '-left-4' : '-right-4',
-      className
-    )}
-    aria-label={direction === 'prev' ? 'Previous slide' : 'Next slide'}
-  >
-    <svg
-      className={clsx('h-5 w-5 text-gray-600', direction === 'prev' && 'rotate-180')}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-    </svg>
-  </button>
-)
-
-// Heading Component
-const SliderHeading: React.FC<HeadingProps> = ({ heading, subHeading, dimHeading, level = 'h2', isCenter }) => {
-  if (!heading && !subHeading) return null
-
-  const HeadingTag = level
-
-  return (
-    <div className={clsx('mb-12', isCenter && 'text-center')}>
-      <HeadingWithSub className="mb-0!" subHeading={subHeading}>
-        {heading}
-      </HeadingWithSub>
-    </div>
-  )
-}
-
-// Main Component
 const SectionSlider: React.FC<SectionSliderProps> = ({
   heading,
   subHeading,
-  dimHeading,
   className,
   categories,
-  categoryCardType = 'card3',
+  categoryCardType = 'card2',
   config = {},
   lang,
 }) => {
-  const mergedConfig = { ...defaultConfig, ...config }
-  const { autoSlide, autoSlideInterval, showButtons, loop, slidesToScroll } = mergedConfig
+  const cfg = { ...defaultConfig, ...config }
+  const { autoSlide, autoSlideInterval, showButtons, loop, marquee, marqueeSpeed } = cfg
 
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const trackRef = useRef<HTMLDivElement | null>(null)
+
+  const startXRef = useRef(0)
+  const prevTranslateRef = useRef(0)
+  const animationFrameRef = useRef<number | null>(null)
+  const draggingRef = useRef(false)
+  const pointerIdRef = useRef<number | null>(null)
+
+  const marqueeRafRef = useRef<number | null>(null)
+  const marqueeTranslateRef = useRef(0)
+  const lastTsRef = useRef<number | null>(null)
+  // Cached style refs to avoid redundant DOM writes
+  const lastTransformRef = useRef<string>('')
+  const lastTransitionRef = useRef<string>('')
+  // Visibility / viewport refs
+  const isInViewRef = useRef(true)
+  const isPageVisibleRef = useRef(true)
+
+  const [cardsPerView, setCardsPerView] = useState(5)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [cardsPerView, setCardsPerView] = useState(7) // Default value that matches server render
-  const [isClient, setIsClient] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
-  const [isInfiniteMode, setIsInfiniteMode] = useState(false)
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const controls = useAnimationControls()
-
+  const slideWidthRef = useRef(0)
   const totalSlides = categories.length
+  const isLooping = loop && totalSlides > 0
+  const clonesCount = isLooping ? cardsPerView : 0
+  const extendedCategories = useMemo(() => {
+    if (!isLooping) return categories
+    const head = categories.slice(0, clonesCount)
+    const tail = categories.slice(-clonesCount)
+    return [...tail, ...categories, ...head]
+  }, [categories, clonesCount, isLooping])
+  const extendedLength = extendedCategories.length
   const maxIndex = Math.max(0, totalSlides - cardsPerView)
-
-  // Only calculate duplicated categories on client side
-  const duplicatedCategories = React.useMemo(() => {
-    if (!isClient) return categories
-    if (!autoSlide || !loop || categories.length === 0) return categories
-
-    // Simply repeat the same sequence multiple times to maintain order
-    const repeatCount = Math.ceil((cardsPerView * 3) / categories.length) + 2
-    const duplicates = []
-
-    for (let i = 0; i < repeatCount; i++) {
-      duplicates.push(...categories)
-    }
-
-    return duplicates
-  }, [categories, autoSlide, loop, cardsPerView, isClient])
-
-  // Set isClient to true on mount
-  useEffect(() => {
-    setIsClient(true)
-
-    const updateCardsPerView = () => {
-      const width = window.innerWidth
-      if (width < 640) setCardsPerView(1)
-      else if (width < 768) setCardsPerView(2)
-      else if (width < 1024) setCardsPerView(3)
-      else if (width < 1280) setCardsPerView(5)
-      else setCardsPerView(5)
-    }
-
-    // Only run on client side
-    updateCardsPerView()
-    window.addEventListener('resize', updateCardsPerView)
-    return () => window.removeEventListener('resize', updateCardsPerView)
-  }, [])
-
-  // Calculate card width percentage, ensure no division by zero
-  const cardWidthPercentage = cardsPerView > 0 ? 100 / cardsPerView : 100
-
-  // Infinite auto-sliding logic with Framer Motion
-  useEffect(() => {
-    if (!autoSlide || isPaused || totalSlides === 0 || !loop) return
-
-    setIsInfiniteMode(true)
-
-    const startInfiniteAnimation = () => {
-      // Calculate total width needed to move through all original cards once
-      const totalMoveDistance = -(categories.length * cardWidthPercentage)
-
-      controls.start({
-        x: `${totalMoveDistance}%`,
-        transition: {
-          duration: (categories.length * (autoSlideInterval || 3000)) / 1000,
-          ease: 'linear',
-          repeat: Infinity,
-          repeatType: 'loop',
-        },
-      })
-    }
-
-    startInfiniteAnimation()
-
-    return () => {
-      controls.stop()
-    }
-  }, [autoSlide, autoSlideInterval, isPaused, loop, totalSlides, cardWidthPercentage, controls, categories.length])
-
-  // Regular auto-sliding for non-infinite mode
-  useEffect(() => {
-    if (!autoSlide || isPaused || totalSlides === 0 || loop) return
-
-    intervalRef.current = setInterval(() => {
-      setCurrentIndex((prevIndex) => {
-        const nextIndex = prevIndex + slidesToScroll!
-        return nextIndex >= maxIndex ? 0 : nextIndex
-      })
-    }, autoSlideInterval)
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-      }
-    }
-  }, [autoSlide, autoSlideInterval, isPaused, maxIndex, loop, slidesToScroll, totalSlides])
-
-  const goToNext = useCallback(() => {
-    if (isInfiniteMode) {
-      controls.stop()
-      setIsPaused(true)
-      setTimeout(() => setIsPaused(false), 100)
-      return
-    }
-
-    const nextIndex = currentIndex + slidesToScroll!
-    if (nextIndex >= maxIndex) {
-      setCurrentIndex(loop ? 0 : maxIndex)
-    } else {
-      setCurrentIndex(nextIndex)
-    }
-    setIsPaused(false)
-  }, [currentIndex, maxIndex, loop, slidesToScroll, isInfiniteMode, controls])
-
-  const goToPrev = useCallback(() => {
-    if (isInfiniteMode) {
-      controls.stop()
-      setIsPaused(true)
-      setTimeout(() => setIsPaused(false), 100)
-      return
-    }
-
-    const prevIndex = currentIndex - slidesToScroll!
-    if (prevIndex < 0) {
-      setCurrentIndex(loop ? maxIndex : 0)
-    } else {
-      setCurrentIndex(prevIndex)
-    }
-    setIsPaused(false)
-  }, [currentIndex, maxIndex, loop, slidesToScroll, isInfiniteMode, controls])
-
-  // Create swipe handlers
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: goToNext,
-    onSwipedRight: goToPrev,
-    trackMouse: true,
-    trackTouch: true,
-    preventScrollOnSwipe: true,
-  })
-
-  // Combine refs manually
-  const combinedRef = useCallback(
-    (node: HTMLDivElement | null) => {
-      containerRef.current = node
-      if (swipeHandlers.ref) {
-        ;(swipeHandlers.ref as any)(node)
-      }
-    },
-    [swipeHandlers.ref]
-  )
+  const autoplayRef = useRef<number | null>(null)
+  const smoothTransitionRef = useRef(true)
 
   const renderCard = (item: TCategory, index: number) => {
-    const topIndex = index < 3 ? `#${index + 1}` : undefined
-
+    const badge = index < 3 ? `#${index + 1}` : undefined
     switch (categoryCardType) {
       case 'card1':
         return <CardCategory1 key={`${item.id}-${index}`} category={item} />
       case 'card2':
-        return <CardCategory2 key={`${item.id}-${index}`} badge={topIndex} category={item} lang={lang} />
+        return <CardCategory2 key={`${item.id}-${index}`} category={item} badge={badge} lang={lang} />
       case 'card3':
         return <CardCategory3 key={`${item.id}-${index}`} category={item} />
       case 'card4':
-        return <CardCategory4 key={`${item.id}-${index}`} badge={topIndex} category={item} />
+        return <CardCategory4 key={`${item.id}-${index}`} category={item} badge={badge} />
       case 'card5':
         return <CardCategory5 key={`${item.id}-${index}`} category={item} />
       default:
-        return null
+        return <CardCategory2 key={`${item.id}-${index}`} category={item} badge={badge} lang={lang} />
     }
   }
 
-  // Regular translateX for non-infinite mode
-  const translateX = isInfiniteMode ? 0 : -(currentIndex * (100 / cardsPerView))
-  const prevBtnDisabled = !loop && currentIndex === 0
-  const nextBtnDisabled = !loop && currentIndex >= maxIndex
+  useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth
+      if (w < 640) setCardsPerView(1)
+      else if (w < 768) setCardsPerView(2)
+      else if (w < 1024) setCardsPerView(3)
+      else if (w < 1280) setCardsPerView(4)
+      else setCardsPerView(5)
+    }
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
 
-  // Choose which categories array to render
-  const categoriesToRender = isInfiniteMode && autoSlide && loop ? duplicatedCategories : categories
+  useEffect(() => {
+    const calc = () => {
+      if (!containerRef.current) return
+      const containerWidth = containerRef.current.clientWidth
+      slideWidthRef.current = containerWidth / cardsPerView
+      if (marquee) {
+        if (isLooping) {
+          marqueeTranslateRef.current = -clonesCount * slideWidthRef.current
+        } else {
+          marqueeTranslateRef.current = 0
+        }
+        applyTranslate(marqueeTranslateRef.current, 0)
+      } else {
+        applyTranslate(-currentIndex * slideWidthRef.current, 0)
+      }
+    }
+
+    calc()
+    const RO = (window as any).ResizeObserver || null
+    const ro = RO ? new RO(() => calc()) : null
+    if (containerRef.current && ro) ro.observe(containerRef.current)
+    window.addEventListener('resize', calc)
+    return () => {
+      if (ro && containerRef.current) ro.unobserve(containerRef.current)
+      window.removeEventListener('resize', calc)
+    }
+  }, [cardsPerView, marquee, isLooping, clonesCount, currentIndex])
+
+  useEffect(() => {
+    if (!isLooping) return
+    if (marquee) {
+      marqueeTranslateRef.current = -clonesCount * slideWidthRef.current
+      applyTranslate(marqueeTranslateRef.current, 0)
+      return
+    }
+    smoothTransitionRef.current = false
+    setCurrentIndex((prev) => {
+      const min = clonesCount
+      const max = clonesCount + totalSlides - 1
+      if (prev >= min && prev <= max) return prev
+      return clonesCount
+    })
+    applyTranslate(-clonesCount * slideWidthRef.current, 0)
+  }, [cardsPerView, totalSlides, clonesCount, isLooping, marquee])
+
+  useEffect(() => {
+    if (marquee) return
+    const target = -currentIndex * slideWidthRef.current
+    prevTranslateRef.current = target
+    const ms = smoothTransitionRef.current ? 500 : 0
+    applyTranslate(target, ms)
+    smoothTransitionRef.current = true
+  }, [currentIndex, marquee])
+
+  const applyTranslate = (px: number, transitionMs = 500) => {
+    const el = trackRef.current
+    if (!el) return
+    const nextTransition = transitionMs > 0 ? `transform ${transitionMs}ms ease-in-out` : 'none'
+    if (lastTransitionRef.current !== nextTransition) {
+      el.style.transition = nextTransition
+      lastTransitionRef.current = nextTransition
+    }
+    const nextTransform = `translate3d(${px}px, 0, 0)`
+    if (lastTransformRef.current !== nextTransform) {
+      el.style.transform = nextTransform
+      lastTransformRef.current = nextTransform
+    }
+  }
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (e.button && e.button !== 0) return
+
+    const el = trackRef.current
+    if (!el || !containerRef.current) return
+
+    ;(e.target as Element).setPointerCapture?.(e.pointerId)
+    pointerIdRef.current = e.pointerId
+
+    draggingRef.current = true
+    startXRef.current = e.clientX
+    prevTranslateRef.current = getCurrentTranslate()
+    el.style.transition = 'none'
+    setIsPaused(true)
+  }
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!draggingRef.current) return
+    const delta = e.clientX - startXRef.current
+    const next = prevTranslateRef.current + delta
+    let limited = next
+    if (!isLooping) {
+      const maxTranslate = 0
+      const minTranslate = -maxIndex * slideWidthRef.current
+      if (next > maxTranslate + 80) limited = maxTranslate + 80
+      if (next < minTranslate - 80) limited = minTranslate - 80
+    }
+    applyTranslate(limited, 0)
+  }
+
+  const onPointerUp = (e: React.PointerEvent) => {
+    if (!draggingRef.current) return
+    draggingRef.current = false
+    setIsPaused(false)
+    try {
+      ;(e.target as Element).releasePointerCapture?.(e.pointerId)
+    } catch {}
+    const endX = e.clientX
+    const movedPx = endX - startXRef.current
+    const threshold = slideWidthRef.current * 0.25
+
+    if (marquee) {
+      marqueeTranslateRef.current = getCurrentTranslate()
+      return
+    }
+
+    if (movedPx < -threshold) {
+      goToNext()
+    } else if (movedPx > threshold) {
+      goToPrev()
+    } else {
+      applyTranslate(-currentIndex * slideWidthRef.current, 200)
+    }
+  }
+
+  const getCurrentTranslate = () => {
+    if (!trackRef.current) return 0
+    const style = window.getComputedStyle(trackRef.current)
+    const transform = style.transform || ''
+    if (transform && transform !== 'none') {
+      const match = transform.match(/matrix.*\((.+)\)/)
+      if (match) {
+        const parts = match[1].split(',').map((s) => s.trim())
+        const tx = parseFloat(parts[4])
+        return tx || 0
+      }
+    }
+    return 0
+  }
+
+  const goToNext = useCallback(() => {
+    if (marquee) {
+      const next = getCurrentTranslate() - slideWidthRef.current
+      marqueeTranslateRef.current = next
+      applyTranslate(next, 200)
+      return
+    }
+    setCurrentIndex((prev) => {
+      if (isLooping) return prev + 1
+      if (prev >= maxIndex) return maxIndex
+      return prev + 1
+    })
+  }, [isLooping, maxIndex, marquee])
+
+  const goToPrev = useCallback(() => {
+    if (marquee) {
+      const next = getCurrentTranslate() + slideWidthRef.current
+      marqueeTranslateRef.current = next
+      applyTranslate(next, 200)
+      return
+    }
+    setCurrentIndex((prev) => {
+      if (isLooping) return prev - 1
+      if (prev <= 0) return 0
+      return prev - 1
+    })
+  }, [isLooping, marquee])
+
+  useEffect(() => {
+    if (marquee) return
+    if (!autoSlide || totalSlides <= cardsPerView) return
+
+    const startAutoplay = () => {
+      if (autoplayRef.current) clearInterval(autoplayRef.current)
+      autoplayRef.current = window.setInterval(() => {
+        if (!draggingRef.current && !isPaused) {
+          goToNext()
+        }
+      }, autoSlideInterval)
+    }
+
+    startAutoplay()
+
+    return () => {
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current)
+        autoplayRef.current = null
+      }
+    }
+  }, [autoSlide, autoSlideInterval, isPaused, cardsPerView, totalSlides, goToNext, marquee])
+
+  useEffect(() => {
+    if (!marquee || !autoSlide || !isLooping || totalSlides <= 0) return
+    marqueeTranslateRef.current = marqueeTranslateRef.current || -clonesCount * slideWidthRef.current
+    applyTranslate(marqueeTranslateRef.current, 0)
+    let mounted = true
+    const step = (ts: number) => {
+      if (!mounted) return
+      if (draggingRef.current || isPaused || !isInViewRef.current || !isPageVisibleRef.current) {
+        lastTsRef.current = ts
+        marqueeRafRef.current = requestAnimationFrame(step)
+        return
+      }
+      if (lastTsRef.current == null) lastTsRef.current = ts
+      const dt = Math.min(64, ts - lastTsRef.current)
+      lastTsRef.current = ts
+      const speedPxPerMs = Math.max(5, marqueeSpeed || 50) / 1000
+      let next = marqueeTranslateRef.current - speedPxPerMs * dt
+      const oneCycleWidth = totalSlides * slideWidthRef.current
+      const minTranslate = -(clonesCount + totalSlides) * slideWidthRef.current
+      if (next <= minTranslate) {
+        next += oneCycleWidth
+      }
+      marqueeTranslateRef.current = next
+      applyTranslate(next, 0)
+      marqueeRafRef.current = requestAnimationFrame(step)
+    }
+    marqueeRafRef.current = requestAnimationFrame(step)
+    return () => {
+      mounted = false
+      if (marqueeRafRef.current) cancelAnimationFrame(marqueeRafRef.current)
+      marqueeRafRef.current = null
+      lastTsRef.current = null
+    }
+  }, [marquee, autoSlide, isLooping, totalSlides, clonesCount, marqueeSpeed])
+
+  // Pause when slider offscreen using IntersectionObserver
+  useEffect(() => {
+    const root = containerRef.current
+    if (!root) return
+    // Observe the container itself for visibility in viewport
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        isInViewRef.current = entry?.isIntersecting ?? true
+      },
+      { threshold: 0.1 }
+    )
+    io.observe(root)
+    return () => io.disconnect()
+  }, [])
+
+  // Pause when tab not visible
+  useEffect(() => {
+    const onVis = () => {
+      isPageVisibleRef.current = !document.hidden
+    }
+    document.addEventListener('visibilitychange', onVis)
+    onVis()
+    return () => document.removeEventListener('visibilitychange', onVis)
+  }, [])
+
+  const onTransitionEnd = () => {
+    if (marquee) return
+    if (!isLooping || totalSlides === 0) return
+    const min = clonesCount
+    const max = clonesCount + totalSlides - 1
+    if (currentIndex > max) {
+      smoothTransitionRef.current = false
+      const newIndex = currentIndex - totalSlides
+      setCurrentIndex(newIndex)
+      applyTranslate(-newIndex * slideWidthRef.current, 0)
+    } else if (currentIndex < min) {
+      smoothTransitionRef.current = false
+      const newIndex = currentIndex + totalSlides
+      setCurrentIndex(newIndex)
+      applyTranslate(-newIndex * slideWidthRef.current, 0)
+    }
+  }
+
+  const handleMouseEnter = () => setIsPaused(true)
+  const handleMouseLeave = () => setIsPaused(false)
+
+  const trackStyle: React.CSSProperties = {
+    display: 'flex',
+    willChange: 'transform',
+    touchAction: 'pan-y',
+    userSelect: 'none',
+  }
 
   return (
-    <div className={clsx('section-slider-new-categories relative', className)}>
-      {/* Heading Section with Container */}
-      <SliderHeading heading={heading} subHeading={subHeading} dimHeading={dimHeading} />
+    <div className={clsx('section-slider relative', className)}>
+      {heading && <HeadingWithSub subHeading={subHeading}>{heading}</HeadingWithSub>}
 
-      {/* Slider Section */}
-      <div className="relative" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
-        {/* Navigation Buttons */}
+      <div
+        ref={containerRef}
+        className="relative overflow-hidden"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         {showButtons && totalSlides > cardsPerView && (
-          <>
-            <NavigationButton direction="prev" onClick={goToPrev} disabled={prevBtnDisabled} />
-            <NavigationButton direction="next" onClick={goToNext} disabled={nextBtnDisabled} />
-          </>
+          <button
+            aria-label="Previous slide"
+            onClick={goToPrev}
+            className="absolute top-1/2 left-2 z-20 -translate-y-1/2 rounded-full bg-white p-2 shadow-md"
+          >
+            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
         )}
 
-        {/* Slider Container */}
-        <div ref={combinedRef} className="overflow-hidden" {...(({ ref, ...handlers }) => handlers)(swipeHandlers)}>
-          <motion.div
-            animate={controls}
-            className="flex"
-            style={{
-              transform: isInfiniteMode ? undefined : `translateX(${translateX}%)`,
-              width: isInfiniteMode ? 'auto' : `${(totalSlides / cardsPerView) * 100}%`,
-            }}
-            transition={{
-              duration: isInfiniteMode ? 0 : 0.3,
-              ease: isInfiniteMode ? 'linear' : 'easeOut',
-            }}
+        {showButtons && totalSlides > cardsPerView && (
+          <button
+            aria-label="Next slide"
+            onClick={goToNext}
+            className="absolute top-1/2 right-2 z-20 -translate-y-1/2 rounded-full bg-white p-2 shadow-md"
           >
-            {categoriesToRender.map((category, index) => (
-              <div
-                key={`${category.id}-${index}`}
-                className="flex-shrink-0 px-4 lg:px-2"
-                style={{
-                  width: isInfiniteMode ? `${cardWidthPercentage}%` : `${100 / categoriesToRender.length}%`,
-                }}
-              >
-                {renderCard(category, index)}
-              </div>
-            ))}
-          </motion.div>
+            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        )}
+
+        <div
+          ref={trackRef}
+          style={trackStyle}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerUp}
+          onTransitionEnd={onTransitionEnd}
+          className="w-full"
+        >
+          {extendedCategories.map((category, index) => (
+            <div
+              key={`${category.id ?? 'cat'}-ext-${index}`}
+              className="flex-shrink-0 px-3"
+              style={{ width: `${100 / cardsPerView}%` }}
+            >
+              {renderCard(category, index)}
+            </div>
+          ))}
         </div>
       </div>
     </div>
