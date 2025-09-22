@@ -60,14 +60,15 @@ const Languages = ({
           key={item.code}
           onClick={() => (pagesWithLanguage ? onSelectLanguage(item) : router.push(`/${item.code}`))}
           className={clsx(
-            '-m-2.5 flex cursor-pointer items-center rounded-lg p-2.5 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden dark:hover:bg-neutral-700',
+            '-m-2.5 flex cursor-pointer items-center  p-1 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden dark:hover:bg-neutral-700',
             item.active ? 'bg-neutral-100 dark:bg-neutral-700' : 'opacity-80'
           )}
         >
           <div>
             <div className="flex items-center gap-x-2">
-              {item.FlagComponent && <item.FlagComponent className="" />}
-              <p className="text-sm font-medium">{item.name}</p>
+              {/* {item.FlagComponent && <item.FlagComponent className="" />} */}
+              <p className="text-xs font-normal">{item.code.toUpperCase()}</p>
+              <p className="text-xs font-noraml">{item.name}</p>
             </div>
           </div>
         </CloseButton>
@@ -95,7 +96,7 @@ const CurrLangDropdown: FC<Props> = ({
   languages,
   currencies,
   home,
-  panelClassName = 'w-44',
+  panelClassName = 'w-36',
   lang,
 }) => {
   const router = useRouter()
@@ -151,8 +152,8 @@ const CurrLangDropdown: FC<Props> = ({
         )}
       >
         <div className="flex h-5 items-center justify-center rounded-full px-1 text-sm font-medium text-white">
-          {selectedLanguage?.FlagComponent && <selectedLanguage.FlagComponent className="me-1 h-3 w-3" />}
-          {selectedLanguage?.code}
+          {/* {selectedLanguage?.FlagComponent && <selectedLanguage.FlagComponent className="me-1 h-3 w-3" />} */}
+          {selectedLanguage?.code.toUpperCase()}
         </div>
         {/* <GlobeAltIcon className="size-5" /> */}
         <ChevronDownIcon className="ms-1 size-4 group-data-open:rotate-180" aria-hidden="true" />
@@ -162,12 +163,12 @@ const CurrLangDropdown: FC<Props> = ({
         anchor={panelAnchor}
         transition
         className={clsx(
-          'z-40 rounded-2xl bg-white p-2 ring-1 ring-black/5 transition duration-200 ease-in-out data-closed:translate-y-1 data-closed:opacity-0 dark:bg-[#0D0D0D]',
+          'z-40  bg-white p-2 ring-1 ring-black/5 transition duration-200 ease-in-out data-closed:translate-y-1 data-closed:opacity-0 dark:bg-[#0D0D0D]',
           panelClassName
         )}
       >
         <TabGroup>
-          <TabPanels className="mt-5">
+          <TabPanels className="">
             <TabPanel className="rounded-xl p-3 focus:ring-0 focus:outline-hidden">
               <Languages
                 languages={languages.map((lang) => ({
