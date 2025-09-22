@@ -178,15 +178,14 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
         {/* Calendar with Date and Time */}
         <div
           className={clsx(
-            'flex items-center gap-x-2 text-sm font-medium',
-            home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
+            'flex items-center gap-x-2 rounded-lg px-3 py-2 text-sm font-thin transition-colors hover:bg-white/10',
+            home ? 'text-white' : 'text-gray-700 dark:text-white'
           )}
         >
-          <CalendarIcon className="h-5 w-5" />
-          <div className="flex flex-col leading-none">
-            <span className="text-xs">{currentDate}</span>
-            <span className="text-xs font-normal">{currentTime}</span>
-          </div>
+          <CalendarIcon className="h-4 w-4 opacity-60" />
+          <span className="font-thin text-xs">
+            {currentDate} • {currentTime}
+          </span>
         </div>
       </div>
     </div>
