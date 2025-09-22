@@ -172,8 +172,8 @@ const Lv1MenuItem = ({
       {menuItem.children?.length ? (
         <ChevronDownIcon
           className={clsx(
-            'ms-2 size-4',
-            isScrolled ? 'text-black' : 'text-white hover:text-black dark:hover:text-white'
+            'ms-1 size-4',
+            isScrolled ? 'text-black' : 'text-dark dark:text-white hover:text-black dark:hover:text-white'
           )}
         />
       ) : null}
