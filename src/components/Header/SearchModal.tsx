@@ -65,28 +65,28 @@ const quickActions: Option[] = [
     type: 'quick-action',
     name: 'Muhammed',
     icon: Search01Icon,
-    uri: '/search',
+    uri: '/muhammad',
   },
   {
     type: 'quick-action',
-    name: 'Islam',
+    name: 'Pioneers',
     // icon: UserSearchIcon,
     icon: Search01Icon,
-    uri: '/search/?tab=authors&s=',
+    uri: '/pioneers',
   },
   {
     type: 'quick-action',
     name: 'Holy Quran',
     // icon: FolderDetailsIcon,
     icon: Search01Icon,
-    uri: '/search/?tab=categories&s=',
+    uri: '/holy-quran',
   },
   {
     type: 'quick-action',
     name: 'Islam For Beginners',
     // icon: Tag02Icon,
     icon: Search01Icon,
-    uri: '/search/?tab=tags&s=',
+    uri: '/islam-for-beginners',
   },
 ]
 
