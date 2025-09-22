@@ -18,7 +18,6 @@ interface Props {
   verticalLine?: boolean
   textCenter?: boolean
   lang?: string
-  yellowColor?: boolean
 }
 
 const Card19: FC<Props> = ({
@@ -26,7 +25,6 @@ const Card19: FC<Props> = ({
   titleClass = 'text-xl sm:text-2xl xl:text-3xl',
   ratio = 'aspect-4/3 sm:aspect-1/1',
   post,
-  yellowColor = false,
   verticalLine = false,
   textCenter = false,
   lang,
@@ -97,7 +95,7 @@ const Card19: FC<Props> = ({
         {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
-        <CategoryBadgeList categories={categories} yellowColor={yellowColor} />
+        <CategoryBadgeList categories={categories} />
         <div className="ms-auto flex gap-1">
           <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
           <PostCardSaveBtn bookmarked={bookmarked} />
@@ -124,11 +122,14 @@ const Card19: FC<Props> = ({
           </div>
         )}
 
-        <div className="relative z-10 flex items-end gap-3">
-          {verticalLine && <div className="mt-1 h-8 w-0.5 flex-shrink-0 bg-white"></div>}
+        <div className="relative z-10 flex items-end">
           <h2
             className={clsx(
               '!line-clamp-2 block !text-sm font-semibold text-white sm:!text-lg lg:!text-xl',
+              // When verticalLine is true, render a right-side vertical rule that
+              // automatically matches the title height using a pseudo-element.
+              verticalLine &&
+                "relative ps-3 before:absolute before:start-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-white before:content-['']",
               titleClass
             )}
           >
