@@ -77,12 +77,12 @@ const Card19: FC<Props> = ({
               wrapSize="size-7"
               iconSize="size-4"
             /> */}
-            <span className="absolute inset-0"></span>
+            <span className="pointer-events-none absolute inset-0"></span>
           </>
         )}
       </div>
 
-      <span className="absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80" />
+      <span className="absolute inset-x-0 bottom-0 z-0 block h-1/2 bg-linear-to-t from-black opacity-80" />
 
       {/* <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:px-7">
         <CategoryBadgeList categories={categories} />
@@ -91,12 +91,16 @@ const Card19: FC<Props> = ({
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} />
       </div> */}
 
-      <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-4 opacity-100">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex flex-wrap gap-x-2 gap-y-1 p-4 opacity-100">
         {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
-        <CategoryBadgeList categories={categories} />
-        <div className="ms-auto flex gap-1">
+        {!textCenter && (
+          <div className="pointer-events-auto">
+            <CategoryBadgeList categories={categories} />
+          </div>
+        )}
+        <div className="pointer-events-auto ms-auto flex gap-1">
           <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
           <PostCardSaveBtn bookmarked={bookmarked} />
         </div>
@@ -105,12 +109,10 @@ const Card19: FC<Props> = ({
       <div
         className={clsx(
           'absolute inset-x-0 bottom-0 flex grow flex-col',
-          textCenter
-            ? 'w-full gap-2 p-5 text-left sm:gap-4 sm:p-6 xl:my-1 xl:text-left'
-            : 'p-5 text-left sm:p-6'
+          textCenter ? 'w-full gap-2 p-5 text-left sm:gap-4 sm:p-6 xl:my-1 xl:text-left' : 'p-5 text-left sm:p-6'
         )}
       >
-        <div className="relative z-10 flex items-end">
+        <div className="relative z-20 flex items-end">
           <h2
             className={clsx(
               '!line-clamp-2 block !text-sm font-semibold text-white sm:!text-lg lg:!text-xl',
@@ -127,7 +129,7 @@ const Card19: FC<Props> = ({
 
         {/* Button above title */}
         {textCenter && (
-          <div className="relative z-10 text-center">
+          <div className="relative z-20 text-center">
             <Link href={lang === 'en' ? `/video/${slug}` : `/${lang}/video/${slug}`}>
               <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
                 Watch full video
@@ -138,7 +140,7 @@ const Card19: FC<Props> = ({
         )}
 
         {!textCenter && (
-          <div className="relative z-10 mt-3 flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <div className="relative z-20 mt-3 flex flex-col items-center justify-between gap-4 sm:flex-row">
             <p className={clsx('line-clamp-2 flex-1 text-[12px] leading-snug font-medium text-white sm:text-sm')}>
               {excerpt}
             </p>
