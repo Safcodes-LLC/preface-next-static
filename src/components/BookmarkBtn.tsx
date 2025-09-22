@@ -1,10 +1,10 @@
 'use client'
 
-import { useAuth } from '@/contexts/AuthContext'
 import { Bookmark02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import { FC, useState } from 'react'
+import { useAuth } from '@/contexts/AuthContext'
 import AuthRequiredModal from './ui/AuthRequiredModal'
 
 interface Props {
@@ -20,7 +20,7 @@ const BookmarkBtn: FC<Props> = ({ className, bookmarked, color }) => {
 
   // Default color classes
   const defaultClasses =
-    'relative flex size-8 cursor-pointer items-center justify-center rounded-full bg-neutral-50 transition-colors duration-300 hover:bg-neutral-100 dark:bg-white/10 dark:hover:bg-white/20'
+    'relative flex size-5 cursor-pointer px-1 items-center justify-center rounded-full bg-neutral-50 transition-colors duration-300 hover:bg-neutral-100 dark:bg-white/10 dark:hover:bg-white/20'
 
   const handleBookmarkClick = () => {
     if (!isAuthenticated) {
@@ -39,7 +39,12 @@ const BookmarkBtn: FC<Props> = ({ className, bookmarked, color }) => {
         onClick={handleBookmarkClick}
         type="button"
       >
-        <HugeiconsIcon icon={Bookmark02Icon} size={16} strokeWidth={1} fill={isBookmarked ? 'currentColor' : 'none'} />
+        <HugeiconsIcon 
+          icon={Bookmark02Icon} 
+          size={16} 
+          strokeWidth={1} 
+          fill={isBookmarked ? 'currentColor' : 'none'} 
+        />
       </button>
 
       <AuthRequiredModal
