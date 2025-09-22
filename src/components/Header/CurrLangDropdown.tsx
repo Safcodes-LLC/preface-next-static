@@ -152,7 +152,7 @@ const CurrLangDropdown: FC<Props> = ({
       >
         <div className="flex h-5 items-center justify-center rounded-full px-1 text-xs font-medium text-white">
           {selectedLanguage?.FlagComponent && <selectedLanguage.FlagComponent className="me-1 h-3 w-3" />}
-          {selectedLanguage?.name}
+          {selectedLanguage?.code}
         </div>
         {/* <GlobeAltIcon className="size-5" /> */}
         <ChevronDownIcon className="ms-1 size-4 group-data-open:rotate-180" aria-hidden="true" />
