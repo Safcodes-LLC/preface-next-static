@@ -72,6 +72,8 @@ const PageStories = async ({ params }: { params: Promise<{ query: string; lang: 
   }
   const dict = await getDictionary(lang)
 
+  console.log(category?.data?.length,"category length");
+  
   return (
     <div className="stories-page" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="container mx-auto mt-10 md:mt-14 lg:mt-20">
@@ -88,11 +90,13 @@ const PageStories = async ({ params }: { params: Promise<{ query: string; lang: 
 
       <div className="container py-10 md:py-14 lg:py-20">
         <Suspense fallback={<StoriesSkeleton />}>{renderLoopItems(category, lang)}</Suspense>
-        <div className="mx-auto mt-8 text-center md:mt-10 lg:mt-12">
-          <ButtonSecondary>
-            Load More <ArrowDownIcon className="h-6 w-6 text-[#444444] dark:text-white" />
-          </ButtonSecondary>
-        </div>
+        {category?.data?.length > 20 && (
+          <div className="mx-auto mt-8 text-center md:mt-10 lg:mt-12">
+            <ButtonSecondary>
+              Load More <ArrowDownIcon className="h-6 w-6 text-[#444444] dark:text-white" />
+            </ButtonSecondary>
+          </div>
+        )}
       </div>
     </div>
   )
