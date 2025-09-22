@@ -21,7 +21,7 @@ const CardCategory3: FC<Props> = ({ className = '', category, lang }) => {
         <Image
           src={featuredImage || featuredIcon || thumbnail || ''}
           className="h-full w-full rounded-2xl object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
-          sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
+          // sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
           fill
           alt={name || ''}
         />
