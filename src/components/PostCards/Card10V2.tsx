@@ -3,10 +3,10 @@ import { TPost } from '@/data/posts'
 import clsx from 'clsx'
 import { FC, useState } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
+import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardMeta2 from '../PostCardMeta/PostCardMeta2'
 import PostCardSaveBtn from '../PostCardSaveBtn'
 import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
-import PostCardLikeBtn from '../PostCardLikeBtn'
 
 interface Props {
   className?: string

@@ -17,10 +17,22 @@ interface Props {
 }
 
 const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPlay = false, href }) => {
-  const { featuredImage, thumbnail, postType, videoFile, video_url, videoUrl, video_file, galleryImgs, audioUrl, handle, title } = post
+  const {
+    featuredImage,
+    thumbnail,
+    postType,
+    videoFile,
+    video_url,
+    videoUrl,
+    video_file,
+    galleryImgs,
+    audioUrl,
+    handle,
+    title,
+  } = post
 
   // Use video_file as primary, then videoFile, then videoUrl as fallbacks
-  const videoSource = video_url ||videoUrl || video_file || videoFile || '';
+  const videoSource = video_url || videoUrl || video_file || videoFile || ''
 
   const renderPostGallery = () => {
     if (!galleryImgs) {
@@ -52,7 +64,7 @@ const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPl
             postType={postType}
           />
         )}
-        <MediaVideo isHover={isHover} videoUrl={videoSource} handle={handle} autoPlay={autoPlay} href={href}/>
+        <MediaVideo isHover={isHover} videoUrl={videoSource} handle={handle} autoPlay={autoPlay} href={href} />
       </>
     )
   }
@@ -73,11 +85,17 @@ const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPl
   }
 
   const renderImage = () => {
-    const imageSrc = featuredImage || thumbnail;
-    if (!imageSrc) return null;
+    const imageSrc = featuredImage || thumbnail
+    if (!imageSrc) return null
     return (
       <Link href={href || `/abcd/${handle}`}>
-        <Image alt={title} fill className="object-cover transition-transform duration-600 ease-in-out group-hover:scale-110" src={imageSrc} sizes="(max-width: 600px) 100vw, 50vw" />
+        <Image
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-600 ease-in-out group-hover:scale-110"
+          src={imageSrc}
+          sizes="(max-width: 600px) 100vw, 50vw"
+        />
         <div className="absolute inset-0 bg-black/25 opacity-100 transition-opacity group-hover:opacity-75" />
       </Link>
     )

@@ -25,7 +25,6 @@ const colors = {
 type BadgeProps = {
   color?: keyof typeof colors
   index?: number
-
 }
 
 export function Badge({
@@ -35,14 +34,12 @@ export function Badge({
 
   ...props
 }: BadgeProps & React.ComponentPropsWithoutRef<'span'>) {
-
   return (
     <span
       {...props}
       className={clsx(
         className,
-        'inline-flex items-center gap-x-1.5 rounded-full bg-[#60a43a] px-2.5 py-0.5 text-[10px] text-white forced-colors:outline',
-       
+        'inline-flex items-center gap-x-1.5 rounded-full bg-[#60a43a] px-2.5 py-0.5 text-[10px] text-white forced-colors:outline'
       )}
     />
   )
@@ -71,7 +68,7 @@ export const BadgeButton = forwardRef(function BadgeButton(
   return 'href' in props ? (
     <Link {...props} className={classes} ref={ref as React.ForwardedRef<HTMLAnchorElement>}>
       <TouchTarget>
-        <Badge color={color} index={index} >
+        <Badge color={color} index={index}>
           {children}
         </Badge>
       </TouchTarget>
