@@ -7,6 +7,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
+import PostCardLikeBtn from '../PostCardLikeBtn'
+import PostCardSaveBtn from '../PostCardSaveBtn'
 
 interface Props {
   className?: string
@@ -16,7 +18,6 @@ interface Props {
   verticalLine?: boolean
   textCenter?: boolean
   lang?: string
-  yellowColor?: boolean
 }
 
 const Card19: FC<Props> = ({
@@ -24,7 +25,6 @@ const Card19: FC<Props> = ({
   titleClass = 'text-xl sm:text-2xl xl:text-3xl',
   ratio = 'aspect-4/3 sm:aspect-1/1',
   post,
-  yellowColor = false,
   verticalLine = false,
   textCenter = false,
   lang,
@@ -42,6 +42,7 @@ const Card19: FC<Props> = ({
     liked,
     commentCount,
     bookmarked,
+    favoriteCount,
   } = post
 
   const parentCategorySlug = categories[0]?.parentCategory?.slug
@@ -57,14 +58,16 @@ const Card19: FC<Props> = ({
         ) : (
           <>
             {thumbnail || featuredImage ? (
-              <Image
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="rounded-xl object-cover brightness-85 transition-[filter] duration-300 group-hover:brightness-60"
-                src={thumbnail || featuredImage}
-                alt={title}
-                priority
-                fill
-              />
+              <div className="relative h-full w-full overflow-hidden rounded-xl">
+                <Image
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="h-full w-full rounded-xl object-cover brightness-85 transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-60"
+                  src={thumbnail || featuredImage}
+                  alt={title}
+                  priority
+                  fill
+                />
+              </div>
             ) : (
               <div className="h-full w-full rounded-xl bg-gray-200" /> // fallback placeholder
             )}
@@ -74,12 +77,12 @@ const Card19: FC<Props> = ({
               wrapSize="size-7"
               iconSize="size-4"
             /> */}
-            <span className="absolute inset-0"></span>
+            <span className="pointer-events-none absolute inset-0"></span>
           </>
         )}
       </div>
 
-      <span className="absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80" />
+      <span className="absolute inset-x-0 bottom-0 z-0 block h-1/2 bg-linear-to-t from-black opacity-80" />
 
       {/* <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:px-7">
         <CategoryBadgeList categories={categories} />
@@ -88,24 +91,45 @@ const Card19: FC<Props> = ({
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} />
       </div> */}
 
-      <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-4 opacity-100">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex flex-wrap gap-x-2 gap-y-1 p-4 opacity-100">
         {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
-        <CategoryBadgeList categories={categories} yellowColor={yellowColor} />
+        {!textCenter && (
+          <div className="pointer-events-auto">
+            <CategoryBadgeList categories={categories} />
+          </div>
+        )}
+        <div className="pointer-events-auto ms-auto flex gap-1">
+          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
+          <PostCardSaveBtn bookmarked={bookmarked} />
+        </div>
       </div>
 
       <div
         className={clsx(
           'absolute inset-x-0 bottom-0 flex grow flex-col',
-          textCenter
-            ? 'w-full gap-2 p-5 text-left sm:gap-4 sm:p-6 xl:mx-auto xl:my-8 xl:w-[80%] xl:text-center'
-            : 'p-5 text-left sm:p-6'
+          textCenter ? 'w-full gap-2 p-5 text-left sm:gap-4 sm:p-6 xl:my-1 xl:text-left' : 'p-5 text-left sm:p-6'
         )}
       >
+        <div className="relative z-20 flex items-end">
+          <h2
+            className={clsx(
+              '!line-clamp-2 block !text-sm font-semibold text-white sm:!text-lg lg:!text-xl',
+              // When verticalLine is true, render a right-side vertical rule that
+              // automatically matches the title height using a pseudo-element.
+              verticalLine &&
+                "relative ps-3 before:absolute before:start-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-white before:content-['']",
+              titleClass
+            )}
+          >
+            {title}
+          </h2>
+        </div>
+
         {/* Button above title */}
         {textCenter && (
-          <div className="relative z-10">
+          <div className="relative z-20 text-center">
             <Link href={lang === 'en' ? `/video/${slug}` : `/${lang}/video/${slug}`}>
               <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
                 Watch full video
@@ -115,19 +139,8 @@ const Card19: FC<Props> = ({
           </div>
         )}
 
-        <div className="relative z-10 flex items-end gap-3">
-          {verticalLine && <div className="mt-1 h-8 w-0.5 flex-shrink-0 bg-white"></div>}
-          <h2
-            className={clsx(
-              '!line-clamp-2 block !text-sm font-semibold text-white sm:!text-lg lg:!text-xl',
-              titleClass
-            )}
-          >
-            {title}
-          </h2>
-        </div>
         {!textCenter && (
-          <div className="relative z-10 mt-3 flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <div className="relative z-20 mt-3 flex flex-col items-center justify-between gap-4 sm:flex-row">
             <p className={clsx('line-clamp-2 flex-1 text-[12px] leading-snug font-medium text-white sm:text-sm')}>
               {excerpt}
             </p>

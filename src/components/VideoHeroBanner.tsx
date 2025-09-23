@@ -16,7 +16,7 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
   heading = 'VIDEO',
   className = '',
 }) => {
-  // const [isMuted, setIsMuted] = useState(true)
+  const [isMuted, setIsMuted] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isRendered, setIsRendered] = useState(false)
   const playerRef = useRef<ReactPlayer | null>(null)
@@ -33,8 +33,8 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
         <ReactPlayer
           ref={playerRef}
           url={videoUrl}
-          // muted={isMuted}
-          muted={true}
+          muted={isMuted}
+          // muted={false}
           playing={isPlaying}
           loop={true}
           controls={false}
@@ -72,7 +72,7 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
       </div> */}
 
       {/* Mute/Unmute Button */}
-      {/* {isPlaying && (
+      {isPlaying && (
         <button
           className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-white transition-all hover:scale-110 hover:bg-black/80"
           onClick={() => setIsMuted(!isMuted)}
@@ -89,7 +89,7 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
             </svg>
           )}
         </button>
-      )} */}
+      )}
     </div>
   )
 }

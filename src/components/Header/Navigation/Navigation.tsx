@@ -158,7 +158,7 @@ const Lv1MenuItem = ({
   return (
     <Link
       className={clsx(
-        'flex w-full items-center self-center rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap lg:text-[15px] xl:px-5',
+        'flex w-full !items-center self-center rounded-full px-2 py-[2px] text-sm font-normal whitespace-nowrap lg:text-sm',
         'hover:bg-neutral-100 hover:text-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-neutral-200',
         home
           ? isTransparentHeader
@@ -172,8 +172,8 @@ const Lv1MenuItem = ({
       {menuItem.children?.length ? (
         <ChevronDownIcon
           className={clsx(
-            'ms-2 size-4',
-            isScrolled ? 'text-black' : 'text-white hover:text-black dark:hover:text-white'
+            'ms-1 size-4',
+            isScrolled ? 'text-black' : 'text-dark dark:text-white hover:text-black dark:hover:text-white'
           )}
         />
       ) : null}
@@ -355,7 +355,7 @@ export interface Props {
 
 const Navigation: FC<Props> = ({ menu, className, featuredPosts, isScrolled, isTransparentHeader, home, lang }) => {
   return (
-    <ul className={clsx('flex', className)} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <ul className={clsx('flex gap-6', className)} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       {menu.map((menuItem) => {
         if (menuItem.type === 'dropdown') {
           return (

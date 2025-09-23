@@ -18,7 +18,7 @@ interface Props {
 
 export default function AvatarDropdown({ className, trigger }: Props) {
   const user = {
-    name: 'Ajmal',
+    name: 'Guest ',
     email: 'john@gmail.com',
     avatar:
       'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -136,7 +136,7 @@ export default function AvatarDropdown({ className, trigger }: Props) {
             {/* <Divider /> */}
 
             {/* ------------------ 2 --------------------- */}
-            <div className="focus-visible:ring-opacity-50 -m-3 flex items-center justify-between rounded-lg p-2 hover:bg-neutral-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 dark:hover:bg-neutral-700">
+            {/* <div className="focus-visible:ring-opacity-50 -m-3 flex items-center justify-between rounded-lg p-2 hover:bg-neutral-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 dark:hover:bg-neutral-700">
               <div className="flex items-center">
                 <div className="flex flex-shrink-0 items-center justify-center text-neutral-500 dark:text-neutral-300">
                   <HugeiconsIcon icon={Idea01Icon} size={24} strokeWidth={1.5} />
@@ -144,7 +144,7 @@ export default function AvatarDropdown({ className, trigger }: Props) {
                 <p className="ms-4 text-sm font-medium">Dark theme</p>
               </div>
               <SwitchDarkMode2 />
-            </div>
+            </div> */}
 
             {/* ------------------ 2 --------------------- */}
 

@@ -6,6 +6,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
+import PostCardLikeBtn from '../PostCardLikeBtn'
+import PostCardSaveBtn from '../PostCardSaveBtn'
 
 interface Props {
   className?: string
@@ -13,10 +15,9 @@ interface Props {
   titleClass?: string
   post?: TPost | any
   lang?: string
-  yellowColor?: boolean
 }
 
-const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post, lang, yellowColor }) => {
+const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post, lang }) => {
   const {
     title,
     excerpt,
@@ -30,6 +31,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
     liked,
     commentCount,
     bookmarked,
+    favoriteCount,
   } = post
 
   const parentCategorySlug = categories[0]?.parentCategory?.slug
@@ -43,14 +45,16 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         ) : (
           <>
             {thumbnail || featuredImage ? (
-              <Image
-                sizes="(max-width: 1024px) 100vw, 33vw"
-                alt={title}
-                className="size-full rounded-xl object-cover brightness-85 transition-[filter] duration-300 group-hover:brightness-60"
-                src={thumbnail || featuredImage}
-                priority
-                fill
-              />
+              <div className="relative h-full w-full overflow-hidden rounded-xl">
+                <Image
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  alt={title}
+                  className="h-full w-full rounded-xl object-cover brightness-85 transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-60"
+                  src={thumbnail || featuredImage}
+                  priority
+                  fill
+                />
+              </div>
             ) : (
               <div className="size-full rounded-xl bg-gray-200" /> // fallback placeholder
             )}
@@ -69,19 +73,29 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
-        <CategoryBadgeList categories={categories} yellowColor={yellowColor} />
+        <CategoryBadgeList categories={categories}/>
+        <div className="ms-auto flex gap-1">
+          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
+          <PostCardSaveBtn bookmarked={bookmarked} />
+        </div>
+      
       </div>
 
-      <span className="absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80" />
+      <span
+        className="absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80"
+      />
 
       <div className="absolute inset-x-0 bottom-0 flex grow flex-col p-6">
         <span className="absolute inset-0" />
         {/* <CategoryBadgeList categories={categories} /> */}
-        <div className="flex items-start gap-3">
-          {/* vertical line */}
-          <div className="mt-1 h-8 w-0.5 flex-shrink-0 bg-white"></div>
+        <div className="flex items-start">
           <h2
-            className={clsx('!line-clamp-2 !text-sm leading-snug font-semibold text-white sm:!text-[17px]', titleClass)}
+            className={clsx(
+              "!line-clamp-2 !text-sm leading-snug font-semibold text-white sm:!text-[17px]",
+              // Left-side vertical rule that automatically matches the title height
+              "relative ps-3 before:absolute before:start-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-white before:content-['']",
+              titleClass
+            )}
           >
             {title}
           </h2>
@@ -91,13 +105,8 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
             {excerpt}
           </p>
           <div className="relative z-10">
-            <Link
-              href={
-                lang === 'en'
-                  ? `/${parentCategorySlug}/${categorySlug}/${slug}`
-                  : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`
-              }
-            >
+           
+            <Link href={lang === 'en' ? `/${parentCategorySlug}/${categorySlug}/${slug}` : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`}>
               <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
                 Start Reading
                 {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}

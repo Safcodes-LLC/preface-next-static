@@ -22,8 +22,8 @@ const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang }) =>
             titleClass="text-lg sm:text-xl"
             ratio="aspect-4/3 sm:aspect-1/1 md:aspect-4/1 lg:aspect-4/2 xl:aspect-1/1"
             textCenter={true}
+            verticalLine={true}
             lang={lang}
-            yellowColor={true}
           />
         )}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:grid-rows-5">
@@ -35,13 +35,12 @@ const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang }) =>
               post={posts[0]}
               verticalLine={true}
               lang={lang}
-              yellowColor={true}
             />
           )}
           {posts
             .filter((_, i) => i < 3 && i >= 1)
             .map((item, index) => (
-              <Card18 className="col-span-1 sm:row-span-3" key={index} post={item} lang={lang} yellowColor={true} />
+              <Card18 className="col-span-1 sm:row-span-3" key={index} post={item} lang={lang} />
             ))}
         </div>
       </div>
