@@ -194,7 +194,6 @@ const SectionSlider: React.FC<SectionSliderProps> = ({
 
     const el = trackRef.current
     if (!el || !containerRef.current) return
-
     ;(e.target as Element).setPointerCapture?.(e.pointerId)
     pointerIdRef.current = e.pointerId
 

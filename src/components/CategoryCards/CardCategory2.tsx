@@ -31,7 +31,7 @@ const CardCategory2: FC<Props> = ({ className, category, badge, lang }) => {
   return (
     <div
       className={clsx(
-        `card-category-2 relative flex flex-col items-center justify-center rounded-3xl bg-white px-3 py-3 text-center sm:p-3 dark:bg-[#0D0D0D] group`,
+        `card-category-2 group relative flex flex-col items-center justify-center rounded-3xl bg-white px-3 py-3 text-center sm:p-3 dark:bg-[#0D0D0D]`,
         className
       )}
     >
@@ -51,7 +51,7 @@ const CardCategory2: FC<Props> = ({ className, category, badge, lang }) => {
       <div className="mt-3">
         <Link
           href={lang === 'en' ? `/${parentCategory?.slug}/${slug}` : `/${lang}/${parentCategory?.slug}/${slug}`}
-          className={`line-clamp-1 text-base font-semibold relative z-10 inset-0 text-[#2a2a2a2] hover:text-[#3a3a3a]`}
+          className={`relative inset-0 z-10 line-clamp-1 text-base font-semibold text-[#2a2a2a2] hover:text-[#3a3a3a]`}
         >
           {categoryName}
         </Link>

@@ -60,7 +60,7 @@ const Languages = ({
           key={item.code}
           onClick={() => (pagesWithLanguage ? onSelectLanguage(item) : router.push(`/${item.code}`))}
           className={clsx(
-            '-m-2.5 flex cursor-pointer items-center  p-1 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden dark:hover:bg-neutral-700',
+            '-m-2.5 flex cursor-pointer items-center p-1 transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden dark:hover:bg-neutral-700',
             item.active ? 'bg-neutral-100 dark:bg-neutral-700' : 'opacity-80'
           )}
         >
@@ -68,7 +68,7 @@ const Languages = ({
             <div className="flex items-center gap-x-2">
               {/* {item.FlagComponent && <item.FlagComponent className="" />} */}
               <p className="text-xs font-normal">{item.code.toUpperCase()}</p>
-              <p className="text-xs font-noraml">{item.name}</p>
+              <p className="font-noraml text-xs">{item.name}</p>
             </div>
           </div>
         </CloseButton>
@@ -163,7 +163,7 @@ const CurrLangDropdown: FC<Props> = ({
         anchor={panelAnchor}
         transition
         className={clsx(
-          'z-40  bg-white p-2 ring-1 ring-black/5 transition duration-200 ease-in-out data-closed:translate-y-1 data-closed:opacity-0 dark:bg-[#0D0D0D]',
+          'z-40 bg-white p-2 ring-1 ring-black/5 transition duration-200 ease-in-out data-closed:translate-y-1 data-closed:opacity-0 dark:bg-[#0D0D0D]',
           panelClassName
         )}
       >

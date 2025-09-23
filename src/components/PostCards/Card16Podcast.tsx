@@ -107,7 +107,7 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang 
           {/* <p className="mt-3 mb-5 block text-sm/6 text-neutral-600 dark:text-neutral-400">
             <span className="line-clamp-2">{excerpt}</span>
           </p> */}
-          <div className="relative mt-auto flex items-center flex-nowrap gap-x-2">
+          <div className="relative mt-auto flex flex-nowrap items-center gap-x-2">
             <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
             <PostCardSaveBtn bookmarked={bookmarked} />
             <Link

@@ -183,7 +183,7 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
           )}
         >
           <CalendarIcon className="h-4 w-4 opacity-60" />
-          <span className="font-thin text-xs">
+          <span className="text-xs font-thin">
             {currentDate} • {currentTime}
           </span>
         </div>
