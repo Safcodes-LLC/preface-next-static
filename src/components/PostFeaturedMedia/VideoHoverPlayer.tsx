@@ -75,8 +75,8 @@ const VideoHoverPlayer: FC<Props> = ({ className, post }) => {
           <PostTypeFeaturedIcon
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
             postType={postType}
-            wrapSize="size-16"
-            iconSize="size-8"
+            wrapSize="size-12 sm:size-16"
+            iconSize="size-6 sm:size-8"
           />
         </div>
       )}
