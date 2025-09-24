@@ -37,7 +37,7 @@ const Card17Podcast: FC<Props> = ({ className, post, lang }) => {
     <Link
       href={href}
       className={clsx(
-        'post-card-17-podcast group relative flex items-center justify-between gap-x-5 rounded-xl bg-white p-2.5 hover:bg-neutral-50 dark:bg-[#0D0D0D] dark:hover:bg-[#1A1A1A] block',
+        'post-card-17-podcast group relative flex items-center justify-between gap-x-5 rounded-xl bg-white p-2.5 hover:bg-neutral-50 dark:bg-[#0D0D0D] dark:hover:bg-[#1A1A1A]',
         className
       )}
     >
