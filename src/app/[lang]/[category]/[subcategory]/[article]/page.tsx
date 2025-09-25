@@ -136,7 +136,7 @@ const Page = async ({
             <SectionSliderPosts
               posts={popularArticles || relatedPosts}
               heading={`${dict.sections.populararticles.heading}`}
-              postCardName="card16Podcast"
+              postCardName="card10V5"
             />
           </Suspense>
         </div>
