@@ -47,7 +47,11 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
             {thumbnail || featuredImage ? (
               <div className="relative h-full w-full overflow-hidden rounded-xl">
                 <Link
-                  href={lang === 'en' ? `/${parentCategorySlug}/${categorySlug}/${slug}` : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`}
+                  href={
+                    lang === 'en'
+                      ? `/${parentCategorySlug}/${categorySlug}/${slug}`
+                      : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`
+                  }
                   className="absolute inset-0 z-10"
                   aria-label={title}
                 >
@@ -71,7 +75,6 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
               wrapSize="size-7"
               iconSize="size-4"
             /> */}
-            
           </>
         )}
       </div>
@@ -88,9 +91,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
       </div>
 
       <span className="absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80" />
-      <span
-        className="pointer-events-none absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80"
-      />
+      <span className="pointer-events-none absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80" />
 
       <div className="absolute inset-x-0 bottom-0 z-20 flex grow flex-col p-6">
         <span className="pointer-events-none absolute inset-0" />

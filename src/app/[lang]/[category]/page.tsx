@@ -126,7 +126,9 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
           {/* Mobile dropdown */}
           <div className="md:hidden">
             <FiltersDropdown
-              items={categoryData.data.subcategories.length > 0 ? categoryData.data.subcategories : galleryPosts.slice(0, 8)}
+              items={
+                categoryData.data.subcategories.length > 0 ? categoryData.data.subcategories : galleryPosts.slice(0, 8)
+              }
               lang={lang}
             />
           </div>

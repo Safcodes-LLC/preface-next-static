@@ -13,12 +13,12 @@ interface Props {
 const CardCategory3: FC<Props> = ({ className = '', category, lang }) => {
   const { name, thumbnail, featuredImage, slug, featuredIcon, subCategory } = category
 
-  const href = lang === 'en' ? `/${slug}` : `/${lang}/${slug}`;
-  
+  const href = lang === 'en' ? `/${slug}` : `/${lang}/${slug}`
+
   return (
-    <Link 
+    <Link
       href={href}
-      className={`card-category-3 group flex flex-col rounded-[18px] bg-white p-[10px] dark:bg-[#0D0D0D] ${className} hover:shadow-lg transition-shadow duration-200`}
+      className={`card-category-3 group flex flex-col rounded-[18px] bg-white p-[10px] dark:bg-[#0D0D0D] ${className} transition-shadow duration-200 hover:shadow-lg`}
     >
       <div className="aspect-w-5 relative h-0 w-full shrink-0 overflow-hidden rounded-2xl aspect-h-5">
         <Image
@@ -30,7 +30,7 @@ const CardCategory3: FC<Props> = ({ className = '', category, lang }) => {
         <span className="absolute inset-0 bg-black/30 opacity-0 transition-opacity group-hover:opacity-100"></span>
 
         {/* Arrow overlay */}
-        <div 
+        <div
           className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100"
           onClick={(e) => e.stopPropagation()}
         >
@@ -40,9 +40,7 @@ const CardCategory3: FC<Props> = ({ className = '', category, lang }) => {
         </div>
       </div>
       <div className="mt-4 text-center">
-        <h2 className={`line-clamp-2 text-lg font-medium text-neutral-900 dark:text-neutral-100`}>
-          {name}
-        </h2>
+        <h2 className={`line-clamp-2 text-lg font-medium text-neutral-900 dark:text-neutral-100`}>{name}</h2>
         <span className={`mt-1 block text-sm text-neutral-600 dark:text-neutral-400`}>
           {subCategory?.length} Articles
         </span>

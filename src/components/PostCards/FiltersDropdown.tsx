@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
+import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
 
 type Item = {
   _id?: string
@@ -96,10 +96,17 @@ const FiltersDropdown: React.FC<Props> = ({ className, items, lang, onApply, onC
       >
         <span id={labelId} className="text-sm font-medium">
           {label}
-          {selectedIds.size > 0 && <span className="ms-2 rounded-full bg-[#00652E]/10 px-2 py-0.5 text-xs text-[#00652E]">{selectedIds.size}</span>}
+          {selectedIds.size > 0 && (
+            <span className="ms-2 rounded-full bg-[#00652E]/10 px-2 py-0.5 text-xs text-[#00652E]">
+              {selectedIds.size}
+            </span>
+          )}
         </span>
         <ChevronDownIcon
-          className={clsx('h-5 w-5 text-neutral-600 transition-transform duration-200 dark:text-neutral-300', open && 'rotate-180')}
+          className={clsx(
+            'h-5 w-5 text-neutral-600 transition-transform duration-200 dark:text-neutral-300',
+            open && 'rotate-180'
+          )}
           aria-hidden="true"
         />
       </button>
@@ -148,7 +155,12 @@ const FiltersDropdown: React.FC<Props> = ({ className, items, lang, onApply, onC
                   <h2 className={clsx('block text-sm text-[#000000] dark:text-white', 'group-hover:text-white')}>
                     <span>{item.name || item.title}</span>
                   </h2>
-                  <span className={clsx('text-[9px] font-[400] text-neutral-500 dark:text-neutral-400', 'group-hover:text-white')}>
+                  <span
+                    className={clsx(
+                      'text-[9px] font-[400] text-neutral-500 dark:text-neutral-400',
+                      'group-hover:text-white'
+                    )}
+                  >
                     {item.totalArticles || 0} Articles
                   </span>
                 </div>
