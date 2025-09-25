@@ -72,8 +72,6 @@ const PageStories = async ({ params }: { params: Promise<{ query: string; lang: 
   }
   const dict = await getDictionary(lang)
 
-  console.log(category?.data?.length,"category length");
-  
   return (
     <div className="stories-page" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="container mx-auto mt-10 md:mt-14 lg:mt-20">

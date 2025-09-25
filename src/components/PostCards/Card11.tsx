@@ -32,6 +32,9 @@ const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'asp
     bookmarked,
   } = post
 
+  console.log(post,"oissts");
+  
+
   const [isHover, setIsHover] = useState(false)
 
   return (
@@ -72,7 +75,7 @@ const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'asp
         {/* Right content: arrow icon (fixed size) */}
         <Link
           href={
-            slug ? (slug.startsWith(`${lang}/`) || slug.startsWith(`/${lang}/`) ? `/${slug}` : `/${lang}/${slug}`) : '#'
+            lang === 'en' ? `/${slug}` : `/${lang}/${slug}`
           }
         >
           <div className="border-[#E2E2E2] transition-transform flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border duration-200 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]">
