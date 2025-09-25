@@ -45,28 +45,33 @@ const LoginModal = ({
     onClose()
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!formData.emailOrUsername || !formData.password) return
+// In LoginModal.tsx, updating the handleSubmit function
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
+  if (!formData.emailOrUsername || !formData.password) return
 
-    setIsLoading(true)
-    try {
-      console.log('Login attempt:', formData)
+  setIsLoading(true)
+  try {
+    console.log('Login attempt:', formData)
+    
+    // Call the login API
+    await login({
+      emailOrUsername: formData.emailOrUsername,
+      password: formData.password,
+    })
 
-      await login({
-        emailOrUsername: formData.emailOrUsername,
-        password: formData.password,
-      })
-
-      handleLoginSuccess()
-      router.push('/')
-    } catch (error: any) {
-      console.error('Login error:', error)
-      alert(error.message || 'Login failed. Please try again.')
-    } finally {
-      setIsLoading(false)
-    }
+    // Handle successful login without redirect
+    handleLoginSuccess()
+    
+    // Don't redirect here, just close the modal
+  } catch (error: any) {
+    console.error('Login error:', error)
+    // You can add error handling here (e.g., show toast notification)
+    alert(error.message || 'Login failed. Please try again.')
+  } finally {
+    setIsLoading(false)
   }
+}
 
   const handleInputChange = (field: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
