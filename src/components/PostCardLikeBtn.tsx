@@ -8,7 +8,7 @@ import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
 import { FC, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import AuthRequiredModal from './ui/AuthRequiredModal'
+import LoginModal from './ui/LoginModal'
 
 interface Props {
   className?: string
@@ -116,13 +116,11 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, c
         </span>
       </button>
 
-      <AuthRequiredModal
+      <LoginModal
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
-        description="You need to be signed in to like posts. Please sign in to continue."
-        actionText="Sign In"
-        cancelText="Cancel"
-        redirectPath="/login"
+        onLoginSuccess={() => setShowAuthModal(false)}
+        redirectPath="/"
       />
     </>
   )
