@@ -1,11 +1,15 @@
 import Banner from '@/components/Banner'
-import ClientSectionSliderPosts from '@/components/ClientSectionSliderPosts'
 import Card17 from '@/components/PostCards/Card17'
+
 import Card17Filter from '@/components/PostCards/Card17Filter'
 import FiltersDropdown from '@/components/PostCards/FiltersDropdown'
+
+import SectionSliderPosts from '@/components/SectionSliderPosts'
+
 import BannerSkeleton from '@/components/Skeletons/BannerSkeleton'
 import Card17Skelton from '@/components/Skeletons/Card17Skelton'
 import { SectionSliderPostsSkeleton } from '@/components/Skeletons/SectionSliderPostsSkeleton'
+import { getPopularArticles } from '@/data/api/posts'
 import {
   //  getPostsDefault,
   getPostsGallery,
@@ -76,6 +80,8 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
 
   const galleryPosts = await getPostsGallery()
   // const defaultPosts = await getPostsDefault()
+
+  const popularArticles = await getPopularArticles({ parentSlug: category, lang })
 
   const categoryName = categoryData.data.name || ''
 
@@ -153,7 +159,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
 
       <div className="container py-10 md:py-14 lg:py-20">
         <div className="relative">
-          <Suspense fallback={<SectionSliderPostsSkeleton />}>
+          {/* <Suspense fallback={<SectionSliderPostsSkeleton />}>
             <ClientSectionSliderPosts
               postCardName="card10V5"
               // heading={`POPULAR ARTICLES FROM ${categoryName}`}
@@ -161,6 +167,14 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
               // subHeading="Over 10 Articles"
               parentSlug={category}
               limit={6}
+              lang={lang}
+            />
+          </Suspense> */}
+          <Suspense fallback={<SectionSliderPostsSkeleton />}>
+            <SectionSliderPosts
+              posts={popularArticles}
+              heading={`${lang === 'en' ? `${dict.sections.populararticlesfrom.heading} ${categoryName}` : ` ${categoryName} ${dict.sections.populararticlesfrom.heading}`} `}
+              postCardName="card10V5"
               lang={lang}
             />
           </Suspense>

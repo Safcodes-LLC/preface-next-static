@@ -154,12 +154,29 @@ export const getTopicsWithArticles = async (lang?: string) => {
   }
 }
 
-export const getPopularArticles = async (lang?: string) => {
+// Get popular articles with filtering options
+// /api/frontend/popular-articles?parentSlug=&subcategorySlug=&limit=6&lang=
+export const getPopularArticles = async (params?: {
+  parentSlug?: string
+  subcategorySlug?: string
+  limit?: number
+  lang?: string
+}) => {
   try {
-    const response = await serverFetch.get<{ data: any[] }>('/api/frontend/popular-articles', {
-      language: lang,
+    const queryParams = new URLSearchParams()
+
+    if (params?.parentSlug) queryParams.append('parentSlug', params.parentSlug)
+    if (params?.subcategorySlug) queryParams.append('subcategorySlug', params.subcategorySlug)
+    queryParams.append('limit', (params?.limit || 6).toString())
+    if (params?.lang) queryParams.append('lang', params.lang)
+
+    const url = `/api/frontend/popular-articles?${queryParams.toString()}`
+
+    const response = await serverFetch.get<{ data: any[] }>(url, {
+      language: params?.lang || 'en',
       next: { revalidate: 60 }, // Revalidate every 60 seconds
     })
+
     return response?.data || []
   } catch (error) {
     console.error('Failed to fetch popular articles:', error)

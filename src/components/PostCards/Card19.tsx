@@ -59,6 +59,17 @@ const Card19: FC<Props> = ({
           <>
             {thumbnail || featuredImage ? (
               <div className="relative h-full w-full overflow-hidden rounded-xl">
+                <Link
+                  href={
+                    lang === 'en'
+                      ? `/${parentCategorySlug}/${categorySlug}/${slug}`
+                      : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`
+                  }
+                  className="absolute inset-0 z-10"
+                  aria-label={title}
+                >
+                  <span className="sr-only">{title}</span>
+                </Link>
                 <Image
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-full w-full rounded-xl object-cover brightness-85 transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-60"
