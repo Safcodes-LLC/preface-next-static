@@ -111,6 +111,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
         </Suspense>
       </div>
 
+      {popularArticles.length > 0 && (
       <div className="container pb-10 md:pb-14 lg:pb-20">
         <div className="relative">
           {/* <BackgroundSection /> */}
@@ -133,6 +134,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
           </Suspense>
         </div>
       </div>
+      )}
     </div>
   )
 }
