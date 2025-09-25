@@ -9,6 +9,7 @@ import WidgetCategories from '@/components/WidgetCategories'
 import WidgetPosts from '@/components/WidgetPosts'
 import { getCategoryBySlug, getPopularArticles, getPostBySlug, getSubcategoryPosts } from '@/data/api/posts'
 import { getAllPosts, getCommentsByPostId, getPostByHandle } from '@/data/posts'
+
 import { getDictionary } from '@/i18n'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'

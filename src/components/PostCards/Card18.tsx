@@ -80,14 +80,14 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
-        <CategoryBadgeList categories={categories}/>
+        <CategoryBadgeList categories={categories} />
         <div className="ms-auto flex gap-1">
           <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
           <PostCardSaveBtn bookmarked={bookmarked} />
         </div>
-      
       </div>
 
+      <span className="absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80" />
       <span
         className="pointer-events-none absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80"
       />
@@ -98,7 +98,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         <div className="flex items-start">
           <h2
             className={clsx(
-              "!line-clamp-2 !text-sm leading-snug font-semibold text-white sm:!text-[17px]",
+              '!line-clamp-2 !text-sm leading-snug font-semibold text-white sm:!text-[17px]',
               // Left-side vertical rule that automatically matches the title height
               "relative ps-3 before:absolute before:start-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-white before:content-['']",
               titleClass
@@ -112,8 +112,13 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
             {excerpt}
           </p>
           <div className="relative z-10">
-           
-            <Link href={lang === 'en' ? `/${parentCategorySlug}/${categorySlug}/${slug}` : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`}>
+            <Link
+              href={
+                lang === 'en'
+                  ? `/${parentCategorySlug}/${categorySlug}/${slug}`
+                  : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`
+              }
+            >
               <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
                 Start Reading
                 {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}

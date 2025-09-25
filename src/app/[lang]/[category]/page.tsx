@@ -1,6 +1,11 @@
 import Banner from '@/components/Banner'
 import Card17 from '@/components/PostCards/Card17'
+
+import Card17Filter from '@/components/PostCards/Card17Filter'
+import FiltersDropdown from '@/components/PostCards/FiltersDropdown'
+
 import SectionSliderPosts from '@/components/SectionSliderPosts'
+
 import BannerSkeleton from '@/components/Skeletons/BannerSkeleton'
 import Card17Skelton from '@/components/Skeletons/Card17Skelton'
 import { SectionSliderPostsSkeleton } from '@/components/Skeletons/SectionSliderPostsSkeleton'
@@ -112,6 +117,32 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
         {/* Horizontal line - matching Figma design */}
         <hr className="mt-12 w-full border-t border-[#E3E3E3] dark:border-[#2C2C2C]" />
       </div>
+
+      <div className="container pt-6 lg:pt-10">
+        <h2 className="pb-6 text-[22px] font-medium">Filter By Category</h2>
+
+        {/* LOOP ITEMS - Use posts from API if available, otherwise fallback to gallery posts */}
+        <Suspense fallback={<Card17Skelton />}>
+          {/* Mobile dropdown */}
+          <div className="md:hidden">
+            <FiltersDropdown
+              items={categoryData.data.subcategories.length > 0 ? categoryData.data.subcategories : galleryPosts.slice(0, 8)}
+              lang={lang}
+            />
+          </div>
+
+          {/* Inline list for md+ screens */}
+          <div className="hidden flex-wrap gap-2 sm:gap-4 md:flex">
+            {(categoryData.data.subcategories.length > 0
+              ? categoryData.data.subcategories
+              : galleryPosts.slice(0, 8)
+            ).map((post: any, index: number) => (
+              <Card17Filter key={post._id || index} post={post} lang={lang} />
+            ))}
+          </div>
+        </Suspense>
+      </div>
+
       <div className="container pt-6 lg:pt-10">
         {/* LOOP ITEMS - Use posts from API if available, otherwise fallback to gallery posts */}
         <Suspense fallback={<Card17Skelton />}>

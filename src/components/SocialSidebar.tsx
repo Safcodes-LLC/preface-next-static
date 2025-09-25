@@ -1,6 +1,13 @@
 'use client'
 
-import { Facebook02Icon, InstagramIcon, YoutubeIcon, Linkedin02Icon, SnapchatIcon, NewTwitterIcon } from '@hugeicons/core-free-icons'
+import {
+  Facebook02Icon,
+  InstagramIcon,
+  Linkedin02Icon,
+  NewTwitterIcon,
+  SnapchatIcon,
+  YoutubeIcon,
+} from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import Link from 'next/link'

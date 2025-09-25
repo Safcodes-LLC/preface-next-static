@@ -25,7 +25,7 @@ const VideoHoverPlayer: FC<Props> = ({ className, post }) => {
   const handleMouseEnter = () => {
     setIsHovered(true)
     setIsLoading(true)
-    
+
     // If no video source, stop loading after 2 seconds
     if (!videoSource) {
       setTimeout(() => {
@@ -47,25 +47,25 @@ const VideoHoverPlayer: FC<Props> = ({ className, post }) => {
     const imageSrc = featuredImage || thumbnail
     if (!imageSrc) return null
     return (
-      <Image 
-        alt={title} 
-        fill 
-        className="object-cover transition-transform duration-600 ease-in-out group-hover:scale-110" 
-        src={imageSrc} 
-        sizes="(max-width: 600px) 100vw, 50vw" 
+      <Image
+        alt={title}
+        fill
+        className="object-cover transition-transform duration-600 ease-in-out group-hover:scale-110"
+        src={imageSrc}
+        sizes="(max-width: 600px) 100vw, 50vw"
       />
     )
   }
 
   return (
-    <div 
+    <div
       className={clsx('relative size-full overflow-hidden', className)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {/* Background Image */}
       {renderImage()}
-      
+
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/25" />
 
@@ -90,13 +90,7 @@ const VideoHoverPlayer: FC<Props> = ({ className, post }) => {
 
       {/* Video Player - shown when hovered and video source exists */}
       {isHovered && videoSource && (
-        <MediaVideo 
-          isHover={true} 
-          videoUrl={videoSource} 
-          handle={handle} 
-          autoPlay={false}
-          onStart={handleVideoStart}
-        />
+        <MediaVideo isHover={true} videoUrl={videoSource} handle={handle} autoPlay={false} onStart={handleVideoStart} />
       )}
 
       {/* Fallback for no video source - keep showing loading */}
