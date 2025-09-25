@@ -32,8 +32,6 @@ const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'asp
     bookmarked,
   } = post
 
-  console.log(post, 'oissts')
-
   const [isHover, setIsHover] = useState(false)
 
   return (
@@ -77,8 +75,8 @@ const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'asp
 
         {/* Right content: arrow icon (fixed size) */}
         <Link href={lang === 'en' ? `/${slug}` : `/${lang}/${slug}`}>
-          <div className="group/arrow inline-flex items-center justify-center rounded-full border border-[#E2E2E2] bg-white p-1.5 transition-all duration-200 hover:scale-110 hover:border-primary-100 hover:bg-primary-50 dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:border-[#666] dark:hover:bg-[#1A1A1A]">
-            <ArrowRightIcon className="h-3 w-3 text-[#919191] transition-transform duration-200 group-hover/arrow:translate-x-0.5 group-hover/arrow:text-primary-600 rtl:rotate-180 dark:text-[#707070] dark:group-hover/arrow:text-gray-300" />
+          <div className="group/arrow inline-flex items-center justify-center rounded-full border border-[#E2E2E2] bg-white p-1.5 transition-all duration-200 hover:scale-110 hover:border-neutral-300 hover:bg-neutral-50 dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:border-[#666] dark:hover:bg-[#1A1A1A]">
+            <ArrowRightIcon className="h-3 w-3 text-[#919191] transition-transform duration-200 group-hover/arrow:translate-x-0.5 group-hover/arrow:text-[#919191] rtl:rotate-180 dark:text-[#707070] dark:group-hover/arrow:text-gray-300" />
           </div>
         </Link>
       </div>
