@@ -145,7 +145,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
         </Suspense>
       </div>
 
-      <div className="container pt-6 lg:pt-10">
+      <div className="container py-10 md:py-14 lg:py-20">
         {/* LOOP ITEMS - Use posts from API if available, otherwise fallback to gallery posts */}
         <Suspense fallback={<Card17Skelton />}>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
@@ -159,29 +159,31 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
         </Suspense>
       </div>
 
-      <div className="container py-10 md:py-14 lg:py-20">
-        <div className="relative">
-          {/* <Suspense fallback={<SectionSliderPostsSkeleton />}>
-            <ClientSectionSliderPosts
-              postCardName="card10V5"
-              // heading={`POPULAR ARTICLES FROM ${categoryName}`}
-              heading={`${dict.sections.populararticlesfrom.heading} ${categoryName}`}
-              // subHeading="Over 10 Articles"
-              parentSlug={category}
-              limit={6}
-              lang={lang}
-            />
-          </Suspense> */}
-          <Suspense fallback={<SectionSliderPostsSkeleton />}>
-            <SectionSliderPosts
-              posts={popularArticles}
-              heading={`${lang === 'en' ? `${dict.sections.populararticlesfrom.heading} ${categoryName}` : ` ${categoryName} ${dict.sections.populararticlesfrom.heading}`} `}
-              postCardName="card10V5"
-              lang={lang}
-            />
-          </Suspense>
+      {popularArticles.length > 0 && (
+        <div className="container pb-10 md:pb-14 lg:pb-20">
+          <div className="relative">
+            {/* <Suspense fallback={<SectionSliderPostsSkeleton />}>
+              <ClientSectionSliderPosts
+                postCardName="card10V5"
+                // heading={`POPULAR ARTICLES FROM ${categoryName}`}
+                heading={`${dict.sections.populararticlesfrom.heading} ${categoryName}`}
+                // subHeading="Over 10 Articles"
+                parentSlug={category}
+                limit={6}
+                lang={lang}
+              />
+            </Suspense> */}
+            <Suspense fallback={<SectionSliderPostsSkeleton />}>
+              <SectionSliderPosts
+                posts={popularArticles}
+                heading={`${lang === 'en' ? `${dict.sections.populararticlesfrom.heading} ${categoryName}` : ` ${categoryName} ${dict.sections.populararticlesfrom.heading}`} `}
+                postCardName="card10V5"
+                lang={lang}
+              />
+            </Suspense>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
