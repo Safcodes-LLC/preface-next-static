@@ -33,8 +33,6 @@ const CategoryBadgeList: FC<Props> = ({ className, itemClass, categories, index 
     return null // Don't render anything if no valid categories
   }
 
-  console.log(validCategories, 'validCategories')
-
   const getCategoryHandle = (category: CategoryItem): string => {
     return category.handle || category.slug || category._id || ''
   }
