@@ -112,10 +112,10 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
       </div>
 
       {popularArticles.length > 0 && (
-      <div className="container pb-10 md:pb-14 lg:pb-20">
-        <div className="relative">
-          {/* <BackgroundSection /> */}
-          {/* <Suspense fallback={<SectionSliderPostsSkeleton />}>
+        <div className="container pb-10 md:pb-14 lg:pb-20">
+          <div className="relative">
+            {/* <BackgroundSection /> */}
+            {/* <Suspense fallback={<SectionSliderPostsSkeleton />}>
             <ClientSectionSliderPosts
               postCardName="card10V5"
               heading={`${dict.sections.populararticlesfrom.heading} ${subcategoryName}`}
@@ -125,15 +125,15 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
               lang={lang}
             />
           </Suspense> */}
-          <Suspense fallback={<SectionSliderPostsSkeleton />}>
-            <SectionSliderPosts
-              posts={popularArticles}
-              heading={`${lang === 'en' ? `${dict.sections.populararticlesfrom.heading} ${subcategoryName}` : `${subcategoryName} ${dict.sections.populararticlesfrom.heading} `}`}
-              postCardName="card10V5"
-            />
-          </Suspense>
+            <Suspense fallback={<SectionSliderPostsSkeleton />}>
+              <SectionSliderPosts
+                posts={popularArticles}
+                heading={`${lang === 'en' ? `${dict.sections.populararticlesfrom.heading} ${subcategoryName}` : `${subcategoryName} ${dict.sections.populararticlesfrom.heading} `}`}
+                postCardName="card10V5"
+              />
+            </Suspense>
+          </div>
         </div>
-      </div>
       )}
     </div>
   )

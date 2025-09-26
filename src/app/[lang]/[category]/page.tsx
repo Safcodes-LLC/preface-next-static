@@ -1,4 +1,5 @@
 import Banner from '@/components/Banner'
+import Card16Podcast from '@/components/PostCards/Card16Podcast'
 import Card17 from '@/components/PostCards/Card17'
 
 import Card17Filter from '@/components/PostCards/Card17Filter'
@@ -7,7 +8,9 @@ import FiltersDropdown from '@/components/PostCards/FiltersDropdown'
 import SectionSliderPosts from '@/components/SectionSliderPosts'
 
 import BannerSkeleton from '@/components/Skeletons/BannerSkeleton'
+import Card16PodcastSkeleton from '@/components/Skeletons/Card16PodcastSkeleton'
 import Card17Skelton from '@/components/Skeletons/Card17Skelton'
+import PostListsSkelton from '@/components/Skeletons/PostListsSkelton'
 import { SectionSliderPostsSkeleton } from '@/components/Skeletons/SectionSliderPostsSkeleton'
 import { getPopularArticles } from '@/data/api/posts'
 import {
@@ -141,6 +144,23 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
             ).map((post: any, index: number) => (
               <Card17Filter key={post._id || index} post={post} lang={lang} />
             ))}
+          </div>
+        </Suspense>
+      </div>
+
+      <div className="container">
+        <Suspense fallback={<PostListsSkelton />}>
+          <div className="pt-10 md:pt-14 lg:pt-20">
+            <>
+              <div className="pb-4 text-base font-normal text-[#000000]">120 Articles Found</div>
+              <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
+                {galleryPosts.slice(0, 8).map((p) => (
+                  <Suspense key={`suspense-${p._id}`} fallback={<Card16PodcastSkeleton />}>
+                    <Card16Podcast key={p._id} post={p} lang={lang} />
+                  </Suspense>
+                ))}
+              </div>
+            </>
           </div>
         </Suspense>
       </div>

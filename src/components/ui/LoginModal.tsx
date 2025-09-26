@@ -45,33 +45,33 @@ const LoginModal = ({
     onClose()
   }
 
-// In LoginModal.tsx, updating the handleSubmit function
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-  if (!formData.emailOrUsername || !formData.password) return
+  // In LoginModal.tsx, updating the handleSubmit function
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!formData.emailOrUsername || !formData.password) return
 
-  setIsLoading(true)
-  try {
-    console.log('Login attempt:', formData)
-    
-    // Call the login API
-    await login({
-      emailOrUsername: formData.emailOrUsername,
-      password: formData.password,
-    })
+    setIsLoading(true)
+    try {
+      console.log('Login attempt:', formData)
 
-    // Handle successful login without redirect
-    handleLoginSuccess()
-    
-    // Don't redirect here, just close the modal
-  } catch (error: any) {
-    console.error('Login error:', error)
-    // You can add error handling here (e.g., show toast notification)
-    alert(error.message || 'Login failed. Please try again.')
-  } finally {
-    setIsLoading(false)
+      // Call the login API
+      await login({
+        emailOrUsername: formData.emailOrUsername,
+        password: formData.password,
+      })
+
+      // Handle successful login without redirect
+      handleLoginSuccess()
+
+      // Don't redirect here, just close the modal
+    } catch (error: any) {
+      console.error('Login error:', error)
+      // You can add error handling here (e.g., show toast notification)
+      alert(error.message || 'Login failed. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
   }
-}
 
   const handleInputChange = (field: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
@@ -162,7 +162,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
             <p className="text-center text-sm text-gray-500 dark:text-gray-400">
               Don&apos;t have an account?{' '}
-              <Link 
+              <Link
                 href="/signup"
                 onClick={() => onClose()}
                 className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
