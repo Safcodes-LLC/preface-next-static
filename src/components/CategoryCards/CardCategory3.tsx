@@ -18,7 +18,7 @@ const CardCategory3: FC<Props> = ({ className = '', category, lang }) => {
   return (
     <Link
       href={href}
-      className={`card-category-3 group flex flex-col rounded-[18px] bg-white p-[10px] dark:bg-[#0D0D0D] ${className} transition-shadow duration-200 hover:shadow-lg`}
+      className={`card-category-3 group flex flex-col rounded-[18px] bg-white p-[10px] dark:bg-[#0D0D0D] ${className} `}
     >
       <div className="aspect-w-5 relative h-0 w-full shrink-0 overflow-hidden rounded-2xl aspect-h-5">
         <Image
