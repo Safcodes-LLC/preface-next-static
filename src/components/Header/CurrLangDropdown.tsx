@@ -151,7 +151,10 @@ const CurrLangDropdown: FC<Props> = ({
           home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
         )}
       >
-        <div className="flex h-5 items-center justify-center rounded-full px-1 text-sm font-medium text-white">
+        <div className={clsx("flex h-5 items-center justify-center rounded-full px-1 text-sm font-medium ",
+        home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
+        )}
+        >
           {/* {selectedLanguage?.FlagComponent && <selectedLanguage.FlagComponent className="me-1 h-3 w-3" />} */}
           {selectedLanguage?.code.toUpperCase()}
         </div>
