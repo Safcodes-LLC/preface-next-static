@@ -24,7 +24,7 @@ interface LoginModalProps {
 const LoginModal = ({
   isOpen,
   onClose,
-  title = 'Welcome back',
+  title = 'Sign In',
   description = 'Sign in to your account to continue',
   cancelText = 'Cancel',
   onLoginSuccess,
@@ -45,6 +45,7 @@ const LoginModal = ({
     onClose()
   }
 
+  // In LoginModal.tsx, updating the handleSubmit function
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!formData.emailOrUsername || !formData.password) return
@@ -53,15 +54,19 @@ const LoginModal = ({
     try {
       console.log('Login attempt:', formData)
 
+      // Call the login API
       await login({
         emailOrUsername: formData.emailOrUsername,
         password: formData.password,
       })
 
+      // Handle successful login without redirect
       handleLoginSuccess()
-      router.push('/')
+
+      // Don't redirect here, just close the modal
     } catch (error: any) {
       console.error('Login error:', error)
+      // You can add error handling here (e.g., show toast notification)
       alert(error.message || 'Login failed. Please try again.')
     } finally {
       setIsLoading(false)
@@ -135,7 +140,7 @@ const LoginModal = ({
 
             <ButtonPrimary
               type="submit"
-              color="primary"
+              color="loginbtn"
               className="w-full"
               disabled={isLoading || !formData.emailOrUsername || !formData.password}
             >
@@ -157,16 +162,13 @@ const LoginModal = ({
 
             <p className="text-center text-sm text-gray-500 dark:text-gray-400">
               Don&apos;t have an account?{' '}
-              <button
-                type="button"
-                onClick={() => {
-                  onClose()
-                  router.push(redirectPath)
-                }}
+              <Link
+                href="/signup"
+                onClick={() => onClose()}
                 className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
               >
                 Sign up
-              </button>
+              </Link>
             </p>
           </form>
         </Dialog.Panel>

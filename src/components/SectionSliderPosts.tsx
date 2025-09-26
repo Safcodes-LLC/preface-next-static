@@ -63,7 +63,7 @@ const SectionSliderPosts: FC<Props> = ({
       case 'card11':
         return <Card11 key={index} post={item} />
       case 'card16Podcast':
-        return <Card16Podcast key={index} post={item} />
+        return <Card16Podcast key={index} post={item} lang={lang} />
 
       default:
         return null

@@ -1,12 +1,12 @@
 import Banner from '@/components/Banner'
-import ClientSectionSliderPosts from '@/components/ClientSectionSliderPosts'
 import ModalCategories from '@/components/ModalCategories'
 import Card16Podcast from '@/components/PostCards/Card16Podcast'
+import SectionSliderPosts from '@/components/SectionSliderPosts'
 import BannerSkeleton from '@/components/Skeletons/BannerSkeleton'
 import Card16PodcastSkeleton from '@/components/Skeletons/Card16PodcastSkeleton'
 import PostListsSkelton from '@/components/Skeletons/PostListsSkelton'
 import { SectionSliderPostsSkeleton } from '@/components/Skeletons/SectionSliderPostsSkeleton'
-import { getCategoryBySlug, getSubcategoryPosts } from '@/data/api/posts'
+import { getCategoryBySlug, getPopularArticles, getSubcategoryPosts } from '@/data/api/posts'
 import { getAllPosts } from '@/data/posts'
 import { getDictionary } from '@/i18n'
 import { Metadata } from 'next'
@@ -40,10 +40,9 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
 
   // Call getSubcategoryPosts and log the results
   const subcategoryPosts = await getSubcategoryPosts(subcategory, lang)
-  // console.log('getSubcategoryPosts result:', subcategoryPosts)
 
-  // Get all posts and filter by subcategory
   const allPosts = await getAllPosts()
+  const popularArticles = await getPopularArticles({ subcategorySlug: subcategory, lang })
 
   // Debug: Log all unique categories and tags
   const allCategories = new Set<string>()
@@ -55,17 +54,14 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
   // Format subcategory name for display
   const subcategoryName = subcategoryPosts?.categories?.[0]?.name
   const subcategoryImage = subcategoryPosts?.categories[0]?.featuredImage
-  const lengthTopics = subcategoryPosts?.list?.length
   const listPost = subcategoryPosts?.list
 
   // const categories = await getCategories()
   const categories2 = await getCategoryBySlug(category, lang)
 
-  console.log(categories2.subcategories, 'categories2')
-
   return (
     <div className={`page-subcategory-${subcategory}`}>
-      <div className="container mx-auto mt-12 sm:mt-20">
+      <div className="container mx-auto mt-10 md:mt-14 lg:mt-20">
         <Suspense fallback={<BannerSkeleton />}>
           <Banner
             image={subcategoryImage}
@@ -79,7 +75,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
         </Suspense>
       </div>
 
-      <div className="container pt-10 lg:pt-20">
+      <div className="container py-10 md:py-14 lg:py-20">
         <Suspense
           fallback={
             <div className="flex w-16 gap-x-2 gap-y-4 rounded-full bg-neutral-200 p-3 dark:bg-neutral-700">
@@ -115,10 +111,11 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
         </Suspense>
       </div>
 
-      <div className="container space-y-20 py-20 lg:space-y-28 lg:py-28">
-        <div className="relative">
-          {/* <BackgroundSection /> */}
-          <Suspense fallback={<SectionSliderPostsSkeleton />}>
+      {popularArticles.length > 0 && (
+        <div className="container pb-10 md:pb-14 lg:pb-20">
+          <div className="relative">
+            {/* <BackgroundSection /> */}
+            {/* <Suspense fallback={<SectionSliderPostsSkeleton />}>
             <ClientSectionSliderPosts
               postCardName="card10V5"
               heading={`${dict.sections.populararticlesfrom.heading} ${subcategoryName}`}
@@ -127,9 +124,17 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
               limit={6}
               lang={lang}
             />
-          </Suspense>
+          </Suspense> */}
+            <Suspense fallback={<SectionSliderPostsSkeleton />}>
+              <SectionSliderPosts
+                posts={popularArticles}
+                heading={`${lang === 'en' ? `${dict.sections.populararticlesfrom.heading} ${subcategoryName}` : `${subcategoryName} ${dict.sections.populararticlesfrom.heading} `}`}
+                postCardName="card10V5"
+              />
+            </Suspense>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

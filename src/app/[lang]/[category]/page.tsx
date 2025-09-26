@@ -1,9 +1,18 @@
 import Banner from '@/components/Banner'
-import ClientSectionSliderPosts from '@/components/ClientSectionSliderPosts'
+import Card16Podcast from '@/components/PostCards/Card16Podcast'
 import Card17 from '@/components/PostCards/Card17'
+
+import Card17Filter from '@/components/PostCards/Card17Filter'
+import FiltersDropdown from '@/components/PostCards/FiltersDropdown'
+
+import SectionSliderPosts from '@/components/SectionSliderPosts'
+
 import BannerSkeleton from '@/components/Skeletons/BannerSkeleton'
+import Card16PodcastSkeleton from '@/components/Skeletons/Card16PodcastSkeleton'
 import Card17Skelton from '@/components/Skeletons/Card17Skelton'
+import PostListsSkelton from '@/components/Skeletons/PostListsSkelton'
 import { SectionSliderPostsSkeleton } from '@/components/Skeletons/SectionSliderPostsSkeleton'
+import { getPopularArticles } from '@/data/api/posts'
 import {
   //  getPostsDefault,
   getPostsGallery,
@@ -75,6 +84,8 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
   const galleryPosts = await getPostsGallery()
   // const defaultPosts = await getPostsDefault()
 
+  const popularArticles = await getPopularArticles({ parentSlug: category, lang })
+
   const categoryName = categoryData.data.name || ''
 
   return (
@@ -109,7 +120,52 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
         {/* Horizontal line - matching Figma design */}
         <hr className="mt-12 w-full border-t border-[#E3E3E3] dark:border-[#2C2C2C]" />
       </div>
+
       <div className="container pt-6 lg:pt-10">
+        <h2 className="pb-6 text-[22px] font-medium">Filter By Category</h2>
+
+        {/* LOOP ITEMS - Use posts from API if available, otherwise fallback to gallery posts */}
+        <Suspense fallback={<Card17Skelton />}>
+          {/* Mobile dropdown */}
+          <div className="md:hidden">
+            <FiltersDropdown
+              items={
+                categoryData.data.subcategories.length > 0 ? categoryData.data.subcategories : galleryPosts.slice(0, 8)
+              }
+              lang={lang}
+            />
+          </div>
+
+          {/* Inline list for md+ screens */}
+          <div className="hidden flex-wrap gap-2 sm:gap-4 md:flex">
+            {(categoryData.data.subcategories.length > 0
+              ? categoryData.data.subcategories
+              : galleryPosts.slice(0, 8)
+            ).map((post: any, index: number) => (
+              <Card17Filter key={post._id || index} post={post} lang={lang} />
+            ))}
+          </div>
+        </Suspense>
+      </div>
+
+      <div className="container">
+        <Suspense fallback={<PostListsSkelton />}>
+          <div className="pt-10 md:pt-14 lg:pt-20">
+            <>
+              <div className="pb-4 text-base font-normal text-[#000000]">120 Articles Found</div>
+              <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
+                {galleryPosts.slice(0, 8).map((p) => (
+                  <Suspense key={`suspense-${p._id}`} fallback={<Card16PodcastSkeleton />}>
+                    <Card16Podcast key={p._id} post={p} lang={lang} />
+                  </Suspense>
+                ))}
+              </div>
+            </>
+          </div>
+        </Suspense>
+      </div>
+
+      <div className="container py-10 md:py-14 lg:py-20">
         {/* LOOP ITEMS - Use posts from API if available, otherwise fallback to gallery posts */}
         <Suspense fallback={<Card17Skelton />}>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
@@ -123,21 +179,31 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
         </Suspense>
       </div>
 
-      <div className="container py-10 md:py-14 lg:py-20">
-        <div className="relative">
-          <Suspense fallback={<SectionSliderPostsSkeleton />}>
-            <ClientSectionSliderPosts
-              postCardName="card10V5"
-              // heading={`POPULAR ARTICLES FROM ${categoryName}`}
-              heading={`${dict.sections.populararticlesfrom.heading} ${categoryName}`}
-              // subHeading="Over 10 Articles"
-              parentSlug={category}
-              limit={6}
-              lang={lang}
-            />
-          </Suspense>
+      {popularArticles.length > 0 && (
+        <div className="container pb-10 md:pb-14 lg:pb-20">
+          <div className="relative">
+            {/* <Suspense fallback={<SectionSliderPostsSkeleton />}>
+              <ClientSectionSliderPosts
+                postCardName="card10V5"
+                // heading={`POPULAR ARTICLES FROM ${categoryName}`}
+                heading={`${dict.sections.populararticlesfrom.heading} ${categoryName}`}
+                // subHeading="Over 10 Articles"
+                parentSlug={category}
+                limit={6}
+                lang={lang}
+              />
+            </Suspense> */}
+            <Suspense fallback={<SectionSliderPostsSkeleton />}>
+              <SectionSliderPosts
+                posts={popularArticles}
+                heading={`${lang === 'en' ? `${dict.sections.populararticlesfrom.heading} ${categoryName}` : ` ${categoryName} ${dict.sections.populararticlesfrom.heading}`} `}
+                postCardName="card10V5"
+                lang={lang}
+              />
+            </Suspense>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

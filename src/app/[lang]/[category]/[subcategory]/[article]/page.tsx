@@ -1,18 +1,21 @@
 import PaginationWrapper2 from '@/components/PaginationWrapper2'
+import SectionSliderPosts from '@/components/SectionSliderPosts'
 import PostBannerSkeleton from '@/components/Skeletons/PostBannerSkeleton'
 import PostContentSkelton from '@/components/Skeletons/PostContentSkelton'
+import { SectionSliderPostsSkeleton } from '@/components/Skeletons/SectionSliderPostsSkeleton'
 import WidgetCategoriesSkeleton from '@/components/Skeletons/WidgetCategoriesSkeleton'
 import WidgetPostsSkeleton from '@/components/Skeletons/WidgetPostsSkeleton'
 import WidgetCategories from '@/components/WidgetCategories'
 import WidgetPosts from '@/components/WidgetPosts'
-import { getCategoryBySlug, getPostBySlug, getSubcategoryPosts } from '@/data/api/posts'
+import { getCategoryBySlug, getPopularArticles, getPostBySlug, getSubcategoryPosts } from '@/data/api/posts'
 import { getAllPosts, getCommentsByPostId, getPostByHandle } from '@/data/posts'
+
+import { getDictionary } from '@/i18n'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import SingleContentContainer from '../../../post/SingleContentContainer'
 import SingleHeaderContainer from '../../../post/SingleHeaderContainer'
-import SingleRelatedPosts from '../../../post/SingleRelatedPosts'
 
 export async function generateMetadata({
   params,
@@ -63,7 +66,13 @@ const Page = async ({
   // Await the params before using them
   const { category, subcategory, article, lang } = await params
 
-  // console.log(`Processing article route: category=${category}, subcategory=${subcategory}, article=${article}`)
+  const post = await getPostBySlug(article)
+  const subcategoryPosts = await getSubcategoryPosts(post?.categories[0]?.slug)
+  const comments = await getCommentsByPostId(post.id)
+  const relatedPosts = (await getAllPosts()).slice(0, 6)
+  const categoryData = await getCategoryBySlug(category, lang)
+  const popularArticles = await getPopularArticles({ lang })
+  const dict = await getDictionary(lang)
 
   // Validate the article parameter - it should not contain invalid characters or be a Chrome DevTools request
   if (!article || article.includes('.') || article.includes('com.chrome.devtools.json')) {
@@ -71,38 +80,16 @@ const Page = async ({
     return notFound()
   }
 
-  const post = await getPostBySlug(article)
-
   // If article not found, return 404 early
   if (!post) {
     console.warn(`Post not found for slug: ${article} - returning 404`)
     return notFound()
   }
 
-  // console.log(`Successfully fetched post: ${post.title || post.name}`)
-
-  const subcategoryPosts = await getSubcategoryPosts(post?.categories[0]?.slug)
-
   // Filter posts to only include those with postType.name === "Article"
   const filteredSubcategoryPosts = subcategoryPosts?.list?.filter((post) => post.postType?.name === 'Article') || []
 
-  // console.log(post,"post checking articlezs");
-
-  // console.log(subcategoryPosts,"subcategoryPosts");
-
-  const comments = await getCommentsByPostId(post.id)
-  const relatedPosts = (await getAllPosts()).slice(0, 6)
-  const moreFromAuthorPosts = (await getAllPosts()).slice(1, 7)
-
-  const categoryData = await getCategoryBySlug(category, lang)
-
-  // console.log(categoryData, "categoryData");
-
   const otherTopics = categoryData?.subcategories || []
-
-  // console.log(otherTopics,"otherTopics");
-
-  const widgetPosts = (await getAllPosts()).slice(0, 12)
 
   return (
     <div className="single-post-page pt-8">
@@ -135,8 +122,6 @@ const Page = async ({
         </div>
         <div className="mt-12 w-full lg:mt-0 lg:w-2/5 lg:ps-10 xl:w-1/3 xl:ps-0">
           <div className="space-y-7 lg:sticky lg:top-7">
-            {/* <WidgetAuthors authors={widgetAuthors} />
-            <WidgetTags tags={widgetTags} /> */}
             <Suspense fallback={<WidgetCategoriesSkeleton />}>
               <WidgetCategories categories={filteredSubcategoryPosts} />
             </Suspense>
@@ -146,8 +131,19 @@ const Page = async ({
           </div>
         </div>
       </div>
+      <div className="relative mt-16 bg-neutral-50 py-16 lg:mt-28 lg:py-24 dark:bg-neutral-800">
+        <div className="container space-y-16 lg:space-y-28">
+          <Suspense fallback={<SectionSliderPostsSkeleton />}>
+            <SectionSliderPosts
+              posts={popularArticles || relatedPosts}
+              heading={`${dict.sections.populararticles.heading}`}
+              postCardName="card10V5"
+            />
+          </Suspense>
+        </div>
+      </div>
 
-      <SingleRelatedPosts moreFromAuthorPosts={moreFromAuthorPosts} />
+      {/* <SingleRelatedPosts moreFromAuthorPosts={moreFromAuthorPosts} /> */}
     </div>
   )
 }

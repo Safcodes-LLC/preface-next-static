@@ -46,6 +46,17 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
           <>
             {thumbnail || featuredImage ? (
               <div className="relative h-full w-full overflow-hidden rounded-xl">
+                <Link
+                  href={
+                    lang === 'en'
+                      ? `/${parentCategorySlug}/${categorySlug}/${slug}`
+                      : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`
+                  }
+                  className="absolute inset-0 z-10"
+                  aria-label={title}
+                >
+                  <span className="sr-only">{title}</span>
+                </Link>
                 <Image
                   sizes="(max-width: 1024px) 100vw, 33vw"
                   alt={title}
@@ -64,12 +75,11 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
               wrapSize="size-7"
               iconSize="size-4"
             /> */}
-            <span className="absolute inset-0"></span>
           </>
         )}
       </div>
 
-      <div className="absolute inset-x-0 top-0 flex flex-wrap gap-x-2 gap-y-1 p-4 opacity-100">
+      <div className="absolute inset-x-0 top-0 z-20 flex flex-wrap gap-x-2 gap-y-1 p-4 opacity-100">
         {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
@@ -81,9 +91,10 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
       </div>
 
       <span className="absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80" />
+      <span className="pointer-events-none absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80" />
 
-      <div className="absolute inset-x-0 bottom-0 flex grow flex-col p-6">
-        <span className="absolute inset-0" />
+      <div className="absolute inset-x-0 bottom-0 z-20 flex grow flex-col p-6">
+        <span className="pointer-events-none absolute inset-0" />
         {/* <CategoryBadgeList categories={categories} /> */}
         <div className="flex items-start">
           <h2

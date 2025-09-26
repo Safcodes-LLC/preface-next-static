@@ -83,41 +83,22 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang 
 
       {/* MAIN CONTENT */}
       <div className="relative -mt-32 w-11/12">
-        {/* {postType !== 'audio' && (
-          <PostTypeFeaturedIcon
-            wrapSize="size-8"
-            iconSize="size-4"
-            className="absolute start-3 top-6"
-            postType={postType}
-          />
-        )} */}
-
-        {/* <div className={clsx('flex items-center gap-x-4 px-5', postType !== 'audio' && 'invisible opacity-0')}>
-          <div className="grow">
-            <Image src={musicWave} alt="musicWave" />
-          </div>
-          <ButtonPlayMusicPlayer post={post} />
-        </div> */}
         <div className="mt-20 flex grow flex-col rounded-3xl rounded-ss-none bg-white p-5 dark:bg-[#0D0D0D]">
           <h2 className="nc-card-title mb-2 block font-normal text-neutral-900 sm:text-base dark:text-neutral-100">
             <span title={title} className="line-clamp-2">
               {title}
             </span>
           </h2>
-          {/* <p className="mt-3 mb-5 block text-sm/6 text-neutral-600 dark:text-neutral-400">
-            <span className="line-clamp-2">{excerpt}</span>
-          </p> */}
           <div className="relative mt-auto flex flex-nowrap items-center gap-x-2">
             <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
             <PostCardSaveBtn bookmarked={bookmarked} />
             <Link
-              // href={getPostUrl()}
               href={lang === 'en' ? getPostUrl() : `/${lang}/${getPostUrl()}`}
-              className="ms-auto flex h-7 w-7 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-transform duration-200 hover:bg-[#f3f3f3] dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:bg-[#1a1a1a]"
+              className="group/arrow ms-auto items-center justify-center rounded-full border border-[#E2E2E2] bg-white p-1.5 transition-all duration-200 hover:scale-110 hover:border-neutral-300 hover:bg-neutral-50 dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:border-[#666] dark:hover:bg-[#1A1A1A]"
             >
               <ArrowRightIcon
                 strokeWidth={3}
-                className="h-3 w-3 text-[#C2C2C2] transition-colors duration-200 rtl:rotate-180 dark:text-[#707070]"
+                className="h-3 w-3 text-[#C2C2C2] transition-transform duration-200 group-hover/arrow:translate-x-0.5 group-hover/arrow:text-[#919191] rtl:rotate-180 dark:text-[#707070] dark:group-hover/arrow:text-gray-300"
               />
             </Link>
           </div>

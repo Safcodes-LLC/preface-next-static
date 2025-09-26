@@ -152,15 +152,18 @@ const styles = {
       '[--btn-icon:var(--color-rose-300)] data-active:[--btn-icon:var(--color-rose-200)] data-hover:[--btn-icon:var(--color-rose-200)]',
     ],
     primary: [
-      'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:var(--color-primary-500)] [--btn-border:var(--color-primary-600)]/90',
-      '[--btn-icon:var(--color-primary-300)] data-active:[--btn-icon:var(--color-primary-200)] data-hover:[--btn-icon:var(--color-primary-200)]',
+      'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:#60a43a] [--btn-border:#4d8a2c]',
+      '[--btn-icon:var(--color-white)]/80 data-active:[--btn-icon:var(--color-white)] data-hover:[--btn-icon:var(--color-white)]',
     ],
     transparent: [
       '!bg-transparent !border-[#DBDBDB] dark:!border-[#5B5B5B]',
       'text-[#444444] dark:text-[#C2C2C2] text-sm font-normal',
     ],
     logooutline: ['text-[#60A43A] border border-[#60A43A] px-2 rounded-full'],
-    loginbtn: ['text-white bg-[#01662F] dark:bg-[#60A43A]'],
+    loginbtn: [
+      'text-white bg-[#01662F] dark:bg-[#60A43A]',
+      'hover:bg-[#014d24] dark:hover:bg-[#4d8a2c] active:bg-[#01391a] dark:active:bg-[#3d6d23] transition-colors',
+    ],
     'logo-colors': [
       'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:#60A43A] [--btn-border:#60A43A]/90',
       '[--btn-icon:var(--color-white)]/60 data-active:[--btn-icon:var(--color-white)]/80 data-hover:[--btn-icon:var(--color-white)]/80',

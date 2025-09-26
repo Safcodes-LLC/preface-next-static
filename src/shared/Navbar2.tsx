@@ -113,7 +113,7 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
       <div className="flex flex-1 justify-end gap-1">
         {/* Home Icon */}
         <Link
-          href="/"
+          href={`/${lang}`}
           className={clsx(
             'flex items-center gap-x-1 rounded-full px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10',
             home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
