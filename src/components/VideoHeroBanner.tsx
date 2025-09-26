@@ -7,6 +7,7 @@ interface VideoHeroBannerProps {
   videoUrl?: string
   heading?: string
   className?: string
+  nextSectionId?: string
 }
 
 const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
@@ -15,11 +16,15 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
   videoUrl = 'https://preface-drive.blr1.digitaloceanspaces.com/preface-space/uploads/PREFACE_SEP_04(A%20STREAM%20WITH%20MANY%20CURRENTS_FINAL%20).mp4',
   heading = 'VIDEO',
   className = '',
+  nextSectionId = 'magazine-section',
 }) => {
   const [isMuted, setIsMuted] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isRendered, setIsRendered] = useState(false)
   const playerRef = useRef<ReactPlayer | null>(null)
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const isAnimatingRef = useRef(false)
+  const touchStartYRef = useRef<number | null>(null)
 
   useEffect(() => {
     // Render player immediately for autoplay
@@ -27,8 +32,50 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
     setIsPlaying(true)
   }, [])
 
+  const scrollToNext = () => {
+    if (isAnimatingRef.current) return
+    const nextEl = document.getElementById(nextSectionId)
+    if (!nextEl) return
+    isAnimatingRef.current = true
+    nextEl.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    // Fallback reset after animation
+    window.setTimeout(() => {
+      isAnimatingRef.current = false
+    }, 1000)
+  }
+
+  const handleWheel: React.WheelEventHandler<HTMLDivElement> = (e) => {
+    // Only react to downward scroll to go to next section
+    if (e.deltaY > 10) {
+      e.preventDefault()
+      scrollToNext()
+    }
+  }
+
+  const handleTouchStart: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    touchStartYRef.current = e.touches[0]?.clientY ?? null
+  }
+
+  const handleTouchMove: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    if (touchStartYRef.current == null) return
+    const currentY = e.touches[0]?.clientY ?? touchStartYRef.current
+    const deltaY = currentY - touchStartYRef.current
+    // Swipe up (negative delta) should go to next section
+    if (deltaY < -30) {
+      e.preventDefault()
+      scrollToNext()
+      touchStartYRef.current = null
+    }
+  }
+
   return (
-    <div className={`relative h-screen w-full overflow-hidden ${className}`}>
+    <div
+      ref={containerRef}
+      onWheel={handleWheel}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      className={`relative h-screen w-full overflow-hidden ${className}`}
+    >
       {isRendered && (
         <ReactPlayer
           ref={playerRef}

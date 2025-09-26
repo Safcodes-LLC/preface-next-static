@@ -1,11 +1,13 @@
 import BackgroundSection from '@/components/BackgroundSection'
-import ParallaxScrollSection from '@/components/ParallaxScrollSection'
+// import ParallaxScrollSection from '@/components/ParallaxScrollSection'
+import SectionMagazine10 from '@/components/SectionMagazine10'
 import SectionMagazine4 from '@/components/SectionMagazine4'
 import SectionMagazine7 from '@/components/SectionMagazine7'
 import SectionSlider from '@/components/SectionSlider'
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories'
 import SectionTrending from '@/components/SectionTrending'
 import SwipableSliderPosts from '@/components/SwipableSliderPosts'
+import VideoHeroBanner from '@/components/VideoHeroBanner'
 import { getBannerHighlightedArticles, getBannerHighlightedVideos } from '@/data/api/banner'
 import { getCategory, getQuranSubcategories, getTopTrendingTopics } from '@/data/api/category'
 import { getIslamForBeginners, getLatestArticles, getLatestVideos, getQuranLatestArticles } from '@/data/api/posts'
@@ -102,7 +104,11 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
         {/* </div> */}
         {/* Parallax Scroll Section - VideoHeroBanner + SectionMagazine10 */}
         <HomeHeader lang={lang} dict={dict} navigationMenu={navigationMenu} featuredPosts={featuredPosts} />
-        <ParallaxScrollSection magazinePosts={articlesArray} videoPosts={videoPostsArray} lang={lang} />
+        {/* <ParallaxScrollSection magazinePosts={articlesArray} videoPosts={videoPostsArray} lang={lang} /> */}
+        <VideoHeroBanner />
+        <div id="magazine-section" className="container pt-10 md:pt-14 lg:pt-20">
+          <SectionMagazine10 posts={articlesArray} videoPosts={videoPostsArray} lang={lang} />
+        </div>
         {/* <ParallaxScrollSection magazine10Data={articlesArray} videoPosts={videoPostsArray} /> */}
         <div className="relative container space-y-8 py-10 md:space-y-12 md:py-14 lg:space-y-16 lg:py-20">
           {/* <SectionMagazine10 posts={magazine10Data} /> */}
