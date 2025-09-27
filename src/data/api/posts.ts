@@ -216,7 +216,7 @@ export const getPostsByParentCategory = async (
   category: string, 
   lang?: string, 
   page: number = 1, 
-  limit: number = 20
+  limit: number = 100
 ) => {
   try {
     const queryParams = new URLSearchParams({

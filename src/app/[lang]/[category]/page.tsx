@@ -154,7 +154,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
         <Suspense fallback={<PostListsSkelton />}>
           <div className="pt-10 md:pt-14 lg:pt-20">
             <>
-              <div className="pb-4 text-base font-normal text-[#000000]">
+              <div className="pb-4 text-base font-normal text-[#000000] dark:text-white">
                 {postsByParentCategory?.data?.length} Articles Found
               </div>
               <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
