@@ -80,11 +80,11 @@ export default function AvatarDropdown({ className, trigger }: Props) {
                   {name || user.name}
                   {/* <Link href={`/author/${user.handle}`} className="absolute inset-0" /> */}
                 </h4>
-                <p className="text-xs/6">{user.location}</p>
+                {/* <p className="text-xs/6">{user.location}</p> */}
               </div>
             </div>
 
-            <Divider />
+            {isAuthenticated && <Divider />}
 
             {/* ------------------ 1 --------------------- */}
             {/* <Link
