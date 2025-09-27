@@ -1,7 +1,7 @@
 // src/lib/server/api.ts
 
-const API_BASE_URL = 'https://king-prawn-app-x9z27.ondigitalocean.app'
-// const API_BASE_URL = 'http://localhost:8080';
+// const API_BASE_URL = 'https://king-prawn-app-x9z27.ondigitalocean.app'
+const API_BASE_URL = 'http://localhost:8080';
 
 interface ApiOptions {
   requiresAuth?: boolean
