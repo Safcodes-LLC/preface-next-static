@@ -48,7 +48,7 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang 
   }
 
   return (
-    <div className={clsx('group post-card-16-podcast relative flex flex-col pb-6', className)}>
+    <div className={clsx('group post-card-16-podcast relative flex flex-col ', className)}>
       <div className={`relative w-full shrink-0 ${ratio}`}>
         {(thumbnail || featuredImage) && (
           <Image
