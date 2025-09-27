@@ -198,16 +198,58 @@ export const getCategoryBySlug = async (category: string, lang?: string) => {
   }
 }
 
-export const getPostsByParentCategory = async (category: string, lang?: string) => {
+// export const getPostsByParentCategory = async (category: string, lang?: string) => {
+//   try {
+//     const response = await serverFetch.get<{ data: any }>(`/api/frontend/postsbyparentcategory/${category}`, {
+//       language: lang,
+//       next: { revalidate: 60 }, // Revalidate every 60 seconds
+//     })
+//     return response?.data || null
+//   } catch (error) {
+//     console.error(`Failed to fetch category by slug: ${category}`, error)
+//     return null
+//   }
+// }
+
+// Update your API function to support pagination
+export const getPostsByParentCategory = async (
+  category: string, 
+  lang?: string, 
+  page: number = 1, 
+  limit: number = 20
+) => {
   try {
-    const response = await serverFetch.get<{ data: any }>(`/api/frontend/postsbyparentcategory/${category}`, {
-      language: lang,
+    const queryParams = new URLSearchParams({
+      ...(lang && { lang }),
+      page: page.toString(),
+      limit: limit.toString(),
+    })
+
+    const response = await serverFetch.get<{ 
+      data: any[], 
+      pagination: {
+        currentPage: number
+        totalPages: number
+        totalPosts: number
+        hasNextPage: boolean
+        hasPrevPage: boolean
+        limit: number
+        skip: number
+      }
+    }>(`/api/frontend/postsbyparentcategory/${category}?${queryParams}`, {
       next: { revalidate: 60 }, // Revalidate every 60 seconds
     })
-    return response?.data || null
+    
+    return {
+      data: response?.data || [],
+      pagination: response?.pagination || null
+    }
   } catch (error) {
-    console.error(`Failed to fetch category by slug: ${category}`, error)
-    return null
+    console.error(`Failed to fetch posts by parent category: ${category}`, error)
+    return {
+      data: [],
+      pagination: null
+    }
   }
 }
 

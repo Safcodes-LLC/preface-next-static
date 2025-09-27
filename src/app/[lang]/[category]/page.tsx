@@ -155,16 +155,16 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
           <div className="pt-10 md:pt-14 lg:pt-20">
             <>
               <div className="pb-4 text-base font-normal text-[#000000]">
-                {postsByParentCategory.length}Articles Found
+                {postsByParentCategory?.pagination?.totalPosts}Articles Found
               </div>
               <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
-                {postsByParentCategory.map((post: any) => (
+                {postsByParentCategory?.data?.map((post: any) => (
                   <Suspense key={`suspense-${post._id}`} fallback={<Card16PodcastSkeleton />}>
                     <Card16Podcast key={post._id} post={post} lang={lang} />
                   </Suspense>
                 ))}
               </div>
-              {postsByParentCategory.length > 20 && (
+              {postsByParentCategory?.pagination?.totalPosts && postsByParentCategory.pagination.totalPosts > 20 && (
                 <div className="mx-auto mt-8 text-center md:mt-10 lg:mt-12">
                   <ButtonSecondary>
                     Load More <ArrowDownIcon className="h-6 w-6 text-[#444444] dark:text-white" />
