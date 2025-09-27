@@ -197,3 +197,17 @@ export const getCategoryBySlug = async (category: string, lang?: string) => {
     return null
   }
 }
+
+export const getPostsByParentCategory = async (category: string, lang?: string) => {
+  try {
+    const response = await serverFetch.get<{ data: any }>(`/api/frontend/postsbyparentcategory/${category}`, {
+      language: lang,
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
+    })
+    return response?.data || null
+  } catch (error) {
+    console.error(`Failed to fetch category by slug: ${category}`, error)
+    return null
+  }
+}
+

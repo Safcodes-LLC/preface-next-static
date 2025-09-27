@@ -4,21 +4,22 @@ import Card17 from '@/components/PostCards/Card17'
 
 import Card17Filter from '@/components/PostCards/Card17Filter'
 import FiltersDropdown from '@/components/PostCards/FiltersDropdown'
-
 import SectionSliderPosts from '@/components/SectionSliderPosts'
+import { ArrowDownIcon } from '@heroicons/react/24/outline'
 
 import BannerSkeleton from '@/components/Skeletons/BannerSkeleton'
 import Card16PodcastSkeleton from '@/components/Skeletons/Card16PodcastSkeleton'
 import Card17Skelton from '@/components/Skeletons/Card17Skelton'
 import PostListsSkelton from '@/components/Skeletons/PostListsSkelton'
 import { SectionSliderPostsSkeleton } from '@/components/Skeletons/SectionSliderPostsSkeleton'
-import { getPopularArticles } from '@/data/api/posts'
+import { getPopularArticles, getPostsByParentCategory } from '@/data/api/posts'
 import {
   //  getPostsDefault,
   getPostsGallery,
 } from '@/data/posts'
 import { getDictionary } from '@/i18n'
 import { serverFetch } from '@/lib/server/api'
+import ButtonSecondary from '@/shared/ButtonSecondary'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
@@ -85,6 +86,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
   // const defaultPosts = await getPostsDefault()
 
   const popularArticles = await getPopularArticles({ parentSlug: category, lang })
+  const postsByParentCategory = await getPostsByParentCategory(category, lang)
 
   const categoryName = categoryData.data.name || ''
 
@@ -152,14 +154,23 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
         <Suspense fallback={<PostListsSkelton />}>
           <div className="pt-10 md:pt-14 lg:pt-20">
             <>
-              <div className="pb-4 text-base font-normal text-[#000000]">120 Articles Found</div>
+              <div className="pb-4 text-base font-normal text-[#000000]">
+                {postsByParentCategory.length}Articles Found
+              </div>
               <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
-                {galleryPosts.slice(0, 8).map((p) => (
-                  <Suspense key={`suspense-${p._id}`} fallback={<Card16PodcastSkeleton />}>
-                    <Card16Podcast key={p._id} post={p} lang={lang} />
+                {postsByParentCategory.map((post: any) => (
+                  <Suspense key={`suspense-${post._id}`} fallback={<Card16PodcastSkeleton />}>
+                    <Card16Podcast key={post._id} post={post} lang={lang} />
                   </Suspense>
                 ))}
               </div>
+              {postsByParentCategory.length > 20 && (
+                <div className="mx-auto mt-8 text-center md:mt-10 lg:mt-12">
+                  <ButtonSecondary>
+                    Load More <ArrowDownIcon className="h-6 w-6 text-[#444444] dark:text-white" />
+                  </ButtonSecondary>
+                </div>
+              )}
             </>
           </div>
         </Suspense>
