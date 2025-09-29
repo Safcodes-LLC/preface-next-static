@@ -116,10 +116,10 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
           </div>
         </Suspense>
         {/* Horizontal line - matching Figma design */}
-        <hr className="mt-12 w-full border-t border-[#E3E3E3] dark:border-[#2C2C2C]" />
+        {/* <hr className="mt-12 w-full border-t border-[#E3E3E3] dark:border-[#2C2C2C]" /> */}
       </div>
 
-      <div className="container pt-6 lg:pt-10">
+      <div className="container ">
         <h2 className="pb-6 text-[22px] font-medium">Filter By Category</h2>
 
         {/* LOOP ITEMS - Use posts from API if available, otherwise fallback to gallery posts */}
