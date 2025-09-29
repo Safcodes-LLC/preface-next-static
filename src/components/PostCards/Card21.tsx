@@ -32,7 +32,7 @@ const Card21: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
   return (
     <div
       className={clsx(
-        'card21 relative flex flex-col overflow-hidden rounded-[25px] md:border border-t-30 border-t-[#60A43A]  md:border-l-30 border-l-[#60A43A] bg-white p-10 dark:bg-[#0D0D0D]',
+        'card21 relative flex flex-col overflow-hidden rounded-[25px] border-t-[#60A43A] md:border-t-0 md:border-l-[#60A43A] border-t-30 md:border-l-30 bg-white p-10 dark:bg-[#0D0D0D]',
         className
       )}
     >
