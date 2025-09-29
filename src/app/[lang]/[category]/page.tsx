@@ -1,12 +1,10 @@
 import Banner from '@/components/Banner'
 import Card16Podcast from '@/components/PostCards/Card16Podcast'
 import Card17 from '@/components/PostCards/Card17'
-
 import Card17Filter from '@/components/PostCards/Card17Filter'
+import Card22 from '@/components/PostCards/Card22'
 import FiltersDropdown from '@/components/PostCards/FiltersDropdown'
 import SectionSliderPosts from '@/components/SectionSliderPosts'
-import { ArrowDownIcon } from '@heroicons/react/24/outline'
-
 import BannerSkeleton from '@/components/Skeletons/BannerSkeleton'
 import Card16PodcastSkeleton from '@/components/Skeletons/Card16PodcastSkeleton'
 import Card17Skelton from '@/components/Skeletons/Card17Skelton'
@@ -23,8 +21,6 @@ import ButtonSecondary from '@/shared/ButtonSecondary'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
-
-// Remove generateStaticParams to enable dynamic routing
 
 export async function generateMetadata({
   params,
@@ -150,6 +146,11 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
         </Suspense>
       </div>
 
+      {/* here create ui */}
+      <div className='container pt-10 md:pt-14 lg:pt-20'>
+        <Card22/>
+      </div>
+
       <div className="container">
         <Suspense fallback={<PostListsSkelton />}>
           <div className="pt-10 md:pt-14 lg:pt-20">
@@ -191,17 +192,6 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
       {popularArticles.length > 0 && (
         <div className="container pb-10 md:pb-14 lg:pb-20">
           <div className="relative">
-            {/* <Suspense fallback={<SectionSliderPostsSkeleton />}>
-              <ClientSectionSliderPosts
-                postCardName="card10V5"
-                // heading={`POPULAR ARTICLES FROM ${categoryName}`}
-                heading={`${dict.sections.populararticlesfrom.heading} ${categoryName}`}
-                // subHeading="Over 10 Articles"
-                parentSlug={category}
-                limit={6}
-                lang={lang}
-              />
-            </Suspense> */}
             <Suspense fallback={<SectionSliderPostsSkeleton />}>
               <SectionSliderPosts
                 posts={popularArticles}
