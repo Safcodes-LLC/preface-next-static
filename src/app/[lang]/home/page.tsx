@@ -112,10 +112,9 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
           <SectionMagazine10 posts={articlesArray} videoPosts={videoPostsArray} lang={lang} />
         </div>
 
-        <div className="container pt-10 md:pt-14 lg:pt-20">
-          {/* <Card21 post={latestArticles.data[0]} /> */}
+        {/* <div className="container pt-10 md:pt-14 lg:pt-20">
           <SectionMagazine12 posts={latestArticles.data[0]} lang={lang} />
-        </div>
+        </div> */}
 
         <div className="container">{/* create a featured card for home page  */}</div>
         {/* <ParallaxScrollSection magazine10Data={articlesArray} videoPosts={videoPostsArray} /> */}
