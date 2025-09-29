@@ -237,6 +237,7 @@ export const getPostsByParentCategory = async (
         skip: number
       }
     }>(`/api/frontend/postsbyparentcategory/${category}?${queryParams}`, {
+      language: lang || 'en',
       next: { revalidate: 60 }, // Revalidate every 60 seconds
     })
     
