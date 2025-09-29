@@ -1,24 +1,19 @@
-import { TPost } from '@/data/posts'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { FC } from 'react'
+import PostCardLikeBtn from '../PostCardLikeBtn'
+import PostCardSaveBtn from '../PostCardSaveBtn'
 
 interface Props {
   className?: string
   ratio?: string
   titleClass?: string
-  post?: TPost | any
+  post?: any
   lang?: string
 }
 
-const Card21: FC<Props> = ({
-  className,
-  titleClass = 'text-xl sm:text-2xl xl:text-3xl',
-  ratio = 'aspect-4/3 sm:aspect-1/1',
-  post,
-  lang,
-}) => {
+const Card21: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post, lang }) => {
   const {
     title,
     excerpt,
@@ -28,43 +23,56 @@ const Card21: FC<Props> = ({
     featuredImage,
     categories,
     postType,
-    likeCount,
+    likeCount = 120,
     liked,
     bookmarked,
     favoriteCount,
-  } = post
-
-  console.log(post, 'post find datas')
+  } = post || {}
 
   return (
-    <div className={clsx('card21 flex flex-col gap-2 rounded-3xl bg-white px-9 py-8', className)}>
-      <div className="grid grid-cols-12 items-start">
-        <div className="relative col-span-1 h-30 max-h-16 w-full rounded-2xl sm:max-h-30">
-          <Image src="/images/featured.png" alt={title} fill className="object-contain" sizes="80px" priority />
+    <div className={clsx('card21 relative flex flex-col overflow-hidden rounded-2xl bg-white', className)}>
+      <div className="p-10">
+        <div className="flex items-start gap-5">
+          <div className="relative h-[145px] w-[122px] flex-shrink-0">
+            <Image
+              src={featuredImage || thumbnail || '/images/featured.png'}
+              alt={title || 'Featured article'}
+              fill
+              className="object-cover"
+              sizes="122px"
+              priority
+            />
+          </div>
+          <div className="flex min-w-0 flex-1 flex-col gap-5">
+            <div className="flex flex-col gap-1">
+              <h3 className="text-xl font-bold tracking-wide text-[#00652E]">Featured</h3>
+              <div className="w-9 border-b-2 border-[#00652E]" />
+            </div>
+            <h2 className={clsx('font-semibold text-gray-900', titleClass)}>
+              <span className="line-clamp-1">{title || 'How to Pray that cleanse Your ensure'}</span>
+            </h2>
+            <div className="mt-auto flex items-center gap-3">
+              <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
+              <PostCardSaveBtn bookmarked={bookmarked} />
+            </div>
+          </div>
         </div>
-        <div className="col-span-11 mx-4">
-          <h3 className="border-b-2 border-[#00652E] text-xl font-bold text-[#00652E]">Featured</h3>
-          <h2 className="pt-5 text-3xl font-medium">How to Pray that cleanse Your ensure</h2>
-        </div>
-      </div>
+        <div className="flex flex-col gap-3 pt-3">
+          <p className="text-sm leading-relaxed text-gray-700 sm:text-base">
+            {excerpt ||
+              "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
+          </p>
 
-      <p className="text-base font-normal">
-        is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy
-        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-        specimen book. It has survived not only five centuries, but also the leap into electronic is simply dummy text
-        of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the
-        1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-      </p>
-      <p className="text-base font-normal">
-        {' '}
-        is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy
-        text ever since the 1500s,
-      </p>
-      <div className="flex gap-2">
-        <span>Continue Reading </span>
+          <p className="text-sm leading-relaxed text-gray-700 sm:text-base">
+            is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard
+            dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+            type specimen book.
+          </p>
 
-        <div>
-          <ArrowRightIcon className="h-3 w-3" />
+          <button className="group mt-1 flex cursor-pointer items-center gap-2 self-start text-base font-semibold text-[#00652E] transition-all hover:gap-3">
+            <span>Continue Reading</span>
+            <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </button>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import BackgroundSection from '@/components/BackgroundSection'
 // import ParallaxScrollSection from '@/components/ParallaxScrollSection'
-import Card21 from '@/components/PostCards/Card21'
 import SectionMagazine10 from '@/components/SectionMagazine10'
+import SectionMagazine12 from '@/components/SectionMagazine12'
 import SectionMagazine4 from '@/components/SectionMagazine4'
 import SectionMagazine7 from '@/components/SectionMagazine7'
 import SectionSlider from '@/components/SectionSlider'
@@ -112,11 +112,12 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
           <SectionMagazine10 posts={articlesArray} videoPosts={videoPostsArray} lang={lang} />
         </div>
 
-        {/* <div className="container pt-10 md:pt-14 lg:pt-20">
-          <Card21 post={latestArticles.data[0]} />
-        </div> */}
+        <div className="container pt-10 md:pt-14 lg:pt-20">
+          {/* <Card21 post={latestArticles.data[0]} /> */}
+          <SectionMagazine12 posts={latestArticles.data[0]} lang={lang} />
+        </div>
 
-        <div className="container ">{/* create a featured card for home page  */}</div>
+        <div className="container">{/* create a featured card for home page  */}</div>
         {/* <ParallaxScrollSection magazine10Data={articlesArray} videoPosts={videoPostsArray} /> */}
         <div className="relative container space-y-8 py-10 md:space-y-12 md:py-14 lg:space-y-16 lg:py-20">
           {/* <SectionMagazine10 posts={magazine10Data} /> */}
@@ -161,6 +162,7 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
             }}
           />
         </div> */}
+
         <div className="relative py-10 md:py-14 lg:py-20">
           <BackgroundSection />
           <div className="container">
