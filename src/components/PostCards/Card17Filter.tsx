@@ -15,7 +15,7 @@ const Card17Filter: FC<Props> = ({ className, post, lang }) => {
   const { title, name, parentCategory, slug, featuredIcon, totalArticles, icon } = post
 
   return (
-    <div className="flex flex-wrap gap-2 sm:gap-4">
+    <div className="flex cursor-pointer flex-wrap gap-2 sm:gap-4">
       <div
         className={clsx(
           'post-card-17-filter group relative flex items-center justify-between gap-x-3 rounded-[10px] bg-white px-3 py-[10px] hover:bg-[#00652E] dark:bg-[#0D0D0D]',
