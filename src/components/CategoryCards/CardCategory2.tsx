@@ -50,7 +50,7 @@ const CardCategory2: FC<Props> = ({ className, category, badge, lang }) => {
       />
       <div className="mt-3">
         <Link
-          href={lang === 'en' ? `/${parentCategory?.slug}/${slug}` : `/${lang}/${parentCategory?.slug}/${slug}`}
+          href={lang === 'en' ? `/${slug}` : `/${lang}/${slug}`}
           className={`relative inset-0 z-10 line-clamp-1 text-base font-semibold text-[#2a2a2a2] hover:text-[#3a3a3a]`}
         >
           {categoryName}
