@@ -15,9 +15,10 @@ interface Props {
   post: TPost
   ratio?: string
   lang?: string
+  categoryPage?: boolean
 }
 
-const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang }) => {
+const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang, categoryPage }) => {
   const {
     title,
     handle,
@@ -36,19 +37,34 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang 
     favoriteCount,
   } = post
 
+  console.log(post, 'post123')
+
   // Build the post URL safely
   const getPostUrl = () => {
-    if (category?.slug && category?.parentCategory?.slug) {
-      return `/${category.parentCategory.slug}/${category.slug}/${slug}`
+    const mainCategorySlug = categoryPage ? category?.slug : categories[0]?.slug
+    const parentCategorySlug = categoryPage ? category?.parentCategory?.slug : categories[0]?.parentCategory?.slug
+
+    if (mainCategorySlug && parentCategorySlug) {
+      return `${parentCategorySlug}/${mainCategorySlug}/${slug}`
     }
-    if (category?.slug) {
-      return `/${category.slug}/${slug}`
+
+    if (mainCategorySlug) {
+      return `${mainCategorySlug}/${slug}`
     }
+
     return `/post/${handle}`
   }
+  // const postUrl =
+
+  // if (categories?.slug && categories?.parentCategory?.slug) {
+  //   return `/${categories.parentCategory.slug}/${categories.slug}/${slug}`
+  // }
+  // if (categories?.slug) {
+  //   return `/${categories.slug}/${slug}`
+  // }
 
   return (
-    <div className={clsx('group post-card-16-podcast relative flex flex-col ', className)}>
+    <div className={clsx('group post-card-16-podcast relative flex flex-col', className)}>
       <div className={`relative w-full shrink-0 ${ratio}`}>
         {(thumbnail || featuredImage) && (
           <Image
