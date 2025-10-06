@@ -5,15 +5,34 @@ import WidgetHeading from './WidgetHeading'
 
 interface Props {
   className?: string
-  categories: any
+  categories?: any
+  lang?: string
 }
 
-const WidgetCategories: FC<Props> = ({ className = 'bg-white dark:bg-[#0D0D0D]', categories }) => {
+const WidgetCategories: FC<Props> = ({ className = 'bg-white dark:bg-[#0D0D0D]', categories, lang }) => {
   const shouldScroll = categories && categories.length > 6
+
+  // Get category data with fallbacks
+  const firstCategory = categories?.[0]?.category
+  const slug = firstCategory?.slug || ''
+  const parentSlug = firstCategory?.parentCategory?.slug || ''
+
+  // Determine the viewAllHref
+  let viewAllHref = '' // Default empty string if no slug
+
+  if (slug) {
+    if (parentSlug) {
+      // If we have both slug and parentSlug
+      viewAllHref = lang === 'en' ? `/${parentSlug}/${slug}` : `/${lang}/${parentSlug}/${slug}`
+    } else {
+      // If we only have slug
+      viewAllHref = lang === 'en' ? `/${slug}` : `/${lang}/${slug}`
+    }
+  }
 
   return (
     <div className={clsx('widget-categories overflow-hidden rounded-3xl', className)}>
-      <WidgetHeading title="Continues Read" viewAll={{ label: 'View all', href: '/#' }} />
+      <WidgetHeading title="Continues Read" viewAll={{ label: 'View all', href: viewAllHref }} />
       <div className="flow-root">
         <div
           className={clsx(

@@ -67,7 +67,7 @@ const Page = async ({
   const { category, subcategory, article, lang } = await params
 
   const post = await getPostBySlug(article)
-  const subcategoryPosts = await getSubcategoryPosts(post?.categories[0]?.slug)
+  const subcategoryPosts = await getSubcategoryPosts(post?.categories[0]?.slug , lang)
   const comments = await getCommentsByPostId(post.id)
   const relatedPosts = (await getAllPosts()).slice(0, 6)
   const categoryData = await getCategoryBySlug(category, lang)
@@ -123,10 +123,10 @@ const Page = async ({
         <div className="mt-12 w-full lg:mt-0 lg:w-2/5 lg:ps-10 xl:w-1/3 xl:ps-0">
           <div className="space-y-7 lg:sticky lg:top-7">
             <Suspense fallback={<WidgetCategoriesSkeleton />}>
-              <WidgetCategories categories={filteredSubcategoryPosts} />
+              <WidgetCategories categories={filteredSubcategoryPosts} lang={lang}/>
             </Suspense>
             <Suspense fallback={<WidgetPostsSkeleton />}>
-              <WidgetPosts posts={otherTopics} />
+              <WidgetPosts posts={otherTopics} lang={lang}/>
             </Suspense>
           </div>
         </div>

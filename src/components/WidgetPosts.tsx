@@ -9,6 +9,7 @@ interface Props {
   posts: TPost[]
   maxHeight?: string // Optional prop to customize max height
   maxVisiblePosts?: number // Optional prop to set when scrolling should kick in
+  lang?: string
 }
 
 const WidgetPosts: FC<Props> = ({
@@ -16,11 +17,16 @@ const WidgetPosts: FC<Props> = ({
   posts,
   maxHeight = 'max-h-[70vh]', // Default max height (24rem = 384px)
   maxVisiblePosts = 6,
+  lang,
 }) => {
   const shouldScroll = posts && posts.length > 6
+
+  const parentCategory = posts?.[0]?.parentCategory?.slug
+  const viewAllHref = lang === 'en' ? `/${parentCategory}` : `/${lang}/${parentCategory}`
+
   return (
     <div className={clsx('widget-posts overflow-hidden rounded-3xl', className)}>
-      <WidgetHeading title="Other Topics" viewAll={{ label: 'View all', href: '/#' }} />
+      <WidgetHeading title="Other Topics" viewAll={{ label: 'View all', href: viewAllHref }} />
       <div
         className={clsx(
           'flex flex-col divide-y divide-neutral-200 dark:divide-neutral-700',
@@ -34,6 +40,7 @@ const WidgetPosts: FC<Props> = ({
             key={post._id}
             post={post}
             index={index}
+            lang={lang}
           />
         ))}
       </div>
