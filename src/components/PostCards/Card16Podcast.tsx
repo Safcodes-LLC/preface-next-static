@@ -1,7 +1,6 @@
 'use client'
 
 import { TPost } from '@/data/posts'
-import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -37,14 +36,14 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang,
     favoriteCount,
   } = post
 
-console.log(post, "posty findignd");
-console.log(isCategoryPage, "isCategoryPage123")
+  console.log(post, 'posty findignd')
+  console.log(isCategoryPage, 'isCategoryPage123')
   // Build the post URL safely
   const getPostUrl = () => {
-    const mainCategorySlug = isCategoryPage ? categories[0]?.slug :  category?.slug
+    const mainCategorySlug = isCategoryPage ? categories[0]?.slug : category?.slug
     const parentCategorySlug = isCategoryPage ? categories[0]?.parentCategory?.slug : category?.parentCategory?.slug
 
-    if (isCategoryPage ) {
+    if (isCategoryPage) {
       return `${parentCategorySlug}/${mainCategorySlug}/${slug}`
     }
     if (mainCategorySlug) {
@@ -62,17 +61,24 @@ console.log(isCategoryPage, "isCategoryPage123")
   //   return `/${categories.slug}/${slug}`
   // }
 
+  const postUrl = getPostUrl()
+  const href = lang === 'en' ? postUrl : `/${lang}/${postUrl}`
+
   return (
     <div className={clsx('group post-card-16-podcast relative flex flex-col', className)}>
-      <div className={`relative w-full shrink-0 ${ratio}`}>
+      <div className={`relative w-full shrink-0 overflow-hidden rounded-3xl ${ratio}`}>
         {(thumbnail || featuredImage) && (
-          <Image
-            fill
-            alt={title || ''}
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            src={thumbnail || featuredImage || ''}
-            className="rounded-3xl object-cover brightness-100 transition-[filter] duration-300 group-hover:brightness-75"
-          />
+          <Link href={href}>
+            <Image
+              fill
+              alt={title || ''}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              src={thumbnail || featuredImage || ''}
+              className="rounded-3xl object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+            />
+            {/* Premium overlay on hover */}
+            <div className="absolute inset-0 rounded-3xl bg-black/0 transition-all duration-300 ease-out group-hover:bg-black/20" />
+          </Link>
         )}
         {!thumbnail && !featuredImage && (
           <div className="absolute inset-0 flex items-center justify-center rounded-3xl bg-gray-200 dark:bg-gray-800">
@@ -97,25 +103,16 @@ console.log(isCategoryPage, "isCategoryPage123")
       <CategoryBadgeList className="absolute inset-x-3 top-3" categories={category} />
 
       {/* MAIN CONTENT */}
-      <div className="relative -mt-32 w-11/12">
-        <div className="mt-20 flex grow flex-col rounded-3xl rounded-ss-none bg-white p-5 dark:bg-[#0D0D0D]">
+      <div className="pointer-events-none relative -mt-32 w-11/12">
+        <div className="pointer-events-auto mt-20 flex grow flex-col rounded-3xl rounded-ss-none bg-white p-5 transition-shadow duration-300 ease-out group-hover:shadow-lg dark:bg-[#0D0D0D] dark:group-hover:shadow-2xl">
           <h2 className="nc-card-title mb-2 block font-normal text-neutral-900 sm:text-base dark:text-neutral-100">
-            <span title={title} className="line-clamp-2">
+            <Link href={href} title={title} className="line-clamp-2">
               {title}
-            </span>
+            </Link>
           </h2>
           <div className="relative mt-auto flex flex-nowrap items-center gap-x-2">
             <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
             <PostCardSaveBtn bookmarked={bookmarked} />
-            <Link
-              href={lang === 'en' ? getPostUrl() : `/${lang}/${getPostUrl()}`}
-              className="group/arrow ms-auto items-center justify-center rounded-full border border-[#E2E2E2] bg-white p-1.5 transition-all duration-200 hover:scale-110 hover:border-neutral-300 hover:bg-neutral-50 dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:border-[#666] dark:hover:bg-[#1A1A1A]"
-            >
-              <ArrowRightIcon
-                strokeWidth={3}
-                className="h-3 w-3 text-[#C2C2C2] transition-transform duration-200 group-hover/arrow:translate-x-0.5 group-hover/arrow:text-[#919191] rtl:rotate-180 dark:text-[#707070] dark:group-hover/arrow:text-gray-300"
-              />
-            </Link>
           </div>
         </div>
       </div>
