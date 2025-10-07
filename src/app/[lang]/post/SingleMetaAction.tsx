@@ -14,14 +14,13 @@ import {
   Mail01Icon,
   MoreHorizontalIcon,
   NewTwitterIcon,
-  Share03Icon,
+  Share08Icon,
   ViewOffSlashIcon,
   WhatsappIcon,
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import { FC, useState } from 'react'
-
 function ActionDropdown({ handle, title }: { handle: string; title: string }) {
   const [isOpenDialogHideAuthor, setIsOpenDialogHideAuthor] = useState(false)
   const [isOpenDialogReportPost, setIsOpenDialogReportPost] = useState(false)
@@ -153,11 +152,11 @@ function ShareDropdown({ handle, color }: { handle: string; color?: string }) {
     <Dropdown>
       <DropdownButton
         as="button"
-        className={`flex size-8.5 items-center justify-center rounded-full transition-colors duration-300 ${
+        className={`flex size-6 items-center justify-center rounded-full transition-colors duration-300 ${
           color || 'bg-neutral-50 hover:bg-neutral-100 dark:bg-white/10 dark:hover:bg-white/20'
         }`}
       >
-        <HugeiconsIcon icon={Share03Icon} size={20} />
+        <HugeiconsIcon icon={Share08Icon} size={12} />
       </DropdownButton>
       <DropdownMenu>
         {socialsShare.map((item, index) => (
@@ -187,13 +186,16 @@ const SingleMetaAction: FC<Props> = ({ className, likeCount, liked, commentCount
         <PostCardLikeBtn
           likeCount={likeCount}
           liked={liked}
+          className='h-6'
           color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white"
         />
         {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
         {/* <p className="font-light text-neutral-400 sm:mx-1">/</p> */}
         <BookmarkBtn
-          className="size-8.5!"
-          color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white  relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-300 "
+          // className="size-5.5!"
+          className='h-6 w-6'
+          // color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white  relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-300 "
+          color="relative flex size-5 cursor-pointer px-1 items-center justify-center rounded-full transition-colors duration-300 bg-transparent border border-white !text-white hover:bg-white/10 hover:text-white"
         />
         <ShareDropdown
           handle={handle}

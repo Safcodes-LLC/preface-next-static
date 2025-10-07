@@ -16,9 +16,10 @@ interface Props {
   liked?: boolean
   color?: string
   post?: any
+  iconsize?:string
 }
 
-const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, color, post }) => {
+const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, color, post, iconsize }) => {
   const { isAuthenticated, user } = useAuth()
   const [isLiked, setIsLiked] = useState(liked)
   const [optimisticLikeCount, setOptimisticLikeCount] = useState(likeCount)
@@ -109,7 +110,7 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, c
         title={isLiked ? 'Unlike' : 'Like'}
         disabled={!post?._id} // Disable if no post ID is available
       >
-        <HeartIcon className="size-3" strokeWidth={1} fill={isLiked ? 'currentColor' : 'none'} />
+        <HeartIcon className={iconsize || 'size-3'} strokeWidth={1} fill={isLiked ? 'currentColor' : 'none'} />
 
         <span className={clsx('ms-1', isLiked && 'text-[#00652E]')}>
           {post?.favoriteCount || convertNumbThousand(optimisticLikeCount)}
