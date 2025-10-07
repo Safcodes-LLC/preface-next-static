@@ -1,7 +1,6 @@
 'use client'
 
 import { TPost } from '@/data/posts'
-import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -31,54 +30,42 @@ const Card17: FC<Props> = ({ className, post, lang }) => {
   const IS_AUDIO = postType === 'audio'
 
   return (
-    <div
-      className={clsx(
-        'post-card-17 relative flex items-center justify-between gap-x-4 rounded-xl bg-white p-4 dark:bg-[#0D0D0D]',
-        className
-      )}
+    <Link
+      href={lang === 'en' ? `/${parentCategory?.slug}/${slug}` : `/${lang}/${parentCategory?.slug}/${slug}`}
+      className="block"
     >
-      <div className="relative h-[70px] w-[70px] shrink-0 rounded-full bg-[#F8F8F8] dark:bg-[#1A1A1A]">
-        <Image
-          sizes="70px"
-          className="object-contain p-4"
-          src={featuredIcon || icon?.src || '/images/placeholder-image.png'}
-          fill
-          alt={name || title}
-        />
-        {/* <NcImage
-        alt={name}
-        containerClassName={clsx(
-          'relative me-4 shrink-0 overflow-hidden rounded-lg',
-          size === 'large' ? 'size-20' : 'size-12'
+      <div
+        className={clsx(
+          'post-card-17 group relative flex items-center justify-between gap-x-4 overflow-hidden rounded-xl bg-white p-4 transition-all duration-300 ease-in-out',
+          ' hover:-translate-y-0.5 dark:bg-[#0D0D0D]',
+          'transform-gpu will-change-transform',
+          'dark:hover:bg-[#1A1A1A]',
+          className
         )}
-        src={thumbnail || ''}
-        fill
-        className="object-cover"
-        sizes="80px"
-      /> */}
-      </div>
-      <div className="flex flex-1 flex-col text-left">
-        <h2 className="block text-base font-medium text-[#000000] dark:text-white">
-          <span className="line-clamp-1">{name || title}</span>
-        </h2>
-        <div className="mt-1">
-          <span className="text-[12px] font-[400] text-neutral-500 dark:text-neutral-400">
-            {totalArticles} Articles
-          </span>
+      >
+        <div className="relative h-[70px] w-[70px] shrink-0 rounded-full bg-[#F8F8F8] dark:bg-[#1A1A1A]">
+          <div className="relative h-full w-full transition-transform duration-300 group-hover:scale-110">
+            <Image
+              sizes="70px"
+              className="object-contain p-4"
+              src={featuredIcon || icon?.src || '/images/placeholder-image.png'}
+              fill
+              alt={name || title}
+            />
+          </div>
+        </div>
+        <div className="flex flex-1 flex-col text-left">
+          <h2 className="block text-base font-medium text-[#000000] transition-colors duration-300 group-hover:text-[#00652E] dark:text-white dark:group-hover:text-[#60a43a]">
+            <span className="line-clamp-1">{name || title}</span>
+          </h2>
+          <div className="mt-1">
+            <span className="text-[12px] font-[400] text-neutral-500 transition-colors duration-300 group-hover:text-neutral-700 dark:text-neutral-400 dark:group-hover:text-neutral-300">
+              {totalArticles} Articles
+            </span>
+          </div>
         </div>
       </div>
-
-      {/* Arrow button on the far right */}
-      <div className="flex shrink-0 items-center">
-        <Link
-          href={lang === 'en' ? `/${parentCategory?.slug}/${slug}` : `/${lang}/${parentCategory?.slug}/${slug}`}
-          // href={lang === 'en' ? `/${slug}` : `/${lang}/${slug}`}
-          className="group/arrow inline-flex items-center justify-center rounded-full border border-[#E2E2E2] bg-white p-1.5 transition-all duration-200 hover:scale-110 hover:border-neutral-300 hover:bg-neutral-50 dark:border-[#505050] dark:bg-[#0D0D0D] dark:hover:border-[#666] dark:hover:bg-[#1A1A1A]"
-        >
-          <ArrowRightIcon className="h-3 w-3 text-[#919191] transition-transform duration-200 group-hover/arrow:translate-x-0.5 group-hover/arrow:text-[#919191] rtl:rotate-180 dark:text-[#707070] dark:group-hover/arrow:text-gray-300" />
-        </Link>
-      </div>
-    </div>
+    </Link>
   )
 }
 
