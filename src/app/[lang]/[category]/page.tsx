@@ -161,7 +161,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
               <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
                 {postsByParentCategory?.data?.map((post: any) => (
                   <Suspense key={`suspense-${post._id}`} fallback={<Card16PodcastSkeleton />}>
-                    <Card16Podcast key={post._id} post={post} lang={lang} />
+                    <Card16Podcast key={post._id} post={post} lang={lang} isCategoryPage={true}/>
                   </Suspense>
                 ))}
               </div>

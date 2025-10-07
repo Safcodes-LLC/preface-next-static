@@ -97,7 +97,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
                     .filter((p) => p.postType?.name === 'Article')
                     .map((p) => (
                       <Suspense key={`suspense-${p._id}`} fallback={<Card16PodcastSkeleton />}>
-                        <Card16Podcast key={p._id} post={p} lang={lang} />
+                        <Card16Podcast key={p._id} post={p} lang={lang} isCategoryPage={false}/>
                       </Suspense>
                     ))}
                 </div>

@@ -15,10 +15,10 @@ interface Props {
   post: TPost
   ratio?: string
   lang?: string
-  categoryPage?: boolean
+  isCategoryPage?: boolean
 }
 
-const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang, categoryPage }) => {
+const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang, isCategoryPage = false }) => {
   const {
     title,
     handle,
@@ -37,17 +37,16 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang,
     favoriteCount,
   } = post
 
-  console.log(post, 'post123')
-
+console.log(post, "posty findignd");
+console.log(isCategoryPage, "isCategoryPage123")
   // Build the post URL safely
   const getPostUrl = () => {
-    const mainCategorySlug = categoryPage ? category?.slug : categories[0]?.slug
-    const parentCategorySlug = categoryPage ? category?.parentCategory?.slug : categories[0]?.parentCategory?.slug
+    const mainCategorySlug = isCategoryPage ? categories[0]?.slug :  category?.slug
+    const parentCategorySlug = isCategoryPage ? categories[0]?.parentCategory?.slug : category?.parentCategory?.slug
 
-    if (mainCategorySlug && parentCategorySlug) {
+    if (isCategoryPage ) {
       return `${parentCategorySlug}/${mainCategorySlug}/${slug}`
     }
-
     if (mainCategorySlug) {
       return `${mainCategorySlug}/${slug}`
     }
