@@ -29,7 +29,7 @@ const ModalCategories: FC<Props> = ({ categories }) => {
             <Divider className="my-6" />
             <div className="grid gap-6 sm:grid-cols-2 sm:py-2 md:grid-cols-3 md:gap-8 lg:grid-cols-4">
               {categories.map((cat) => (
-                <CardCategory1 key={cat._id} category={cat} size="normal" />
+                <CardCategory1 key={cat._id} category={cat} sizes="normal" />
               ))}
             </div>
           </DialogBody>
