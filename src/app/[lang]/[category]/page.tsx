@@ -147,9 +147,9 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
       </div>
 
       {/* here featured create ui */}
-      {/* <div className='container pt-10 md:pt-14 lg:pt-20'>
+      <div className='container pt-10 md:pt-14 lg:pt-20'>
         <Card22/>
-      </div> */}
+      </div>
 
       <div className="container">
         <Suspense fallback={<PostListsSkelton />}>
