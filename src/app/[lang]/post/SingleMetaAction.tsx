@@ -21,6 +21,7 @@ import {
 import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import { FC, useState } from 'react'
+import toast from 'react-hot-toast'
 function ActionDropdown({ handle, title }: { handle: string; title: string }) {
   const [isOpenDialogHideAuthor, setIsOpenDialogHideAuthor] = useState(false)
   const [isOpenDialogReportPost, setIsOpenDialogReportPost] = useState(false)
@@ -120,31 +121,71 @@ function ActionDropdown({ handle, title }: { handle: string; title: string }) {
 }
 
 function ShareDropdown({ handle, color }: { handle: string; color?: string }) {
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : ''
+  const postTitle = typeof document !== 'undefined' ? document.title : ''
+
+  const handleShare = (platform: string) => {
+    const shareUrl = new URL(currentUrl)
+    let shareLink = ''
+
+    switch (platform) {
+      case 'facebook':
+        shareLink = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`
+        break
+      case 'twitter':
+        shareLink = `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(postTitle)}`
+        break
+      case 'whatsapp':
+        shareLink = `https://wa.me/?text=${encodeURIComponent(`${postTitle} ${currentUrl}`)}`
+        break
+      case 'email':
+        shareLink = `mailto:?subject=${encodeURIComponent(`Check this out: ${postTitle}`)}&body=${encodeURIComponent(`${postTitle}\n\n${currentUrl}`)}`
+        break
+      case 'copy':
+        navigator.clipboard.writeText(currentUrl)
+        toast.success('Link copied to clipboard!', {
+          position: 'top-center',
+          duration: 2000,
+          className: '!bg-neutral-800 dark:!bg-neutral-100 !text-white dark:!text-neutral-900 !px-4 !py-2 !rounded-lg !text-sm !font-medium !shadow-lg !min-w-[200px] !text-center',
+        })
+        return
+    }
+
+    if (shareLink) {
+      window.open(shareLink, '_blank', 'noopener,noreferrer')
+    }
+  }
+
   const socialsShare = [
     {
+      id: 'facebook',
       name: 'Facebook',
-      href: '#',
       icon: Facebook01Icon,
+      onClick: () => handleShare('facebook'),
     },
     {
+      id: 'email',
       name: 'Email',
-      href: '#',
       icon: Mail01Icon,
+      onClick: () => handleShare('email'),
     },
     {
+      id: 'twitter',
       name: 'Twitter',
-      href: '#',
       icon: NewTwitterIcon,
+      onClick: () => handleShare('twitter'),
     },
     {
+      id: 'whatsapp',
       name: 'WhatsApp',
-      href: '#',
       icon: WhatsappIcon,
+      onClick: () => handleShare('whatsapp'),
     },
     {
+      id: 'copy',
       name: 'Copy Link',
-      href: '#',
       icon: CopyIcon,
+      onClick: () => handleShare('copy'),
     },
   ]
 
@@ -159,8 +200,8 @@ function ShareDropdown({ handle, color }: { handle: string; color?: string }) {
         <HugeiconsIcon icon={Share08Icon} size={12} />
       </DropdownButton>
       <DropdownMenu>
-        {socialsShare.map((item, index) => (
-          <DropdownItem key={index} href={item.href}>
+        {socialsShare.map((item) => (
+          <DropdownItem key={item.id} onClick={item.onClick} className="cursor-pointer">
             <HugeiconsIcon icon={item.icon} size={20} data-slot="icon" />
             {item.name}
           </DropdownItem>
@@ -186,14 +227,14 @@ const SingleMetaAction: FC<Props> = ({ className, likeCount, liked, commentCount
         <PostCardLikeBtn
           likeCount={likeCount}
           liked={liked}
-          className='h-6'
+          className="h-6"
           color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white"
         />
         {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
         {/* <p className="font-light text-neutral-400 sm:mx-1">/</p> */}
         <BookmarkBtn
           // className="size-5.5!"
-          className='h-6 w-6'
+          className="h-6 w-6"
           // color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white  relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-300 "
           color="relative flex size-5 cursor-pointer px-1 items-center justify-center rounded-full transition-colors duration-300 bg-transparent border border-white !text-white hover:bg-white/10 hover:text-white"
         />
