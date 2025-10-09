@@ -9,6 +9,7 @@ import {
   Quran01Icon,
   Search01Icon,
   Tag02Icon,
+  UserIcon,
   UserListIcon,
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
@@ -103,7 +104,7 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
                     <h1 className="text-[24px] dark:text-white">
                       Al-Baqarah <span className="text-[20px] dark:text-white">(The Cow)</span>
                     </h1>
-                    <div className="text-[16px]text-[#666666]">Verse 1</div>
+                    <div className="text-[16px] text-[#666666]">Verse 1</div>
                   </div>
 
                   <div className="flex justify-end">
@@ -122,9 +123,9 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
             <div className="col-span-6 flex flex-col gap-6 rounded-2xl max-md:col-span-full">
               <div className="rounded-2xl bg-white dark:bg-[#0d0d0d]">
                 <div className="flex justify-between gap-2 p-[25px_30px]">
-                  <div className="flex gap-2">
-                    <HugeiconsIcon icon={Quran01Icon} className="text-[#00652E]" strokeWidth={2.5} />
-                    <div>Make your Quran Goals</div>
+                  <div className="flex items-center gap-2">
+                    <HugeiconsIcon icon={Quran01Icon} size={20} className="text-[#00652E] flex-shrink-0" strokeWidth={2.5} />
+                    <div className="text-[20px]">Make your Quran Goals</div>
                   </div>
                   <button className="flex aspect-square w-[30px] cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-colors hover:bg-gray-50">
                     <HugeiconsIcon icon={ArrowUpRightIcon} size={14} className="text-[#919191]" strokeWidth={2.5} />
@@ -133,21 +134,9 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
               </div>
               <div className="rounded-2xl bg-white dark:bg-[#0d0d0d]">
                 <div className="flex justify-between gap-2 p-[25px_30px]">
-                  <div className="flex gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="size-6 text-[#60A43A]"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-
-                    <div>Login & Schedule your learning</div>
+                  <div className="flex items-center gap-2">
+                    <HugeiconsIcon icon={UserIcon} size={20} className="text-[#00652E]" strokeWidth={2.5} />
+                    <div className="text-xl">Login & Schedule your learning</div>
                   </div>
                   <button className="flex aspect-square w-[30px] cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-colors hover:bg-gray-50">
                     <HugeiconsIcon icon={ArrowUpRightIcon} size={14} className="text-[#919191]" strokeWidth={2.5} />
@@ -201,6 +190,43 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
                   className="text-[#7D7D7D] group-hover:text-black dark:text-[#919191] dark:group-hover:text-white"
                   strokeWidth={3}
                 />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* week's learning section2 */}
+        <div className="grid grid-cols-3 gap-6 max-md:col-span-full">
+          <div className="rounded-[10px] border border-[#E9E9E9]">
+            <div className="flex justify-between gap-2 p-[25px_30px]">
+              <div className="flex items-center gap-2">
+                <HugeiconsIcon icon={Quran01Icon} className="text-[#00652E] flex-shrink-0" strokeWidth={2.5} />
+                <div className="">Holy Quran</div>
+              </div>
+              <button className="flex aspect-square w-[30px] cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-colors hover:bg-gray-50">
+                <HugeiconsIcon icon={ArrowUpRightIcon} size={14} className="text-[#919191]" strokeWidth={2.5} />
+              </button>
+            </div>
+          </div>
+          <div className="rounded-[10px] border border-[#E9E9E9]">
+            <div className="flex justify-between gap-2 p-[25px_30px]">
+              <div className="flex items-center gap-2">
+                <HugeiconsIcon icon={Quran01Icon} className="text-[#00652E] flex-shrink-0" strokeWidth={2.5} />
+                <div className="">Hudhayl Quran</div>
+              </div>
+              <button className="flex aspect-square w-[30px] cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-colors hover:bg-gray-50">
+                <HugeiconsIcon icon={ArrowUpRightIcon} size={14} className="text-[#919191]" strokeWidth={2.5} />
+              </button>
+            </div>
+          </div>
+          <div className="rounded-[10px] border border-[#E9E9E9]">
+            <div className="flex justify-between gap-2 p-[25px_30px]">
+              <div className="flex items-center gap-2">
+                <HugeiconsIcon icon={Quran01Icon} className="text-[#00652E] flex-shrink-0" strokeWidth={2.5} />
+                <div className="">Hawaazin Quran</div>
+              </div>
+              <button className="flex aspect-square w-[30px] cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-colors hover:bg-gray-50">
+                <HugeiconsIcon icon={ArrowUpRightIcon} size={14} className="text-[#919191]" strokeWidth={2.5} />
               </button>
             </div>
           </div>
