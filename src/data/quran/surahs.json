@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "name": "الفاتحة",
+    "transliteration": "Al-Fatihah",
+    "translation": "The Opener",
+    "type": "Meccan",
+    "total_verses": 7,
+    "revelation_order": 5,
+    "rukus": 1,
+    "english_name": "The Opening"
+  },
+  {
+    "id": 2,
+    "name": "البقرة",
+    "transliteration": "Al-Baqarah",
+    "translation": "The Cow",
+    "type": "Medinan",
+    "total_verses": 286,
+    "revelation_order": 87,
+    "rukus": 40,
+    "english_name": "The Cow"
+  },
+  {
+    "id": 3,
+    "name": "آل عمران",
+    "transliteration": "Ali 'Imran",
+    "translation": "Family of Imran",
+    "type": "Medinan",
+    "total_verses": 200,
+    "revelation_order": 89,
+    "rukus": 20,
+    "english_name": "The Family of Imran"
+  },
+  {
+    "id": 4,
+    "name": "النساء",
+    "transliteration": "An-Nisa",
+    "translation": "The Women",
+    "type": "Medinan",
+    "total_verses": 176,
+    "revelation_order": 92,
+    "rukus": 24,
+    "english_name": "The Women"
+  },
+  {
+    "id": 5,
+    "name": "المائدة",
+    "transliteration": "Al-Ma'idah",
+    "translation": "The Table Spread",
+    "type": "Medinan",
+    "total_verses": 120,
+    "revelation_order": 112,
+    "rukus": 16,
+    "english_name": "The Table Spread"
+  },
+  {
+    "id": 6,
+    "name": "الأنعام",
+    "transliteration": "Al-An'am",
+    "translation": "The Cattle",
+    "type": "Meccan",
+    "total_verses": 165,
+    "revelation_order": 55,
+    "rukus": 20,
+    "english_name": "The Cattle"
+  },
+  {
+    "id": 7,
+    "name": "الأعراف",
+    "transliteration": "Al-A'raf",
+    "translation": "The Heights",
+    "type": "Meccan",
+    "total_verses": 206,
+    "revelation_order": 39,
+    "rukus": 24,
+    "english_name": "The Heights"
+  },
+  {
+    "id": 8,
+    "name": "الأنفال",
+    "transliteration": "Al-Anfal",
+    "translation": "The Spoils of War",
+    "type": "Medinan",
+    "total_verses": 75,
+    "revelation_order": 88,
+    "rukus": 10,
+    "english_name": "The Spoils of War"
+  },
+  {
+    "id": 9,
+    "name": "التوبة",
+    "transliteration": "At-Tawbah",
+    "translation": "The Repentance",
+    "type": "Medinan",
+    "total_verses": 129,
+    "revelation_order": 113,
+    "rukus": 16,
+    "english_name": "The Repentance"
+  },
+  {
+    "id": 10,
+    "name": "يونس",
+    "transliteration": "Yunus",
+    "translation": "Jonah",
+    "type": "Meccan",
+    "total_verses": 109,
+    "revelation_order": 51,
+    "rukus": 11,
+    "english_name": "Jonah"
+  },
+  {
+    "id": 11,
+    "name": "هود",
+    "transliteration": "Hud",
+    "translation": "Hud",
+    "type": "Meccan",
+    "total_verses": 123,
+    "revelation_order": 52,
+    "rukus": 10,
+    "english_name": "Hud"
+  },
+  {
+    "id": 12,
+    "name": "يوسف",
+    "transliteration": "Yusuf",
+    "translation": "Joseph",
+    "type": "Meccan",
+    "total_verses": 111,
+    "revelation_order": 53,
+    "rukus": 12,
+    "english_name": "Joseph"
+  },
+  {
+    "id": 13,
+    "name": "الرعد",
+    "transliteration": "Ar-Ra'd",
+    "translation": "The Thunder",
+    "type": "Medinan",
+    "total_verses": 43,
+    "revelation_order": 96,
+    "rukus": 6,
+    "english_name": "The Thunder"
+  },
+  {
+    "id": 14,
+    "name": "إبراهيم",
+    "transliteration": "Ibrahim",
+    "translation": "Abraham",
+    "type": "Meccan",
+    "total_verses": 52,
+    "revelation_order": 72,
+    "rukus": 7,
+    "english_name": "Abraham"
+  },
+  {
+    "id": 15,
+    "name": "الحجر",
+    "transliteration": "Al-Hijr",
+    "translation": "The Rocky Tract",
+    "type": "Meccan",
+    "total_verses": 99,
+    "revelation_order": 54,
+    "rukus": 6,
+    "english_name": "The Rocky Tract"
+  },
+  {
+    "id": 16,
+    "name": "النحل",
+    "transliteration": "An-Nahl",
+    "translation": "The Bee",
+    "type": "Meccan",
+    "total_verses": 128,
+    "revelation_order": 70,
+    "rukus": 16,
+    "english_name": "The Bee"
+  },
+  {
+    "id": 17,
+    "name": "الإسراء",
+    "transliteration": "Al-Isra",
+    "translation": "The Night Journey",
+    "type": "Meccan",
+    "total_verses": 111,
+    "revelation_order": 50,
+    "rukus": 12,
+    "english_name": "The Night Journey"
+  },
+  {
+    "id": 18,
+    "name": "الكهف",
+    "transliteration": "Al-Kahf",
+    "translation": "The Cave",
+    "type": "Meccan",
+    "total_verses": 110,
+    "revelation_order": 69,
+    "rukus": 12,
+    "english_name": "The Cave"
+  },
+  {
+    "id": 19,
+    "name": "مريم",
+    "transliteration": "Maryam",
+    "translation": "Mary",
+    "type": "Meccan",
+    "total_verses": 98,
+    "revelation_order": 44,
+    "rukus": 6,
+    "english_name": "Mary"
+  },
+  {
+    "id": 20,
+    "name": "طه",
+    "transliteration": "Ta-Ha",
+    "translation": "Ta-Ha",
+    "type": "Meccan",
+    "total_verses": 135,
+    "revelation_order": 45,
+    "rukus": 8,
+    "english_name": "Ta-Ha"
+  }
+]
