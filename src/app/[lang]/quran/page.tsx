@@ -1,7 +1,9 @@
 import { getSearchResults } from '@/data/search'
 import { Input } from '@headlessui/react'
 import {
+  ArrowDown02Icon,
   ArrowUpRightIcon,
+  BookOpen01Icon,
   Folder02Icon,
   LicenseIcon,
   Quran01Icon,
@@ -159,9 +161,12 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
         {/* Week’s Learning */}
         <div>
           <h2 className="pb-4 text-[26px] font-medium">Week’s Learning</h2>
-          <div className="space-y-6 rounded-2xl bg-white p-[30px] dark:bg-[#0d0d0d]">
+          <div className="space-y-5 rounded-2xl bg-white p-[30px] dark:bg-[#0d0d0d]">
             {/* Arabic Text - Right Aligned */}
-            <div className="w-full text-2xl leading-[3.5rem] text-[#1A1A1A] dark:text-white" dir="rtl">
+            <div
+              className="w-full text-2xl leading-[2.5rem] text-[#1A1A1A] sm:leading-[3rem] dark:text-white"
+              dir="rtl"
+            >
               <p className="w-[90%] break-words whitespace-pre-wrap md:w-[80%]" dir="rtl">
                 قَالَ ٱللَّهُ هَٰذَا يَوْمُ يَنفَعُ ٱلصَّٰدِقِينَ صِدْقُهُمْ ۚ لَهُمْ جَنَّٰتٌ تَجْرِي مِن تَحْتِهَا
                 ٱلْأَنْهَٰرُ خَٰلِدِينَ فِيهَآ أَبَدًۭا ۚ رَّضِىَ ٱللَّهُ عَنْهُمْ وَّرَضُوا عَنْهُ ۚ ذَٰلِكَ ٱلْفَوْزُ
@@ -170,21 +175,33 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
             </div>
 
             {/* English Translation */}
-            <div className="w-[95%] text-base text-black md:w-[85%] md:text-lg dark:text-gray-300">
+            <div className="w-[95%] text-base font-normal text-black md:w-[90%] md:text-lg dark:text-gray-300">
               The lightning almost snatches away their sight. Whenever it lights [the way], they walk therein; but when
               darkness covers them, they stand still. Had Allah willed, He could have taken away their hearing and their
               sight. Indeed, Allah has power over all things.
             </div>
 
             {/* Explanation */}
-            <div className="space-y-4">
-              <h3 className="text-xl font-medium text-[#1A1A1A] dark:text-white">Explanation</h3>
-              <p className="text-sm text-[#4B4B4B] dark:text-gray-300">
-                These two verses form the second parable that the Qur&apos;an presents to describe the psychological and
-                spiritual condition of the hypocrites. While the earlier parable (v. 17-18) depicted their sudden fall
-                from guidance into confusion and blindness...
+            <div className="space-y-3">
+              <div className="flex items-center gap-1">
+                <HugeiconsIcon icon={BookOpen01Icon} size={14} />
+                <h3 className="text-sm font-medium text-[#222222] dark:text-white">Explanation</h3>
+              </div>
+              <p className="w-[95%] text-[15px] text-[#4B4B4B] dark:text-gray-300">
+                These two verses form the second parable that the Qur’an presents to describe the psychological and
+                spiritual condition of the hypocrites. While the earlier parable (v. 17–18) depicted their sudden fall
+                from guidance into confusion and blindness, Qur’an presents to describe the psychological and spiritual
+                ...
               </p>
-              <button className="text-[#00652E] hover:underline dark:text-[#4CAF50]">Read More</button>
+              <button className="group flex cursor-pointer items-center text-[11px] font-normal text-[#7D7D7D] hover:text-black hover:underline dark:text-[#919191] dark:hover:text-white">
+                Read More
+                <HugeiconsIcon
+                  icon={ArrowDown02Icon}
+                  size={11}
+                  className="text-[#7D7D7D] group-hover:text-black dark:text-[#919191] dark:group-hover:text-white"
+                  strokeWidth={3}
+                />
+              </button>
             </div>
           </div>
         </div>
