@@ -40,25 +40,25 @@ type SocialItem = {
 const socialsDemo: SocialItem[] = [
   {
     name: 'Facebook',
-    href: 'https://www.facebook.com/',
+    href: 'https://facebook.com/prefacetoislam',
     icon: Facebook01Icon,
     useHugeicons: true,
   },
   {
     name: 'Instagram',
-    href: 'https://www.instagram.com/example',
+    href: 'https://instagram.com/prefacetoislam',
     icon: InstagramIcon,
     useHugeicons: true,
   },
   {
     name: 'Youtube',
-    href: 'https://www.youtube.com/@example',
+    href: 'https://youtube.com/@prefacetoislam',
     icon: YoutubeIcon,
     useHugeicons: true,
   },
   {
     name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/example',
+    href: 'https://www.linkedin.com/in/preface-multimedia-628048378',
     icon: LinkedinStrokeIcon,
     useHugeicons: false,
   },

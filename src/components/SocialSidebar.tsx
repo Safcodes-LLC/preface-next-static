@@ -29,7 +29,7 @@ type SocialItem = {
 const socialItems: SocialItem[] = [
   {
     name: 'Instagram',
-    href: 'https://www.instagram.com/example',
+    href: 'https://instagram.com/prefacetoislam',
     icon: InstagramIcon,
     useHugeicons: true,
     color: '#60A43A',
@@ -43,14 +43,14 @@ const socialItems: SocialItem[] = [
   },
   {
     name: 'YouTube',
-    href: 'https://www.youtube.com/@example',
+    href: 'https://youtube.com/@prefacetoislam',
     icon: YoutubeIcon,
     useHugeicons: true,
     color: '#60A43A',
   },
   {
     name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/example',
+    href: 'https://www.linkedin.com/in/preface-multimedia-628048378',
     icon: Linkedin02Icon,
     useHugeicons: true,
     color: '#60A43A',
