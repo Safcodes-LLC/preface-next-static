@@ -57,7 +57,7 @@ const socialItems: SocialItem[] = [
   },
   {
     name: 'Snapchat',
-    href: 'https://www.snapchat.com/add/example',
+    href: 'https://www.snapchat.com/add/prefacetoislam?share_id=tVTkvNt3U9s&locale=en-OM',
     icon: SnapchatIcon,
     useHugeicons: true,
     color: '#60A43A',
@@ -65,7 +65,7 @@ const socialItems: SocialItem[] = [
   // add x icon
   {
     name: 'X',
-    href: 'https://www.x.com/',
+    href: 'https://x.com/PrefaceToIslam?t=uKvByEi1Q9VM-sBW6hpPew&s=09',
     icon: NewTwitterIcon,
     useHugeicons: true,
     color: '#60A43A',
