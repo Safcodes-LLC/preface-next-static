@@ -38,7 +38,7 @@ const Card8: FC<Props> = ({ className, post, ratio = 'aspect-3/4 sm:aspect-2/1',
 
   return (
     <div
-      className={clsx('group post-card-8 relative overflow-hidden rounded-3xl', className)}
+      className={clsx('group post-card-8 relative overflow-hidden rounded-[15px]', className)}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
