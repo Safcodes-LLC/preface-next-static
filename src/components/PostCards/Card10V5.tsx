@@ -17,7 +17,7 @@ interface Props {
 
 const Card10V5: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect-6/5', lang }) => {
   const [isHover, setIsHover] = useState(false)
-  const { categories, bookmarked, likeCount, liked, slug } = post
+  const { categories, bookmarked, likeCount, liked, favoriteCount, slug } = post
   // console.log(post,"post check for popular articles");
 
   return (
@@ -41,7 +41,7 @@ const Card10V5: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
         {/* <CategoryBadgeList categories={categories} /> */}
 
         <div className="absolute inset-x-0 top-0 z-10 flex flex-wrap gap-x-2 gap-y-1">
-          <PostCardLikeBtn likeCount={likeCount} liked={liked} />
+          <PostCardLikeBtn likeCount={favoriteCount | likeCount} liked={liked} post={post}/>
           <PostCardSaveBtn bookmarked={bookmarked} />
         </div>
       </div>
