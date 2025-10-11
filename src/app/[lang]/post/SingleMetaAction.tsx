@@ -214,19 +214,22 @@ function ShareDropdown({ handle, color }: { handle: string; color?: string }) {
 interface Props {
   className?: string
   likeCount?: number | any
+  favoriteCount?: number | any
   liked?: boolean | any
   commentCount?: number | any
   handle?: string | any
   title?: string
+  post?: any
 }
 
-const SingleMetaAction: FC<Props> = ({ className, likeCount, liked, commentCount, handle, title }) => {
+const SingleMetaAction: FC<Props> = ({ className, likeCount, favoriteCount, liked, commentCount, handle, title, post }) => {
   return (
     <div className={clsx('single-meta-action', className)}>
       <div className="flex flex-wrap items-center gap-x-2.5 gap-y-2">
         <PostCardLikeBtn
-          likeCount={likeCount}
+          likeCount={favoriteCount | likeCount}
           liked={liked}
+          post={post}
           className="h-6"
           color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white"
         />

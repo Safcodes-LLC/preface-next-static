@@ -58,7 +58,7 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
   const [isShowScrollToTop, setIsShowScrollToTop] = useState<boolean>(false)
   //
 
-  const { tags, author, content, likeCount, commentCount, liked, handle } = post
+  const { tags, author, content, likeCount, favoriteCount, commentCount, liked, handle } = post
   const renderedHtml = useMemo(() => {
     const str = typeof content === 'string' ? content : String(content ?? '')
     try {
@@ -143,7 +143,7 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
       {/* LIKE AND COMMENT STICKY */}
       <div className={`sticky bottom-8 z-11 mt-8 justify-center ${showLikeAndCommentSticky ? 'flex' : 'hidden'}`}>
         <div className="flex items-center justify-center gap-x-2 rounded-full bg-white p-1.5 text-xs shadow-lg ring-1 ring-black/5 dark:bg-neutral-800 dark:ring-white/20">
-          <PostCardLikeBtn likeCount={likeCount} liked={liked} />
+          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
           {/* <div className="h-4 border-s border-neutral-200 dark:border-neutral-700"></div>
           <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
           <div className="h-4 border-s border-neutral-200 dark:border-neutral-700"></div>

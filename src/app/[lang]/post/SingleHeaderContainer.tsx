@@ -38,6 +38,7 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
             handle={handle}
             likeCount={likeCount}
             liked={liked}
+            post={post}
             title={title}
             className="text-white hover:text-white/80"
           />
