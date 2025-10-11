@@ -6,6 +6,7 @@ import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import { FC, useState } from 'react'
 import AuthRequiredModal from './ui/AuthRequiredModal'
+import LoginModal from './ui/LoginModal'
 
 interface Props {
   className?: string
@@ -42,13 +43,11 @@ const BookmarkBtn: FC<Props> = ({ className, bookmarked, color }) => {
         <HugeiconsIcon icon={Bookmark02Icon} size={16} strokeWidth={1} fill={isBookmarked ? 'currentColor' : 'none'} />
       </button>
 
-      <AuthRequiredModal
+      <LoginModal
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
-        description="You need to be signed in to save posts. Please sign in to continue."
-        actionText="Sign In"
-        cancelText="Cancel"
-        redirectPath="/login"
+        onLoginSuccess={() => setShowAuthModal(false)}
+        redirectPath="/"
       />
     </>
   )
