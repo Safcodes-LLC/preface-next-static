@@ -86,7 +86,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         <CategoryBadgeList categories={categories} />
         <div className="ms-auto flex gap-1">
           <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-          <PostCardSaveBtn bookmarked={bookmarked} />
+          <PostCardSaveBtn bookmarked={bookmarked} post={post} />
         </div>
       </div>
 

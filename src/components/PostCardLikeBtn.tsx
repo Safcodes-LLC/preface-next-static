@@ -19,6 +19,13 @@ interface Props {
   iconsize?:string
 }
 
+type Favorite = {
+  postId: {
+    _id: string
+  }
+  // Add other properties from your favorite object if needed
+}
+
 const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, color, post, iconsize }) => {
   const { isAuthenticated, user } = useAuth()
   const [isLiked, setIsLiked] = useState(liked)
@@ -29,15 +36,7 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, c
   const { data } = useGetUserFavourites()
 
   const removeFavourite = useRemoveFavourite()
-
-  type Favorite = {
-    postId: {
-      _id: string
-    }
-    // Add other properties from your favorite object if needed
-  }
-
-  const userFavourites = data?.favorites as Favorite[] | undefined
+  const userFavourites = data?.favorites 
 
   // Update liked state based on user's favorites
   useEffect(() => {
@@ -93,10 +92,10 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, c
     }
   }
 
-  const handleLogin = () => {
-    router.push('/login')
-    setShowAuthModal(false)
-  }
+  // const handleLogin = () => {
+  //   router.push('/login')
+  //   setShowAuthModal(false)
+  // }
 
   return (
     <>

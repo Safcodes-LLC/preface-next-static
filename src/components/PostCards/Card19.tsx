@@ -113,7 +113,7 @@ const Card19: FC<Props> = ({
         )}
         <div className="pointer-events-auto ms-auto flex gap-1">
           <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-          <PostCardSaveBtn bookmarked={bookmarked} />
+          <PostCardSaveBtn bookmarked={bookmarked} post={post}/>
         </div>
       </div>
 

@@ -44,7 +44,7 @@ const Card10V2: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
         <CategoryBadgeList categories={categories} />
         <div className="ms-auto flex gap-1">
           <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-          <PostCardSaveBtn bookmarked={bookmarked} />
+          <PostCardSaveBtn bookmarked={bookmarked} post={post}/>
         </div>
       </div>
 

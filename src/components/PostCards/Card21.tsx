@@ -57,7 +57,7 @@ const Card21: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
           </h2>
           <div className="mt-auto flex items-center gap-3">
             <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-            <PostCardSaveBtn bookmarked={bookmarked} />
+            <PostCardSaveBtn bookmarked={bookmarked} post={post}/>
           </div>
         </div>
       </div>
