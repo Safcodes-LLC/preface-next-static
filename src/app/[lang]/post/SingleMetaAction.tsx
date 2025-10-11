@@ -146,7 +146,8 @@ function ShareDropdown({ handle, color }: { handle: string; color?: string }) {
         toast.success('Link copied to clipboard!', {
           position: 'top-center',
           duration: 2000,
-          className: '!bg-neutral-800 dark:!bg-neutral-100 !text-white dark:!text-neutral-900 !px-4 !py-2 !rounded-lg !text-sm !font-medium !shadow-lg !min-w-[200px] !text-center',
+          className:
+            '!bg-neutral-800 dark:!bg-neutral-100 !text-white dark:!text-neutral-900 !px-4 !py-2 !rounded-lg !text-sm !font-medium !shadow-lg !min-w-[200px] !text-center',
         })
         return
     }
@@ -222,7 +223,16 @@ interface Props {
   post?: any
 }
 
-const SingleMetaAction: FC<Props> = ({ className, likeCount, favoriteCount, liked, commentCount, handle, title, post }) => {
+const SingleMetaAction: FC<Props> = ({
+  className,
+  likeCount,
+  favoriteCount,
+  liked,
+  commentCount,
+  handle,
+  title,
+  post,
+}) => {
   return (
     <div className={clsx('single-meta-action', className)}>
       <div className="flex flex-wrap items-center gap-x-2.5 gap-y-2">
@@ -240,6 +250,7 @@ const SingleMetaAction: FC<Props> = ({ className, likeCount, favoriteCount, like
           className="h-6 w-6"
           // color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white  relative flex size-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-300 "
           color="relative flex size-5 cursor-pointer px-1 items-center justify-center rounded-full transition-colors duration-300 bg-transparent border border-white !text-white hover:bg-white/10 hover:text-white"
+          post={post}
         />
         <ShareDropdown
           handle={handle}
