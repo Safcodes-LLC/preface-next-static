@@ -1,3 +1,4 @@
+import { getCategory, getTopTrendingTopics } from '@/data/api/category'
 import { CustomLink } from '@/data/types'
 import Logo from '@/shared/Logo'
 import SocialsListStroke2 from '@/shared/SocialsListStroke2'
@@ -9,54 +10,91 @@ export interface WidgetFooterMenu {
   menus: CustomLink[]
 }
 
-const widgetMenus: WidgetFooterMenu[] = [
-  {
+const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
+  const categoriesData = await getCategory(lang || 'en')
+  const categories = categoriesData?.data || []
+
+  const topicsData = await getTopTrendingTopics(lang || 'en')
+  const topics = topicsData?.data || []
+
+  console.log(topics,"topics data");
+  
+
+  // Transform categories to the required format
+  const categoryMenu: WidgetFooterMenu = {
     id: '1',
     title: 'Categories',
-    menus: [
-      { href: '/', label: 'Belief' },
-      { href: '/', label: 'Idealism' },
-      { href: '/', label: 'Sufism' },
-      { href: '/', label: 'Tafseer' },
-      { href: '/', label: 'Heritage' },
-    ],
-  },
-  {
+    menus: categories.slice(0, 5).map((category: any) => ({
+      href: `${lang === 'en' ? `/${category.slug || category.id}` : `/${lang}/${category.slug || category.id}`}`,
+      label: category.name || 'Unnamed Category',
+    })),
+  }
+
+  // Transform categories to the required format
+  const topicMenu: WidgetFooterMenu = {
     id: '2',
     title: 'Topics',
-    menus: [
-      { href: '/', label: 'Hadith in Daily Life' },
-      { href: '/', label: 'Hajj Comprehensive Study' },
-      { href: '/', label: 'Quran at Makkah' },
-      { href: '/', label: 'Quran at Madina' },
-      { href: '/', label: 'Hadith in Daily Life' },
-    ],
-  },
-  {
-    id: '3',
-    title: 'Islam for beginners',
-    menus: [
-      { href: '/', label: 'Zakat' },
-      { href: '/', label: 'Hajj' },
-      { href: '/', label: 'Umra' },
-      { href: '/', label: 'Fasting' },
-      { href: '/', label: 'Pray' },
-    ],
-  },
-  {
-    id: '4',
-    title: 'Most Engaged',
-    menus: [
-      { href: '/', label: 'Belief Articles' },
-      { href: '/', label: 'Quraan Audio' },
-      { href: '/', label: 'Hadith Video' },
-      { href: '/', label: 'Hadith in Daily Life' },
-      { href: '/', label: 'Quran at Makkah' },
-    ],
-  },
-]
+    menus: topics.slice(0, 5).map((topic: any) => ({
+      href: `${lang === 'en' ? `/${topic.parentCategory.slug}/${topic.slug}` : `/${lang}/${topic.parentCategory.slug}/${topic.slug}`}`,
+      label: topic.categoryName || 'Unnamed Topic',
+    })),
+  }
 
-const Footer: React.FC<{ lang?: string }> = ({ lang }) => {
+  // href={
+  //   lang === 'en'
+  //     ? `/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`
+  //     : `/${lang}/${categories[0]?.parentCategory.slug}/${categories[0]?.slug}/${slug}`
+  // }
+
+  const widgetMenus: WidgetFooterMenu[] = [
+    categoryMenu,
+    topicMenu,
+    // {
+    //   id: '1',
+    //   title: 'Categories',
+    //   menus: [
+    //     { href: '/', label: 'Belief' },
+    //     { href: '/', label: 'Idealism' },
+    //     { href: '/', label: 'Sufism' },
+    //     { href: '/', label: 'Tafseer' },
+    //     { href: '/', label: 'Heritage' },
+    //   ],
+    // },
+    // {
+    //   id: '2',
+    //   title: 'Topics',
+    //   menus: [
+    //     { href: '/', label: 'Hadith in Daily Life' },
+    //     { href: '/', label: 'Hajj Comprehensive Study' },
+    //     { href: '/', label: 'Quran at Makkah' },
+    //     { href: '/', label: 'Quran at Madina' },
+    //     { href: '/', label: 'Hadith in Daily Life' },
+    //   ],
+    // },
+    {
+      id: '3',
+      title: 'Islam for beginners',
+      menus: [
+        { href: '/', label: 'Zakat' },
+        { href: '/', label: 'Hajj' },
+        { href: '/', label: 'Umra' },
+        { href: '/', label: 'Fasting' },
+        { href: '/', label: 'Pray' },
+      ],
+    },
+    {
+      id: '4',
+      title: 'Most Engaged',
+      menus: [
+        { href: '/', label: 'Belief Articles' },
+        { href: '/', label: 'Quraan Audio' },
+        { href: '/', label: 'Hadith Video' },
+        { href: '/', label: 'Hadith in Daily Life' },
+        { href: '/', label: 'Quran at Makkah' },
+      ],
+    },
+  ]
+
   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
     return (
       <div key={index} className="text-sm">
