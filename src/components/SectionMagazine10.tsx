@@ -14,7 +14,7 @@ interface Props {
 const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang }) => {
   return (
     <div className={clsx('section-magazine-10 relative', className)}>
-      {!posts.length && <span>Nothing we found!</span>}
+      {/* {!posts.length && <span>Nothing we found!</span>} */}
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
         {videoPosts[0] && (
           <Card19
