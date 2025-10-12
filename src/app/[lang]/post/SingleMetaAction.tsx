@@ -172,7 +172,7 @@ function ShareDropdown({ handle, color }: { handle: string; color?: string }) {
     },
     {
       id: 'twitter',
-      name: 'Twitter',
+      name: 'X',
       icon: NewTwitterIcon,
       onClick: () => handleShare('twitter'),
     },
