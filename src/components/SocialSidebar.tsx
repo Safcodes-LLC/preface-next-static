@@ -114,8 +114,8 @@ const SocialSidebar: FC<Props> = ({ className }) => {
           className="relative z-10 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-[#D9D9D9] bg-transparent text-[#B3B3B3] transition-colors duration-200 hover:bg-white/10"
           aria-label={isExpanded ? 'Collapse social media bar' : 'Expand social media bar'}
         >
-          <span className="text-lg font-bold text-center">
-            {isExpanded ? '×' : <ChevronDownIcon className={clsx(' size-4')} />}
+          <span className="text-center text-lg font-bold">
+            {isExpanded ? '×' : <ChevronDownIcon className={clsx('size-4')} />}
           </span>
         </button>
       </div>

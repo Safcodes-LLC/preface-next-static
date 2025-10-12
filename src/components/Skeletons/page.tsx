@@ -61,7 +61,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
   // const categories = await getCategories()
   const categories2 = await getCategoryBySlug(category, lang)
 
-  console.log(categories2.subcategories, 'categories2')
+  // console.log(categories2.subcategories, 'categories2')
 
   return (
     <div className={`page-subcategory-${subcategory}`}>

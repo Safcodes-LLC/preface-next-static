@@ -36,8 +36,8 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang,
     favoriteCount,
   } = post
 
-  console.log(post, 'posty findignd')
-  console.log(isCategoryPage, 'isCategoryPage123')
+  // console.log(post, 'posty findignd')
+  // console.log(isCategoryPage, 'isCategoryPage123')
   // Build the post URL safely
   const getPostUrl = () => {
     const mainCategorySlug = isCategoryPage ? categories[0]?.slug : category?.slug

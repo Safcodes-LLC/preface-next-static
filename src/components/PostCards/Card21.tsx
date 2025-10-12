@@ -32,17 +32,17 @@ const Card21: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
   return (
     <div
       className={clsx(
-        'card21 relative flex flex-col overflow-hidden rounded-[25px] border-t-[#60A43A] md:border-t-0 md:border-l-[#60A43A] border-t-30 md:border-l-30 bg-white p-10 dark:bg-[#0D0D0D]',
+        'card21 relative flex flex-col overflow-hidden rounded-[25px] border-t-30 border-t-[#60A43A] bg-white p-10 md:border-t-0 md:border-l-30 md:border-l-[#60A43A] dark:bg-[#0D0D0D]',
         className
       )}
     >
-      <div className="flex flex-col md:flex-row items-start gap-5">
-        <div className="relative h-[145px] w-full md:w-[122px] flex-shrink-0">
+      <div className="flex flex-col items-start gap-5 md:flex-row">
+        <div className="relative h-[145px] w-full flex-shrink-0 md:w-[122px]">
           <Image
             src={featuredImage || thumbnail || '/images/featured.png'}
             alt={title || 'Featured article'}
             fill
-            className="object-cover rounded-2xl"
+            className="rounded-2xl object-cover"
             sizes="122px"
             priority
           />
@@ -57,7 +57,7 @@ const Card21: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
           </h2>
           <div className="mt-auto flex items-center gap-3">
             <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-            <PostCardSaveBtn bookmarked={bookmarked} post={post}/>
+            <PostCardSaveBtn bookmarked={bookmarked} post={post} />
           </div>
         </div>
       </div>

@@ -17,7 +17,6 @@ import {
 } from '@/data/posts'
 import { getDictionary } from '@/i18n'
 import { serverFetch } from '@/lib/server/api'
-import ButtonSecondary from '@/shared/ButtonSecondary'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
@@ -119,7 +118,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
         {/* <hr className="mt-12 w-full border-t border-[#E3E3E3] dark:border-[#2C2C2C]" /> */}
       </div>
 
-      <div className="container ">
+      <div className="container">
         <h2 className="pb-6 text-[22px] font-medium">Filter By Category</h2>
 
         {/* LOOP ITEMS - Use posts from API if available, otherwise fallback to gallery posts */}
@@ -147,8 +146,8 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
       </div>
 
       {/* here featured create ui */}
-      <div className='container pt-10 md:pt-14 lg:pt-20'>
-        <Card22/>
+      <div className="container pt-10 md:pt-14 lg:pt-20">
+        <Card22 />
       </div>
 
       <div className="container">
@@ -161,11 +160,11 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
               <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
                 {postsByParentCategory?.data?.map((post: any) => (
                   <Suspense key={`suspense-${post._id}`} fallback={<Card16PodcastSkeleton />}>
-                    <Card16Podcast key={post._id} post={post} lang={lang} isCategoryPage={true}/>
+                    <Card16Podcast key={post._id} post={post} lang={lang} isCategoryPage={true} />
                   </Suspense>
                 ))}
               </div>
-                {/* <div className="mx-auto mt-8 text-center md:mt-10 lg:mt-12">
+              {/* <div className="mx-auto mt-8 text-center md:mt-10 lg:mt-12">
                   <ButtonSecondary>
                     Load More <ArrowDownIcon className="h-6 w-6 text-[#444444] dark:text-white" />
                   </ButtonSecondary>

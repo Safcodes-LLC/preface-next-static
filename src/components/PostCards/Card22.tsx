@@ -32,12 +32,12 @@ const Card22: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
   return (
     <div
       className={clsx(
-        'card22 relative grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 rounded-3xl bg-white p-6 md:p-10 dark:bg-[#0D0D0D]',
+        'card22 relative grid grid-cols-1 gap-6 rounded-3xl bg-white p-6 md:gap-10 md:p-10 lg:grid-cols-12 dark:bg-[#0D0D0D]',
         className
       )}
     >
-      <div className="w-full h-48 lg:h-auto lg:col-span-3">
-        <div className="relative w-full h-full overflow-hidden rounded-2xl">
+      <div className="h-48 w-full lg:col-span-3 lg:h-auto">
+        <div className="relative h-full w-full overflow-hidden rounded-2xl">
           <Image
             src="/images/featured-2.png"
             alt={title || 'Featured Post'}
@@ -47,7 +47,7 @@ const Card22: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
           />
         </div>
       </div>
-      <div className="w-full lg:col-span-9 grid gap-2 lg:gap-5">
+      <div className="grid w-full gap-2 lg:col-span-9 lg:gap-5">
         <div className="flex flex-col gap-1">
           <h3 className="text-xl font-bold tracking-wide text-[#00652E] dark:text-[#60a43a]">Featured</h3>
           <div className="w-9 border-b-2 border-[#00652E] dark:border-[#60a43a]" />

@@ -213,9 +213,9 @@ export const getCategoryBySlug = async (category: string, lang?: string) => {
 
 // Update your API function to support pagination
 export const getPostsByParentCategory = async (
-  category: string, 
-  lang?: string, 
-  page: number = 1, 
+  category: string,
+  lang?: string,
+  page: number = 1,
   limit: number = 100
 ) => {
   try {
@@ -225,8 +225,8 @@ export const getPostsByParentCategory = async (
       limit: limit.toString(),
     })
 
-    const response = await serverFetch.get<{ 
-      data: any[], 
+    const response = await serverFetch.get<{
+      data: any[]
       pagination: {
         currentPage: number
         totalPages: number
@@ -240,17 +240,16 @@ export const getPostsByParentCategory = async (
       language: lang || 'en',
       next: { revalidate: 60 }, // Revalidate every 60 seconds
     })
-    
+
     return {
       data: response?.data || [],
-      pagination: response?.pagination || null
+      pagination: response?.pagination || null,
     }
   } catch (error) {
     console.error(`Failed to fetch posts by parent category: ${category}`, error)
     return {
       data: [],
-      pagination: null
+      pagination: null,
     }
   }
 }
-

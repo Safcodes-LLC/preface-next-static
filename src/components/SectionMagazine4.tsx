@@ -49,7 +49,7 @@ const SectionMagazine4: FC<Props> = ({ posts, heading, className, subHeading, di
         initial={{ opacity: 0, x: -50 }}
         animate={isFirstSectionInView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="grid grid-cols-1 gap-4 sm:grid-cols-2  lg:gap-5 xl:grid-cols-4"
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-5 xl:grid-cols-4"
         aria-live="polite"
       >
         {posts[0] && <Card8 className="sm:col-span-2" post={posts[0]} lang={lang} />}

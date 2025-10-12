@@ -22,32 +22,58 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
   const [isPlaying, setIsPlaying] = useState(false)
   const [isRendered, setIsRendered] = useState(false)
   const playerRef = useRef<ReactPlayer | null>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const isAnimatingRef = useRef(false)
   const touchStartYRef = useRef<number | null>(null)
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     // Render player immediately for autoplay
     setIsRendered(true)
     setIsPlaying(true)
+
+    // Cleanup function to clear any pending timeouts
+    return () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current)
+      }
+    }
   }, [])
 
   const scrollToNext = () => {
     if (isAnimatingRef.current) return
+
     const nextEl = document.getElementById(nextSectionId)
     if (!nextEl) return
+
     isAnimatingRef.current = true
-    nextEl.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    // Fallback reset after animation
-    window.setTimeout(() => {
-      isAnimatingRef.current = false
-    }, 1000)
+
+    // Clear any existing timeout
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current)
+    }
+
+    // Add a small delay before starting scroll for better performance
+    scrollTimeoutRef.current = setTimeout(() => {
+      nextEl.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+
+      // Reset animation state after scroll completes
+      scrollTimeoutRef.current = setTimeout(() => {
+        isAnimatingRef.current = false
+      }, 1200) // Slightly longer than the smooth scroll duration
+    }, 100) // Small delay before starting scroll
   }
 
   const handleWheel: React.WheelEventHandler<HTMLDivElement> = (e) => {
     // Only react to downward scroll to go to next section
-    if (e.deltaY > 10) {
-      e.preventDefault()
+    if (e.deltaY > 1) {
+      if (e.cancelable) {
+        e.preventDefault()
+      }
       scrollToNext()
     }
   }
@@ -67,6 +93,7 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
       touchStartYRef.current = null
     }
   }
+  console.log('videoUrl', videoUrl)
 
   return (
     <div
@@ -75,7 +102,32 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       className={`relative h-screen w-full overflow-hidden ${className}`}
+      // videoBackground
     >
+      {isRendered && (
+        <video
+          ref={videoRef}
+          src={videoUrl}
+          autoPlay
+          muted={isMuted}
+          loop
+          playsInline
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: isPlaying ? 1 : 0,
+            transition: 'opacity 0.5s ease-in-out',
+          }}
+          onPlay={() => setIsPlaying(true)}
+        />
+      )}
+
       {isRendered && (
         <ReactPlayer
           ref={playerRef}
@@ -90,7 +142,7 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
           style={{
             opacity: isPlaying ? 1 : 0,
           }}
-          className="absolute inset-0 bg-[#000000] transition-opacity"
+          className="absolute inset-0 bg-gray-900/20 backdrop-blur-[10px] transition-opacity"
           width="100%"
           height="100%"
           onStart={() => {
@@ -107,17 +159,14 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
           }}
         />
       )}
-
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40" />
-
       {/* Centered Heading */}
       {/* <div className="absolute inset-0 flex items-center justify-center">
         <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-white tracking-wider">
           {heading}
         </h1>
       </div> */}
-
       {/* Mute/Unmute Button */}
       {isPlaying && (
         <button

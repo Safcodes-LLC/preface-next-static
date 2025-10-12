@@ -37,7 +37,7 @@ const Card17: FC<Props> = ({ className, post, lang }) => {
       <div
         className={clsx(
           'post-card-17 group relative flex items-center justify-between gap-x-4 overflow-hidden rounded-xl bg-white p-4 transition-all duration-300 ease-in-out',
-          ' hover:-translate-y-0.5 dark:bg-[#0D0D0D]',
+          'hover:-translate-y-0.5 dark:bg-[#0D0D0D]',
           'transform-gpu will-change-transform',
           'dark:hover:bg-[#1A1A1A]',
           className

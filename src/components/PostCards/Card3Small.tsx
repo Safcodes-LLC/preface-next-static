@@ -14,7 +14,6 @@ interface Props {
 const Card3Small: FC<Props> = ({ className, post, index, lang }) => {
   const { name, title, handle, featuredImage, parentCategory, slug } = post
   // console.log(parentCategory, 'parentCategory');
-  
 
   return (
     <div className={clsx('post-card-3-small group relative flex items-center justify-between gap-4', className)}>

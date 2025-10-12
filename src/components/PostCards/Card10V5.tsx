@@ -41,8 +41,8 @@ const Card10V5: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
         {/* <CategoryBadgeList categories={categories} /> */}
 
         <div className="absolute inset-x-0 top-0 z-10 flex flex-wrap gap-x-2 gap-y-1">
-          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post}/>
-          <PostCardSaveBtn bookmarked={bookmarked} post={post}/>
+          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
+          <PostCardSaveBtn bookmarked={bookmarked} post={post} />
         </div>
       </div>
 
