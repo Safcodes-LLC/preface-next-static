@@ -17,8 +17,7 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
   const topicsData = await getTopTrendingTopics(lang || 'en')
   const topics = topicsData?.data || []
 
-  console.log(topics,"getTopTrendingTopics data");
-  
+  console.log(topics, 'getTopTrendingTopics data')
 
   // Transform categories to the required format
   const categoryMenu: WidgetFooterMenu = {
@@ -34,20 +33,21 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
   const topicMenu: WidgetFooterMenu = {
     id: '2',
     title: 'Topics',
-    menus: topics.reverse().slice(0, 5).map((topic: any) => {
-      const basePath = topic.parentCategory?.slug 
-        ? `${topic.parentCategory.slug}/${topic.slug}`
-        : topic.slug || topic.id;
-      
-      const href = lang === 'en' 
-        ? `/${basePath}`
-        : `/${lang}/${basePath}`;
-    
-      return {
-        href,
-        label: topic.categoryName || 'Unnamed Topic',
-      };
-    }),
+    menus: topics
+      .reverse()
+      .slice(0, 5)
+      .map((topic: any) => {
+        const basePath = topic.parentCategory?.slug
+          ? `${topic.parentCategory.slug}/${topic.slug}`
+          : topic.slug || topic.id
+
+        const href = lang === 'en' ? `/${basePath}` : `/${lang}/${basePath}`
+
+        return {
+          href,
+          label: topic.categoryName || 'Unnamed Topic',
+        }
+      }),
   }
 
   // href={
