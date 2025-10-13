@@ -19,8 +19,7 @@ export default function AvatarDropdown({ className, trigger }: Props) {
   const user = {
     name: 'Guest ',
     email: 'john@gmail.com',
-    avatar:
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    avatar: '/images/Preface-Logo.png',
     handle: 'john-doe',
     location: 'Dubai, UAE',
     bio: 'I am a software engineer and a writer. I love to write about technology and programming.',
@@ -49,11 +48,11 @@ export default function AvatarDropdown({ className, trigger }: Props) {
         ) : (
           <PopoverButton as={ButtonCircle} className="relative" plain>
             <Avatar
-              alt="avatar"
+              alt="Preface Logo"
               src={user.avatar}
               width={32}
               height={32}
-              className="size-8 rounded-full object-cover"
+              className="size-8 rounded-full object-contain"
             />
           </PopoverButton>
         )}
@@ -69,11 +68,11 @@ export default function AvatarDropdown({ className, trigger }: Props) {
           <div className="relative flex flex-col gap-y-6 bg-white px-6 py-7 dark:bg-[#0D0D0D]">
             <div className="relative flex items-center gap-x-3">
               <Avatar
-                alt="avatar"
+                alt="Preface Logo"
                 src={user.avatar}
                 width={48}
                 height={48}
-                className="size-12 rounded-full object-cover"
+                className="size-12 rounded-full object-contain"
               />
               <div className="grow">
                 <h4 className="font-semibold">
