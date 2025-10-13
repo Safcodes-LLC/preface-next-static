@@ -5,6 +5,7 @@ import SectionGridPostsSkeleton from '@/components/Skeletons/SectionGridPostsSke
 import SwipableSliderPostsSkeleton from '@/components/Skeletons/SwipableSliderPostsSkelton'
 import SwipableSliderPosts from '@/components/SwipableSliderPosts'
 import { getLatestVideos } from '@/data/api/posts'
+import { getDictionary } from '@/i18n'
 import { ReactNode, Suspense } from 'react'
 // import { getAuthors } from '@/data/authors'
 // import { getCategories } from '@/data/categories'
@@ -18,6 +19,7 @@ interface Props {
 const Layout: React.FC<Props> = async ({ children, params }) => {
   // Access the lang parameter
   const { lang } = await params
+  const dict = await getDictionary(lang)
   const videoPosts = await getLatestVideos(lang || 'en')
   return (
     <ApplicationLayout home={true} params={params}>
@@ -27,7 +29,7 @@ const Layout: React.FC<Props> = async ({ children, params }) => {
           <BackgroundSection />
           <Suspense fallback={<SwipableSliderPostsSkeleton />}>
             <SwipableSliderPosts
-              heading="TOP RATED ON PREFACE"
+              heading={dict.sections.topratedonpreface.heading}
               subHeading="Over 100 Articles for beginners"
               // posts={defaultPosts.slice(0, 8)}
               posts={videoPosts.slice(0, 8)}
@@ -51,8 +53,8 @@ const Layout: React.FC<Props> = async ({ children, params }) => {
           <Suspense fallback={<SectionGridPostsSkeleton />}>
             <SectionGridPosts
               postCardName="card10V6"
-              heading="STORYTELLING ISLAM"
-              subHeading="Understanding Islam through 1001 stories"
+              heading={dict.sections.storytelling.heading}
+              subHeading={dict.sections.storytelling.description}
               posts={videoPosts.slice(0, 8)}
               gridClass="md:grid-cols-2 lg:grid-cols-3"
               timeDuration={true}
