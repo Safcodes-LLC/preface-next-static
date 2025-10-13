@@ -6,7 +6,7 @@ import Link from 'next/link';
 import axios from 'axios';
 
 const VerifyEmailClient = () => {
-  const [verificationStatus, setVerificationStatus] = useState<'pending' | 'success' | 'failed'>('pending');
+  const [verificationStatus, setVerificationStatus] = useState<'success' | 'failed' | ''>('');
   const [verificationMessage, setVerificationMessage] = useState('Verifying your email address');
   const [isApiCalled, setIsApiCalled] = useState(false);
   const searchParams = useSearchParams();
@@ -68,7 +68,6 @@ const VerifyEmailClient = () => {
 
   return (
     <div className={`relative min-h-screen bg-gradient-to-br ${status.bg}`}>
-      {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-emerald-200 opacity-20 blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-teal-200 opacity-20 blur-3xl"></div>
@@ -76,14 +75,11 @@ const VerifyEmailClient = () => {
 
       <div className="relative flex min-h-screen items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
-          {/* Card */}
           <div className="rounded-2xl bg-white p-8 shadow-xl shadow-emerald-100/50 backdrop-blur-sm">
-            {/* Title */}
             <h2 className={`mb-2 text-center text-3xl font-bold ${status.textColor}`}>
               {status.title}
             </h2>
 
-            {/* Message */}
             <div className={`mb-8 rounded-lg border ${status.borderColor} ${status.bgColor} p-4 text-center`}>
               <p className={status.textColor}>{verificationMessage}</p>
             </div>
