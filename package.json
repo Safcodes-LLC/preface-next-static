@@ -41,6 +41,7 @@
     "@types/node": "20.9.2",
     "@types/react": "19.1.6",
     "@types/react-dom": "19.1.6",
+    "axios": "^1.12.2",
     "clsx": "^2.1.1",
     "draftjs-to-html": "^0.9.1",
     "embla-carousel-react": "^8.6.0",
