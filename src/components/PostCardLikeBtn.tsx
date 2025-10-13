@@ -16,7 +16,7 @@ interface Props {
   liked?: boolean
   color?: string
   post?: any
-  iconsize?:string
+  iconsize?: string
 }
 
 type Favorite = {
@@ -36,7 +36,7 @@ const PostCardLikeBtn: FC<Props> = ({ className, likeCount = 0, liked = false, c
   const { data } = useGetUserFavourites()
 
   const removeFavourite = useRemoveFavourite()
-  const userFavourites = data?.favorites 
+  const userFavourites = data?.favorites
 
   // Update liked state based on user's favorites
   useEffect(() => {

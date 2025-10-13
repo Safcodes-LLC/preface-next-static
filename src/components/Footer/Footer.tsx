@@ -21,9 +21,10 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
   const islamForBeginnersData = await getIslamForBeginners(lang || 'en')
   const islamForBeginners = islamForBeginnersData || []
   // console.log(islamForBeginners, 'islamForBeginners data');
-  
+
   const popularArticlesData = await getPopularArticles({ lang })
   const popularArticles = popularArticlesData || []
+
 
   // Transform categories to the required format
   const categoryMenu: WidgetFooterMenu = {
@@ -56,32 +57,30 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
       }),
   }
 
-    // Transform categories to the required format
-    const islamForBeginnersMenu: WidgetFooterMenu = {
-      id: '3',
-      title: 'Islam for beginners',
-      menus: islamForBeginners.slice(0, 5).map((post: any) => ({
-        href: `${lang === 'en' ? `/${post.categories[0].parentCategory?.slug}/${post.categories[0].slug}/${post.slug || post.id}` : `/${lang}/${post.categories[0].parentCategory?.slug}/${post.categories[0].slug}/${post.slug || post.id}`}`,
-        label: post.title || 'Unnamed Category',
-      })),
-    }
+  // Transform categories to the required format
+  const islamForBeginnersMenu: WidgetFooterMenu = {
+    id: '3',
+    title: 'Islam for beginners',
+    menus: islamForBeginners.slice(0, 5).map((post: any) => ({
+      href: `${lang === 'en' ? `/${post.categories[0].parentCategory?.slug}/${post.categories[0].slug}/${post.slug || post.id}` : `/${lang}/${post.categories[0].parentCategory?.slug}/${post.categories[0].slug}/${post.slug || post.id}`}`,
+      label: post.title || 'Unnamed Category',
+    })),
+  }
 
-    const popularArticlesMenu: WidgetFooterMenu = {
-      id: '4',
-      title: 'Most Engaged',
-      menus: popularArticles.slice(0, 5).map((post: any) => ({
-        href: `${lang === 'en' ? `/${post.categories[0].parentCategory?.slug}/${post.categories[0].slug}/${post.slug || post.id}` : `/${lang}/${post.categories[0].parentCategory?.slug}/${post.categories[0].slug}/${post.slug || post.id}`}`,
-        label: post.title || 'Unnamed Category',
-      })),
-    }
-
-
+  const popularArticlesMenu: WidgetFooterMenu = {
+    id: '4',
+    title: 'Most Engaged',
+    menus: popularArticles.slice(0, 5).map((post: any) => ({
+      href: `${lang === 'en' ? `/${post.categories[0].parentCategory?.slug}/${post.categories[0].slug}/${post.slug || post.id}` : `/${lang}/${post.categories[0].parentCategory?.slug}/${post.categories[0].slug}/${post.slug || post.id}`}`,
+      label: post.title || 'Unnamed Category',
+    })),
+  }
 
   const widgetMenus: WidgetFooterMenu[] = [
     categoryMenu,
     topicMenu,
     islamForBeginnersMenu,
-    popularArticlesMenu
+    popularArticlesMenu,
     // {
     //   id: '1',
     //   title: 'Categories',

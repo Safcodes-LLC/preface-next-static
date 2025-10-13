@@ -13,8 +13,8 @@ interface Props {
 const CardCategory1: FC<Props> = ({ className, sizes = 'normal', category }) => {
   const { count, name, handle, parentCategory, thumbnail, featuredImage, slug } = category
   return (
-    <Link 
-      href={`/${parentCategory?.slug}/${slug}`} 
+    <Link
+      href={`/${parentCategory?.slug}/${slug}`}
       className={clsx(
         'card-category-1 group flex flex-col gap-2',
         'transition-all duration-200 ease-in-out',

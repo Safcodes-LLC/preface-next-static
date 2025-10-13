@@ -306,10 +306,10 @@ const SwipableSliderPosts: FC<SwipableSliderPostsProps> = ({
               <button
                 key={pageIndex}
                 onClick={() => {
-                  console.log(
-                    `Clicking dot ${pageIndex + 1}, showing posts:`,
-                    posts.slice(pageIndex * cardsPerView, (pageIndex + 1) * cardsPerView).map((p) => p.id || p.title)
-                  )
+                  // console.log(
+                  //   `Clicking dot ${pageIndex + 1}, showing posts:`,
+                  //   posts.slice(pageIndex * cardsPerView, (pageIndex + 1) * cardsPerView).map((p) => p.id || p.title)
+                  // )
                   goToPage(pageIndex)
                 }}
                 className={clsx(

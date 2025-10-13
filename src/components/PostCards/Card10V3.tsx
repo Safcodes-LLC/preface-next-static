@@ -135,7 +135,7 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1, lang }) => {
       <div className="absolute inset-x-3 top-3 flex items-start gap-2">
         {/* <CategoryBadgeList categories={categories} /> */}
         <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-        <PostCardSaveBtn bookmarked={bookmarked} post={post}/>
+        <PostCardSaveBtn bookmarked={bookmarked} post={post} />
       </div>
 
       <div className="absolute right-0 bottom-0 left-0 p-6">

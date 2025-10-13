@@ -19,7 +19,6 @@ const Card10V2: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
   const { handle, categories, bookmarked, slug, favoriteCount, likeCount, liked } = post
 
   // console.log(post,"post123");
-  
 
   const [isHover, setIsHover] = useState(false)
 
@@ -44,7 +43,7 @@ const Card10V2: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
         <CategoryBadgeList categories={categories} />
         <div className="ms-auto flex gap-1">
           <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-          <PostCardSaveBtn bookmarked={bookmarked} post={post}/>
+          <PostCardSaveBtn bookmarked={bookmarked} post={post} />
         </div>
       </div>
 
