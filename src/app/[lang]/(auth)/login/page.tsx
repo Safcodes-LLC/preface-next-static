@@ -1,6 +1,6 @@
+import { getDictionary } from '@/i18n'
 import { Metadata } from 'next'
 import LoginClient from './LoginClient'
-import { getDictionary } from '@/i18n';
 
 export const metadata: Metadata = {
   title: 'Login',

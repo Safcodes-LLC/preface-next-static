@@ -176,7 +176,9 @@ export default function SignupForm({ className = '', dict, lang }: SignupFormPro
       </Field>
 
       <Field className="block">
-        <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">{dict.signup.password.label}</Label>
+        <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">
+          {dict.signup.password.label}
+        </Label>
         <div className="relative mt-1">
           <Input
             type={showPassword ? 'text' : 'password'}

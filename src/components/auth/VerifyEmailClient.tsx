@@ -1,36 +1,36 @@
 'use client'
 
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
-import axios from 'axios';
+import axios from 'axios'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 const VerifyEmailClient = () => {
-  const [verificationStatus, setVerificationStatus] = useState<'success' | 'failed' | ''>('');
-  const [verificationMessage, setVerificationMessage] = useState('Verifying your email address');
-  const [isApiCalled, setIsApiCalled] = useState(false);
-  const searchParams = useSearchParams();
-  const token = searchParams?.get('token');
+  const [verificationStatus, setVerificationStatus] = useState<'success' | 'failed' | ''>('')
+  const [verificationMessage, setVerificationMessage] = useState('Verifying your email address')
+  const [isApiCalled, setIsApiCalled] = useState(false)
+  const searchParams = useSearchParams()
+  const token = searchParams?.get('token')
 
   useEffect(() => {
     if (token && !isApiCalled) {
-      setIsApiCalled(true);
+      setIsApiCalled(true)
 
       axios
         .post('https://king-prawn-app-x9z27.ondigitalocean.app/api/user/verify-email', { token })
         .then((response) => {
-          setVerificationStatus('success');
-          setVerificationMessage(response.data.message || 'Your email has been successfully verified!');
+          setVerificationStatus('success')
+          setVerificationMessage(response.data.message || 'Your email has been successfully verified!')
         })
         .catch((error) => {
-          setVerificationStatus('failed');
-          setVerificationMessage(error.response?.data?.message || 'Email verification failed. Please try again.');
-        });
+          setVerificationStatus('failed')
+          setVerificationMessage(error.response?.data?.message || 'Email verification failed. Please try again.')
+        })
     } else if (!token) {
-      setVerificationStatus('failed');
-      setVerificationMessage('Invalid verification link. Please check your email for the correct link.');
+      setVerificationStatus('failed')
+      setVerificationMessage('Invalid verification link. Please check your email for the correct link.')
     }
-  }, [token, isApiCalled]);
+  }, [token, isApiCalled])
 
   const getStatusStyles = () => {
     switch (verificationStatus) {
@@ -41,8 +41,8 @@ const VerifyEmailClient = () => {
           title: 'Email Verified!',
           textColor: 'text-emerald-600',
           bgColor: 'bg-emerald-50',
-          borderColor: 'border-emerald-200'
-        };
+          borderColor: 'border-emerald-200',
+        }
       case 'failed':
         return {
           bg: 'from-rose-50 via-white to-amber-50',
@@ -50,8 +50,8 @@ const VerifyEmailClient = () => {
           title: 'Verification Failed',
           textColor: 'text-rose-600',
           bgColor: 'bg-rose-50',
-          borderColor: 'border-rose-200'
-        };
+          borderColor: 'border-rose-200',
+        }
       default:
         return {
           bg: 'from-blue-50 via-white to-indigo-50',
@@ -59,12 +59,12 @@ const VerifyEmailClient = () => {
           title: 'Verifying Email',
           textColor: 'text-blue-600',
           bgColor: 'bg-blue-50',
-          borderColor: 'border-blue-200'
-        };
+          borderColor: 'border-blue-200',
+        }
     }
-  };
+  }
 
-  const status = getStatusStyles();
+  const status = getStatusStyles()
 
   return (
     <div className={`relative min-h-screen bg-gradient-to-br ${status.bg}`}>
@@ -76,9 +76,7 @@ const VerifyEmailClient = () => {
       <div className="relative flex min-h-screen items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
           <div className="rounded-2xl bg-white p-8 shadow-xl shadow-emerald-100/50 backdrop-blur-sm">
-            <h2 className={`mb-2 text-center text-3xl font-bold ${status.textColor}`}>
-              {status.title}
-            </h2>
+            <h2 className={`mb-2 text-center text-3xl font-bold ${status.textColor}`}>{status.title}</h2>
 
             <div className={`mb-8 rounded-lg border ${status.borderColor} ${status.bgColor} p-4 text-center`}>
               <p className={status.textColor}>{verificationMessage}</p>
@@ -96,7 +94,7 @@ const VerifyEmailClient = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default VerifyEmailClient;
+export default VerifyEmailClient

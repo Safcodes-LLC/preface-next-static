@@ -25,7 +25,6 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
   const popularArticlesData = await getPopularArticles({ lang })
   const popularArticles = popularArticlesData || []
 
-
   // Transform categories to the required format
   const categoryMenu: WidgetFooterMenu = {
     id: '1',

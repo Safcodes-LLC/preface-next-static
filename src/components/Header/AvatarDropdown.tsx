@@ -40,8 +40,7 @@ export default function AvatarDropdown({ className, trigger, lang }: Props) {
     // router.refresh()
   }
 
-  return (
-    !isClient ? null :
+  return !isClient ? null : (
     <div className={className}>
       <Popover>
         {/* <PopoverButton as={ButtonCircle} className="relative" plain>

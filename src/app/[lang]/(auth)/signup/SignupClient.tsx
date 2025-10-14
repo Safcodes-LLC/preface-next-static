@@ -12,7 +12,10 @@ const GuestRoute = dynamic(() => import('@/contexts/AuthContext').then((mod) => 
 
 function SignupPageContent({ lang }: { lang: string }) {
   return (
-    <div className="grid min-h-screen grid-cols-1 md:grid-cols-[3fr_2fr]" dir={lang === "ar" || lang ==="fa" || lang ==="ur" ? "rtl" : "ltr" }>
+    <div
+      className="grid min-h-screen grid-cols-1 md:grid-cols-[3fr_2fr]"
+      dir={lang === 'ar' || lang === 'fa' || lang === 'ur' ? 'rtl' : 'ltr'}
+    >
       {/* LEFT SIDE - Content */}
       <div className="flex flex-col justify-center bg-white px-6 sm:px-12 lg:px-20 dark:bg-black">
         <div className="mt-16 mb-10 flex flex-col items-center text-center">

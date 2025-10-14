@@ -4,9 +4,9 @@ import LoginForm from '@/components/auth/LoginForm'
 import SocialLogin from '@/components/auth/SocialLogin'
 import Logo from '@/shared/Logo'
 import dynamic from 'next/dynamic'
+import { Noto_Kufi_Arabic, Noto_Serif, Noto_Serif_Malayalam } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Noto_Serif, Noto_Kufi_Arabic, Noto_Serif_Malayalam } from 'next/font/google';
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
@@ -44,20 +44,22 @@ function LoginPageContent({ lang, dict }: { lang: string; dict: any }) {
         </div>
 
         <div className="mx-auto max-w-md space-y-6">
-          <LoginForm dict={dict} lang={lang}/>
+          <LoginForm dict={dict} lang={lang} />
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300 dark:border-neutral-600"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-2 text-gray-500 dark:bg-black dark:text-gray-400">{dict.login.orcontinue}</span>
+              <span className="bg-white px-2 text-gray-500 dark:bg-black dark:text-gray-400">
+                {dict.login.orcontinue}
+              </span>
             </div>
           </div>
 
           <SocialLogin dict={dict} lang={lang} />
 
           <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
-            {dict.login.donthaveaccount+ " "}
+            {dict.login.donthaveaccount + ' '}
             <Link
               href={`/${lang}/signup`}
               className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"

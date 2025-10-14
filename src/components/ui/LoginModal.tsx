@@ -8,10 +8,10 @@ import Input from '@/shared/Input'
 import { Field, Label } from '@/shared/fieldset'
 import { Dialog } from '@headlessui/react'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
-import { useRouter, useSearchParams, useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import { Noto_Kufi_Arabic, Noto_Serif, Noto_Serif_Malayalam } from 'next/font/google'
+import Link from 'next/link'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
@@ -136,7 +136,9 @@ const LoginModal = ({
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-6">
             <Field className="block">
-              <Label className="text-[#868686] dark:text-[#B7B7B7]">{dict?.login?.email?.label || 'Email or Username'}</Label>
+              <Label className="text-[#868686] dark:text-[#B7B7B7]">
+                {dict?.login?.email?.label || 'Email or Username'}
+              </Label>
               <Input
                 type="text"
                 placeholder={dict?.login?.email?.placeholder || 'Enter your email or username'}
@@ -188,7 +190,7 @@ const LoginModal = ({
               className="w-full"
               disabled={isLoading || !formData.emailOrUsername || !formData.password}
             >
-              {isLoading ? (dict?.login?.loggingin || 'Logging in...') : (dict?.login?.login || 'Sign In')}
+              {isLoading ? dict?.login?.loggingin || 'Logging in...' : dict?.login?.login || 'Sign In'}
             </ButtonPrimary>
 
             <SocialLogin lang={lang} dict={dict} />

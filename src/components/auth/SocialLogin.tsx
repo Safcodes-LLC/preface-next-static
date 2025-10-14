@@ -1,11 +1,11 @@
- 'use client'
+'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import Script from 'next/script'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { FaFacebookF } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import Script from 'next/script'
-import { useRouter } from 'next/navigation'
 
 declare global {
   interface Window {
@@ -26,42 +26,44 @@ export default function SocialLogin({ className = '', dict, lang }: SocialLoginP
   const initOnceRef = useRef(false)
   const googleBtnRef = useRef<HTMLDivElement | null>(null)
 
-  const handleGoogleCredential = useCallback(async (credential: string) => {
-    try {
-      const response = await fetch(
-        'https://king-prawn-app-x9z27.ondigitalocean.app/api/authentication/google',
-        {
+  const handleGoogleCredential = useCallback(
+    async (credential: string) => {
+      try {
+        const response = await fetch('https://king-prawn-app-x9z27.ondigitalocean.app/api/authentication/google', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ credential }),
+        })
+
+        const data = await response.json()
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Google authentication failed')
         }
-      )
 
-      const data = await response.json()
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('authToken', data.token)
+          const userData = data.userData || data.user
+          localStorage.setItem('user', JSON.stringify(userData))
+        }
 
-      if (!response.ok) {
-        throw new Error(data.message || 'Google authentication failed')
+        router.push(lang ? `/${lang}` : '/')
+      } catch (err) {
+        console.error('Google auth error:', err)
       }
-
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('authToken', data.token)
-        const userData = data.userData || data.user
-        localStorage.setItem('user', JSON.stringify(userData))
-      }
-
-      router.push(lang ? `/${lang}` : '/')
-    } catch (err) {
-      console.error('Google auth error:', err)
-    }
-  }, [router])
+    },
+    [router]
+  )
 
   const initGoogle = useCallback(() => {
     if (initOnceRef.current) return
     const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
     if (!clientId) {
-      console.error('[Google Auth] NEXT_PUBLIC_GOOGLE_CLIENT_ID is not set. Add it to .env.local and restart the dev server.')
+      console.error(
+        '[Google Auth] NEXT_PUBLIC_GOOGLE_CLIENT_ID is not set. Add it to .env.local and restart the dev server.'
+      )
       return
     }
     if (!window.google) return
@@ -120,8 +122,8 @@ export default function SocialLogin({ className = '', dict, lang }: SocialLoginP
     },
     {
       name: t.facebook,
-      href: '#', 
-      // href: '/auth/facebook', 
+      href: '#',
+      // href: '/auth/facebook',
       icon: (
         <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#1877F2]">
           <FaFacebookF size={12} color="white" />
@@ -149,24 +151,19 @@ export default function SocialLogin({ className = '', dict, lang }: SocialLoginP
 
       {/* Social buttons */}
       <div className="grid gap-3 lg:grid-cols-2">
-        {socials.map((item, index) => (
+        {socials.map((item, index) =>
           item.type === 'google' ? (
             <div key={index} className="relative">
               {/* Visible custom-styled button (old UI) */}
-              <div
-                className="pointer-events-none flex w-full items-center gap-2 rounded-full shadow-lg border border-[#E2E2E2] bg-white px-4 py-3 dark:border-[#363636] dark:bg-[#000000] h-full overflow-hidden"
-              >
+              <div className="pointer-events-none flex h-full w-full items-center gap-2 overflow-hidden rounded-full border border-[#E2E2E2] bg-white px-4 py-3 shadow-lg dark:border-[#363636] dark:bg-[#000000]">
                 <div>{item.icon}</div>
-                <span className="text-center text-sm font-medium whitespace-nowrap text-[#404040] dark:text-white line-clamp-1">
+                <span className="line-clamp-1 text-center text-sm font-medium whitespace-nowrap text-[#404040] dark:text-white">
                   {item.name}
                 </span>
               </div>
 
               {/* Invisible GIS button overlay to capture clicks and trigger Google flow */}
-              <div
-                className="absolute inset-0"
-                style={{ opacity: 0, display: 'flex', alignItems: 'center' }}
-              >
+              <div className="absolute inset-0" style={{ opacity: 0, display: 'flex', alignItems: 'center' }}>
                 <div ref={googleBtnRef} className="w-full" />
               </div>
             </div>
@@ -174,15 +171,15 @@ export default function SocialLogin({ className = '', dict, lang }: SocialLoginP
             <Link
               key={index}
               href={item.href}
-              className="flex w-full items-center gap-2 rounded-full shadow-lg border border-[#E2E2E2] bg-white px-4 py-3 transition-transform dark:border-[#363636] dark:bg-[#000000] overflow-hidden"
+              className="flex w-full items-center gap-2 overflow-hidden rounded-full border border-[#E2E2E2] bg-white px-4 py-3 shadow-lg transition-transform dark:border-[#363636] dark:bg-[#000000]"
             >
               <div>{item.icon}</div>
-              <span className="flex-1 text-center text-sm font-medium whitespace-nowrap text-[#404040] dark:text-white line-clamp-1">
+              <span className="line-clamp-1 flex-1 text-center text-sm font-medium whitespace-nowrap text-[#404040] dark:text-white">
                 {item.name}
               </span>
             </Link>
           )
-        ))}
+        )}
       </div>
     </>
   )
