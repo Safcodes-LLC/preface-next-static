@@ -33,20 +33,22 @@ export async function generateMetadata({
 
     if (!categoryData) {
       return {
-        title: 'Category not found',
-        description: 'Category not found',
+        title: 'Preface Islam',
+        description: 'Preface Islam is a platform for Muslims to learn about Islam and its teachings',
       }
     }
 
     return {
-      title: categoryData?.name || categoryData?.title,
-      description: categoryData?.description || categoryData?.meta_description,
+      title: categoryData?.data?.meta_title || `${categoryData?.data?.name} - Preface Islam` || 'Preface Islam',
+      description:
+        categoryData?.data?.meta_description ||
+        'Preface Islam is a platform for Muslims to learn about Islam and its teachings.',
     }
   } catch (error) {
     console.error('Error fetching category metadata:', error)
     return {
-      title: 'Category',
-      description: 'Category page',
+      title: 'Preface Islam',
+      description: 'Preface Islam is a platform for Muslims to learn about Islam and its teachings',
     }
   }
 }

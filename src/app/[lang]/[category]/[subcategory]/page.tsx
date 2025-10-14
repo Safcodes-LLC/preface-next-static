@@ -27,7 +27,7 @@ export async function generateMetadata({
     .join(' ')
 
   return {
-    title: subcategoryName,
+    title: subcategoryName + ' - Preface Islam',
     description: `Articles about ${subcategoryName}`,
   }
 }

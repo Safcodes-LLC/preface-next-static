@@ -30,17 +30,12 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
         <div
           className={`${
             t.visible ? 'animate-enter' : 'animate-leave'
-          } pointer-events-auto flex w-full max-w-md rounded-lg bg-green-500 shadow-lg ring-1 ring-black ring-opacity-5`}
+          } ring-opacity-5 pointer-events-auto flex w-full max-w-md rounded-lg bg-green-500 shadow-lg ring-1 ring-black`}
         >
           <div className="w-0 flex-1 p-4">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <svg
-                  className="h-6 w-6 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
+                <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -50,16 +45,14 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
                 </svg>
               </div>
               <div className="ml-3 flex-1">
-                <p className="text-sm font-medium text-white">
-                  Login successful! Redirecting...
-                </p>
+                <p className="text-sm font-medium text-white">Login successful! Redirecting...</p>
               </div>
             </div>
           </div>
           <div className="flex border-l border-green-400">
             <button
               onClick={() => toast.dismiss(t.id)}
-              className="flex w-full items-center justify-center rounded-none rounded-r-lg border border-transparent p-4 text-sm font-medium text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="flex w-full items-center justify-center rounded-none rounded-r-lg border border-transparent p-4 text-sm font-medium text-white hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:outline-none"
             >
               <XMarkIcon className="h-5 w-5" />
             </button>
@@ -76,17 +69,12 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
         <div
           className={`${
             t.visible ? 'animate-enter' : 'animate-leave'
-          } pointer-events-auto flex w-full max-w-md rounded-lg bg-red-500 shadow-lg ring-1 ring-black ring-opacity-5`}
+          } ring-opacity-5 pointer-events-auto flex w-full max-w-md rounded-lg bg-red-500 shadow-lg ring-1 ring-black`}
         >
           <div className="w-0 flex-1 p-4">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <svg
-                  className="h-6 w-6 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
+                <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -103,7 +91,7 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
           <div className="flex border-l border-red-400">
             <button
               onClick={() => toast.dismiss(t.id)}
-              className="flex w-full items-center justify-center rounded-none rounded-r-lg border border-transparent p-4 text-sm font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="flex w-full items-center justify-center rounded-none rounded-r-lg border border-transparent p-4 text-sm font-medium text-white hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:outline-none"
             >
               <XMarkIcon className="h-5 w-5" />
             </button>
@@ -138,11 +126,9 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
       }, 500)
     } catch (error: any) {
       console.error('Login error:', error)
-      
+
       // Show error toast with custom styling
-      showErrorToast(
-        error.message || 'Login failed. Please check your credentials and try again.'
-      )
+      showErrorToast(error.message || 'Login failed. Please check your credentials and try again.')
     } finally {
       setIsLoading(false)
     }

@@ -3,8 +3,16 @@ import rightImg from '@/images/about-hero-right.png'
 import { Button } from '@/shared/Button'
 import Input from '@/shared/Input'
 import { Divider } from '@/shared/divider'
+import { Metadata } from 'next'
 import SectionFounder from './SectionFounder'
 import SectionStatistic from './SectionStatistic'
+
+export async function generateMetadata({}: {}): Promise<Metadata> {
+  return {
+    title: 'About US - Preface Islam',
+    description: `Preface Islam is a platform for Muslims to learn about Islam and its teachings`,
+  }
+}
 
 const PageAbout = ({}) => {
   return (
