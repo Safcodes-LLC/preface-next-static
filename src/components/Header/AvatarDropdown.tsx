@@ -9,13 +9,17 @@ import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { Logout01Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 interface Props {
   className?: string
   trigger?: React.ReactNode
+  lang?: string
 }
 
-export default function AvatarDropdown({ className, trigger }: Props) {
+export default function AvatarDropdown({ className, trigger, lang }: Props) {
+  const [isClient, setIsClient] = useState(false)
+  useEffect(() => setIsClient(true), [])
   const user = {
     name: 'Guest ',
     email: 'john@gmail.com',
@@ -32,10 +36,12 @@ export default function AvatarDropdown({ className, trigger }: Props) {
   const handleLogout = () => {
     logout()
     // Refresh the page to clear any client-side state
-    window.location.href = '/' // Using window.location to ensure full page refresh
+    window.location.href = `/${lang}` // Using window.location to ensure full page refresh
+    // router.refresh()
   }
 
   return (
+    !isClient ? null :
     <div className={className}>
       <Popover>
         {/* <PopoverButton as={ButtonCircle} className="relative" plain>

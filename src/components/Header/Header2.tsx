@@ -57,7 +57,7 @@ const Header2: FC<Header2Props> = ({
         </div>
 
         <div className="flex flex-1 items-center justify-end gap-x-1">
-          <SignInButton dict={dict} />
+          <SignInButton dict={dict} lang={lang} />
           <SearchModal type="type1" isTransparentHeader={isTransparentHeader} home={home} />
           <AvatarDropdown
             trigger={

@@ -1,6 +1,7 @@
 'use client'
 
 import SocialLogin from '@/components/auth/SocialLogin'
+import { getDictionary } from '@/i18n'
 import { login } from '@/services/authService'
 import ButtonPrimary from '@/shared/ButtonPrimary'
 import Input from '@/shared/Input'
@@ -8,8 +9,25 @@ import { Field, Label } from '@/shared/fieldset'
 import { Dialog } from '@headlessui/react'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useRouter, useSearchParams, useParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { Noto_Kufi_Arabic, Noto_Serif, Noto_Serif_Malayalam } from 'next/font/google'
+
+const notoSerif = Noto_Serif({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+const notoKufiArabic = Noto_Kufi_Arabic({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+const notoSerifMalayalam = Noto_Serif_Malayalam({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
 
 interface LoginModalProps {
   isOpen: boolean
@@ -32,6 +50,10 @@ const LoginModal = ({
 }: LoginModalProps) => {
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
+  const [dict, setDict] = useState<any>(null)
+  const [lang, setLang] = useState('en')
+  const searchParams = useSearchParams()
+  const params = useParams<{ lang?: string }>()
   const [formData, setFormData] = useState({
     emailOrUsername: '',
     password: '',
@@ -79,25 +101,45 @@ const LoginModal = ({
       [field]: e.target.value,
     }))
   }
-
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const paramLang = (params as any)?.lang
+      const queryLang = searchParams.get('lang')
+      const langData = (Array.isArray(paramLang) ? paramLang[0] : paramLang) || queryLang || 'en'
+      try {
+        const dictData = await getDictionary(langData)
+        setDict(dictData)
+      } catch (e) {
+        // fallback silently if dictionary load fails
+        setDict(null)
+      }
+      setLang(langData)
+    }
+    fetchDictionary()
+  }, [searchParams, params])
   return (
-    <Dialog open={isOpen} onClose={onClose} className="relative z-50">
+    <Dialog
+      open={isOpen}
+      onClose={onClose}
+      className={`relative z-50 ${lang === 'ar' || lang === 'fa' || lang === 'ur' ? notoKufiArabic.className : lang === 'ml' ? notoSerifMalayalam.className : notoSerif.className}`}
+      dir={lang === 'ar' || lang === 'fa' || lang === 'ur' ? 'rtl' : 'ltr'}
+    >
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <Dialog.Panel className="mx-auto max-h-[90vh] w-full max-w-md overflow-y-auto rounded-xl bg-white p-6 dark:bg-neutral-900">
           <Dialog.Title className="text-center text-2xl font-semibold text-gray-900 dark:text-white">
-            {title}
+            {dict?.login.heading || title}
           </Dialog.Title>
           <Dialog.Description className="mt-2 text-center text-sm text-gray-600 dark:text-gray-300">
-            {description}
+            {dict?.login.description || description}
           </Dialog.Description>
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-6">
             <Field className="block">
-              <Label className="text-[#868686] dark:text-[#B7B7B7]">Email or Username</Label>
+              <Label className="text-[#868686] dark:text-[#B7B7B7]">{dict?.login?.email?.label || 'Email or Username'}</Label>
               <Input
                 type="text"
-                placeholder="Enter your email or username"
+                placeholder={dict?.login?.email?.placeholder || 'Enter your email or username'}
                 className="mt-1"
                 value={formData.emailOrUsername}
                 onChange={handleInputChange('emailOrUsername')}
@@ -107,12 +149,14 @@ const LoginModal = ({
             </Field>
 
             <Field className="block">
-              <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">Password</Label>
+              <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">
+                {dict?.login?.password?.label || 'Password'}
+              </Label>
               <div className="relative mt-1">
                 <Input
                   type={showPassword ? 'text' : 'password'}
-                  className="w-full pr-10"
-                  placeholder="Enter your password"
+                  className="w-full"
+                  placeholder={dict?.login?.password?.placeholder || 'Enter your password'}
                   value={formData.password}
                   onChange={handleInputChange('password')}
                   required
@@ -121,7 +165,7 @@ const LoginModal = ({
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                  className={`absolute inset-y-0 ${lang === 'ar' || lang === 'fa' || lang === 'ur' ? 'left-3' : 'right-3'} flex items-center text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200`}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                   disabled={isLoading}
                 >
@@ -133,7 +177,7 @@ const LoginModal = ({
             <Field className="block">
               <div className="flex items-center justify-end text-[#00652E] dark:text-[#60A43A]">
                 <Link href="/forgot-password" className="text-sm font-medium underline hover:no-underline">
-                  Forgot password?
+                  {dict?.login?.forgotpassword || 'Forgot password?'}
                 </Link>
               </div>
             </Field>
@@ -144,30 +188,19 @@ const LoginModal = ({
               className="w-full"
               disabled={isLoading || !formData.emailOrUsername || !formData.password}
             >
-              {isLoading ? 'Logging in...' : 'Sign In'}
+              {isLoading ? (dict?.login?.loggingin || 'Logging in...') : (dict?.login?.login || 'Sign In')}
             </ButtonPrimary>
 
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300 dark:border-neutral-600"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="bg-white px-2 text-gray-500 dark:bg-neutral-900 dark:text-gray-400">
-                  Or continue with
-                </span>
-              </div>
-            </div>
-
-            <SocialLogin />
+            <SocialLogin lang={lang} dict={dict} />
 
             <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-              Don&apos;t have an account?{' '}
+              {(dict?.login?.donthaveaccount || "Don't have an account?") + ' '}
               <Link
-                href="/signup"
+                href={`${lang}/signup`}
                 onClick={() => onClose()}
                 className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
               >
-                Sign up
+                {dict?.login?.signup || 'Sign up'}
               </Link>
             </p>
           </form>

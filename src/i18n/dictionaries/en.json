@@ -11,6 +11,67 @@
     "loadMore": "Load More",
     "loading": "Loading"
   },
+  "login": {
+    "heading": "Login to your account",
+    "description": "Welcome to our blog magazine Community",
+    "email": {
+      "label": "Email or Username",
+      "placeholder": "Enter your email or username",
+      "errorMessage": "Please enter a valid email or username"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter your password",
+      "errorMessage": "Please enter a valid password"
+    },
+    "forgotpassword": "Forgot password?",
+    "login": "Login",
+    "loggingin": "Logging in...",
+    "signup": "Sign up",
+    "orcontinue": "Or continue with",
+    "or": "OR",
+    "facebook": "Login with Facebook",
+    "google": "Login with Google",
+    "donthaveaccount": "Don't have an account?"
+  },
+  "signup": {
+    "heading": "Create your account",
+    "description": "Welcome to our blog magazine Community",
+    "fullName": {
+      "label": "Full Name",
+      "placeholder": "Enter your full name",
+      "errorMessage": "Please enter a valid full name"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email",
+      "errorMessage": "Please enter a valid email"
+    },
+    "userName": {
+      "label": "Username",
+      "placeholder": "Enter your username",
+      "errorMessage": "Please enter a valid username",
+      "note": "If left empty, a username will be generated from your name"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter your password (min 8 characters)",
+      "errorMessage": "Please enter a valid password"
+    },
+    "confirmPassword": {
+      "label": "Confirm Password",
+      "placeholder": "Confirm your password",
+      "errorMessage": "Please enter a valid confirm password"
+    },
+    "createAccount": "Create Account",
+    "creatingAccount": "Creating Account...",
+    "signin": "Sign In",
+    "donthaveaccount": "Don't have an account?",
+    "toast": {
+      "success": "Verification email sent! Please check your inbox.",
+      "error": "Signup failed. Please try again."
+    }
+  },
   "navigation": {
     "about": "About",
     "stories": "Stories",
