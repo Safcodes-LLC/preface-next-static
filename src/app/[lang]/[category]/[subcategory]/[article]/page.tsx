@@ -8,7 +8,7 @@ import WidgetPostsSkeleton from '@/components/Skeletons/WidgetPostsSkeleton'
 import WidgetCategories from '@/components/WidgetCategories'
 import WidgetPosts from '@/components/WidgetPosts'
 import { getCategoryBySlug, getPopularArticles, getPostBySlug, getSubcategoryPosts } from '@/data/api/posts'
-import { getAllPosts, getCommentsByPostId, getPostByHandle } from '@/data/posts'
+import { getAllPosts, getCommentsByPostId } from '@/data/posts'
 
 import { getDictionary } from '@/i18n'
 import { Metadata } from 'next'
@@ -30,6 +30,7 @@ export async function generateMetadata({
   // Await the params before using them
   const { article, lang } = await params
 
+  const post = await getPostBySlug(article)
   // Validate the article parameter
   if (!article || article.includes('.') || article.includes('com.chrome.devtools.json')) {
     return {
@@ -37,8 +38,6 @@ export async function generateMetadata({
       description: 'The requested article URL is invalid',
     }
   }
-
-  const post = await getPostByHandle(article)
 
   if (!post) {
     return {
