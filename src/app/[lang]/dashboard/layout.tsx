@@ -4,6 +4,7 @@ import DashboardSidebar from '@/components/Dashboard/DashboardSidebar'
 import NotifyDropdown from '@/components/Header/NotifyDropdown'
 
 import {
+  AskScholarIcon,
   ContinuosReadIcon,
   DashboardIcon,
   FavouriteIcon,
@@ -33,8 +34,8 @@ const user = {
 }
 
 const navigation = [
-  { name: 'Qur’an', href: '/dashboard/quran' },
-  { name: 'Ask the Scholar', href: '/dashboard/ask-the-scholar' },
+  { name: 'Qur’an', href: '/dashboard/quran', icon: QuranIcon },
+  { name: 'Ask the Scholar', href: '/dashboard/ask-the-scholar', icon: AskScholarIcon },
   //   { name: 'Subscription', href: '/dashboard/subscription' },
   //   { name: 'Billing', href: '/dashboard/billing-address' },
   //   { name: 'Submit post', href: '/submission' },
@@ -50,49 +51,36 @@ const subPages: { href: any; pageName: string; icon: any }[] = [
   {
     href: '/dashboard',
     icon: DashboardIcon,
-
     pageName: 'Dashboard',
   },
   {
     href: '/dashboard/quran',
-
     icon: QuranIcon,
-
     pageName: "Qur'an",
   },
   {
     href: '/dashboard/my-reading-list',
-
     icon: ContinuosReadIcon,
-
     pageName: 'Continuous Read',
   },
   {
     href: '/dashboard/my-favourite',
-
     icon: FavouriteIcon,
-
     pageName: 'Favorites',
   },
   {
     href: '/dashboard/saved-read',
-
     icon: SavedIcon,
-
     pageName: 'Saved Read',
   },
   {
     href: '/dashboard/subscription',
-
     icon: QAIcon,
-
     pageName: 'Q & A',
   },
   {
     href: '/dashboard/preferences',
-
     icon: PreferenceIcon,
-
     pageName: 'Preferences',
   },
   // {
@@ -107,9 +95,7 @@ const subPages: { href: any; pageName: string; icon: any }[] = [
   // },
   {
     href: '/dashboard/update-profile',
-
     icon: ProfileIcon,
-
     pageName: 'Profile',
   },
 ]
@@ -251,10 +237,13 @@ export default function Layout({ children }: { children: ReactNode }) {
                         isActive(item.href)
                           ? 'border border-[#E8E8E8] bg-white text-primary-600 shadow dark:bg-neutral-700 dark:text-white'
                           : 'text-neutral-600 hover:bg-[#E8E8E8] hover:text-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700/50 dark:hover:text-white',
-
-                        'rounded-md border border-[#E8E8E8] px-4 py-2 text-sm font-medium transition-colors duration-200 dark:border-[#5B5B5B]'
+                        'inline-flex items-center gap-2 rounded-md border border-[#E8E8E8] px-4 py-2 text-sm font-medium transition-colors duration-200 dark:border-[#5B5B5B]'
                       )}
                     >
+                      <span>
+                        {' '}
+                        <item.icon className={`size-4 fill-[#454545] dark:fill-[#FFFFFF]`} />
+                      </span>
                       <span> {item.name}</span>
                     </Link>
                   ))}

@@ -17,12 +17,12 @@ export default function DashboardSidebar({ subPages, pathname }: DashboardSideba
       {/* Mobile Horizontal Scrollable Tabs */}
       <div className="col-span-12 lg:hidden">
         <div className="hide-scrollbar flex space-x-2 overflow-x-auto pb-2">
-          {subPages.map(({ href, pageName, icon }, index) => {
-            const isActive = pathname === href
+          {subPages.map((item, index) => {
+            const isActive = pathname === item.href
             return (
               <Link
                 key={index}
-                href={href}
+                href={item.href}
                 className={`flex-shrink-0 cursor-pointer rounded-lg px-4 py-3 text-sm whitespace-nowrap transition-colors ${
                   isActive
                     ? 'bg-[#FFFFFF] text-[#00652E] shadow-sm dark:bg-primary-900/30 dark:text-primary-400'
@@ -30,8 +30,12 @@ export default function DashboardSidebar({ subPages, pathname }: DashboardSideba
                 }`}
               >
                 <span className="flex items-center gap-2">
-                  <img src={icon} alt={pageName} className="h-4 w-4 object-contain" />
-                  <span>{pageName}</span>
+                  <span className="mr-3 flex h-4 w-4 items-center justify-center text-lg">
+                    <item.icon
+                      className={` ${isActive ? 'fill-[#00652E] dark:fill-[#60A43A]' : 'fill-[#222222] dark:fill-[#DFDFDF]'}`}
+                    />
+                  </span>
+                  <span>{item.pageName}</span>
                 </span>
               </Link>
             )
@@ -49,14 +53,16 @@ export default function DashboardSidebar({ subPages, pathname }: DashboardSideba
                 <li key={`desktop-${index}`}>
                   <Link
                     href={Item.href}
-                    className={`flex cursor-pointer items-center rounded-lg bg-[#F0F0F0] dark:bg-[#0D0D0D] p-3 text-sm transition-colors ${
+                    className={`flex cursor-pointer items-center rounded-lg bg-[#F0F0F0] p-3 text-sm transition-colors dark:bg-[#0D0D0D] ${
                       isActive
                         ? 'bg-[#FFFFFF] text-[#00652E] dark:bg-[#1D1D1D] dark:text-[#60A43A]'
                         : 'text-neutral-700 hover:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-neutral-700/50'
                     }`}
                   >
                     <span className="mr-3 flex h-4 w-4 items-center justify-center text-lg">
-                      <Item.icon className={` ${isActive ? 'fill-[#00652E] dark:fill-[#60A43A]' : 'fill-[#222222] dark:fill-[#DFDFDF]'}`} />
+                      <Item.icon
+                        className={` ${isActive ? 'fill-[#00652E] dark:fill-[#60A43A]' : 'fill-[#222222] dark:fill-[#DFDFDF]'}`}
+                      />
                     </span>
                     <span>{Item.pageName}</span>
                   </Link>
