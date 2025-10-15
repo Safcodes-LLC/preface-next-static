@@ -30,7 +30,6 @@ export default function Page() {
 
   return (
     <ProtectedRoute>
-      <div className="container mx-auto py-4">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {dashboardItems.map((item, index) => (
             <div key={index} className="group relative pt-4">
@@ -50,7 +49,6 @@ export default function Page() {
             </div>
           ))}
         </div>
-      </div>
     </ProtectedRoute>
   )
 }

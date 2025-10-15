@@ -12,7 +12,6 @@ import {
   QAIcon,
   QuranIcon,
   SavedIcon,
-  AskScholarIcon
 } from '@/components/Svg/svg'
 
 import Avatar from '@/shared/Avatar'
@@ -266,7 +265,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
           {/* sidebar */}
           <main>
-            <div className="container grid grid-cols-12 gap-8 px-4 py-10 lg:gap-4">
+            <div className="container grid grid-cols-12 gap-8 px-4 py-10">
               <DashboardSidebar subPages={subPages} pathname={pathname} />
 
               <div className="col-span-12 lg:col-span-10">{children}</div>
