@@ -3,7 +3,7 @@ import Link from 'next/link'
 interface SubPage {
   href: string
   pageName: string
-  icon: string
+  icon: any
 }
 
 interface DashboardSidebarProps {
@@ -43,26 +43,22 @@ export default function DashboardSidebar({ subPages, pathname }: DashboardSideba
       <div className="col-span-12 hidden lg:col-span-2 lg:block">
         <div className="sticky top-24">
           <ul className="space-y-2">
-            {subPages.map(({ href, pageName, icon }, index) => {
-              const isActive = pathname === href
+            {subPages.map((Item, index) => {
+              const isActive = pathname === Item.href
               return (
                 <li key={`desktop-${index}`}>
                   <Link
-                    href={href}
-                    className={`flex cursor-pointer items-center rounded-lg bg-[#F0F0F0] p-3 text-sm transition-colors dark:bg-[#0D0D0D] ${
+                    href={Item.href}
+                    className={`flex cursor-pointer items-center rounded-lg bg-[#F0F0F0] dark:bg-[#0D0D0D] p-3 text-sm transition-colors ${
                       isActive
                         ? 'bg-[#FFFFFF] text-[#00652E] dark:bg-[#1D1D1D] dark:text-[#60A43A]'
-                        : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700/50'
+                        : 'text-neutral-700 hover:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-neutral-700/50'
                     }`}
                   >
                     <span className="mr-3 flex h-4 w-4 items-center justify-center text-lg">
-                      {icon.startsWith('/') ? (
-                        <img src={icon} alt={pageName} className="h-4 w-4 object-contain" />
-                      ) : (
-                        <span>{icon}</span>
-                      )}
+                      <Item.icon className={` ${isActive ? 'fill-[#00652E] dark:fill-[#60A43A]' : 'fill-[#222222] dark:fill-[#DFDFDF]'}`} />
                     </span>
-                    <span>{pageName}</span>
+                    <span>{Item.pageName}</span>
                   </Link>
                 </li>
               )

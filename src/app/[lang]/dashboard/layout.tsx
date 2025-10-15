@@ -2,6 +2,19 @@
 
 import DashboardSidebar from '@/components/Dashboard/DashboardSidebar'
 import NotifyDropdown from '@/components/Header/NotifyDropdown'
+
+import {
+  ContinuosReadIcon,
+  DashboardIcon,
+  FavouriteIcon,
+  PreferenceIcon,
+  ProfileIcon,
+  QAIcon,
+  QuranIcon,
+  SavedIcon,
+  AskScholarIcon
+} from '@/components/Svg/svg'
+
 import Avatar from '@/shared/Avatar'
 import Logo from '@/shared/Logo'
 import { Divider } from '@/shared/divider'
@@ -34,40 +47,53 @@ const userNavigation = [
   { name: 'Sign out', href: '#' },
 ]
 
-const subPages: { href: any; pageName: string; icon: string }[] = [
+const subPages: { href: any; pageName: string; icon: any }[] = [
   {
     href: '/dashboard',
-    icon: '/images/dashboardsidebar/dashboard.svg',
+    icon: DashboardIcon,
+
     pageName: 'Dashboard',
   },
   {
     href: '/dashboard/quran',
-    icon: '/images/dashboardsidebar/quran.svg',
+
+    icon: QuranIcon,
+
     pageName: "Qur'an",
   },
   {
     href: '/dashboard/my-reading-list',
-    icon: '/images/dashboardsidebar/continuos-read.svg',
+
+    icon: ContinuosReadIcon,
+
     pageName: 'Continuous Read',
   },
   {
     href: '/dashboard/my-favourite',
-    icon: '/images/dashboardsidebar/favourite.svg',
+
+    icon: FavouriteIcon,
+
     pageName: 'Favorites',
   },
   {
     href: '/dashboard/saved-read',
-    icon: '/images/dashboardsidebar/saved.svg',
+
+    icon: SavedIcon,
+
     pageName: 'Saved Read',
   },
   {
     href: '/dashboard/subscription',
-    icon: '/images/dashboardsidebar/q&a.svg',
+
+    icon: QAIcon,
+
     pageName: 'Q & A',
   },
   {
     href: '/dashboard/preferences',
-    icon: '/images/dashboardsidebar/preference.svg',
+
+    icon: PreferenceIcon,
+
     pageName: 'Preferences',
   },
   // {
@@ -82,7 +108,9 @@ const subPages: { href: any; pageName: string; icon: string }[] = [
   // },
   {
     href: '/dashboard/update-profile',
-    icon: '/images/dashboardsidebar/profile.svg',
+
+    icon: ProfileIcon,
+
     pageName: 'Profile',
   },
 ]
@@ -96,7 +124,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <>
       <div className="min-h-screen">
         <Disclosure as="nav">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="container">
             <div className="flex h-20 justify-between">
               <div className="flex">
                 <div className="flex shrink-0 items-center">
@@ -161,8 +189,9 @@ export default function Layout({ children }: { children: ReactNode }) {
                   aria-current={isActive(item.href) ? 'page' : undefined}
                   className={clsx(
                     isActive(item.href)
-                      ? 'curs border-primary-500 bg-neutral-50 dark:bg-white/10'
-                      : 'border-transparent text-neutral-600 hover:border-neutral-300 hover:bg-neutral-50 hover:text-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-200',
+                      ? 'cursor-pointer border-primary-500 bg-neutral-50 dark:bg-white/10'
+                      : 'cursor-pointer border-transparent text-neutral-600 hover:border-neutral-300 hover:bg-neutral-50 hover:text-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-200',
+
                     'block border-s-4 py-2 ps-3 pe-4 text-base font-medium'
                   )}
                 >
@@ -206,10 +235,12 @@ export default function Layout({ children }: { children: ReactNode }) {
 
         <div className="py-12">
           <header>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <h1 className="text-3xl font-bold tracking-tight text-[#00652E]">{pageTitle}</h1>
+            <div className="container">
+              <h1 className="text-3xl font-bold tracking-tight text-[#00652E] dark:text-[#60A43A]">{pageTitle}</h1>
               <div className="flex flex-col justify-between gap-4 sm:flex-row">
-                <span className="text-lg text-[#444444]">View your dashboard, manage your posts</span>
+                <span className="text-lg text-[#444444] dark:text-[#DFDFDF]">
+                  View your dashboard, manage your posts
+                </span>
 
                 <div className="flex gap-4">
                   {navigation.map((item) => (
@@ -221,10 +252,11 @@ export default function Layout({ children }: { children: ReactNode }) {
                         isActive(item.href)
                           ? 'border border-[#E8E8E8] bg-white text-primary-600 shadow dark:bg-neutral-700 dark:text-white'
                           : 'text-neutral-600 hover:bg-[#E8E8E8] hover:text-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700/50 dark:hover:text-white',
-                        'rounded-md border border-[#E8E8E8] px-4 py-2 text-sm font-medium transition-colors duration-200'
+
+                        'rounded-md border border-[#E8E8E8] px-4 py-2 text-sm font-medium transition-colors duration-200 dark:border-[#5B5B5B]'
                       )}
                     >
-                      {item.name}
+                      <span> {item.name}</span>
                     </Link>
                   ))}
                 </div>
