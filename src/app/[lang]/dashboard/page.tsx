@@ -40,11 +40,11 @@ export default function Page() {
 
               {/* Card */}
               <div
-                className={`flex h-full flex-col items-center rounded-2xl bg-white py-6 pt-10 text-center transition-all duration-300 hover:shadow-lg`}
+                className={`flex h-full flex-col items-center rounded-2xl bg-white dark:bg-[#0D0D0D] py-6 pt-10 text-center transition-all duration-300 hover:shadow-lg`}
               >
-                <p className={`mb-2 text-base font-medium text-black`}>{item.title}</p>
-                <p className="text-xl font-bold text-[#00652E]">{item.count}</p>
-                <p className="mt-1 text-base font-medium text-[#444444]">{item.status}</p>
+                <p className={`mb-2 text-base font-medium text-black dark:text-white`}>{item.title}</p>
+                <p className="text-xl font-bold text-[#00652E] dark:text-[#60A43A]">{item.count}</p>
+                <p className="mt-1 text-base font-medium text-[#444444] dark:text-[#DFDFDF]">{item.status}</p>
               </div>
             </div>
           ))}
