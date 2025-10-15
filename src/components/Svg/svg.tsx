@@ -198,10 +198,10 @@ export const ProfileIcon = ({ className }: any) => {
   return (
     <svg width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
-        fill-rule="evenodd"
-        className={className}
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M7.50106 0C5.552 0 3.97198 1.58002 3.97198 3.52907C3.97198 5.47813 5.552 7.05814 7.50106 7.05814C9.45011 7.05814 11.0301 5.47813 11.0301 3.52907C11.0301 1.58002 9.45011 0 7.50106 0ZM4.98029 3.52907C4.98029 2.13689 6.10889 1.00831 7.50106 1.00831C8.89323 1.00831 10.0218 2.13689 10.0218 3.52907C10.0218 4.92125 8.89323 6.04984 7.50106 6.04984C6.10889 6.04984 4.98029 4.92125 4.98029 3.52907Z"
+        className={className}
         // fill="#DFDFDF"
       />
       <path
