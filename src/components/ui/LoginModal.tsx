@@ -12,6 +12,7 @@ import { Noto_Kufi_Arabic, Noto_Serif, Noto_Serif_Malayalam } from 'next/font/go
 import Link from 'next/link'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-hot-toast'
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
@@ -50,6 +51,7 @@ const LoginModal = ({
 }: LoginModalProps) => {
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
+  const [isError, setNowError] = useState(null)
   const [dict, setDict] = useState<any>(null)
   const [lang, setLang] = useState('en')
   const searchParams = useSearchParams()
@@ -84,12 +86,17 @@ const LoginModal = ({
 
       // Handle successful login without redirect
       handleLoginSuccess()
+      toast.success(dict?.login?.success || 'Logged in successfully')
 
       // Don't redirect here, just close the modal
     } catch (error: any) {
-      console.error('Login error:', error)
+      // console.error('Login error:', error)
       // You can add error handling here (e.g., show toast notification)
-      alert(error.message || 'Login failed. Please try again.')
+      setNowError(error.message || 'Login failed. Please try again.')
+      setTimeout(() => {
+        setNowError(null)
+      }, 5000)
+      // alert(error.message || 'Login failed. Please try again.')
     } finally {
       setIsLoading(false)
     }
@@ -192,8 +199,8 @@ const LoginModal = ({
             >
               {isLoading ? dict?.login?.loggingin || 'Logging in...' : dict?.login?.login || 'Sign In'}
             </ButtonPrimary>
-
-            <SocialLogin lang={lang} dict={dict} />
+            {isError ? <p className="text-center text-sm text-red-500">{isError}</p> : null}
+            <SocialLogin lang={lang} dict={dict} onSuccess={handleLoginSuccess} />
 
             <p className="text-center text-sm text-gray-500 dark:text-gray-400">
               {(dict?.login?.donthaveaccount || "Don't have an account?") + ' '}

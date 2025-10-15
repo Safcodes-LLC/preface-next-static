@@ -49,7 +49,7 @@ export default function DashboardSidebar({ subPages, pathname }: DashboardSideba
                 <li key={`desktop-${index}`}>
                   <Link
                     href={href}
-                    className={`flex cursor-pointer items-center rounded-lg bg-[#F0F0F0] dark:bg-[#0D0D0D] p-3 text-sm transition-colors ${
+                    className={`flex cursor-pointer items-center rounded-lg bg-[#F0F0F0] p-3 text-sm transition-colors dark:bg-[#0D0D0D] ${
                       isActive
                         ? 'bg-[#FFFFFF] text-[#00652E] dark:bg-[#1D1D1D] dark:text-[#60A43A]'
                         : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700/50'
@@ -57,7 +57,7 @@ export default function DashboardSidebar({ subPages, pathname }: DashboardSideba
                   >
                     <span className="mr-3 flex h-4 w-4 items-center justify-center text-lg">
                       {icon.startsWith('/') ? (
-                        <img src={icon} alt={pageName} className="h-4 w-4 object-contain " />
+                        <img src={icon} alt={pageName} className="h-4 w-4 object-contain" />
                       ) : (
                         <span>{icon}</span>
                       )}

@@ -32,7 +32,9 @@
     "or": "OR",
     "facebook": "Login with Facebook",
     "google": "Login with Google",
-    "donthaveaccount": "Don't have an account?"
+    "donthaveaccount": "Don't have an account?",
+    "success": "Login successful! Redirecting...",
+    "failed": "Login credentials failed"
   },
   "signup": {
     "heading": "Create your account",

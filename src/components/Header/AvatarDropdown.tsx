@@ -10,6 +10,7 @@ import { Logout01Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-hot-toast'
 
 interface Props {
   className?: string
@@ -35,9 +36,7 @@ export default function AvatarDropdown({ className, trigger, lang }: Props) {
 
   const handleLogout = () => {
     logout()
-    // Refresh the page to clear any client-side state
-    window.location.href = `/${lang}` // Using window.location to ensure full page refresh
-    // router.refresh()
+    toast.success('Logged out successfully')
   }
 
   return !isClient ? null : (

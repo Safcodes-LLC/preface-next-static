@@ -81,6 +81,13 @@ export const login = async (credentials: LoginCredentials): Promise<LoginRespons
   if (typeof window !== 'undefined') {
     localStorage.setItem('authToken', responseData.token)
     localStorage.setItem('user', JSON.stringify(responseData.userData))
+    // Notify listeners (same-tab) that auth state has changed
+    try {
+      const se = new StorageEvent('storage', { key: 'authToken' })
+      window.dispatchEvent(se)
+    } catch (_) {
+      // noop
+    }
   }
 
   return responseData
@@ -116,10 +123,12 @@ export const logout = (): void => {
     localStorage.removeItem('user')
 
     // Dispatch a custom event that other tabs can listen for
-    window.dispatchEvent(new Event('storage'))
-
-    // Force a full page reload to clear any application state
-    window.location.href = '/'
+    try {
+      const se = new StorageEvent('storage', { key: 'authToken' })
+      window.dispatchEvent(se)
+    } catch (_) {
+      // noop
+    }
   } catch (error) {
     console.error('Error during logout:', error)
   }

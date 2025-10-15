@@ -60,6 +60,7 @@ const Header2: FC<Header2Props> = ({
           <SignInButton dict={dict} lang={lang} />
           <SearchModal type="type1" isTransparentHeader={isTransparentHeader} home={home} />
           <AvatarDropdown
+            lang={lang}
             trigger={
               <button
                 type="button"

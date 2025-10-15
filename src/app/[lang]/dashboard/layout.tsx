@@ -234,7 +234,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
           {/* sidebar */}
           <main>
-            <div className=" grid container grid-cols-12 gap-8 px-4 py-10  lg:gap-4 ">
+            <div className="container grid grid-cols-12 gap-8 px-4 py-10 lg:gap-4">
               <DashboardSidebar subPages={subPages} pathname={pathname} />
 
               <div className="col-span-12 lg:col-span-10">{children}</div>

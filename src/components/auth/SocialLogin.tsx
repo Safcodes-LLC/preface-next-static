@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Script from 'next/script'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { FaFacebookF } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 
@@ -17,9 +18,10 @@ interface SocialLoginProps {
   className?: string
   dict?: any
   lang?: string
+  onSuccess?: () => void
 }
 
-export default function SocialLogin({ className = '', dict, lang }: SocialLoginProps) {
+export default function SocialLogin({ className = '', dict, lang, onSuccess }: SocialLoginProps) {
   const router = useRouter()
   const [gisReady, setGisReady] = useState(false)
   const [googleInited, setGoogleInited] = useState(false)
@@ -47,14 +49,26 @@ export default function SocialLogin({ className = '', dict, lang }: SocialLoginP
           localStorage.setItem('authToken', data.token)
           const userData = data.userData || data.user
           localStorage.setItem('user', JSON.stringify(userData))
+          // notify same-tab listeners (AuthContext)
+          try {
+            const se = new StorageEvent('storage', { key: 'authToken' })
+            window.dispatchEvent(se)
+          } catch (_) {
+            // noop
+          }
         }
 
-        router.push(lang ? `/${lang}` : '/')
+        if (onSuccess) {
+          toast.success(dict?.login?.success || 'Logged in successfully')
+          onSuccess()
+        } else {
+          router.push(lang ? `/${lang}` : '/')
+        }
       } catch (err) {
         console.error('Google auth error:', err)
       }
     },
-    [router]
+    [router, onSuccess, dict, lang]
   )
 
   const initGoogle = useCallback(() => {

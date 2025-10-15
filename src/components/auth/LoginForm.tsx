@@ -24,6 +24,7 @@ export default function LoginForm({ className = '', dict, lang }: LoginFormProps
     password: '',
   })
   const [isLoading, setIsLoading] = useState(false)
+  const [isError, setNowError] = useState(null)
 
   // Custom toast component with close button
   const showSuccessToast = () => {
@@ -47,7 +48,7 @@ export default function LoginForm({ className = '', dict, lang }: LoginFormProps
                 </svg>
               </div>
               <div className="ml-3 flex-1">
-                <p className="text-sm font-medium text-white">Login successful! Redirecting...</p>
+                <p className="text-sm font-medium text-white">{dict.login.success}</p>
               </div>
             </div>
           </div>
@@ -65,46 +66,47 @@ export default function LoginForm({ className = '', dict, lang }: LoginFormProps
     )
   }
 
-  const showErrorToast = (message: string) => {
-    toast.custom(
-      (t) => (
-        <div
-          className={`${
-            t.visible ? 'animate-enter' : 'animate-leave'
-          } ring-opacity-5 pointer-events-auto flex w-full max-w-md rounded-lg bg-red-500 shadow-lg ring-1 ring-black`}
-        >
-          <div className="w-0 flex-1 p-4">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <div className="ml-3 flex-1">
-                <p className="text-sm font-medium text-white">{message}</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex border-l border-red-400">
-            <button
-              onClick={() => toast.dismiss(t.id)}
-              className="flex w-full items-center justify-center rounded-none rounded-r-lg border border-transparent p-4 text-sm font-medium text-white hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:outline-none"
-            >
-              <XMarkIcon className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
-      ),
-      { duration: 4000 }
-    )
-  }
+  // const showErrorToast = (message: string) => {
+  //   toast.custom(
+  //     (t) => (
+  //       <div
+  //         className={`${
+  //           t.visible ? 'animate-enter' : 'animate-leave'
+  //         } ring-opacity-5 pointer-events-auto flex w-full max-w-md rounded-lg bg-red-500 shadow-lg ring-1 ring-black`}
+  //       >
+  //         <div className="w-0 flex-1 p-4">
+  //           <div className="flex items-center">
+  //             <div className="flex-shrink-0">
+  //               <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  //                 <path
+  //                   strokeLinecap="round"
+  //                   strokeLinejoin="round"
+  //                   strokeWidth={2}
+  //                   d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+  //                 />
+  //               </svg>
+  //             </div>
+  //             <div className="ml-3 flex-1">
+  //               <p className="text-sm font-medium text-white">{message}</p>
+  //             </div>
+  //           </div>
+  //         </div>
+  //         <div className="flex border-l border-red-400">
+  //           <button
+  //             onClick={() => toast.dismiss(t.id)}
+  //             className="flex w-full items-center justify-center rounded-none rounded-r-lg border border-transparent p-4 text-sm font-medium text-white hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:outline-none"
+  //           >
+  //             <XMarkIcon className="h-5 w-5" />
+  //           </button>
+  //         </div>
+  //       </div>
+  //     ),
+  //     { duration: 4000 }
+  //   )
+  // }
 
   // Handle form submission
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!formData.emailOrUsername || !formData.password) return
@@ -127,10 +129,14 @@ export default function LoginForm({ className = '', dict, lang }: LoginFormProps
         router.push(`/${lang}/`)
       }, 500)
     } catch (error: any) {
-      console.error('Login error:', error)
+      // console.error('Login error:', error)
 
       // Show error toast with custom styling
-      showErrorToast(error.message || 'Login failed. Please check your credentials and try again.')
+      setNowError(error.message || dict.login.error)
+
+      setTimeout(() => {
+        setNowError(null)
+      }, 5000)
     } finally {
       setIsLoading(false)
     }
@@ -196,6 +202,7 @@ export default function LoginForm({ className = '', dict, lang }: LoginFormProps
       >
         {isLoading ? dict.login.loggingin : dict.login.login}
       </ButtonPrimary>
+      {isError ? <p className="text-center text-sm text-red-500">{isError}</p> : null}
     </form>
   )
 }

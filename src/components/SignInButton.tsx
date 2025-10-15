@@ -1,16 +1,15 @@
 'use client'
 
+import { useAuth } from '@/contexts/AuthContext'
 import { Button } from '@/shared/Button'
 import { useEffect, useState } from 'react'
 
 export default function SignInButton({ dict, lang }: { dict: any; lang?: string }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const { isAuthenticated } = useAuth()
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
-    const token = localStorage.getItem('authToken')
-    setIsAuthenticated(!!token)
   }, [])
 
   if (!isClient || isAuthenticated) {
