@@ -37,37 +37,37 @@ const userNavigation = [
 const subPages: { href: any; pageName: string; icon: string }[] = [
   {
     href: '/dashboard',
-    icon: '/images/dashboardsidebar/dashboard.png',
+    icon: '/images/dashboardsidebar/dashboard.svg',
     pageName: 'Dashboard',
   },
   {
     href: '/dashboard/quran',
-    icon: '/images/dashboardsidebar/quran.png',
+    icon: '/images/dashboardsidebar/quran.svg',
     pageName: "Qur'an",
   },
   {
     href: '/dashboard/my-reading-list',
-    icon: '/images/dashboardsidebar/continuos-read.png',
+    icon: '/images/dashboardsidebar/continuos-read.svg',
     pageName: 'Continuous Read',
   },
   {
     href: '/dashboard/my-favourite',
-    icon: '/images/dashboardsidebar/favourite.png',
+    icon: '/images/dashboardsidebar/favourite.svg',
     pageName: 'Favorites',
   },
   {
     href: '/dashboard/saved-read',
-    icon: '/images/dashboardsidebar/saved.png',
+    icon: '/images/dashboardsidebar/saved.svg',
     pageName: 'Saved Read',
   },
   {
     href: '/dashboard/subscription',
-    icon: '/images/dashboardsidebar/q&a.png',
+    icon: '/images/dashboardsidebar/q&a.svg',
     pageName: 'Q & A',
   },
   {
     href: '/dashboard/preferences',
-    icon: '/images/dashboardsidebar/preference.png',
+    icon: '/images/dashboardsidebar/preference.svg',
     pageName: 'Preferences',
   },
   // {
@@ -82,7 +82,7 @@ const subPages: { href: any; pageName: string; icon: string }[] = [
   // },
   {
     href: '/dashboard/update-profile',
-    icon: '/images/dashboardsidebar/profile.png',
+    icon: '/images/dashboardsidebar/profile.svg',
     pageName: 'Profile',
   },
 ]
