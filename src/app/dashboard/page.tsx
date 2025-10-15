@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 // Dynamically import with no SSR
 
 function DashboardPage() {
-  redirect('/dashboard/posts')
+  redirect('/dashboard')
   return null
 }
 
