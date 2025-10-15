@@ -11,6 +11,67 @@
     "loadMore": "تحميل المزيد",
     "loading": "تحميل"
   },
+  "login": {
+    "heading": "تسجيل الدخول",
+    "description": "مرحبا في مجتمعنا",
+    "email": {
+      "label": "البريد الالكتروني",
+      "placeholder": "أدخل بريدك الالكتروني",
+      "errorMessage": "البريد الالكتروني غير صحيح"
+    },
+    "password": {
+      "label": "كلمة المرور",
+      "placeholder": "أدخل كلمة المرور",
+      "errorMessage": "كلمة المرور غير صحيح"
+    },
+    "forgotpassword": "نسيت كلمة المرور؟",
+    "login": "تسجيل الدخول",
+    "loggingin": "تسجيل الدخول...",
+    "signup": "التسجيل",
+    "orcontinue": "أو اكمل باستخدام",
+    "or": "أو",
+    "facebook": "تسجيل الدخول باستخدام فيسبوك",
+    "google": "تسجيل الدخول باستخدام جوجل",
+    "donthaveaccount": "ليس لديك حساب؟"
+  },
+  "signup": {
+    "heading": "إنشاء حساب",
+    "description": "مرحبا في مجتمعنا",
+    "fullName": {
+      "label": "الاسم الكامل",
+      "placeholder": "أدخل اسمك الكامل",
+      "errorMessage": "الاسم الكامل غير صحيح"
+    },
+    "email": {
+      "label": "البريد الالكتروني",
+      "placeholder": "أدخل بريدك الالكتروني",
+      "errorMessage": "البريد الالكتروني غير صحيح"
+    },
+    "userName": {
+      "label": "اسم المستخدم",
+      "placeholder": "أدخل اسم المستخدم",
+      "errorMessage": "الاسم المستخدم غير صحيح",
+      "note": "إذا تركه فارغاً سيتم إنشاء اسم مستخدم من اسمك"
+    },
+    "password": {
+      "label": "كلمة المرور",
+      "placeholder": "أدخل كلمة المرور (min 8 حروف)",
+      "errorMessage": "كلمة المرور غير صحيح"
+    },
+    "confirmPassword": {
+      "label": "تأكيد كلمة المرور",
+      "placeholder": "تأكيد كلمة المرور",
+      "errorMessage": "تأكيد كلمة المرور غير صحيح"
+    },
+    "createAccount": "إنشاء حساب",
+    "creatingAccount": "جارٍ إنشاء الحساب...",
+    "signin": "تسجيل الدخول",
+    "donthaveaccount": "ليس لديك حساب؟",
+    "toast": {
+      "success": "تم إرسال رسالة التحقق! يُرجى مراجعة بريدك الوارد.",
+      "error": "فشل التسجيل. يُرجى المحاولة مرة أخرى."
+    }
+  },
   "navigation": {
     "about": "عن الموقع",
     "stories": "مقالات",

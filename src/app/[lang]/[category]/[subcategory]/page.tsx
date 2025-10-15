@@ -56,8 +56,10 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
   const subcategoryImage = subcategoryPosts?.categories[0]?.featuredImage
   const listPost = subcategoryPosts?.list
 
+  // Sanitize category slug if it accidentally includes the lang prefix (e.g., "ar" + "life-...")
+  const categorySlug = category.startsWith(lang) ? category.slice(lang.length) : category
   // const categories = await getCategories()
-  const categories2 = await getCategoryBySlug(category, lang)
+  const categories2 = await getCategoryBySlug(categorySlug, lang)
 
   return (
     <div className={`page-subcategory-${subcategory}`}>
@@ -85,7 +87,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
           }
         >
           <div className="flex flex-wrap gap-x-2 gap-y-4">
-            <ModalCategories categories={categories2.subcategories} />
+            <ModalCategories categories={categories2?.subcategories || []} />
           </div>
         </Suspense>
         <Suspense fallback={<PostListsSkelton />}>

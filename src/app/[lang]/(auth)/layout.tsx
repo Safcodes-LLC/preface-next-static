@@ -3,8 +3,8 @@ import React from 'react'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Preface',
-    default: 'Authentication | Preface',
+    template: '%s | Preface Islam',
+    default: 'Authentication | Preface Islam',
   },
   description: 'Join our blog magazine community - Login or create your account',
   robots: {

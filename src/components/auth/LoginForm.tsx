@@ -12,9 +12,11 @@ import toast from 'react-hot-toast'
 
 interface LoginFormProps {
   className?: string
+  dict: any
+  lang: string
 }
 
-export default function LoginForm({ className = '' }: LoginFormProps) {
+export default function LoginForm({ className = '', dict, lang }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false)
   const router = useRouter()
   const [formData, setFormData] = useState({
@@ -122,7 +124,7 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
 
       // Redirect to home page on successful login
       setTimeout(() => {
-        router.push('/')
+        router.push(`/${lang}/`)
       }, 500)
     } catch (error: any) {
       console.error('Login error:', error)
@@ -144,10 +146,10 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
   return (
     <form className={`grid grid-cols-1 gap-6 ${className}`} onSubmit={handleSubmit}>
       <Field className="block">
-        <Label className="text-[#868686] dark:text-[#B7B7B7]">Email or Username</Label>
+        <Label className="text-[#868686] dark:text-[#B7B7B7]">{dict.login.email.label}</Label>
         <Input
           type="text"
-          placeholder="Enter your email or username"
+          placeholder={dict.login.email.placeholder}
           className="mt-1"
           value={formData.emailOrUsername}
           onChange={handleInputChange('emailOrUsername')}
@@ -156,12 +158,14 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
         />
       </Field>
       <Field className="block">
-        <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">Password</Label>
+        <Label className="flex items-center justify-between text-neutral-800 dark:text-[#B7B7B7]">
+          {dict.login.password.label}
+        </Label>
         <div className="relative mt-1">
           <Input
             type={showPassword ? 'text' : 'password'}
-            className="pr-10"
-            placeholder="Enter your password"
+            // className="pr-10"
+            placeholder={dict.login.password.placeholder}
             value={formData.password}
             onChange={handleInputChange('password')}
             required
@@ -170,7 +174,7 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
           <button
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
-            className="absolute inset-y-0 right-3 flex items-center text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+            className={`absolute inset-y-0 flex cursor-pointer items-center text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 ${lang === 'ar' || lang === 'fa' || lang === 'ur' ? 'left-3' : 'right-3'}`}
             aria-label={showPassword ? 'Hide password' : 'Show password'}
             disabled={isLoading}
           >
@@ -178,10 +182,10 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
           </button>
         </div>
       </Field>
-      <Field className="block">
-        <div className="flex items-center justify-end text-[#00652E] dark:text-[#60A43A]">
+      <Field className="ms-auto block">
+        <div className="flex items-center text-[#00652E] dark:text-[#60A43A]">
           <Link href="/forgot-password" className="text-sm font-medium underline">
-            Forgot password?
+            {dict.login.forgotpassword}
           </Link>
         </div>
       </Field>
@@ -190,7 +194,7 @@ export default function LoginForm({ className = '' }: LoginFormProps) {
         color="loginbtn"
         disabled={isLoading || !formData.emailOrUsername || !formData.password}
       >
-        {isLoading ? 'Logging in...' : 'Login'}
+        {isLoading ? dict.login.loggingin : dict.login.login}
       </ButtonPrimary>
     </form>
   )
