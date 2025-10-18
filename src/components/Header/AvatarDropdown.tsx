@@ -36,6 +36,7 @@ export default function AvatarDropdown({ className, trigger, lang }: Props) {
 
   const handleLogout = () => {
     logout()
+    localStorage.removeItem('authToken')
     toast.success('Logged out successfully')
   }
 
