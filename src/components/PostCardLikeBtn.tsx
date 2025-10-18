@@ -61,7 +61,10 @@ const PostCardLikeBtn: FC<Props> = ({ className, color, post, iconsize }) => {
       return
     }
     try {
-      const token = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null
+      const token =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('authToken') || localStorage.getItem('authToken_backup')
+          : null
       const response = await fetch(`https://king-prawn-app-x9z27.ondigitalocean.app/api/favourites/posts/${post._id}`, {
         method: 'POST',
         headers: {
