@@ -79,10 +79,18 @@ const LoginModal = ({
       console.log('Login attempt:', formData)
 
       // Call the login API
-      await login({
+      const res = await login({
         emailOrUsername: formData.emailOrUsername,
         password: formData.password,
       })
+
+      // Explicitly persist to localStorage (login() already does this; this is a safe reinforcement)
+      if (typeof window !== 'undefined' && res?.token) {
+        try {
+          localStorage.setItem('authToken', res.token)
+          if (res?.userData) localStorage.setItem('user', JSON.stringify(res.userData))
+        } catch (_) {}
+      }
 
       // Handle successful login without redirect
       handleLoginSuccess()

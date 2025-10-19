@@ -33,6 +33,7 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
             liked={liked}
             title={title}
             className=""
+            post={post}
           />
         </div>
       </div>
@@ -78,6 +79,7 @@ const HeaderStyle3 = ({ post, className }: Omit<Props, 'defaultStyle'>) => {
             likeCount={likeCount}
             liked={liked}
             title={title}
+            post={post}
           />
         </div>
         <Divider className="mx-auto mt-10 max-w-4xl" />

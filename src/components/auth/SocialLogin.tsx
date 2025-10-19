@@ -31,31 +31,101 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
   const handleGoogleCredential = useCallback(
     async (credential: string) => {
       try {
-        const response = await fetch('https://king-prawn-app-x9z27.ondigitalocean.app/api/authentication/google', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ credential }),
-        })
+        let response: Response
+        try {
+          response = await fetch('https://king-prawn-app-x9z27.ondigitalocean.app/api/authentication/google', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ credential }),
+            credentials: 'include',
+          })
+        } catch (e: any) {
+          // Fallback retry without credentials to diagnose CORS-with-credentials issues
+          console.warn('[Google Auth] First request with credentials failed, retrying without credentials...', e)
+          response = await fetch('https://king-prawn-app-x9z27.ondigitalocean.app/api/authentication/google', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ credential }),
+          })
+        }
 
         const data = await response.json()
 
         if (!response.ok) {
-          throw new Error(data.message || 'Google authentication failed')
+          throw new Error(data?.message || 'Google authentication failed')
+        }
+
+        // Try to find a token across common response shapes
+        const isLikelyJwt = (val: unknown) =>
+          typeof val === 'string' && /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/.test(val)
+
+        // Also try Authorization header (e.g., "Bearer <jwt>")
+        const authHeader = response.headers.get('authorization') || response.headers.get('Authorization')
+        const headerToken = authHeader?.replace(/^Bearer\s+/i, '').trim()
+
+        let token: string | undefined =
+          (headerToken && isLikelyJwt(headerToken) ? headerToken : undefined) ||
+          data?.token ||
+          data?.accessToken ||
+          data?.jwt ||
+          data?.idToken ||
+          data?.id_token ||
+          data?.authToken ||
+          data?.data?.token ||
+          data?.data?.accessToken ||
+          data?.data?.jwt ||
+          data?.data?.idToken ||
+          data?.data?.id_token ||
+          data?.data?.authToken
+
+        // Fallback: scan shallow keys for a JWT-like string
+        if (!token && data && typeof data === 'object') {
+          for (const [k, v] of Object.entries(data as Record<string, unknown>)) {
+            if (isLikelyJwt(v)) {
+              token = v as string
+              break
+            }
+          }
+        }
+
+        // Recursive scan (limited depth) for a JWT-like string
+        if (!token) {
+          const seen = new WeakSet<object>()
+          const dfs = (obj: unknown, depth: number): string | undefined => {
+            if (!obj || depth > 3) return undefined
+            if (typeof obj === 'string') return isLikelyJwt(obj) ? obj : undefined
+            if (typeof obj !== 'object') return undefined
+            if (seen.has(obj as object)) return undefined
+            seen.add(obj as object)
+            for (const v of Object.values(obj as Record<string, unknown>)) {
+              const found = dfs(v, depth + 1)
+              if (found) return found
+            }
+            return undefined
+          }
+          token = dfs(data, 0)
+        }
+
+        const userData = data?.userData || data?.user || data?.data?.userData || data?.data?.user
+
+        if (!token) {
+          // Minimal debug information to help diagnose response shape during development
+          console.warn('[Google Auth] No token found in response. Data keys:', Object.keys(data || {}))
+          throw new Error('No token received from Google authentication')
         }
 
         if (typeof window !== 'undefined') {
-          localStorage.setItem('authToken', data.token)
-          const userData = data.userData || data.user
-          localStorage.setItem('user', JSON.stringify(userData))
-          // notify same-tab listeners (AuthContext)
+          localStorage.setItem('authToken', token)
+          localStorage.setItem('authToken_backup', token)
+          if (userData) localStorage.setItem('user', JSON.stringify(userData))
           try {
             const se = new StorageEvent('storage', { key: 'authToken' })
             window.dispatchEvent(se)
-          } catch (_) {
-            // noop
-          }
+          } catch (_) {}
         }
 
         if (onSuccess) {

@@ -166,9 +166,10 @@ interface Props {
   commentCount?: number | any
   handle?: string | any
   title?: string | any
+  post?: any
 }
 
-const SingleMetaAction: FC<Props> = ({ className, likeCount, liked, commentCount, handle, title }) => {
+const SingleMetaAction: FC<Props> = ({ className, likeCount, liked, commentCount, handle, title, post }) => {
   return (
     <div className={clsx('single-meta-action', className)}>
       <div className="flex flex-wrap items-center gap-x-2.5 gap-y-2">
@@ -176,6 +177,7 @@ const SingleMetaAction: FC<Props> = ({ className, likeCount, liked, commentCount
           likeCount={likeCount}
           liked={liked}
           color="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white"
+          post={post}
         />
         {/* <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
         {/* <p className="font-light text-neutral-400 sm:mx-1">/</p> */}

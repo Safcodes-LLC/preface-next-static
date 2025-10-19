@@ -24,8 +24,23 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const checkAuth = () => {
-      const token = getAuthToken()
+      let token = getAuthToken()
       const userData = getCurrentUser()
+
+      // If token is missing but a backup exists, restore it (defensive fix for unexpected clears)
+      if (typeof window !== 'undefined' && !token) {
+        try {
+          const backup = localStorage.getItem('authToken_backup')
+          if (backup) {
+            localStorage.setItem('authToken', backup)
+            token = backup
+            try {
+              const se = new StorageEvent('storage', { key: 'authToken' })
+              window.dispatchEvent(se)
+            } catch (_) {}
+          }
+        } catch (_) {}
+      }
 
       // Update the auth state
       setUser(userData || null)

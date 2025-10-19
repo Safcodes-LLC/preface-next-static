@@ -1,77 +1,73 @@
-import { useAuth } from '@/contexts/AuthContext'
-import { clientApi } from '@/lib/client/api'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { getAuthToken } from '@/services/authService'
+import { useMutation } from '@tanstack/react-query'
 
-interface FavouriteData {
-  userId: string
+interface ToggleFavouritePayload {
   postId: string
   postType: string
 }
 
-interface RemoveFavouriteData {
-  userId: string
-  postId: string
+interface ToggleFavouriteResponse {
+  isFavourite: boolean
+  favouriteCount: number
 }
 
-export const useFavourite = () => {
+export const useToggleFavourite = () => {
   return useMutation({
-    mutationFn: async (data: FavouriteData) => {
-      const token = localStorage.getItem('authToken') // Make sure to store the token in localStorage after login
-      return clientApi.post('/api/favorites/', data, {
+    mutationFn: async ({ postId, postType }: ToggleFavouritePayload): Promise<ToggleFavouriteResponse> => {
+      const token = getAuthToken()
+
+      const res = await fetch(`https://king-prawn-app-x9z27.ondigitalocean.app/api/favourites/posts/${postId}`, {
+        method: 'POST',
         headers: {
-          Authorization: token || '',
+          Authorization: token ? token : '',
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ postType }),
       })
+
+      if (!res.ok) {
+        // Try to extract server error message
+        let message = 'Failed to toggle favourite'
+        try {
+          const err = await res.json()
+          message = err?.message || message
+        } catch (_) {}
+        throw new Error(message)
+      }
+
+      const json = (await res.json()) as ToggleFavouriteResponse
+      // Return consistent data structure
+      return json
     },
   })
 }
 
-// Hook for fetching latest articles
-export const useGetUserFavourites = () => {
-  const { user } = useAuth()
-  const userId = user?._id
-
-  return useQuery({
-    queryKey: ['favorites', 'user', userId],
-    queryFn: async (): Promise<any> => {
-      if (!userId) return null
-
-      const token = localStorage.getItem('authToken')
-      const response = await clientApi.get<any[]>(`/api/favorites/${userId}`, {
-        headers: {
-          Authorization: token || '',
-          'Content-Type': 'application/json',
-        },
-      })
-      return response
-    },
-    enabled: !!userId,
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    gcTime: 1000 * 60 * 10, // 10 minutes
-  })
-}
-
-export const useRemoveFavourite = () => {
-  const queryClient = useQueryClient()
-
+export const useFavouriteCount = () => {
   return useMutation({
-    mutationFn: async (data: RemoveFavouriteData) => {
-      const token = localStorage.getItem('authToken')
-      return clientApi.delete('/api/favorites/remove', {
+    mutationFn: async ({ postId }: ToggleFavouritePayload): Promise<ToggleFavouriteResponse> => {
+      const token = getAuthToken()
+
+      const res = await fetch(`https://king-prawn-app-x9z27.ondigitalocean.app/api/favourites/count/${postId}`, {
+        method: 'GET',
         headers: {
-          Authorization: token || '',
+          Authorization: token ? token : '',
           'Content-Type': 'application/json',
         },
-        body: data,
       })
-    },
-    onSuccess: () => {
-      // Invalidate and refetch the favorites query to update the UI
-      queryClient.invalidateQueries({ queryKey: ['favorites'] })
-    },
-    onError: (error) => {
-      console.error('Failed to remove favorite:', error)
+
+      if (!res.ok) {
+        // Try to extract server error message
+        let message = 'Failed to get favourite count'
+        try {
+          const err = await res.json()
+          message = err?.message || message
+        } catch (_) {}
+        throw new Error(message)
+      }
+
+      const json = (await res.json()) as ToggleFavouriteResponse
+      // Return consistent data structure
+      return json
     },
   })
 }

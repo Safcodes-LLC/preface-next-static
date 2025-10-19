@@ -80,6 +80,7 @@ export const login = async (credentials: LoginCredentials): Promise<LoginRespons
   // Store the token in localStorage or your preferred auth state management
   if (typeof window !== 'undefined') {
     localStorage.setItem('authToken', responseData.token)
+    localStorage.setItem('authToken_backup', responseData.token)
     localStorage.setItem('user', JSON.stringify(responseData.userData))
     // Notify listeners (same-tab) that auth state has changed
     try {
@@ -120,6 +121,7 @@ export const logout = (): void => {
   try {
     // Clear auth data from localStorage
     localStorage.removeItem('authToken')
+    localStorage.removeItem('authToken_backup')
     localStorage.removeItem('user')
 
     // Dispatch a custom event that other tabs can listen for
