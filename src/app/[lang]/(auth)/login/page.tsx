@@ -7,7 +7,11 @@ export const metadata: Metadata = {
   description: 'Login to your account and access our blog magazine community',
 }
 
-export default async function LoginPage({ params }: { params: { lang: string } }) {
+interface LoginPageProps {
+  params: Promise<{ lang: string }>
+}
+
+export default async function LoginPage({ params }: LoginPageProps) {
   const { lang } = await params
   const dict = await getDictionary(lang)
   return <LoginClient lang={lang} dict={dict} />
