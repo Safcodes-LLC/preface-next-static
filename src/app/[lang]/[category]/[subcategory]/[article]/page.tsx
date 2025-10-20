@@ -115,7 +115,7 @@ const Page = async ({
                 </div>
               }
             >
-              <PaginationWrapper2 post={post} />
+              <PaginationWrapper2 post={post} posts={filteredSubcategoryPosts}/>
             </Suspense>
           </div>
         </div>
