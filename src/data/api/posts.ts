@@ -253,16 +253,15 @@ export const getPostsByParentCategory = async (
     }
   }
 }
-
 export const getContinuosRead = async (userId: string, lang?: string) => {
   try {
-    const data = await serverFetch.get<{ data: any[] }>(`/api/user/read-posts/${userId}`, {
+    const response = await serverFetch.get<{ data: any }>(`/api/user/read-posts/${userId}`, {
       language: lang,
       next: { revalidate: 60 }, // Revalidate every 60 seconds
     })
-    return data.data
+    return response?.data
   } catch (error) {
-    console.error('Failed to fetch user posts', error)
-    return { data: [] }
+    console.error(`Failed to fetch category by slug: ${userId}`, error)
+    return null
   }
 }
