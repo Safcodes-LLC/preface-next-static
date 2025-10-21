@@ -82,7 +82,7 @@ function SignupPageContent({ lang, dict }: { lang: string; dict: any }) {
   )
 }
 
-export default async function SignupPage({ params }: { params: { lang: string } }) {
+export default async function SignupPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
   const dict = await getDictionary(lang)
   // The GuestRoute will handle the redirection if user is already authenticated
