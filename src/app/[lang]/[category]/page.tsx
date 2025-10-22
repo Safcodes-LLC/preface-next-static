@@ -1,14 +1,6 @@
 import Banner from '@/components/Banner'
-import Card16Podcast from '@/components/PostCards/Card16Podcast'
-import Card17 from '@/components/PostCards/Card17'
-import Card17Filter from '@/components/PostCards/Card17Filter'
-import Card22 from '@/components/PostCards/Card22'
-import FiltersDropdown from '@/components/PostCards/FiltersDropdown'
 import SectionSliderPosts from '@/components/SectionSliderPosts'
 import BannerSkeleton from '@/components/Skeletons/BannerSkeleton'
-import Card16PodcastSkeleton from '@/components/Skeletons/Card16PodcastSkeleton'
-import Card17Skelton from '@/components/Skeletons/Card17Skelton'
-import PostListsSkelton from '@/components/Skeletons/PostListsSkelton'
 import { SectionSliderPostsSkeleton } from '@/components/Skeletons/SectionSliderPostsSkeleton'
 import { getPopularArticles, getPostsByParentCategory } from '@/data/api/posts'
 import {
@@ -20,6 +12,7 @@ import { serverFetch } from '@/lib/server/api'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
+import ArticleFilter from './components/articleFilter'
 
 export async function generateMetadata({
   params,
@@ -54,8 +47,7 @@ export async function generateMetadata({
 }
 
 const Page = async ({ params }: { params: Promise<{ category: string; lang: string }> }) => {
-  const { category } = await params
-  const { lang } = await params
+  const { category, lang } = await params
   const dict = await getDictionary(lang)
 
   let categoryData: any = null
@@ -120,75 +112,14 @@ const Page = async ({ params }: { params: Promise<{ category: string; lang: stri
         {/* <hr className="mt-12 w-full border-t border-[#E3E3E3] dark:border-[#2C2C2C]" /> */}
       </div>
 
-      <div className="container">
-        <h2 className="pb-6 text-[22px] font-medium">Filter By Category</h2>
-
-        {/* LOOP ITEMS - Use posts from API if available, otherwise fallback to gallery posts */}
-        <Suspense fallback={<Card17Skelton />}>
-          {/* Mobile dropdown */}
-          <div className="md:hidden">
-            <FiltersDropdown
-              items={
-                categoryData.data.subcategories.length > 0 ? categoryData.data.subcategories : galleryPosts.slice(0, 8)
-              }
-              lang={lang}
-            />
-          </div>
-
-          {/* Inline list for md+ screens */}
-          <div className="hidden flex-wrap gap-2 sm:gap-4 md:flex">
-            {(categoryData.data.subcategories.length > 0
-              ? categoryData.data.subcategories
-              : galleryPosts.slice(0, 8)
-            ).map((post: any, index: number) => (
-              <Card17Filter key={post._id || index} post={post} lang={lang} />
-            ))}
-          </div>
-        </Suspense>
-      </div>
-
-      {/* here featured create ui */}
-      <div className="container pt-10 md:pt-14 lg:pt-20">
-        <Card22 />
-      </div>
-
-      <div className="container">
-        <Suspense fallback={<PostListsSkelton />}>
-          <div className="pt-10 md:pt-14 lg:pt-20">
-            <>
-              <div className="pb-4 text-base font-normal text-[#000000] dark:text-white">
-                {postsByParentCategory?.data?.length} Articles Found
-              </div>
-              <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
-                {postsByParentCategory?.data?.map((post: any) => (
-                  <Suspense key={`suspense-${post._id}`} fallback={<Card16PodcastSkeleton />}>
-                    <Card16Podcast key={post._id} post={post} lang={lang} isCategoryPage={true} />
-                  </Suspense>
-                ))}
-              </div>
-              {/* <div className="mx-auto mt-8 text-center md:mt-10 lg:mt-12">
-                  <ButtonSecondary>
-                    Load More <ArrowDownIcon className="h-6 w-6 text-[#444444] dark:text-white" />
-                  </ButtonSecondary>
-                </div> */}
-            </>
-          </div>
-        </Suspense>
-      </div>
-
-      <div className="container py-10 md:py-14 lg:py-20">
-        {/* LOOP ITEMS - Use posts from API if available, otherwise fallback to gallery posts */}
-        <Suspense fallback={<Card17Skelton />}>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
-            {(categoryData.data.subcategories.length > 0
-              ? categoryData.data.subcategories
-              : galleryPosts.slice(0, 8)
-            ).map((post: any, index: number) => (
-              <Card17 key={post._id || index} post={post} lang={lang} />
-            ))}
-          </div>
-        </Suspense>
-      </div>
+      <ArticleFilter
+        categoryData={categoryData}
+        galleryPosts={galleryPosts}
+        lang={lang}
+        dict={dict}
+        postsByParentCategory={postsByParentCategory}
+        category={category}
+      />
 
       {popularArticles.length > 0 && (
         <div className="container pb-10 md:pb-14 lg:pb-20">

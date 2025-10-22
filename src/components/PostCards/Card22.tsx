@@ -55,10 +55,12 @@ const Card22: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
         <h2 className={clsx('font-semibold text-[#444444] dark:text-white', titleClass)}>
           <span className="line-clamp-2">{title || 'How to Pray that cleanse Your ensure'}</span>
         </h2>
-        <div className="mt-auto flex items-center gap-3">
-          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-          <PostCardSaveBtn bookmarked={bookmarked} />
-        </div>
+        {post?._id ? (
+          <div className="mt-auto flex items-center gap-3">
+            <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
+            <PostCardSaveBtn bookmarked={bookmarked} post={post} />
+          </div>
+        ) : null}
         <p className="line-clamp-5 text-base leading-relaxed text-[#444444] sm:text-base dark:text-white">
           {excerpt ||
             "is simply dummy text of the Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi velit tempora eos aliquam delectus perspiciatis veritatis, molestias voluptas. Doloremque aspernatur voluptatibus nulla maiores eos velit excepturi, obcaecati reprehenderit nostrum unde! Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti doloribus eligendi debitis amet. Iusto consequuntur at tempore. Dolorem amet voluptate nobis, exercitationem veritatis culpa quibusdam dignissimos? In similique eos placeat. printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}

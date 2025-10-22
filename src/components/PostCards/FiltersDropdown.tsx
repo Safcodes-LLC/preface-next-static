@@ -22,13 +22,27 @@ interface Props {
   onApply?: (selected: Item[]) => void
   onClear?: () => void
   label?: string
+  selectedIds?: string[]
+  onChangeSelectedIds?: (ids: string[]) => void
+  loading?: boolean
 }
 
-const FiltersDropdown: React.FC<Props> = ({ className, items, lang, onApply, onClear, label = 'Filter' }) => {
+const FiltersDropdown: React.FC<Props> = ({
+  className,
+  items,
+  lang,
+  onApply,
+  onClear,
+  label = 'Filter',
+  selectedIds: controlledIds,
+  onChangeSelectedIds,
+  loading = false,
+}) => {
   const [open, setOpen] = useState(false)
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
   const panelRef = useRef<HTMLDivElement | null>(null)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
+  const changeOriginRef = useRef<'internal' | 'external' | null>(null)
 
   // Close on outside click
   useEffect(() => {
@@ -53,10 +67,32 @@ const FiltersDropdown: React.FC<Props> = ({ className, items, lang, onApply, onC
     return () => document.removeEventListener('keydown', onKey)
   }, [open])
 
-  const toggle = () => setOpen((v) => !v)
+  // Sync controlled selected IDs
+  useEffect(() => {
+    if (Array.isArray(controlledIds)) {
+      changeOriginRef.current = 'external'
+      setSelectedIds(new Set(controlledIds))
+    }
+  }, [controlledIds])
+
+  // Notify parent after selection changes (post-render)
+  useEffect(() => {
+    if (changeOriginRef.current === 'internal') {
+      onChangeSelectedIds?.(Array.from(selectedIds))
+    }
+    changeOriginRef.current = null
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedIds])
+
+  const toggle = () => {
+    if (loading) return
+    setOpen((v) => !v)
+  }
 
   const isSelected = (id: string) => selectedIds.has(id)
   const toggleSelected = (id: string) => {
+    if (loading) return
+    changeOriginRef.current = 'internal'
     setSelectedIds((prev) => {
       const next = new Set(prev)
       if (next.has(id)) next.delete(id)
@@ -66,11 +102,14 @@ const FiltersDropdown: React.FC<Props> = ({ className, items, lang, onApply, onC
   }
 
   const handleClear = () => {
+    if (loading) return
+    changeOriginRef.current = 'internal'
     setSelectedIds(new Set())
     onClear?.()
   }
 
   const handleApply = () => {
+    if (loading) return
     const selected = items.filter((it) => (it._id || it.slug || '') && isSelected((it._id || it.slug) as string))
     onApply?.(selected)
     setOpen(false)
@@ -87,12 +126,15 @@ const FiltersDropdown: React.FC<Props> = ({ className, items, lang, onApply, onC
         ref={buttonRef}
         type="button"
         aria-expanded={open}
+        aria-busy={loading}
         aria-controls={panelId}
         className={clsx(
           'flex w-full items-center justify-between rounded-lg border border-[#E3E3E3] bg-white px-4 py-3 text-left shadow-sm',
-          'focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00652E] dark:border-[#2C2C2C] dark:bg-[#0D0D0D] dark:text-white'
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00652E] dark:border-[#2C2C2C] dark:bg-[#0D0D0D] dark:text-white',
+          loading && 'cursor-not-allowed opacity-70'
         )}
         onClick={toggle}
+        disabled={loading}
       >
         <span id={labelId} className="text-sm font-medium">
           {label}
@@ -102,13 +144,20 @@ const FiltersDropdown: React.FC<Props> = ({ className, items, lang, onApply, onC
             </span>
           )}
         </span>
-        <ChevronDownIcon
-          className={clsx(
-            'h-5 w-5 text-neutral-600 transition-transform duration-200 dark:text-neutral-300',
-            open && 'rotate-180'
-          )}
-          aria-hidden="true"
-        />
+        {loading ? (
+          <span className="ml-2 inline-flex items-center text-xs text-neutral-500" aria-live="polite">
+            <span className="mr-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-neutral-300 border-t-[#00652E]" />
+            Loading
+          </span>
+        ) : (
+          <ChevronDownIcon
+            className={clsx(
+              'h-5 w-5 text-neutral-600 transition-transform duration-200 dark:text-neutral-300',
+              open && 'rotate-180'
+            )}
+            aria-hidden="true"
+          />
+        )}
       </button>
 
       {/* Panel */}
@@ -122,9 +171,10 @@ const FiltersDropdown: React.FC<Props> = ({ className, items, lang, onApply, onC
           'transition-all duration-300',
           open ? 'max-h-[70vh] opacity-100' : 'max-h-0 opacity-0'
         )}
+        aria-busy={loading}
       >
         {/* Items list */}
-        <div className={clsx('grid grid-cols-1 gap-2 p-3 sm:p-4')}>
+        <div className={clsx('grid grid-cols-1 gap-2 p-3 sm:p-4', loading && 'pointer-events-none opacity-60')}>
           {items.map((item) => {
             const id = (item._id || item.slug || '') as string
             const checked = isSelected(id)
@@ -142,6 +192,7 @@ const FiltersDropdown: React.FC<Props> = ({ className, items, lang, onApply, onC
                   aria-label={(item.name || item.title || 'Filter option') + (checked ? ' selected' : '')}
                   checked={checked}
                   onChange={() => id && toggleSelected(id)}
+                  disabled={loading}
                 />
                 <div className="relative h-[36px] w-[36px] shrink-0 rounded-full bg-[#F8F8F8] dark:bg-[#1A1A1A]">
                   <Image
@@ -178,6 +229,7 @@ const FiltersDropdown: React.FC<Props> = ({ className, items, lang, onApply, onC
             type="button"
             onClick={handleClear}
             className="rounded-md border border-[#E3E3E3] px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00652E] dark:border-[#2C2C2C] dark:text-neutral-200 dark:hover:bg-neutral-800"
+            disabled={loading}
           >
             Clear
           </button>
@@ -185,8 +237,9 @@ const FiltersDropdown: React.FC<Props> = ({ className, items, lang, onApply, onC
             type="button"
             onClick={handleApply}
             className="rounded-md bg-[#00652E] px-4 py-2 text-sm font-semibold text-white hover:bg-[#005226] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00652E]"
+            disabled={loading}
           >
-            Apply Filter
+            {loading ? 'Please wait...' : 'Apply Filter'}
           </button>
         </div>
       </div>
