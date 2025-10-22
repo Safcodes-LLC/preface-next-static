@@ -20,7 +20,7 @@ function PaginationComponent({ totalPages = 10, className, post, posts }: Props)
     return {
       currentIndex: index,
       hasNext: index < posts.length - 1,
-      hasPrevious: index > 0
+      hasPrevious: index > 0,
     }
   }, [post?.slug, posts])
   // console.log(post,"post continuos read");

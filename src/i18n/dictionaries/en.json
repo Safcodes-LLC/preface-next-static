@@ -9,7 +9,9 @@
     "previouspage": "Previous Page",
     "nextpage": "Next Page",
     "loadMore": "Load More",
-    "loading": "Loading"
+    "loading": "Loading",
+    "continueReading": "Continue Reading",
+    "featured": "Featured"
   },
   "login": {
     "heading": "Login to your account",

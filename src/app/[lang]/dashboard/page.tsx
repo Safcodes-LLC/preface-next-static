@@ -1,8 +1,6 @@
-
 import StatusDashboard from '@/components/Dashboard/StatusDashboard'
-import Card23 from '@/components/PostCards/Card23'
 import { ContinuosReadIcon, FavouriteIcon, QAIcon, SavedIcon } from '@/components/Svg/svg'
-import { ProtectedRoute, useAuth } from '@/contexts/AuthContext'
+import { ProtectedRoute } from '@/contexts/AuthContext'
 import { getContinuosRead } from '@/data/api/posts'
 
 const Page = async ({ params, dict }: any) => {
@@ -64,8 +62,6 @@ const Page = async ({ params, dict }: any) => {
       status: 'Saved',
     },
   ]
-  
-
 
   // const { isAuthenticated, user } = useAuth()
 

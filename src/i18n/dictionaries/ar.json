@@ -9,7 +9,9 @@
     "previouspage": "Previous Page",
     "nextpage": "Next Page",
     "loadMore": "تحميل المزيد",
-    "loading": "تحميل"
+    "loading": "تحميل",
+    "continueReading": "مواصلة القراءة",
+    "featured": "مميز"
   },
   "login": {
     "heading": "تسجيل الدخول",

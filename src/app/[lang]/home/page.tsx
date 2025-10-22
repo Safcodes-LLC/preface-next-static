@@ -113,7 +113,7 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
         </div>
 
         <div className="container pt-10 md:pt-14 lg:pt-20">
-          <SectionMagazine12 posts={latestArticles.data[0]} lang={lang} />
+          <SectionMagazine12 dict={dict} lang={lang} />
         </div>
 
         <div className="container">{/* create a featured card for home page  */}</div>
