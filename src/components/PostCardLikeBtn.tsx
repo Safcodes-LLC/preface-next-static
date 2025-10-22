@@ -53,7 +53,7 @@ const PostCardLikeBtn: FC<Props> = ({ className, color, post, iconsize }) => {
     }
     fetchCount()
     return () => controller.abort()
-  }, [post._id, isAuthenticated, user?._id])
+  }, [post?._id, isAuthenticated, user?._id])
 
   const handleLike = async () => {
     if (!isAuthenticated) {
@@ -65,13 +65,13 @@ const PostCardLikeBtn: FC<Props> = ({ className, color, post, iconsize }) => {
         typeof window !== 'undefined'
           ? localStorage.getItem('authToken') || localStorage.getItem('authToken_backup')
           : null
-      const response = await fetch(`https://king-prawn-app-x9z27.ondigitalocean.app/api/favourites/posts/${post._id}`, {
+      const response = await fetch(`https://king-prawn-app-x9z27.ondigitalocean.app/api/favourites/posts/${post?._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `${token ?? ''}`,
         },
-        body: JSON.stringify({ postType: post.postType._id }),
+        body: JSON.stringify({ postType: post?.postType?._id }),
       })
       const data = await response.json()
       setIsLiked(data.isFavourite)
