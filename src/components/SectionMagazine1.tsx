@@ -75,7 +75,7 @@ const SectionMagazine1: FC<Props> = ({ className, lang }) => {
         </div>
       </div> */}
       <div className="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-2">
-        {posts.map((post: any, index: any) => (
+        {posts.slice(0, 6).map((post: any, index: any) => (
           <Card23 key={post._id || index} post={post} lang={lang} />
         ))}
       </div>

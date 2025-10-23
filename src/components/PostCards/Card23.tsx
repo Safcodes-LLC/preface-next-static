@@ -28,7 +28,7 @@ const Card23: FC<Props> = ({ className, post, lang }) => {
     >
       <div className="flex items-center gap-4 rounded-lg bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
         {/* Image Container */}
-        <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-[10px]">
+        <div className="relative aspect-square h-20 w-20 flex-shrink-0 overflow-hidden rounded-[10px]">
           <Image
             src={lastReadArticle.thumbnail || '/images/placeholder-image.png'}
             alt={lastReadArticle.title || 'Article thumbnail'}
