@@ -17,7 +17,7 @@ const SectionMagazine12: FC<Props> = async ({ className, lang, dict }) => {
 
   return (
     <div className={clsx('section-magazine-12 relative', className)}>
-      {customFeatured.data.length > 0 && customFeatured.data[0].status !== 'Deactivated' ? (
+      {customFeatured.data.length > 0 && customFeatured.data[0].status === 'Active' ? (
         <Card21
           post={customFeatured.data[0]}
           dict={dict}
