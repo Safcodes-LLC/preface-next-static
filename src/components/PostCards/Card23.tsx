@@ -26,7 +26,7 @@ const Card23: FC<Props> = ({ className, post, lang }) => {
         className
       )}
     >
-      <div className="flex items-center gap-4 rounded-lg bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+      <div className="flex items-center gap-4 rounded-lg bg-white p-4 shadow-sm transition-shadow hover:shadow-md dark:bg-[#0D0D0D]">
         {/* Image Container */}
         <div className="relative aspect-square h-20 w-20 flex-shrink-0 overflow-hidden rounded-[10px]">
           <Image
@@ -41,7 +41,9 @@ const Card23: FC<Props> = ({ className, post, lang }) => {
         {/* Content */}
         <div className="min-w-0 flex-1">
           {/* Title */}
-          <h3 className="mb-1 line-clamp-1 text-sm font-medium text-gray-900">{lastReadArticle.title}</h3>
+          <h3 className="mb-1 line-clamp-1 text-sm font-medium text-[#000000] dark:text-white">
+            {lastReadArticle.title}
+          </h3>
 
           {/* Category */}
           <span className="mb-2 inline-block text-xs font-medium text-green-700">

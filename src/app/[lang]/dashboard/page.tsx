@@ -83,21 +83,24 @@ const Page = async ({ params, dict }: any) => {
       </div>
 
       {/* saved read section */}
-      <div className="mt-8">
-        <div className="grid grid-cols-12 gap-6">
-          <div className="col-span-8 rounded-2xl bg-white px-5 py-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Saved for Reading</h2>
-              <div>
-                <button className="cursor-pointer text-sm text-[#00652E] hover:underline">View All</button>
-              </div>
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-              <Card24  lang={lang} />
+      <div className="mt-8 grid grid-cols-12 gap-6">
+        <div className="col-span-8 rounded-2xl bg-white px-5 py-6 dark:bg-[#0D0D0D]">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Saved for Reading</h2>
+            <div>
+              <button className="cursor-pointer text-sm text-[#00652E] hover:underline">View All</button>
             </div>
           </div>
-          <div className="col-span-4 bg-green-700">asd</div>
+          <div className="mt-4 grid grid-cols-3 gap-6">
+            <Card24 lang={lang} />
+            <Card24 lang={lang} />
+            <Card24 lang={lang} />
+            <Card24 lang={lang} />
+            <Card24 lang={lang} />
+            <Card24 lang={lang} />
+          </div>
         </div>
+        <div className="col-span-4 bg-green-700">asd</div>
       </div>
     </ProtectedRoute>
   )
