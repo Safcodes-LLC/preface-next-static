@@ -12,45 +12,55 @@ interface Props {
 }
 
 const Card23: FC<Props> = ({ className, post, lang }) => {
-  const { lastReadArticle } = post
-  console.log(post, 'ssshh')
+  const { lastReadArticle, readCount, totalPosts } = post
   const slug =
     lastReadArticle?.parentCategory?.slug + '/' + lastReadArticle?.category?.slug + '/' + lastReadArticle?.slug
+  const progressPercentage = Math.round((readCount / totalPosts) * 100)
 
   return (
     <Link
-      // href={lang === 'en' ? `/${lastReadArticle?.slug}/${slug}` : `/${lang}/${parentCategory?.slug}/${slug}`}
       href={lang === 'en' ? `/${slug}` : `/${lang}/${slug}`}
-      className="block"
+      className={clsx(
+        'block w-full max-w-[600px]',
+        'transform transition-transform duration-200 hover:-translate-y-0.5',
+        className
+      )}
     >
-      <div
-        className={clsx(
-          'post-card-17 group relative flex items-center justify-between gap-x-4 overflow-hidden rounded-xl bg-white p-4 transition-all duration-300 ease-in-out',
-          'hover:-translate-y-0.5 dark:bg-[#0D0D0D]',
-          'transform-gpu will-change-transform',
-          'dark:hover:bg-[#1A1A1A]',
-          className
-        )}
-      >
-        <div className="relative h-[70px] w-[70px] shrink-0 rounded-full bg-[#F8F8F8] dark:bg-[#1A1A1A]">
-          <div className="relative h-full w-full transition-transform duration-300 group-hover:scale-110">
-            <Image
-              sizes="70px"
-              className="object-contain p-4"
-              src={lastReadArticle.image || '/images/placeholder-image.png'}
-              fill
-              alt={lastReadArticle.name || ''}
+      <div className="flex items-center gap-4 rounded-lg bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+        {/* Image Container */}
+        <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-[10px]">
+          <Image
+            src={lastReadArticle.thumbnail || '/images/placeholder-image.png'}
+            alt={lastReadArticle.title || 'Article thumbnail'}
+            fill
+            className="object-cover"
+            sizes="64px"
+          />
+        </div>
+
+        {/* Content */}
+        <div className="min-w-0 flex-1">
+          {/* Title */}
+          <h3 className="mb-1 line-clamp-1 text-sm font-medium text-gray-900">{lastReadArticle.title}</h3>
+
+          {/* Category */}
+          <span className="mb-2 inline-block text-xs font-medium text-green-700">
+            {lastReadArticle.category?.name || 'Uncategorized'}
+          </span>
+
+          {/* Progress Bar */}
+          <div className="mb-1.5 h-1.5 w-full rounded-full bg-gray-100">
+            <div
+              className="h-1.5 rounded-full bg-green-600 transition-all duration-300"
+              style={{ width: `${progressPercentage}%` }}
             />
           </div>
-        </div>
-        <div className="flex flex-1 flex-col text-left">
-          <h2 className="block text-base font-medium text-[#000000] transition-colors duration-300 group-hover:text-[#00652E] dark:text-white dark:group-hover:text-[#60a43a]">
-            <span className="line-clamp-1">{lastReadArticle.title}</span>
-          </h2>
-          <div className="mt-1">
-            <span className="text-[12px] font-[400] text-neutral-500 transition-colors duration-300 group-hover:text-neutral-700 dark:text-neutral-400 dark:group-hover:text-neutral-300">
-              {/* {totalArticles} Articles */}
-              parent category total articles
+
+          {/* Progress Text */}
+          <div className="flex justify-between text-xs text-gray-500">
+            {/* <span>{progressPercentage}% completed</span> */}
+            <span>
+              {readCount} out of {totalPosts} articles read
             </span>
           </div>
         </div>

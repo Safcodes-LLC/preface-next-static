@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/contexts/AuthContext'
 import { HeadingWithSubProps } from '@/shared/Heading'
-import { getContinuosRead , getContinuosReadByCategory} from '@/utils/getServices'
+import { getContinuosReadByCategory } from '@/utils/getServices'
 import clsx from 'clsx'
 import { FC, useEffect, useState } from 'react'
 import Card23 from './PostCards/Card23'
@@ -18,8 +18,6 @@ const SectionMagazine1: FC<Props> = ({ className, lang }) => {
   const [error, setError] = useState<string | null>(null)
   const { user } = useAuth()
 
-  
-
   useEffect(() => {
     const fetchData = async () => {
       if (!user?._id) return
@@ -30,7 +28,7 @@ const SectionMagazine1: FC<Props> = ({ className, lang }) => {
         console.log('Fetching data for user:', user._id)
 
         const response = await getContinuosReadByCategory(user._id)
-        console.log('API Response:', response.data)
+        // console.log('API Response:', response.data)
 
         // Check if response has data property and it's an array
         if (response?.data && Array.isArray(response.data)) {
