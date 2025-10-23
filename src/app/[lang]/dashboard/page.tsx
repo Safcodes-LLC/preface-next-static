@@ -1,4 +1,5 @@
 import StatusDashboard from '@/components/Dashboard/StatusDashboard'
+import SectionMagazine1 from '@/components/SectionMagazine1'
 import { ContinuosReadIcon, FavouriteIcon, QAIcon, SavedIcon } from '@/components/Svg/svg'
 import { ProtectedRoute } from '@/contexts/AuthContext'
 import { getContinuosRead } from '@/data/api/posts'
@@ -63,11 +64,9 @@ const Page = async ({ params, dict }: any) => {
     },
   ]
 
-  // const { isAuthenticated, user } = useAuth()
+ 
 
-  const continuosRead = await getContinuosRead('68afee1a404933bae7a82cba', lang || 'en')
 
-  console.log(continuosRead, 'continuosReadpost dashboard')
 
   return (
     <ProtectedRoute>
@@ -77,12 +76,14 @@ const Page = async ({ params, dict }: any) => {
 
       <div className="mt-12">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Continuous Read</h2>
-        <p className="mt-1 text-gray-600 dark:text-gray-300">Latest 6 topics you started reading</p>
+        <p className="mt-1 mb-4 text-gray-600 dark:text-gray-300">Latest 6 topics you started reading</p>
 
         {/* Add your ReadingProgress component here when ready */}
         {/* {post.map((post, index) => (
           <Card23 key={post._id || index} post={post} lang={lang} />
         ))} */}
+
+        <SectionMagazine1 lang={lang}/>
       </div>
     </ProtectedRoute>
   )

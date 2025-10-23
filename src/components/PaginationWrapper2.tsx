@@ -24,7 +24,7 @@ function PaginationComponent({ totalPages = 10, className, post, posts }: Props)
     }
   }, [post?.slug, posts])
   // console.log(post,"post continuos read");
-  console.log(posts, 'continuosRead abcd')
+  // console.log(posts, 'continuosRead abcd')
 
   // Get a new searchParams string by merging the current
   // searchParams with a provided key/value pair

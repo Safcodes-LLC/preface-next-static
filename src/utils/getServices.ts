@@ -57,3 +57,24 @@ export async function getCategoryFilterArticle(
     // throw notFound();
   }
 }
+
+export async function getContinuosRead(userId: string): Promise<any | undefined> {
+  try {
+    return await getData(`user/read-posts/${userId}`, '', 0)
+  } catch (error) {
+    console.error('Failed to fetch continuos read data:', error)
+    // throw notFound();
+  }
+}
+
+export async function getContinuosReadByCategory(userId: string): Promise<any | undefined> {
+  try {
+    return await getData(`user/read-posts-by-category/${userId}`, '', 0)
+  } catch (error) {
+    console.error('Failed to fetch continuos read data:', error)
+    // throw notFound();
+  }
+}
+
+
+

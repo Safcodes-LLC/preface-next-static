@@ -218,43 +218,47 @@ export default function Layout({ children }: { children: ReactNode }) {
           </DisclosurePanel>
         </Disclosure>
 
-        <div className="py-12">
+        <div className="container py-12">
           <header>
-            <div className="container">
-              <h1 className="text-3xl font-bold tracking-tight text-[#00652E] dark:text-[#60A43A]">{pageTitle}</h1>
-              <div className="flex flex-col justify-between gap-4 sm:flex-row">
-                <span className="text-lg text-[#444444] dark:text-[#DFDFDF]">
-                  View your dashboard, manage your posts
-                </span>
+            <h1 className="text-3xl font-bold tracking-tight text-[#00652E] dark:text-[#60A43A]">{pageTitle}</h1>
+            <div className="flex flex-col justify-between gap-4 sm:flex-row">
+              <span className="text-lg text-[#444444] dark:text-[#DFDFDF]">View your dashboard, manage your posts</span>
 
-                <div className="flex gap-4">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      aria-current={isActive(item.href) ? 'page' : undefined}
-                      className={clsx(
-                        isActive(item.href)
-                          ? 'border border-[#E8E8E8] bg-white text-primary-600 shadow dark:bg-neutral-700 dark:text-white'
-                          : 'text-neutral-600 hover:bg-[#E8E8E8] hover:text-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700/50 dark:hover:text-white',
-                        'inline-flex items-center gap-2 rounded-md border border-[#E8E8E8] px-4 py-2 text-sm font-medium transition-colors duration-200 dark:border-[#5B5B5B]'
-                      )}
-                    >
-                      <span>
-                        {' '}
-                        <item.icon className={`size-4 fill-[#454545] dark:fill-[#FFFFFF]`} />
-                      </span>
-                      <span> {item.name}</span>
-                    </Link>
-                  ))}
-                </div>
+              <div className="flex gap-4">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                    className={clsx(
+                      isActive(item.href)
+                        ? 'border border-[#E8E8E8] bg-white text-primary-600 shadow dark:bg-neutral-700 dark:text-white'
+                        : 'text-neutral-600 hover:bg-[#E8E8E8] hover:text-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700/50 dark:hover:text-white',
+                      'inline-flex items-center gap-2 rounded-md border border-[#E8E8E8] px-4 py-2 text-sm font-medium transition-colors duration-200 dark:border-[#5B5B5B]'
+                    )}
+                  >
+                    <span>
+                      {' '}
+                      <item.icon className={`size-4 fill-[#454545] dark:fill-[#FFFFFF]`} />
+                    </span>
+                    <span> {item.name}</span>
+                  </Link>
+                ))}
+
+                {/* <SectionTabHeader
+                    subHeading={subHeading}
+                    dimHeading={dimHeading}
+                    heading={heading}
+                    tabActive="Workplace"
+                    tabs={['Workplace', 'Design', 'Development', 'Photography']}
+                  /> */}
               </div>
             </div>
           </header>
 
           {/* sidebar */}
           <main>
-            <div className="container grid grid-cols-12 gap-8 px-4 py-10">
+            <div className="grid grid-cols-12 gap-8 py-10">
               <DashboardSidebar subPages={subPages} pathname={pathname} />
 
               <div className="col-span-12 lg:col-span-10">{children}</div>

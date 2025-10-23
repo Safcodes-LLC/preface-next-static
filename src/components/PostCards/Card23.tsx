@@ -12,25 +12,15 @@ interface Props {
 }
 
 const Card23: FC<Props> = ({ className, post, lang }) => {
-  const {
-    title,
-    name,
-    handle,
-    parentCategory,
-    slug,
-    featuredIcon,
-    totalArticles,
-    featuredImage,
-    postType,
-    icon,
-    date,
-    readingTime,
-  } = post
-  const IS_AUDIO = postType === 'audio'
+  const { lastReadArticle } = post
+  console.log(post, 'ssshh')
+  const slug =
+    lastReadArticle?.parentCategory?.slug + '/' + lastReadArticle?.category?.slug + '/' + lastReadArticle?.slug
 
   return (
     <Link
-      href={lang === 'en' ? `/${parentCategory?.slug}/${slug}` : `/${lang}/${parentCategory?.slug}/${slug}`}
+      // href={lang === 'en' ? `/${lastReadArticle?.slug}/${slug}` : `/${lang}/${parentCategory?.slug}/${slug}`}
+      href={lang === 'en' ? `/${slug}` : `/${lang}/${slug}`}
       className="block"
     >
       <div
@@ -47,19 +37,20 @@ const Card23: FC<Props> = ({ className, post, lang }) => {
             <Image
               sizes="70px"
               className="object-contain p-4"
-              src={featuredIcon || icon?.src || '/images/placeholder-image.png'}
+              src={lastReadArticle.image || '/images/placeholder-image.png'}
               fill
-              alt={name || title}
+              alt={lastReadArticle.name || ''}
             />
           </div>
         </div>
         <div className="flex flex-1 flex-col text-left">
           <h2 className="block text-base font-medium text-[#000000] transition-colors duration-300 group-hover:text-[#00652E] dark:text-white dark:group-hover:text-[#60a43a]">
-            <span className="line-clamp-1">{name || title}</span>
+            <span className="line-clamp-1">{lastReadArticle.title}</span>
           </h2>
           <div className="mt-1">
             <span className="text-[12px] font-[400] text-neutral-500 transition-colors duration-300 group-hover:text-neutral-700 dark:text-neutral-400 dark:group-hover:text-neutral-300">
-              {totalArticles} Articles
+              {/* {totalArticles} Articles */}
+              parent category total articles
             </span>
           </div>
         </div>

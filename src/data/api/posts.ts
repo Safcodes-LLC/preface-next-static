@@ -253,7 +253,7 @@ export const getPostsByParentCategory = async (
     }
   }
 }
-export const getContinuosRead = async (userId: string, lang?: string) => {
+export const getContinuosRead1 = async (userId: string, lang?: string) => {
   try {
     const response = await serverFetch.get<{ data: any }>(`/api/user/read-posts/${userId}`, {
       language: lang,
