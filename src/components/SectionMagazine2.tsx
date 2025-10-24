@@ -44,8 +44,8 @@ const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeadin
       try {
         setIsLoading(true)
         const response = await getSavedList(user._id, lang || 'en')
-        if (response && response.savedlist) {
-          setSavedPosts(response.savedlist)
+        if (response && response.data) {
+          setSavedPosts(response.data)
         }
       } catch (err) {
         console.error('Error fetching saved posts:', err)
