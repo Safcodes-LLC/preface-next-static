@@ -165,7 +165,7 @@ export default function AvatarDropdown({ className, trigger, lang }: Props) {
             {isAuthenticated && (
               <button
                 onClick={handleLogout}
-                className="-m-3 flex w-full items-center rounded-lg p-2 text-left transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700"
+                className="-m-3 flex cursor-pointer w-full items-center rounded-lg p-2 text-left transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-orange-500/50 dark:hover:bg-neutral-700"
               >
                 <div className="flex shrink-0 items-center justify-center text-neutral-500 dark:text-neutral-300">
                   <HugeiconsIcon icon={Logout01Icon} size={24} strokeWidth={1.5} />
