@@ -10,7 +10,7 @@ interface Props {
   lang?: string
   title?: string
   category?: string
-  imageUrl?: string
+  thumbnail?: string
 }
 
 const Card24: FC<Props> = ({
@@ -18,7 +18,7 @@ const Card24: FC<Props> = ({
   lang,
   title = 'is simply dummy printing and typese..',
   category = 'Belief',
-  imageUrl = '/images/placeholder-image.png',
+  thumbnail = '/images/placeholder-image.png',
 }) => {
   return (
     <Link
@@ -31,7 +31,7 @@ const Card24: FC<Props> = ({
       {/* Image Container */}
       <div className="relative h-40 w-full">
         <Image
-          src={imageUrl}
+          src={thumbnail}
           alt={title}
           fill
           className="h-full w-full object-cover"

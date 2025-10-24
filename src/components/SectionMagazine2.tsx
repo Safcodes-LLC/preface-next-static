@@ -1,40 +1,101 @@
-import { TPost } from '@/data/posts'
+'use client'
+
+import { useAuth } from '@/contexts/AuthContext'
 import { HeadingWithSubProps } from '@/shared/Heading'
+import { getSavedList } from '@/utils/getServices'
 import clsx from 'clsx'
-import { FC } from 'react'
-import Card11 from './PostCards/Card11'
-import Card2 from './PostCards/Card2'
-import SectionTabHeader from './SectionTabHeader'
+import { FC, useEffect, useState } from 'react'
+import Card24 from './PostCards/Card24'
 
 interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
-  posts: TPost[]
   heading?: string
   className?: string
+  lang?: string
 }
 
-const SectionMagazine2: FC<Props> = ({ posts, heading, className, subHeading, dimHeading }) => {
+interface SavedPost {
+  _id: string
+  userId: string
+  postId: {
+    _id: string
+    title: string
+    thumbnail: string
+    categories: Array<{ name: string }>
+  }
+  postType: string
+  createdAt: string
+  updatedAt: string
+  __v: number
+}
+
+const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeading, lang }) => {
+  const { user } = useAuth()
+  const [savedPosts, setSavedPosts] = useState<SavedPost[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+
+  console.log(savedPosts, "savedPosts1234");
+  
+  useEffect(() => {
+    const fetchSavedPosts = async () => {
+      if (!user?._id) return
+
+      try {
+        setIsLoading(true)
+        const response = await getSavedList(user._id, lang || 'en')
+        if (response && response.savedlist) {
+          setSavedPosts(response.savedlist)
+        }
+      } catch (err) {
+        console.error('Error fetching saved posts:', err)
+        setError('Failed to load saved posts')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchSavedPosts()
+  }, [user?._id, lang])
+
   return (
     <div className={clsx('section-magazine-2 relative', className)}>
-      <SectionTabHeader
-        heading={heading}
-        subHeading={subHeading}
-        dimHeading={dimHeading}
-        tabActive="Workplace"
-        tabs={['Workplace', 'Design', 'Development', 'Photography']}
-      />
+      <div className="mt-8 grid grid-cols-12 gap-6">
+        <div className="col-span-8 rounded-2xl bg-white px-5 py-6 dark:bg-[#0D0D0D]">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Saved for Reading</h2>
+            {savedPosts.length > 0 && (
+              <div>
+                <button className="cursor-pointer text-sm text-[#00652E] hover:underline">View All</button>
+              </div>
+            )}
+          </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <div className="grid gap-6">
-          {posts.slice(1, 3).map((post) => {
-            return <Card11 ratio="aspect-5/3" key={post.id} post={post} />
-          })}
+          {isLoading ? (
+            <div className="mt-4 grid grid-cols-3 gap-6">
+              {[...Array(3)].map((_, index) => (
+                <div key={index} className="h-48 animate-pulse rounded-2xl bg-gray-200 dark:bg-neutral-700"></div>
+              ))}
+            </div>
+          ) : error ? (
+            <div className="mt-4 text-center text-red-500">{error}</div>
+          ) : savedPosts.length > 0 ? (
+            <div className="mt-4 grid grid-cols-3 gap-6">
+              {savedPosts.map((item) => (
+                <Card24
+                  key={item._id}
+                  lang={lang}
+                  title={item.postId?.title}
+                  category={item.postId?.categories?.[0]?.name || 'Uncategorized'}
+                  thumbnail={item.postId?.thumbnail || '/images/placeholder-image.png'}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="mt-4 text-center text-gray-500 dark:text-neutral-400">No saved posts found</div>
+          )}
         </div>
-        <div className="lg:col-span-2">{posts[0] && <Card2 className="h-full" size="large" post={posts[0]} />}</div>
-        <div className="grid grid-cols-1 gap-6 md:col-span-3 md:grid-cols-2 xl:col-span-1 xl:grid-cols-1">
-          {posts.slice(3, 5).map((post) => {
-            return <Card11 className="bg-neutral-50" ratio="aspect-5/3" key={post.id} post={post} />
-          })}
-        </div>
+        <div className="col-span-4 bg-green-700">asd</div>
       </div>
     </div>
   )
