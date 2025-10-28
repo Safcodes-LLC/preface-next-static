@@ -11,13 +11,15 @@ interface Props {
     targetBlank?: boolean
   }
   title: string
+  isArrowHide?: boolean
 }
 
-const WidgetHeading: FC<Props> = ({ className, viewAll, title }) => {
+const WidgetHeading: FC<Props> = ({ className, viewAll, title, isArrowHide = false }) => {
   return (
     <div
       className={clsx(
-        'widget-heading flex items-center gap-2.5 border-b border-neutral-200 p-4 xl:px-5 dark:border-neutral-700',
+        'widget-heading flex items-center gap-2.5 p-4 xl:px-5',
+        !isArrowHide && 'border-b border-neutral-200 dark:border-neutral-700',
         className
       )}
     >
@@ -31,7 +33,7 @@ const WidgetHeading: FC<Props> = ({ className, viewAll, title }) => {
           plain
         >
           {viewAll.label}
-          <ArrowUpRightIcon className="size-4" />
+          {!isArrowHide && <ArrowUpRightIcon className="size-4" />}
         </Button>
       )}
     </div>

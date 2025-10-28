@@ -10,6 +10,9 @@ interface Props {
   maxHeight?: string // Optional prop to customize max height
   maxVisiblePosts?: number // Optional prop to set when scrolling should kick in
   lang?: string
+  isFavourite?: boolean
+  title?: string
+  isArrowHide?: boolean
 }
 
 const WidgetPosts: FC<Props> = ({
@@ -18,15 +21,25 @@ const WidgetPosts: FC<Props> = ({
   maxHeight = 'max-h-[70vh]', // Default max height (24rem = 384px)
   maxVisiblePosts = 6,
   lang,
+  isFavourite,
+  title,
+  isArrowHide = false,
 }) => {
   const shouldScroll = posts && posts.length > 6
+
+  console.log(posts,"postsssss432");
+  
 
   const parentCategory = posts?.[0]?.parentCategory?.slug
   const viewAllHref = lang === 'en' ? `/${parentCategory}` : `/${lang}/${parentCategory}`
 
   return (
-    <div className={clsx('widget-posts overflow-hidden rounded-3xl', className)}>
-      <WidgetHeading title="Other Topics" viewAll={{ label: 'View all', href: viewAllHref }} />
+    <div className={clsx('widget-posts overflow-hidden rounded-[15px]', className)}>
+      <WidgetHeading
+        title={title || 'Other Topics'}
+        viewAll={{ label: 'View all', href: viewAllHref }}
+        isArrowHide={isArrowHide}
+      />
       <div
         className={clsx(
           'flex flex-col divide-y divide-neutral-200 dark:divide-neutral-700',
@@ -34,13 +47,14 @@ const WidgetPosts: FC<Props> = ({
             `${maxHeight} scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 dark:scrollbar-thumb-gray-600 dark:scrollbar-track-gray-800 overflow-y-auto`
         )}
       >
-        {posts?.map((post, index) => (
+        {(isFavourite ? posts?.slice(0, 5) : posts)?.map((post, index) => (
           <Card3Small
-            className="p-4 hover:bg-neutral-200 xl:px-5 xl:py-6 dark:hover:bg-neutral-700"
+            className={`p-4 hover:bg-neutral-200 xl:px-5 ${!isFavourite ? 'xl:py-6' : 'xl:py-3'} dark:hover:bg-neutral-700`}
             key={post._id}
             post={post}
             index={index}
             lang={lang}
+            isFavourite={isFavourite}
           />
         ))}
       </div>

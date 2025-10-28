@@ -84,3 +84,12 @@ export async function getSavedList(userId: string, lang: string): Promise<any | 
     // throw notFound();
   }
 }
+
+export async function getFavouriteList(userId: string, postType: string, lang: string): Promise<any | undefined> {
+  try {
+    return await getData(`favourites/users/${userId}?postType=${postType}&lang=${lang}`, '', 0)
+  } catch (error) {
+    console.error('Failed to fetch continuos read data:', error)
+    // throw notFound();
+  }
+}
