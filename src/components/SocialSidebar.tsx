@@ -82,7 +82,7 @@ const SocialSidebar: FC<Props> = ({ className }) => {
   }
 
   return (
-    <div className={clsx('fixed top-1/2 right-0 z-50 -translate-y-1/2 transform', className)}>
+    <div className={clsx('fixed top-1/2 right-0 z-50 hidden -translate-y-1/2 transform lg:block', className)}>
       <div className="relative flex flex-col items-center space-y-2 rounded-l-lg p-3">
         {/* Top Vertical Line */}
         <div className="absolute top-[-60px] left-1/2 h-16 w-0.5 -translate-x-1/2 bg-[#60A43A]"></div>
