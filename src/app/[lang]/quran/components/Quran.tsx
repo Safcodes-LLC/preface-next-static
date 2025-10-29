@@ -101,11 +101,15 @@ const Quran: FC<Props> = ({ className }) => {
       )}
 
       {quranTab === 'juz' && (
-        <div className="mt-4 grid grid-flow-col grid-rows-[repeat(10,minmax(0,auto))] gap-6 md:grid-rows-[repeat(10,minmax(0,auto))] lg:grid-rows-[repeat(10,minmax(0,auto))]">
+        <div className="mt-4 columns-1 sm:columns-2 lg:columns-3 gap-6">
           {Object.entries(juzData).map(([juzNumber, surahsInJuz]) => {
             // Type assertion to ensure TypeScript knows surahsInJuz is Surah[]
             const surahsArray = surahsInJuz as Surah[]
-            return <JuzGrid key={juzNumber} juzNumber={parseInt(juzNumber)} surahs={surahsArray} />
+            return (
+              <div key={juzNumber} className="mb-6 break-inside-avoid">
+                <JuzGrid juzNumber={parseInt(juzNumber)} surahs={surahsArray} />
+              </div>
+            )
           })}
         </div>
       )}
