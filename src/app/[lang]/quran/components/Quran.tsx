@@ -101,7 +101,7 @@ const Quran: FC<Props> = ({ className }) => {
       )}
 
       {quranTab === 'juz' && (
-        <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-4 grid grid-flow-col grid-rows-[repeat(10,minmax(0,auto))] gap-6 md:grid-rows-[repeat(10,minmax(0,auto))] lg:grid-rows-[repeat(10,minmax(0,auto))]">
           {Object.entries(juzData).map(([juzNumber, surahsInJuz]) => {
             // Type assertion to ensure TypeScript knows surahsInJuz is Surah[]
             const surahsArray = surahsInJuz as Surah[]
