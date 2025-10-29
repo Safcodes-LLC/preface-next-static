@@ -95,7 +95,7 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
           <h2 className="pb-4 text-[26px] font-medium">Continue Reading</h2>
           <div className="grid grid-cols-12 gap-3">
             <div className="col-span-6 rounded-2xl bg-white max-md:col-span-full dark:bg-[#0d0d0d]">
-              <div className="relative flex w-full flex-col gap-3 p-[60px_30px]">
+              <div className="relative flex w-full cursor-pointer flex-col gap-3 p-[60px_30px]">
                 <button className="absolute top-[12px] right-[30px] flex aspect-square w-[30px] rotate-0 cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-colors hover:bg-gray-50">
                   <HugeiconsIcon icon={ArrowUpRightIcon} size={14} className="text-[#919191]" strokeWidth={2.5} />
                 </button>
@@ -122,7 +122,7 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
             </div>
 
             <div className="col-span-6 flex flex-col gap-6 rounded-2xl max-md:col-span-full">
-              <div className="rounded-2xl bg-white dark:bg-[#0d0d0d]">
+              <div className="cursor-pointer rounded-2xl bg-white dark:bg-[#0d0d0d]">
                 <div className="flex justify-between gap-2 p-[25px_30px]">
                   <div className="flex items-center gap-2">
                     <HugeiconsIcon
@@ -140,7 +140,7 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
                   </div>
                 </div>
               </div>
-              <div className="rounded-2xl bg-white dark:bg-[#0d0d0d]">
+              <div className="cursor-pointer rounded-2xl bg-white dark:bg-[#0d0d0d]">
                 <div className="flex justify-between gap-2 p-[25px_30px]">
                   <div className="flex items-center gap-2">
                     <HugeiconsIcon icon={UserIcon} size={20} className="text-[#00652E]" strokeWidth={2.5} />
