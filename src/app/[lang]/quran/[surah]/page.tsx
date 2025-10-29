@@ -1,3 +1,5 @@
+import HeroSection from '../components/HeroSection'
+
 type Props = {
   params: {
     surah: string
@@ -5,7 +7,11 @@ type Props = {
 }
 
 const page = (props: Props) => {
-  return <div>dassadsa</div>
+  return (
+    <div>
+      <HeroSection />
+    </div>
+  )
 }
 
 export default page
