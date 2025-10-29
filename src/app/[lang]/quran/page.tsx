@@ -207,9 +207,9 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
 
           {/* week's learning section2 */}
           <div className="grid grid-cols-1 gap-6 pt-8 max-md:col-span-full md:grid-cols-2 md:pt-12 lg:grid-cols-3">
-            <div className="rounded-[10px] border border-[#E9E9E9]">
+            <div className="cursor-pointer rounded-[10px] border border-[#E9E9E9]">
               <div className="flex justify-between gap-2 p-[25px_30px]">
-                <div className="flex items-center gap-2">
+                <div className="flex cursor-pointer items-center gap-2">
                   <HugeiconsIcon icon={Quran01Icon} className="flex-shrink-0 text-[#00652E]" strokeWidth={2.5} />
                   <div className="">Holy Quran</div>
                 </div>
@@ -220,7 +220,7 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
                 </div>
               </div>
             </div>
-            <div className="rounded-[10px] border border-[#E9E9E9]">
+            <div className="cursor-pointer rounded-[10px] border border-[#E9E9E9]">
               <div className="flex justify-between gap-2 p-[25px_30px]">
                 <div className="flex items-center gap-2">
                   <HugeiconsIcon icon={Quran01Icon} className="flex-shrink-0 text-[#00652E]" strokeWidth={2.5} />
@@ -233,7 +233,7 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
                 </div>
               </div>
             </div>
-            <div className="rounded-[10px] border border-[#E9E9E9]">
+            <div className="cursor-pointer rounded-[10px] border border-[#E9E9E9]">
               <div className="flex justify-between gap-2 p-[25px_30px]">
                 <div className="flex items-center gap-2">
                   <HugeiconsIcon icon={Quran01Icon} className="flex-shrink-0 text-[#00652E]" strokeWidth={2.5} />
