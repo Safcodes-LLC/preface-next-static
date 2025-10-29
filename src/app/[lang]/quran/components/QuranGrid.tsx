@@ -26,7 +26,7 @@ const QuranGrid: FC<Props> = ({
   return (
     <div
       className={clsx(
-        'quran-grid-card flex justify-between rounded-[10px] bg-white px-5 py-5 transition-shadow hover:shadow-md',
+        'quran-grid-card cursor-pointer flex justify-between rounded-[10px] bg-white px-5 py-5 transition-shadow hover:shadow-md',
         className
       )}
     >

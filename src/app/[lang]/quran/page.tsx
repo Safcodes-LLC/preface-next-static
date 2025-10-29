@@ -30,8 +30,8 @@ type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 export async function generateMetadata({ searchParams }: { searchParams: SearchParams }): Promise<Metadata> {
   const { query } = await searchParams
   return {
-    title: `Search results for ${query}`,
-    description: `Search results for ${query}`,
+    title: `Quran - Preface Islam`,
+    description: `Preface Islam is a platform for Muslims to learn about Islam and its teachings`,
   }
 }
 
