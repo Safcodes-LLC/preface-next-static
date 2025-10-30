@@ -35,7 +35,7 @@ const ReadingQuranTab = (props: Props) => {
           transition: color 0.2s ease;
         }
         .quran-ayah:hover {
-          color: #60A43A;
+          color: #60a43a;
         }
         .quran-ayah::after {
           content: attr(data-ayah);

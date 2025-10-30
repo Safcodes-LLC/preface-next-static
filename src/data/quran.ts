@@ -3,6 +3,7 @@ type QuranData = {
   title: string
   link: string
   meaning: string
+  surahCode: string
   image: string
   verse: number
   surah: number
@@ -23,6 +24,7 @@ export const quranData: QuranData[] = [
     title: 'Al-Fatiha',
     link: 'al-fatiha',
     meaning: 'The Opening',
+    surahCode: '001',
     image: '/images/surah-al-fatiha.jpg', // optional image path
     verse: 7, // total verses
     surah: 1, // surah number
@@ -88,6 +90,7 @@ export const quranData: QuranData[] = [
     title: 'Al-Baqarah',
     link: 'al-baqarah',
     meaning: 'The Cow',
+    surahCode: '002',
     image: '/images/surah-al-baqarah.jpg',
     verse: 286,
     surah: 2,

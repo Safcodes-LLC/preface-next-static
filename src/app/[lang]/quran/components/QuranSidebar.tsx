@@ -13,7 +13,7 @@ type Props = {
 }
 
 const surahs = [
-  { id: 1, name: 'Al-Fatihah' },
+  { id: 1, name: 'Al-Fatiha' },
   { id: 2, name: 'Al-Baqarah' },
   { id: 3, name: 'Al-Imran' },
   { id: 4, name: 'An-Nisa' },
