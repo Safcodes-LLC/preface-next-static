@@ -8,12 +8,12 @@ const TranslationQuranTab = (props: Props) => {
   const { surahData } = props
   return (
     <React.Fragment>
-      {surahData.ayah.map((ayah: any) => (
-        <div className="w-full border-t border-[#E4E4E4] py-[20px]">
+      {surahData?.ayah?.map((ayah: any) => (
+        <div key={ayah.ayah} className="w-full border-t border-[#E4E4E4] py-[20px]">
           <div className="flex w-full items-start justify-between gap-[20px]">
             <div className="h-[20px] w-1/5 bg-red-300"></div>
             <div className="ms-auto flex w-4/5 items-center justify-start gap-[6px]" dir="rtl">
-              <p className="quran-ayah text-[26px] font-medium" data-ayah={ayah.ayah}>
+              <p className="quran-ayah text-[26px] font-normal" data-ayah={ayah.ayah}>
                 {ayah.quran}
               </p>
             </div>

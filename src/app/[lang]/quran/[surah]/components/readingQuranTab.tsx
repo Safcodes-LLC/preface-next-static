@@ -14,11 +14,15 @@ const ReadingQuranTab = (props: Props) => {
   const { surahData } = props
   return (
     <React.Fragment>
-      <div className="w-full">
+      <div className="w-full rounded-2xl bg-[#F3F4F6] py-8">
         <div className="mx-auto w-4/6">
           <div className="flex flex-wrap justify-center gap-[10px_6px]" dir="rtl">
             {surahData.ayah.map((ayah: any) => (
-              <p className="quran-ayah w-fit text-center text-[26px] font-medium" data-ayah={ayah.ayah}>
+              <p
+                key={ayah.ayah} // Add this line
+                className="quran-ayah w-fit text-center text-[26px] font-medium"
+                data-ayah={ayah.ayah}
+              >
                 {ayah.quran}
               </p>
             ))}

@@ -92,7 +92,7 @@ export const quranData: QuranData[] = [
     verse: 286,
     surah: 2,
     juz: 1,
-    info: 'Al-Baqarah is the longest surah of the Quran, revealed in Madinah. It covers faith, law, guidance, morality, and the history of past prophets.',
+    info: 'Surah Al-Baqarah is the longest chapter in the Holy Qur’an. It is named Al-Baqarah (The Cow) because it refers to the extraordinary incident in which the Israelites were commanded to slaughter a particular cow to uncover the perpetrator of a murder. The verse known as Ayat al-Kursi, which has been described as the "chief of the verses," is also found in this chapter. Since most of its verses were revealed after the Hijra (migration to Madinah), the chapter is called Madani.',
     ayah: [
       {
         ayah: 1,
