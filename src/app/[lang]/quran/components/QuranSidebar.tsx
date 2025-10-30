@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 type Props = {
   activeTab: 'surah' | 'verse' | 'juz'
   selectedId: number | null
@@ -7,6 +9,7 @@ type Props = {
   setSelectedSurahId?: (id: number) => void
   selectedVerseId?: number | null
   setSelectedVerseId?: (id: number) => void
+  params: { lang: string; surah: string }
 }
 
 const surahs = [
@@ -92,13 +95,25 @@ const QuranSidebar: React.FC<Props> = ({
   setSelectedSurahId,
   selectedVerseId,
   setSelectedVerseId,
+  params,
 }) => {
+  const slugify = (str: string) =>
+    str
+      .toLowerCase()
+      .replace(/['’]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '')
+      .replace(/--+/g, '-')
+
   const items = activeTab === 'juz' ? juz : surahs
   const filteredItems = items.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
+  const currentSlug = params?.surah ? params.surah.toLowerCase() : ''
+  const selectedFromSlug =
+    activeTab !== 'juz' ? (surahs.find((s) => slugify(s.name) === currentSlug)?.id ?? null) : null
 
   if (activeTab === 'verse') {
     // Default to first surah if none selected
-    const surahId = selectedSurahId || filteredItems[0]?.id
+    const surahId = selectedSurahId || selectedFromSlug || filteredItems[0]?.id
     const verseCount = surahVerseCounts[surahId] || 0
     return (
       <div className="flex h-full flex-row">
@@ -107,8 +122,9 @@ const QuranSidebar: React.FC<Props> = ({
           <ul className="space-y-2">
             {filteredItems.map((item) => (
               <li key={item.id}>
-                <button
-                  className={`w-full rounded-lg px-4 py-2 text-left font-medium transition-colors duration-200 ${
+                <Link
+                  href={`/quran/${slugify(item.name)}`}
+                  className={`block w-full rounded-lg px-4 py-2 text-left font-medium transition-colors duration-200 ${
                     surahId === item.id
                       ? 'bg-neutral-100 font-semibold text-neutral-700 shadow-sm'
                       : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700'
@@ -117,7 +133,7 @@ const QuranSidebar: React.FC<Props> = ({
                 >
                   <span className={`mr-3 ${surahId === item.id ? 'font-semibold' : 'font-normal'}`}>{item.id}</span>
                   {item.name}
-                </button>
+                </Link>
               </li>
             ))}
           </ul>
@@ -154,17 +170,40 @@ const QuranSidebar: React.FC<Props> = ({
       <ul className="space-y-2">
         {filteredItems.map((item) => (
           <li key={item.id}>
-            <button
-              className={`w-full rounded-lg px-4 py-2 text-left font-medium transition-colors duration-200 ${
-                selectedId === item.id
-                  ? 'bg-neutral-100 font-semibold text-neutral-700 shadow-sm'
-                  : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700'
-              }`}
-              onClick={() => setSelectedId(item.id)}
-            >
-              <span className={`mr-3 ${selectedId === item.id ? 'font-semibold' : 'font-normal'}`}>{item.id}</span>
-              {item.name}
-            </button>
+            {activeTab === 'juz' ? (
+              <button
+                className={`w-full rounded-lg px-4 py-2 text-left font-medium transition-colors duration-200 ${
+                  (selectedId ?? selectedFromSlug) === item.id
+                    ? 'bg-neutral-100 font-semibold text-neutral-700 shadow-sm'
+                    : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700'
+                }`}
+                onClick={() => setSelectedId(item.id)}
+              >
+                <span
+                  className={`mr-3 ${(selectedId ?? selectedFromSlug) === item.id ? 'font-semibold' : 'font-normal'}`}
+                >
+                  {item.id}
+                </span>
+                {item.name}
+              </button>
+            ) : (
+              <Link
+                href={`/quran/${slugify(item.name)}`}
+                className={`block w-full rounded-lg px-4 py-2 text-left font-medium transition-colors duration-200 ${
+                  (selectedId ?? selectedFromSlug) === item.id
+                    ? 'bg-neutral-100 font-semibold text-neutral-700 shadow-sm'
+                    : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700'
+                }`}
+                onClick={() => setSelectedId(item.id)}
+              >
+                <span
+                  className={`mr-3 ${(selectedId ?? selectedFromSlug) === item.id ? 'font-semibold' : 'font-normal'}`}
+                >
+                  {item.id}
+                </span>
+                {item.name}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

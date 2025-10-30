@@ -10,45 +10,6 @@ interface Props {
   className?: string
 }
 
-const juzData = [
-  {
-    id: 1,
-    enName: 'Juz 1',
-    arName: 'الجزء ١',
-    surahs: [
-      { id: 1, enName: 'Al-Fatihah', arName: 'الفاتحة', ayahCount: 7 },
-      { id: 2, enName: 'Al-Baqarah', arName: 'البقرة', ayahCount: 141 },
-    ],
-  },
-  {
-    id: 2,
-    enName: 'Juz 2',
-    arName: 'الجزء ٢',
-    surahs: [
-      { id: 2, enName: 'Al-Baqarah', arName: 'البقرة', ayahCount: 145 },
-      { id: 3, enName: 'Al-Imran', arName: 'آل عمران', ayahCount: 111 },
-    ],
-  },
-  {
-    id: 3,
-    enName: 'Juz 3',
-    arName: 'الجزء ٣',
-    surahs: [
-      { id: 3, enName: 'Al-Imran', arName: 'آل عمران', ayahCount: 89 },
-      { id: 4, enName: "An-Nisa'", arName: 'النساء', ayahCount: 100 },
-    ],
-  },
-  {
-    id: 4,
-    enName: 'Juz 4',
-    arName: 'الجزء ٤',
-    surahs: [
-      { id: 4, enName: "An-Nisa'", arName: 'النساء', ayahCount: 76 },
-      { id: 5, enName: "Al-Ma'idah", arName: 'المائدة', ayahCount: 47 },
-    ],
-  },
-]
-
 const Quran: FC<Props> = ({ className }) => {
   const [quranTab, setQuranTab] = useState<'surah' | 'juz' | 'revelation-order'>('surah')
 
@@ -59,6 +20,7 @@ const Quran: FC<Props> = ({ className }) => {
   type Surah = {
     id: number
     name: string
+    link: string
     transliteration: string
     translation: string
     type: string
@@ -92,6 +54,7 @@ const Quran: FC<Props> = ({ className }) => {
               key={surah.id}
               id={surah.id}
               name={surah.name}
+              link={surah.link}
               transliteration={surah.transliteration}
               translation={surah.translation}
               totalVerses={surah.total_verses}
@@ -101,7 +64,7 @@ const Quran: FC<Props> = ({ className }) => {
       )}
 
       {quranTab === 'juz' && (
-        <div className="mt-4 columns-1 sm:columns-2 lg:columns-3 gap-6">
+        <div className="mt-4 columns-1 gap-6 sm:columns-2 lg:columns-3">
           {Object.entries(juzData).map(([juzNumber, surahsInJuz]) => {
             // Type assertion to ensure TypeScript knows surahsInJuz is Surah[]
             const surahsArray = surahsInJuz as Surah[]
@@ -121,6 +84,7 @@ const Quran: FC<Props> = ({ className }) => {
               key={`reveal-${surah.id}`}
               id={surah.id}
               name={surah.name}
+              link={surah.link}
               transliteration={surah.transliteration}
               translation={surah.translation}
               totalVerses={surah.total_verses}

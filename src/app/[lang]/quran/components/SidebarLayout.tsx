@@ -1,15 +1,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import SidebarTabs from './SidebarTabs'
 import QuranSidebar from './QuranSidebar'
+import SidebarTabs from './SidebarTabs'
 
 type Props = {
   activeTab?: 'surah' | 'verse' | 'juz'
   setActiveTab?: (tab: 'surah' | 'verse' | 'juz') => void
+  params: { lang: string; surah: string }
 }
 
 const SidebarLayout = (props: Props) => {
+  const { params } = props
   const [activeTab, setActiveTab] = useState<'surah' | 'verse' | 'juz'>('surah')
   const [selectedId, setSelectedId] = useState<number | null>(null)
   const [search, setSearch] = useState('')
@@ -79,6 +81,7 @@ const SidebarLayout = (props: Props) => {
           setSelectedSurahId={setSelectedSurahId}
           selectedVerseId={selectedVerseId}
           setSelectedVerseId={setSelectedVerseId}
+          params={params}
         />
       </div>
     </div>
