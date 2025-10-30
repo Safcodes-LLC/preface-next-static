@@ -1,4 +1,5 @@
 import React from 'react'
+import QuranActionIcons from '../../components/QuranActionIcons'
 
 type Props = {
   surahData: any
@@ -11,7 +12,9 @@ const TranslationQuranTab = (props: Props) => {
       {surahData?.ayah?.map((ayah: any) => (
         <div key={ayah.ayah} className="w-full border-t border-[#E4E4E4] py-[20px]">
           <div className="flex w-full items-start justify-between gap-[20px]">
-            <div className="h-[20px] w-1/5 bg-red-300"></div>
+            <div className="h-[20px] w-1/5">
+            <QuranActionIcons />
+            </div>
             <div className="ms-auto flex w-4/5 items-center justify-start gap-[6px]" dir="rtl">
               <p className="quran-ayah text-[26px] font-normal" data-ayah={ayah.ayah}>
                 {ayah.quran}
@@ -19,6 +22,7 @@ const TranslationQuranTab = (props: Props) => {
             </div>
           </div>
           <div className="flex flex-col items-start gap-[6px]">
+            <p className="py-5 text-[18px] font-normal">{ayah.meaning}</p>
             <h6 className="text-[14px] font-semibold text-[#222]">Explanation</h6>
             <p className="line-clamp-2 text-[15px] font-light text-[#2C2C2C]">{ayah.explanation}</p>
             <button className="cursor-pointer text-[11px] font-normal text-[#7D7D7D]">Read More</button>
