@@ -1,11 +1,13 @@
 'use client'
 import clsx from 'clsx'
+import Link from 'next/link'
 import { FC } from 'react'
 
 interface Props {
   className?: string
   id: number
   name: string
+  link: string
   transliteration: string
   translation: string
   totalVerses: number
@@ -17,6 +19,7 @@ const QuranGrid: FC<Props> = ({
   className,
   id,
   name,
+  link,
   transliteration,
   translation,
   totalVerses,
@@ -24,9 +27,10 @@ const QuranGrid: FC<Props> = ({
   revealOrder,
 }) => {
   return (
-    <div
+    <Link
+      href={'/quran/' + link}
       className={clsx(
-        'quran-grid-card cursor-pointer flex justify-between rounded-[10px] bg-white px-5 py-5 transition-shadow hover:shadow-md',
+        'quran-grid-card flex cursor-pointer justify-between rounded-[10px] bg-white px-5 py-5 transition-shadow hover:shadow-md',
         className
       )}
     >
@@ -53,7 +57,7 @@ const QuranGrid: FC<Props> = ({
         <h3 className="text-[22px] font-normal">{name}</h3>
         <h4 className="text-[13px] text-[#666666]">{totalVerses} Ayat</h4>
       </div>
-    </div>
+    </Link>
   )
 }
 

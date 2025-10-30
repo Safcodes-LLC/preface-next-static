@@ -3,7 +3,7 @@ import QuranLayout from '../components/QuranLayout'
 
 interface Props {
   children: ReactNode
-  params: { lang: string }
+  params: { lang: string; surah: string }
 }
 
 const Layout: React.FC<Props> = async ({ children, params }) => {

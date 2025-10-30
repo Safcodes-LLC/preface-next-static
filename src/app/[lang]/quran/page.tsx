@@ -1,4 +1,3 @@
-import { getSearchResults } from '@/data/search'
 import { Input } from '@headlessui/react'
 import {
   ArrowDown02Icon,
@@ -53,10 +52,10 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
     searchTab = filterTabs[0].value
   }
 
-  const { posts, categories, tags, authors, totalResults, recommendedSearches } = await getSearchResults(
-    searchQuery,
-    searchTab as 'posts' | 'categories' | 'tags' | 'authors'
-  )
+  // const { posts, categories, tags, authors, totalResults, recommendedSearches } = await getSearchResults(
+  //   searchQuery,
+  //   searchTab as 'posts' | 'categories' | 'tags' | 'authors'
+  // )
 
   return (
     <div className="relative space-y-8 py-10 md:space-y-12 md:py-14 lg:space-y-16 lg:py-20">

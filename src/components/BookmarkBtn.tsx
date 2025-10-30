@@ -86,10 +86,10 @@ const BookmarkBtn: FC<Props> = ({ className, bookmarked, color, post }) => {
         onClick={handleBookmarkClick}
         type="button"
       >
-        <HugeiconsIcon 
-          icon={Bookmark02Icon} 
-          size={16} 
-          strokeWidth={1} 
+        <HugeiconsIcon
+          icon={Bookmark02Icon}
+          size={16}
+          strokeWidth={1}
           fill={isBookmarked && isAuthenticated ? 'currentColor' : 'none'}
         />
       </button>
