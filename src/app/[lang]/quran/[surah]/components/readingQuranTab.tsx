@@ -32,6 +32,10 @@ const ReadingQuranTab = (props: Props) => {
       <style jsx>{`
         .quran-ayah {
           position: relative;
+          transition: color 0.2s ease;
+        }
+        .quran-ayah:hover {
+          color: #60A43A;
         }
         .quran-ayah::after {
           content: attr(data-ayah);
