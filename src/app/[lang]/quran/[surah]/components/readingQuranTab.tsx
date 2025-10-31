@@ -1,6 +1,7 @@
 'use client'
 import localFont from 'next/font/local'
 import React from 'react'
+import QuranModal from './quranModal'
 
 type Props = {
   surahData: {
@@ -110,7 +111,13 @@ const ReadingQuranTab = (props: Props) => {
         })}
       </div>
 
-      {selectedAyah && (
+      <QuranModal
+        isOpen={!!selectedAyah}
+        onClose={() => setSelectedAyah(null)}
+        selectedAyah={selectedAyah}
+      />
+
+      {/* {selectedAyah && (
         <div
           className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center"
           role="dialog"
@@ -151,7 +158,9 @@ const ReadingQuranTab = (props: Props) => {
             )}
           </div>
         </div>
-      )}
+      )} */}
+
+      <QuranModal isOpen={!!selectedAyah} onClose={() => setSelectedAyah(null)} selectedAyah={selectedAyah} />
 
       <style jsx>{`
         .quran-ayah {
