@@ -55,7 +55,6 @@ const Card21: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
             alt={content?.title + 'image'}
             fill
             className="rounded-2xl object-cover"
-            sizes="122px"
             priority
           />
         </div>

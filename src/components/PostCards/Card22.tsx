@@ -39,7 +39,7 @@ const Card22: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
       <div className="h-48 w-full lg:col-span-3 lg:h-auto">
         <div className="relative h-full w-full overflow-hidden rounded-2xl">
           <Image
-            src="/images/featured-2.png"
+            src={ thumbnail || featuredImage || "/images/featured-2.png"}
             alt={title || 'Featured Post'}
             fill
             className="object-cover"
