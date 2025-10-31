@@ -9,8 +9,10 @@ type QuranData = {
   surah: number
   juz: number
   info: string
+  startingAlignment?: boolean
   ayah: {
     ayah: number
+    arabic_ayah?: string
     quran: string
     meaning: string
     explanation: string
@@ -30,9 +32,11 @@ export const quranData: QuranData[] = [
     surah: 1, // surah number
     juz: 1, // juz number
     info: 'Al-Fatiha is the opening chapter of the Quran and is recited in every unit of the Muslim prayer. It emphasizes praise of Allah, guidance, and mercy.',
+    startingAlignment: true,
     ayah: [
       {
         ayah: 1,
+        arabic_ayah: '١',
         quran: 'بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ',
         meaning: 'In the name of Allah, the Most Gracious, the Most Merciful.',
         explanation:
@@ -41,6 +45,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 2,
+        arabic_ayah: '٢',
         quran: 'الْـحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
         meaning: 'All praise is due to Allah, Lord of the worlds.',
         explanation: 'It expresses gratitude to Allah for His creation, sustenance, and mercy over all beings.',
@@ -48,6 +53,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 3,
+        arabic_ayah: '٣',
         quran: 'الرَّحْمَـٰنِ الرَّحِيمِ',
         meaning: 'The Most Gracious, the Most Merciful.',
         explanation: 'It highlights Allah’s infinite mercy and compassion, available to all His creation.',
@@ -55,6 +61,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 4,
+        arabic_ayah: '٤',
         quran: 'مَالِكِ يَوْمِ الدِّينِ',
         meaning: 'Master of the Day of Judgment.',
         explanation: 'Affirms that ultimate justice belongs to Allah alone, reminding believers of accountability.',
@@ -62,6 +69,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 5,
+        arabic_ayah: '٥',
         quran: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
         meaning: 'You alone we worship, and You alone we ask for help.',
         explanation: 'Declares complete devotion and dependence on Allah for guidance and strength.',
@@ -69,6 +77,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 6,
+        arabic_ayah: '٦',
         quran: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
         meaning: 'Guide us to the straight path.',
         explanation: 'A plea to remain steadfast on the righteous path of truth and obedience to Allah.',
@@ -76,6 +85,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 7,
+        arabic_ayah: '٧',
         quran: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',
         meaning:
           'The path of those who have received Your grace; not the path of those who have brought down wrath upon themselves, nor of those who have gone astray.',
@@ -96,30 +106,35 @@ export const quranData: QuranData[] = [
     surah: 2,
     juz: 1,
     info: 'Surah Al-Baqarah is the longest chapter in the Holy Qur’an. It is named Al-Baqarah (The Cow) because it refers to the extraordinary incident in which the Israelites were commanded to slaughter a particular cow to uncover the perpetrator of a murder. The verse known as Ayat al-Kursi, which has been described as the "chief of the verses," is also found in this chapter. Since most of its verses were revealed after the Hijra (migration to Madinah), the chapter is called Madani.',
+    startingAlignment: true,
     ayah: [
       {
         ayah: 1,
-        quran: 'الم',
+        arabic_ayah: '١',
+        quran: 'الٓمٓ',
         meaning: 'Alif, Lam, Meem.',
         explanation: 'These are disjointed Arabic letters; their precise meaning is known only to Allah.',
         page: 2,
       },
       {
         ayah: 2,
-        quran: 'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ هُدًى لِّلْمُتَّقِينَ',
+        arabic_ayah: '٢',
+        quran: 'ذَٰلِكَ ٱلْكِتَـٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًۭى لِّلْمُتَّقِينَ',
         meaning: 'This is the Book about which there is no doubt, a guidance for those conscious of Allah.',
         explanation: 'The Quran provides absolute guidance for those who fear Allah and seek truth.',
         page: 2,
       },
       {
         ayah: 3,
-        quran: 'الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنفِقُونَ',
+        arabic_ayah: '٣',
+        quran: 'ٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ',
         meaning: 'Who believe in the unseen, establish prayer, and spend out of what We have provided for them.',
         explanation: 'Faith in the unseen, prayer, and charity are core qualities of believers.',
         page: 2,
       },
       {
         ayah: 4,
+        arabic_ayah: '٤',
         quran:
           'وَالَّذِينَ يُؤْمِنُونَ بِمَا أُنزِلَ إِلَيْكَ وَمَا أُنزِلَ مِن قَبْلِكَ وَبِالْآخِرَةِ هُمْ يُوقِنُونَ',
         meaning:
@@ -129,6 +144,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 5,
+        arabic_ayah: '٥',
         quran: 'أُولَٰئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ وَأُولَٰئِكَ هُمُ الْمُفْلِحُونَ',
         meaning: 'Those are upon [right] guidance from their Lord, and it is those who are the successful.',
         explanation: 'Believers enjoy divine guidance and are promised success in this world and the next.',
@@ -136,6 +152,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 6,
+        arabic_ayah: '٦',
         quran: 'إِنَّ الَّذِينَ كَفَرُوا سَوَاءٌ عَلَيْهِمْ أَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِنُونَ',
         meaning:
           'Indeed, those who disbelieve—it is all the same for them whether you warn them or do not warn them—they will not believe.',
@@ -144,6 +161,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 7,
+        arabic_ayah: '٧',
         quran:
           'خَتَمَ اللَّهُ عَلَىٰ قُلُوبِهِمْ وَعَلَىٰ سَمْعِهِمْ وَعَلَىٰ أَبْصَارِهِمْ غِشَاوَةٌ وَلَهُمْ عَذَابٌ عَظِيمٌ',
         meaning:
@@ -153,6 +171,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 8,
+        arabic_ayah: '٨',
         quran: 'وَمِنَ النَّاسِ مَن يَقُولُ آمَنَّا بِاللَّهِ وَبِالْيَوْمِ الْآخِرِ وَمَا هُم بِمُؤْمِنِينَ',
         meaning:
           "And of the people are some who say, 'We believe in Allah and the Last Day,' but they are not believers.",
@@ -161,6 +180,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 9,
+        arabic_ayah: '٩',
         quran: 'يُخَادِعُونَ اللَّهَ وَالَّذِينَ آمَنُوا وَمَا يَخْدَعُونَ إِلَّا أَنفُسَهُمْ وَمَا يَشْعُرُونَ',
         meaning:
           'They [think to] deceive Allah and those who believe, but they deceive only themselves and perceive [it] not.',
@@ -169,6 +189,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 10,
+        arabic_ayah: '١٠',
         quran: 'فِي قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ اللَّهُ مَرَضًا وَلَهُمْ عَذَابٌ أَلِيمٌ بِمَا كَانُوا يَكْذِبُونَ',
         meaning:
           'In their hearts is a disease, so Allah has increased their disease; and for them is a painful punishment because they [habitually] used to lie.',
@@ -177,6 +198,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 11,
+        arabic_ayah: '١١',
         quran: 'وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا فِي الْأَرْضِ قَالُوا إِنَّمَا نَحْنُ مُصْلِحُونَ',
         meaning:
           "And when it is said to them, 'Do not cause corruption on the earth,' they say, 'We are but reformers.'",
@@ -185,6 +207,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 12,
+        arabic_ayah: '١٢',
         quran: 'أَلَا إِنَّهُمْ هُمُ الْمُفْسِدُونَ وَلَٰكِن لَّا يَشْعُرُونَ',
         meaning: 'Unquestionably, it is they who are the corrupters, but they perceive [it] not.',
         explanation: 'Their actions contradict their claims of reform, causing real harm to society.',
@@ -192,6 +215,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 13,
+        arabic_ayah: '١٣',
         quran:
           'وَإِذَا قِيلَ لَهُمْ آمِنُوا كَمَا آمَنَ النَّاسُ قَالُوا أَنُؤْمِنُ كَمَا آمَنَ السُّفَهَاءُ ۗ أَلَا إِنَّهُمْ هُمُ السُّفَهَاءُ وَلَٰكِن لَّا يَعْلَمُونَ',
         meaning:
@@ -201,6 +225,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 14,
+        arabic_ayah: '١٤',
         quran:
           'وَإِذَا لَقُوا الَّذِينَ آمَنُوا قَالُوا آمَنَّا وَإِذَا خَلَوْا إِلَىٰ شَيَاطِينِهِمْ قَالُوا إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِئُونَ',
         meaning:
@@ -210,6 +235,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 15,
+        arabic_ayah: '١٥',
         quran: 'اللَّهُ يَسْتَهْزِئُ بِهِمْ وَيَمُدُّهُمْ فِي طُغْيَانِهِمْ يَعْمَهُونَ',
         meaning: 'Allah mocks them and prolongs them in their transgression while they wander blindly.',
         explanation: 'Their deception is turned against them by divine justice.',
@@ -217,6 +243,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 16,
+        arabic_ayah: '١٦',
         quran:
           'أُولَٰئِكَ الَّذِينَ اشْتَرَوُا الضَّلَالَةَ بِالْهُدَىٰ فَمَا رَبِحَت تِّجَارَتُهُمْ وَمَا كَانُوا مُهْتَدِينَ',
         meaning:
@@ -226,6 +253,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 17,
+        arabic_ayah: '١٧',
         quran: 'مَثَلُهُمْ كَمَثَلِ الَّذِي اسْتَوْقَدَ نَارًا',
         meaning:
           'Their example is that of one who kindled a fire, but when it illuminated what was around him, Allah took away their light and left them in darkness [so] they could not see.',
@@ -234,6 +262,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 18,
+        arabic_ayah: '١٨',
         quran: 'صُمٌّ بُكْمٌ عُمْيٌ فَهُمْ لَا يَرْجِعُونَ',
         meaning: 'Deaf, dumb, and blind – so they will not return [to the right path].',
         explanation: 'Their rejection of truth makes them spiritually deaf and blind.',
@@ -241,6 +270,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 19,
+        arabic_ayah: '١٩',
         quran: 'أَوْ كَصَيِّبٍ مِّنَ السَّمَاءِ',
         meaning:
           'Or [it is] like a rainstorm from the sky within which is darkness, thunder, and lightning. They put their fingers in their ears against the thunderclaps in dread of death. But Allah is encompassing of the disbelievers.',
@@ -249,6 +279,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 20,
+        arabic_ayah: '٢٠',
         quran: 'يَكَادُ الْبَرْقُ يَخْطَفُ أَبْصَارَهُمْ',
         meaning:
           'The lightning almost snatches away their sight. Every time it lights [the way] for them, they walk therein; but when darkness comes over them, they stand [still]. And if Allah had willed, He could have taken away their hearing and their sight. Indeed, Allah is over all things competent.',
@@ -257,6 +288,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 21,
+        arabic_ayah: '٢١',
         quran:
           'يَا أَيُّهَا النَّاسُ اعْبُدُوا رَبَّكُمُ الَّذِي خَلَقَكُمْ وَالَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ',
         meaning: 'O mankind, worship your Lord, who created you and those before you, that you may become righteous.',
@@ -265,6 +297,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 22,
+        arabic_ayah: '٢٢',
         quran: 'الَّذِي جَعَلَ لَكُمُ الْأَرْضَ فِرَاشًا وَالسَّمَاءَ بِنَاءً',
         meaning:
           'He who made for you the earth a bed and the sky a canopy and sent down from the sky rain and brought forth thereby fruits as provision for you. So do not attribute to Allah equals while you know.',
@@ -273,6 +306,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 23,
+        arabic_ayah: '٢٣',
         quran: 'وَإِن كُنتُمْ فِي رَيْبٍ مِّمَّا نَزَّلْنَا عَلَىٰ عَبْدِنَا',
         meaning:
           'And if you are in doubt about what We have sent down upon Our Servant [Muhammad], then produce a surah the like thereof and call upon your witnesses other than Allah, if you should be truthful.',
@@ -281,6 +315,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 24,
+        arabic_ayah: '٢٤',
         quran: 'فَإِن لَّمْ تَفْعَلُوا وَلَن تَفْعَلُوا',
         meaning:
           'But if you do not—and you will never be able to—then fear the Fire, whose fuel is people and stones, prepared for the disbelievers.',
@@ -289,6 +324,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 25,
+        arabic_ayah: '٢٥',
         quran: 'وَبَشِّرِ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ',
         meaning:
           'And give good tidings to those who believe and do righteous deeds that they will have gardens [in Paradise] beneath which rivers flow...',
@@ -297,6 +333,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 26,
+        arabic_ayah: '٢٦',
         quran: 'إِنَّ اللَّهَ لَا يَسْتَحْيِي أَن يَضْرِبَ مَثَلًا مَّا بَعُوضَةً',
         meaning: 'Indeed, Allah is not timid to present an example—even that of a mosquito or what is smaller...',
         explanation: 'Allah uses examples, however small, to teach truth; believers understand, but disbelievers mock.',
@@ -304,6 +341,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 27,
+        arabic_ayah: '٢٧',
         quran: 'الَّذِينَ يَنقُضُونَ عَهْدَ اللَّهِ',
         meaning:
           'Those who break the covenant of Allah after contracting it and sever that which Allah has ordered to be joined and cause corruption on earth—it is they who are the losers.',
@@ -320,6 +358,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 29,
+        arabic_ayah: '٢٩',
         quran: 'هُوَ الَّذِي خَلَقَ لَكُم مَّا فِي الْأَرْضِ جَمِيعًا',
         meaning:
           'It is He who created for you all of that which is on the earth. Then He directed Himself to the heaven, and made them seven heavens, and He is Knowing of all things.',
@@ -328,6 +367,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 30,
+        arabic_ayah: '٣٠',
         quran: 'وَإِذْ قَالَ رَبُّكَ لِلْمَلَائِكَةِ',
         meaning:
           "And when your Lord said to the angels, 'Indeed, I will make upon the earth a successive authority,' they said, 'Will You place upon it one who causes corruption therein and sheds blood, while we declare Your praise and sanctify You?' He said, 'Indeed, I know that which you do not know.'",
@@ -336,6 +376,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 31,
+        arabic_ayah: '٣١',
         quran: 'وَعَلَّمَ آدَمَ الْأَسْمَاءَ كُلَّهَا',
         meaning:
           "And He taught Adam the names—all of them. Then He showed them to the angels and said, 'Inform Me of the names of these, if you are truthful.'",
@@ -344,6 +385,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 32,
+        arabic_ayah: '٣٢',
         quran: 'قَالُوا سُبْحَانَكَ لَا عِلْمَ لَنَا',
         meaning:
           "They said, 'Exalted are You; we have no knowledge except what You have taught us. Indeed, it is You who is the Knowing, the Wise.'",
@@ -351,6 +393,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 33,
+        arabic_ayah: '٣٣',
         quran: 'قَالَ يَا آدَمُ أَنبِئْهُم بِأَسْمَائِهِمْ',
         meaning:
           "He said, 'O Adam, inform them of their names.' And when he had informed them of their names, He said, 'Did I not tell you that I know the unseen of the heavens and the earth?'",
@@ -358,6 +401,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 34,
+        arabic_ayah: '٣٤',
         quran: 'وَإِذْ قُلْنَا لِلْمَلَائِكَةِ اسْجُدُوا لِآدَمَ',
         meaning:
           "And [mention] when We said to the angels, 'Prostrate before Adam'; so they prostrated, except for Iblis. He refused and was arrogant and became of the disbelievers.",
@@ -372,6 +416,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 36,
+        arabic_ayah: '٣٦',
         quran: 'فَأَزَلَّهُمَا الشَّيْطَانُ',
         meaning:
           'But Satan caused them to slip out of it and removed them from that condition in which they had been...',
@@ -379,6 +424,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 37,
+        arabic_ayah: '٣٧',
         quran: 'فَتَلَقَّىٰ آدَمُ مِن رَّبِّهِ كَلِمَاتٍ',
         meaning:
           'Then Adam received from his Lord some words, and He accepted his repentance. Indeed, it is He who is the Accepting of repentance, the Merciful.',
@@ -386,6 +432,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 38,
+        arabic_ayah: '٣٨',
         quran: 'قُلْنَا اهْبِطُوا مِنْهَا جَمِيعًا',
         meaning:
           "We said, 'Go down from it, all of you. And when guidance comes to you from Me, whoever follows My guidance—there will be no fear concerning them, nor will they grieve.'",
@@ -400,6 +447,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 40,
+        arabic_ayah: '٤٠',
         quran: 'يَا بَنِي إِسْرَائِيلَ اذْكُرُوا نِعْمَتِيَ',
         meaning:
           'O Children of Israel, remember My favor which I have bestowed upon you and fulfill My covenant that I will fulfill your covenant—and be afraid of [only] Me.',
@@ -407,6 +455,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 41,
+        arabic_ayah: '٤١',
         quran: 'وَآمِنُوا بِمَا أَنزَلْتُ',
         meaning:
           'And believe in what I have sent down confirming that which is already with you, and do not be the first to disbelieve in it...',
@@ -414,18 +463,21 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 42,
+        arabic_ayah: '٤٢',
         quran: 'وَلَا تَلْبِسُوا الْحَقَّ بِالْبَاطِلِ',
         meaning: 'And do not mix the truth with falsehood or conceal the truth while you know [it].',
         explanation: 'A warning against corrupting or hiding divine truth.',
       },
       {
         ayah: 43,
+        arabic_ayah: '٤٣',
         quran: 'وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ',
         meaning: 'And establish prayer and give zakah and bow with those who bow [in worship and obedience].',
         explanation: 'They are instructed to uphold prayer, charity, and humility with the believers.',
       },
       {
         ayah: 44,
+        arabic_ayah: '٤٤',
         quran: 'أَتَأْمُرُونَ النَّاسَ بِالْبِرِّ',
         meaning:
           'Do you order righteousness of the people and forget yourselves while you recite the Scripture? Then will you not reason?',
@@ -433,6 +485,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 45,
+        arabic_ayah: '٤٥',
         quran: 'وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ',
         meaning:
           'And seek help through patience and prayer, and indeed, it is difficult except for the humbly submissive [to Allah].',
@@ -440,12 +493,14 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 46,
+        arabic_ayah: '٤٦',
         quran: 'الَّذِينَ يَظُنُّونَ أَنَّهُم مُّلَاقُو رَبِّهِمْ',
         meaning: 'Who are certain that they will meet their Lord and that they will return to Him.',
         explanation: 'True believers act with awareness of their return to Allah.',
       },
       {
         ayah: 47,
+        arabic_ayah: '٤٧',
         quran: 'يَا بَنِي إِسْرَائِيلَ اذْكُرُوا نِعْمَتِيَ',
         meaning:
           'O Children of Israel, remember My favor that I have bestowed upon you and that I preferred you over the worlds.',
@@ -453,6 +508,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 48,
+        arabic_ayah: '٤٨',
         quran: 'وَاتَّقُوا يَوْمًا لَّا تَجْزِي نَفْسٌ عَن نَّفْسٍ شَيْئًا',
         meaning:
           'And fear a Day when no soul will suffice for another at all, nor will intercession be accepted from it...',
@@ -460,6 +516,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 49,
+        arabic_ayah: '٤٩',
         quran: 'وَإِذْ نَجَّيْنَاكُم مِّنْ آلِ فِرْعَوْنَ',
         meaning:
           'And [recall] when We saved you from the people of Pharaoh, who were afflicting you with the worst torment...',
@@ -467,6 +524,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 50,
+        arabic_ayah: '٥٠',
         quran: 'وَإِذْ فَرَقْنَا بِكُمُ الْبَحْرَ',
         meaning:
           'And [recall] when We parted the sea for you and saved you and drowned the people of Pharaoh while you were looking on.',
@@ -474,6 +532,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 51,
+        arabic_ayah: '٥١',
         quran:
           'وَإِذْ وَاعَدْنَا مُوسَىٰ أَرْبَعِينَ لَيْلَةً ثُمَّ اتَّخَذْتُمُ الْعِجْلَ مِن بَعْدِهِ وَأَنتُمْ ظَالِمُونَ',
         meaning:
@@ -482,18 +541,21 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 52,
+        arabic_ayah: '٥٢',
         quran: 'ثُمَّ عَفَوْنَا عَنكُم مِّن بَعْدِ ذَٰلِكَ لَعَلَّكُمْ تَشْكُرُونَ',
         meaning: 'Then We forgave you after that so perhaps you would be grateful.',
         explanation: 'Allah forgave their sin to give them a chance to repent and be thankful.',
       },
       {
         ayah: 53,
+        arabic_ayah: '٥٣',
         quran: 'وَإِذْ آتَيْنَا مُوسَى الْكِتَابَ وَالْفُرْقَانَ لَعَلَّكُمْ تَهْتَدُونَ',
         meaning: 'And when We gave Moses the Scripture and the criterion that perhaps you would be guided.',
         explanation: 'Moses was given the Torah to distinguish truth from falsehood and guide his people.',
       },
       {
         ayah: 54,
+        arabic_ayah: '٥٤',
         quran:
           'وَإِذْ قَالَ مُوسَىٰ لِقَوْمِهِ يَا قَوْمِ إِنَّكُمْ ظَلَمْتُمْ أَنفُسَكُم بِاتِّخَاذِكُمُ الْعِجْلَ فَتُوبُوا إِلَىٰ بَارِئِكُمْ فَاقْتُلُوا أَنفُسَكُمْ ذَٰلِكُمْ خَيْرٌ لَّكُمْ عِندَ بَارِئِكُمْ فَتَابَ عَلَيْكُمْ ۚ إِنَّهُ هُوَ التَّوَّابُ الرَّحِيمُ',
         meaning:
@@ -502,6 +564,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 55,
+        arabic_ayah: '٥٥',
         quran:
           'وَإِذْ قُلْتُمْ يَا مُوسَىٰ لَن نُّؤْمِنَ لَكَ حَتَّىٰ نَرَى اللَّهَ جَهْرَةً فَأَخَذَتْكُمُ الصَّاعِقَةُ وَأَنتُمْ تَنظُرُونَ',
         meaning:
@@ -510,12 +573,14 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 56,
+        arabic_ayah: '٥٦',
         quran: 'ثُمَّ بَعَثْنَاكُم مِّن بَعْدِ مَوْتِكُمْ لَعَلَّكُمْ تَشْكُرُونَ',
         meaning: 'Then We revived you after your death that perhaps you would be grateful.',
         explanation: 'After the thunderbolt struck them dead, Allah revived them as a sign of His mercy.',
       },
       {
         ayah: 57,
+        arabic_ayah: '٥٧',
         quran:
           'وَظَلَّلْنَا عَلَيْكُمُ الْغَمَامَ وَأَنزَلْنَا عَلَيْكُمُ الْمَنَّ وَالسَّلْوَىٰ ۖ كُلُوا مِن طَيِّبَاتِ مَا رَزَقْنَاكُمْ ۚ وَمَا ظَلَمُونَا وَلَـٰكِن كَانُوا أَنفُسَهُمْ يَظْلِمُونَ',
         meaning:
@@ -524,6 +589,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 58,
+        arabic_ayah: '٥٨',
         quran:
           'وَإِذْ قُلْنَا ادْخُلُوا هَـٰذِهِ الْقَرْيَةَ فَكُلُوا مِنْهَا حَيْثُ شِئْتُمْ رَغَدًا وَادْخُلُوا الْبَابَ سُجَّدًا وَقُولُوا حِطَّةٌ نَّغْفِرْ لَكُمْ خَطَايَاكُمْ ۚ وَسَنَزِيدُ الْمُحْسِنِينَ',
         meaning:
@@ -532,6 +598,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 59,
+        arabic_ayah: '٥٩',
         quran:
           'فَبَدَّلَ الَّذِينَ ظَلَمُوا قَوْلًا غَيْرَ الَّذِي قِيلَ لَهُمْ فَأَنزَلْنَا عَلَى الَّذِينَ ظَلَمُوا رِجْزًا مِّنَ السَّمَاءِ بِمَا كَانُوا يَفْسُقُونَ',
         meaning:
@@ -540,6 +607,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 60,
+        arabic_ayah: '٦٠',
         quran:
           'وَإِذِ اسْتَسْقَىٰ مُوسَىٰ لِقَوْمِهِ فَقُلْنَا اضْرِب بِّعَصَاكَ الْحَجَرَ ۖ فَانفَجَرَتْ مِنْهُ اثْنَتَا عَشْرَةَ عَيْنًا ۖ قَدْ عَلِمَ كُلُّ أُنَاسٍ مَّشْرَبَهُمْ ۖ كُلُوا وَاشْرَبُوا مِن رِّزْقِ اللَّهِ وَلَا تَعْثَوْا فِي الْأَرْضِ مُفْسِدِينَ',
         meaning:
@@ -548,6 +616,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 61,
+        arabic_ayah: '٦١',
         quran:
           'وَإِذْ قُلْتُمْ يَا مُوسَىٰ لَن نَّصْبِرَ عَلَىٰ طَعَامٍ وَاحِدٍ فَادْعُ لَنَا رَبَّكَ يُخْرِجْ لَنَا مِمَّا تُنبِتُ الْأَرْضُ',
         meaning:
@@ -556,6 +625,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 62,
+        arabic_ayah: '٦٢',
         quran:
           'إِنَّ الَّذِينَ آمَنُوا وَالَّذِينَ هَادُوا وَالنَّصَارَىٰ وَالصَّابِئِينَ مَنْ آمَنَ بِاللَّهِ وَالْيَوْمِ الْآخِرِ وَعَمِلَ صَالِحًا فَلَهُمْ أَجْرُهُمْ',
         meaning:
@@ -564,6 +634,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 63,
+        arabic_ayah: '٦٣',
         quran: 'وَإِذْ أَخَذْنَا مِيثَاقَكُمْ وَرَفَعْنَا فَوْقَكُمُ الطُّورَ',
         meaning:
           "And [recall] when We took your covenant and raised over you the mount, saying, 'Take what We have given you with determination and remember what is in it that you might fear Allah.'",
@@ -571,6 +642,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 64,
+        arabic_ayah: '٦٤',
         quran:
           'ثُمَّ تَوَلَّيْتُم مِّن بَعْدِ ذَٰلِكَ ۖ فَلَوْلَا فَضْلُ اللَّهِ عَلَيْكُمْ وَرَحْمَتُهُ لَكُنتُم مِّنَ الْخَاسِرِينَ',
         meaning:
@@ -579,6 +651,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 65,
+        arabic_ayah: '٦٥',
         quran: 'وَلَقَدْ عَلِمْتُمُ الَّذِينَ اعْتَدَوْا مِنكُمْ فِي السَّبْتِ',
         meaning:
           "And you had already known about those who transgressed among you concerning the Sabbath, and We said to them, 'Be apes, despised.'",
@@ -586,6 +659,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 66,
+        arabic_ayah: '٦٦',
         quran: 'فَجَعَلْنَاهَا نَكَالًا لِّمَا بَيْنَ يَدَيْهَا وَمَا خَلْفَهَا وَمَوْعِظَةً لِّلْمُتَّقِينَ',
         meaning:
           'And We made it a deterrent punishment for those who were present and those after them and a lesson for the righteous.',
@@ -593,6 +667,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 67,
+        arabic_ayah: '٦٧',
         quran: 'وَإِذْ قَالَ مُوسَىٰ لِقَوْمِهِ إِنَّ اللَّهَ يَأْمُرُكُمْ أَن تَذْبَحُوا بَقَرَةً',
         meaning:
           "And when Moses said to his people, 'Indeed, Allah commands you to slaughter a cow,' they said, 'Do you take us in ridicule?' He said, 'I seek refuge in Allah from being among the ignorant.'",
@@ -600,6 +675,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 68,
+        arabic_ayah: '٦٨',
         quran: 'قَالُوا ادْعُ لَنَا رَبَّكَ يُبَيِّن لَّنَا مَا هِيَ',
         meaning:
           "They said, 'Call upon your Lord to make clear to us what it is.' He said, 'Allah says, “It is a cow neither old nor young but between that,” so do what you are commanded.'",
@@ -607,6 +683,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 69,
+        arabic_ayah: '٦٩',
         quran: 'قَالُوا ادْعُ لَنَا رَبَّكَ يُبَيِّن لَّنَا مَا لَوْنُهَا',
         meaning:
           "They said, 'Call upon your Lord to show us what her color is.' He said, 'He says, “It is a yellow cow, bright in color—pleasing to the observers.”'",
@@ -614,6 +691,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 70,
+        arabic_ayah: '٧٠',
         quran: 'قَالُوا ادْعُ لَنَا رَبَّكَ يُبَيِّن لَّنَا مَا هِيَ',
         meaning:
           "They said, 'Call upon your Lord to make clear to us what it is; indeed, all cows look alike to us. And indeed we, if Allah wills, will be guided.'",
@@ -621,6 +699,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 71,
+        arabic_ayah: '٧١',
         quran: 'قَالَ إِنَّهُ يَقُولُ إِنَّهَا بَقَرَةٌ لَّا ذَلُولٌ تُثِيرُ الْأَرْضَ وَلَا تَسْقِي الْحَرْثَ',
         meaning:
           "He said, 'He says, “It is a cow neither trained to plow the earth nor to irrigate the field, one free from fault with no spot upon her.”' They said, 'Now you have come with the truth.' So they slaughtered her, though they almost did not.",
@@ -628,6 +707,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 72,
+        arabic_ayah: '٧٢',
         quran: 'وَإِذْ قَتَلْتُمْ نَفْسًا فَادَّارَأْتُمْ فِيهَا',
         meaning:
           'And when you killed a man and disputed over it, but Allah was to bring out that which you were concealing.',
@@ -635,6 +715,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 73,
+        arabic_ayah: '٧٣',
         quran: 'فَقُلْنَا اضْرِبُوهُ بِبَعْضِهَا',
         meaning:
           "So We said, 'Strike him with part of it.' Thus does Allah bring the dead to life, and He shows you His signs that you might reason.",
@@ -642,12 +723,14 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 74,
+        arabic_ayah: '٧٤',
         quran: 'ثُمَّ قَسَتْ قُلُوبُكُم مِّن بَعْدِ ذَٰلِكَ',
         meaning: 'Then your hearts became hardened after that, being like stones or even harder...',
         explanation: 'Despite witnessing miracles, their hearts grew cold and unyielding.',
       },
       {
         ayah: 75,
+        arabic_ayah: '٧٥',
         quran: 'أَفَتَطْمَعُونَ أَن يُؤْمِنُوا لَكُمْ',
         meaning:
           'Do you covet [the hope] that they would believe for you while a party of them used to hear the words of Allah then distort it after they had understood it...',
@@ -655,6 +738,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 76,
+        arabic_ayah: '٧٦',
         quran: 'وَإِذَا لَقُوا الَّذِينَ آمَنُوا قَالُوا آمَنَّا',
         meaning:
           "And when they meet those who believe, they say, 'We have believed'; but when alone with one another, they say, 'Do you talk to them about what Allah has revealed to you...'",
@@ -662,12 +746,14 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 77,
+        arabic_ayah: '٧٧',
         quran: 'أَوَلَا يَعْلَمُونَ أَنَّ اللَّهَ يَعْلَمُ مَا يُسِرُّونَ وَمَا يُعْلِنُونَ',
         meaning: 'Do they not know that Allah knows what they conceal and what they declare?',
         explanation: 'Allah reminds that nothing escapes His knowledge.',
       },
       {
         ayah: 78,
+        arabic_ayah: '٧٨',
         quran: 'وَمِنْهُمْ أُمِّيُّونَ لَا يَعْلَمُونَ الْكِتَابَ إِلَّا أَمَانِيَّ',
         meaning:
           'And among them are unlettered ones who do not know the Scripture except [indulgence in] wishful thinking, but they are only assuming.',
@@ -675,6 +761,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 79,
+        arabic_ayah: '٧٩',
         quran: 'فَوَيْلٌ لِّلَّذِينَ يَكْتُبُونَ الْكِتَابَ',
         meaning:
           "So woe to those who write the Scripture with their own hands then say, 'This is from Allah,' to exchange it for a small price...",
@@ -682,6 +769,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 80,
+        arabic_ayah: '٨٠',
         quran: 'وَقَالُوا لَن تَمَسَّنَا النَّارُ إِلَّا أَيَّامًا مَّعْدُودَةً',
         meaning:
           "And they say, 'Never will the Fire touch us, except for a few days.' Say, 'Have you taken a covenant with Allah?'...",
@@ -689,6 +777,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 81,
+        arabic_ayah: '٨١',
         quran: 'بَلَىٰ مَن كَسَبَ سَيِّئَةً',
         meaning:
           'Yes, whoever earns evil and his sin has encompassed him – those are the companions of the Fire; they will abide therein eternally.',
@@ -696,6 +785,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 82,
+        arabic_ayah: '٨٢',
         quran: 'وَالَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ',
         meaning:
           'But they who believe and do righteous deeds – those are the companions of Paradise; they will abide therein eternally.',
@@ -703,6 +793,7 @@ export const quranData: QuranData[] = [
       },
       {
         ayah: 83,
+        arabic_ayah: '٨٣',
         quran: 'وَإِذْ أَخَذْنَا مِيثَاقَ بَنِي إِسْرَائِيلَ',
         meaning:
           "And when We took the covenant from the Children of Israel: 'Do not worship except Allah; and be good to parents and relatives...'",

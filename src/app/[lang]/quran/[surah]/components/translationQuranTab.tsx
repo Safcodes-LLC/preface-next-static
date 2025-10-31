@@ -34,7 +34,7 @@ const TranslationQuranTab = (props: Props) => {
                 data-ayah={ayah.ayah}
                 style={{ fontFamily: quranReadingFont.style.fontFamily }}
               >
-                {ayah.quran}
+                {ayah.quran} {ayah.arabic_ayah}
               </p>
             </div>
           </div>
@@ -50,20 +50,20 @@ const TranslationQuranTab = (props: Props) => {
         .quran-ayah {
           position: relative;
         }
-        .quran-ayah::after {
-          content: attr(data-ayah);
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 28px;
-          height: 28px;
-          margin-right: 8px;
-          border-radius: 9999px;
-          background-color: #d1d5db; /* gray-300 */
-          color: #111827; /* gray-900 */
-          font-size: 14px;
-          // line-height: 1;
-        }
+        // .quran-ayah::after {
+        //   content: attr(data-ayah);
+        //   display: inline-flex;
+        //   align-items: center;
+        //   justify-content: center;
+        //   width: 28px;
+        //   height: 28px;
+        //   margin-right: 8px;
+        //   border-radius: 9999px;
+        //   background-color: #d1d5db; /* gray-300 */
+        //   color: #111827; /* gray-900 */
+        //   font-size: 14px;
+        //   // line-height: 1;
+        // }
       `}</style>
     </React.Fragment>
   )
