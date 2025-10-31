@@ -1,13 +1,25 @@
 import { infoIcon } from '@/components/Svg/svg'
-import Image from 'next/image'
+import localFont from 'next/font/local'
+// import Image from 'next/image'
+
+const quranFont = localFont({
+  src: [
+    {
+      path: '../../../../../public/fonts/surah-name-v4.ttf',
+      weight: 'normal',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-quran',
+})
 
 const HeroSection = ({ surahData }: { surahData: any }) => {
   return (
     <div className="w-full rounded-2xl bg-[#F3F4F6] px-4 py-6 sm:px-6 md:px-8">
       <div className="mx-auto flex max-w-3xl flex-col items-center justify-center text-center">
-        <div className="mb-4">
-          <Image src="/images/quran/EWRTET.png" alt="Al-Baqarah" width={156} height={60} priority />
-        </div>
+        <h2 className="mb-4 text-[60px]" style={{ fontFamily: quranFont.style.fontFamily }}>
+          surah{surahData?.surahCode}
+        </h2>
 
         <div className="mb-2 flex flex-col items-center">
           <div className="mb-[10px] flex items-end gap-2">

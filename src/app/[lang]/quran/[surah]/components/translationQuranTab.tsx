@@ -1,5 +1,18 @@
+import localFont from 'next/font/local'
 import React from 'react'
 import QuranActionIcons from '../../components/QuranActionIcons'
+
+const quranReadingFont = localFont({
+  src: [
+    {
+      // path: '../../../../../../public/fonts/HAFS.ttf',
+      path: '../../../../../../public/fonts/KFGQPC UTHMANIC SCRIPT HAFS REGULAR.otf',
+      // weight: 'normal',
+      // style: 'normal',
+    },
+  ],
+  variable: '--font-quran-reading',
+})
 
 type Props = {
   surahData: any
@@ -13,10 +26,14 @@ const TranslationQuranTab = (props: Props) => {
         <div key={ayah.ayah} className="w-full border-t border-[#E4E4E4] py-[20px]">
           <div className="flex w-full items-start justify-between gap-[20px]">
             <div className="h-[20px] w-1/5">
-            <QuranActionIcons />
+              <QuranActionIcons />
             </div>
             <div className="ms-auto flex w-4/5 items-center justify-start gap-[6px]" dir="rtl">
-              <p className="quran-ayah text-[26px] font-normal" data-ayah={ayah.ayah}>
+              <p
+                className="quran-ayah text-[26px] font-normal"
+                data-ayah={ayah.ayah}
+                style={{ fontFamily: quranReadingFont.style.fontFamily }}
+              >
                 {ayah.quran}
               </p>
             </div>
