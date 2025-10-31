@@ -10,6 +10,7 @@ type QuranData = {
   juz: number
   info: string
   startingAlignment?: boolean
+  isBismi?: boolean
   ayah: {
     ayah: number
     arabic_ayah?: string
@@ -33,6 +34,7 @@ export const quranData: QuranData[] = [
     juz: 1, // juz number
     info: 'Al-Fatiha is the opening chapter of the Quran and is recited in every unit of the Muslim prayer. It emphasizes praise of Allah, guidance, and mercy.',
     startingAlignment: true,
+    isBismi: false,
     ayah: [
       {
         ayah: 1,

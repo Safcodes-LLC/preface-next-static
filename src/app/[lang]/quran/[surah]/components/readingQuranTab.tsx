@@ -1,14 +1,19 @@
+'use client'
 import localFont from 'next/font/local'
 import React from 'react'
 
 type Props = {
   surahData: {
     title: string
+    startingAlignment?: boolean
+    isBismi?: boolean
     ayah: {
       ayah: number
       quran: string
       arabic_ayah?: string
       page: number
+      meaning?: string
+      explanation?: string
     }[]
   }
 }
@@ -28,38 +33,125 @@ const ReadingQuranTab = (props: Props) => {
   // Group ayahs by page
   const ayahsByPage: Record<number, typeof surahData.ayah> = {}
   surahData.ayah.forEach((ayah) => {
-    const page = ayah.page
-    if (!ayahsByPage[page]) {
-      ayahsByPage[page] = []
+    const pageNum = Number(ayah.page)
+    if (!Number.isFinite(pageNum)) {
+      return
     }
-    ayahsByPage[page].push(ayah)
+    if (!ayahsByPage[pageNum]) {
+      ayahsByPage[pageNum] = []
+    }
+    ayahsByPage[pageNum].push(ayah)
   })
+
+  // Sort page numbers to identify the first page deterministically
+  const pages: number[] = Object.keys(ayahsByPage)
+    .map((p) => Number(p))
+    .filter((n) => Number.isFinite(n))
+    .sort((a, b) => a - b)
+  const firstPage: number | undefined = pages[0]
+
+  const [selectedAyah, setSelectedAyah] = React.useState<{
+    ayah: number
+    meaning?: string
+    explanation?: string
+    quran?: string
+    arabic_ayah?: string
+  } | null>(null)
 
   return (
     <React.Fragment>
       <div className="space-y-4">
-        {Object.entries(ayahsByPage).map(([page, ayahs]) => (
-          <div key={`page-${page}`} className="w-full rounded-2xl bg-[#F3F4F6] py-8">
-            <div className="mx-auto flex w-4/6 flex-col gap-6">
+        {pages.map((pageNum) => {
+          const ayahs = ayahsByPage[pageNum] ?? []
+          const alignClass =
+            surahData.startingAlignment === true && firstPage === pageNum ? 'text-center w-2/4 mx-auto' : 'text-justify'
+          return (
+            <div key={`page-${pageNum}`} className="w-full rounded-2xl bg-[#F3F4F6] py-8">
+              <div className="mx-auto flex w-4/6 flex-col gap-6">
+                <p
+                  className={`${alignClass} text-[26px] leading-relaxed font-medium`}
+                  dir="rtl"
+                  style={{ fontFamily: quranReadingFont.style.fontFamily }}
+                >
+                  {surahData.isBismi !== false && firstPage === pageNum && (
+                    <span
+                      className="quran-ayah mb-[20px] flex justify-center text-center whitespace-nowrap"
+                      data-ayah="bismi"
+                    >
+                      بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ{' '}
+                    </span>
+                  )}
+                  {ayahs.map((ayah, index) => (
+                    <span
+                      key={ayah.ayah}
+                      className="quran-ayah"
+                      data-ayah={ayah.ayah}
+                      onClick={() =>
+                        setSelectedAyah({
+                          ayah: ayah.ayah,
+                          meaning: ayah.meaning,
+                          explanation: ayah.explanation,
+                          quran: ayah.quran,
+                          arabic_ayah: ayah.arabic_ayah,
+                        })
+                      }
+                    >
+                      {ayah.quran} {ayah.arabic_ayah}
+                      {index < ayahs.length - 1 && ' '}
+                    </span>
+                  ))}
+                </p>
+                <div className="flex justify-center">
+                  <span>{pageNum}</span>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      {selectedAyah && (
+        <div
+          className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setSelectedAyah(null)}
+        >
+          <div className="w-full max-w-xl rounded-2xl bg-white p-5 shadow-xl" onClick={(e) => e.stopPropagation()}>
+            <div className="mb-3 flex items-center justify-between">
+              <h3 className="text-lg font-semibold">Ayah {selectedAyah.ayah}</h3>
+              <button
+                aria-label="Close"
+                className="rounded-full p-2 text-[#444] hover:bg-gray-100"
+                onClick={() => setSelectedAyah(null)}
+              >
+                ✕
+              </button>
+            </div>
+            {(selectedAyah.quran || selectedAyah.arabic_ayah) && (
               <p
-                className="text-justify text-[26px] leading-relaxed font-medium"
+                className="mb-4 text-[22px] leading-relaxed text-[#111]"
                 dir="rtl"
                 style={{ fontFamily: quranReadingFont.style.fontFamily }}
               >
-                {ayahs.map((ayah, index) => (
-                  <span key={ayah.ayah} className="quran-ayah" data-ayah={ayah.ayah}>
-                    {ayah.quran} {ayah.arabic_ayah}
-                    {index < ayahs.length - 1 && ' '}
-                  </span>
-                ))}
+                {selectedAyah.quran} {selectedAyah.arabic_ayah}
               </p>
-              <div className="flex justify-center">
-                <span>{page}</span>
+            )}
+            {selectedAyah.meaning && (
+              <div className="mb-3">
+                <h4 className="mb-1 text-sm font-medium text-[#222]">Meaning</h4>
+                <p className="text-[15px] leading-relaxed text-[#2C2C2C]">{selectedAyah.meaning}</p>
               </div>
-            </div>
+            )}
+            {selectedAyah.explanation && (
+              <div>
+                <h4 className="mb-1 text-sm font-medium text-[#222]">Explanation</h4>
+                <p className="text-[15px] leading-relaxed text-[#2C2C2C]">{selectedAyah.explanation}</p>
+              </div>
+            )}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
       <style jsx>{`
         .quran-ayah {
