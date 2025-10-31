@@ -183,7 +183,9 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
           )}
         >
           <div>
-            <CalendarIcon className="h-4 w-4 text-black opacity-60 max-md:h-6 max-md:w-6 dark:text-white" />
+            <CalendarIcon
+              className={`h-4 w-4 opacity-60 max-md:h-6 max-md:w-6 ${home ? 'text-white' : 'text-black dark:text-white'}`}
+            />
           </div>
           <div className="flex gap-2 text-xs font-thin max-md:flex-col max-md:gap-1">
             <span>{currentDate}</span>
