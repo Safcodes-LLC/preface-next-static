@@ -36,7 +36,11 @@ const QuranModal: React.FC<QuranModalProps> = ({ isOpen, onClose, selectedAyah }
       <div className="w-full max-w-4xl rounded-2xl bg-white px-[50px] pt-8 pb-[50px]  shadow-xl" onClick={(e) => e.stopPropagation()}>
         <div className="mb-3 flex items-center justify-between">
           <h3 className="text-lg font-semibold">Ayah {selectedAyah.ayah}</h3>
-          <button aria-label="Close" className="rounded-full cursor-pointer p-2 text-[#444] hover:bg-gray-100" onClick={onClose}>
+          <button 
+            aria-label="Close" 
+            className="flex items-center justify-center w-8 h-8 font-bold cursor-pointer text-[#000000] hover:bg-gray-100 rounded-full transition-colors duration-200" 
+            onClick={onClose}
+          >
             ✕
           </button>
         </div>
@@ -50,10 +54,11 @@ const QuranModal: React.FC<QuranModalProps> = ({ isOpen, onClose, selectedAyah }
           </p>
         )}
         {selectedAyah.meaning && (
-          <div className="mb-3">
-            <p className="text-[18px] leading-relaxed">{selectedAyah.meaning}</p>
+          <div className="">
+              <p className="text-[18px] leading-relaxed text-[#000000]">{selectedAyah.meaning}</p>
           </div>
         )}
+        <div className='border-b border-[#E4E4E4] my-6'></div>
         {selectedAyah.explanation && (
           <div>
             <h4 className="mb-1 text-sm font-semibold text-[#222222]">Explanation</h4>
