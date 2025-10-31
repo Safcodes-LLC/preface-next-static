@@ -83,7 +83,7 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
   return (
     <div
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
-      className="relative flex items-center gap-x-6 overflow-hidden px-6 py-2.5 sm:px-3.5 sm:before:flex-1"
+      className="relative flex items-center gap-x-6 overflow-hidden px-6 py-2.5 max-md:px-0 sm:px-3.5 sm:before:flex-1"
     >
       <div
         aria-hidden="true"
@@ -110,12 +110,12 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
         />
       </div>
 
-      <div className="flex flex-1 justify-end gap-1">
+      <div className="flex justify-end gap-1 max-md:w-full max-md:items-center max-md:gap-[0_15px] md:flex-1">
         {/* Home Icon */}
         <Link
           href={`/${lang}`}
           className={clsx(
-            'flex items-center gap-x-1 rounded-full px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10',
+            'flex items-center gap-x-1 rounded-full px-3 py-2 text-sm font-medium transition-colors hover:bg-white/10 max-md:px-0 max-md:py-1',
             home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
           )}
           title="Home"
@@ -127,7 +127,7 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
         <Link
           href="/about"
           className={clsx(
-            `rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors hover:bg-white/10 ${
+            `rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors hover:bg-white/10 max-md:flex max-md:px-1.5 max-md:py-1 ${
               home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
             }`
           )}
@@ -178,14 +178,19 @@ const Navbar2: FC<Navbar2Props> = ({ home, lang, dict }) => {
         {/* Calendar with Date and Time */}
         <div
           className={clsx(
-            'flex items-center gap-x-2 rounded-lg px-3 py-2 text-sm font-thin transition-colors hover:bg-white/10',
-            home ? 'text-white' : 'text-gray-700 dark:text-white'
+            'flex items-center gap-x-2 rounded-lg px-3 py-2 text-sm font-thin transition-colors hover:bg-white/10 max-md:ms-auto max-md:px-0 max-md:py-0',
+            home ? 'text-white' : 'text-black dark:text-white'
           )}
         >
-          <CalendarIcon className="h-4 w-4 opacity-60" />
-          <span className="text-xs font-thin">
-            {currentDate} • {currentTime}
-          </span>
+          <div>
+            <CalendarIcon
+              className={`h-4 w-4 opacity-60 max-md:h-6 max-md:w-6 ${home ? 'text-white' : 'text-black dark:text-white'}`}
+            />
+          </div>
+          <div className="flex gap-2 text-xs font-thin max-md:flex-col max-md:gap-1">
+            <span>{currentDate}</span>
+            <span>{currentTime}</span>
+          </div>
         </div>
       </div>
     </div>

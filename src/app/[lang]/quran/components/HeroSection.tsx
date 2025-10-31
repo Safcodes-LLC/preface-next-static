@@ -15,15 +15,18 @@ const quranFont = localFont({
 
 const HeroSection = ({ surahData }: { surahData: any }) => {
   return (
-    <div className="w-full rounded-2xl bg-[#F3F4F6] px-4 py-6 sm:px-6 md:px-8">
+    <div className="w-full rounded-2xl bg-[#F3F4F6] p-[24px_32px] max-md:p-[20px]">
       <div className="mx-auto flex max-w-3xl flex-col items-center justify-center text-center">
-        <h2 className="mb-4 text-[60px]" style={{ fontFamily: quranFont.style.fontFamily }}>
+        <h2
+          className="mb-4 text-[60px] max-md:mb-2.5 max-md:text-[40px]"
+          style={{ fontFamily: quranFont.style.fontFamily }}
+        >
           surah{surahData?.surahCode}
         </h2>
 
         <div className="mb-2 flex flex-col items-center">
-          <div className="mb-[10px] flex items-end gap-2">
-            <h1 className="text-[24px] font-semibold text-gray-900 md:text-[26px] dark:text-white">
+          <div className="mb-[10px] flex items-end gap-2 max-md:flex-wrap max-md:justify-center">
+            <h1 className="text-[26px] font-semibold text-gray-900 max-md:text-[20px] dark:text-white">
               {surahData?.title}
               <span className="ms-2 text-[20px] font-normal dark:text-white">({surahData?.meaning})</span>
             </h1>
@@ -32,10 +35,12 @@ const HeroSection = ({ surahData }: { surahData: any }) => {
               <span className="text-[14px] font-medium dark:text-white">Surah Info</span>
             </button>
           </div>
-          <h3 className="mt-[20px] text-[15px] font-semibold">Madani | Verses – {surahData?.verse}</h3>
+          <h3 className="mt-[20px] text-[15px] font-semibold max-md:mt-[0px] max-md:text-[14px]">
+            Madani | Verses – {surahData?.verse}
+          </h3>
         </div>
 
-        <div className="mt-2 max-w-4xl text-sm leading-relaxed">
+        <div className="mt-2 max-w-4xl text-[15px] leading-relaxed max-md:text-[14px]">
           <p>{surahData?.info}</p>
         </div>
       </div>

@@ -33,12 +33,15 @@ const QuranModal: React.FC<QuranModalProps> = ({ isOpen, onClose, selectedAyah }
       aria-modal="true"
       onClick={onClose}
     >
-      <div className="w-full max-w-4xl rounded-2xl bg-white px-[50px] pt-8 pb-[50px]  shadow-xl" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="w-full max-w-4xl rounded-2xl bg-white px-[50px] pt-8 pb-[50px] shadow-xl"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="mb-3 flex items-center justify-between">
           <h3 className="text-lg font-semibold">Ayah {selectedAyah.ayah}</h3>
-          <button 
-            aria-label="Close" 
-            className="flex items-center justify-center w-8 h-8 font-bold cursor-pointer text-[#000000] hover:bg-gray-100 rounded-full transition-colors duration-200" 
+          <button
+            aria-label="Close"
+            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full font-bold text-[#000000] transition-colors duration-200 hover:bg-gray-100"
             onClick={onClose}
           >
             ✕
@@ -55,14 +58,14 @@ const QuranModal: React.FC<QuranModalProps> = ({ isOpen, onClose, selectedAyah }
         )}
         {selectedAyah.meaning && (
           <div className="">
-              <p className="text-[18px] leading-relaxed text-[#000000]">{selectedAyah.meaning}</p>
+            <p className="text-[18px] leading-relaxed text-[#000000]">{selectedAyah.meaning}</p>
           </div>
         )}
-        <div className='border-b border-[#E4E4E4] my-6'></div>
+        <div className="my-6 border-b border-[#E4E4E4]"></div>
         {selectedAyah.explanation && (
           <div>
             <h4 className="mb-1 text-sm font-semibold text-[#222222]">Explanation</h4>
-            <p className="text-[15px] font-light leading-relaxed text-[#2C2C2C]">{selectedAyah.explanation}</p>
+            <p className="text-[15px] leading-relaxed font-light text-[#2C2C2C]">{selectedAyah.explanation}</p>
           </div>
         )}
       </div>

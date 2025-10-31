@@ -147,7 +147,7 @@ const CurrLangDropdown: FC<Props> = ({
     <Popover className={clsx('group', className)}>
       <PopoverButton
         className={clsx(
-          'flex cursor-pointer items-center p-2.5 text-sm font-medium hover:rounded-full hover:bg-white/10 focus:outline-hidden focus-visible:outline-hidden',
+          'flex cursor-pointer items-center p-2.5 text-sm font-medium hover:rounded-full hover:bg-white/10 focus:outline-hidden focus-visible:outline-hidden max-md:p-1',
           home ? 'text-[#fff] dark:text-[#fff]' : 'text-[#000000] dark:text-white'
         )}
       >

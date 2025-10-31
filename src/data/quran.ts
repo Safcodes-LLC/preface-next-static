@@ -141,7 +141,8 @@ export const quranData: QuranData[] = [
           'وَالَّذِينَ يُؤْمِنُونَ بِمَا أُنزِلَ إِلَيْكَ وَمَا أُنزِلَ مِن قَبْلِكَ وَبِالْآخِرَةِ هُمْ يُوقِنُونَ',
         meaning:
           'They believe in what has been revealed to you, and what was revealed before you, and are certain of the Hereafter.',
-        explanation: 'Muslims believe in four revealed scriptures: the Tawrah (Torah), Zabur (Psalms), Injil (Gospel), and the Qur’an. These were respectively given to Prophets Musa (Moses), Dawud (David), Isa (Jesus), and Muhammad ﷺ. While the Qur’an has been divinely preserved, the earlier scriptures were altered by human interference. Accepting some messengers and rejecting others is a sign of ignorance. All prophets were divine messengers and among the noblest of creation.',
+        explanation:
+          'Muslims believe in four revealed scriptures: the Tawrah (Torah), Zabur (Psalms), Injil (Gospel), and the Qur’an. These were respectively given to Prophets Musa (Moses), Dawud (David), Isa (Jesus), and Muhammad ﷺ. While the Qur’an has been divinely preserved, the earlier scriptures were altered by human interference. Accepting some messengers and rejecting others is a sign of ignorance. All prophets were divine messengers and among the noblest of creation.',
         page: 2,
       },
       {
