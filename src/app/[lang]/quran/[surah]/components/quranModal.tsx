@@ -33,7 +33,7 @@ const QuranModal: React.FC<QuranModalProps> = ({ isOpen, onClose, selectedAyah }
       aria-modal="true"
       onClick={onClose}
     >
-      <div className="w-full max-w-xl rounded-2xl bg-white p-5 shadow-xl" onClick={(e) => e.stopPropagation()}>
+      <div className="w-full max-w-4xl rounded-2xl bg-white px-[50px] pt-8 pb-[50px]  shadow-xl" onClick={(e) => e.stopPropagation()}>
         <div className="mb-3 flex items-center justify-between">
           <h3 className="text-lg font-semibold">Ayah {selectedAyah.ayah}</h3>
           <button aria-label="Close" className="rounded-full cursor-pointer p-2 text-[#444] hover:bg-gray-100" onClick={onClose}>
@@ -51,14 +51,13 @@ const QuranModal: React.FC<QuranModalProps> = ({ isOpen, onClose, selectedAyah }
         )}
         {selectedAyah.meaning && (
           <div className="mb-3">
-            <h4 className="mb-1 text-sm font-medium text-[#222]">Meaning</h4>
-            <p className="text-[15px] leading-relaxed text-[#2C2C2C]">{selectedAyah.meaning}</p>
+            <p className="text-[18px] leading-relaxed">{selectedAyah.meaning}</p>
           </div>
         )}
         {selectedAyah.explanation && (
           <div>
-            <h4 className="mb-1 text-sm font-medium text-[#222]">Explanation</h4>
-            <p className="text-[15px] leading-relaxed text-[#2C2C2C]">{selectedAyah.explanation}</p>
+            <h4 className="mb-1 text-sm font-semibold text-[#222222]">Explanation</h4>
+            <p className="text-[15px] font-light leading-relaxed text-[#2C2C2C]">{selectedAyah.explanation}</p>
           </div>
         )}
       </div>
