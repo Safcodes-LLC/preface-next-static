@@ -65,18 +65,20 @@ const ReadingQuranTab = (props: Props) => {
         {pages.map((pageNum) => {
           const ayahs = ayahsByPage[pageNum] ?? []
           const alignClass =
-            surahData.startingAlignment === true && firstPage === pageNum ? 'text-center w-2/4 mx-auto' : 'text-justify'
+            surahData.startingAlignment === true && firstPage === pageNum
+              ? 'text-center w-2/4 max-md:w-3/4 mx-auto'
+              : 'text-justify'
           return (
-            <div key={`page-${pageNum}`} className="w-full rounded-2xl bg-[#F3F4F6] py-8">
-              <div className="mx-auto flex w-4/6 flex-col gap-6">
+            <div key={`page-${pageNum}`} className="w-full rounded-2xl bg-[#F3F4F6] py-8 max-md:py-6">
+              <div className="mx-auto flex w-4/6 flex-col gap-6 max-md:w-5/6">
                 <p
-                  className={`${alignClass} text-[26px] leading-relaxed font-medium`}
+                  className={`${alignClass} text-[26px] leading-relaxed font-medium max-md:text-[20px]`}
                   dir="rtl"
                   style={{ fontFamily: quranReadingFont.style.fontFamily }}
                 >
                   {surahData.isBismi !== false && firstPage === pageNum && (
                     <span
-                      className="quran-ayah mb-[20px] flex justify-center text-center whitespace-nowrap"
+                      className="quran-ayah mb-[20px] flex justify-center text-center whitespace-nowrap max-md:mb-[10px]"
                       data-ayah="bismi"
                     >
                       بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ{' '}
@@ -102,7 +104,7 @@ const ReadingQuranTab = (props: Props) => {
                     </span>
                   ))}
                 </p>
-                <div className="flex justify-center">
+                <div className="flex justify-center max-md:text-[14px]">
                   <span>{pageNum}</span>
                 </div>
               </div>
@@ -111,11 +113,7 @@ const ReadingQuranTab = (props: Props) => {
         })}
       </div>
 
-      <QuranModal
-        isOpen={!!selectedAyah}
-        onClose={() => setSelectedAyah(null)}
-        selectedAyah={selectedAyah}
-      />
+      <QuranModal isOpen={!!selectedAyah} onClose={() => setSelectedAyah(null)} selectedAyah={selectedAyah} />
 
       {/* {selectedAyah && (
         <div
