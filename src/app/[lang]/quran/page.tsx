@@ -95,7 +95,7 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
           <div className="grid grid-cols-12 gap-3">
             <div className="col-span-6 rounded-2xl bg-white max-md:col-span-full dark:bg-[#0d0d0d]">
               <div className="relative flex w-full cursor-pointer flex-col gap-3 p-[60px_30px]">
-                <button className="absolute top-[12px] right-[30px] flex aspect-square w-[30px] rotate-0 cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-colors hover:bg-gray-50">
+                <button className="absolute top-[12px] right-[30px] flex aspect-square w-[30px] rotate-0 cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-colors hover:bg-gray-50 dark:hover:bg-gray-800">
                   <HugeiconsIcon icon={ArrowUpRightIcon} size={14} className="text-[#919191]" strokeWidth={2.5} />
                 </button>
 
@@ -206,40 +206,40 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
 
           {/* week's learning section2 */}
           <div className="grid grid-cols-1 gap-6 pt-8 max-md:col-span-full md:grid-cols-2 md:pt-12 lg:grid-cols-3">
-            <div className="cursor-pointer rounded-[10px] border border-[#E9E9E9]">
+            <div className="cursor-pointer rounded-[10px] border border-[#E9E9E9] dark:border-[#505050]">
               <div className="flex justify-between gap-2 p-[25px_30px]">
                 <div className="flex cursor-pointer items-center gap-2">
                   <HugeiconsIcon icon={Quran01Icon} className="flex-shrink-0 text-[#00652E]" strokeWidth={2.5} />
                   <div className="">Holy Quran</div>
                 </div>
                 <div className="flex items-center">
-                  <button className="flex aspect-square w-[30px] cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-colors hover:bg-gray-50">
+                  <button className="flex aspect-square w-[30px] cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-colors hover:bg-gray-50 dark:border-[#505050]">
                     <HugeiconsIcon icon={ArrowUpRightIcon} size={14} className="text-[#919191]" strokeWidth={2.5} />
                   </button>
                 </div>
               </div>
             </div>
-            <div className="cursor-pointer rounded-[10px] border border-[#E9E9E9]">
+            <div className="cursor-pointer rounded-[10px] border border-[#E9E9E9] dark:border-[#505050]">
               <div className="flex justify-between gap-2 p-[25px_30px]">
                 <div className="flex items-center gap-2">
                   <HugeiconsIcon icon={Quran01Icon} className="flex-shrink-0 text-[#00652E]" strokeWidth={2.5} />
                   <div className="">Hudhayl Quran</div>
                 </div>
                 <div className="flex items-center">
-                  <button className="flex aspect-square w-[30px] cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-colors hover:bg-gray-50">
+                  <button className="flex aspect-square w-[30px] cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] dark:border-[#505050] transition-colors hover:bg-gray-50">
                     <HugeiconsIcon icon={ArrowUpRightIcon} size={14} className="text-[#919191]" strokeWidth={2.5} />
                   </button>
                 </div>
               </div>
             </div>
-            <div className="cursor-pointer rounded-[10px] border border-[#E9E9E9]">
+            <div className="cursor-pointer rounded-[10px] border border-[#E9E9E9] dark:border-[#505050]">
               <div className="flex justify-between gap-2 p-[25px_30px]">
                 <div className="flex items-center gap-2">
                   <HugeiconsIcon icon={Quran01Icon} className="flex-shrink-0 text-[#00652E]" strokeWidth={2.5} />
                   <div className="">Hawaazin Quran</div>
                 </div>
                 <div className="flex items-center">
-                  <button className="flex aspect-square w-[30px] cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] transition-colors hover:bg-gray-50">
+                  <button className="flex aspect-square w-[30px] cursor-pointer items-center justify-center rounded-full border border-[#E2E2E2] dark:border-[#505050] transition-colors hover:bg-gray-50">
                     <HugeiconsIcon icon={ArrowUpRightIcon} size={14} className="text-[#919191]" strokeWidth={2.5} />
                   </button>
                 </div>

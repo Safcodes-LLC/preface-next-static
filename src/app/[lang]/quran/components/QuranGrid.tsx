@@ -30,13 +30,13 @@ const QuranGrid: FC<Props> = ({
     <Link
       href={'/quran/' + link}
       className={clsx(
-        'quran-grid-card flex cursor-pointer justify-between rounded-[10px] bg-white px-5 py-5 transition-shadow hover:shadow-md',
+        'quran-grid-card group flex cursor-pointer justify-between rounded-[10px] bg-white px-5 py-5 transition-shadow hover:shadow-md dark:bg-[#0d0d0d]',
         className
       )}
     >
       <div className="flex items-center gap-4">
         <button
-          className="flex aspect-square w-[35px] cursor-pointer items-center justify-center rounded-full bg-[#F3F3F3] text-sm transition-colors hover:bg-gray-50"
+          className="flex aspect-square w-[35px] cursor-pointer items-center justify-center rounded-full bg-[#F3F3F3] text-sm transition-colors group-hover:bg-[#E5F5EA] dark:bg-[#1A1A1A] dark:group-hover:text-black"
           aria-label={`Surah ${transliteration}`}
         >
           {showRevealOrder ? revealOrder : id}
