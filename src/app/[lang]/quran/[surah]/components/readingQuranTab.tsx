@@ -69,7 +69,7 @@ const ReadingQuranTab = (props: Props) => {
               ? 'text-center w-2/4 max-md:w-3/4 mx-auto'
               : 'text-justify'
           return (
-            <div key={`page-${pageNum}`} className="w-full rounded-2xl bg-[#F3F4F6] py-8 max-md:py-6">
+            <div key={`page-${pageNum}`} className="w-full rounded-2xl bg-[#F3F4F6] dark:bg-[#0d0d0d] py-8 max-md:py-6">
               <div className="mx-auto flex w-4/6 flex-col gap-6 max-md:w-5/6">
                 <p
                   className={`${alignClass} text-[26px] leading-relaxed font-medium max-md:text-[20px]`}
