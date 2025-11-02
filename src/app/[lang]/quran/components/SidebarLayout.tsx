@@ -38,7 +38,7 @@ const SidebarLayout = (props: Props) => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={`Search ${activeTab === 'juz' ? 'Juz' : 'Surah'}...`}
-            className="w-full rounded-[42px] border border-neutral-200 bg-[#F5F5F5] px-4 py-2 pl-10 text-sm text-neutral-900 focus:border-transparent focus:ring-0 focus:ring-[#00652E] dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-100"
+            className="w-full rounded-[42px] border border-neutral-200 bg-[#F5F5F5] dark:bg-[#1A1A1A]  px-4 py-2 pl-10 text-sm text-neutral-900 focus:border-transparent focus:ring-0 focus:ring-[#00652E] dark:border-neutral-700 dark:text-neutral-100"
           />
           <svg
             className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-neutral-400"

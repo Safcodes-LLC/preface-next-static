@@ -163,7 +163,7 @@ const QuranSidebar: React.FC<Props> = ({
 
   // Single column for surah/juz
   return (
-    <aside className="scrollbar-thin scrollbar-track-[#E2E2E2] h-full max-h-[70vh] overflow-y-auto bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800">
+    <aside className="scrollbar-thin scrollbar-track-[#E2E2E2] rounded-[10px] h-full max-h-[70vh] overflow-y-auto bg-white dark:bg-[#1A1A1A] p-4 dark:border-neutral-700">
       {/* <h3 className="text-lg font-semibold mb-4 text-[#00652E]">
         {activeTab === 'juz' ? 'Juz' : 'Surah'}
       </h3> */}

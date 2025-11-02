@@ -15,7 +15,7 @@ const tabs = [
 
 const SidebarTabs: FC<Props> = ({ activeTab, setActiveTab = () => {}, className }) => {
   return (
-    <div className="mb-[20px] flex items-center justify-between rounded-full bg-[#F1F1F1] p-1">
+    <div className="mb-[20px] flex items-center justify-between rounded-full bg-[#F1F1F1] dark:bg-[#1A1A1A] p-1">
       {tabs.map((tab) => (
         <button
           key={tab.id}

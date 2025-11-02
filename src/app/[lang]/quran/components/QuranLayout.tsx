@@ -10,7 +10,7 @@ const QuranLayout: React.FC<Props> = ({ children, params }) => {
   return (
     <div className="container my-10 grid grid-cols-12 gap-10 max-md:gap-0">
       <div className="col-span-3 max-md:hidden">
-        <div className="sticky top-20 rounded-[10px] bg-white px-4 py-5">
+        <div className="sticky top-20 rounded-[10px] bg-white dark:bg-[#0d0d0d] px-4 py-5">
           <SidebarLayout params={params} />
         </div>
       </div>
