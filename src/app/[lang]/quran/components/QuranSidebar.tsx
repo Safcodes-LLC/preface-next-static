@@ -163,7 +163,7 @@ const QuranSidebar: React.FC<Props> = ({
 
   // Single column for surah/juz
   return (
-    <aside className="scrollbar-thin scrollbar-track-[#E2E2E2] rounded-[10px] h-full max-h-[70vh] overflow-y-auto bg-white dark:bg-[#1A1A1A] p-4 dark:border-neutral-700">
+    <aside className="scrollbar-thin scrollbar-track-[#E2E2E2] rounded-[10px] h-full max-h-[70vh] overflow-y-auto  p-4 dark:border-neutral-700">
       {/* <h3 className="text-lg font-semibold mb-4 text-[#00652E]">
         {activeTab === 'juz' ? 'Juz' : 'Surah'}
       </h3> */}
@@ -187,11 +187,12 @@ const QuranSidebar: React.FC<Props> = ({
                 {item.name}
               </button>
             ) : (
+              <>
               <Link
                 href={`/quran/${slugify(item.name)}`}
                 className={`block w-full rounded-lg px-4 py-2 text-left font-medium transition-colors duration-200 ${
                   (selectedId ?? selectedFromSlug) === item.id
-                    ? 'bg-neutral-100 font-semibold text-neutral-700 shadow-sm'
+                    ? ' font-semibold text-[#00652E] '
                     : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700'
                 }`}
                 onClick={() => setSelectedId(item.id)}
@@ -203,6 +204,8 @@ const QuranSidebar: React.FC<Props> = ({
                 </span>
                 {item.name}
               </Link>
+                <div className='border border-[#EFEFEF]'></div>
+                </>
             )}
           </li>
         ))}

@@ -77,8 +77,8 @@ const QuranTab = (props: Props) => {
           {/* Backdrop */}
           <div className="fixed inset-0 bg-black/40" />
           {/* Sidebar */}
-          <div className="relative z-10 h-full w-[280px] bg-white shadow-xl" onClick={(e) => e.stopPropagation()}>
-            <div className="sticky top-0 rounded-[10px] bg-white px-4 py-5">
+          <div className="relative z-10 h-full w-[280px] bg-white dark:bg-[#0D0D0D] shadow-xl" onClick={(e) => e.stopPropagation()}>
+            <div className="sticky top-0 rounded-[10px] bg-white px-4 py-5 dark:bg-[#0D0D0D]">
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-lg font-semibold">Menu</h2>
                 <button
