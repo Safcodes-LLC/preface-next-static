@@ -118,20 +118,20 @@ const QuranSidebar: React.FC<Props> = ({
     return (
       <div className="flex h-full flex-row">
         {/* Surah List */}
-        <div className="max-h-[70vh] w-3/4 overflow-y-auto border-r border-neutral-200 pr-2">
-          <ul className="space-y-2">
+        <div className="max-h-[70vh] w-3/4 overflow-y-auto pr-2">
+          <ul className="">
             {filteredItems.map((item) => (
               <li key={item.id}>
                 <Link
                   href={`/quran/${slugify(item.name)}`}
-                  className={`block w-full rounded-lg px-4 py-2 text-left font-medium transition-colors duration-200 ${
+                  className={`flex  w-full gap-4 rounded-lg border-b border-[#EFEFEF] px-4 py-2 text-left font-medium transition-colors duration-200 dark:border-[#333333] ${
                     surahId === item.id
-                      ? 'bg-neutral-100 font-semibold text-neutral-700 shadow-sm'
-                      : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700'
+                      ? 'font-semibold text-[#00652E] dark:text-[#60A43A]'
+                      : 'text-neutral-700 dark:text-neutral-300'
                   }`}
                   onClick={() => setSelectedSurahId && setSelectedSurahId(item.id)}
                 >
-                  <span className={`mr-3 ${surahId === item.id ? 'font-semibold' : 'font-normal'}`}>{item.id}</span>
+                  <span className={` ${surahId === item.id ? 'font-semibold' : 'font-normal'}`}>{item.id}</span>
                   {item.name}
                 </Link>
               </li>
@@ -144,10 +144,10 @@ const QuranSidebar: React.FC<Props> = ({
             {Array.from({ length: verseCount }, (_, i) => (
               <li key={i + 1}>
                 <button
-                  className={`w-full rounded px-3 py-1 text-left text-[13px] transition-colors duration-200 ${
+                  className={`w-full cursor-pointer rounded px-3 py-1 text-left text-[13px] transition-colors duration-200 ${
                     selectedVerseId === i + 1
-                      ? 'bg-neutral-100 font-semibold text-neutral-700 shadow-sm'
-                      : 'text-neutral-700 hover:bg-neutral-100'
+                      ? 'font-semibold text-[#00652E] dark:text-[#60A43A]'
+                      : 'text-neutral-700 dark:text-neutral-300'
                   }`}
                   onClick={() => setSelectedVerseId && setSelectedVerseId(i + 1)}
                 >
@@ -163,19 +163,19 @@ const QuranSidebar: React.FC<Props> = ({
 
   // Single column for surah/juz
   return (
-    <aside className="scrollbar-thin scrollbar-track-[#E2E2E2] rounded-[10px] h-full max-h-[70vh] overflow-y-auto  p-4 dark:border-neutral-700">
+    <aside className="scrollbar-thin scrollbar-track-[#E2E2E2] h-full max-h-[70vh] overflow-y-auto rounded-[10px] px-4 dark:border-neutral-700">
       {/* <h3 className="text-lg font-semibold mb-4 text-[#00652E]">
         {activeTab === 'juz' ? 'Juz' : 'Surah'}
       </h3> */}
-      <ul className="space-y-2">
+      <ul className="">
         {filteredItems.map((item) => (
           <li key={item.id}>
             {activeTab === 'juz' ? (
               <button
-                className={`w-full rounded-lg px-4 py-2 text-left font-medium transition-colors duration-200 ${
+                className={`w-full cursor-pointer rounded-lg px-4 py-2 text-left font-medium transition-colors duration-200 ${
                   (selectedId ?? selectedFromSlug) === item.id
-                    ? 'bg-neutral-100 font-semibold text-neutral-700 shadow-sm'
-                    : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700'
+                    ? 'font-semibold text-[#00652E] dark:text-[#60A43A]'
+                    : 'text-neutral-700 dark:text-neutral-300'
                 }`}
                 onClick={() => setSelectedId(item.id)}
               >
@@ -188,24 +188,24 @@ const QuranSidebar: React.FC<Props> = ({
               </button>
             ) : (
               <>
-              <Link
-                href={`/quran/${slugify(item.name)}`}
-                className={`block w-full rounded-lg px-4 py-2 text-left font-medium transition-colors duration-200 ${
-                  (selectedId ?? selectedFromSlug) === item.id
-                    ? ' font-semibold text-[#00652E] '
-                    : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700'
-                }`}
-                onClick={() => setSelectedId(item.id)}
-              >
-                <span
-                  className={`mr-3 ${(selectedId ?? selectedFromSlug) === item.id ? 'font-semibold' : 'font-normal'}`}
+                <Link
+                  href={`/quran/${slugify(item.name)}`}
+                  className={`flex w-full gap-4 rounded-lg border-b border-[#EFEFEF] py-2 text-left font-medium transition-colors duration-200 dark:border-[#333333] ${
+                    (selectedId ?? selectedFromSlug) === item.id
+                      ? 'font-semibold text-[#00652E] dark:text-[#60A43A]'
+                      : 'text-neutral-700 dark:text-neutral-300'
+                  }`}
+                  onClick={() => setSelectedId(item.id)}
                 >
-                  {item.id}
-                </span>
-                {item.name}
-              </Link>
-                <div className='border border-[#EFEFEF]'></div>
-                </>
+                  <span
+                    className={` ${(selectedId ?? selectedFromSlug) === item.id ? 'font-semibold' : 'font-normal'}`}
+                  >
+                    {item.id}
+                  </span>
+                  {item.name}
+                </Link>
+                {/* <div className="border border-[#EFEFEF] dark:border-[#333333]"></div> */}
+              </>
             )}
           </li>
         ))}

@@ -23,7 +23,7 @@ const TranslationQuranTab = (props: Props) => {
   return (
     <React.Fragment>
       {surahData?.ayah?.map((ayah: any) => (
-        <div key={ayah.ayah} className="w-full border-t border-[#E4E4E4] py-[20px] max-md:py-[10px]">
+        <div key={ayah.ayah} className="w-full border-t border-[#E4E4E4] dark:border-[#333333] py-[20px] max-md:py-[10px]">
           <div className="flex w-full items-start justify-between gap-[20px]">
             <div className="h-[20px] w-1/5">
               <QuranActionIcons />

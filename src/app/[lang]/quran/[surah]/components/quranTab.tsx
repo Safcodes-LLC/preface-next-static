@@ -38,7 +38,7 @@ const QuranTab = (props: Props) => {
           <div className="md:hidden">
             <button
               onClick={() => setNowSideBar(true)}
-              className="me-auto aspect-square h-full rounded-full bg-gray-100 p-[10px] shadow-md"
+              className="me-auto aspect-square h-full rounded-full bg-gray-100 dark:bg-[#0D0D0D] p-[10px] shadow-md"
             >
               <HugeiconsIcon icon={Menu01Icon} size={24} color="currentColor" strokeWidth={1.5} />
             </button>

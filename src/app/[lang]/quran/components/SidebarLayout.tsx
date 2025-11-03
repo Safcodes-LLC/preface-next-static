@@ -57,7 +57,7 @@ const SidebarLayout = (props: Props) => {
           {activeTab === 'verse' && (
             <>
               <span
-                className="absolute top-1/2 right-12 mr-8 h-5 w-px -translate-y-1/2 bg-[#DDDDDD] sm:mr-4 md:mr-28 lg:mr-4"
+                className="absolute top-1/2 right-12 mr-8 h-5 w-px -translate-y-1/2 bg-[#DDDDDD] dark:bg-[#444444] sm:mr-4 md:mr-28 lg:mr-4"
                 aria-hidden="true"
               />
               <span
@@ -71,7 +71,7 @@ const SidebarLayout = (props: Props) => {
         </div>
       </div>
       {/* Sidebar List */}
-      <div className="px-0 pb-4">
+      <div className="pb-4">
         <QuranSidebar
           activeTab={activeTab}
           selectedId={selectedId}
