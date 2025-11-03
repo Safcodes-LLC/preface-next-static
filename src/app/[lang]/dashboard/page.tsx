@@ -83,7 +83,7 @@ const Page = async ({ params, dict }: any) => {
       </div>
 
       {/* saved read and favourite section */}
-      <SectionMagazine2 lang={lang} gridClass='grid grid-cols-2 md:grid-cols-3 gap-6'/>
+      <SectionMagazine2 lang={lang} gridClass="grid grid-cols-2 md:grid-cols-3 gap-6" />
     </ProtectedRoute>
   )
 }

@@ -14,6 +14,7 @@ interface SlideContent {
   views: number
   createdAt: string
   updatedAt: string
+  visualsList?: any[]
 }
 
 interface ImageHeroBannerProps {
@@ -84,8 +85,8 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
         title: item.title || 'Untitled',
         content: item.content || item.description || '',
         thumbnail: item.thumbnail || item.image || imageUrl,
-        video_url: item.video_url || item.videoUrl || '',
-        video_file: item.video_file || item.videoFile || '',
+        video_url: item.video_url || item.videoLink || '',
+        video_file: item.video_file || item.video || '',
         slug: item.slug || '',
         views: item.views || 0,
         createdAt: item.createdAt || new Date().toISOString(),
@@ -150,17 +151,26 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
       </div>
 
       {/* Video Overlay - Only show when hovering play button */}
-      {isHoveringPlayButton && currentSlideData?.video_url && (
+      {isHoveringPlayButton && (currentSlideData?.video_url || currentSlideData?.video_file) && (
         <div className="absolute inset-0 z-20">
-          <iframe
-            ref={videoRef}
-            src={getYouTubeEmbedUrl(currentSlideData.video_url)}
-            className="h-full w-full object-cover"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title={currentSlideData.title}
-          />
+          {currentSlideData?.video_file ? (
+            // Native HTML5 video player for video files
+            <video className="h-full w-full object-cover" autoPlay muted loop playsInline>
+              <source src={currentSlideData.video_file} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          ) : currentSlideData?.video_url ? (
+            // YouTube iframe for YouTube URLs
+            <iframe
+              ref={videoRef}
+              src={getYouTubeEmbedUrl(currentSlideData.video_url)}
+              className="h-full w-full object-cover"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title={currentSlideData.title}
+            />
+          ) : null}
         </div>
       )}
 

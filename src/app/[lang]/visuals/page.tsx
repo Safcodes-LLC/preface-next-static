@@ -6,6 +6,7 @@ import {
 } from '@/data/api/posts'
 import { getNavigation } from '@/data/navigation'
 import { getDictionary } from '@/i18n'
+import { getVisualBannerList } from '@/utils/getServices'
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 import HomeHeader from '../home/components/homeHeader'
@@ -90,7 +91,8 @@ const PageVisuals = async ({
   // )
   // console.log(posts, 'postssss.. ')
   const dict = await getDictionary((await params).lang)
-
+  const visualsList = await getVisualBannerList((await params).lang)
+  // log( 'visualsList....', visualsList.data)
   return (
     <div className="visuals-page" dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}>
       <HomeHeader
@@ -100,7 +102,7 @@ const PageVisuals = async ({
         dict={dict}
       />
       <Suspense fallback={<ImageHeroBannerSkeleton />}>
-        <ImageHeroBanner />
+        <ImageHeroBanner posts={visualsList.data} />
       </Suspense>
     </div>
   )

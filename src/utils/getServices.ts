@@ -102,3 +102,11 @@ export async function getCustomBannerArticle(id: string): Promise<any | undefine
     // throw notFound();
   }
 }
+export async function getVisualBannerList(lang: string): Promise<any | undefined> {
+  try {
+    return await getData(`visuals?lang=${lang}&page=1&limit=10`, '', 0)
+  } catch (error) {
+    console.error('Failed to fetch visual banner list data:', error)
+    // throw notFound();
+  }
+}

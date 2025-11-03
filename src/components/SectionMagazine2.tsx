@@ -74,7 +74,7 @@ const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeadin
   return (
     <div className={clsx('section-magazine-2 relative', className)}>
       <div className="mt-8 grid grid-cols-12 gap-6">
-        <div className="col-span-12 lg:col-span-7 rounded-2xl bg-white px-5 pb-6 dark:bg-[#0D0D0D]">
+        <div className="col-span-12 rounded-2xl bg-white px-5 pb-6 lg:col-span-7 dark:bg-[#0D0D0D]">
           {/* <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Saved for Reading</h2>
             {savedPosts.length > 0 && (
