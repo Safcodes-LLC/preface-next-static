@@ -12,6 +12,7 @@ interface SlideContent {
   video_file?: string
   slug: string
   views: number
+  status: boolean
   createdAt: string
   updatedAt: string
   visualsList?: any[]
@@ -34,6 +35,7 @@ const defaultSlides: SlideContent[] = [
     video_url: 'https://www.youtube.com/watch?v=VJg37fVPy9I',
     slug: 'default-slide-1',
     views: 0,
+    status: true,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
@@ -44,6 +46,7 @@ const defaultSlides: SlideContent[] = [
     video_url: 'https://www.youtube.com/watch?v=example2',
     slug: 'default-slide-2',
     views: 0,
+    status: true,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
@@ -81,20 +84,23 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
   useEffect(() => {
     if (posts && posts.length > 0) {
       // Map posts data to our SlideContent interface
-      const mappedSlides: SlideContent[] = posts.map((item: any) => ({
-        _id: item._id || item.id || Math.random().toString(),
-        title: item.title || 'Untitled',
-        content: item.content || item.description || '',
-        thumbnail: item.thumbnail || item.image || imageUrl,
-        video_url: item.video_url || item.videoLink || '',
-        video_file: item.video_file || item.video || '',
-        slug: item.slug || '',
-        views: item.views || 0,
-        createdAt: item.createdAt || new Date().toISOString(),
-        updatedAt: item.updatedAt || new Date().toISOString(),
-      }))
+      const mappedSlides: SlideContent[] = posts
+        .map((item: any) => ({
+          _id: item._id || item.id || Math.random().toString(),
+          title: item.title || 'Untitled',
+          content: item.content || item.description || '',
+          thumbnail: item.thumbnail || item.image || imageUrl,
+          video_url: item.video_url || item.videoLink || '',
+          video_file: item.video_file || item.video || '',
+          slug: item.slug || '',
+          views: item.views || 0,
+          status: item.status !== undefined ? item.status : true,
+          createdAt: item.createdAt || new Date().toISOString(),
+          updatedAt: item.updatedAt || new Date().toISOString(),
+        }))
+        .filter((slide) => slide.status === true) // Only include slides with status true
 
-      setSlides(mappedSlides)
+      setSlides(mappedSlides.length > 0 ? mappedSlides : defaultSlides)
     } else {
       setSlides(defaultSlides)
     }
