@@ -19,7 +19,7 @@ const SidebarTabs: FC<Props> = ({ activeTab, setActiveTab = () => {}, className 
       {tabs.map((tab) => (
         <button
           key={tab.id}
-          className={`font-inter cursor-pointer mx-0.5 h-[33px] rounded-full px-6 text-[13px] font-normal transition-colors duration-200 ${
+          className={`font-inter cursor-pointer mx-0.5 h-[33px] rounded-full px-6 text-[13px] font-normal  ${
             activeTab === tab.id ? 'bg-[#00652E] text-white' : 'bg-transparent text-[#666666] dark:text-white'
           } `}
           style={{ minWidth: 70 }}

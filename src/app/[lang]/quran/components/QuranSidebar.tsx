@@ -124,7 +124,7 @@ const QuranSidebar: React.FC<Props> = ({
               <li key={item.id}>
                 <Link
                   href={`/quran/${slugify(item.name)}`}
-                  className={`flex  w-full gap-4 rounded-lg border-b border-[#EFEFEF] px-4 py-2 text-left font-medium transition-colors duration-200 dark:border-[#333333] ${
+                  className={`flex w-full gap-4 rounded-lg border-b border-[#EFEFEF] px-4 py-2 text-left font-medium dark:border-[#333333] ${
                     surahId === item.id
                       ? 'font-semibold text-[#00652E] dark:text-[#60A43A]'
                       : 'text-neutral-700 dark:text-neutral-300'
@@ -144,7 +144,7 @@ const QuranSidebar: React.FC<Props> = ({
             {Array.from({ length: verseCount }, (_, i) => (
               <li key={i + 1}>
                 <button
-                  className={`w-full cursor-pointer rounded px-3 py-1 text-left text-[13px] transition-colors duration-200 ${
+                  className={`w-full cursor-pointer rounded px-3 py-1 text-left text-[13px]  ${
                     selectedVerseId === i + 1
                       ? 'font-semibold text-[#00652E] dark:text-[#60A43A]'
                       : 'text-neutral-700 dark:text-neutral-300'
@@ -172,7 +172,7 @@ const QuranSidebar: React.FC<Props> = ({
           <li key={item.id}>
             {activeTab === 'juz' ? (
               <button
-                className={`w-full cursor-pointer rounded-lg px-4 py-2 text-left font-medium transition-colors duration-200 ${
+                className={`w-full cursor-pointer rounded-lg px-4 py-2 text-left font-medium  ${
                   (selectedId ?? selectedFromSlug) === item.id
                     ? 'font-semibold text-[#00652E] dark:text-[#60A43A]'
                     : 'text-neutral-700 dark:text-neutral-300'
@@ -188,22 +188,24 @@ const QuranSidebar: React.FC<Props> = ({
               </button>
             ) : (
               <>
-                <Link
-                  href={`/quran/${slugify(item.name)}`}
-                  className={`flex w-full gap-4 rounded-lg border-b border-[#EFEFEF] py-2 text-left font-medium transition-colors duration-200 dark:border-[#333333] ${
-                    (selectedId ?? selectedFromSlug) === item.id
-                      ? 'font-semibold text-[#00652E] dark:text-[#60A43A]'
-                      : 'text-neutral-700 dark:text-neutral-300'
-                  }`}
-                  onClick={() => setSelectedId(item.id)}
-                >
-                  <span
-                    className={` ${(selectedId ?? selectedFromSlug) === item.id ? 'font-semibold' : 'font-normal'}`}
+                <div className="border-b border-[#EFEFEF] dark:border-[#333333]">
+                  <Link
+                    href={`/quran/${slugify(item.name)}`}
+                    className={`flex w-full gap-4 rounded-lg py-2 text-left font-medium  ${
+                      (selectedId ?? selectedFromSlug) === item.id
+                        ? 'font-semibold text-[#00652E] dark:text-[#60A43A]'
+                        : 'text-neutral-700 dark:text-neutral-300'
+                    }`}
+                    onClick={() => setSelectedId(item.id)}
                   >
-                    {item.id}
-                  </span>
-                  {item.name}
-                </Link>
+                    <span
+                      className={` ${(selectedId ?? selectedFromSlug) === item.id ? 'font-semibold' : 'font-normal'}`}
+                    >
+                      {item.id}
+                    </span>
+                    {item.name}
+                  </Link>
+                </div>
                 {/* <div className="border border-[#EFEFEF] dark:border-[#333333]"></div> */}
               </>
             )}
