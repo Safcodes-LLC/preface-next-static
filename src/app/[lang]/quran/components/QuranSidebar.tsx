@@ -52,6 +52,8 @@ const juz = [
   { id: 7, name: 'Juz 7' },
   { id: 8, name: 'Juz 8' },
   { id: 9, name: 'Juz 9' },
+  { id: 10, name: 'Juz 10' },
+  { id: 11, name: 'Juz 11' },
   // ... add more as needed
 ]
 
@@ -124,14 +126,16 @@ const QuranSidebar: React.FC<Props> = ({
               <li key={item.id}>
                 <Link
                   href={`/quran/${slugify(item.name)}`}
-                  className={`flex w-full gap-4 rounded-lg border-b border-[#EFEFEF] px-4 py-2 text-left font-medium dark:border-[#333333] ${
+                  className={`flex w-full gap-2 rounded-lg border-b border-[#EFEFEF] px-4 py-2 text-left font-medium dark:border-[#333333] ${
                     surahId === item.id
                       ? 'font-semibold text-[#00652E] dark:text-[#60A43A]'
                       : 'text-neutral-700 dark:text-neutral-300'
                   }`}
                   onClick={() => setSelectedSurahId && setSelectedSurahId(item.id)}
                 >
-                  <span className={` ${surahId === item.id ? 'font-semibold' : 'font-normal'}`}>{item.id}</span>
+                  <span className={`w-8 flex-shrink-0 ${surahId === item.id ? 'font-semibold' : 'font-normal'}`}>
+                    {item.id}
+                  </span>
                   {item.name}
                 </Link>
               </li>
@@ -172,7 +176,7 @@ const QuranSidebar: React.FC<Props> = ({
           <li key={item.id}>
             {activeTab === 'juz' ? (
               <button
-                className={`w-full cursor-pointer rounded-lg px-4 py-2 text-left font-medium ${
+                className={`w-full cursor-pointer rounded-lg px-4 py-2 text-left font-medium  ${
                   (selectedId ?? selectedFromSlug) === item.id
                     ? 'font-semibold text-[#00652E] dark:text-[#60A43A]'
                     : 'text-neutral-700 dark:text-neutral-300'
@@ -180,7 +184,7 @@ const QuranSidebar: React.FC<Props> = ({
                 onClick={() => setSelectedId(item.id)}
               >
                 <span
-                  className={`mr-3 ${(selectedId ?? selectedFromSlug) === item.id ? 'font-semibold' : 'font-normal'}`}
+                  className={`w-8 flex-shrink-0 ${(selectedId ?? selectedFromSlug) === item.id ? 'font-semibold' : 'font-normal'}`}
                 >
                   {item.id}
                 </span>
@@ -191,7 +195,7 @@ const QuranSidebar: React.FC<Props> = ({
                 <div className="border-b border-[#EFEFEF] dark:border-[#333333]">
                   <Link
                     href={`/quran/${slugify(item.name)}`}
-                    className={`flex w-full gap-4 rounded-lg py-2 text-left font-medium ${
+                    className={`flex w-full gap-4 rounded-lg py-2 text-left font-medium  ${
                       (selectedId ?? selectedFromSlug) === item.id
                         ? 'font-semibold text-[#00652E] dark:text-[#60A43A]'
                         : 'text-neutral-700 dark:text-neutral-300'
@@ -199,11 +203,11 @@ const QuranSidebar: React.FC<Props> = ({
                     onClick={() => setSelectedId(item.id)}
                   >
                     <span
-                      className={` ${(selectedId ?? selectedFromSlug) === item.id ? 'font-semibold' : 'font-normal'}`}
+                      className={`w-8 flex-shrink-0 ${(selectedId ?? selectedFromSlug) === item.id ? 'font-semibold' : 'font-normal'}`}
                     >
                       {item.id}
                     </span>
-                    {item.name}
+                    <span className="truncate">{item.name}</span>
                   </Link>
                 </div>
                 {/* <div className="border border-[#EFEFEF] dark:border-[#333333]"></div> */}
