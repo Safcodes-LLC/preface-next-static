@@ -14,6 +14,7 @@ interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
   heading?: string
   className?: string
   lang?: string
+  gridClass?: string
 }
 
 interface SavedPost {
@@ -31,7 +32,7 @@ interface SavedPost {
   __v: number
 }
 
-const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeading, lang }) => {
+const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeading, lang, gridClass }) => {
   const { user } = useAuth()
   const [savedPosts, setSavedPosts] = useState<SavedPost[]>([])
   const [favouritePosts, setFavouritePosts] = useState<any[]>([])
@@ -39,7 +40,7 @@ const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeadin
   const [error, setError] = useState<string | null>(null)
 
   // console.log(savedPosts, "savedPosts1234");
-  console.log(favouritePosts, 'favouritePosts1234')
+  // console.log(favouritePosts, 'favouritePosts1234')
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -73,7 +74,7 @@ const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeadin
   return (
     <div className={clsx('section-magazine-2 relative', className)}>
       <div className="mt-8 grid grid-cols-12 gap-6">
-        <div className="col-span-7 rounded-2xl bg-white px-5 pb-6 dark:bg-[#0D0D0D]">
+        <div className="col-span-12 lg:col-span-7 rounded-2xl bg-white px-5 pb-6 dark:bg-[#0D0D0D]">
           {/* <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Saved for Reading</h2>
             {savedPosts.length > 0 && (
@@ -90,7 +91,7 @@ const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeadin
           />
 
           {isLoading ? (
-            <div className="grid grid-cols-3 gap-6">
+            <div className={gridClass}>
               {[...Array(3)].map((_, index) => (
                 <div key={index} className="h-48 animate-pulse rounded-2xl bg-gray-200 dark:bg-neutral-700"></div>
               ))}
@@ -98,7 +99,7 @@ const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeadin
           ) : error ? (
             <div className="text-center text-red-500">{error}</div>
           ) : savedPosts.length > 0 ? (
-            <div className="grid grid-cols-3 gap-6">
+            <div className={gridClass}>
               {savedPosts.slice(0, 6).map((item) => (
                 <Card24
                   key={item._id}
@@ -113,7 +114,7 @@ const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeadin
             <div className="mt-4 text-center text-gray-500 dark:text-neutral-400">No saved posts found</div>
           )}
         </div>
-        <div className="col-span-5">
+        <div className="col-span-12 lg:col-span-5">
           <Suspense fallback={<WidgetPostsSkeleton />}>
             <WidgetPosts posts={favouritePosts} lang={lang} isFavourite title="My Favourites" isArrowHide={true} />
           </Suspense>

@@ -29,7 +29,7 @@ const Card24: FC<Props> = ({
       )}
     >
       {/* Image Container */}
-      <div className="relative h-40 w-full">
+      <div className="relative aspect-[4/4]">
         <Image
           src={thumbnail}
           alt={title}
