@@ -38,13 +38,13 @@ const QuranTab = (props: Props) => {
           <div className="md:hidden">
             <button
               onClick={() => setNowSideBar(true)}
-              className="me-auto aspect-square h-full rounded-full bg-gray-100 dark:bg-[#0D0D0D] p-[10px] shadow-md"
+              className="me-auto aspect-square h-full rounded-full bg-gray-100 p-[10px] shadow-md dark:bg-[#0D0D0D]"
             >
               <HugeiconsIcon icon={Menu01Icon} size={24} color="currentColor" strokeWidth={1.5} />
             </button>
           </div>
 
-          <div className="flex items-center gap-[5px] rounded-full border-[1.5px] border-[#60A43A] bg-[#f8f8f8] dark:bg-[#0d0d0d] p-[5px] max-md:shadow-md md:mx-auto">
+          <div className="flex items-center gap-[5px] rounded-full border-[1.5px] border-[#60A43A] bg-[#f8f8f8] p-[5px] max-md:shadow-md md:mx-auto dark:bg-[#0d0d0d]">
             <button
               onClick={() => setTab('translation')}
               className={`${tab === 'translation' ? 'bg-[#60A43A] text-white' : 'bg-transparent text-[#626262] hover:bg-[#60A43A]/10'} cursor-pointer rounded-full p-[10px_20px] text-[15px] font-medium max-md:text-[14px] ${tab === 'translation' ? 'bg-[#60A43A]' : ''}`}
@@ -77,7 +77,10 @@ const QuranTab = (props: Props) => {
           {/* Backdrop */}
           <div className="fixed inset-0 bg-black/40" />
           {/* Sidebar */}
-          <div className="relative z-10 h-full w-[280px] bg-white dark:bg-[#0D0D0D] shadow-xl" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="relative z-10 h-full w-[280px] bg-white shadow-xl dark:bg-[#0D0D0D]"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="sticky top-0 rounded-[10px] bg-white px-4 py-5 dark:bg-[#0D0D0D]">
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-lg font-semibold">Menu</h2>

@@ -15,7 +15,7 @@ const quranFont = localFont({
 
 const HeroSection = ({ surahData }: { surahData: any }) => {
   return (
-    <div className="w-full rounded-2xl bg-[#F3F4F6] dark:bg-[#0d0d0d] p-[24px_32px] max-md:p-[20px]">
+    <div className="w-full rounded-2xl bg-[#F3F4F6] p-[24px_32px] max-md:p-[20px] dark:bg-[#0d0d0d]">
       <div className="mx-auto flex max-w-3xl flex-col items-center justify-center text-center">
         <h2
           className="mb-4 text-[60px] max-md:mb-2.5 max-md:text-[40px]"

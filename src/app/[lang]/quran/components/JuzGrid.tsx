@@ -23,7 +23,9 @@ interface Props {
 
 const JuzGrid: FC<Props> = ({ className, juzNumber, surahs }) => {
   return (
-    <div className={clsx('quran-grid-card flex flex-col gap-3 rounded-[10px] bg-white dark:bg-[#0d0d0d] p-5', className)}>
+    <div
+      className={clsx('quran-grid-card flex flex-col gap-3 rounded-[10px] bg-white p-5 dark:bg-[#0d0d0d]', className)}
+    >
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-bold">Juz {juzNumber}</h2>
@@ -39,12 +41,14 @@ const JuzGrid: FC<Props> = ({ className, juzNumber, surahs }) => {
           {surahs.map((surah, index) => (
             <div
               key={`juz-${juzNumber}-surah-${surah.id}`}
-              className="group cursor-pointer rounded-[10px] border border-[#EFEFEF] dark:border-[#505050] px-5 py-6 transition-shadow hover:shadow-md"
+              className="group cursor-pointer rounded-[10px] border border-[#EFEFEF] px-5 py-6 transition-shadow hover:shadow-md dark:border-[#505050]"
             >
               <div className="flex justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F3F3F3] dark:bg-[#1A1A1A]  group-hover:bg-[#E5F5EA]">
-                    <span className="text-sm font-medium text-[#222] dark:text-white dark:group-hover:text-black">{surah.id}</span>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F3F3F3] group-hover:bg-[#E5F5EA] dark:bg-[#1A1A1A]">
+                    <span className="text-sm font-medium text-[#222] dark:text-white dark:group-hover:text-black">
+                      {surah.id}
+                    </span>
                   </div>
                   <div className="flex flex-col gap-[6px]">
                     <h3 className="text-base font-medium">{surah.transliteration}</h3>

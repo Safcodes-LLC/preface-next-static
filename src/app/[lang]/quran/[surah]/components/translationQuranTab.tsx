@@ -6,7 +6,7 @@ const quranReadingFont = localFont({
   src: [
     {
       // path: '../../../../../../public/fonts/HAFS.ttf',
-      path: '../../../../../../public/fonts/KFGQPC UTHMANIC SCRIPT HAFS REGULAR.otf',
+      path: '../../../../../../public/fonts/KFGQPC UTHMANIC SCRIPT HAFS REGULAR.ttf',
       // weight: 'normal',
       // style: 'normal',
     },
@@ -23,7 +23,10 @@ const TranslationQuranTab = (props: Props) => {
   return (
     <React.Fragment>
       {surahData?.ayah?.map((ayah: any) => (
-        <div key={ayah.ayah} className="w-full border-t border-[#E4E4E4] dark:border-[#333333] py-[20px] max-md:py-[10px]">
+        <div
+          key={ayah.ayah}
+          className="w-full border-t border-[#E4E4E4] py-[20px] max-md:py-[10px] dark:border-[#333333]"
+        >
           <div className="flex w-full items-start justify-between gap-[20px]">
             <div className="h-[20px] w-1/5">
               <QuranActionIcons />
@@ -40,8 +43,10 @@ const TranslationQuranTab = (props: Props) => {
           </div>
           <div className="flex flex-col items-start gap-[6px]">
             <p className="py-5 text-[18px] font-normal max-md:py-3 max-md:text-[15px]">{ayah.meaning}</p>
-            <h6 className="text-[15px] font-semibold text-[#222] dark:text-white max-md:text-[14px]">Explanation</h6>
-            <p className="line-clamp-2 text-[15px] font-light text-[#2C2C2C] dark:text-white max-md:text-[14px]">{ayah.explanation}</p>
+            <h6 className="text-[15px] font-semibold text-[#222] max-md:text-[14px] dark:text-white">Explanation</h6>
+            <p className="line-clamp-2 text-[15px] font-light text-[#2C2C2C] max-md:text-[14px] dark:text-white">
+              {ayah.explanation}
+            </p>
             <button className="cursor-pointer text-[11px] font-normal text-[#7D7D7D] max-md:text-[10px]">
               Read More
             </button>

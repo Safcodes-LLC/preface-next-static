@@ -3,7 +3,7 @@ import localFont from 'next/font/local'
 const quranReadingFont = localFont({
   src: [
     {
-      path: '../../../../../../public/fonts/KFGQPC UTHMANIC SCRIPT HAFS REGULAR.otf',
+      path: '../../../../../../public/fonts/KFGQPC UTHMANIC SCRIPT HAFS REGULAR.ttf',
     },
   ],
   variable: '--font-quran-reading',

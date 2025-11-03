@@ -15,11 +15,11 @@ const tabs = [
 
 const SidebarTabs: FC<Props> = ({ activeTab, setActiveTab = () => {}, className }) => {
   return (
-    <div className="mb-[20px] flex items-center justify-between rounded-full bg-[#F1F1F1] dark:bg-[#1A1A1A] p-1">
+    <div className="mb-[20px] flex items-center justify-between rounded-full bg-[#F1F1F1] p-1 dark:bg-[#1A1A1A]">
       {tabs.map((tab) => (
         <button
           key={tab.id}
-          className={`font-inter cursor-pointer mx-0.5 h-[33px] rounded-full px-6 text-[13px] font-normal  ${
+          className={`font-inter mx-0.5 h-[33px] cursor-pointer rounded-full px-6 text-[13px] font-normal ${
             activeTab === tab.id ? 'bg-[#00652E] text-white' : 'bg-transparent text-[#666666] dark:text-white'
           } `}
           style={{ minWidth: 70 }}
