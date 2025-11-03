@@ -1,5 +1,5 @@
 'use client'
-import { PlayIcon } from '@heroicons/react/24/outline'
+import { PauseIcon, PlayIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { FC, useEffect, useRef, useState } from 'react'
 
@@ -73,8 +73,9 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [slides, setSlides] = useState<SlideContent[]>(defaultSlides)
-  const [isHoveringPlayButton, setIsHoveringPlayButton] = useState(false)
-  const videoRef = useRef<HTMLIFrameElement>(null)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
 
   // Process posts data
   useEffect(() => {
@@ -101,28 +102,31 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
 
   // console.log(slides, 'slides')
 
-  // Auto-slide functionality with hover pause
+  // Auto-slide functionality with video pause
   useEffect(() => {
-    if (!isAutoPlaying || slides.length <= 1 || isHoveringPlayButton) return
+    if (!isAutoPlaying || slides.length <= 1 || isVideoPlaying) return
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
     }, 5000) // Change slide every 5 seconds
 
     return () => clearInterval(interval)
-  }, [isAutoPlaying, slides.length, isHoveringPlayButton])
+  }, [isAutoPlaying, slides.length, isVideoPlaying])
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index)
     setIsAutoPlaying(false) // Stop auto-play when user manually navigates
+    setIsVideoPlaying(false) // Stop video when changing slides
   }
 
-  const handlePlayButtonHover = () => {
-    setIsHoveringPlayButton(true)
+  const handlePlayClick = () => {
+    setIsVideoPlaying(true)
+    setIsAutoPlaying(false) // Pause auto-slide when video plays
   }
 
-  const handlePlayButtonLeave = () => {
-    setIsHoveringPlayButton(false)
+  const handlePauseClick = () => {
+    setIsVideoPlaying(false)
+    setIsAutoPlaying(true) // Resume auto-slide when video stops
   }
 
   const currentSlideData = slides[currentSlide]
@@ -150,19 +154,19 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
         ))}
       </div>
 
-      {/* Video Overlay - Only show when hovering play button */}
-      {isHoveringPlayButton && (currentSlideData?.video_url || currentSlideData?.video_file) && (
+      {/* Video Overlay - Only show when video is playing */}
+      {isVideoPlaying && (currentSlideData?.video_url || currentSlideData?.video_file) && (
         <div className="absolute inset-0 z-20">
           {currentSlideData?.video_file ? (
             // Native HTML5 video player for video files
-            <video className="h-full w-full object-cover" autoPlay muted loop playsInline>
+            <video ref={videoRef} className="h-full w-full object-cover" autoPlay muted loop playsInline>
               <source src={currentSlideData.video_file} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           ) : currentSlideData?.video_url ? (
             // YouTube iframe for YouTube URLs
             <iframe
-              ref={videoRef}
+              ref={iframeRef}
               src={getYouTubeEmbedUrl(currentSlideData.video_url)}
               className="h-full w-full object-cover"
               frameBorder="0"
@@ -177,12 +181,12 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
       {/* Linear Gradient Overlay - Center to Bottom */}
       <div
         className={`absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 ${
-          isHoveringPlayButton ? 'z-30' : 'z-10'
+          isVideoPlaying ? 'z-30' : 'z-10'
         }`}
       />
 
       {/* Main Content */}
-      <div className={`absolute inset-0 container flex items-end pb-24 ${isHoveringPlayButton ? 'z-40' : 'z-20'}`}>
+      <div className={`absolute inset-0 container flex items-end pb-24 ${isVideoPlaying ? 'z-40' : 'z-20'}`}>
         {/* Left Content */}
         <div className="flex flex-1 flex-col pr-2 md:pr-8">
           <h1 className="mb-4 max-w-full text-2xl font-semibold tracking-wider text-white md:max-w-2xl md:text-3xl md:font-bold">
@@ -198,15 +202,24 @@ const ImageHeroBanner: FC<ImageHeroBannerProps> = ({
             }
           </p> */}
 
-          {/* Animated Play Now Button */}
-          <button
-            className="animated-play-button relative inline-flex w-fit cursor-pointer items-center gap-2 px-4 py-3 text-lg font-medium whitespace-nowrap text-white"
-            onMouseEnter={handlePlayButtonHover}
-            onMouseLeave={handlePlayButtonLeave}
-          >
-            <PlayIcon className="h-5 w-5 flex-shrink-0" />
-            Play Now
-          </button>
+          {/* Play/Pause Button */}
+          {!isVideoPlaying ? (
+            <button
+              className="animated-play-button relative inline-flex w-fit cursor-pointer items-center gap-2 px-4 py-3 text-lg font-medium whitespace-nowrap text-white"
+              onClick={handlePlayClick}
+            >
+              <PlayIcon className="h-5 w-5 flex-shrink-0" />
+              Play Now
+            </button>
+          ) : (
+            <button
+              className="animated-play-button relative inline-flex w-fit cursor-pointer items-center gap-2 px-4 py-3 text-lg font-medium whitespace-nowrap text-white"
+              onClick={handlePauseClick}
+            >
+              <PauseIcon className="h-5 w-5 flex-shrink-0" />
+              Pause
+            </button>
+          )}
         </div>
 
         {/* Right Side - Content Info */}
