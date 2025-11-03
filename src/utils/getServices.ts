@@ -93,3 +93,12 @@ export async function getFavouriteList(userId: string, postType: string, lang: s
     // throw notFound();
   }
 }
+
+export async function getCustomBannerArticle(id: string): Promise<any | undefined> {
+  try {
+    return await getData(`banner/posts/custom-banner/${id}`, '', 0)
+  } catch (error) {
+    console.error('Failed to fetch custom banner article data:', error)
+    // throw notFound();
+  }
+}

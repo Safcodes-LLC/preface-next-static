@@ -1,11 +1,13 @@
+'use client'
 import PostFeaturedMedia from '@/components/PostFeaturedMedia/PostFeaturedMedia'
 import VideoHoverPlayer from '@/components/PostFeaturedMedia/VideoHoverPlayer'
 import { TPost } from '@/data/posts'
 import ButtonPrimary from '@/shared/ButtonPrimary'
+import { getCustomBannerArticle } from '@/utils/getServices'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
@@ -18,6 +20,7 @@ interface Props {
   verticalLine?: boolean
   textCenter?: boolean
   lang?: string
+  home?: boolean
 }
 
 const Card19: FC<Props> = ({
@@ -28,6 +31,7 @@ const Card19: FC<Props> = ({
   verticalLine = false,
   textCenter = false,
   lang,
+  home,
 }) => {
   const {
     title,
@@ -45,16 +49,37 @@ const Card19: FC<Props> = ({
     favoriteCount,
   } = post
 
+  const [isCustomBannerData, setIsCustomBannerData] = useState<{ data: any } | null>(null)
   const parentCategorySlug = categories[0]?.parentCategory?.slug
   const categorySlug = categories[0]?.slug
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getCustomBannerArticle(post.id)
+      setIsCustomBannerData(data)
+    }
+    fetchData()
+  }, [post.id])
+
+  // console.log("isCustomBannerData?.data", isCustomBannerData?.data);
 
   return (
     <div className={clsx('group post-card-19 relative flex flex-col overflow-hidden rounded-xl', className)}>
       <div className={clsx('relative size-full', ratio)}>
         {postType?.name === 'Video' ? (
-          <VideoHoverPlayer post={post} />
+          <VideoHoverPlayer
+            post={post}
+            customVideoImage={
+              home && isCustomBannerData?.data.customBannerStatus ? isCustomBannerData?.data.customVideoImage : null
+            }
+            customVideo={
+              home && isCustomBannerData?.data.customBannerStatus
+                ? { video: isCustomBannerData?.data.customVideo, youtubeLink: isCustomBannerData?.data.customVideoLink }
+                : {}
+            }
+          />
         ) : postType?.name === 'Podcast' ? (
-          <PostFeaturedMedia post={post} />
+          <PostFeaturedMedia post={post} /> // not defined custom vedio
         ) : (
           <>
             {thumbnail || featuredImage ? (
@@ -73,7 +98,11 @@ const Card19: FC<Props> = ({
                 <Image
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-full w-full rounded-xl object-cover brightness-85 transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-60"
-                  src={thumbnail || featuredImage}
+                  src={
+                    home && isCustomBannerData?.data.customBannerStatus
+                      ? isCustomBannerData?.data.customHorizontalImage
+                      : thumbnail || featuredImage
+                  }
                   alt={title}
                   priority
                   fill

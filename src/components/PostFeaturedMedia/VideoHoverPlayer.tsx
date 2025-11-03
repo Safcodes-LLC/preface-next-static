@@ -12,9 +12,11 @@ import MediaVideo from './MediaVideo'
 interface Props {
   className?: string
   post: TPost
+  customVideo?: { video?: string; youtubeLink?: string }
+  customVideoImage?: string
 }
 
-const VideoHoverPlayer: FC<Props> = ({ className, post }) => {
+const VideoHoverPlayer: FC<Props> = ({ className, post, customVideo, customVideoImage }) => {
   const { featuredImage, thumbnail, postType, videoFile, videoUrl, video_file, handle, title } = post
   const [isHovered, setIsHovered] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -43,6 +45,49 @@ const VideoHoverPlayer: FC<Props> = ({ className, post }) => {
     setIsLoading(false)
   }
 
+  // Build a safe YouTube embed URL from various possible inputs:
+  // - full watch URL: https://www.youtube.com/watch?v=VIDEO_ID
+  // - short URL: https://youtu.be/VIDEO_ID
+  // - already embed URL: https://www.youtube.com/embed/VIDEO_ID
+  // - plain ID: VIDEO_ID
+  const getYouTubeEmbedUrl = (link?: string) => {
+    if (!link) return ''
+    // If the link already looks like an embed URL, just append params
+    try {
+      const url = new URL(link)
+      const hostname = url.hostname.toLowerCase()
+
+      // youtu.be short link
+      if (hostname.includes('youtu.be')) {
+        const id = url.pathname.replace(/^\//, '')
+        return id ? `https://www.youtube.com/embed/${id}?autoplay=1&mute=1` : ''
+      }
+
+      // youtube full domain
+      if (hostname.includes('youtube.com')) {
+        // already an embed
+        if (url.pathname.startsWith('/embed/')) {
+          const id = url.pathname.split('/embed/')[1]
+          return id ? `https://www.youtube.com/embed/${id}?autoplay=1&mute=1` : ''
+        }
+
+        // watch?v=VIDEO_ID
+        const v = url.searchParams.get('v')
+        if (v) return `https://www.youtube.com/embed/${v}?autoplay=1&mute=1`
+      }
+    } catch (e) {
+      // Not a valid URL — fallthrough to treat link as possible ID
+    }
+
+    // Fallback: try to extract a 11-char YouTube id from the provided string
+    const idMatch = link.match(/[A-Za-z0-9_-]{11}/)
+    if (idMatch) return `https://www.youtube.com/embed/${idMatch[0]}?autoplay=1&mute=1`
+
+    return ''
+  }
+
+  const youtubeEmbedSrc = getYouTubeEmbedUrl(customVideo?.youtubeLink)
+
   const renderImage = () => {
     const imageSrc = featuredImage || thumbnail
     if (!imageSrc) return null
@@ -51,7 +96,7 @@ const VideoHoverPlayer: FC<Props> = ({ className, post }) => {
         alt={title}
         fill
         className="object-cover transition-transform duration-600 ease-in-out group-hover:scale-110"
-        src={imageSrc}
+        src={customVideoImage || imageSrc}
         sizes="(max-width: 600px) 100vw, 50vw"
       />
     )
@@ -89,9 +134,26 @@ const VideoHoverPlayer: FC<Props> = ({ className, post }) => {
       )}
 
       {/* Video Player - shown when hovered and video source exists */}
-      {isHovered && videoSource && (
-        <MediaVideo isHover={true} videoUrl={videoSource} handle={handle} autoPlay={false} onStart={handleVideoStart} />
-      )}
+      {isHovered &&
+        (videoSource || customVideo?.video || customVideo?.youtubeLink) &&
+        (customVideo?.video ? (
+          <MediaVideo
+            isHover={true}
+            videoUrl={customVideo?.video || videoSource || ''}
+            handle={handle}
+            autoPlay={true}
+            onStart={handleVideoStart}
+          />
+        ) : youtubeEmbedSrc ? (
+          <iframe
+            className="absolute inset-0 h-full w-full"
+            src={youtubeEmbedSrc}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
+            allowFullScreen
+          />
+        ) : null)}
 
       {/* Fallback for no video source - keep showing loading */}
       {isHovered && !videoSource && isLoading && (

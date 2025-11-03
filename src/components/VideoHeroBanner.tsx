@@ -93,7 +93,7 @@ const VideoHeroBanner: FC<VideoHeroBannerProps> = ({
       touchStartYRef.current = null
     }
   }
-  console.log('videoUrl', videoUrl)
+  // console.log('videoUrl', videoUrl)
 
   return (
     <div

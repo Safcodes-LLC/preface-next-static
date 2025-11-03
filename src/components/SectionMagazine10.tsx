@@ -54,6 +54,7 @@ const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang }) =>
               textCenter={true}
               verticalLine={true}
               lang={lang}
+              home
             />
           </motion.div>
         )}
@@ -71,6 +72,7 @@ const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang }) =>
                 post={posts[0]}
                 verticalLine={true}
                 lang={lang}
+                home
               />
             </motion.div>
           )}
@@ -83,7 +85,7 @@ const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang }) =>
                 className="col-span-1 h-full sm:row-span-3"
                 viewport={viewportOptions}
               >
-                <Card18 post={post} lang={lang} className="h-full" />
+                <Card18 post={post} lang={lang} className="h-full" home />
               </motion.div>
             ))}
         </motion.div>

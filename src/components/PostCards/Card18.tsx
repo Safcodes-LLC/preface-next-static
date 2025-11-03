@@ -1,10 +1,12 @@
+'use client'
 import PostFeaturedMedia from '@/components/PostFeaturedMedia/PostFeaturedMedia'
 import { TPost } from '@/data/posts'
 import ButtonPrimary from '@/shared/ButtonPrimary'
+import { getCustomBannerArticle } from '@/utils/getServices'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
@@ -15,9 +17,10 @@ interface Props {
   titleClass?: string
   post?: TPost | any
   lang?: string
+  home?: boolean
 }
 
-const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post, lang }) => {
+const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post, lang, home }) => {
   const {
     title,
     excerpt,
@@ -33,9 +36,17 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
     bookmarked,
     favoriteCount,
   } = post
-
+  const [isCustomBannerData, setIsCustomBannerData] = useState<any | null>(null)
   const parentCategorySlug = categories[0]?.parentCategory?.slug
   const categorySlug = categories[0]?.slug
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getCustomBannerArticle(post.id)
+      setIsCustomBannerData(data)
+    }
+    fetchData()
+  }, [post.id])
 
   return (
     <div className={clsx('group post-card-18 relative flex flex-col overflow-hidden rounded-xl', className)}>
@@ -61,7 +72,11 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
                   sizes="(max-width: 1024px) 100vw, 33vw"
                   alt={title}
                   className="h-full w-full rounded-xl object-cover brightness-85 transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:brightness-60"
-                  src={thumbnail || featuredImage}
+                  src={
+                    home && isCustomBannerData?.data.customBannerStatus
+                      ? isCustomBannerData?.data.customVerticalImage
+                      : thumbnail || featuredImage
+                  }
                   priority
                   fill
                 />
