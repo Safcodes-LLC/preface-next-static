@@ -25,8 +25,8 @@ export default function DashboardSidebar({ subPages, pathname }: DashboardSideba
                 href={item.href}
                 className={`flex-shrink-0 cursor-pointer rounded-lg px-4 py-3 text-sm whitespace-nowrap transition-colors ${
                   isActive
-                    ? 'bg-[#FFFFFF] text-[#00652E] shadow-sm dark:bg-primary-900/30 dark:text-primary-400'
-                    : 'bg-[#F0F0F0] text-neutral-700 hover:bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700'
+                    ? 'bg-[#FFFFFF] text-[#00652E] dark:bg-[#1D1D1D] dark:text-[#60A43A]'
+                    : 'text-neutral-700 hover:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-neutral-700/50'
                 }`}
               >
                 <span className="flex items-center gap-2">
@@ -45,7 +45,7 @@ export default function DashboardSidebar({ subPages, pathname }: DashboardSideba
 
       {/* Desktop Sidebar (hidden on mobile) */}
       <div className="col-span-12 hidden lg:col-span-2 lg:block">
-        <div className="sticky top-24">
+        <div className="sticky top-[180px] sm:z-10 sm:bg-[#f8f8f8] sm:dark:bg-black">
           <ul className="space-y-2">
             {subPages.map((Item, index) => {
               const isActive = pathname === Item.href

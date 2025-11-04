@@ -60,7 +60,7 @@ const subPages: { href: any; pageName: string; icon: any }[] = [
   },
   {
     // href: '/dashboard/my-reading-list',
-    href: '/dashboard/continuous-read',
+    href: '/dashboard/continuos-read',
     icon: ContinuosReadIcon,
     pageName: 'Continuous Read',
   },
@@ -109,7 +109,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <div className="min-h-screen">
-        <Disclosure as="nav">
+        <Disclosure as="nav" className="sm:sticky sm:top-0  sm:z-20 sm:bg-[#F8F8F8] sm:dark:bg-black">
           <div className="container">
             <div className="flex h-20 justify-between">
               <div className="flex">
@@ -139,10 +139,10 @@ export default function Layout({ children }: { children: ReactNode }) {
 
                 {/* Profile dropdown */}
                 <Dropdown>
-                  <DropdownButton as={'button'} className="rounded-full">
+                  <DropdownButton as={'button'} className="rounded-full ">
                     <Avatar alt="avatar" src={user.imageUrl} className="size-8" width={32} height={32} sizes="32px" />
                   </DropdownButton>
-                  <DropdownMenu>
+                  <DropdownMenu className="z-50">
                     {userNavigation.map((item) => (
                       <DropdownItem key={item.name} href={item.href}>
                         {item.name}
@@ -219,8 +219,9 @@ export default function Layout({ children }: { children: ReactNode }) {
           </DisclosurePanel>
         </Disclosure>
 
-        <div className="container py-12">
-          <header className=''>
+        <div className="container py-12 sm:bg-[#F8F8F8] sm:dark:bg-black">
+          {/*  and heading */}
+          <header className="sticky top-[80px] z-10 bg-[#F8F8F8] dark:bg-black py-[20px]">
             <h1 className="text-3xl font-bold tracking-tight text-[#00652E] dark:text-[#60A43A]">{pageTitle}</h1>
             <div className="flex flex-col justify-between gap-4 sm:flex-row">
               <span className="text-lg text-[#444444] dark:text-[#DFDFDF]">View your dashboard, manage your posts</span>
