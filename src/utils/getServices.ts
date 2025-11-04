@@ -110,3 +110,12 @@ export async function getVisualBannerList(lang: string): Promise<any | undefined
     // throw notFound();
   }
 }
+
+export async function getContinuosReadList(userId: string, lang: string): Promise<any | undefined> {
+  try {
+    return await getData(`user/read-posts/${userId}?lang=${lang}`, '', 0)
+  } catch (error) {
+    console.error('Failed to fetch continuos read data:', error)
+    // throw notFound();
+  }
+}

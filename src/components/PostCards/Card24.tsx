@@ -24,7 +24,7 @@ const Card24: FC<Props> = ({
     <Link
       href={'#'}
       className={clsx(
-        'group relative block overflow-hidden rounded-2xl border border-[#E8E8E8] transition-all hover:bg-gray-50 dark:border-[#505050] dark:hover:bg-neutral-800',
+        'group relative block overflow-hidden rounded-[10px] border border-[#E8E8E8] transition-all hover:bg-gray-50 dark:border-[#505050] dark:hover:bg-neutral-800',
         className
       )}
     >
