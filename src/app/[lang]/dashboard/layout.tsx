@@ -59,7 +59,8 @@ const subPages: { href: any; pageName: string; icon: any }[] = [
     pageName: "Qur'an",
   },
   {
-    href: '/dashboard/my-reading-list',
+    // href: '/dashboard/my-reading-list',
+    href: '/dashboard/continuous-read',
     icon: ContinuosReadIcon,
     pageName: 'Continuous Read',
   },
@@ -107,7 +108,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div className="min-h-screen ">
+      <div className="min-h-screen">
         <Disclosure as="nav">
           <div className="container">
             <div className="flex h-20 justify-between">
