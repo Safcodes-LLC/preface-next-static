@@ -1,9 +1,9 @@
-import { clientApi } from '@/lib/client/api'
+import { GuestTicketData, postGuestTicket } from '@/services/scholarService'
 import { useMutation } from '@tanstack/react-query'
 
 export const useSubmitScholarQuestion = () => {
   return useMutation({
-    mutationFn: (data: any) => clientApi.post('/api/scholar-questions/guest', data),
+    mutationFn: (data: GuestTicketData) => postGuestTicket(data),
   })
 }
 

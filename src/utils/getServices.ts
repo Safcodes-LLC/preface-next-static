@@ -1,4 +1,5 @@
 import { getData } from './getData'
+import { postData } from './postData'
 
 export async function getCustomFeaturedArticle(lang: string): Promise<any | undefined> {
   try {
@@ -114,6 +115,15 @@ export async function getVisualBannerList(lang: string): Promise<any | undefined
 export async function getContinuosReadList(userId: string, lang: string): Promise<any | undefined> {
   try {
     return await getData(`user/read-posts/${userId}?lang=${lang}`, '', 0)
+  } catch (error) {
+    console.error('Failed to fetch continuos read data:', error)
+    // throw notFound();
+  }
+}
+
+export async function postGuestTicket(data: any): Promise<any | undefined> {
+  try {
+    return await postData(`scholar-questions/guest`, data, '', 0)
   } catch (error) {
     console.error('Failed to fetch continuos read data:', error)
     // throw notFound();

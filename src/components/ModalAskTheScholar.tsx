@@ -4,6 +4,7 @@ import { useSubmitScholarQuestion } from '@/hooks/api/use-scholar-questions'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion, Variants } from 'framer-motion'
 import { FC, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 interface Props {
   isOpen: boolean
@@ -78,6 +79,17 @@ const ModalAskTheScholar: FC<Props> = ({ isOpen, onClose }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Show loading toast
+    const loadingToast = toast.loading('Submitting your question...', {
+      style: {
+        background: '#999DA0',
+        color: '#fff',
+        padding: '14px',
+        borderRadius: '10px',
+      },
+    })
+
     submitQuestion(
       {
         ...formData,
@@ -85,18 +97,60 @@ const ModalAskTheScholar: FC<Props> = ({ isOpen, onClose }) => {
       },
       {
         onSuccess: () => {
+          // Dismiss loading toast
+          toast.dismiss(loadingToast)
+
+          // Show success toast
+          toast.success('Your question has been submitted successfully! You will receive an answer within 48 hours.', {
+            duration: 5000,
+            position: 'top-center',
+            style: {
+              background: '#10B981',
+              color: '#fff',
+              padding: '16px',
+              borderRadius: '10px',
+            },
+            iconTheme: {
+              primary: '#fff',
+              secondary: '#10B981',
+            },
+          })
+
+          // Reset form
           setFormData({
             name: '',
             email: '',
             mobile: '',
             question: '',
           })
-          alert('Your question has been submitted successfully!')
-          onClose()
+
+          // Close modal after a short delay
+          setTimeout(() => {
+            onClose()
+          }, 500)
         },
-        onError: (error) => {
+        onError: (error: any) => {
+          // Dismiss loading toast
+          toast.dismiss(loadingToast)
+
+          // Show error toast
+          const errorMessage = error?.message || 'Failed to submit question. Please try again.'
+          toast.error(errorMessage, {
+            duration: 5000,
+            position: 'top-center',
+            style: {
+              background: '#EF4444',
+              color: '#fff',
+              padding: '16px',
+              borderRadius: '10px',
+            },
+            iconTheme: {
+              primary: '#fff',
+              secondary: '#EF4444',
+            },
+          })
+
           console.error('Submission failed:', error)
-          alert('Failed to submit question. Please try again.')
         },
       }
     )

@@ -220,7 +220,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         </Disclosure>
 
         <div className="container py-12">
-          <header className=''>
+          <header className="">
             <h1 className="text-3xl font-bold tracking-tight text-[#00652E] dark:text-[#60A43A]">{pageTitle}</h1>
             <div className="flex flex-col justify-between gap-4 sm:flex-row">
               <span className="text-lg text-[#444444] dark:text-[#DFDFDF]">View your dashboard, manage your posts</span>
