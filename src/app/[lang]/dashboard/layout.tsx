@@ -109,7 +109,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <div className="min-h-screen">
-        <Disclosure as="nav" className="sm:sticky sm:top-0  sm:z-20 sm:bg-[#F8F8F8] sm:dark:bg-black">
+        <Disclosure as="nav" className="sticky top-0  z-20 bg-[#F8F8F8] dark:bg-black">
           <div className="container">
             <div className="flex h-20 justify-between">
               <div className="flex">
@@ -221,7 +221,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
         <div className="container py-12 sm:bg-[#F8F8F8] sm:dark:bg-black">
           {/*  and heading */}
-          <header className="sticky top-[80px] z-10 bg-[#F8F8F8] dark:bg-black py-[20px]">
+          <header className="sm:sticky sm:top-[80px] sm:z-10 sm:bg-[#F8F8F8] sm:dark:bg-black py-[20px]">
             <h1 className="text-3xl font-bold tracking-tight text-[#00652E] dark:text-[#60A43A]">{pageTitle}</h1>
             <div className="flex flex-col justify-between gap-4 sm:flex-row">
               <span className="text-lg text-[#444444] dark:text-[#DFDFDF]">View your dashboard, manage your posts</span>
