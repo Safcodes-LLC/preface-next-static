@@ -45,7 +45,7 @@ export default function DashboardSidebar({ subPages, pathname }: DashboardSideba
 
       {/* Desktop Sidebar (hidden on mobile) */}
       <div className="col-span-12 hidden lg:col-span-2 lg:block">
-        <div className="sticky top-[180px] sm:z-10 sm:bg-[#f8f8f8] sm:dark:bg-black">
+        <div className="sticky top-[190px] sm:z-10 sm:bg-[#f8f8f8] sm:dark:bg-black">
           <ul className="space-y-2">
             {subPages.map((Item, index) => {
               const isActive = pathname === Item.href
