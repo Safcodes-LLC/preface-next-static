@@ -26,7 +26,7 @@ const Card23: FC<Props> = ({ className, post, lang }) => {
         className
       )}
     >
-      <div className="flex items-center gap-4 rounded-lg bg-white p-4 shadow-sm transition-shadow hover:shadow-md dark:bg-[#0D0D0D]">
+      <div className="flex items-center gap-4 rounded-lg bg-white p-4  dark:bg-[#0D0D0D]">
         {/* Image Container */}
         <div className="relative aspect-square h-20 w-20 flex-shrink-0 overflow-hidden rounded-[10px]">
           <Image
