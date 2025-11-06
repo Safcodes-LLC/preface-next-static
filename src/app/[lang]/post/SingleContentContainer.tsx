@@ -143,10 +143,10 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
             style={{
               fontFamily:
                 lang === 'ar'
-                  ? notoKufiArabic.className
+                  ? notoKufiArabic.style.fontFamily
                   : lang === 'ml'
-                    ? notoSerifMalayalam.className
-                    : notoSerif.className,
+                    ? notoSerifMalayalam.style.fontFamily
+                    : notoSerif.style.fontFamily,
             }}
           />
         </div>
