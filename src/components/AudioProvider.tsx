@@ -142,7 +142,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
         // Làm mới phần tử audio bằng cách thay đổi key
         setAudioKey(() => Date.now())
 
-        console.log('hide - currentSrc after clearing:', playerRef.current?.currentSrc)
+        // console.log('hide - currentSrc after clearing:', playerRef.current?.currentSrc)
 
         dispatch({ type: ActionKind.HIDE })
       },

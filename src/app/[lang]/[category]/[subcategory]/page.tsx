@@ -7,6 +7,7 @@ import Card16PodcastSkeleton from '@/components/Skeletons/Card16PodcastSkeleton'
 import PostListsSkelton from '@/components/Skeletons/PostListsSkelton'
 import { SectionSliderPostsSkeleton } from '@/components/Skeletons/SectionSliderPostsSkeleton'
 import { getCategoryBySlug, getPopularArticles, getSubcategoryPosts } from '@/data/api/posts'
+import { fallbackImg } from '@/data/fallbackImg'
 import { getAllPosts } from '@/data/posts'
 import { getDictionary } from '@/i18n'
 import { Metadata } from 'next'
@@ -53,7 +54,8 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
 
   // Format subcategory name for display
   const subcategoryName = subcategoryPosts?.categories?.[0]?.name
-  const subcategoryImage = subcategoryPosts?.categories[0]?.featuredImage
+  const subcategoryImage = subcategoryPosts?.categories[0]?.featuredImage || fallbackImg
+
   const listPost = subcategoryPosts?.list
 
   // Sanitize category slug if it accidentally includes the lang prefix (e.g., "ar" + "life-...")

@@ -25,7 +25,7 @@ const SectionMagazine1: FC<Props> = ({ className, lang }) => {
       try {
         setLoading(true)
         setError(null)
-        console.log('Fetching data for user:', user._id)
+        // console.log('Fetching data for user:', user._id)
 
         const response = await getContinuosReadByCategory(user._id)
         // console.log('API Response:', response.data)

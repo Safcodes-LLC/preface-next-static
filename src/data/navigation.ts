@@ -7,19 +7,19 @@ export async function getNavigation(lang: string = 'en'): Promise<TNavigationIte
   const dict = await getDictionary(lang)
   const topicsNav = topicsWithArticles.map((topic: any) => ({
     id: topic?.id,
-    href: `${lang === 'en' ? '/' : '/' + lang}${topic?.slug}`,
+    href: `${lang === 'en' ? `/${topic?.slug}` : `/${lang}/${topic?.slug}`}`,
     name: topic?.name,
     type: 'dropdown',
     children:
       topic?.subcategories?.map((sub: any) => ({
         id: sub.id,
-        href: `${lang === 'en' ? '/' : '/' + lang}${topic?.slug}/${sub.slug}`,
+        href: `${lang === 'en' ? `/${topic?.slug}/${sub.slug}` : `/${lang}/${topic?.slug}/${sub.slug}`}`,
         name: sub.name,
         type: 'dropdown',
         children:
           sub.articles?.map((article: any) => ({
             id: article.id,
-            href: `${lang === 'en' ? '/' : '/' + lang}${topic?.slug}/${sub.slug}/${article.slug}`,
+            href: `${lang === 'en' ? `/${topic?.slug}/${sub.slug}/${article.slug}` : `/${lang}/${topic?.slug}/${sub.slug}/${article.slug}`}`,
             name: article.title,
             type: 'link', // ✅ explicitly mark as leaf link
           })) || [],
