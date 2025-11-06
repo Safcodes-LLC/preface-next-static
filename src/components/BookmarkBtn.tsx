@@ -72,7 +72,7 @@ const BookmarkBtn: FC<Props> = ({ className, bookmarked, color, post }) => {
         })
       }
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       setIsBookmarked(!newSavedState)
       toast.error(`Failed to ${newSavedState ? 'add to' : 'remove from'} reading list`)
     }

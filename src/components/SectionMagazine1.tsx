@@ -35,7 +35,6 @@ const SectionMagazine1: FC<Props> = ({ className, lang }) => {
     fetchData()
   }, [user?._id])
 
-
   // console.log(continuosRead?.data, 'continuosReadpost dashboard')
 
   return (

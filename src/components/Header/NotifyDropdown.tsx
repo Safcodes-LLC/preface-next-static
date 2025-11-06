@@ -45,7 +45,7 @@ const NotifyDropdown: FC<Props> = ({ className = '', notifications = _defaultNot
     <Popover className={className}>
       <>
         <PopoverButton as={ButtonCircle} className="relative" color="light" plain>
-            <span className="absolute end-0 top-px size-2.5 rounded-full bg-[#60A43A]"></span>
+          <span className="absolute end-0 top-px size-2.5 rounded-full bg-[#60A43A]"></span>
           <HugeiconsIcon icon={Notification02Icon} size={24} />
         </PopoverButton>
 

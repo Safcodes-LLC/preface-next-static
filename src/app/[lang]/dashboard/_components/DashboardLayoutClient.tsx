@@ -11,6 +11,7 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+import DashboardSidebar from '@/components/Dashboard/DashboardSidebar'
 import {
   AskScholarIcon,
   ContinuosReadIcon,
@@ -22,7 +23,6 @@ import {
   QuranIcon,
   SavedIcon,
 } from '@/components/Svg/svg'
-import DashboardSidebar from '@/components/Dashboard/DashboardSidebar'
 
 const user = {
   name: 'John Doe',
@@ -183,7 +183,7 @@ export default function DashboardLayoutClient({ children }: { children: React.Re
       </Disclosure>
 
       <div className="container py-12 sm:bg-[#F8F8F8] sm:dark:bg-black">
-        <header className="sm:sticky sm:top-[80px] sm:z-10 sm:bg-[#F8F8F8] sm:dark:bg-black py-[20px]">
+        <header className="py-[20px] sm:sticky sm:top-[80px] sm:z-10 sm:bg-[#F8F8F8] sm:dark:bg-black">
           <h1 className="text-3xl font-bold tracking-tight text-[#00652E] dark:text-[#60A43A]">{pageTitle}</h1>
           <div className="flex flex-col justify-between gap-4 sm:flex-row">
             <span className="text-lg text-[#444444] dark:text-[#DFDFDF]">View your dashboard, manage your posts</span>

@@ -112,7 +112,8 @@ const FloatingPanel: FC<{
 /* ------------------------------ Basic Links ------------------------------ */
 
 const MenuLink = ({ item, lang, level }: { item: TNavigationItem; lang?: string; level: number }) => {
-  const href = lang && lang !== 'en' ? `/${lang}${item.href || '#'}` : item.href || '#'
+  const href = item.href || '#'
+
   return (
     <Link
       href={href}
@@ -154,7 +155,7 @@ const Lv1MenuItem = ({
   home?: boolean
   lang?: string
 }) => {
-  const href = lang && lang !== 'en' ? `/${lang}${menuItem.href}` : menuItem.href || '#'
+  const href = menuItem.href || '#'
   return (
     <Link
       className={clsx(
@@ -295,7 +296,7 @@ const MegaMenu = ({
   lang?: string
 }) => {
   const renderNavlink = (item: TNavigationItem) => {
-    const href = lang && lang !== 'en' ? `/${lang}${item.href || '#'}` : item.href || '#'
+    const href = item.href || '#'
     return (
       <li key={item.id} className={clsx('menu-item', item.isNew && 'menuIsNew')}>
         <Link

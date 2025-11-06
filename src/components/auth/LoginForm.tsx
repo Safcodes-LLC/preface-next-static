@@ -113,7 +113,7 @@ export default function LoginForm({ className = '', dict, lang }: LoginFormProps
 
     setIsLoading(true)
     try {
-      console.log('Login attempt:', formData)
+      // console.log('Login attempt:', formData)
 
       // Call the login API
       const res = await login({
