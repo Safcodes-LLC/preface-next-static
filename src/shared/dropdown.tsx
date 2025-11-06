@@ -38,7 +38,7 @@ export function DropdownMenu({
         // Handle scrolling when menu won't fit in viewport
         'overflow-y-auto',
         // Popover background
-        'bg-white dark:bg-neutral-800',
+        'bg-white dark:bg-[#0D0D0D]',
         // Shadows
         'shadow-lg ring-1 ring-neutral-950/10 dark:ring-white/10 dark:ring-inset',
         // Define grid at the menu level if subgrid is supported

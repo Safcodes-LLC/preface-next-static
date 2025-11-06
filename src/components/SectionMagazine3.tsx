@@ -66,15 +66,7 @@ const SectionMagazine3: FC<Props> = ({ heading, className, subHeading, dimHeadin
   return (
     <div>
       <div className={clsx('section-magazine-3 relative', className)}>
-        {isLoading ? (
-          <div className={gridClass}>
-            {[...Array(8)].map((_, index) => (
-              <div key={index} className="h-78 animate-pulse rounded-2xl bg-gray-200 dark:bg-neutral-700"></div>
-            ))}
-          </div>
-        ) : error ? (
-          <div className="text-center text-red-500">{error}</div>
-        ) : continuosPosts.length > 0 ? (
+        {continuosPosts.length > 0 && (
           <>
             <div className={gridClass}>
               {continuosPosts.slice(0, visibleCount).map((item) => (
@@ -110,8 +102,6 @@ const SectionMagazine3: FC<Props> = ({ heading, className, subHeading, dimHeadin
               </div>
             )}
           </>
-        ) : (
-          <div className="mt-4 text-center text-gray-500 dark:text-neutral-400">No saved posts found</div>
         )}
       </div>
       <div></div>
