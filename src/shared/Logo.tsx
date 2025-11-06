@@ -11,7 +11,7 @@ interface Props extends React.SVGProps<SVGSVGElement> {
 
 const Logo: React.FC<Props> = ({ className, lang }) => {
   return (
-    <Link href={`/${lang}`} className={clsx('inline-block shrink-0', className)}>
+    <Link href={lang === 'en' ? '/' : `/${lang}`} className={clsx('inline-block shrink-0', className)}>
       <Image
         src="/preface-logo.svg"
         alt="Preface Logo"
