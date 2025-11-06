@@ -20,9 +20,8 @@ const SectionMagazine3: FC<Props> = ({ heading, className, subHeading, dimHeadin
   const { user } = useAuth()
   const [continuosPosts, setContinuosPosts] = useState<any[]>([])
   const [visibleCount, setVisibleCount] = useState<number>(8)
-  const [isLoading, setIsLoading] = useState(true)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  // const [error, setError] = useState<string | null>(null)
   const [allPostsLoaded, setAllPostsLoaded] = useState(false)
 
   // Load more posts
@@ -45,8 +44,6 @@ const SectionMagazine3: FC<Props> = ({ heading, className, subHeading, dimHeadin
       if (!user?._id) return
 
       try {
-        setIsLoading(true)
-
         // Fetch saved posts
         const continuosReadResponse = await getContinuosReadList(user._id, lang || 'en')
         if (continuosReadResponse?.data) {
@@ -54,9 +51,7 @@ const SectionMagazine3: FC<Props> = ({ heading, className, subHeading, dimHeadin
         }
       } catch (err) {
         console.error('Error fetching posts:', err)
-        setError('Failed to load posts')
-      } finally {
-        setIsLoading(false)
+        // setError('Failed to load posts')
       }
     }
 
