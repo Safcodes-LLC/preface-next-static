@@ -6,11 +6,21 @@ import useIntersectionObserver from '@/hooks/useIntersectionObserver'
 import { ArrowUp02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import draftToHtml from 'draftjs-to-html'
-import { Noto_Serif } from 'next/font/google'
+import { Noto_Kufi_Arabic, Noto_Serif, Noto_Serif_Malayalam } from 'next/font/google'
 import { FC, useEffect, useMemo, useRef, useState } from 'react'
 import { ShareDropdown } from './SingleMetaAction'
 
 const notoSerif = Noto_Serif({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+const notoKufiArabic = Noto_Kufi_Arabic({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+const notoSerifMalayalam = Noto_Serif_Malayalam({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400', '500', '600', '700'],
@@ -130,7 +140,14 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
           <div
             dangerouslySetInnerHTML={{ __html: renderedHtml }}
             className="dark:[&_*]:!text-white"
-            style={{ fontFamily: notoSerif.style.fontFamily }}
+            style={{
+              fontFamily:
+                lang === 'ar'
+                  ? notoKufiArabic.className
+                  : lang === 'ml'
+                    ? notoSerifMalayalam.className
+                    : notoSerif.className,
+            }}
           />
         </div>
 
