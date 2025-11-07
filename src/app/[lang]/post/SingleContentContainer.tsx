@@ -5,7 +5,8 @@ import { TComment, TPostDetail } from '@/data/posts'
 import useIntersectionObserver from '@/hooks/useIntersectionObserver'
 import { ArrowUp02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import draftToHtml from 'draftjs-to-html'
+import { RawDraftContentState as DraftRawDraftContentState, convertFromRaw } from 'draft-js'
+import { stateToHTML } from 'draft-js-export-html'
 import { Noto_Kufi_Arabic, Noto_Serif, Noto_Serif_Malayalam } from 'next/font/google'
 import { FC, useEffect, useMemo, useRef, useState } from 'react'
 import { ShareDropdown } from './SingleMetaAction'
@@ -60,6 +61,76 @@ interface Props {
   lang?: string
 }
 
+// Custom style map matching the admin panel
+const customStyleMap = {
+  FONTWEIGHT_NORMAL: {
+    style: {
+      fontWeight: '400',
+    },
+  },
+  FONTWEIGHT_SLIM: {
+    style: {
+      fontWeight: '300',
+    },
+  },
+  FONTWEIGHT_MEDIUM: {
+    style: {
+      fontWeight: '500',
+    },
+  },
+  FONTWEIGHT_SEMIBOLD: {
+    style: {
+      fontWeight: '600',
+    },
+  },
+  FONTWEIGHT_BOLD: {
+    style: {
+      fontWeight: '700',
+    },
+  },
+  FONTWEIGHT_EXTRABOLD: {
+    style: {
+      fontWeight: '800',
+    },
+  },
+  HIGHLIGHT_YELLOW: {
+    style: {
+      backgroundColor: '#ffff00',
+      padding: '2px 0',
+    },
+  },
+  HIGHLIGHT_GREEN: {
+    style: {
+      backgroundColor: '#90ee90',
+      padding: '2px 0',
+    },
+  },
+  HIGHLIGHT_BLUE: {
+    style: {
+      backgroundColor: '#add8e6',
+      padding: '2px 0',
+    },
+  },
+  HIGHLIGHT_PINK: {
+    style: {
+      backgroundColor: '#ffb6c1',
+      padding: '2px 0',
+    },
+  },
+  HIGHLIGHT_ORANGE: {
+    style: {
+      backgroundColor: '#ffa500',
+      padding: '2px 0',
+    },
+  },
+  HIGHLIGHT_PURPLE: {
+    style: {
+      backgroundColor: '#dda0dd',
+      padding: '2px 0',
+    },
+  },
+}
+
 const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) => {
   const endedAnchorRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -69,15 +140,39 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
   //
 
   const { tags, author, content, likeCount, favoriteCount, commentCount, liked, handle } = post
+
   const renderedHtml = useMemo(() => {
     const str = typeof content === 'string' ? content : String(content ?? '')
     try {
       const parsed = JSON.parse(str) as unknown
+
+      // Check if it's a valid Draft.js content state
       if (parsed && typeof parsed === 'object' && Array.isArray((parsed as { blocks?: unknown }).blocks)) {
-        return draftToHtml(parsed as unknown as RawDraftContentState)
+        const rawContent = parsed as DraftRawDraftContentState
+
+        // Convert Draft.js raw content to ContentState
+        const contentState = convertFromRaw(rawContent)
+
+        // Convert to HTML with custom inline styles
+        const options = {
+          inlineStyles: customStyleMap,
+          // Optional: customize block rendering
+          blockRenderers: {
+            'header-two': (block: any) => `<h2>${block.getText()}</h2>`,
+            'header-three': (block: any) => `<h3>${block.getText()}</h3>`,
+            'header-four': (block: any) => `<h4>${block.getText()}</h4>`,
+            'header-five': (block: any) => `<h5>${block.getText()}</h5>`,
+            'header-six': (block: any) => `<h6>${block.getText()}</h6>`,
+          },
+        }
+
+        return stateToHTML(contentState, options)
       }
+
+      // Fallback to original string if not Draft.js format
       return str
-    } catch {
+    } catch (error) {
+      console.error('Error converting Draft.js to HTML:', error)
       return str
     }
   }, [content])
@@ -139,7 +234,7 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
         >
           <div
             dangerouslySetInnerHTML={{ __html: renderedHtml }}
-            className="dark:[&_*]:!text-white"
+            className="article-content [&_a]:text-blue-600 [&_a]:underline [&_a]:transition-colors [&_a]:hover:text-blue-800 dark:[&_a]:text-blue-400 dark:[&_a]:hover:text-blue-300"
             style={{
               fontFamily:
                 lang === 'ar'
