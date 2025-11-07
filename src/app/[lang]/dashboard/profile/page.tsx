@@ -4,10 +4,9 @@ import Link from 'next/link'
 const Page = () => {
   return (
     <>
-      {/* edit button start here */}
       <Link
         href="/dashboard/profile/edit"
-        className="flex items-center justify-end gap-2 pb-2 text-sm font-semibold text-[#00652E]"
+        className="flex items-center justify-end gap-1 pb-2 text-sm font-semibold text-[#00652E]"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,9 +24,9 @@ const Page = () => {
         </svg>
         Edit
       </Link>
-      {/* edit button end here  */}
+
       <main className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <section className="rounded-xl bg-white px-8 pt-10 pb-8">
+        <section className="rounded-xl bg-white px-8 pt-10 pb-8 dark:bg-[#0D0D0D]">
           <div className="flex flex-col items-center justify-center gap-4">
             <div className="relative h-20 w-20 overflow-hidden rounded-full">
               <Image
@@ -39,40 +38,40 @@ const Page = () => {
             </div>
             <h2 className="text-xl font-semibold">Muhammed Ajmal</h2>
           </div>
-          <hr className="my-7 border border-[#DFDFDF]" />
+          <hr className="my-7 border border-[#DFDFDF] dark:border-[#3A3A3A]" />
           <dl className="flex flex-col gap-5" aria-label="User contact information">
             <div>
-              <dt className="text-sm text-[#4D4D4D]">Email Address</dt>
-              <dd className="text-[15px] font-medium text-black">ajmal1muhammed@gmail.com</dd>
+              <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">Email Address</dt>
+              <dd className="text-[15px] font-medium">ajmal1muhammed@gmail.com</dd>
             </div>
             <div>
-              <dt className="text-sm text-[#4D4D4D]">Mobile Number</dt>
-              <dd className="text-[15px] font-medium text-black">+971 55 666 7777</dd>
+              <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">Mobile Number</dt>
+              <dd className="text-[15px] font-medium">+971 55 666 7777</dd>
             </div>
           </dl>
         </section>
 
-        <section className="rounded-xl bg-white p-8">
-          <dl className="flex flex-col gap-5 divide-y divide-[#EEEEEE]">
+        <section className="rounded-xl bg-white p-8 dark:bg-[#0D0D0D]">
+          <dl className="flex flex-col gap-5 divide-y divide-[#EEEEEE] dark:divide-[#3A3A3A]">
             <div className="flex items-center justify-between py-3">
-              <dt className="text-sm text-[#4D4D4D]">Address 1</dt>
-              <dd className="text-[15px] font-medium text-black">Villa No. 25</dd>
+              <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">Address 1</dt>
+              <dd className="text-[15px] font-medium">Villa No. 25</dd>
             </div>
             <div className="flex items-center justify-between py-3">
-              <dt className="text-sm text-[#4D4D4D]">Address 2</dt>
-              <dd className="text-[15px] font-medium text-black">Rashidiyya</dd>
+              <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">Address 2</dt>
+              <dd className="text-[15px] font-medium">Rashidiyya</dd>
             </div>
             <div className="flex items-center justify-between py-3">
-              <dt className="text-sm text-[#4D4D4D]">City</dt>
-              <dd className="text-[15px] font-medium text-black">Dubai</dd>
+              <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">City</dt>
+              <dd className="text-[15px] font-medium">Dubai</dd>
             </div>
             <div className="flex items-center justify-between py-3">
-              <dt className="text-sm text-[#4D4D4D]">State</dt>
-              <dd className="text-[15px] font-medium text-black">Dubai</dd>
+              <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">State</dt>
+              <dd className="text-[15px] font-medium">Dubai</dd>
             </div>
             <div className="flex items-center justify-between py-3">
-              <dt className="text-sm text-[#4D4D4D]">Country</dt>
-              <dd className="text-[15px] font-medium text-black">United Arab Emirates</dd>
+              <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">Country</dt>
+              <dd className="text-[15px] font-medium">United Arab Emirates</dd>
             </div>
           </dl>
         </section>
