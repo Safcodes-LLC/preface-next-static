@@ -141,6 +141,23 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
 
   const { tags, author, content, likeCount, favoriteCount, commentCount, liked, handle } = post
 
+  // State for custom tooltip
+  const [tooltipData, setTooltipData] = useState<{
+    visible: boolean
+    content: string
+    imageUrl: string
+    x: number
+    y: number
+    showBelow?: boolean
+  }>({
+    visible: false,
+    content: '',
+    imageUrl: '',
+    x: 0,
+    y: 0,
+    showBelow: false,
+  })
+
   const renderedHtml = useMemo(() => {
     const str = typeof content === 'string' ? content : String(content ?? '')
     try {
@@ -153,9 +170,41 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
         // Convert Draft.js raw content to ContentState
         const contentState = convertFromRaw(rawContent)
 
-        // Convert to HTML with custom inline styles
+        // Enhanced entity style function to handle links with tooltips AND images
+        const entityStyleFn = (entity: any) => {
+          const entityType = entity.get('type')
+
+          if (entityType.toLowerCase() === 'link') {
+            const data = entity.getData()
+            const { url, target, tooltipContent, imageUrl } = data
+
+            // Build base attributes
+            const attributes: any = {
+              href: url || '#',
+              target: target || '_blank',
+              rel: target === '_blank' ? 'noopener noreferrer' : undefined,
+            }
+
+            // Add data attributes for custom tooltip
+            if (tooltipContent || imageUrl) {
+              attributes['data-tooltip-content'] = tooltipContent || ''
+              attributes['data-tooltip-image'] = imageUrl || ''
+              attributes.class = 'has-custom-tooltip'
+            }
+
+            return {
+              element: 'a',
+              attributes,
+            }
+          }
+
+          return undefined
+        }
+
+        // Convert to HTML with custom inline styles and entity handling
         const options = {
           inlineStyles: customStyleMap,
+          entityStyleFn: entityStyleFn, // Add entity style function for tooltips and images
           // Optional: customize block rendering
           blockRenderers: {
             'header-two': (block: any) => `<h2>${block.getText()}</h2>`,
@@ -166,7 +215,13 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
           },
         }
 
-        return stateToHTML(contentState, options)
+        let html = stateToHTML(contentState, options)
+
+        // Remove image replacement logic since we want to show images in tooltips, not inline
+        // const entityMap = rawContent.entityMap || {}
+        // ... removed
+
+        return html
       }
 
       // Fallback to original string if not Draft.js format
@@ -220,6 +275,84 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
     }
   }, [])
 
+  // Handle custom tooltip on link hover
+  useEffect(() => {
+    const handleMouseEnter = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+
+      if (target.tagName === 'A' && target.classList.contains('has-custom-tooltip')) {
+        const tooltipContent = target.getAttribute('data-tooltip-content') || ''
+        const imageUrl = target.getAttribute('data-tooltip-image') || ''
+
+        if (tooltipContent || imageUrl) {
+          const rect = target.getBoundingClientRect()
+          const tooltipWidth = 288 // max-w-xs is approximately 288px (20rem)
+          const estimatedTooltipHeight = imageUrl ? 250 : 80 // Estimate tooltip height
+
+          // Calculate horizontal position with viewport boundaries
+          let xPos = rect.left + rect.width / 2
+          const viewportWidth = window.innerWidth
+
+          // Adjust if tooltip would overflow on left
+          if (xPos - tooltipWidth / 2 < 10) {
+            xPos = tooltipWidth / 2 + 10
+          }
+          // Adjust if tooltip would overflow on right
+          if (xPos + tooltipWidth / 2 > viewportWidth - 10) {
+            xPos = viewportWidth - tooltipWidth / 2 - 10
+          }
+
+          // Calculate vertical position - show above the link by default
+          // Use absolute positioning relative to viewport
+          let yPos = rect.top - 10
+          let showBelow = false
+
+          // If not enough space above, show below
+          if (rect.top < estimatedTooltipHeight + 20) {
+            yPos = rect.bottom + 10
+            showBelow = true
+          }
+
+          setTooltipData({
+            visible: true,
+            content: tooltipContent,
+            imageUrl: imageUrl,
+            x: xPos,
+            y: yPos,
+            showBelow: showBelow,
+          })
+        }
+      }
+    }
+
+    const handleMouseLeave = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (target.tagName === 'A' && target.classList.contains('has-custom-tooltip')) {
+        // Hide tooltip when mouse leaves the link
+        setTooltipData((prev) => ({ ...prev, visible: false }))
+      }
+    }
+
+    const handleScroll = () => {
+      // Hide tooltip on scroll
+      setTooltipData((prev) => ({ ...prev, visible: false }))
+    }
+
+    const content = contentRef.current
+    if (content) {
+      // Use capture phase to catch events on all links
+      content.addEventListener('mouseenter', handleMouseEnter, true)
+      content.addEventListener('mouseleave', handleMouseLeave, true)
+      window.addEventListener('scroll', handleScroll, { passive: true })
+
+      return () => {
+        content.removeEventListener('mouseenter', handleMouseEnter, true)
+        content.removeEventListener('mouseleave', handleMouseLeave, true)
+        window.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [renderedHtml])
+
   const showLikeAndCommentSticky =
     !endedAnchorEntry?.intersectionRatio && (endedAnchorEntry?.boundingClientRect.top || 0) > 0
 
@@ -234,7 +367,7 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
         >
           <div
             dangerouslySetInnerHTML={{ __html: renderedHtml }}
-            className="article-content [&_a]:text-blue-600 [&_a]:underline [&_a]:transition-colors [&_a]:hover:text-blue-800 dark:[&_a]:text-blue-400 dark:[&_a]:hover:text-blue-300"
+            className="article-content [&_a]:text-blue-600 [&_a]:underline [&_a]:transition-colors [&_a]:hover:text-blue-800 dark:[&_a]:text-blue-400 dark:[&_a]:hover:text-blue-300 [&_a.has-custom-tooltip]:cursor-help [&_a.has-custom-tooltip]:border-b [&_a.has-custom-tooltip]:border-dotted [&_a.has-custom-tooltip]:border-blue-600 dark:[&_a.has-custom-tooltip]:border-blue-400"
             style={{
               fontFamily:
                 lang === 'ar'
@@ -251,6 +384,57 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
           <div ref={endedAnchorRef}></div>
         </div>
       </div>
+
+      {/* Custom Tooltip with Image */}
+      {tooltipData.visible && (tooltipData.content || tooltipData.imageUrl) && (
+        <div
+          className="pointer-events-none fixed z-[9999] px-2 transition-opacity duration-200"
+          style={{
+            left: `${tooltipData.x}px`,
+            top: `${tooltipData.y}px`,
+            transform: tooltipData.showBelow ? 'translate(-50%, 0)' : 'translate(-50%, -100%)',
+            maxWidth: 'calc(100vw - 20px)',
+          }}
+        >
+          <div className="w-max max-w-xs rounded-lg border border-gray-700 bg-gray-900 p-3 text-white shadow-2xl dark:bg-gray-800">
+            {tooltipData.imageUrl && (
+              <div className="mb-2">
+                <img
+                  src={tooltipData.imageUrl}
+                  alt="Tooltip"
+                  className="h-auto max-h-48 w-full rounded object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none'
+                  }}
+                />
+              </div>
+            )}
+            {tooltipData.content && (
+              <p className="m-0 text-xs leading-relaxed break-words whitespace-pre-wrap sm:text-sm">
+                {tooltipData.content}
+              </p>
+            )}
+            {/* Arrow pointing to link */}
+            <div
+              className="absolute left-1/2 -translate-x-1/2 transform"
+              style={{
+                [tooltipData.showBelow ? 'top' : 'bottom']: 0,
+                [tooltipData.showBelow ? 'transform' : 'transform']: tooltipData.showBelow
+                  ? 'translate(-50%, -100%)'
+                  : 'translate(-50%, 100%)',
+              }}
+            >
+              <div
+                className={`h-0 w-0 border-r-[6px] border-l-[6px] border-r-transparent border-l-transparent ${
+                  tooltipData.showBelow
+                    ? 'border-b-[6px] border-b-gray-900 dark:border-b-gray-800'
+                    : 'border-t-[6px] border-t-gray-900 dark:border-t-gray-800'
+                }`}
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* LIKE AND COMMENT STICKY */}
       <div className={`sticky bottom-8 z-11 mt-8 justify-center ${showLikeAndCommentSticky ? 'flex' : 'hidden'}`}>
