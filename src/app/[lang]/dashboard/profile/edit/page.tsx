@@ -1,8 +1,7 @@
-import { getLoggedUser } from '@/utils/getServices'
+// import { getLoggedUser } from '@/utils/getServices'
 import Image from 'next/image'
 
 const Page = async () => {
-  
   return (
     <>
       <div className="mb-[24px] flex justify-end">
