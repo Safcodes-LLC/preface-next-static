@@ -1,10 +1,21 @@
 'use client'
-
+import { getAuthToken } from '@/services/authService'
+import { getLoggedUser } from '@/utils/getServices'
 import Image from 'next/image'
-// import { getLoggedUser } from '@/utils/getServices'
+import { useEffect, useState } from 'react'
 
 const ProfileForm = () => {
-  // const { data } = getLoggedUser()
+  let token = getAuthToken()
+  const [data, setData] = useState<any>(null)
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const result = await getLoggedUser(token || '')
+      setData(result.data)
+    }
+    fetchUser()
+  }, [token])
+
   return (
     <>
       <div className="mb-[24px] flex justify-end">

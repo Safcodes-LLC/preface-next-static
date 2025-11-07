@@ -1,9 +1,7 @@
 import ProfileForm from './ProfileForm'
 
 const Page = async () => {
-  return (
-    <ProfileForm />
-  )
+  return <ProfileForm />
 }
 
 export default Page

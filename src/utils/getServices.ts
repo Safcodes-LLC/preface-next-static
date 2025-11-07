@@ -123,7 +123,7 @@ export async function getContinuosReadList(userId: string, lang: string): Promis
 
 export async function getLoggedUser(authToken: string): Promise<any | undefined> {
   try {
-    return await getData(`authentication/loggedin_user`, authToken || '' , 0)
+    return await getData(`authentication/loggedin_user`, authToken || '', 0)
   } catch (error) {
     console.error('Failed to fetch continuos read data:', error)
     // throw notFound();

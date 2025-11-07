@@ -396,7 +396,7 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
             maxWidth: 'calc(100vw - 20px)',
           }}
         >
-          <div className="w-max max-w-xs rounded-lg border border-gray-700 bg-gray-900 p-3 text-white shadow-2xl dark:bg-gray-800">
+          <div className="w-max max-w-xs rounded-lg border bg-white p-3 text-black shadow-2xl dark:bg-[#0d0d0d] dark:text-white">
             {tooltipData.imageUrl && (
               <div className="mb-2">
                 <img
