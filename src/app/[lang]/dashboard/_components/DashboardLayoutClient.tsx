@@ -79,7 +79,7 @@ const subPages = [
     pageName: 'Preferences',
   },
   {
-    href: '/dashboard/update-profile',
+    href: '/dashboard/profile',
     icon: ProfileIcon,
     pageName: 'Profile',
   },
