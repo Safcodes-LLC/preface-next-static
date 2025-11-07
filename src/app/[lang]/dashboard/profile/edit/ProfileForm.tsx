@@ -1,10 +1,10 @@
 'use client'
 
 import Image from 'next/image'
-import { getLoggedUser } from '@/utils/getServices'
+// import { getLoggedUser } from '@/utils/getServices'
 
 const ProfileForm = () => {
-  const { data } = getLoggedUser()
+  // const { data } = getLoggedUser()
   return (
     <>
       <div className="mb-[24px] flex justify-end">
