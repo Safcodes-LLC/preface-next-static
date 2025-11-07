@@ -61,76 +61,6 @@ interface Props {
   lang?: string
 }
 
-// Custom style map matching the admin panel
-const customStyleMap = {
-  FONTWEIGHT_NORMAL: {
-    style: {
-      fontWeight: '400',
-    },
-  },
-  FONTWEIGHT_SLIM: {
-    style: {
-      fontWeight: '300',
-    },
-  },
-  FONTWEIGHT_MEDIUM: {
-    style: {
-      fontWeight: '500',
-    },
-  },
-  FONTWEIGHT_SEMIBOLD: {
-    style: {
-      fontWeight: '600',
-    },
-  },
-  FONTWEIGHT_BOLD: {
-    style: {
-      fontWeight: '700',
-    },
-  },
-  FONTWEIGHT_EXTRABOLD: {
-    style: {
-      fontWeight: '800',
-    },
-  },
-  HIGHLIGHT_YELLOW: {
-    style: {
-      backgroundColor: '#ffff00',
-      padding: '2px 0',
-    },
-  },
-  HIGHLIGHT_GREEN: {
-    style: {
-      backgroundColor: '#90ee90',
-      padding: '2px 0',
-    },
-  },
-  HIGHLIGHT_BLUE: {
-    style: {
-      backgroundColor: '#add8e6',
-      padding: '2px 0',
-    },
-  },
-  HIGHLIGHT_PINK: {
-    style: {
-      backgroundColor: '#ffb6c1',
-      padding: '2px 0',
-    },
-  },
-  HIGHLIGHT_ORANGE: {
-    style: {
-      backgroundColor: '#ffa500',
-      padding: '2px 0',
-    },
-  },
-  HIGHLIGHT_PURPLE: {
-    style: {
-      backgroundColor: '#dda0dd',
-      padding: '2px 0',
-    },
-  },
-}
-
 const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) => {
   const endedAnchorRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -159,53 +89,66 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
   })
 
   const renderedHtml = useMemo(() => {
+    // Theme-independent inline styles to avoid hydration mismatches
+    const customStyleMap = {
+      FONTWEIGHT_NORMAL: { style: { fontWeight: '400' } },
+      FONTWEIGHT_SLIM: { style: { fontWeight: '300' } },
+      FONTWEIGHT_MEDIUM: { style: { fontWeight: '500' } },
+      FONTWEIGHT_SEMIBOLD: { style: { fontWeight: '600' } },
+      FONTWEIGHT_BOLD: { style: { fontWeight: '700' } },
+      FONTWEIGHT_EXTRABOLD: { style: { fontWeight: '800' } },
+      // NOTE: Highlights are applied via classes using inlineStyleFn below
+    } as const
+
     const str = typeof content === 'string' ? content : String(content ?? '')
     try {
       const parsed = JSON.parse(str) as unknown
-
-      // Check if it's a valid Draft.js content state
       if (parsed && typeof parsed === 'object' && Array.isArray((parsed as { blocks?: unknown }).blocks)) {
         const rawContent = parsed as DraftRawDraftContentState
-
-        // Convert Draft.js raw content to ContentState
         const contentState = convertFromRaw(rawContent)
 
-        // Enhanced entity style function to handle links with tooltips AND images
         const entityStyleFn = (entity: any) => {
-          const entityType = entity.get('type')
-
-          if (entityType.toLowerCase() === 'link') {
+          if (entity.get('type').toLowerCase() === 'link') {
             const data = entity.getData()
             const { url, target, tooltipContent, imageUrl } = data
-
-            // Build base attributes
             const attributes: any = {
               href: url || '#',
               target: target || '_blank',
               rel: target === '_blank' ? 'noopener noreferrer' : undefined,
             }
-
-            // Add data attributes for custom tooltip
             if (tooltipContent || imageUrl) {
               attributes['data-tooltip-content'] = tooltipContent || ''
               attributes['data-tooltip-image'] = imageUrl || ''
               attributes.class = 'has-custom-tooltip'
             }
-
-            return {
-              element: 'a',
-              attributes,
-            }
+            return { element: 'a', attributes }
           }
-
           return undefined
         }
 
-        // Convert to HTML with custom inline styles and entity handling
+        // Apply highlight backgrounds via classes to keep HTML static; CSS handles dark mode
+        const inlineStyleFn = (styles: any) => {
+          const cls: string[] = []
+          if (styles.has && styles.has('HIGHLIGHT_YELLOW'))
+            cls.push('px-0.5 rounded-sm bg-yellow-200 dark:bg-yellow-200/30')
+          if (styles.has && styles.has('HIGHLIGHT_GREEN'))
+            cls.push('px-0.5 rounded-sm bg-green-200 dark:bg-green-200/30')
+          if (styles.has && styles.has('HIGHLIGHT_BLUE')) cls.push('px-0.5 rounded-sm bg-sky-200 dark:bg-sky-900/50')
+          if (styles.has && styles.has('HIGHLIGHT_PINK')) cls.push('px-0.5 rounded-sm bg-pink-200 dark:bg-pink-200/30')
+          if (styles.has && styles.has('HIGHLIGHT_ORANGE'))
+            cls.push('px-0.5 rounded-sm bg-orange-200 dark:bg-orange-200/30')
+          if (styles.has && styles.has('HIGHLIGHT_PURPLE'))
+            cls.push('px-0.5 rounded-sm bg-purple-200 dark:bg-purple-200/30')
+          if (cls.length) {
+            return { element: 'span', attributes: { class: cls.join(' ') } }
+          }
+          return undefined
+        }
+
         const options = {
           inlineStyles: customStyleMap,
-          entityStyleFn: entityStyleFn, // Add entity style function for tooltips and images
-          // Optional: customize block rendering
+          inlineStyleFn,
+          entityStyleFn,
           blockRenderers: {
             'header-two': (block: any) => `<h2>${block.getText()}</h2>`,
             'header-three': (block: any) => `<h3>${block.getText()}</h3>`,
@@ -214,30 +157,14 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
             'header-six': (block: any) => `<h6>${block.getText()}</h6>`,
           },
         }
-
-        let html = stateToHTML(contentState, options)
-
-        // Remove image replacement logic since we want to show images in tooltips, not inline
-        // const entityMap = rawContent.entityMap || {}
-        // ... removed
-
-        return html
+        return stateToHTML(contentState, options)
       }
-
-      // Fallback to original string if not Draft.js format
       return str
-    } catch (error) {
-      console.error('Error converting Draft.js to HTML:', error)
+    } catch (err) {
+      console.error('Error converting Draft.js to HTML:', err)
       return str
     }
   }, [content])
-
-  const endedAnchorEntry = useIntersectionObserver(endedAnchorRef, {
-    threshold: 0,
-    root: null,
-    rootMargin: '0%',
-    freezeOnceVisible: false,
-  })
 
   useEffect(() => {
     const handleProgressIndicator = () => {
@@ -353,6 +280,13 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
     }
   }, [renderedHtml])
 
+  const endedAnchorEntry = useIntersectionObserver(endedAnchorRef, {
+    threshold: 0,
+    root: null,
+    rootMargin: '0%',
+    freezeOnceVisible: false,
+  })
+
   const showLikeAndCommentSticky =
     !endedAnchorEntry?.intersectionRatio && (endedAnchorEntry?.boundingClientRect.top || 0) > 0
 
@@ -416,12 +350,10 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
             )}
             {/* Arrow pointing to link */}
             <div
-              className="absolute left-1/2 -translate-x-1/2 transform"
+              className="absolute left-1/2 -translate-x-1/2"
               style={{
                 [tooltipData.showBelow ? 'top' : 'bottom']: 0,
-                [tooltipData.showBelow ? 'transform' : 'transform']: tooltipData.showBelow
-                  ? 'translate(-50%, -100%)'
-                  : 'translate(-50%, 100%)',
+                transform: tooltipData.showBelow ? 'translate(-50%, -100%)' : 'translate(-50%, 100%)',
               }}
             >
               <div
