@@ -81,10 +81,9 @@ const Page = () => {
                   {row.date}
                 </td>
                 <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px]`}>
-                  <div className="line-clamp-2 max-w-[300px] overflow-hidden text-ellipsis whitespace-nowrap md:whitespace-normal">
-                    {row.subject}
-                  </div>
+                  <div className="max-w-[300px] overflow-hidden text-ellipsis whitespace-nowrap">{row.subject}</div>
                 </td>
+
                 <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px]`}>
                   <span
                     className={`inline-flex items-center rounded-[6px] px-6 py-1 text-xs font-medium whitespace-nowrap ${statusColors[row.status]}`}
