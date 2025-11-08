@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 interface TableRow {
   date: string
   subject: string
@@ -9,7 +11,8 @@ const Page = () => {
   const data: TableRow[] = [
     {
       date: '21 Apr 2025',
-      subject: 'is simply dummy text of the printing and typesetting?',
+      subject:
+        'is simply dummy text of the printing and typesetting? is simply dummy text of the printing and typesetting? is simply dummy text of the printing and typesetting? is simply dummy text of the printing and typesetting?',
       status: 'Pending',
       lastUpdated: '21 Apr 2025',
     },
@@ -55,45 +58,56 @@ const Page = () => {
         </button>
       </div>
 
-      <table className="min-w-full overflow-hidden rounded-[10px] border border-[#EAEAEA]">
-        <thead className="">
-          <tr className="bg-[#F2FAF6] text-left">
-            <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A]">Date</th>
-            <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A]">Subject</th>
-            <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A]">Status</th>
-            <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A]">Last Updated</th>
-            <th className="px-5 py-[10px] text-right"></th>
-          </tr>
-        </thead>
-        <tbody className="bg-[#FFFFFF]">
-          {data.map((row, i) => (
-            <tr
-              key={i}
-              className={`border-t border-gray-100 text-sm text-gray-600 transition-colors hover:bg-gray-50 ${
-                i % 2 === 0 ? 'bg-white' : 'bg-[#FBFBFB]'
-              }`}
-            >
-              <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px] whitespace-nowrap`}>
-                {row.date}
-              </td>
-              <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px]`}>{row.subject}</td>
-              <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px]`}>
-                <span className={`rounded-[6px] px-6 py-1 text-xs font-medium ${statusColors[row.status]}`}>
-                  {row.status}
-                </span>
-              </td>
-              <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px] whitespace-nowrap`}>
-                {row.lastUpdated}
-              </td>
-              <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-right`}>
-                <button className="cursor-pointer rounded-md bg-[#CBDB2A] px-3 py-1 text-xs font-medium text-[#00652E] transition hover:bg-[#A7B81D]">
-                  View
-                </button>
-              </td>
+      <div className="overflow-x-auto">
+        <table className="min-w-full overflow-hidden rounded-[10px] border border-[#EAEAEA]">
+          <thead className="">
+            <tr className="bg-[#F2FAF6] text-left">
+              <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A]">Date</th>
+              <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A]">Subject</th>
+              <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A]">Status</th>
+              <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A]">Last Updated</th>
+              <th className="px-5 py-[10px] text-right"></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="bg-[#FFFFFF]">
+            {data.map((row, i) => (
+              <tr
+                key={i}
+                className={`border-t border-gray-100 text-sm text-gray-600 transition-colors hover:bg-gray-50 ${
+                  i % 2 === 0 ? 'bg-white' : 'bg-[#FBFBFB]'
+                }`}
+              >
+                <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px] whitespace-nowrap`}>
+                  {row.date}
+                </td>
+                <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px]`}>
+                  <div className="line-clamp-2 max-w-[300px] overflow-hidden text-ellipsis whitespace-nowrap md:whitespace-normal">
+                    {row.subject}
+                  </div>
+                </td>
+                <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px]`}>
+                  <span
+                    className={`inline-flex items-center rounded-[6px] px-6 py-1 text-xs font-medium whitespace-nowrap ${statusColors[row.status]}`}
+                  >
+                    {row.status}
+                  </span>
+                </td>
+                <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px] whitespace-nowrap`}>
+                  {row.lastUpdated}
+                </td>
+                <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-right`}>
+                  <Link
+                    href="/dashboard/qa/view"
+                    className="inline-block rounded-md bg-[#CBDB2A] px-3 py-1 text-xs font-medium text-[#00652E] transition hover:bg-[#A7B81D]"
+                  >
+                    View
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   )
 }
