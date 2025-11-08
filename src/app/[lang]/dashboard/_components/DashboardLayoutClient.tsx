@@ -69,7 +69,7 @@ const subPages = [
     pageName: 'Saved Read',
   },
   {
-    href: '/dashboard/subscription',
+    href: '/dashboard/qa',
     icon: QAIcon,
     pageName: 'Q & A',
   },
