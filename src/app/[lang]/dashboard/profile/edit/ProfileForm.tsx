@@ -232,7 +232,7 @@ const ProfileForm = () => {
         }}
       />
       <div className="mb-[24px] flex justify-end">
-        <button type="button" className="rounded-[6px] bg-[#00652E] px-4 py-1 text-sm font-semibold text-[#FFFFFF]">
+        <button type="button" className="rounded-[6px] cursor-pointer bg-[#00652E] px-4 py-1 text-sm font-semibold text-[#FFFFFF]">
           Reset Password
         </button>
       </div>
