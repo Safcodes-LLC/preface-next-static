@@ -1,15 +1,16 @@
 'use client'
 import { getAuthToken } from '@/services/authService'
-import { getLoggedUser } from '@/utils/getServices'
+import { getLoggedUser, putProfileUpdate } from '@/utils/getServices'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 
 interface UserData {
+  _id: string
   name: string
   email: string
   username: string
   profile_pic: string
-  // Add other fields as needed
 }
 
 const ProfileForm = () => {
@@ -40,7 +41,7 @@ const ProfileForm = () => {
           address2: result.data.address2 || '',
           city: result.data.city || '',
           state: result.data.state || '',
-          country: result.data.country || 'United Arab Emirates',
+          country: result.data.country || '',
         })
       }
     }
@@ -55,18 +56,71 @@ const ProfileForm = () => {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
+
+    try {
+      // Create FormData object
+      const formDataToSend = new FormData()
+
+      // Append all form fields to FormData
+      formDataToSend.append('name', formData.fullName)
+      formDataToSend.append('email', formData.email)
+      formDataToSend.append('mobile', formData.mobile)
+      formDataToSend.append('address1', formData.address1)
+      formDataToSend.append('address2', formData.address2 || '')
+      formDataToSend.append('city', formData.city)
+      formDataToSend.append('state', formData.state)
+      formDataToSend.append('country', formData.country)
+
+      // Get the token
+      const token = getAuthToken() || ''
+
+      if (!userData?._id) {
+        console.error('User ID is not available')
+        return
+      }
+
+      const response = await putProfileUpdate(userData._id, formDataToSend)
+
+      if (response) {
+        // Handle success (you might want to show a success message)
+        console.log('Profile updated successfully:', response)
+        toast.success('Profile updated successfully!')
+        // Optionally refresh user data
+        const result = await getLoggedUser(token)
+        if (result?.data) {
+          setUserData(result.data)
+        }
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error)
+      // Handle error (you might want to show an error message to the user)
+      toast.error('Failed to update profile. Please try again.')
+    }
   }
 
-  if (!userData) {
-    return <div>Loading...</div>
-  }
+  // if (!userData) {
+  //   return <div>Loading...</div>
+  // }
 
   return (
     <>
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          style: {
+            background: '#333',
+            color: '#fff',
+          },
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 3000,
+          },
+        }}
+      />
       <div className="mb-[24px] flex justify-end">
         <button type="button" className="rounded-[6px] bg-[#00652E] px-4 py-1 text-sm font-semibold text-[#FFFFFF]">
           Reset Password
@@ -79,7 +133,7 @@ const ProfileForm = () => {
             <div className="relative h-20 w-20 overflow-hidden rounded-full">
               <Image
                 alt="Profile picture"
-                src={userData.profile_pic || '/images/fallbackImg.webp'}
+                src={userData?.profile_pic || '/images/fallbackImg.webp'}
                 fill
                 className="rounded-full object-contain"
               />
@@ -220,7 +274,10 @@ const ProfileForm = () => {
         </section>
 
         <div className="col-span-full mt-[24px] flex justify-end">
-          <button type="submit" className="rounded-[6px] bg-[#00652E] px-8 py-1 text-sm font-semibold text-[#FFFFFF]">
+          <button
+            type="submit"
+            className="cursor-pointer rounded-[6px] bg-[#00652E] px-8 py-1 text-sm font-semibold text-[#FFFFFF]"
+          >
             Update
           </button>
         </div>
