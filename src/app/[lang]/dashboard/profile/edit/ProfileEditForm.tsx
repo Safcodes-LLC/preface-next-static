@@ -13,7 +13,7 @@ interface UserData {
   profile_pic: string
 }
 
-const ProfileForm = () => {
+const ProfileEditForm = () => {
   let token = getAuthToken()
   const [userData, setUserData] = useState<UserData | null>(null)
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
@@ -403,4 +403,4 @@ const ProfileForm = () => {
   )
 }
 
-export default ProfileForm
+export default ProfileEditForm
