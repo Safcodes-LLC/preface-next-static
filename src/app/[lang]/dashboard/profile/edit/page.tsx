@@ -1,7 +1,7 @@
-import ProfileForm from './ProfileForm'
+import ProfileEditForm from './ProfileEditForm'
 
 const Page = async () => {
-  return <ProfileForm />
+  return <ProfileEditForm />
 }
 
 export default Page

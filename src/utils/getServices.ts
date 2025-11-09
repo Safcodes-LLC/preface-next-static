@@ -1,5 +1,6 @@
 import { getData } from './getData'
 import { postData } from './postData'
+import { putData } from './putData'
 
 export async function getCustomFeaturedArticle(lang: string): Promise<any | undefined> {
   try {
@@ -133,6 +134,15 @@ export async function getLoggedUser(authToken: string): Promise<any | undefined>
 export async function postGuestTicket(data: any): Promise<any | undefined> {
   try {
     return await postData(`scholar-questions/guest`, data, '', 0)
+  } catch (error) {
+    console.error('Failed to fetch continuos read data:', error)
+    // throw notFound();
+  }
+}
+
+export async function putProfileUpdate(userId: string, data: any): Promise<any | undefined> {
+  try {
+    return await putData(`authentication/update-profile/${userId}`, data, '', 0)
   } catch (error) {
     console.error('Failed to fetch continuos read data:', error)
     // throw notFound();
