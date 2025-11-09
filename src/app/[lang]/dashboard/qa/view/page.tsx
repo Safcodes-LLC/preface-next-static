@@ -1,9 +1,9 @@
 const Page = () => {
   return (
-    <>
-      <div>view page</div>
-      <div>view page</div>
-    </>
+    <div>
+      <div>view page left</div>
+      <div>view page right</div>
+    </div>
   )
 }
 
