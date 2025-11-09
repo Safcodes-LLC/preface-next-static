@@ -27,7 +27,6 @@ const WidgetPosts: FC<Props> = ({
 }) => {
   const shouldScroll = posts && posts.length > 6
 
-
   const parentCategory = posts?.[0]?.parentCategory?.slug
   const viewAllHref = lang === 'en' ? `/${parentCategory}` : `/${lang}/${parentCategory}`
 

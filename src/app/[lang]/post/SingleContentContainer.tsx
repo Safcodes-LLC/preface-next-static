@@ -5,12 +5,23 @@ import { TComment, TPostDetail } from '@/data/posts'
 import useIntersectionObserver from '@/hooks/useIntersectionObserver'
 import { ArrowUp02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import draftToHtml from 'draftjs-to-html'
-import { Noto_Serif } from 'next/font/google'
+import { RawDraftContentState as DraftRawDraftContentState, convertFromRaw } from 'draft-js'
+import { stateToHTML } from 'draft-js-export-html'
+import { Noto_Kufi_Arabic, Noto_Serif, Noto_Serif_Malayalam } from 'next/font/google'
 import { FC, useEffect, useMemo, useRef, useState } from 'react'
 import { ShareDropdown } from './SingleMetaAction'
 
 const notoSerif = Noto_Serif({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+const notoKufiArabic = Noto_Kufi_Arabic({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+const notoSerifMalayalam = Noto_Serif_Malayalam({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400', '500', '600', '700'],
@@ -59,25 +70,133 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
   //
 
   const { tags, author, content, likeCount, favoriteCount, commentCount, liked, handle } = post
+
+  // State for custom tooltip
+  const [tooltipData, setTooltipData] = useState<{
+    visible: boolean
+    content: string
+    imageUrl: string
+    x: number
+    y: number
+    showBelow?: boolean
+  }>({
+    visible: false,
+    content: '',
+    imageUrl: '',
+    x: 0,
+    y: 0,
+    showBelow: false,
+  })
+
   const renderedHtml = useMemo(() => {
+    // Theme-independent inline styles to avoid hydration mismatches
+    const customStyleMap = {
+      FONTWEIGHT_NORMAL: { style: { fontWeight: '400' } },
+      FONTWEIGHT_SLIM: { style: { fontWeight: '300' } },
+      FONTWEIGHT_MEDIUM: { style: { fontWeight: '500' } },
+      FONTWEIGHT_SEMIBOLD: { style: { fontWeight: '600' } },
+      FONTWEIGHT_BOLD: { style: { fontWeight: '700' } },
+      FONTWEIGHT_EXTRABOLD: { style: { fontWeight: '800' } },
+      // NOTE: Highlights are applied via classes using inlineStyleFn below
+    } as const
+
     const str = typeof content === 'string' ? content : String(content ?? '')
     try {
       const parsed = JSON.parse(str) as unknown
       if (parsed && typeof parsed === 'object' && Array.isArray((parsed as { blocks?: unknown }).blocks)) {
-        return draftToHtml(parsed as unknown as RawDraftContentState)
+        const rawContent = parsed as DraftRawDraftContentState
+
+        // DEBUG: Log the content to verify alignment data
+        console.log('=== FRONTEND: Raw Draft.js Content ===')
+        console.log(
+          'Blocks with alignment:',
+          rawContent.blocks.map((b) => ({
+            text: b.text.substring(0, 30),
+            type: b.type,
+            alignment: b.data?.['text-align'],
+          }))
+        )
+
+        const contentState = convertFromRaw(rawContent)
+
+        const entityStyleFn = (entity: any) => {
+          if (entity.get('type').toLowerCase() === 'link') {
+            const data = entity.getData()
+            const { url, target, tooltipContent, imageUrl } = data
+            const attributes: any = {
+              href: url || '#',
+              target: target || '_blank',
+              rel: target === '_blank' ? 'noopener noreferrer' : undefined,
+            }
+            if (tooltipContent || imageUrl) {
+              attributes['data-tooltip-content'] = tooltipContent || ''
+              attributes['data-tooltip-image'] = imageUrl || ''
+              attributes.class = 'has-custom-tooltip'
+            }
+            return { element: 'a', attributes }
+          }
+          return undefined
+        }
+
+        // Apply highlight backgrounds via classes to keep HTML static; CSS handles dark mode
+        const inlineStyleFn = (styles: any) => {
+          const cls: string[] = []
+          if (styles.has && styles.has('HIGHLIGHT_YELLOW'))
+            cls.push('px-0.5 rounded-sm bg-yellow-200 dark:bg-yellow-200/30')
+          if (styles.has && styles.has('HIGHLIGHT_GREEN'))
+            cls.push('px-0.5 rounded-sm bg-green-200 dark:bg-green-200/30')
+          if (styles.has && styles.has('HIGHLIGHT_BLUE')) cls.push('px-0.5 rounded-sm bg-sky-200 dark:bg-sky-900/50')
+          if (styles.has && styles.has('HIGHLIGHT_PINK')) cls.push('px-0.5 rounded-sm bg-pink-200 dark:bg-pink-200/30')
+          if (styles.has && styles.has('HIGHLIGHT_ORANGE'))
+            cls.push('px-0.5 rounded-sm bg-orange-200 dark:bg-orange-200/30')
+          if (styles.has && styles.has('HIGHLIGHT_PURPLE'))
+            cls.push('px-0.5 rounded-sm bg-purple-200 dark:bg-purple-200/30')
+          if (cls.length) {
+            return { element: 'span', attributes: { class: cls.join(' ') } }
+          }
+          return undefined
+        }
+
+        // Custom block style function to add alignment classes
+        const blockStyleFn = (block: any) => {
+          const alignment = block.getData().get('text-align')
+          if (alignment) {
+            console.log(`Adding alignment class: text-align-${alignment}`)
+            return {
+              attributes: {
+                class: `text-align-${alignment}`,
+              },
+            }
+          }
+          return undefined
+        }
+
+        const options = {
+          inlineStyles: customStyleMap,
+          inlineStyleFn,
+          entityStyleFn,
+          blockStyleFn, // Add the block style function
+          blockRenderers: {
+            'header-two': (block: any) => `<h2>${block.getText()}</h2>`,
+            'header-three': (block: any) => `<h3>${block.getText()}</h3>`,
+            'header-four': (block: any) => `<h4>${block.getText()}</h4>`,
+            'header-five': (block: any) => `<h5>${block.getText()}</h5>`,
+            'header-six': (block: any) => `<h6>${block.getText()}</h6>`,
+          },
+        }
+
+        const html = stateToHTML(contentState, options)
+        console.log('=== Generated HTML (first 500 chars) ===')
+        console.log(html.substring(0, 500))
+
+        return html
       }
       return str
-    } catch {
+    } catch (err) {
+      console.error('Error converting Draft.js to HTML:', err)
       return str
     }
   }, [content])
-
-  const endedAnchorEntry = useIntersectionObserver(endedAnchorRef, {
-    threshold: 0,
-    root: null,
-    rootMargin: '0%',
-    freezeOnceVisible: false,
-  })
 
   useEffect(() => {
     const handleProgressIndicator = () => {
@@ -115,6 +234,91 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
     }
   }, [])
 
+  // Handle custom tooltip on link hover
+  useEffect(() => {
+    const handleMouseEnter = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+
+      if (target.tagName === 'A' && target.classList.contains('has-custom-tooltip')) {
+        const tooltipContent = target.getAttribute('data-tooltip-content') || ''
+        const imageUrl = target.getAttribute('data-tooltip-image') || ''
+
+        if (tooltipContent || imageUrl) {
+          const rect = target.getBoundingClientRect()
+          const tooltipWidth = 288 // max-w-xs is approximately 288px (20rem)
+          const estimatedTooltipHeight = imageUrl ? 250 : 80 // Estimate tooltip height
+
+          // Calculate horizontal position with viewport boundaries
+          let xPos = rect.left + rect.width / 2
+          const viewportWidth = window.innerWidth
+
+          // Adjust if tooltip would overflow on left
+          if (xPos - tooltipWidth / 2 < 10) {
+            xPos = tooltipWidth / 2 + 10
+          }
+          // Adjust if tooltip would overflow on right
+          if (xPos + tooltipWidth / 2 > viewportWidth - 10) {
+            xPos = viewportWidth - tooltipWidth / 2 - 10
+          }
+
+          // Calculate vertical position - show above the link by default
+          // Use absolute positioning relative to viewport
+          let yPos = rect.top - 10
+          let showBelow = false
+
+          // If not enough space above, show below
+          if (rect.top < estimatedTooltipHeight + 20) {
+            yPos = rect.bottom + 10
+            showBelow = true
+          }
+
+          setTooltipData({
+            visible: true,
+            content: tooltipContent,
+            imageUrl: imageUrl,
+            x: xPos,
+            y: yPos,
+            showBelow: showBelow,
+          })
+        }
+      }
+    }
+
+    const handleMouseLeave = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (target.tagName === 'A' && target.classList.contains('has-custom-tooltip')) {
+        // Hide tooltip when mouse leaves the link
+        setTooltipData((prev) => ({ ...prev, visible: false }))
+      }
+    }
+
+    const handleScroll = () => {
+      // Hide tooltip on scroll
+      setTooltipData((prev) => ({ ...prev, visible: false }))
+    }
+
+    const content = contentRef.current
+    if (content) {
+      // Use capture phase to catch events on all links
+      content.addEventListener('mouseenter', handleMouseEnter, true)
+      content.addEventListener('mouseleave', handleMouseLeave, true)
+      window.addEventListener('scroll', handleScroll, { passive: true })
+
+      return () => {
+        content.removeEventListener('mouseenter', handleMouseEnter, true)
+        content.removeEventListener('mouseleave', handleMouseLeave, true)
+        window.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [renderedHtml])
+
+  const endedAnchorEntry = useIntersectionObserver(endedAnchorRef, {
+    threshold: 0,
+    root: null,
+    rootMargin: '0%',
+    freezeOnceVisible: false,
+  })
+
   const showLikeAndCommentSticky =
     !endedAnchorEntry?.intersectionRatio && (endedAnchorEntry?.boundingClientRect.top || 0) > 0
 
@@ -129,8 +333,15 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
         >
           <div
             dangerouslySetInnerHTML={{ __html: renderedHtml }}
-            className="dark:[&_*]:!text-white"
-            style={{ fontFamily: notoSerif.style.fontFamily }}
+            className="article-content [&_a]:text-blue-600 [&_a]:underline [&_a]:transition-colors [&_a]:hover:text-blue-800 dark:[&_a]:text-blue-400 dark:[&_a]:hover:text-blue-300 [&_a.has-custom-tooltip]:cursor-help [&_a.has-custom-tooltip]:border-b [&_a.has-custom-tooltip]:border-dotted [&_a.has-custom-tooltip]:border-blue-600 dark:[&_a.has-custom-tooltip]:border-blue-400"
+            style={{
+              fontFamily:
+                lang === 'ar'
+                  ? notoKufiArabic.style.fontFamily
+                  : lang === 'ml'
+                    ? notoSerifMalayalam.style.fontFamily
+                    : notoSerif.style.fontFamily,
+            }}
           />
         </div>
 
@@ -140,12 +351,59 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
         </div>
       </div>
 
+      {/* Custom Tooltip with Image */}
+      {tooltipData.visible && (tooltipData.content || tooltipData.imageUrl) && (
+        <div
+          className="pointer-events-none fixed z-[9999] px-2 transition-opacity duration-200"
+          style={{
+            left: `${tooltipData.x}px`,
+            top: `${tooltipData.y}px`,
+            transform: tooltipData.showBelow ? 'translate(-50%, 0)' : 'translate(-50%, -100%)',
+            maxWidth: 'calc(100vw - 20px)',
+          }}
+        >
+          <div className="w-max max-w-xs rounded-lg border bg-white p-3 text-black shadow-2xl dark:bg-[#0d0d0d] dark:text-white">
+            {tooltipData.imageUrl && (
+              <div className="mb-2">
+                <img
+                  src={tooltipData.imageUrl}
+                  alt="Tooltip"
+                  className="h-auto max-h-48 w-full rounded object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none'
+                  }}
+                />
+              </div>
+            )}
+            {tooltipData.content && (
+              <p className="m-0 text-xs leading-relaxed break-words whitespace-pre-wrap sm:text-sm">
+                {tooltipData.content}
+              </p>
+            )}
+            {/* Arrow pointing to link */}
+            <div
+              className="absolute left-1/2 -translate-x-1/2"
+              style={{
+                [tooltipData.showBelow ? 'top' : 'bottom']: 0,
+                transform: tooltipData.showBelow ? 'translate(-50%, -100%)' : 'translate(-50%, 100%)',
+              }}
+            >
+              <div
+                className={`h-0 w-0 border-r-[6px] border-l-[6px] border-r-transparent border-l-transparent ${
+                  tooltipData.showBelow
+                    ? 'border-b-[6px] border-b-gray-900 dark:border-b-gray-800'
+                    : 'border-t-[6px] border-t-gray-900 dark:border-t-gray-800'
+                }`}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* LIKE AND COMMENT STICKY */}
       <div className={`sticky bottom-8 z-11 mt-8 justify-center ${showLikeAndCommentSticky ? 'flex' : 'hidden'}`}>
         <div className="flex items-center justify-center gap-x-2 rounded-full bg-white p-1.5 text-xs shadow-lg ring-1 ring-black/5 dark:bg-neutral-800 dark:ring-white/20">
           <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-          {/* <div className="h-4 border-s border-neutral-200 dark:border-neutral-700"></div>
-          <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
           <div className="h-4 border-s border-neutral-200 dark:border-neutral-700"></div>
           <ShareDropdown handle={handle} />
           <div className="h-4 border-s border-neutral-200 dark:border-neutral-700"></div>

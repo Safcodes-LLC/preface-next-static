@@ -47,7 +47,7 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang,
       return `${parentCategorySlug}/${mainCategorySlug}/${slug}`
     }
     if (mainCategorySlug) {
-      return `${parentCategorySlug}/${mainCategorySlug}/${slug}`
+      return lang === 'en' ? `${mainCategorySlug}/${slug}` : `${parentCategorySlug}/${mainCategorySlug}/${slug}`
     }
 
     return `/post/${handle}`

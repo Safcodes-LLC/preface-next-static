@@ -53,7 +53,7 @@ export default function DashboardSidebar({ subPages, pathname }: DashboardSideba
                 <li key={`desktop-${index}`}>
                   <Link
                     href={Item.href}
-                    className={`flex cursor-pointer items-center rounded-lg bg-[#F0F0F0] p-3 text-sm transition-colors dark:bg-[#0D0D0D] ${
+                    className={`flex cursor-pointer items-center rounded-lg bg-[#F0F0F0] p-3 text-sm dark:bg-[#0D0D0D] ${
                       isActive
                         ? 'bg-[#FFFFFF] text-[#00652E] dark:bg-[#1D1D1D] dark:text-[#60A43A]'
                         : 'text-neutral-700 hover:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-neutral-700/50'

@@ -1,6 +1,6 @@
 import SectionMagazine3 from '@/components/SectionMagazine3'
 
-const page = async ({ params }: any) => {
+const Page = async ({ params }: any) => {
   const { lang } = await params
   return (
     <div className="">
@@ -10,4 +10,4 @@ const page = async ({ params }: any) => {
   )
 }
 
-export default page
+export default Page
