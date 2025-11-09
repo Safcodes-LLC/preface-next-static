@@ -280,3 +280,87 @@
 @utility sub-menu {
   @apply hidden;
 }
+
+/* Text Alignment Classes for Draft.js Content */
+.text-align-left {
+  text-align: left !important;
+}
+
+.text-align-center {
+  text-align: center !important;
+}
+
+.text-align-right {
+  text-align: right !important;
+}
+
+.text-align-justify {
+  text-align: justify !important;
+}
+
+/* Ensure alignment works within article content */
+.article-content .text-align-left {
+  text-align: left !important;
+}
+
+.article-content .text-align-center {
+  text-align: center !important;
+}
+
+.article-content .text-align-right {
+  text-align: right !important;
+}
+
+.article-content .text-align-justify {
+  text-align: justify !important;
+}
+
+/* Ensure children inherit alignment */
+.text-align-left > *,
+.text-align-center > *,
+.text-align-right > *,
+.text-align-justify > * {
+  text-align: inherit !important;
+}
+
+/* Override any prose/typography defaults that might interfere */
+.prose .text-align-left,
+.prose .text-align-center,
+.prose .text-align-right,
+.prose .text-align-justify {
+  text-align: inherit !important;
+}
+
+/* Text Alignment for Draft.js Content */
+.text-align-left {
+  text-align: left !important;
+}
+
+.text-align-center {
+  text-align: center !important;
+}
+
+.text-align-right {
+  text-align: right !important;
+}
+
+.text-align-justify {
+  text-align: justify !important;
+}
+
+/* Ensure prose doesn't override */
+.prose .text-align-left {
+  text-align: left !important;
+}
+
+.prose .text-align-center {
+  text-align: center !important;
+}
+
+.prose .text-align-right {
+  text-align: right !important;
+}
+
+.prose .text-align-justify {
+  text-align: justify !important;
+}

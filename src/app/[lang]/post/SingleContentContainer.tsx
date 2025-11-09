@@ -105,6 +105,18 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
       const parsed = JSON.parse(str) as unknown
       if (parsed && typeof parsed === 'object' && Array.isArray((parsed as { blocks?: unknown }).blocks)) {
         const rawContent = parsed as DraftRawDraftContentState
+
+        // DEBUG: Log the content to verify alignment data
+        console.log('=== FRONTEND: Raw Draft.js Content ===')
+        console.log(
+          'Blocks with alignment:',
+          rawContent.blocks.map((b) => ({
+            text: b.text.substring(0, 30),
+            type: b.type,
+            alignment: b.data?.['text-align'],
+          }))
+        )
+
         const contentState = convertFromRaw(rawContent)
 
         const entityStyleFn = (entity: any) => {
@@ -145,10 +157,25 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
           return undefined
         }
 
+        // Custom block style function to add alignment classes
+        const blockStyleFn = (block: any) => {
+          const alignment = block.getData().get('text-align')
+          if (alignment) {
+            console.log(`Adding alignment class: text-align-${alignment}`)
+            return {
+              attributes: {
+                class: `text-align-${alignment}`,
+              },
+            }
+          }
+          return undefined
+        }
+
         const options = {
           inlineStyles: customStyleMap,
           inlineStyleFn,
           entityStyleFn,
+          blockStyleFn, // Add the block style function
           blockRenderers: {
             'header-two': (block: any) => `<h2>${block.getText()}</h2>`,
             'header-three': (block: any) => `<h3>${block.getText()}</h3>`,
@@ -157,7 +184,12 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
             'header-six': (block: any) => `<h6>${block.getText()}</h6>`,
           },
         }
-        return stateToHTML(contentState, options)
+
+        const html = stateToHTML(contentState, options)
+        console.log('=== Generated HTML (first 500 chars) ===')
+        console.log(html.substring(0, 500))
+
+        return html
       }
       return str
     } catch (err) {
@@ -372,8 +404,6 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
       <div className={`sticky bottom-8 z-11 mt-8 justify-center ${showLikeAndCommentSticky ? 'flex' : 'hidden'}`}>
         <div className="flex items-center justify-center gap-x-2 rounded-full bg-white p-1.5 text-xs shadow-lg ring-1 ring-black/5 dark:bg-neutral-800 dark:ring-white/20">
           <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-          {/* <div className="h-4 border-s border-neutral-200 dark:border-neutral-700"></div>
-          <PostCardCommentBtn commentCount={commentCount} handle={handle} /> */}
           <div className="h-4 border-s border-neutral-200 dark:border-neutral-700"></div>
           <ShareDropdown handle={handle} />
           <div className="h-4 border-s border-neutral-200 dark:border-neutral-700"></div>
