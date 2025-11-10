@@ -33,7 +33,7 @@ const ProfileForm = () => {
         setIsLoading(false)
       }
     }
-    
+
     if (token) {
       fetchUser()
     } else {
@@ -44,7 +44,7 @@ const ProfileForm = () => {
   if (isLoading) {
     return (
       <div className="flex h-64 items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+        <div className="border-primary h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
       </div>
     )
   }
@@ -67,12 +67,12 @@ const ProfileForm = () => {
             <div className="relative h-20 w-20 overflow-hidden rounded-full">
               <Image
                 alt="Profile picture of user"
-                src={profile_pic || "/images/fallbackImg.webp"}
+                src={profile_pic || '/images/fallbackImg.webp'}
                 fill
                 className="rounded-full object-cover"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement
-                  target.src = "/images/fallbackImg.webp"
+                  target.src = '/images/fallbackImg.webp'
                 }}
               />
             </div>

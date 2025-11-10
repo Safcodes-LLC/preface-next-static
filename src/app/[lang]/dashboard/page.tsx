@@ -66,11 +66,11 @@ const Page = async ({ params, dict }: any) => {
 
   return (
     <ProtectedRoute>
-      <div className="grid grid-cols-1 gap-6 pb-[40px] sm:sticky sm:top-[190px] sm:z-10 sm:bg-[#F8F8F8] md:grid-cols-2 lg:grid-cols-4 sm:dark:bg-black">
+      <div className="grid grid-cols-12 gap-6 pb-[40px] max-md:gap-[15px] sm:sticky sm:top-[190px] sm:z-10 sm:bg-[#F8F8F8] sm:dark:bg-black">
         <StatusDashboard dashboardItems={dashboardItems} />
       </div>
 
-      <div className="mt-12">
+      <div className="mt-0">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Continuous Read</h2>
         <p className="mt-1 mb-4 text-gray-600 dark:text-gray-300">Latest 6 topics you started reading</p>
 
@@ -83,7 +83,10 @@ const Page = async ({ params, dict }: any) => {
       </div>
 
       {/* saved read and favourite section */}
-      <SectionMagazine2 lang={lang} gridClass="grid grid-cols-2 md:grid-cols-3 gap-6" />
+      <SectionMagazine2
+        lang={lang}
+        gridClass="grid grid-cols-2 md:grid-cols-3 max-md:grid-cols-1 gap-6 max-md:gap-[20px]"
+      />
     </ProtectedRoute>
   )
 }
