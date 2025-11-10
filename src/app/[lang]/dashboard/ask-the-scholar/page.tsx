@@ -96,7 +96,7 @@ const Page = () => {
                 </td>
                 <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-right`}>
                   <Link
-                    href="/dashboard/qa/view"
+                    href="/dashboard/ask-the-scholar/view"
                     className="inline-block rounded-md bg-[#CBDB2A] px-3 py-1 text-xs font-medium text-[#00652E] transition hover:bg-[#A7B81D]"
                   >
                     View

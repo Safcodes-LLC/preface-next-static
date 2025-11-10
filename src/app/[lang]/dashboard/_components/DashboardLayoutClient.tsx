@@ -69,7 +69,7 @@ const subPages = [
     pageName: 'Saved Read',
   },
   {
-    href: '/dashboard/qa',
+    href: '/dashboard/ask-the-scholar',
     icon: QAIcon,
     pageName: 'Q & A',
   },
@@ -212,7 +212,7 @@ export default function DashboardLayoutClient({ children }: { children: React.Re
         </header>
 
         <main>
-          <div className="grid grid-cols-12 gap-8 py-10">
+          <div className="grid grid-cols-12 gap-8 p-[40px_0] max-md:gap-[20px_0] max-md:p-[20px_0_40px]">
             <DashboardSidebar subPages={subPages} pathname={pathname} />
             <div className="col-span-12 lg:col-span-10">{children}</div>
           </div>
