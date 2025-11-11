@@ -97,7 +97,7 @@ export default function DashboardLayoutClient({ children }: { children: React.Re
           <div className="flex h-20 justify-between">
             <div className="flex">
               <div className="flex shrink-0 items-center">
-                <Logo size="size-10" />
+                <Logo size="size-10" lang="en" />
               </div>
             </div>
             <div className="hidden gap-x-4 sm:ms-6 sm:flex sm:items-center">
