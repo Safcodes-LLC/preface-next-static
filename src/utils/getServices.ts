@@ -148,3 +148,45 @@ export async function putProfileUpdate(userId: string, data: any): Promise<any |
     // throw notFound();
   }
 }
+
+export async function postAskTheScolarQuestion(data: any, authToken: string): Promise<any | undefined> {
+  try {
+    return await postData(`scholar-questions/user`, data, authToken || '', 0)
+  } catch (error) {
+    console.error('Failed to fetch continuos read data:', error)
+    // throw notFound();
+  }
+}
+export async function postAskTheScolarReplay(
+  questionId: string,
+  data: any,
+  authToken: string
+): Promise<any | undefined> {
+  try {
+    return await postData(`scholar-questions/user-reply/${questionId}`, data, authToken || '', 0)
+  } catch (error) {
+    console.error('Failed to fetch continuos read data:', error)
+    // throw notFound();
+  }
+}
+
+export async function getAskTheScholarAllQuestions(authToken: string): Promise<any | undefined> {
+  try {
+    return await getData(`scholar-questions/userAllQuestions`, authToken || '', 0)
+  } catch (error) {
+    console.error('Failed to fetch continuos read data:', error)
+    // throw notFound();
+  }
+}
+
+export async function getAskTheScholarSingleQuestionsById(
+  questionId: string,
+  authToken: string
+): Promise<any | undefined> {
+  try {
+    return await getData(`scholar-questions/${questionId}`, authToken || '', 0)
+  } catch (error) {
+    console.error('Failed to fetch continuos read data:', error)
+    // throw notFound();
+  }
+}
