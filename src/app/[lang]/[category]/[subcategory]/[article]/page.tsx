@@ -130,7 +130,7 @@ const Page = async ({
           </div>
         </div>
       </div>
-      <div className="relative mt-16 bg-neutral-50 py-16 lg:mt-28 lg:py-24 dark:bg-neutral-800">
+      <div className="relative mt-16 bg-white py-16 lg:mt-28 lg:py-24 dark:bg-[#0D0D0D]">
         <div className="container space-y-16 lg:space-y-28">
           <Suspense fallback={<SectionSliderPostsSkeleton />}>
             <SectionSliderPosts
@@ -138,7 +138,7 @@ const Page = async ({
               heading={`${dict.sections.populararticles.heading}`}
               postCardName="card10V5"
             />
-          </Suspense>
+          </Suspense>z
         </div>
       </div>
 
