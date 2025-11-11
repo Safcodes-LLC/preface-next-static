@@ -63,7 +63,7 @@ const AskNewQuestion = (props: Props) => {
   }
 
   return (
-    <div className="flex items-center justify-center rounded-[12px] bg-white p-[40px] max-md:p-[20px]">
+    <div className="flex items-center justify-center rounded-[12px] bg-white dark:bg-[#0D0D0D] p-[40px] max-md:p-[20px]">
       <form onSubmit={handleSubmit} className="flex w-2/3 flex-col gap-[20px] max-md:w-full">
         <div className="flex w-3/4 flex-col gap-1">
           <label htmlFor="regarding">Regarding</label>
@@ -71,7 +71,7 @@ const AskNewQuestion = (props: Props) => {
             id="regarding"
             value={regarding}
             onChange={(e) => setRegarding(e.target.value)}
-            className="h-full w-full rounded-[8px] border border-[#DEDEDE] p-2"
+            className="h-full w-full rounded-[8px] dark:bg-[#303030] border border-[#DEDEDE] dark:border-[#5B5B5B] p-2"
             required
           >
             <option value="">Select a topic</option>
@@ -90,7 +90,7 @@ const AskNewQuestion = (props: Props) => {
             type="text"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
-            className="h-full w-full rounded-[8px] border border-[#DEDEDE] p-2"
+            className="h-full w-full rounded-[8px] dark:bg-[#303030] border border-[#DEDEDE] dark:border-[#5B5B5B] p-2"
             placeholder="Subject"
             required
           />
@@ -102,7 +102,7 @@ const AskNewQuestion = (props: Props) => {
             rows={4}
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
-            className="h-full w-full rounded-[8px] border border-[#DEDEDE] p-2"
+            className="h-full w-full rounded-[8px] dark:bg-[#303030] border border-[#DEDEDE] dark:border-[#5B5B5B] p-2"
             placeholder="Message"
             required
           />
@@ -111,7 +111,7 @@ const AskNewQuestion = (props: Props) => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full cursor-pointer rounded-[8px] bg-green-600 p-2 font-semibold text-white transition-colors duration-200 hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full cursor-pointer rounded-[8px] bg-[#60A43A] p-2 font-semibold text-white transition-colors duration-200 hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? 'Submitting...' : 'Submit'}
           </button>

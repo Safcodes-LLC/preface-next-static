@@ -106,13 +106,13 @@ const MassageSection = ({ questionId }: Props) => {
           <div key={msg._id || idx} className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
             <div
               className={`m-[10px] flex w-[80%] flex-col gap-[15px] rounded-[15px] p-[20px] drop-shadow-lg max-md:w-[85%] max-md:rounded-[8px] max-md:p-[15px] ${
-                isUser ? 'bg-[#E0F4E9]' : 'bg-white'
+                isUser ? 'bg-[#E0F4E9] dark:bg-[#1D1D1D]' : 'bg-white dark:bg-[#0D0D0D]'
               }`}
             >
               <div className="flex justify-between">
                 <div className="flex items-center gap-2">
                   <div className="h-[50px] w-[50px] rounded-full bg-[#D9D9D9] max-md:h-[30px] max-md:w-[30px]"></div>
-                  <p className="text-[18px] font-medium text-black max-md:text-[16px]">
+                  <p className="text-[18px] font-medium text-black dark:text-white max-md:text-[16px]">
                     {isUser ? 'User' : msg.sender || 'Admin'}
                   </p>
                 </div>
@@ -121,9 +121,9 @@ const MassageSection = ({ questionId }: Props) => {
                   <p className="text-end text-[12px] text-[#878787]">{formatTime(msg.sentAt)}</p>
                 </div>
               </div>
-              <hr className="border-gray-300" />
+              <hr className="border-gray-300 dark:border-[#272727]" />
               <div>
-                <p className="max-md:text-[14px]">{msg.message}</p>
+                <p className="max-md:text-[14px] dark:text-white">{msg.message}</p>
               </div>
             </div>
           </div>
