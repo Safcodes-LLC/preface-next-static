@@ -3,7 +3,7 @@
 import ModalAskTheScholar from '@/components/ModalAskTheScholar'
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface Props {
   className?: string
@@ -14,6 +14,12 @@ interface Props {
 
 const AskScholarButton = ({ className, home, isTransparentHeader, dict }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [token, setToken] = useState<string | null>(null)
+
+  useEffect(() => {
+    // This code will only run on the client side
+    setToken(localStorage.getItem('authToken'))
+  }, [])
 
   const handleAskScholarClick = () => {
     setIsModalOpen(true)
@@ -22,7 +28,6 @@ const AskScholarButton = ({ className, home, isTransparentHeader, dict }: Props)
   const handleCloseModal = () => {
     setIsModalOpen(false)
   }
-  const token = localStorage.getItem('authToken')
 
   return (
     <>
@@ -40,7 +45,7 @@ const AskScholarButton = ({ className, home, isTransparentHeader, dict }: Props)
           style={{ marginTop: 0 }}
         >
           <ChatBubbleLeftRightIcon className="h-5 w-5" aria-hidden="true" />
-          <span className="whitespace-nowrap">{dict.navigation.askthescholar}</span>
+          <span className="whitespace-nowrap">{dict?.navigation?.askthescholar}</span>
         </Link>
       ) : (
         <button
@@ -56,7 +61,7 @@ const AskScholarButton = ({ className, home, isTransparentHeader, dict }: Props)
           style={{ marginTop: 0 }}
         >
           <ChatBubbleLeftRightIcon className="h-5 w-5" aria-hidden="true" />
-          <span className="whitespace-nowrap">{dict.navigation.askthescholar}</span>
+          <span className="whitespace-nowrap">{dict?.navigation?.askthescholar}</span>
         </button>
       )}
 
