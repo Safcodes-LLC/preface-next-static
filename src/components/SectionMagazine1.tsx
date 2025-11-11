@@ -16,6 +16,8 @@ const SectionMagazine1: FC<Props> = ({ className, lang }) => {
   const [posts, setPosts] = useState<any[]>([])
   const { user } = useAuth()
 
+  console.log(posts,"posts");
+  
   useEffect(() => {
     const fetchData = async () => {
       if (!user?._id) return

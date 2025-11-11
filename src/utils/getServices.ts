@@ -190,3 +190,12 @@ export async function getAskTheScholarSingleQuestionsById(
     // throw notFound();
   }
 }
+
+export async function getCompletedReadByCategory(userId: string): Promise<any | undefined> {
+  try {
+    return await getData(`user/completed-read-posts-by-category/${userId}`, '', 0)
+  } catch (error) {
+    console.error('Failed to fetch completed read data:', error)
+    // throw notFound();
+  }
+}
