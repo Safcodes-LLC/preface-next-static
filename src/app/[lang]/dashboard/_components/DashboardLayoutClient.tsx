@@ -91,8 +91,8 @@ export default function DashboardLayoutClient({ children }: { children: React.Re
   const pageTitle = navigation.find((item) => isActive(item.href))?.name ?? 'Dashboard'
 
   return (
-    <div className="min-h-screen">
-      <Disclosure as="nav" className="sticky top-0 z-20 bg-[#F8F8F8] dark:bg-black">
+    <div className="h-screen max-md:h-full md:overflow-hidden">
+      <Disclosure as="nav" className="top-0 left-0 z-20 w-full bg-[#F8F8F8] max-md:fixed dark:bg-black">
         <div className="container">
           <div className="flex h-20 justify-between">
             <div className="flex">
@@ -182,11 +182,15 @@ export default function DashboardLayoutClient({ children }: { children: React.Re
         </DisclosurePanel>
       </Disclosure>
 
-      <div className="container py-12 sm:bg-[#F8F8F8] sm:dark:bg-black">
-        <header className="py-[20px] sm:sticky sm:top-[80px] sm:z-10 sm:bg-[#F8F8F8] sm:dark:bg-black">
-          <h1 className="text-3xl font-bold tracking-tight text-[#00652E] dark:text-[#60A43A]">{pageTitle}</h1>
+      <div className="container max-md:p-[80px_20px_40px] sm:bg-[#F8F8F8] md:py-[40px] sm:dark:bg-black">
+        <header className="py-[20px] sm:bg-[#F8F8F8] sm:dark:bg-black">
+          <h1 className="text-3xl font-bold tracking-tight text-[#00652E] max-md:text-[22px] dark:text-[#60A43A]">
+            {pageTitle}
+          </h1>
           <div className="flex flex-col justify-between gap-4 sm:flex-row">
-            <span className="text-lg text-[#444444] dark:text-[#DFDFDF]">View your dashboard, manage your posts</span>
+            <span className="text-lg text-[#444444] max-md:mt-1 max-md:text-[14px] dark:text-[#DFDFDF]">
+              View your dashboard, manage your posts
+            </span>
 
             <div className="flex gap-4">
               {navigation.map((item) => (
@@ -212,9 +216,11 @@ export default function DashboardLayoutClient({ children }: { children: React.Re
         </header>
 
         <main>
-          <div className="grid grid-cols-12 gap-8 p-[40px_0] max-md:gap-[20px_0] max-md:p-[20px_0_40px]">
+          <div className="grid grid-cols-12 gap-8 max-md:gap-[20px_0] max-md:p-[20px_0_40px]">
             <DashboardSidebar subPages={subPages} pathname={pathname} />
-            <div className="col-span-12 lg:col-span-10">{children}</div>
+            <div className="dashboard-scrollbar col-span-12 h-[calc(100vh-280px)] md:overflow-y-auto md:pe-[20px] lg:col-span-10">
+              {children}
+            </div>
           </div>
         </main>
       </div>

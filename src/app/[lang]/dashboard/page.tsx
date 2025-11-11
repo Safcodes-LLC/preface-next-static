@@ -66,7 +66,7 @@ const Page = async ({ params, dict }: any) => {
 
   return (
     <ProtectedRoute>
-      <div className="grid grid-cols-12 gap-6 pb-[40px] max-md:gap-[15px] sm:sticky sm:top-[190px] sm:z-10 sm:bg-[#F8F8F8] sm:dark:bg-black">
+      <div className="grid grid-cols-12 gap-6 pb-[40px] max-md:gap-[15px] sm:bg-[#F8F8F8] sm:dark:bg-black">
         <StatusDashboard dashboardItems={dashboardItems} />
       </div>
 
