@@ -1,8 +1,10 @@
 import React from 'react'
 import QuestionsListData from './components/QuestionsListData'
 
-const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
-  const { lang } = await params
+// In Next.js App Router, params is provided synchronously as an object, not a Promise.
+// Fix the typing and remove the unnecessary async/await to satisfy build type checks.
+const Page = ({ params }: { params: { lang: string } }) => {
+  const { lang } = params
   const statusColors = {
     Pending: 'bg-[#F4CDB1] text-[#FF7700]',
     Closed: 'bg-gray-500 text-white',
