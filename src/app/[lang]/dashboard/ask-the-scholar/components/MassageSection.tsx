@@ -1,5 +1,7 @@
 'use client'
-import { getAskTheScholarSingleQuestionsById } from '@/utils/getServices'
+import { fallbackImg } from '@/data/fallbackImg'
+import { getAskTheScholarSingleQuestionsById, getLoggedUser } from '@/utils/getServices'
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 
 type Props = {
@@ -26,6 +28,7 @@ type Reply = {
 
 const MassageSection = ({ questionId }: Props) => {
   const [question, setQuestion] = useState<Question | null>(null)
+  const [isUserData, setNowUserData] = useState<any>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const listRef = useRef<HTMLDivElement>(null)
@@ -46,11 +49,15 @@ const MassageSection = ({ questionId }: Props) => {
         }
 
         const res = await getAskTheScholarSingleQuestionsById(questionId, token)
+        const userData = await getLoggedUser(token)
         // Many APIs return either { data: {...} } or a raw object
         const data: Question | null = (res && (res.data ?? res)) || null
-        if (isMounted) setQuestion(data)
+        if (isMounted) {
+          setQuestion(data)
+          setNowUserData(userData.data)
+        }
       } catch (e: any) {
-        if (isMounted) setError(e?.message || 'Failed to load question')
+        if (isMounted) setError(e?.message || 'Failed to load question and user data')
       } finally {
         if (isMounted) setLoading(false)
       }
@@ -68,6 +75,7 @@ const MassageSection = ({ questionId }: Props) => {
   }, [question?.replies])
 
   console.log('question', question)
+  console.log('userData', isUserData)
 
   // Helpers to format date and time separately
   const formatDate = (dateStr?: string) => {
@@ -111,9 +119,20 @@ const MassageSection = ({ questionId }: Props) => {
             >
               <div className="flex justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="h-[50px] w-[50px] rounded-full bg-[#D9D9D9] max-md:h-[30px] max-md:w-[30px]"></div>
+                  <div
+                    className={`h-[50px] w-[50px] overflow-hidden rounded-full bg-[#D9D9D9] max-md:h-[30px] max-md:w-[30px]`}
+                  >
+                    {' '}
+                    <Image
+                      src={isUser ? isUserData?.profile_pic || fallbackImg : '/images/Preface-Logo.png'}
+                      alt={isUser ? isUserData?.name : 'User'}
+                      width={100}
+                      height={100}
+                      className=""
+                    />
+                  </div>
                   <p className="text-[18px] font-medium text-black max-md:text-[16px]">
-                    {isUser ? 'User' : msg.sender || 'Admin'}
+                    {isUser ? isUserData?.name : msg.sender || 'Admin'}
                   </p>
                 </div>
                 <div className="flex flex-col gap-1 max-md:flex-wrap">
