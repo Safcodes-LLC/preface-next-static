@@ -3,7 +3,7 @@
 import ModalAskTheScholar from '@/components/ModalAskTheScholar'
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props {
   className?: string

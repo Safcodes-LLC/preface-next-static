@@ -131,7 +131,7 @@ const MassageSection = ({ questionId }: Props) => {
                       className=""
                     />
                   </div>
-                  <p className="text-[18px] font-medium text-black dark:text-white max-md:text-[16px]">
+                  <p className="text-[18px] font-medium text-black max-md:text-[16px] dark:text-white">
                     {isUser ? isUserData?.name : msg.sender || 'Admin'}
                   </p>
                 </div>

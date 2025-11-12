@@ -63,18 +63,18 @@ const ViewMassage = (props: Props) => {
   }
   return (
     <React.Fragment>
-      <div className="sticky top-0 left-0 z-10 mb-[24px] flex items-center justify-between bg-[#f8f8f8] dark:bg-[#000000] pb-[10px] max-md:flex-wrap max-md:gap-[10px]">
+      <div className="sticky top-0 left-0 z-10 mb-[24px] flex items-center justify-between bg-[#f8f8f8] pb-[10px] max-md:flex-wrap max-md:gap-[10px] dark:bg-[#000000]">
         {isReplay ? (
           <button
             onClick={() => setNowReplay(false)}
-            className="cursor-pointer rounded-[6px] bg-gray-400 dark:bg-[#2A2A2A] px-4 py-2 text-sm font-semibold text-[#FFFFFF] transition-colors duration-200 hover:bg-gray-500"
+            className="cursor-pointer rounded-[6px] bg-gray-400 px-4 py-2 text-sm font-semibold text-[#FFFFFF] transition-colors duration-200 hover:bg-gray-500 dark:bg-[#2A2A2A]"
           >
             Back to Massage
           </button>
         ) : (
           <Link
             href={`/${props.lang}/dashboard/ask-the-scholar`}
-            className="cursor-pointer rounded-[6px] bg-gray-400 dark:bg-[#2A2A2A] px-4 py-2 text-sm font-semibold text-[#FFFFFF] transition-colors duration-200 hover:bg-gray-500"
+            className="cursor-pointer rounded-[6px] bg-gray-400 px-4 py-2 text-sm font-semibold text-[#FFFFFF] transition-colors duration-200 hover:bg-gray-500 dark:bg-[#2A2A2A]"
           >
             Back to Questions
           </Link>

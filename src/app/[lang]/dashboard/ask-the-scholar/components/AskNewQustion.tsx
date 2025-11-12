@@ -63,7 +63,7 @@ const AskNewQuestion = (props: Props) => {
   }
 
   return (
-    <div className="flex items-center justify-center rounded-[12px] bg-white dark:bg-[#0D0D0D] p-[40px] max-md:p-[20px]">
+    <div className="flex items-center justify-center rounded-[12px] bg-white p-[40px] max-md:p-[20px] dark:bg-[#0D0D0D]">
       <form onSubmit={handleSubmit} className="flex w-2/3 flex-col gap-[20px] max-md:w-full">
         <div className="flex w-3/4 flex-col gap-1">
           <label htmlFor="regarding">Regarding</label>
@@ -71,7 +71,7 @@ const AskNewQuestion = (props: Props) => {
             id="regarding"
             value={regarding}
             onChange={(e) => setRegarding(e.target.value)}
-            className="h-full w-full rounded-[8px] dark:bg-[#303030] border border-[#DEDEDE] dark:border-[#5B5B5B] p-2"
+            className="h-full w-full rounded-[8px] border border-[#DEDEDE] p-2 dark:border-[#5B5B5B] dark:bg-[#303030]"
             required
           >
             <option value="">Select a topic</option>
@@ -90,7 +90,7 @@ const AskNewQuestion = (props: Props) => {
             type="text"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
-            className="h-full w-full rounded-[8px] dark:bg-[#303030] border border-[#DEDEDE] dark:border-[#5B5B5B] p-2"
+            className="h-full w-full rounded-[8px] border border-[#DEDEDE] p-2 dark:border-[#5B5B5B] dark:bg-[#303030]"
             placeholder="Subject"
             required
           />
@@ -102,7 +102,7 @@ const AskNewQuestion = (props: Props) => {
             rows={4}
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
-            className="h-full w-full rounded-[8px] dark:bg-[#303030] border border-[#DEDEDE] dark:border-[#5B5B5B] p-2"
+            className="h-full w-full rounded-[8px] border border-[#DEDEDE] p-2 dark:border-[#5B5B5B] dark:bg-[#303030]"
             placeholder="Message"
             required
           />

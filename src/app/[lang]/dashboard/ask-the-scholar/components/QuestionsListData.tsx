@@ -60,7 +60,7 @@ const QuestionsListData = (props: Props) => {
       </div>
 
       <div className="overflow-x-auto rounded-[10px] border border-[#EAEAEA] dark:border-[#2A2A2A]">
-        <table className="min-w-full overflow-hidden ">
+        <table className="min-w-full overflow-hidden">
           <thead className="">
             <tr className="bg-[#F2FAF6] text-left dark:bg-[#2A2A2A]">
               <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A] dark:text-[#CECECE]">Date</th>

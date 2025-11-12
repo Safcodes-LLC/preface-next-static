@@ -1,8 +1,8 @@
 'use client'
 
 import Card24 from '@/components/PostCards/Card24'
-import ButtonSecondary from '@/shared/ButtonSecondary'
 import { useAuth } from '@/contexts/AuthContext'
+import ButtonSecondary from '@/shared/ButtonSecondary'
 import { getSavedList } from '@/utils/getServices'
 import { ArrowDownIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
@@ -87,7 +87,7 @@ const SavedList = ({ lang }: Props) => {
           <ButtonSecondary
             onClick={handleLoadMore}
             disabled={isLoadingMore || allPostsLoaded}
-            className={`flex items-center ${(isLoadingMore || allPostsLoaded) ? 'opacity-70 cursor-not-allowed' : ''}`}
+            className={`flex items-center ${isLoadingMore || allPostsLoaded ? 'cursor-not-allowed opacity-70' : ''}`}
           >
             {isLoadingMore ? (
               'Loading...'

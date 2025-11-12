@@ -21,8 +21,8 @@ const PostCardMeta4: FC<Props> = ({ meta, className, avatarSize, isFavouriteDash
           </Link> */}
           <span className="line-clamp-1">{title}</span>
         </h2>
-        <span className="block pt-1 text-xs font-normal text-[#00652E] dark:text-[#60A43A] ">
-          { !isFavouriteDashboard ? categories[0]?.parentCategory.name : categories[0]?.name}
+        <span className="block pt-1 text-xs font-normal text-[#00652E] dark:text-[#60A43A]">
+          {!isFavouriteDashboard ? categories[0]?.parentCategory.name : categories[0]?.name}
         </span>
         {/* <Link href={`/author/${author.handle}`} className="mt-2 flex">
           <span className="block font-medium text-neutral-900 dark:text-neutral-300">{author.name}</span>

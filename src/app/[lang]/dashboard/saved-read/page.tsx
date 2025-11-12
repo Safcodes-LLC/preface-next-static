@@ -8,7 +8,7 @@ const Page = async ({ params }: { params: Promise<{ lang: string }> }) => {
   return (
     <React.Fragment>
       {/* <QuestionsListData statusColors={statusColors} lang={lang} /> */}
-     
+
       <SavedList lang={lang} />
     </React.Fragment>
   )

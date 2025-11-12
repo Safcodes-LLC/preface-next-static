@@ -138,7 +138,8 @@ const Page = async ({
               heading={`${dict.sections.populararticles.heading}`}
               postCardName="card10V5"
             />
-          </Suspense>z
+          </Suspense>
+          z
         </div>
       </div>
 

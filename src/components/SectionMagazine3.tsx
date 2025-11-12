@@ -41,34 +41,34 @@ const SectionMagazine3: FC<Props> = ({ heading, className, subHeading, dimHeadin
     setIsLoadingMore(false)
   }
 
-useEffect(() => {
-  const fetchPosts = async () => {
-    if (!user?._id) return
+  useEffect(() => {
+    const fetchPosts = async () => {
+      if (!user?._id) return
 
-    try {
-      // Fetch in-progress reading
-      const [continuosReadResponse, completedReadResponse] = await Promise.all([
-        getContinuosReadList(user._id, lang || 'en'),
-        getCompletedReadByCategory(user._id)
-      ])
-      
-      if (continuosReadResponse?.data) {
-        setContinuosPosts(continuosReadResponse.data)
+      try {
+        // Fetch in-progress reading
+        const [continuosReadResponse, completedReadResponse] = await Promise.all([
+          getContinuosReadList(user._id, lang || 'en'),
+          getCompletedReadByCategory(user._id),
+        ])
+
+        if (continuosReadResponse?.data) {
+          setContinuosPosts(continuosReadResponse.data)
+        }
+
+        // Handle completed reads response
+        if (completedReadResponse?.data) {
+          // You'll need to add a new state for completed reads
+          setCompletedReads(completedReadResponse.data)
+        }
+      } catch (err) {
+        console.error('Error fetching posts:', err)
+        // setError('Failed to load posts')
       }
-      
-      // Handle completed reads response
-      if (completedReadResponse?.data) {
-        // You'll need to add a new state for completed reads
-        setCompletedReads(completedReadResponse.data)
-      }
-    } catch (err) {
-      console.error('Error fetching posts:', err)
-      // setError('Failed to load posts')
     }
-  }
 
-  fetchPosts()
-}, [user?._id, lang])
+    fetchPosts()
+  }, [user?._id, lang])
 
   return (
     <div className="grid grid-cols-12 gap-8 max-md:gap-[20px_0]">
