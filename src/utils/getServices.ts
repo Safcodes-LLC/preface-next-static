@@ -69,9 +69,13 @@ export async function getContinuosRead(userId: string): Promise<any | undefined>
   }
 }
 
-export async function getContinuosReadByCategory(userId: string): Promise<any | undefined> {
+export async function getContinuosReadByCategory(
+  userId: string,
+  lang: string,
+  postType: string
+): Promise<any | undefined> {
   try {
-    return await getData(`user/read-posts-by-category/${userId}`, '', 0)
+    return await getData(`user/read-posts-by-category/${userId}?lang=${lang}&postType=${postType}`, '', 0)
   } catch (error) {
     console.error('Failed to fetch continuos read data:', error)
     // throw notFound();

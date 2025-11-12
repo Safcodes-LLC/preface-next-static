@@ -15,6 +15,7 @@ interface Props extends Pick<HeadingWithSubProps, 'subHeading' | 'dimHeading'> {
 const SectionMagazine1: FC<Props> = ({ className, lang }) => {
   const [posts, setPosts] = useState<any[]>([])
   const { user } = useAuth()
+  const postType = '66d9d564987787d3e3ff1312' // You can make this dynamic if needed
 
   console.log(posts, 'posts')
 
@@ -23,7 +24,7 @@ const SectionMagazine1: FC<Props> = ({ className, lang }) => {
       if (!user?._id) return
 
       try {
-        const response = await getContinuosReadByCategory(user._id)
+        const response = await getContinuosReadByCategory(user._id, lang || 'en', postType)
         if (response?.data && Array.isArray(response.data)) {
           setPosts(response.data)
         } else {
