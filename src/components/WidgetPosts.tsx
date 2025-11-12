@@ -34,7 +34,7 @@ const WidgetPosts: FC<Props> = ({
     <div className={clsx('widget-posts overflow-hidden rounded-[15px]', className)}>
       <WidgetHeading
         title={title || 'Other Topics'}
-        viewAll={{ label: 'View all', href: viewAllHref }}
+        viewAll={{ label: 'View all', href: isFavourite ? lang === 'en' ? `/dashboard/my-favourite` : `${lang}/dashboard/my-favourite` : viewAllHref }}
         isArrowHide={isArrowHide}
       />
       <div
