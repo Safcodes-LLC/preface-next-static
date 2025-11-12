@@ -1,5 +1,5 @@
 'use client'
-import { fallbackImg } from '@/data/fallbackImg'
+import { fallbackAvatar } from '@/data/fallbackImg'
 import { getAskTheScholarSingleQuestionsById, getLoggedUser } from '@/utils/getServices'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
@@ -119,20 +119,18 @@ const MassageSection = ({ questionId }: Props) => {
             >
               <div className="flex justify-between">
                 <div className="flex items-center gap-2">
-                  <div
-                    className={`h-[50px] w-[50px] overflow-hidden rounded-full bg-[#D9D9D9] max-md:h-[30px] max-md:w-[30px]`}
-                  >
+                  <div className={`h-[50px] w-[50px] overflow-hidden rounded-full max-md:h-[30px] max-md:w-[30px]`}>
                     {' '}
                     <Image
-                      src={isUser ? isUserData?.profile_pic || fallbackImg : '/images/Preface-Logo.png'}
+                      src={isUser ? isUserData?.profile_pic || fallbackAvatar : '/images/Preface-Logo.png'}
                       alt={isUser ? isUserData?.name : 'User'}
                       width={100}
                       height={100}
-                      className=""
+                      className="w-full object-cover"
                     />
                   </div>
                   <p className="text-[18px] font-medium text-black max-md:text-[16px] dark:text-white">
-                    {isUser ? isUserData?.name : msg.sender || 'Admin'}
+                    {isUser ? isUserData?.name : 'Preface Scholar'}
                   </p>
                 </div>
                 <div className="flex flex-col gap-1 max-md:flex-wrap">
