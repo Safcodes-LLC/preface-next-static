@@ -17,7 +17,7 @@ const SectionMagazine1: FC<Props> = ({ className, lang }) => {
   const { user } = useAuth()
   const postType = '66d9d564987787d3e3ff1312' // You can make this dynamic if needed
 
-  console.log(posts, 'posts')
+  // console.log(posts, 'posts')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +36,7 @@ const SectionMagazine1: FC<Props> = ({ className, lang }) => {
     }
 
     fetchData()
-  }, [user?._id])
+  }, [user?._id, lang])
 
   // console.log(continuosRead?.data, 'continuosReadpost dashboard')
 
