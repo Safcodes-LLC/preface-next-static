@@ -18,6 +18,7 @@ const SavedList = ({ lang }: Props) => {
   const [visibleCount, setVisibleCount] = useState<number>(12)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [allPostsLoaded, setAllPostsLoaded] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   // Load more posts
   const handleLoadMore = () => {
@@ -36,7 +37,13 @@ const SavedList = ({ lang }: Props) => {
 
   useEffect(() => {
     const fetchSavedPosts = async () => {
-      if (!user?._id) return
+      setIsLoading(true)
+
+      if (!user?._id) {
+        setSavedPosts([])
+        setIsLoading(false)
+        return
+      }
 
       try {
         const savedResponse = await getSavedList(user._id, lang || 'en')
@@ -46,14 +53,19 @@ const SavedList = ({ lang }: Props) => {
           if (savedResponse.data.length <= visibleCount) {
             setAllPostsLoaded(true)
           }
+        } else {
+          setSavedPosts([])
         }
       } catch (err) {
         console.error('Error fetching saved posts:', err)
+        setSavedPosts([])
+      } finally {
+        setIsLoading(false)
       }
     }
 
     fetchSavedPosts()
-  }, [user?._id, lang, visibleCount])
+  }, [user?._id, lang])
 
   return (
     <div>
@@ -66,20 +78,28 @@ const SavedList = ({ lang }: Props) => {
         </Link>
       </div>
 
-      {savedPosts.length > 0 ? (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {savedPosts.slice(0, visibleCount).map((item) => (
-            <Card24
-              key={item._id}
-              lang={lang}
-              title={item.postId?.title}
-              category={item.postId?.categories?.[0]?.name || 'Uncategorized'}
-              thumbnail={item.postId?.thumbnail || '/images/placeholder-image.png'}
-            />
-          ))}
+      {isLoading ? (
+        <div className="flex h-64 items-center justify-center">
+          <div className="border-primary h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
         </div>
       ) : (
-        <p className="py-8 text-center text-gray-500 dark:text-gray-400">No saved articles found.</p>
+        <>
+          {savedPosts.length > 0 ? (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {savedPosts.slice(0, visibleCount).map((item) => (
+                <Card24
+                  key={item._id}
+                  lang={lang}
+                  title={item.postId?.title}
+                  category={item.postId?.categories?.[0]?.name || 'Uncategorized'}
+                  thumbnail={item.postId?.thumbnail || '/images/placeholder-image.png'}
+                />
+              ))}
+            </div>
+          ) : !isLoading && user?._id ? (
+            <p className="py-8 text-center text-gray-500 dark:text-gray-400">No saved articles found.</p>
+          ) : null}
+        </>
       )}
 
       {savedPosts.length > visibleCount && (
