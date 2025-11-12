@@ -97,8 +97,12 @@ export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
     }
   }, [isAuthenticated, isLoading, router])
 
-  if (isLoading) {
-    return <div>Loading...</div> // Or your custom loading component
+ if (isLoading) {
+    return (
+      <div className="flex h-64 items-center justify-center">
+        <div className="border-primary h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
+      </div>
+    )
   }
 
   return isAuthenticated ? <>{children}</> : null

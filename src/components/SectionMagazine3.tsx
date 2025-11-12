@@ -25,6 +25,7 @@ const SectionMagazine3: FC<Props> = ({ heading, className, subHeading, dimHeadin
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   // const [error, setError] = useState<string | null>(null)
   const [allPostsLoaded, setAllPostsLoaded] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   // Load more posts
   const handleLoadMore = () => {
@@ -43,32 +44,40 @@ const SectionMagazine3: FC<Props> = ({ heading, className, subHeading, dimHeadin
 
   useEffect(() => {
     const fetchPosts = async () => {
-      if (!user?._id) return
+      if (!user?._id) {
+        setIsLoading(false)
+        return
+      }
 
       try {
-        // Fetch in-progress reading
+        setIsLoading(true)
+        // Fetch both in-progress and completed reads in parallel
         const [continuosReadResponse, completedReadResponse] = await Promise.all([
           getContinuosReadList(user._id, lang || 'en'),
-          getCompletedReadByCategory(user._id),
+          getCompletedReadByCategory(user._id)
         ])
 
-        if (continuosReadResponse?.data) {
-          setContinuosPosts(continuosReadResponse.data)
-        }
-
-        // Handle completed reads response
-        if (completedReadResponse?.data) {
-          // You'll need to add a new state for completed reads
-          setCompletedReads(completedReadResponse.data)
-        }
+        // Update both states in a single batch
+        setContinuosPosts(continuosReadResponse?.data || [])
+        setCompletedReads(completedReadResponse?.data || [])
       } catch (err) {
         console.error('Error fetching posts:', err)
         // setError('Failed to load posts')
+      } finally {
+        setIsLoading(false)
       }
     }
 
     fetchPosts()
   }, [user?._id, lang])
+
+  if (isLoading) {
+    return (
+      <div className="flex h-64 items-center justify-center">
+        <div className="border-primary h-8 w-8 animate-spin rounded-full border-4 border-t-transparent"></div>
+      </div>
+    )
+  }
 
   return (
     <div className="grid grid-cols-12 gap-8 max-md:gap-[20px_0]">
