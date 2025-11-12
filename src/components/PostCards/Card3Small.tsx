@@ -12,8 +12,7 @@ interface Props {
 }
 
 const Card3Small: FC<Props> = ({ className, post, index, lang, isFavourite }) => {
-  const { name, title, handle, featuredImage, parentCategory, slug } = post
-  // console.log(parentCategory, 'parentCategory');
+  const { name, title, handle, featuredImage, categories, parentCategory, slug } = post
 
   const imageSrc = isFavourite ? post?.favourite?.thumbnail : featuredImage
 
@@ -44,7 +43,7 @@ const Card3Small: FC<Props> = ({ className, post, index, lang, isFavourite }) =>
             {isFavourite ? post?.favourite?.title : name || title}
           </p>
         </h2>
-        {isFavourite && <div className="text-xs font-medium text-neutral-500">hadeeth</div>}
+        {isFavourite && <div className="text-xs font-medium text-neutral-500">{post.favourite?.categories[0]?.name}</div>}
         {!isFavourite && <div className="text-xs font-medium text-neutral-500">Article {index + 1}</div>}
       </div>
 
