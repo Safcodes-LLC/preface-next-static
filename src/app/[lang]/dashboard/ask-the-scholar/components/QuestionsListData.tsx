@@ -59,18 +59,18 @@ const QuestionsListData = (props: Props) => {
         </Link>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full overflow-hidden rounded-[10px] border border-[#EAEAEA]">
+      <div className="overflow-x-auto rounded-[10px] border border-[#EAEAEA] dark:border-[#2A2A2A]">
+        <table className="min-w-full overflow-hidden ">
           <thead className="">
-            <tr className="bg-[#F2FAF6] text-left">
-              <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A]">Date</th>
-              <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A]">Subject</th>
-              <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A]">Status</th>
-              <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A]">Last Updated</th>
-              <th className="px-5 py-[10px] text-right"></th>
+            <tr className="bg-[#F2FAF6] text-left dark:bg-[#2A2A2A]">
+              <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A] dark:text-[#CECECE]">Date</th>
+              <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A] dark:text-[#CECECE]">Subject</th>
+              <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A] dark:text-[#CECECE]">Status</th>
+              <th className="px-5 py-[10px] text-xs font-medium text-[#4A4A4A] dark:text-[#CECECE]">Last Updated</th>
+              <th className="px-5 py-[10px] text-right dark:text-[#CECECE]"></th>
             </tr>
           </thead>
-          <tbody className="bg-[#FFFFFF]">
+          <tbody className="bg-[#FFFFFF] dark:bg-[#2A2A2A]">
             {loading && (
               <tr>
                 <td colSpan={5} className="px-5 py-8 text-center text-sm text-neutral-500">
@@ -88,16 +88,18 @@ const QuestionsListData = (props: Props) => {
             {questions.map((row, i) => (
               <tr
                 key={row._id || i}
-                className={`border-t border-gray-100 text-sm text-black transition-colors ${
-                  i % 2 === 0 ? 'bg-white' : 'bg-[#FBFBFB]'
+                className={`text-sm text-black ${
+                  i % 2 === 0 ? 'bg-white dark:bg-[#0D0D0D]' : 'bg-[#FBFBFB] dark:bg-[#000000]'
                 }`}
               >
-                <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px] whitespace-nowrap`}>
+                <td
+                  className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px] whitespace-nowrap dark:text-white`}
+                >
                   {row.createdAt ? new Date(row.createdAt).toLocaleDateString() : row.date || '—'}
                 </td>
                 <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px]`}>
                   <div
-                    className="max-w-[300px] overflow-hidden text-ellipsis whitespace-nowrap"
+                    className="max-w-[300px] overflow-hidden text-ellipsis whitespace-nowrap dark:text-white"
                     title={row.subject || ''}
                   >
                     {row.subject || '—'}
@@ -111,7 +113,9 @@ const QuestionsListData = (props: Props) => {
                     {row.status || 'Unknown'}
                   </span>
                 </td>
-                <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px] whitespace-nowrap`}>
+                <td
+                  className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-[14px] whitespace-nowrap dark:text-white`}
+                >
                   {row.updatedAt ? new Date(row.updatedAt).toLocaleDateString() : row.lastUpdated || '—'}
                 </td>
                 <td className={`px-5 ${i % 2 === 0 ? 'py-[18px]' : 'py-[9px]'} text-right`}>

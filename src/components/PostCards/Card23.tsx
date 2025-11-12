@@ -17,6 +17,7 @@ const Card23: FC<Props> = ({ className, post, lang }) => {
     lastReadArticle?.parentCategory?.slug + '/' + lastReadArticle?.category?.slug + '/' + lastReadArticle?.slug
   const progressPercentage = Math.round((readCount / totalPosts) * 100)
 
+  console.log(post, 'lastReadArticle')
   return (
     <Link
       href={lang === 'en' ? `/${slug}` : `/${lang}/${slug}`}
