@@ -23,9 +23,9 @@ export default function AvatarDropdown({ className, trigger, lang }: Props) {
   useEffect(() => setIsClient(true), [])
   const user = {
     name: 'Guest ',
-    email: 'john@gmail.com',
+    email: 'guest@gmail.com',
     avatar: '/images/Preface-Logo.png',
-    handle: 'john-doe',
+    handle: 'guest',
     location: 'Dubai, UAE',
     bio: 'I am a software engineer and a writer. I love to write about technology and programming.',
   }
