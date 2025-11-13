@@ -23,6 +23,9 @@ import {
   QuranIcon,
   SavedIcon,
 } from '@/components/Svg/svg'
+import { getAuthToken } from '@/services/authService'
+import { getLoggedUser } from '@/utils/getServices'
+import { useEffect, useState } from 'react'
 
 const user = {
   name: 'John Doe',
@@ -37,8 +40,8 @@ const navigation = [
 ]
 
 const userNavigation = [
-  { name: 'Your Profile', href: '/dashboard/posts' },
-  { name: 'Settings', href: '/dashboard/edit-profile' },
+  { name: 'Your Profile', href: '/dashboard/profile' },
+  // { name: 'Settings', href: '/dashboard/edit-profile' },
   { name: 'Sign out', href: '#' },
 ]
 
@@ -86,9 +89,27 @@ const subPages = [
 ]
 
 export default function DashboardLayoutClient({ children }: { children: React.ReactNode }) {
+  let token = getAuthToken()
   const pathname = usePathname()
+  const [profile, setProfile] = useState<any | null>(null)
   const isActive = (href: string) => pathname === href
   const pageTitle = navigation.find((item) => isActive(item.href))?.name ?? 'Dashboard'
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (token) {
+        try {
+          const result = await getLoggedUser(token)
+          setProfile(result.data)
+          console.log('Profile data:', result)
+        } catch (error) {
+          console.error('Error fetching profile data:', error)
+        }
+      }
+    }
+
+    fetchUser()
+  }, [token])
+
 
   return (
     <div className="h-screen max-md:h-full md:overflow-hidden">
@@ -105,7 +126,14 @@ export default function DashboardLayoutClient({ children }: { children: React.Re
 
               <Dropdown>
                 <DropdownButton as={'button'} className="rounded-full">
-                  <Avatar alt="avatar" src={user.imageUrl} className="size-8" width={32} height={32} sizes="32px" />
+                  <Avatar
+                    alt="avatar"
+                    src={profile?.profile_pic || user.imageUrl}
+                    className="size-8"
+                    width={32}
+                    height={32}
+                    sizes="32px"
+                  />
                 </DropdownButton>
                 <DropdownMenu className="z-50">
                   {userNavigation.map((item) => (
