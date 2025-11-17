@@ -66,7 +66,10 @@ const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeadin
         <div className="col-span-12 rounded-2xl bg-white px-5 pb-6 lg:col-span-7 dark:bg-[#0D0D0D]">
           <WidgetHeading
             title="Saved for Reading"
-            viewAll={{ label: 'View all', href: lang === 'en' ? `/dashboard/saved-read` : `${lang}/dashboard/saved-read`}}
+            viewAll={{
+              label: 'View all',
+              href: lang === 'en' ? `/dashboard/saved-read` : `${lang}/dashboard/saved-read`,
+            }}
             isArrowHide={true}
             className="!px-0"
           />

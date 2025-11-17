@@ -77,7 +77,7 @@ export async function getContinuosReadByCategory(
   try {
     return await getData(`user/read-posts-by-category/${userId}?lang=${lang}&postType=${postType}`, '', 0)
   } catch (error) {
-    console.error('Failed to fetch continuos read data:', error)
+    console.error('Failed to fetch continuos read by category data:', error)
     // throw notFound();
   }
 }
@@ -86,7 +86,7 @@ export async function getSavedList(userId: string, lang: string): Promise<any | 
   try {
     return await getData(`savedlist/${userId}?lang=${lang}`, '', 0)
   } catch (error) {
-    console.error('Failed to fetch continuos read data:', error)
+    console.error('Failed to fetch saved list data:', error)
     // throw notFound();
   }
 }
@@ -95,7 +95,7 @@ export async function getFavouriteList(userId: string, postType: string, lang: s
   try {
     return await getData(`favourites/users/${userId}?postType=${postType}&lang=${lang}`, '', 0)
   } catch (error) {
-    console.error('Failed to fetch continuos read data:', error)
+    console.error('Failed to fetch favourite list data:', error)
     // throw notFound();
   }
 }
@@ -121,7 +121,7 @@ export async function getContinuosReadList(userId: string, lang: string): Promis
   try {
     return await getData(`user/read-posts/${userId}?lang=${lang}`, '', 0)
   } catch (error) {
-    console.error('Failed to fetch continuos read data:', error)
+    console.error('Failed to fetch continuos read list data:', error)
     // throw notFound();
   }
 }
@@ -130,7 +130,7 @@ export async function getLoggedUser(authToken: string): Promise<any | undefined>
   try {
     return await getData(`authentication/loggedin_user`, authToken || '', 0)
   } catch (error) {
-    console.error('Failed to fetch continuos read data:', error)
+    console.error('Failed to fetch logged user data:', error)
     // throw notFound();
   }
 }
@@ -139,7 +139,7 @@ export async function postGuestTicket(data: any): Promise<any | undefined> {
   try {
     return await postData(`scholar-questions/guest`, data, '', 0)
   } catch (error) {
-    console.error('Failed to fetch continuos read data:', error)
+    console.error('Failed to post guest ticket data:', error)
     // throw notFound();
   }
 }
@@ -148,7 +148,7 @@ export async function putProfileUpdate(userId: string, data: any): Promise<any |
   try {
     return await putData(`authentication/update-profile/${userId}`, data, '', 0)
   } catch (error) {
-    console.error('Failed to fetch continuos read data:', error)
+    console.error('Failed to update profile data:', error)
     // throw notFound();
   }
 }
@@ -157,7 +157,7 @@ export async function postAskTheScolarQuestion(data: any, authToken: string): Pr
   try {
     return await postData(`scholar-questions/user`, data, authToken || '', 0)
   } catch (error) {
-    console.error('Failed to fetch continuos read data:', error)
+    console.error('Failed to post ask the scholar question data:', error)
     // throw notFound();
   }
 }
@@ -169,7 +169,7 @@ export async function postAskTheScolarReplay(
   try {
     return await postData(`scholar-questions/user-reply/${questionId}`, data, authToken || '', 0)
   } catch (error) {
-    console.error('Failed to fetch continuos read data:', error)
+    console.error('Failed to post ask the scholar reply data:', error)
     // throw notFound();
   }
 }
@@ -178,7 +178,7 @@ export async function getAskTheScholarAllQuestions(authToken: string): Promise<a
   try {
     return await getData(`scholar-questions/userAllQuestions`, authToken || '', 0)
   } catch (error) {
-    console.error('Failed to fetch continuos read data:', error)
+    console.error('Failed to fetch ask the scholar all questions data:', error)
     // throw notFound();
   }
 }
@@ -190,7 +190,7 @@ export async function getAskTheScholarSingleQuestionsById(
   try {
     return await getData(`scholar-questions/${questionId}`, authToken || '', 0)
   } catch (error) {
-    console.error('Failed to fetch continuos read data:', error)
+    console.error('Failed to fetch ask the scholar single question data:', error)
     // throw notFound();
   }
 }
@@ -199,7 +199,44 @@ export async function getCompletedReadByCategory(userId: string): Promise<any | 
   try {
     return await getData(`user/completed-read-posts-by-category/${userId}`, '', 0)
   } catch (error) {
-    console.error('Failed to fetch completed read data:', error)
+    console.error('Failed to fetch completed read by category data:', error)
+    // throw notFound();
+  }
+}
+
+export async function postSavedArticle(postId: string, authToken: string): Promise<any | undefined> {
+  try {
+    return await postData(
+      `savedlist/toggle/${postId}`,
+      {
+        postType: '66d9d564987787d3e3ff1312', // Article post type ID
+      },
+      authToken || '',
+      0
+    )
+  } catch (error) {
+    console.error('Failed to post saved article data:', error)
+    // throw notFound();
+  }
+}
+
+export async function getSavedArticlesList(
+  postType: string,
+  lang: string,
+  authToken: string
+): Promise<any | undefined> {
+  try {
+    return await getData(`savedlist/all?postType=${postType}&lang=${lang}`, authToken || '', 0)
+  } catch (error) {
+    console.error('Failed to fetch saved articles list data:', error)
+    // throw notFound();
+  }
+}
+export async function getSavedArticleStatus(postId: string, authToken: string): Promise<any | undefined> {
+  try {
+    return await getData(`savedlist/status/${postId}`, authToken || '', 0)
+  } catch (error) {
+    console.error('Failed to fetch saved article status data:', error)
     // throw notFound();
   }
 }
