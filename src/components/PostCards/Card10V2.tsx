@@ -31,6 +31,7 @@ const Card10V2: FC<Props> = ({ className, post, ratio = 'aspect-square sm:aspect
       <div className={clsx('relative w-full shrink-0 overflow-hidden rounded-[15px]', ratio)}>
         <PostFeaturedMedia
           post={post}
+          isSquareImg={true}
           isHover={isHover}
           href={
             lang === 'en'

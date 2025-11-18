@@ -14,11 +14,13 @@ interface Props {
   isHover?: boolean
   autoPlay?: boolean
   href?: string
+  isSquareImg?: boolean
 }
 
-const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPlay = false, href }) => {
+const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPlay = false, href, isSquareImg = false }) => {
   const {
     featuredImage,
+    featured_image,
     thumbnail,
     postType,
     videoFile,
@@ -85,7 +87,7 @@ const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPl
   }
 
   const renderImage = () => {
-    const imageSrc = featuredImage || thumbnail
+    const imageSrc = isSquareImg ?  featured_image : featuredImage || thumbnail
 
     if (!imageSrc) {
       return (
