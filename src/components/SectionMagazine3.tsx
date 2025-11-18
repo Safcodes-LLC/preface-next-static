@@ -54,7 +54,7 @@ const SectionMagazine3: FC<Props> = ({ heading, className, subHeading, dimHeadin
         // Fetch both in-progress and completed reads in parallel
         const [continuosReadResponse, completedReadResponse] = await Promise.all([
           getContinuosReadList(user._id, lang || 'en'),
-          getCompletedReadByCategory(user._id)
+          getCompletedReadByCategory(user._id),
         ])
 
         // Update both states in a single batch

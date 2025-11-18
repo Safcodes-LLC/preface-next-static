@@ -1,7 +1,8 @@
 'use client'
 
 import { useAuth } from '@/contexts/AuthContext'
-import { useGetUserSaved, useRemoveSaved, useSaved } from '@/hooks/api/use-saved'
+import { useGetUserSaved, useRemoveSaved } from '@/hooks/api/use-saved'
+import { getSavedArticleStatus, postSavedArticle } from '@/utils/getServices'
 import { Bookmark02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
@@ -26,14 +27,49 @@ type Saved = {
 
 const BookmarkBtn: FC<Props> = ({ className, bookmarked, color, post }) => {
   const { isAuthenticated, user } = useAuth()
-  const [isBookmarked, setIsBookmarked] = useState(bookmarked)
+  const [isBookmarked, setIsBookmarked] = useState(bookmarked || false)
   const [showAuthModal, setShowAuthModal] = useState(false)
-  const { mutate: toggleSaved } = useSaved()
+  const [isProcessing, setIsProcessing] = useState(false)
   const { data } = useGetUserSaved()
   const removeSaved = useRemoveSaved()
   const userSaved = data?.savedlist
 
-  // Update liked state based on user's favorites
+  // Fetch saved status on mount for authenticated users
+  useEffect(() => {
+    const fetchSavedStatus = async () => {
+      if (!isAuthenticated || !post?._id) {
+        setIsBookmarked(false)
+        return
+      }
+
+      const token =
+        typeof window !== 'undefined' ? localStorage.getItem('authToken') || localStorage.getItem('token') || '' : ''
+
+      if (!token) {
+        setIsBookmarked(false)
+        return
+      }
+
+      try {
+        const response = await getSavedArticleStatus(post._id, token)
+        // Check the correct response structure
+        if (response?.data?.isSaved !== undefined) {
+          setIsBookmarked(response.data.isSaved)
+        } else if (response?.isSaved !== undefined) {
+          setIsBookmarked(response.isSaved)
+        } else {
+          setIsBookmarked(false)
+        }
+      } catch (error) {
+        console.error('Failed to fetch saved status:', error)
+        setIsBookmarked(false)
+      }
+    }
+
+    fetchSavedStatus()
+  }, [isAuthenticated, post?._id])
+
+  // Update liked state based on user's favorites (fallback)
   useEffect(() => {
     if (userSaved && post?._id) {
       const isPostLiked = userSaved.some((saved: any) => saved.postId?._id === post._id)
@@ -51,47 +87,82 @@ const BookmarkBtn: FC<Props> = ({ className, bookmarked, color, post }) => {
       return
     }
 
-    if (!post?._id || !user?._id) return
+    if (!post?._id) return
 
-    const newSavedState = !isBookmarked
+    // Prevent double-clicking
+    if (isProcessing) return
+
+    const token =
+      typeof window !== 'undefined' ? localStorage.getItem('authToken') || localStorage.getItem('token') || '' : ''
+
+    if (!token) {
+      toast.error('Authentication token not found')
+      return
+    }
+
+    const previousState = isBookmarked
+
     // Optimistic update
-    setIsBookmarked(newSavedState)
+    setIsProcessing(true)
+    setIsBookmarked(!previousState)
 
-    // TODO: Add API call to save the bookmark status
     try {
-      if (newSavedState) {
-        await toggleSaved({
-          userId: user._id,
-          postId: post._id,
-          postType: post.postType?._id,
-        })
+      // Use the new API function that toggles save/unsave
+      const response = await postSavedArticle(post._id, token)
+
+      // Verify the response and update state accordingly
+      if (response?.data?.isSaved !== undefined) {
+        setIsBookmarked(response.data.isSaved)
+        toast.success(response.data.isSaved ? 'Added to reading list' : 'Removed from reading list')
+      } else if (response?.isSaved !== undefined) {
+        setIsBookmarked(response.isSaved)
+        toast.success(response.isSaved ? 'Added to reading list' : 'Removed from reading list')
       } else {
-        await removeSaved.mutateAsync({
-          userId: user._id,
-          postId: post._id,
-        })
+        // Fallback to optimistic state
+        toast.success(!previousState ? 'Added to reading list' : 'Removed from reading list')
       }
     } catch (error) {
-      // console.log(error)
-      setIsBookmarked(!newSavedState)
-      toast.error(`Failed to ${newSavedState ? 'add to' : 'remove from'} reading list`)
+      console.error('Failed to toggle bookmark:', error)
+      // Revert to previous state on error
+      setIsBookmarked(previousState)
+      toast.error(`Failed to ${!previousState ? 'add to' : 'remove from'} reading list`)
+    } finally {
+      setIsProcessing(false)
     }
   }
 
   return (
     <>
       <button
-        className={clsx(color ? color : defaultClasses, className)}
+        className={clsx(
+          color ? color : defaultClasses,
+          className,
+          'relative overflow-hidden transition-all duration-300',
+          isProcessing ? 'scale-95' : 'scale-100'
+        )}
         title={isBookmarked ? 'Remove from reading list' : 'Save to reading list'}
         onClick={handleBookmarkClick}
+        disabled={isProcessing}
         type="button"
       >
-        <HugeiconsIcon
-          icon={Bookmark02Icon}
-          size={16}
-          strokeWidth={1}
-          fill={isBookmarked && isAuthenticated ? 'currentColor' : 'none'}
-        />
+        {isProcessing && (
+          <>
+            {/* Rotating ring animation */}
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent opacity-70"></span>
+            </span>
+            {/* Pulse effect */}
+            <span className="absolute inset-0 animate-ping rounded-full bg-current opacity-20"></span>
+          </>
+        )}
+        <span className={`transition-all duration-300 ${isProcessing ? 'opacity-30 blur-[1px]' : 'opacity-100'}`}>
+          <HugeiconsIcon
+            icon={Bookmark02Icon}
+            size={12}
+            strokeWidth={1}
+            fill={isBookmarked && isAuthenticated ? 'currentColor' : 'none'}
+          />
+        </span>
       </button>
 
       <LoginModal

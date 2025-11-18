@@ -30,8 +30,7 @@ import { useEffect, useState } from 'react'
 const user = {
   name: 'John Doe',
   email: 'john@example.com',
-  imageUrl:
-    '/images/Preface-Logo.png',
+  imageUrl: '/images/Preface-Logo.png',
 }
 
 const navigation = [
@@ -109,7 +108,6 @@ export default function DashboardLayoutClient({ children }: { children: React.Re
 
     fetchUser()
   }, [token])
-
 
   return (
     <div className="h-screen max-md:h-full md:overflow-hidden">
