@@ -20,7 +20,7 @@ export async function getHighlightedFeaturedArticle(lang: string): Promise<any |
 }
 export async function getRandomFeaturedArticle(lang: string): Promise<any | undefined> {
   try {
-    return await getData(`featured/random-featured-article?${lang}`, '', 0)
+    return await getData(`featured/random-featured-article?lang=${lang}`, '', 0)
   } catch (error) {
     console.error('Failed to fetch random featured data:', error)
     // throw notFound();
