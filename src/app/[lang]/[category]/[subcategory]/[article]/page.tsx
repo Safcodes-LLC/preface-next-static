@@ -140,7 +140,7 @@ const Page = async ({
             />
           </Suspense>
         </div>
-      </div>
+      </div> 
 
       {/* <SingleRelatedPosts moreFromAuthorPosts={moreFromAuthorPosts} /> */}
     </div>
