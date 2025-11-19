@@ -33,6 +33,7 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang,
     bookmarked,
     readingTime,
     slug,
+    image,
     favoriteCount,
   } = post
 
@@ -59,20 +60,20 @@ const Card16Podcast: FC<Props> = ({ className, post, ratio = 'aspect-4/3', lang,
   return (
     <div className={clsx('group post-card-16-podcast relative flex flex-col', className)}>
       <div className={`relative w-full shrink-0 overflow-hidden rounded-3xl ${ratio}`}>
-        {(thumbnail || featuredImage) && (
+        {(image || thumbnail || featuredImage) && (
           <Link href={href}>
             <Image
               fill
               alt={title || ''}
               sizes="(max-width: 1024px) 100vw, 50vw"
-              src={thumbnail || featuredImage || ''}
+              src={image || thumbnail || featuredImage || ''}
               className="rounded-3xl object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             />
             {/* Premium overlay on hover */}
             <div className="absolute inset-0 rounded-3xl bg-black/0 transition-all duration-300 ease-out group-hover:bg-black/20" />
           </Link>
         )}
-        {!thumbnail && !featuredImage && (
+        {!image && !thumbnail && !featuredImage && (
           <Link href={href}>
             <div className="absolute inset-0 flex items-center justify-center rounded-3xl bg-gray-200 dark:bg-gray-800">
               <div className="text-center text-gray-500 dark:text-gray-400">
