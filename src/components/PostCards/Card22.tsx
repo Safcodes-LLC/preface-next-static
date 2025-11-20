@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Image from 'next/image'
+import Link from 'next/link'
 import { FC } from 'react'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
@@ -29,6 +30,10 @@ const Card22: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
     favoriteCount,
   } = post || {}
 
+  const link =
+    lang == 'en'
+      ? `/${categories[0]?.parentCategory?.slug}/${categories[0]?.slug}/${slug}`
+      : `/${lang}/${categories[0]?.parentCategory?.slug}/${categories[0]?.slug}/${slug}`
   return (
     <div
       className={clsx(
@@ -65,10 +70,13 @@ const Card22: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
           {excerpt ||
             "is simply dummy text of the Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi velit tempora eos aliquam delectus perspiciatis veritatis, molestias voluptas. Doloremque aspernatur voluptatibus nulla maiores eos velit excepturi, obcaecati reprehenderit nostrum unde! Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti doloribus eligendi debitis amet. Iusto consequuntur at tempore. Dolorem amet voluptate nobis, exercitationem veritatis culpa quibusdam dignissimos? In similique eos placeat. printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
         </p>
-        <button className="group mt-1 flex cursor-pointer items-center gap-2 self-start text-base font-semibold text-[#00652E] transition-all hover:gap-3 dark:text-[#60a43a]">
+        <Link
+          href={link}
+          className="group mt-1 flex cursor-pointer items-center gap-2 self-start text-base font-semibold text-[#00652E] transition-all hover:gap-3 dark:text-[#60a43a]"
+        >
           <span>Continue Reading</span>
           <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </button>
+        </Link>
       </div>
     </div>
   )
