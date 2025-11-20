@@ -89,15 +89,25 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
   })
 
   const renderedHtml = useMemo(() => {
-    // Theme-independent inline styles to avoid hydration mismatches
+    // COMPLETE custom inline style map with ALL supported styles
     const customStyleMap = {
+      // Font Weights
       FONTWEIGHT_NORMAL: { style: { fontWeight: '400' } },
       FONTWEIGHT_SLIM: { style: { fontWeight: '300' } },
       FONTWEIGHT_MEDIUM: { style: { fontWeight: '500' } },
       FONTWEIGHT_SEMIBOLD: { style: { fontWeight: '600' } },
       FONTWEIGHT_BOLD: { style: { fontWeight: '700' } },
       FONTWEIGHT_EXTRABOLD: { style: { fontWeight: '800' } },
-      // NOTE: Highlights are applied via classes using inlineStyleFn below
+
+      // Subscript and Superscript
+      SUBSCRIPT: {
+        element: 'sub',
+        style: {},
+      },
+      SUPERSCRIPT: {
+        element: 'sup',
+        style: {},
+      },
     } as const
 
     const str = typeof content === 'string' ? content : String(content ?? '')
@@ -106,19 +116,19 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
       if (parsed && typeof parsed === 'object' && Array.isArray((parsed as { blocks?: unknown }).blocks)) {
         const rawContent = parsed as DraftRawDraftContentState
 
-        // DEBUG: Log the content to verify alignment data
-        console.log('=== FRONTEND: Raw Draft.js Content ===')
+        console.log('=== FRONTEND: Processing Draft.js Content ===')
         console.log(
-          'Blocks with alignment:',
+          'Blocks:',
           rawContent.blocks.map((b) => ({
             text: b.text.substring(0, 30),
             type: b.type,
-            alignment: b.data?.['text-align'],
+            data: b.data,
           }))
         )
 
         const contentState = convertFromRaw(rawContent)
 
+        // Entity style function for links with tooltips
         const entityStyleFn = (entity: any) => {
           if (entity.get('type').toLowerCase() === 'link') {
             const data = entity.getData()
@@ -138,9 +148,11 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
           return undefined
         }
 
-        // Apply highlight backgrounds via classes to keep HTML static; CSS handles dark mode
+        // Apply highlight backgrounds and text transformations via classes
         const inlineStyleFn = (styles: any) => {
           const cls: string[] = []
+
+          // Highlights
           if (styles.has && styles.has('HIGHLIGHT_YELLOW'))
             cls.push('px-0.5 rounded-sm bg-yellow-200 dark:bg-yellow-200/30')
           if (styles.has && styles.has('HIGHLIGHT_GREEN'))
@@ -151,23 +163,61 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
             cls.push('px-0.5 rounded-sm bg-orange-200 dark:bg-orange-200/30')
           if (styles.has && styles.has('HIGHLIGHT_PURPLE'))
             cls.push('px-0.5 rounded-sm bg-purple-200 dark:bg-purple-200/30')
+
+          // Text Transformations
+          if (styles.has && styles.has('UPPERCASE')) cls.push('text-uppercase')
+          if (styles.has && styles.has('LOWERCASE')) cls.push('text-lowercase')
+          if (styles.has && styles.has('CAPITALIZE')) cls.push('text-capitalize')
+
           if (cls.length) {
             return { element: 'span', attributes: { class: cls.join(' ') } }
           }
           return undefined
         }
 
-        // Custom block style function to add alignment classes
+        // Block style function to handle alignment, indentation, line spacing, and direction
         const blockStyleFn = (block: any) => {
-          const alignment = block.getData().get('text-align')
+          const blockData = block.getData()
+          const alignment = blockData.get('text-align')
+          const indentLevel = blockData.get('indent-level') || 0
+          const textDirection = blockData.get('text-direction')
+          const lineSpacing = blockData.get('line-spacing')
+
+          const classes: string[] = []
+
+          // Text alignment
           if (alignment) {
-            console.log(`Adding alignment class: text-align-${alignment}`)
+            classes.push(`text-align-${alignment}`)
+          }
+
+          // Indentation with RTL support
+          if (indentLevel > 0) {
+            if (textDirection === 'rtl') {
+              classes.push(`indent-level-${indentLevel}-rtl`)
+            } else {
+              classes.push(`indent-level-${indentLevel}`)
+            }
+          }
+
+          // Text direction
+          if (textDirection) {
+            classes.push(`dir-${textDirection}`)
+          }
+
+          // Line spacing
+          if (lineSpacing) {
+            classes.push(`line-spacing-${lineSpacing}`)
+          }
+
+          if (classes.length > 0) {
+            console.log(`Block classes:`, classes.join(' '))
             return {
               attributes: {
-                class: `text-align-${alignment}`,
+                class: classes.join(' '),
               },
             }
           }
+
           return undefined
         }
 
@@ -175,7 +225,7 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
           inlineStyles: customStyleMap,
           inlineStyleFn,
           entityStyleFn,
-          blockStyleFn, // Add the block style function
+          blockStyleFn,
           blockRenderers: {
             'header-two': (block: any) => `<h2>${block.getText()}</h2>`,
             'header-three': (block: any) => `<h3>${block.getText()}</h3>`,
@@ -245,28 +295,22 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
 
         if (tooltipContent || imageUrl) {
           const rect = target.getBoundingClientRect()
-          const tooltipWidth = 288 // max-w-xs is approximately 288px (20rem)
-          const estimatedTooltipHeight = imageUrl ? 250 : 80 // Estimate tooltip height
+          const tooltipWidth = 288
+          const estimatedTooltipHeight = imageUrl ? 250 : 80
 
-          // Calculate horizontal position with viewport boundaries
           let xPos = rect.left + rect.width / 2
           const viewportWidth = window.innerWidth
 
-          // Adjust if tooltip would overflow on left
           if (xPos - tooltipWidth / 2 < 10) {
             xPos = tooltipWidth / 2 + 10
           }
-          // Adjust if tooltip would overflow on right
           if (xPos + tooltipWidth / 2 > viewportWidth - 10) {
             xPos = viewportWidth - tooltipWidth / 2 - 10
           }
 
-          // Calculate vertical position - show above the link by default
-          // Use absolute positioning relative to viewport
           let yPos = rect.top - 10
           let showBelow = false
 
-          // If not enough space above, show below
           if (rect.top < estimatedTooltipHeight + 20) {
             yPos = rect.bottom + 10
             showBelow = true
@@ -287,19 +331,16 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
     const handleMouseLeave = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       if (target.tagName === 'A' && target.classList.contains('has-custom-tooltip')) {
-        // Hide tooltip when mouse leaves the link
         setTooltipData((prev) => ({ ...prev, visible: false }))
       }
     }
 
     const handleScroll = () => {
-      // Hide tooltip on scroll
       setTooltipData((prev) => ({ ...prev, visible: false }))
     }
 
     const content = contentRef.current
     if (content) {
-      // Use capture phase to catch events on all links
       content.addEventListener('mouseenter', handleMouseEnter, true)
       content.addEventListener('mouseleave', handleMouseLeave, true)
       window.addEventListener('scroll', handleScroll, { passive: true })
@@ -380,7 +421,6 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
                 {tooltipData.content}
               </p>
             )}
-            {/* Arrow pointing to link */}
             <div
               className="absolute left-1/2 -translate-x-1/2"
               style={{

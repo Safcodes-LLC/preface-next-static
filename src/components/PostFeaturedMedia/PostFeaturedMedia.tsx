@@ -17,7 +17,14 @@ interface Props {
   isSquareImg?: boolean
 }
 
-const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPlay = false, href, isSquareImg = false }) => {
+const PostFeaturedMedia: FC<Props> = ({
+  className,
+  post,
+  isHover = false,
+  autoPlay = false,
+  href,
+  isSquareImg = false,
+}) => {
   const {
     featuredImage,
     featured_image,
@@ -87,7 +94,7 @@ const PostFeaturedMedia: FC<Props> = ({ className, post, isHover = false, autoPl
   }
 
   const renderImage = () => {
-    const imageSrc = isSquareImg ?  featured_image : featuredImage || thumbnail
+    const imageSrc = isSquareImg ? featured_image : featuredImage || thumbnail
 
     if (!imageSrc) {
       return (

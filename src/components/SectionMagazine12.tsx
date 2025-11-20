@@ -15,7 +15,6 @@ const SectionMagazine12: FC<Props> = async ({ className, lang, dict }) => {
   const highlightedFeatured = await getHighlightedFeaturedArticle(lang || 'en')
   const randomFeatured = await getRandomFeaturedArticle(lang || 'en')
 
-
   return (
     <div className={clsx('section-magazine-12 relative', className)}>
       {customFeatured?.data?.length > 0 && customFeatured?.data[0].status === 'Active' ? (
@@ -38,7 +37,10 @@ const SectionMagazine12: FC<Props> = async ({ className, lang, dict }) => {
           dict={dict}
           content={{
             id: highlightedFeatured?.data[0]?._id,
-            link: lang === 'en' ? `/${highlightedFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${highlightedFeatured?.data[0]?.categories[0]?.slug}/${highlightedFeatured?.data[0]?.slug}` : `/${lang}/${highlightedFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${highlightedFeatured?.data[0]?.categories[0]?.slug}/${highlightedFeatured?.data[0]?.slug}`,
+            link:
+              lang === 'en'
+                ? `/${highlightedFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${highlightedFeatured?.data[0]?.categories[0]?.slug}/${highlightedFeatured?.data[0]?.slug}`
+                : `/${lang}/${highlightedFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${highlightedFeatured?.data[0]?.categories[0]?.slug}/${highlightedFeatured?.data[0]?.slug}`,
             title: highlightedFeatured?.data[0]?.title,
             content: highlightedFeatured?.data[0]?.content,
             image: highlightedFeatured?.data[0]?.featured_image,
@@ -52,7 +54,10 @@ const SectionMagazine12: FC<Props> = async ({ className, lang, dict }) => {
           dict={dict}
           content={{
             id: randomFeatured?.data[0]?._id,
-            link: lang === 'en' ? `/${randomFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${randomFeatured?.data[0]?.categories[0]?.slug}/${randomFeatured?.data[0]?.slug}` : `/${lang}/${randomFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${randomFeatured?.data[0]?.categories[0]?.slug}/${randomFeatured?.data[0]?.slug}`,
+            link:
+              lang === 'en'
+                ? `/${randomFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${randomFeatured?.data[0]?.categories[0]?.slug}/${randomFeatured?.data[0]?.slug}`
+                : `/${lang}/${randomFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${randomFeatured?.data[0]?.categories[0]?.slug}/${randomFeatured?.data[0]?.slug}`,
             title: randomFeatured?.data[0]?.title,
             content: randomFeatured?.data[0]?.content,
             image: randomFeatured?.data[0]?.featured_image,

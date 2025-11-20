@@ -9,7 +9,7 @@ export default function Loading() {
       <PostBannerSkeleton />
       <div className="container mt-12 flex flex-col lg:flex-row">
         <div className="w-full lg:w-3/5 xl:w-2/3 xl:pe-20">
-          <PostContentSkelton /> 
+          <PostContentSkelton />
           <div className="my-12">
             <div className="flex gap-4">
               <div className="flex animate-pulse items-center gap-2 rounded-full bg-neutral-200 p-2 dark:bg-neutral-700">
