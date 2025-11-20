@@ -24,7 +24,7 @@ const SectionMagazine12: FC<Props> = async ({ className, lang, dict }) => {
           dict={dict}
           content={{
             id: customFeatured?.data[0]?._id,
-            link: customFeatured?.data[0]?.link,
+            link: lang === 'en' ? customFeatured?.data[0]?.link : `/${lang}${customFeatured?.data[0]?.link}`,
             title: customFeatured?.data[0]?.title,
             content: customFeatured?.data[0]?.content,
             image: customFeatured?.data[0]?.featured_image,
@@ -38,7 +38,7 @@ const SectionMagazine12: FC<Props> = async ({ className, lang, dict }) => {
           dict={dict}
           content={{
             id: highlightedFeatured?.data[0]?._id,
-            link: `/${highlightedFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${highlightedFeatured?.data[0]?.categories[0]?.slug}/${highlightedFeatured?.data[0]?.slug}`,
+            link: lang === 'en' ? `/${highlightedFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${highlightedFeatured?.data[0]?.categories[0]?.slug}/${highlightedFeatured?.data[0]?.slug}` : `/${lang}/${highlightedFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${highlightedFeatured?.data[0]?.categories[0]?.slug}/${highlightedFeatured?.data[0]?.slug}`,
             title: highlightedFeatured?.data[0]?.title,
             content: highlightedFeatured?.data[0]?.content,
             image: highlightedFeatured?.data[0]?.featured_image,
@@ -52,7 +52,7 @@ const SectionMagazine12: FC<Props> = async ({ className, lang, dict }) => {
           dict={dict}
           content={{
             id: randomFeatured?.data[0]?._id,
-            link: `/${randomFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${randomFeatured?.data[0]?.categories[0]?.slug}/${randomFeatured?.data[0]?.slug}`,
+            link: lang === 'en' ? `/${randomFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${randomFeatured?.data[0]?.categories[0]?.slug}/${randomFeatured?.data[0]?.slug}` : `/${lang}/${randomFeatured?.data[0]?.categories[0]?.parentCategory?.slug}/${randomFeatured?.data[0]?.categories[0]?.slug}/${randomFeatured?.data[0]?.slug}`,
             title: randomFeatured?.data[0]?.title,
             content: randomFeatured?.data[0]?.content,
             image: randomFeatured?.data[0]?.featured_image,
