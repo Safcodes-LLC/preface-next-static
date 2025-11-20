@@ -42,6 +42,7 @@ const PageStories = async ({ params }: { params: Promise<{ query: string; lang: 
   const resolvedParams = await params
   const lang = resolvedParams.lang
   const category = await getCategory(lang || 'en')
+  const dict = await getDictionary(lang)
   // let searchQuery = (await searchParams)['s']
   // let searchTab = (await searchParams)['tab']
   // example: /search?s=text1&s=text2 => searchQuery = 'text1'
@@ -59,6 +60,8 @@ const PageStories = async ({ params }: { params: Promise<{ query: string; lang: 
   //   searchTab = filterTabs[0].value // default tab is posts
   // }
 
+  // console.log(category?.data,"category data");
+
   const renderLoopItems = (category: any, lang: string) => {
     return (
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-8 lg:grid-cols-4">
@@ -68,14 +71,20 @@ const PageStories = async ({ params }: { params: Promise<{ query: string; lang: 
       </div>
     )
   }
-  const dict = await getDictionary(lang)
+
+  const categoryItems = category?.data || []
+  const randomBannerImage =
+    categoryItems.length > 0
+      ? categoryItems[Math.floor(Math.random() * categoryItems.length)]?.featuredImage ||
+        '/images/banner/common-banner.png'
+      : '/images/banner/common-banner.png'
 
   return (
     <div className="stories-page" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="container mx-auto mt-10 md:mt-14 lg:mt-20">
         <Suspense fallback={<BannerSkeleton className="animate-duration-[2000ms] animate-pulse" />}>
           <Banner
-            image="/images/banner/common-banner.png"
+            image={randomBannerImage}
             title={dict.navigation.stories}
             description={category?.data?.length}
             alt="Stories banner"
