@@ -31,12 +31,17 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
   const handleGoogleCredential = useCallback(
     async (credential: string) => {
       try {
+        // Log the current origin for debugging
+        const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'unknown'
+        console.log('[Google Auth] Attempting authentication from origin:', currentOrigin)
+        
         let response: Response
         try {
           response = await fetch('https://king-prawn-app-x9z27.ondigitalocean.app/api/authentication/google', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Origin': currentOrigin,
             },
             body: JSON.stringify({ credential }),
             credentials: 'include',
@@ -48,6 +53,7 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Origin': currentOrigin,
             },
             body: JSON.stringify({ credential }),
           })
@@ -136,6 +142,7 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
         }
       } catch (err) {
         console.error('Google auth error:', err)
+        toast.error(dict?.login?.error || 'Authentication failed. Please try again.')
       }
     },
     [router, onSuccess, dict, lang]
@@ -148,11 +155,17 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
       console.error(
         '[Google Auth] NEXT_PUBLIC_GOOGLE_CLIENT_ID is not set. Add it to .env.local and restart the dev server.'
       )
+      toast.error('Google Sign-In is not configured properly.')
       return
     }
     if (!window.google) return
     initOnceRef.current = true
     try {
+      const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'unknown'
+      console.log('[Google Auth] Initializing with Client ID:', clientId)
+      console.log('[Google Auth] Current Origin:', currentOrigin)
+      console.log('[Google Auth] Make sure this origin is added to Google Cloud Console')
+      
       // Prevent auto sign-in selection issues
       window.google.accounts.id.disableAutoSelect?.()
       window.google.accounts.id.initialize({
@@ -160,6 +173,14 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
         callback: (response: { credential: string }) => {
           if (response?.credential) {
             handleGoogleCredential(response.credential)
+          }
+        },
+        error_callback: (error: any) => {
+          console.error('[Google Auth] Initialization error:', error)
+          if (error?.type === 'popup_failed_to_open') {
+            toast.error('Please allow popups for Google Sign-In')
+          } else {
+            toast.error('Google Sign-In failed. Please check console for details.')
           }
         },
       })

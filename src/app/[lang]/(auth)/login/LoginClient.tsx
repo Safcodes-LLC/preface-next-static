@@ -1,5 +1,6 @@
 'use client'
 
+import GoogleAuthDebugger from '@/components/auth/GoogleAuthDebugger'
 import LoginForm from '@/components/auth/LoginForm'
 import SocialLogin from '@/components/auth/SocialLogin'
 import Logo from '@/shared/Logo'
@@ -88,6 +89,7 @@ function LoginPageContent({ lang, dict }: { lang: string; dict: any }) {
 export default function LoginClient({ lang, dict }: { lang: string; dict: any }) {
   return (
     <GuestRoute>
+      <GoogleAuthDebugger />
       <LoginPageContent lang={lang} dict={dict} />
     </GuestRoute>
   )
