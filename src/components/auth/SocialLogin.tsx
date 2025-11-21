@@ -25,6 +25,7 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
   const router = useRouter()
   const [gisReady, setGisReady] = useState(false)
   const [googleInited, setGoogleInited] = useState(false)
+  const [originMismatch, setOriginMismatch] = useState(false)
   const initOnceRef = useRef(false)
   const googleBtnRef = useRef<HTMLDivElement | null>(null)
 
@@ -145,6 +146,7 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
         const errorMessage = err?.message || ''
         if (errorMessage.includes('origin') || errorMessage.includes('mismatch')) {
           const currentOrigin = typeof window !== 'undefined' ? window.location.origin : ''
+          setOriginMismatch(true)
           console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
           console.error('❌ GOOGLE OAUTH ERROR: origin_mismatch')
           console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
@@ -293,6 +295,14 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
               <div className="absolute inset-0" style={{ opacity: 0, display: 'flex', alignItems: 'center' }}>
                 <div ref={googleBtnRef} className="w-full" />
               </div>
+              {originMismatch && (
+                <div className="mt-3 rounded-md border border-amber-300 bg-amber-50 p-3 text-xs text-amber-800 dark:border-amber-600 dark:bg-amber-900/30 dark:text-amber-200">
+                  <p className="font-semibold mb-1">Google origin not authorized.</p>
+                  <p className="mb-2">Add <code className="rounded bg-white px-1 dark:bg-black">{typeof window !== 'undefined' ? window.location.origin : ''}</code> to Google Cloud Console → OAuth Client → Authorized JavaScript origins.</p>
+                  <p className="mb-2">If you cannot update that now, use the fallback OAuth flow:</p>
+                  <FallbackOAuthLink />
+                </div>
+              )}
             </div>
           ) : (
             <Link
@@ -309,5 +319,28 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
         )}
       </div>
     </>
+  )
+}
+
+// Fallback component building an authorization URL for code flow.
+function FallbackOAuthLink() {
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
+  const redirectUri = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT || `${typeof window !== 'undefined' ? window.location.origin : ''}/api/auth/google/callback`
+  const scope = encodeURIComponent('openid email profile')
+  const authUrl = clientId
+    ? `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(
+        redirectUri
+      )}&response_type=code&scope=${scope}&prompt=select_account`
+    : ''
+  if (!clientId) {
+    return <p className="text-red-600 dark:text-red-400">Missing NEXT_PUBLIC_GOOGLE_CLIENT_ID for fallback flow.</p>
+  }
+  return (
+    <a
+      href={authUrl}
+      className="inline-block rounded bg-[#4285F4] px-3 py-1 text-white hover:bg-[#3367D6]"
+    >
+      Use Fallback Google Sign-In
+    </a>
   )
 }
