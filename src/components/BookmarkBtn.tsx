@@ -113,13 +113,13 @@ const BookmarkBtn: FC<Props> = ({ className, bookmarked, color, post }) => {
       // Verify the response and update state accordingly
       if (response?.data?.isSaved !== undefined) {
         setIsBookmarked(response.data.isSaved)
-        toast.success(response.data.isSaved ? 'Added to reading list' : 'Removed from reading list')
+        // toast.success(response.data.isSaved ? 'Added to reading list' : 'Removed from reading list')
       } else if (response?.isSaved !== undefined) {
         setIsBookmarked(response.isSaved)
-        toast.success(response.isSaved ? 'Added to reading list' : 'Removed from reading list')
+        // toast.success(response.isSaved ? 'Added to reading list' : 'Removed from reading list')
       } else {
         // Fallback to optimistic state
-        toast.success(!previousState ? 'Added to reading list' : 'Removed from reading list')
+        // toast.success(!previousState ? 'Added to reading list' : 'Removed from reading list')
       }
     } catch (error) {
       console.error('Failed to toggle bookmark:', error)
