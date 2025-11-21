@@ -4,6 +4,7 @@ import VideoHoverPlayer from '@/components/PostFeaturedMedia/VideoHoverPlayer'
 import { TPost } from '@/data/posts'
 import ButtonPrimary from '@/shared/ButtonPrimary'
 import { getCustomBannerArticle } from '@/utils/getServices'
+import { ArrowUpRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -21,6 +22,7 @@ interface Props {
   textCenter?: boolean
   lang?: string
   home?: boolean
+  hide?: boolean
 }
 
 const Card19: FC<Props> = ({
@@ -32,6 +34,7 @@ const Card19: FC<Props> = ({
   textCenter = false,
   lang,
   home,
+  hide,
 }) => {
   const {
     title,
@@ -135,36 +138,62 @@ const Card19: FC<Props> = ({
         {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
-        {!textCenter && (
+        {!textCenter && !hide && (
           <div className="pointer-events-auto">
             <CategoryBadgeList categories={categories} />
           </div>
         )}
-        <div className="pointer-events-auto ms-auto flex gap-1">
-          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-          <PostCardSaveBtn bookmarked={bookmarked} post={post} />
-        </div>
+        {hide && !textCenter ? (
+          <Link
+            href={lang === 'en' ? `/video/${slug}` : `/${lang}/video/${slug}`}
+            className="group/arrow ms-auto flex aspect-square w-[30px] items-center justify-center rounded-full bg-white hover:bg-gray-100"
+          >
+            <ArrowUpRightIcon className="m-auto h-5 w-5 stroke-2 text-[#00652E] group-hover/arrow:scale-110" />
+          </Link>
+        ) : (
+          !textCenter && (
+            <div className="pointer-events-auto ms-auto flex gap-1">
+              <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
+              <PostCardSaveBtn bookmarked={bookmarked} post={post} />
+            </div>
+          )
+        )}
       </div>
 
       <div
         className={clsx(
           'absolute inset-x-0 bottom-0 flex grow flex-col',
-          textCenter ? 'w-full gap-2 p-5 text-left sm:gap-4 sm:p-6 xl:my-1 xl:text-left' : 'p-5 text-left sm:p-6'
+          textCenter ? 'w-full gap-2 p-5 text-left sm:gap-4 sm:p-6 xl:my-1 xl:text-left' : 'p-5 text-left sm:p-5'
         )}
       >
         <div className="relative z-20 flex items-end">
-          <h2
-            className={clsx(
-              '!line-clamp-2 block !text-sm font-semibold text-white sm:!text-lg lg:!text-xl',
-              // When verticalLine is true, render a right-side vertical rule that
-              // automatically matches the title height using a pseudo-element.
-              verticalLine &&
-                "relative ps-3 before:absolute before:start-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-white before:content-['']",
-              titleClass
-            )}
-          >
-            {title}
-          </h2>
+          {!textCenter ? (
+            <h2
+              className={clsx(
+                '!line-clamp-1 block !text-sm font-semibold text-white sm:!text-[17px]',
+                // When verticalLine is true, render a right-side vertical rule that
+                // automatically matches the title height using a pseudo-element.
+                verticalLine &&
+                  "relative ps-3 before:absolute before:start-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-white before:content-['']",
+                titleClass
+              )}
+            >
+              {title}
+            </h2>
+          ) : (
+            <h2
+              className={clsx(
+                '!line-clamp-2 block !text-sm font-semibold text-white sm:!text-lg lg:!text-xl',
+                // When verticalLine is true, render a right-side vertical rule that
+                // automatically matches the title height using a pseudo-element.
+                verticalLine &&
+                  "relative ps-3 before:absolute before:start-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-white before:content-['']",
+                titleClass
+              )}
+            >
+              {title}
+            </h2>
+          )}
         </div>
 
         {/* Button above title */}
@@ -184,17 +213,19 @@ const Card19: FC<Props> = ({
             <p className={clsx('line-clamp-2 flex-1 text-[12px] leading-snug font-medium text-white sm:text-sm')}>
               {excerpt}
             </p>
-            <Link
-              href={
-                lang === 'en'
-                  ? `/${parentCategorySlug}/${categorySlug}/${slug}`
-                  : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`
-              }
-            >
-              <ButtonPrimary color="logo-colors" className="flex-shrink-0 !px-4 !py-1 !text-[12px]">
-                Start Reading
-              </ButtonPrimary>
-            </Link>
+            {hide ? null : (
+              <Link
+                href={
+                  lang === 'en'
+                    ? `/${parentCategorySlug}/${categorySlug}/${slug}`
+                    : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`
+                }
+              >
+                <ButtonPrimary color="logo-colors" className="flex-shrink-0 !px-4 !py-1 !text-[12px]">
+                  Start Reading
+                </ButtonPrimary>
+              </Link>
+            )}
           </div>
         )}
 
