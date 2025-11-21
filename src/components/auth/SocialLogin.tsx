@@ -41,7 +41,6 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Origin': currentOrigin,
             },
             body: JSON.stringify({ credential }),
             credentials: 'include',
@@ -53,7 +52,6 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Origin': currentOrigin,
             },
             body: JSON.stringify({ credential }),
           })
