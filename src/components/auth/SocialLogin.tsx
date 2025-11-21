@@ -35,7 +35,7 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
         // Log the current origin for debugging
         const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'unknown'
         console.log('[Google Auth] Attempting authentication from origin:', currentOrigin)
-        
+
         let response: Response
         try {
           response = await fetch('https://king-prawn-app-x9z27.ondigitalocean.app/api/authentication/google', {
@@ -141,7 +141,7 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
         }
       } catch (err: any) {
         console.error('Google auth error:', err)
-        
+
         // Check if it's an origin mismatch error
         const errorMessage = err?.message || ''
         if (errorMessage.includes('origin') || errorMessage.includes('mismatch')) {
@@ -159,7 +159,7 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
           console.error('3. Add to "Authorized JavaScript origins":', currentOrigin)
           console.error('4. Save and wait 5-10 minutes')
           console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
-          
+
           toast.error(
             `Google Sign-In blocked. Add ${currentOrigin} to Google Cloud Console. Check console for details.`,
             { duration: 8000 }
@@ -174,7 +174,7 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
 
   const initGoogle = useCallback(() => {
     if (initOnceRef.current) return
-    const clientId = "280351122038-kjua2hto0jb0g3lksg2d19eov5qdcv3g.apps.googleusercontent.com"
+    const clientId = '280351122038-kjua2hto0jb0g3lksg2d19eov5qdcv3g.apps.googleusercontent.com'
     if (!clientId) {
       console.error(
         '[Google Auth] NEXT_PUBLIC_GOOGLE_CLIENT_ID is not set. Add it to .env.local and restart the dev server.'
@@ -189,7 +189,7 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
       console.log('[Google Auth] Initializing with Client ID:', clientId)
       console.log('[Google Auth] Current Origin:', currentOrigin)
       console.log('[Google Auth] Make sure this origin is added to Google Cloud Console')
-      
+
       // Prevent auto sign-in selection issues
       window.google.accounts.id.disableAutoSelect?.()
       window.google.accounts.id.initialize({
@@ -297,8 +297,14 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
               </div>
               {originMismatch && (
                 <div className="mt-3 rounded-md border border-amber-300 bg-amber-50 p-3 text-xs text-amber-800 dark:border-amber-600 dark:bg-amber-900/30 dark:text-amber-200">
-                  <p className="font-semibold mb-1">Google origin not authorized.</p>
-                  <p className="mb-2">Add <code className="rounded bg-white px-1 dark:bg-black">{typeof window !== 'undefined' ? window.location.origin : ''}</code> to Google Cloud Console → OAuth Client → Authorized JavaScript origins.</p>
+                  <p className="mb-1 font-semibold">Google origin not authorized.</p>
+                  <p className="mb-2">
+                    Add{' '}
+                    <code className="rounded bg-white px-1 dark:bg-black">
+                      {typeof window !== 'undefined' ? window.location.origin : ''}
+                    </code>{' '}
+                    to Google Cloud Console → OAuth Client → Authorized JavaScript origins.
+                  </p>
                   <p className="mb-2">If you cannot update that now, use the fallback OAuth flow:</p>
                   <FallbackOAuthLink />
                 </div>
@@ -324,8 +330,10 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
 
 // Fallback component building an authorization URL for code flow.
 function FallbackOAuthLink() {
-  const clientId = "280351122038-kjua2hto0jb0g3lksg2d19eov5qdcv3g.apps.googleusercontent.com"
-  const redirectUri = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT || `${typeof window !== 'undefined' ? window.location.origin : ''}/api/auth/google/callback`
+  const clientId = '280351122038-kjua2hto0jb0g3lksg2d19eov5qdcv3g.apps.googleusercontent.com'
+  const redirectUri =
+    process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT ||
+    `${typeof window !== 'undefined' ? window.location.origin : ''}/api/auth/google/callback`
   const scope = encodeURIComponent('openid email profile')
   const authUrl = clientId
     ? `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(
@@ -336,10 +344,7 @@ function FallbackOAuthLink() {
     return <p className="text-red-600 dark:text-red-400">Missing NEXT_PUBLIC_GOOGLE_CLIENT_ID for fallback flow.</p>
   }
   return (
-    <a
-      href={authUrl}
-      className="inline-block rounded bg-[#4285F4] px-3 py-1 text-white hover:bg-[#3367D6]"
-    >
+    <a href={authUrl} className="inline-block rounded bg-[#4285F4] px-3 py-1 text-white hover:bg-[#3367D6]">
       Use Fallback Google Sign-In
     </a>
   )

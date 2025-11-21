@@ -167,7 +167,7 @@ const Lv1MenuItem = ({
             : 'text-[#000000] dark:text-white'
           : 'text-[#000000] dark:text-white'
       )}
-      href={lang !== "en" ? `/${lang}${href}` : href}
+      href={lang !== 'en' ? `/${lang}${href}` : href}
     >
       {menuItem.name}
       {menuItem.children?.length ? (
