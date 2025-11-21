@@ -174,7 +174,7 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
 
   const initGoogle = useCallback(() => {
     if (initOnceRef.current) return
-    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
+    const clientId = "280351122038-kjua2hto0jb0g3lksg2d19eov5qdcv3g.apps.googleusercontent.com"
     if (!clientId) {
       console.error(
         '[Google Auth] NEXT_PUBLIC_GOOGLE_CLIENT_ID is not set. Add it to .env.local and restart the dev server.'
@@ -324,7 +324,7 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
 
 // Fallback component building an authorization URL for code flow.
 function FallbackOAuthLink() {
-  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
+  const clientId = "280351122038-kjua2hto0jb0g3lksg2d19eov5qdcv3g.apps.googleusercontent.com"
   const redirectUri = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT || `${typeof window !== 'undefined' ? window.location.origin : ''}/api/auth/google/callback`
   const scope = encodeURIComponent('openid email profile')
   const authUrl = clientId
