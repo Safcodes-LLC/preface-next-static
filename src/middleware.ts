@@ -52,7 +52,6 @@ export function middleware(request: NextRequest) {
   // If no locale is provided, assume English and rewrite URL internally
   if (!pathname.startsWith('/ml') && !pathname.startsWith('/ar')) {
     const rewrittenPath = new URL(`/en${pathname}`, request.url)
-    console.log('Rewriting path to:', rewrittenPath.pathname)
     return NextResponse.rewrite(rewrittenPath)
   }
   return NextResponse.next()
