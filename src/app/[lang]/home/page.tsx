@@ -109,7 +109,7 @@ const HomePage = async ({ params, dict }: HomePageProps) => {
 
         <VideoHeroBanner />
         <div id="magazine-section" className="container pt-10 md:pt-14 lg:pt-20">
-          <SectionMagazine10 posts={articlesArray || []} videoPosts={videoPostsArray || []} lang={lang} />
+          <SectionMagazine10 posts={articlesArray || []} videoPosts={videoPostsArray || []} lang={lang} hide />
         </div>
 
         <div className="container pt-10 md:pt-14 lg:pt-20">

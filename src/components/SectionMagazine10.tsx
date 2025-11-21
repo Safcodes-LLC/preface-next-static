@@ -10,6 +10,7 @@ interface Props {
   videoPosts?: any
   className?: string
   lang?: string
+  hide?: boolean
 }
 
 const container: Variants = {
@@ -41,7 +42,7 @@ const viewportOptions = {
   margin: '-50px', // Start the animation a bit before the element is in view
 }
 
-const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang }) => {
+const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang, hide }) => {
   return (
     <motion.div initial="hidden" whileInView="show" viewport={viewportOptions} variants={container}>
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
@@ -50,11 +51,12 @@ const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang }) =>
             <Card19
               post={videoPosts[0]}
               titleClass="text-lg sm:text-xl"
-              ratio="aspect-4/3 sm:aspect-1/1 md:aspect-4/1 lg:aspect-4/2 xl:aspect-1/1"
+              ratio="aspect-16/9"
               textCenter={true}
               verticalLine={true}
               lang={lang}
               home
+              hide={hide}
             />
           </motion.div>
         )}
@@ -66,13 +68,14 @@ const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang }) =>
           {posts[0] && (
             <motion.div variants={item} className="sm:col-span-2 sm:row-span-2" viewport={viewportOptions}>
               <Card19
-                ratio="aspect-4/3 sm:aspect-16/1"
+                ratio="max-md:aspect-16/9"
                 className="h-full"
                 titleClass="text-lg sm:text-xl"
                 post={posts[0]}
                 verticalLine={true}
                 lang={lang}
                 home
+                hide={hide}
               />
             </motion.div>
           )}
@@ -82,10 +85,10 @@ const SectionMagazine10: FC<Props> = ({ posts, videoPosts, className, lang }) =>
               <motion.div
                 key={post.id}
                 variants={item}
-                className="col-span-1 h-full sm:row-span-3"
+                className="col-span-1 h-auto sm:row-span-3"
                 viewport={viewportOptions}
               >
-                <Card18 post={post} lang={lang} className="h-full" home />
+                <Card18 post={post} lang={lang} className="h-full" home ratio="aspect-16/9" hide={hide} />
               </motion.div>
             ))}
         </motion.div>

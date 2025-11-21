@@ -3,6 +3,7 @@ import PostFeaturedMedia from '@/components/PostFeaturedMedia/PostFeaturedMedia'
 import { TPost } from '@/data/posts'
 import ButtonPrimary from '@/shared/ButtonPrimary'
 import { getCustomBannerArticle } from '@/utils/getServices'
+import { ArrowUpRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,9 +19,10 @@ interface Props {
   post?: TPost | any
   lang?: string
   home?: boolean
+  hide?: boolean
 }
 
-const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post, lang, home }) => {
+const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect-4/3', post, lang, home, hide }) => {
   const {
     title,
     excerpt,
@@ -98,11 +100,24 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         {/* <PostCardLikeBtn likeCount={likeCount} liked={liked} />
         <PostCardCommentBtn commentCount={commentCount} handle={handle} />
         <PostCardSaveBtn className="ms-auto" bookmarked={bookmarked} /> */}
-        <CategoryBadgeList categories={categories} />
-        <div className="ms-auto flex gap-1">
-          <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
-          <PostCardSaveBtn bookmarked={bookmarked} post={post} />
-        </div>
+        {hide ? null : <CategoryBadgeList categories={categories} />}
+        {hide ? (
+          <Link
+            className="group/arrow ms-auto flex aspect-square w-[30px] items-center justify-center rounded-full bg-white hover:bg-gray-100"
+            href={
+              lang === 'en'
+                ? `/${parentCategorySlug}/${categorySlug}/${slug}`
+                : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`
+            }
+          >
+            <ArrowUpRightIcon className="m-auto h-5 w-5 stroke-2 text-[#00652E] group-hover/arrow:scale-110" />
+          </Link>
+        ) : (
+          <div className="ms-auto flex gap-1">
+            <PostCardLikeBtn likeCount={favoriteCount || likeCount} liked={liked} post={post} />
+            <PostCardSaveBtn bookmarked={bookmarked} post={post} />
+          </div>
+        )}
       </div>
 
       <span className="absolute inset-x-0 bottom-0 block h-1/2 bg-linear-to-t from-black opacity-80" />
@@ -114,7 +129,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
         <div className="flex items-start">
           <h2
             className={clsx(
-              '!line-clamp-2 !text-sm leading-snug font-semibold text-white sm:!text-[17px]',
+              '!line-clamp-1 !text-sm leading-snug font-semibold text-white sm:!text-[17px]',
               // Left-side vertical rule that automatically matches the title height
               "relative ps-3 before:absolute before:start-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-white before:content-['']",
               titleClass
@@ -127,20 +142,22 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
           <p className={clsx('mt-3 line-clamp-2 text-[12px] leading-snug font-medium text-white sm:text-sm')}>
             {excerpt}
           </p>
-          <div className="relative z-10">
-            <Link
-              href={
-                lang === 'en'
-                  ? `/${parentCategorySlug}/${categorySlug}/${slug}`
-                  : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`
-              }
-            >
-              <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
-                Start Reading
-                {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}
-              </ButtonPrimary>
-            </Link>
-          </div>
+          {hide ? null : (
+            <div className="relative z-10">
+              <Link
+                href={
+                  lang === 'en'
+                    ? `/${parentCategorySlug}/${categorySlug}/${slug}`
+                    : `/${lang}/${parentCategorySlug}/${categorySlug}/${slug}`
+                }
+              >
+                <ButtonPrimary color="logo-colors" className="!px-6 !py-1 !text-[12px]">
+                  Start Reading
+                  {/* <ArrowRightIcon className="h-5 w-5 rtl:rotate-180" /> */}
+                </ButtonPrimary>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>
