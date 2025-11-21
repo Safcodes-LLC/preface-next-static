@@ -140,9 +140,33 @@ export default function SocialLogin({ className = '', dict, lang, onSuccess }: S
         } else {
           router.push(lang ? `/${lang}` : '/')
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error('Google auth error:', err)
-        toast.error(dict?.login?.error || 'Authentication failed. Please try again.')
+        
+        // Check if it's an origin mismatch error
+        const errorMessage = err?.message || ''
+        if (errorMessage.includes('origin') || errorMessage.includes('mismatch')) {
+          const currentOrigin = typeof window !== 'undefined' ? window.location.origin : ''
+          console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+          console.error('❌ GOOGLE OAUTH ERROR: origin_mismatch')
+          console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+          console.error('🚨 YOUR SITE URL IS NOT AUTHORIZED')
+          console.error('📍 Current Origin:', currentOrigin)
+          console.error('')
+          console.error('✅ TO FIX THIS:')
+          console.error('1. Open: https://console.cloud.google.com/apis/credentials')
+          console.error('2. Click on: 280351122038-kjua2hto0jb0g3lksg2d19eov5qdcv3g.apps.googleusercontent.com')
+          console.error('3. Add to "Authorized JavaScript origins":', currentOrigin)
+          console.error('4. Save and wait 5-10 minutes')
+          console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+          
+          toast.error(
+            `Google Sign-In blocked. Add ${currentOrigin} to Google Cloud Console. Check console for details.`,
+            { duration: 8000 }
+          )
+        } else {
+          toast.error(dict?.login?.error || 'Authentication failed. Please try again.')
+        }
       }
     },
     [router, onSuccess, dict, lang]
