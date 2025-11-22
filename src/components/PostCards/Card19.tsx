@@ -183,7 +183,7 @@ const Card19: FC<Props> = ({
           ) : (
             <h2
               className={clsx(
-                '!line-clamp-2 block !text-sm font-semibold text-white sm:!text-lg lg:!text-xl',
+                '!line-clamp-1 block !text-sm font-semibold text-white sm:!text-lg md:!line-clamp-2 lg:!text-xl',
                 // When verticalLine is true, render a right-side vertical rule that
                 // automatically matches the title height using a pseudo-element.
                 verticalLine &&
