@@ -71,17 +71,20 @@ const FOUNDERS = [
   },
 ]
 
-export default function Example() {
+export default function SectionWhoWeAre() {
   return (
     <div className="">
-      <div className="mx-auto max-w-2xl lg:mx-0">
-        <h2 className="text-3xl font-semibold tracking-tight text-pretty sm:text-4xl lg:text-5xl">Our team</h2>
+      <div className="">
+        <h2 className="text-3xl font-semibold tracking-tight text-pretty sm:text-4xl lg:text-5xl">Who We Are</h2>
         <p className="mt-6 text-lg/8 text-neutral-600 dark:text-neutral-400">
-          We’re a dynamic group of individuals who are passionate about what we do and dedicated to delivering the best
-          results for our clients.
+          Quran.com is a waqf (endowment), established as a public trust to ensure that the Quran remains accessible to
+          all, free of charge and without commercial interests. It is managed by Quran.Foundation, a 501(c)(3) nonprofit
+          organization, which sustains and develops Quran.com as part of its mission to provide high-quality, authentic
+          Quranic resources to the world. Our commitment is to serve the Quran and its readers with excellence,
+          sincerity, and responsibility.
         </p>
       </div>
-      <ul
+      {/* <ul
         role="list"
         className="mx-auto mt-20 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-16 text-center sm:grid-cols-3 md:grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-5 xl:grid-cols-6"
       >
@@ -92,7 +95,7 @@ export default function Example() {
             <p className="text-sm/6 text-neutral-600 dark:text-neutral-400">{person.job}</p>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   )
 }

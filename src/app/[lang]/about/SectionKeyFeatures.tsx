@@ -1,16 +1,27 @@
-export default function SectionStatistic() {
+export default function SectionKeyFeatures() {
+  const features = [
+    "User-Friendly Quran Interface– A clean and intuitive reading experience on any device.",
+    "Multiple Translations & Tafsir – Access to translations in multiple languages, along with tafsir.",
+    "Audio Recitations – Listen to high-quality recitations from world-renowned Qaris, with the ability to follow along word by word.",
+    "Advanced Search & Navigation – Find verses instantly by topic or keywords across the entire Quran.",
+    "Ayah Bookmarking & Notes – Save verses and write personal reflections for later reference.",
+    "QuranReflect Integration – Engage with a global community through reflections and insights shared by scholars and individuals.",
+    "Reading Progress Tracking and Goals – Keep track of your daily goals and reading history",
+    "APIs for Developers – Free access to content and features to power Islamic apps and R&D.",
+    "And much more, Alhamdulillah."
+  ];
   return (
     <div className="">
-      <div className="mx-auto max-w-4xl lg:mx-0">
+      <div className="">
         <h2 className="text-3xl font-semibold tracking-tight text-pretty sm:text-4xl lg:text-5xl">
-          We approach work as a place to make the world better
+          Key Features & Offerings
         </h2>
         <p className="mt-6 text-base/7 text-neutral-600 dark:text-neutral-400">
-          Diam nunc lacus lacus aliquam turpis enim. Eget hac velit est euismod lacus. Est non placerat nam arcu. Cras
-          purus nibh cursus sit eu in id. Integer vel nibh.
+          Quran.com is designed to support every stage of engagement with the Quran—from reading and memorization to study and reflection. Our features include:
         </p>
       </div>
-      <div className="mx-auto mt-16 flex max-w-2xl flex-col gap-8 lg:mx-0 lg:mt-20 lg:max-w-none lg:flex-row lg:items-end">
+      {/* i need bullet point here like figma */}
+      {/* <div className="mx-auto mt-16 flex max-w-2xl flex-col gap-8 lg:mx-0 lg:mt-20 lg:max-w-none lg:flex-row lg:items-end">
         <div className="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-gray-50 p-8 sm:w-3/4 sm:max-w-md sm:flex-row-reverse sm:items-end lg:w-72 lg:max-w-none lg:flex-none lg:flex-col lg:items-start">
           <p className="flex-none text-3xl font-bold tracking-tight text-gray-900">250k</p>
           <div className="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
@@ -38,7 +49,16 @@ export default function SectionStatistic() {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
+
+      <ul className="mt-8 space-y-4 max-w-6xl mx-auto">
+        {features.map((feature, index) => (
+          <li key={index} className="flex items-start">
+            <span className="flex-shrink-0 w-1.5 h-1.5 mt-2.5 rounded-full bg-black dark:bg-white mr-3"></span>
+            <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

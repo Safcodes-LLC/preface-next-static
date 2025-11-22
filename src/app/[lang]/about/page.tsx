@@ -1,11 +1,12 @@
-import SectionHero from '@/components/SectionHero'
 import rightImg from '@/images/about-hero-right.png'
 import { Button } from '@/shared/Button'
 import Input from '@/shared/Input'
 import { Divider } from '@/shared/divider'
 import { Metadata } from 'next'
-import SectionFounder from './SectionFounder'
-import SectionStatistic from './SectionStatistic'
+import SectionHero1 from '@/components/SectionHero1'
+import SectionOurMission from './SectionOurMission'
+import SectionKeyFeatures from './SectionKeyFeatures'
+import SectionWhoWeAre from './SectionWhoWeAre'
 
 export async function generateMetadata({}: {}): Promise<Metadata> {
   return {
@@ -17,19 +18,21 @@ export async function generateMetadata({}: {}): Promise<Metadata> {
 const PageAbout = ({}) => {
   return (
     <div className={`nc-PageAbout relative`}>
-      <div className="relative container space-y-16 py-16 lg:space-y-28 lg:py-28">
-        <SectionHero
+      <div className="relative container space-y-10 py-16 lg:space-y-16 lg:py-28">
+        <SectionHero1
           rightImg={rightImg}
-          heading="About us."
+          heading="About us"
           btnText="Get in touch"
-          subHeading="We're impartial and independent, and every day we create distinctive, world-class programmes and content which inform, educate and entertain millions of people in the around the world."
+          subHeading="Since its founding in 1995, Quran.com has been committed to making the Quran available to everyone in a way that is clear, authentic, and easy to engage with. Every day, millions of people worldwide turn to Quran.com to read, listen, study, and reflect on the Quran—whether they are lifelong students, scholars, or just beginning their journey."
         />
         <Divider />
-        <SectionFounder />
+        <SectionOurMission />
         <Divider />
-        <SectionStatistic />
+        <SectionKeyFeatures />
+        <Divider />
+        <SectionWhoWeAre />
 
-        <div className="py-16 sm:py-24 lg:py-32">
+        {/* <div className="py-16 sm:py-24 lg:py-32">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
             <h2 className="max-w-xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl lg:col-span-7 lg:text-5xl">
               Want product news and updates? Sign up for our newsletter.
@@ -58,7 +61,7 @@ const PageAbout = ({}) => {
               </p>
             </form>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )
