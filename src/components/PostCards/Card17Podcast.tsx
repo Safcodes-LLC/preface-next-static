@@ -2,11 +2,11 @@
 
 import { TPost } from '@/data/posts'
 import { Link } from '@/shared/link'
+import { toTitleCase } from '@/utils/slug'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { FC } from 'react'
 import ButtonPlayMusicPlayer from '../ButtonPlayMusicPlayer'
-import { toTitleCase } from '@/utils/slug'
 
 interface Props {
   className?: string

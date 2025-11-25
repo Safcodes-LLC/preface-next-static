@@ -3,10 +3,11 @@
 import Card20 from '@/components/PostCards/Card20'
 import { TNavigationItem } from '@/data/navigation'
 import { TPost } from '@/data/posts'
+import { toTitleCase } from '@/utils/slug'
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 import Link from 'next/link'
-import { FC, ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { FC, ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 /* ------------------------------- Utilities ------------------------------- */
@@ -124,7 +125,7 @@ const MenuLink = ({ item, lang, level }: { item: TNavigationItem; lang?: string;
         'break-words whitespace-normal' // <-- wrap long text
       )}
     >
-      <span className="flex-1">{item.name}</span>
+      <span className="flex-1">{level >= 3 ? toTitleCase(item.name || '') : item.name}</span>
       {item.children?.length ? (
         level === 1 ? (
           <ChevronDownIcon
@@ -156,6 +157,8 @@ const Lv1MenuItem = ({
   lang?: string
 }) => {
   const href = menuItem.href || '#'
+
+  // flex w-full items-center justify-between rounded-md px-4 py-1 font-normal text-neutral-600 hover:bg-neutral-100 hover:text-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 break-words whitespace-normal
   return (
     <Link
       className={clsx(
@@ -196,7 +199,7 @@ const NestedMenuList: FC<{
         'ring-1 ring-black/5 dark:bg-[#0D0D0D] dark:ring-white/10',
         'max-h-[70vh] overflow-y-auto',
         level >= 3
-          ? 'w-80 break-words whitespace-normal' // wider + allow wrapping for 3rd level+
+          ? 'w-80 break-words whitespace-normal capitalize' // wider + allow wrapping for 3rd level+
           : 'w-56 overflow-x-hidden'
       )}
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
@@ -219,27 +222,29 @@ const NestedMenuItem: FC<{
   const hasChildren = item.type === 'dropdown' && !!item.children?.length
 
   return (
-    <li
-      ref={liRef}
-      className="relative px-2"
-      onMouseEnter={hasChildren ? openNow : undefined}
-      onMouseLeave={hasChildren ? closeLater : undefined}
-    >
-      <MenuLink item={item} lang={lang} level={level} />
+    <React.Fragment>
+      <li
+        ref={liRef}
+        className="relative px-2"
+        onMouseEnter={hasChildren ? openNow : undefined}
+        onMouseLeave={hasChildren ? closeLater : undefined}
+      >
+        <MenuLink item={item} lang={lang} level={level} />
 
-      {/* Submenu in a portal so it’s never clipped by parent scroll */}
-      {hasChildren && open && (
-        <FloatingPanel
-          anchor={liRef.current}
-          side={lang === 'ar' ? 'left' : 'right'}
-          gap={lang === 'ar' ? (level === 1 ? 250 : 330) : 8}
-        >
-          <div onMouseEnter={cancel} onMouseLeave={closeLater} className="w-56">
-            <NestedMenuList items={item.children as TNavigationItem[]} lang={lang} level={level + 1} />
-          </div>
-        </FloatingPanel>
-      )}
-    </li>
+        {/* Submenu in a portal so it’s never clipped by parent scroll */}
+        {hasChildren && open && (
+          <FloatingPanel
+            anchor={liRef.current}
+            side={lang === 'ar' ? 'left' : 'right'}
+            gap={lang === 'ar' ? (level === 1 ? 250 : 330) : 8}
+          >
+            <div onMouseEnter={cancel} onMouseLeave={closeLater} className="w-56">
+              <NestedMenuList items={item.children as TNavigationItem[]} lang={lang} level={level + 1} />
+            </div>
+          </FloatingPanel>
+        )}
+      </li>
+    </React.Fragment>
   )
 }
 

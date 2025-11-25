@@ -1,6 +1,7 @@
 'use client'
 
 import { TPost } from '@/data/posts'
+import { toTitleCase } from '@/utils/slug'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { FC, useState } from 'react'
@@ -9,7 +10,6 @@ import CategoryBadgeList from '../CategoryBadgeList'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
 import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
-import { toTitleCase } from '@/utils/slug'
 
 interface Props {
   className?: string

@@ -1,6 +1,5 @@
-import ButtonPrimary from '@/shared/ButtonPrimary'
 import clsx from 'clsx'
-import Image, { StaticImageData } from 'next/image'
+import { StaticImageData } from 'next/image'
 import { FC, ReactNode } from 'react'
 
 interface Props {

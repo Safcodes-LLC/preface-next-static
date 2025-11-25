@@ -1,9 +1,9 @@
 import { TPost } from '@/data/posts'
+import { toTitleCase } from '@/utils/slug'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
-import { toTitleCase } from '@/utils/slug'
 
 interface Props {
   className?: string

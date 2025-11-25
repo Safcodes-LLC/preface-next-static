@@ -1,11 +1,9 @@
+import SectionHero1 from '@/components/SectionHero1'
 import rightImg from '@/images/about-hero-right.png'
-import { Button } from '@/shared/Button'
-import Input from '@/shared/Input'
 import { Divider } from '@/shared/divider'
 import { Metadata } from 'next'
-import SectionHero1 from '@/components/SectionHero1'
-import SectionOurMission from './SectionOurMission'
 import SectionKeyFeatures from './SectionKeyFeatures'
+import SectionOurMission from './SectionOurMission'
 import SectionWhoWeAre from './SectionWhoWeAre'
 
 export async function generateMetadata({}: {}): Promise<Metadata> {

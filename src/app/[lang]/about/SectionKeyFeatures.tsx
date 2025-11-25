@@ -1,15 +1,15 @@
 export default function SectionKeyFeatures() {
   const features = [
-    "User-Friendly Quran Interface– A clean and intuitive reading experience on any device.",
-    "Multiple Translations & Tafsir – Access to translations in multiple languages, along with tafsir.",
-    "Audio Recitations – Listen to high-quality recitations from world-renowned Qaris, with the ability to follow along word by word.",
-    "Advanced Search & Navigation – Find verses instantly by topic or keywords across the entire Quran.",
-    "Ayah Bookmarking & Notes – Save verses and write personal reflections for later reference.",
-    "QuranReflect Integration – Engage with a global community through reflections and insights shared by scholars and individuals.",
-    "Reading Progress Tracking and Goals – Keep track of your daily goals and reading history",
-    "APIs for Developers – Free access to content and features to power Islamic apps and R&D.",
-    "And much more, Alhamdulillah."
-  ];
+    'User-Friendly Quran Interface– A clean and intuitive reading experience on any device.',
+    'Multiple Translations & Tafsir – Access to translations in multiple languages, along with tafsir.',
+    'Audio Recitations – Listen to high-quality recitations from world-renowned Qaris, with the ability to follow along word by word.',
+    'Advanced Search & Navigation – Find verses instantly by topic or keywords across the entire Quran.',
+    'Ayah Bookmarking & Notes – Save verses and write personal reflections for later reference.',
+    'QuranReflect Integration – Engage with a global community through reflections and insights shared by scholars and individuals.',
+    'Reading Progress Tracking and Goals – Keep track of your daily goals and reading history',
+    'APIs for Developers – Free access to content and features to power Islamic apps and R&D.',
+    'And much more, Alhamdulillah.',
+  ]
   return (
     <div className="">
       <div className="">
@@ -17,7 +17,8 @@ export default function SectionKeyFeatures() {
           Key Features & Offerings
         </h2>
         <p className="mt-6 text-base/7 text-neutral-600 dark:text-neutral-400">
-          Quran.com is designed to support every stage of engagement with the Quran—from reading and memorization to study and reflection. Our features include:
+          Quran.com is designed to support every stage of engagement with the Quran—from reading and memorization to
+          study and reflection. Our features include:
         </p>
       </div>
       {/* i need bullet point here like figma */}
@@ -51,10 +52,10 @@ export default function SectionKeyFeatures() {
         </div>
       </div> */}
 
-      <ul className="mt-8 space-y-4 max-w-6xl mx-auto">
+      <ul className="mx-auto mt-8 max-w-6xl space-y-4">
         {features.map((feature, index) => (
           <li key={index} className="flex items-start">
-            <span className="flex-shrink-0 w-1.5 h-1.5 mt-2.5 rounded-full bg-black dark:bg-white mr-3"></span>
+            <span className="mt-2.5 mr-3 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-black dark:bg-white"></span>
             <span className="text-gray-700 dark:text-gray-300">{feature}</span>
           </li>
         ))}
