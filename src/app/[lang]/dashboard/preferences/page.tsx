@@ -1,5 +1,5 @@
 const Page = () => {
-  return <div>Qur&apos;an</div>
+  return <div>Preferences</div>
 }
 
 export default Page

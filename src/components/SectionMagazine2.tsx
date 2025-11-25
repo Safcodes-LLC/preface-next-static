@@ -63,7 +63,7 @@ const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeadin
   return (
     <div className={clsx('section-magazine-2 relative', className)}>
       <div className="mt-8 grid grid-cols-12 gap-6">
-        <div className="col-span-12 rounded-2xl bg-white px-5 pb-6 lg:col-span-7 dark:bg-[#0D0D0D]">
+        <div className="col-span-12 h-fit rounded-2xl bg-white px-5 pb-6 lg:col-span-7 dark:bg-[#0D0D0D]">
           <WidgetHeading
             title="Saved for Reading"
             viewAll={{
@@ -74,7 +74,7 @@ const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeadin
             className="!px-0"
           />
 
-          {savedPosts.length > 0 && (
+          {savedPosts.length > 0 ? (
             <div className={gridClass}>
               {savedPosts.slice(0, 6).map((item) => (
                 <Card24
@@ -86,6 +86,8 @@ const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeadin
                 />
               ))}
             </div>
+          ) : (
+            <p className="py-8 text-center text-gray-500 dark:text-gray-400">You have no saved articles</p>
           )}
         </div>
         <div className="col-span-12 lg:col-span-5">

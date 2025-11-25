@@ -75,7 +75,7 @@ export async function getContinuosReadByCategory(
   postType: string
 ): Promise<any | undefined> {
   try {
-    return await getData(`user/read-posts-by-category/${userId}?lang=${lang}&postType=${postType}`, '', 0)
+    return await getData(`user/read-posts-by-category/${userId}?lang=${lang}&postType=${postType}`, '', 60)
   } catch (error) {
     console.error('Failed to fetch continuos read by category data:', error)
     // throw notFound();
@@ -93,7 +93,7 @@ export async function getSavedList(userId: string, lang: string): Promise<any | 
 
 export async function getFavouriteList(userId: string, postType: string, lang: string): Promise<any | undefined> {
   try {
-    return await getData(`favourites/users/${userId}?postType=${postType}&lang=${lang}`, '', 0)
+    return await getData(`favourites/users/${userId}?postType=${postType}&lang=${lang}`, '', 60)
   } catch (error) {
     console.error('Failed to fetch favourite list data:', error)
     // throw notFound();
@@ -128,7 +128,7 @@ export async function getContinuosReadList(userId: string, lang: string): Promis
 
 export async function getLoggedUser(authToken: string): Promise<any | undefined> {
   try {
-    return await getData(`authentication/loggedin_user`, authToken || '', 0)
+    return await getData(`authentication/loggedin_user`, authToken || '', 600)
   } catch (error) {
     console.error('Failed to fetch logged user data:', error)
     // throw notFound();
@@ -176,7 +176,7 @@ export async function postAskTheScolarReplay(
 
 export async function getAskTheScholarAllQuestions(authToken: string): Promise<any | undefined> {
   try {
-    return await getData(`scholar-questions/userAllQuestions`, authToken || '', 0)
+    return await getData(`scholar-questions/userAllQuestions`, authToken || '', 120)
   } catch (error) {
     console.error('Failed to fetch ask the scholar all questions data:', error)
     // throw notFound();
@@ -188,7 +188,7 @@ export async function getAskTheScholarSingleQuestionsById(
   authToken: string
 ): Promise<any | undefined> {
   try {
-    return await getData(`scholar-questions/${questionId}`, authToken || '', 0)
+    return await getData(`scholar-questions/${questionId}`, authToken || '', 300)
   } catch (error) {
     console.error('Failed to fetch ask the scholar single question data:', error)
     // throw notFound();
@@ -226,7 +226,7 @@ export async function getSavedArticlesList(
   authToken: string
 ): Promise<any | undefined> {
   try {
-    return await getData(`savedlist/all?postType=${postType}&lang=${lang}`, authToken || '', 0)
+    return await getData(`savedlist/all?postType=${postType}&lang=${lang}`, authToken || '', 180)
   } catch (error) {
     console.error('Failed to fetch saved articles list data:', error)
     // throw notFound();
@@ -234,7 +234,7 @@ export async function getSavedArticlesList(
 }
 export async function getSavedArticleStatus(postId: string, authToken: string): Promise<any | undefined> {
   try {
-    return await getData(`savedlist/status/${postId}`, authToken || '', 0)
+    return await getData(`savedlist/status/${postId}`, authToken || '', 300)
   } catch (error) {
     console.error('Failed to fetch saved article status data:', error)
     // throw notFound();

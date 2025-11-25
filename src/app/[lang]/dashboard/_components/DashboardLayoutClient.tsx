@@ -90,24 +90,43 @@ const subPages = [
 export default function DashboardLayoutClient({ children }: { children: React.ReactNode }) {
   let token = getAuthToken()
   const pathname = usePathname()
-  const [profile, setProfile] = useState<any | null>(null)
-  const isActive = (href: string) => pathname === href
-  const pageTitle = navigation.find((item) => isActive(item.href))?.name ?? 'Dashboard'
-  useEffect(() => {
-    const fetchUser = async () => {
-      if (token) {
+  const [profile, setProfile] = useState<any | null>(() => {
+    // Load cached profile immediately from localStorage
+    if (typeof window !== 'undefined') {
+      const cached = localStorage.getItem('user')
+      if (cached) {
         try {
-          const result = await getLoggedUser(token)
-          setProfile(result.data)
-          console.log('Profile data:', result)
-        } catch (error) {
-          console.error('Error fetching profile data:', error)
+          return JSON.parse(cached)
+        } catch {
+          return null
         }
       }
     }
+    return null
+  })
+  const isActive = (href: string) => pathname === href
+  const pageTitle = navigation.find((item) => isActive(item.href))?.name ?? 'Dashboard'
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (!token) return
+
+      try {
+        const result = await getLoggedUser(token)
+        if (result?.data) {
+          setProfile(result.data)
+          // Cache the profile data
+          localStorage.setItem('user', JSON.stringify(result.data))
+        }
+      } catch (error) {
+        console.error('Error fetching profile data:', error)
+      }
+    }
+
+    // Only fetch once on mount, use cached data for instant navigation
     fetchUser()
-  }, [token])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) // Empty deps to run only once
 
   return (
     <div className="h-screen max-md:h-full md:overflow-hidden">

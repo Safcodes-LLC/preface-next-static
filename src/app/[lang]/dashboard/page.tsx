@@ -1,5 +1,4 @@
 import StatusDashboard from '@/components/Dashboard/StatusDashboard'
-import SectionMagazine1 from '@/components/SectionMagazine1'
 import SectionMagazine2 from '@/components/SectionMagazine2'
 import { ContinuosReadIcon, FavouriteIcon, QAIcon, SavedIcon } from '@/components/Svg/svg'
 import { ProtectedRoute } from '@/contexts/AuthContext'
@@ -79,7 +78,7 @@ const Page = async ({ params, dict }: any) => {
           <Card23 key={post._id || index} post={post} lang={lang} />
         ))} */}
 
-        <SectionMagazine1 lang={lang} />
+        {/* <SectionMagazine1 lang={lang} /> */}
       </div>
 
       {/* saved read and favourite section */}
