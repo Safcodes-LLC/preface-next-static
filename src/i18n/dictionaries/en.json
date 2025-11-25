@@ -76,6 +76,13 @@
       "error": "Signup failed. Please try again."
     }
   },
+  "footer": {
+    "top": "Top",
+    "categories": "Categories",
+    "topics": "Topics",
+    "islamForBeginners": "Islam For Beginners",
+    "mostEngaged": "Most Engaged"
+  },
   "navigation": {
     "about": "About",
     "stories": "Stories",

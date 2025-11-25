@@ -1,6 +1,7 @@
 import NcImage from '@/components/NcImage/NcImage'
 import { TCategory } from '@/data/categories'
 import { Link } from '@/shared/link'
+import { toTitleCase } from '@/utils/slug'
 import clsx from 'clsx'
 import { FC } from 'react'
 
@@ -53,7 +54,7 @@ const CardCategory2: FC<Props> = ({ className, category, badge, lang }) => {
           href={lang === 'en' ? `/${slug}` : `/${lang}/${slug}`}
           className={`relative inset-0 z-10 line-clamp-1 text-base font-semibold text-[#2a2a2a2] hover:text-[#3a3a3a]`}
         >
-          {categoryName}
+          {toTitleCase(categoryName)}
         </Link>
         <div
           className="absolute inset-0"

@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { FC, useMemo } from 'react'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
+import { toTitleCase } from '@/utils/slug'
 
 interface Props {
   className?: string
@@ -66,7 +67,7 @@ const Card21: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
             <div className="w-9 border-b-2 border-[#00652E] dark:border-[#60a43a]" />
           </div>
           <h2 className={clsx('font-semibold text-[#444444] dark:text-white', titleClass)}>
-            <span className="line-clamp-2">{content?.title || 'How to Pray that cleanse Your ensure'}</span>
+            <span className="line-clamp-2">{toTitleCase(content?.title) || 'How to Pray that cleanse Your ensure'}</span>
           </h2>
           {content.likeAndBookmark ? (
             <div className="mt-auto flex items-center gap-3">

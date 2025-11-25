@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
+import { toTitleCase } from '@/utils/slug'
 
 interface Props {
   className?: string
@@ -40,7 +41,7 @@ const Card5: FC<Props> = ({ className, post, lang, index }) => {
         <CategoryBadgeList categories={categories} index={index} />
         <h2 className="my-4 block text-base text-neutral-800 dark:text-neutral-300" title={title}>
           <Link href={`/${parentCategorySlug}/${categorySlug}/${articleSlug}`} className="line-clamp-2" title={title}>
-            {title}
+            {toTitleCase(title)}
           </Link>
         </h2>
         {/* <PostCardMeta3 className="relative mt-auto" readingTime={readingTime} author={author} date={date} /> */}

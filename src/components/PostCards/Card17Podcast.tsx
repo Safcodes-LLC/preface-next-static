@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import { FC } from 'react'
 import ButtonPlayMusicPlayer from '../ButtonPlayMusicPlayer'
+import { toTitleCase } from '@/utils/slug'
 
 interface Props {
   className?: string
@@ -53,7 +54,7 @@ const Card17Podcast: FC<Props> = ({ className, post, lang }) => {
         <div className="flex grow flex-col">
           <h2 className="block font-medium">
             {/* <Link href={`/post/${handle}`} className="absolute inset-0"></Link> */}
-            <span className="line-clamp-1">{name || title}</span>
+            <span className="line-clamp-1">{toTitleCase(name || title)}</span>
           </h2>
 
           <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">

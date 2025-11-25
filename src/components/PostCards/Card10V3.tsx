@@ -7,6 +7,7 @@ import NcImage from '../NcImage/NcImage'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
 import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
+import { toTitleCase } from '@/utils/slug'
 
 interface Props {
   className?: string
@@ -149,7 +150,7 @@ const Card10V3: FC<Props> = ({ className, post, galleryType = 1, lang }) => {
             title={name || title}
             className="line-clamp-2"
           >
-            {name || title}
+            {toTitleCase(name || title)}
           </Link>
         </h2>
       </div>

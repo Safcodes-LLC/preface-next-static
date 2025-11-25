@@ -76,6 +76,13 @@
       "error": "فشل التسجيل. يُرجى المحاولة مرة أخرى."
     }
   },
+  "footer": {
+    "top": "Top",
+    "categories": "Categories",
+    "topics": "Topics",
+    "islamForBeginners": "Islam For Beginners",
+    "mostEngaged": "Most Engaged"
+  },
   "navigation": {
     "about": "عن الموقع",
     "stories": "مقالات",

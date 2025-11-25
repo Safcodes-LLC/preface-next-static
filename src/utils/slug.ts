@@ -56,3 +56,20 @@ export function findBySlug<T extends { handle?: string; name: string }>(slug: st
 
   return item ?? null
 }
+
+/**
+ * Convert a string to Title Case.
+ * Example: "ZAMZAM: THE WATER OF WONDER!" -> "Zamzam: The Water Of Wonder!"
+ */
+export function toTitleCase(str: string): string {
+  if (!str) return ''
+
+  return str
+    .toLowerCase()
+    .split(' ')
+    .map((word) => {
+      if (!word) return word
+      return word[0].toUpperCase() + word.slice(1)
+    })
+    .join(' ')
+}

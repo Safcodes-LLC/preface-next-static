@@ -1,4 +1,5 @@
 import { TPost } from '@/data/posts'
+import { toTitleCase } from '@/utils/slug'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
@@ -19,7 +20,7 @@ const PostCardMeta2: FC<Props> = ({ meta, className, avatarSize }) => {
       <div>
         <h2 className={clsx('block w-full text-base font-medium')}>
           <Link href={`/post/${handle}`} className="line-clamp-2">
-            {title}
+            {toTitleCase(title)}
           </Link>
         </h2>
 

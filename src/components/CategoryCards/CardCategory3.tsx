@@ -1,4 +1,5 @@
 import { TCategory } from '@/data/categories'
+import { toTitleCase } from '@/utils/slug'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
@@ -39,7 +40,7 @@ const CardCategory3: FC<Props> = ({ className = '', category, lang }) => {
         </div> */}
       </div>
       <div className="mt-4 text-center">
-        <h2 className={`line-clamp-2 text-lg font-medium text-neutral-900 dark:text-neutral-100`}>{name}</h2>
+        <h2 className={`line-clamp-2 text-lg font-medium text-neutral-900 dark:text-neutral-100`}>{toTitleCase(name)}</h2>
         <span className={`mt-1 block text-sm text-neutral-600 dark:text-neutral-400`}>
           {subCategory?.length} Articles
         </span>

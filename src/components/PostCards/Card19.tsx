@@ -12,6 +12,7 @@ import { FC, useEffect, useState } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
+import { toTitleCase } from '@/utils/slug'
 
 interface Props {
   className?: string
@@ -178,7 +179,7 @@ const Card19: FC<Props> = ({
                 titleClass
               )}
             >
-              {title}
+              {toTitleCase(title)}
             </h2>
           ) : (
             <h2
@@ -191,7 +192,7 @@ const Card19: FC<Props> = ({
                 titleClass
               )}
             >
-              {title}
+              {toTitleCase(title)}
             </h2>
           )}
         </div>

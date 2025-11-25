@@ -9,6 +9,7 @@ import CategoryBadgeList from '../CategoryBadgeList'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
 import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
+import { toTitleCase } from '@/utils/slug'
 
 interface Props {
   className?: string
@@ -66,7 +67,7 @@ const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post, lang }) => {
 
         <div className="mt-3.5 text-neutral-300">
           <h2 className="!line-clamp-2 block text-base font-medium text-white xl:text-lg/6" title={title}>
-            {title}
+            {toTitleCase(title)}
           </h2>
         </div>
       </div>

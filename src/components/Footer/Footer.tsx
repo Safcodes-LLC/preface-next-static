@@ -1,8 +1,11 @@
 import { getCategory, getTopTrendingTopics } from '@/data/api/category'
 import { getIslamForBeginners, getPopularArticles } from '@/data/api/posts'
 import { CustomLink } from '@/data/types'
+import { getDictionary } from '@/i18n'
 import Logo from '@/shared/Logo'
 import SocialsListStroke2 from '@/shared/SocialsListStroke2'
+import { toTitleCase } from '@/utils/slug'
+import Link from 'next/link'
 import React from 'react'
 
 export interface WidgetFooterMenu {
@@ -14,6 +17,7 @@ export interface WidgetFooterMenu {
 const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
   const categoriesData = await getCategory(lang || 'en')
   const categories = categoriesData?.data || []
+  const dict = await getDictionary(lang || 'en')
 
   const topicsData = await getTopTrendingTopics(lang || 'en')
   const topics = topicsData?.data || []
@@ -28,7 +32,7 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
   // Transform categories to the required format
   const categoryMenu: WidgetFooterMenu = {
     id: '1',
-    title: 'Categories',
+    title: toTitleCase(dict?.footer?.categories),
     menus: categories.slice(0, 5).map((category: any) => ({
       href: `${lang === 'en' ? `/${category.slug || category.id}` : `/${lang}/${category.slug || category.id}`}`,
       label: category.name || 'Unnamed Category',
@@ -38,7 +42,7 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
   // Transform categories to the required format
   const topicMenu: WidgetFooterMenu = {
     id: '2',
-    title: 'Topics',
+    title: toTitleCase(dict?.footer?.topics),
     menus: topics
       .reverse()
       .slice(0, 5)
@@ -59,7 +63,7 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
   // Transform categories to the required format
   const islamForBeginnersMenu: WidgetFooterMenu = {
     id: '3',
-    title: 'Islam for beginners',
+    title: toTitleCase(dict?.footer?.islamForBeginners),
     menus: islamForBeginners.slice(0, 5).map((post: any) => ({
       href: `${lang === 'en' ? `/${post.categories[0].parentCategory?.slug}/${post.categories[0].slug}/${post.slug || post.id}` : `/${lang}/${post.categories[0].parentCategory?.slug}/${post.categories[0].slug}/${post.slug || post.id}`}`,
       label: post.title || 'Unnamed Category',
@@ -68,7 +72,7 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
 
   const popularArticlesMenu: WidgetFooterMenu = {
     id: '4',
-    title: 'Most Engaged',
+    title: toTitleCase(dict?.footer?.mostEngaged),
     menus: popularArticles.slice(0, 5).map((post: any) => ({
       href: `${lang === 'en' ? `/${post.categories[0].parentCategory?.slug}/${post.categories[0].slug}/${post.slug || post.id}` : `/${lang}/${post.categories[0].parentCategory?.slug}/${post.categories[0].slug}/${post.slug || post.id}`}`,
       label: post.title || 'Unnamed Category',
@@ -131,15 +135,15 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
       <div key={index} className="text-sm">
         <h2 className="font-semibold text-neutral-700 dark:text-neutral-200">Top 5</h2>
         <h2 className="font-semibold text-neutral-700 dark:text-neutral-200">{menu.title}</h2>
-        <ul className="mt-5 space-y-4">
-          {menu.menus.map((item, index) => (
+        <ul className="mt-5 space-y-[10px]">
+          {menu.menus.slice(0, 5).map((item: any, index: any) => (
             <li key={index}>
               <a
                 key={index}
-                className="text-neutral-600 hover:text-black dark:text-neutral-300 dark:hover:text-white"
+                className="line-clamp-1 text-neutral-600 capitalize hover:text-black dark:text-neutral-300 dark:hover:text-white"
                 href={item.href}
               >
-                {item.label}
+                {toTitleCase(item.label)}
               </a>
             </li>
           ))}
@@ -160,13 +164,26 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
             <div className="col-span-2 md:col-span-1">
               <Logo size="size-10" />
             </div>
+
+            <div className="flex w-full flex-col space-y-2">
+              <Link href="/about" className="text-sm font-medium text-[#444444] dark:text-white">
+                About Us
+              </Link>
+              <a href="mailto:info@prefacetoislam.com" className="text-sm text-[#444444] dark:text-white">
+                info@prefacetoislam.com
+              </a>
+              <a
+                href="https://www.prefacetoislam.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-[#444444] dark:text-white"
+              >
+                www.prefacetoislam.com
+              </a>
+            </div>
             <div className="col-span-2 flex items-center md:col-span-3">
               {/* <SocialsList1 /> */}
               <SocialsListStroke2 />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm text-[#444444] dark:text-white">info@preface.com</span>
-              <span className="text-sm text-[#444444] dark:text-white">www.preface.com</span>
             </div>
           </div>
           {widgetMenus.map(renderWidgetMenuItem)}

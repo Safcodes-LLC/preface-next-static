@@ -76,6 +76,13 @@
       "error": "സൈൻ അപ്പ് പരാജയപ്പെട്ടു. ദയവായി വീണ്ടും ശ്രമിക്കുക."
     }
   },
+  "footer": {
+    "top": "Top",
+    "categories": "Categories",
+    "topics": "Topics",
+    "islamForBeginners": "Islam For Beginners",
+    "mostEngaged": "Most Engaged"
+  },
   "navigation": {
     "about": "About",
     "stories": "സ്റ്റോറീസ്",

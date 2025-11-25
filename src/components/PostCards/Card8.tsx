@@ -8,6 +8,7 @@ import CategoryBadgeList from '../CategoryBadgeList'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
 import PostFeaturedMedia from '../PostFeaturedMedia/PostFeaturedMedia'
+import { toTitleCase } from '@/utils/slug'
 
 interface Props {
   className?: string
@@ -62,7 +63,7 @@ const Card8: FC<Props> = ({ className, post, ratio = 'aspect-3/4 sm:aspect-2/1',
         <CategoryBadgeList categories={categories} />
 
         <h2 className="mt-4 !line-clamp-2 block text-lg font-semibold text-white sm:text-xl" title={title}>
-          {title}
+          {toTitleCase(title)}
         </h2>
 
         {/* Meta info without inner <a> */}

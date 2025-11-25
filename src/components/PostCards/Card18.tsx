@@ -11,6 +11,7 @@ import { FC, useEffect, useState } from 'react'
 import CategoryBadgeList from '../CategoryBadgeList'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
+import { toTitleCase } from '@/utils/slug'
 
 interface Props {
   className?: string
@@ -135,7 +136,7 @@ const Card18: FC<Props> = ({ className, titleClass = 'text-lg ', ratio = 'aspect
               titleClass
             )}
           >
-            {title}
+            {toTitleCase(title)}
           </h2>
         </div>
         <div className="flex flex-col items-center gap-2">
