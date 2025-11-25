@@ -115,9 +115,9 @@ export default function LoginForm({ className = '', dict, lang }: LoginFormProps
       // Show error toast with custom styling
       setNowError(error.message || dict.login.error)
 
-      setTimeout(() => {
-        setNowError(null)
-      }, 5000)
+      // setTimeout(() => {
+      setNowError(null)
+      // }, 5000)
     } finally {
       setIsLoading(false)
     }

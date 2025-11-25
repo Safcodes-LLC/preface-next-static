@@ -75,9 +75,9 @@ export default function SignupForm({ className = '', dict, lang }: SignupFormPro
     onSuccess: (data) => {
       toast.success(dict.signup.toast.success)
       // Redirect to login after a short delay
-      setTimeout(() => {
-        router.push(`/${lang}/login`)
-      }, 2000)
+      // setTimeout(() => {
+      router.push(`/${lang}/login`)
+      // }, 2000)
     },
     onError: (error: Error) => {
       // Clear the email field if email is already registered
