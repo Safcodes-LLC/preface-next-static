@@ -28,42 +28,15 @@ export default function LoginForm({ className = '', dict, lang }: LoginFormProps
 
   // Custom toast component with close button
   const showSuccessToast = () => {
-    toast.custom(
-      (t) => (
-        <div
-          className={`${
-            t.visible ? 'animate-enter' : 'animate-leave'
-          } ring-opacity-5 pointer-events-auto flex w-full max-w-md rounded-lg bg-green-500 shadow-lg ring-1 ring-black`}
-        >
-          <div className="w-0 flex-1 p-4">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <div className="ml-3 flex-1">
-                <p className="text-sm font-medium text-white">{dict.login.success}</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex border-l border-green-400">
-            <button
-              onClick={() => toast.dismiss(t.id)}
-              className="flex w-full items-center justify-center rounded-none rounded-r-lg border border-transparent p-4 text-sm font-medium text-white hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:outline-none"
-            >
-              <XMarkIcon className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
-      ),
-      { duration: 2000 }
-    )
+    toast.success(dict.login.success, {
+      position: 'bottom-right',
+      duration: 3000,
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+      },
+    })
   }
 
   // const showErrorToast = (message: string) => {
