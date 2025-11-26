@@ -17,12 +17,12 @@ export function Heading({ className, level = 2, dimHeading, headingColor, childr
       className={clsx(
         className,
         'text-[22px] font-semibold tracking-tight text-pretty sm:text-[26px]',
-        isLight ? 'text-white' : 'text-neutral-950 dark:text-white'
+        isLight ? 'text-white' : 'text-black dark:text-white'
       )}
     >
       {children}
       {dimHeading && '. '}
-      {dimHeading && <span className="text-neutral-400 dark:text-neutral-500">{dimHeading}</span>}
+      {dimHeading && <span className="text-black dark:text-neutral-500">{dimHeading}</span>}
     </Element>
   )
 }
@@ -36,7 +36,7 @@ export function Subheading({ className, level = 3, headingColor, ...props }: Hea
       className={clsx(
         className,
         'text-base font-normal lg:text-lg',
-        isLight ? 'text-[#C2C2C2]' : 'text-neutral-500 dark:text-neutral-400'
+        isLight ? 'text-black' : 'text-black dark:text-neutral-400'
       )}
     />
   )
