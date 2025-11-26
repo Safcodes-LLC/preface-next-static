@@ -153,23 +153,20 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false, home, isTr
 
   // Fetch latest articles when component mounts
   useEffect(() => {
-  const fetchArticles = async () => {
-    try {
-      // Fetch both requests in parallel
-      const [latestResponse, popularResponse] = await Promise.all([
-        getLatestArticles(lang),
-        getPopularArticles(lang)
-      ])
-      
-      setLatestArticles(latestResponse?.data || [])
-      setPopularArticles(popularResponse?.data || [])
-    } catch (error) {
-      console.error('Failed to fetch articles:', error)
-    }
-  }
+    const fetchArticles = async () => {
+      try {
+        // Fetch both requests in parallel
+        const [latestResponse, popularResponse] = await Promise.all([getLatestArticles(lang), getPopularArticles(lang)])
 
-  fetchArticles()
-}, [lang])
+        setLatestArticles(latestResponse?.data || [])
+        setPopularArticles(popularResponse?.data || [])
+      } catch (error) {
+        console.error('Failed to fetch articles:', error)
+      }
+    }
+
+    fetchArticles()
+  }, [lang])
 
   // Update search when query changes
   useEffect(() => {

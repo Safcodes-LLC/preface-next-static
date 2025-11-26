@@ -61,7 +61,7 @@ const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeadin
   }, [user?._id, lang])
 
   return (
-    <div className={clsx('section-magazine-2 relative', className)}>
+    <div className={clsx('section-magazine-2 relative', className)} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <div className="mt-8 grid grid-cols-12 gap-6">
         <div className="col-span-12 h-fit rounded-2xl bg-white px-5 pb-6 lg:col-span-7 dark:bg-[#0D0D0D]">
           <WidgetHeading

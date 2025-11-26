@@ -1,4 +1,5 @@
 import StatusDashboard from '@/components/Dashboard/StatusDashboard'
+import SectionMagazine1 from '@/components/SectionMagazine1'
 import SectionMagazine2 from '@/components/SectionMagazine2'
 import { ContinuosReadIcon, FavouriteIcon, QAIcon, SavedIcon } from '@/components/Svg/svg'
 import { ProtectedRoute } from '@/contexts/AuthContext'
@@ -62,14 +63,18 @@ const Page = async ({ params, dict }: any) => {
       status: 'Saved',
     },
   ]
+  console.log(lang)
 
   return (
-    <ProtectedRoute>
-      <div className="grid grid-cols-12 gap-6 pb-[40px] max-md:gap-[15px] sm:bg-[#F8F8F8] sm:dark:bg-black">
+    <ProtectedRoute lang={lang}>
+      <div
+        dir={lang === 'ar' ? 'rtl' : 'ltr'}
+        className="grid grid-cols-12 gap-6 pb-[40px] max-md:gap-[15px] sm:bg-[#F8F8F8] sm:dark:bg-black"
+      >
         <StatusDashboard dashboardItems={dashboardItems} />
       </div>
 
-      <div className="mt-0">
+      <div className="mt-0" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Continuous Read</h2>
         <p className="mt-1 mb-4 text-gray-600 dark:text-gray-300">Latest 6 topics you started reading</p>
 
@@ -78,7 +83,7 @@ const Page = async ({ params, dict }: any) => {
           <Card23 key={post._id || index} post={post} lang={lang} />
         ))} */}
 
-        {/* <SectionMagazine1 lang={lang} /> */}
+        <SectionMagazine1 lang={lang} />
       </div>
 
       {/* saved read and favourite section */}

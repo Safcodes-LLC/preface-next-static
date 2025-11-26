@@ -87,7 +87,7 @@ export const useAuth = () => {
 }
 
 // Protected route component
-export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
+export const ProtectedRoute = ({ children, lang }: { children: ReactNode; lang?: string }) => {
   const { isAuthenticated, isLoading } = useAuth()
   const router = useRouter()
 
@@ -105,7 +105,7 @@ export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
     )
   }
 
-  return isAuthenticated ? <>{children}</> : null
+  return isAuthenticated ? <div dir={lang === 'ar' ? 'rtl' : 'ltr'}>{children}</div> : null
 }
 
 // Guest route component

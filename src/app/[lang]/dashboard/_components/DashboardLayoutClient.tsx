@@ -87,7 +87,7 @@ const subPages = [
   },
 ]
 
-export default function DashboardLayoutClient({ children }: { children: React.ReactNode }) {
+export default function DashboardLayoutClient({ children, lang }: { children: React.ReactNode; lang?: string }) {
   let token = getAuthToken()
   const pathname = usePathname()
   const [profile, setProfile] = useState<any | null>(() => {
@@ -129,7 +129,7 @@ export default function DashboardLayoutClient({ children }: { children: React.Re
   }, []) // Empty deps to run only once
 
   return (
-    <div className="h-screen max-md:h-full md:overflow-hidden">
+    <div className="h-screen max-md:h-full md:overflow-hidden" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <Disclosure as="nav" className="top-0 left-0 z-20 w-full bg-[#F8F8F8] max-md:fixed dark:bg-black">
         <div className="container">
           <div className="flex h-20 justify-between">
@@ -262,7 +262,7 @@ export default function DashboardLayoutClient({ children }: { children: React.Re
 
         <main>
           <div className="grid grid-cols-12 gap-8 max-md:gap-[20px_0] max-md:p-[20px_0_40px]">
-            <DashboardSidebar subPages={subPages} pathname={pathname} />
+            <DashboardSidebar subPages={subPages} pathname={pathname} lang={lang} />
             <div className="dashboard-scrollbar col-span-12 h-[calc(100vh-280px)] md:overflow-y-auto md:pe-[20px] lg:col-span-10">
               {children}
             </div>

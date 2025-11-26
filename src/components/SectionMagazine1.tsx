@@ -41,7 +41,7 @@ const SectionMagazine1: FC<Props> = ({ className, lang }) => {
   // console.log(continuosRead?.data, 'continuosReadpost dashboard')
 
   return (
-    <div className={clsx('section-magazine-1', className)}>
+    <div className={clsx('section-magazine-1', className)} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       {/* <SectionTabHeader
         subHeading={subHeading}
         dimHeading={dimHeading}

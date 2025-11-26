@@ -16,10 +16,10 @@ import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getNavigation } from '@/data/navigation'
 import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsVideo } from '@/data/posts'
+import { getLatestArticles } from '@/utils/getServices'
 import { Metadata } from 'next'
 import { ApplicationLayout } from '../application-layout'
 import HomeHeader from './components/homeHeader'
-import { getLatestArticles } from '@/utils/getServices'
 
 export const metadata: Metadata = {
   title: 'Preface Islam',
