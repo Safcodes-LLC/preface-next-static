@@ -47,13 +47,13 @@ const QuranTab = (props: Props) => {
           <div className="flex items-center gap-[5px] rounded-full border-[1.5px] border-[#60A43A] bg-[#f8f8f8] p-[5px] max-md:shadow-md md:mx-auto dark:bg-[#0d0d0d]">
             <button
               onClick={() => setTab('translation')}
-              className={`${tab === 'translation' ? 'bg-[#60A43A] text-white' : 'bg-transparent text-[#626262] hover:bg-[#60A43A]/10'} cursor-pointer rounded-full p-[10px_20px] text-[15px] font-medium max-md:text-[14px] ${tab === 'translation' ? 'bg-[#60A43A]' : ''}`}
+              className={`${tab === 'translation' ? 'bg-[#60A43A] text-white' : 'bg-transparent text-[#626262] hover:bg-[#60A43A]/10'} cursor-pointer rounded-full p-[10px_20px] text-[16px] font-medium max-md:text-[14px] ${tab === 'translation' ? 'bg-[#60A43A]' : ''}`}
             >
               Translation
             </button>
             <button
               onClick={() => setTab('reading')}
-              className={`${tab === 'reading' ? 'bg-[#60A43A] text-white' : 'bg-transparent text-[#626262] hover:bg-[#60A43A]/10'} cursor-pointer rounded-full p-[10px_20px] text-[15px] font-medium max-md:text-[14px] ${tab === 'reading' ? 'bg-[#60A43A]' : ''}`}
+              className={`${tab === 'reading' ? 'bg-[#60A43A] text-white' : 'bg-transparent text-[#626262] hover:bg-[#60A43A]/10'} cursor-pointer rounded-full p-[10px_20px] text-[16px] font-medium max-md:text-[14px] ${tab === 'reading' ? 'bg-[#60A43A]' : ''}`}
             >
               Reading
             </button>

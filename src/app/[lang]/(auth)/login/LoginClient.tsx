@@ -4,16 +4,20 @@ import LoginForm from '@/components/auth/LoginForm'
 import SocialLogin from '@/components/auth/SocialLogin'
 import Logo from '@/shared/Logo'
 import dynamic from 'next/dynamic'
-import { Noto_Kufi_Arabic, Noto_Serif, Noto_Serif_Malayalam } from 'next/font/google'
+import { Noto_Naskh_Arabic, Noto_Serif_Malayalam } from 'next/font/google'
+import localFont from 'next/font/local'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const notoSerif = Noto_Serif({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
+const elgraine = localFont({
+  src: [
+    {
+      path: '../../../../../public/fonts/Elgraine-Regular.woff',
+    },
+  ],
+  variable: '--font-elgraine',
 })
-const notoKufiArabic = Noto_Kufi_Arabic({
+const notoNaskhArabic = Noto_Naskh_Arabic({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400', '500', '600', '700'],
@@ -31,7 +35,7 @@ function LoginPageContent({ lang, dict }: { lang: string; dict: any }) {
   return (
     <div
       className={`grid min-h-screen grid-cols-1 md:grid-cols-[3fr_2fr] ${
-        lang === 'ar' ? notoKufiArabic.className : lang === 'ml' ? notoSerifMalayalam.className : notoSerif.className
+        lang === 'ar' ? notoNaskhArabic.className : lang === 'ml' ? notoSerifMalayalam.className : elgraine.className
       }`}
       dir={lang === 'ar' || lang === 'fa' || lang === 'ur' ? 'rtl' : 'ltr'}
     >

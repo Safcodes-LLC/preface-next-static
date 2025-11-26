@@ -6,7 +6,8 @@ import { getNavigation as fetchNavigation } from '@/data/navigation'
 import { getAllPosts } from '@/data/posts'
 import { getDictionary } from '@/i18n'
 import Navbar2 from '@/shared/Navbar2'
-import { Noto_Kufi_Arabic, Noto_Serif, Noto_Serif_Malayalam } from 'next/font/google'
+import { Noto_Naskh_Arabic, Noto_Serif_Malayalam } from 'next/font/google'
+import localFont from 'next/font/local'
 import { ReactNode } from 'react'
 
 interface Props {
@@ -17,12 +18,15 @@ interface Props {
   home?: boolean
   params?: any
 }
-const notoSerif = Noto_Serif({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
+const elgraine = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/Elgraine-Regular.woff',
+    },
+  ],
+  variable: '--font-elgraine',
 })
-const notoKufiArabic = Noto_Kufi_Arabic({
+const notoNaskhArabic = Noto_Naskh_Arabic({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400', '500', '600', '700'],
@@ -42,10 +46,10 @@ const ApplicationLayout = async ({ children, home, params }: Props) => {
     <div
       className={
         (await params).lang === 'ar'
-          ? notoKufiArabic.className
+          ? notoNaskhArabic.className
           : (await params).lang === 'ml'
             ? notoSerifMalayalam.className
-            : notoSerif.className
+            : elgraine.className
       }
       dir={(await params).lang === 'ar' ? 'rtl' : 'ltr'}
     >

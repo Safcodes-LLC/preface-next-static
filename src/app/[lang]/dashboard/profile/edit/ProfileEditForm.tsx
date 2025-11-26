@@ -285,7 +285,7 @@ const ProfileEditForm = () => {
                 type="text"
                 value={formData.fullName}
                 onChange={handleChange}
-                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[15px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
+                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[16px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
               />
             </div>
 
@@ -299,7 +299,7 @@ const ProfileEditForm = () => {
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[15px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
+                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[16px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
               />
             </div>
 
@@ -313,7 +313,7 @@ const ProfileEditForm = () => {
                 type="tel"
                 value={formData.mobile}
                 onChange={handleChange}
-                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[15px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
+                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[16px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
               />
             </div>
           </div>
@@ -331,7 +331,7 @@ const ProfileEditForm = () => {
                 type="text"
                 value={formData.address1}
                 onChange={handleChange}
-                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[15px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
+                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[16px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
               />
             </div>
 
@@ -345,7 +345,7 @@ const ProfileEditForm = () => {
                 type="text"
                 value={formData.address2}
                 onChange={handleChange}
-                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[15px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
+                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[16px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
               />
             </div>
 
@@ -359,7 +359,7 @@ const ProfileEditForm = () => {
                 type="text"
                 value={formData.city}
                 onChange={handleChange}
-                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[15px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
+                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[16px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
               />
             </div>
 
@@ -373,7 +373,7 @@ const ProfileEditForm = () => {
                 type="text"
                 value={formData.state}
                 onChange={handleChange}
-                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[15px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
+                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[16px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
               />
             </div>
 
@@ -387,7 +387,7 @@ const ProfileEditForm = () => {
                 type="text"
                 value={formData.country}
                 onChange={handleChange}
-                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[15px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
+                className="w-full rounded-[10px] border border-[#EDEDED] px-3 py-2 text-[16px] text-[#222222] focus:border-[#00652E] focus:outline-none dark:border-[#2D2D2D] dark:bg-[#1A1A1A] dark:text-white"
               />
             </div>
           </div>

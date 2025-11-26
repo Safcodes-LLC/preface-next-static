@@ -7,16 +7,22 @@ import { ArrowUp02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { RawDraftContentState as DraftRawDraftContentState, convertFromRaw } from 'draft-js'
 import { stateToHTML } from 'draft-js-export-html'
-import { Noto_Kufi_Arabic, Noto_Serif, Noto_Serif_Malayalam } from 'next/font/google'
+import { Noto_Naskh_Arabic, Noto_Serif_Malayalam } from 'next/font/google'
+import localFont from 'next/font/local'
 import { FC, useEffect, useMemo, useRef, useState } from 'react'
 import { ShareDropdown } from './SingleMetaAction'
 
-const notoSerif = Noto_Serif({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
+const elgraine = localFont({
+  src: [
+    {
+      path: '../../../../public/fonts/Elgraine-Regular.woff',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-elgraine',
 })
-const notoKufiArabic = Noto_Kufi_Arabic({
+const notoNaskhArabic = Noto_Naskh_Arabic({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400', '500', '600', '700'],
@@ -235,9 +241,13 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
           },
         }
 
-        const html = stateToHTML(contentState, options)
+        let html = stateToHTML(contentState, options)
         console.log('=== Generated HTML (first 500 chars) ===')
         console.log(html.substring(0, 500))
+
+        // Remove any inline font-family styles from CMS content
+        html = html.replace(/font-family:\s*[^;}"']+[;]?/gi, '')
+        // html = html.replace(/style=["']\s*["']/g, '') // Remove empty style attributes
 
         return html
       }
@@ -378,10 +388,10 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
             style={{
               fontFamily:
                 lang === 'ar'
-                  ? notoKufiArabic.style.fontFamily
+                  ? notoNaskhArabic.style.fontFamily
                   : lang === 'ml'
                     ? notoSerifMalayalam.style.fontFamily
-                    : notoSerif.style.fontFamily,
+                    : elgraine.style.fontFamily,
             }}
           />
         </div>

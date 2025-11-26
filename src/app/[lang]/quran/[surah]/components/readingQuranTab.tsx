@@ -145,13 +145,13 @@ const ReadingQuranTab = (props: Props) => {
             {selectedAyah.meaning && (
               <div className="mb-3">
                 <h4 className="mb-1 text-sm font-medium text-[#222]">Meaning</h4>
-                <p className="text-[15px] leading-relaxed text-[#2C2C2C]">{selectedAyah.meaning}</p>
+                <p className="text-[16px] leading-relaxed text-[#2C2C2C]">{selectedAyah.meaning}</p>
               </div>
             )}
             {selectedAyah.explanation && (
               <div>
                 <h4 className="mb-1 text-sm font-medium text-[#222]">Explanation</h4>
-                <p className="text-[15px] leading-relaxed text-[#2C2C2C]">{selectedAyah.explanation}</p>
+                <p className="text-[16px] leading-relaxed text-[#2C2C2C]">{selectedAyah.explanation}</p>
               </div>
             )}
           </div>

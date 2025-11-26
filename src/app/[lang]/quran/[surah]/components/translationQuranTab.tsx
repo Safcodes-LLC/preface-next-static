@@ -42,9 +42,9 @@ const TranslationQuranTab = (props: Props) => {
             </div>
           </div>
           <div className="flex flex-col items-start gap-[6px]">
-            <p className="py-5 text-[18px] font-normal max-md:py-3 max-md:text-[15px]">{ayah.meaning}</p>
-            <h6 className="text-[15px] font-semibold text-[#222] max-md:text-[14px] dark:text-white">Explanation</h6>
-            <p className="line-clamp-2 text-[15px] font-light text-[#2C2C2C] max-md:text-[14px] dark:text-white">
+            <p className="py-5 text-[18px] font-normal max-md:py-3 max-md:text-[16px]">{ayah.meaning}</p>
+            <h6 className="text-[16px] font-semibold text-[#222] max-md:text-[14px] dark:text-white">Explanation</h6>
+            <p className="line-clamp-2 text-[16px] font-light text-[#2C2C2C] max-md:text-[14px] dark:text-white">
               {ayah.explanation}
             </p>
             <button className="cursor-pointer text-[11px] font-normal text-[#7D7D7D] max-md:text-[10px]">

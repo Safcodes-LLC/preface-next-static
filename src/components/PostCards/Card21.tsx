@@ -3,7 +3,8 @@ import { toTitleCase } from '@/utils/slug'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import draftToHtml from 'draftjs-to-html'
-import { Noto_Serif } from 'next/font/google'
+import { Noto_Naskh_Arabic, Noto_Serif_Malayalam } from 'next/font/google'
+import localFont from 'next/font/local'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useMemo } from 'react'
@@ -20,7 +21,22 @@ interface Props {
   dict?: any
 }
 
-const notoSerif = Noto_Serif({
+const elgraine = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/Elgraine-Regular.woff',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-elgraine',
+})
+const notoNaskhArabic = Noto_Naskh_Arabic({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+const notoSerifMalayalam = Noto_Serif_Malayalam({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400', '500', '600', '700'],
@@ -34,7 +50,11 @@ const Card21: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
     try {
       const parsed = JSON.parse(str) as unknown
       if (parsed && typeof parsed === 'object' && Array.isArray((parsed as { blocks?: unknown }).blocks)) {
-        return draftToHtml(parsed as any)
+        let html = draftToHtml(parsed as any)
+        // Remove any inline font-family styles from CMS content
+        html = html.replace(/font-family:\s*[^;}"']+[;]?/gi, '')
+        // html = html.replace(/style=["']\s*["']/g, '') // Remove empty style attributes
+        return html
       }
       return str
     } catch {
@@ -84,7 +104,14 @@ const Card21: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
           <div
             dangerouslySetInnerHTML={{ __html: renderedHtml }}
             className="line-clamp-6 w-full dark:[&_*]:!text-white"
-            style={{ fontFamily: notoSerif.style.fontFamily }}
+            style={{
+              fontFamily:
+                lang === 'ar'
+                  ? notoNaskhArabic.style.fontFamily
+                  : lang === 'ml'
+                    ? notoSerifMalayalam.style.fontFamily
+                    : elgraine.style.fontFamily,
+            }}
           />
         </div>
         <Link

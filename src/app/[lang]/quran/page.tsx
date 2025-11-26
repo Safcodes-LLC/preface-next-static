@@ -185,7 +185,7 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
                   <HugeiconsIcon icon={BookOpen01Icon} size={14} />
                   <h3 className="text-sm font-medium text-[#222222] dark:text-white">Explanation</h3>
                 </div>
-                <p className="w-[95%] text-[15px] text-[#4B4B4B] dark:text-gray-300">
+                <p className="w-[95%] text-[16px] text-[#4B4B4B] dark:text-gray-300">
                   These two verses form the second parable that the Qur’an presents to describe the psychological and
                   spiritual condition of the hypocrites. While the earlier parable (v. 17–18) depicted their sudden fall
                   from guidance into confusion and blindness, Qur’an presents to describe the psychological and

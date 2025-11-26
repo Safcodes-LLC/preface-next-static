@@ -8,18 +8,22 @@ import Input from '@/shared/Input'
 import { Field, Label } from '@/shared/fieldset'
 import { Dialog } from '@headlessui/react'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
-import { Noto_Kufi_Arabic, Noto_Serif, Noto_Serif_Malayalam } from 'next/font/google'
+import { Noto_Naskh_Arabic, Noto_Serif_Malayalam } from 'next/font/google'
+import localFont from 'next/font/local'
 import Link from 'next/link'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 
-const notoSerif = Noto_Serif({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
+const elgraine = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/Elgraine-Regular.woff',
+    },
+  ],
+  variable: '--font-elgraine',
 })
-const notoKufiArabic = Noto_Kufi_Arabic({
+const notoNaskhArabic = Noto_Naskh_Arabic({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400', '500', '600', '700'],
@@ -136,7 +140,7 @@ const LoginModal = ({
     <Dialog
       open={isOpen}
       onClose={onClose}
-      className={`relative z-50 ${lang === 'ar' || lang === 'fa' || lang === 'ur' ? notoKufiArabic.className : lang === 'ml' ? notoSerifMalayalam.className : notoSerif.className}`}
+      className={`relative z-50 ${lang === 'ar' || lang === 'fa' || lang === 'ur' ? notoNaskhArabic.className : lang === 'ml' ? notoSerifMalayalam.className : elgraine.className}`}
       dir={lang === 'ar' || lang === 'fa' || lang === 'ur' ? 'rtl' : 'ltr'}
     >
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />

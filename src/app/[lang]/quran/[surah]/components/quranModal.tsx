@@ -65,7 +65,7 @@ const QuranModal: React.FC<QuranModalProps> = ({ isOpen, onClose, selectedAyah }
         {selectedAyah.explanation && (
           <div>
             <h4 className="mb-1 text-sm font-semibold text-[#222222]">Explanation</h4>
-            <p className="text-[15px] leading-relaxed font-light text-[#2C2C2C]">{selectedAyah.explanation}</p>
+            <p className="text-[16px] leading-relaxed font-light text-[#2C2C2C]">{selectedAyah.explanation}</p>
           </div>
         )}
       </div>

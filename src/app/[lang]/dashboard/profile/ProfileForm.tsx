@@ -82,11 +82,11 @@ const ProfileForm = () => {
           <dl className="flex flex-col gap-5" aria-label="User contact information">
             <div>
               <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">Email Address</dt>
-              <dd className="text-[15px] font-medium">{email || 'Not provided'}</dd>
+              <dd className="text-[16px] font-medium">{email || 'Not provided'}</dd>
             </div>
             <div>
               <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">Mobile Number</dt>
-              <dd className="text-[15px] font-medium">{mobile || 'Not provided'}</dd>
+              <dd className="text-[16px] font-medium">{mobile || 'Not provided'}</dd>
             </div>
           </dl>
         </section>
@@ -95,23 +95,23 @@ const ProfileForm = () => {
           <dl className="flex flex-col gap-5 divide-y divide-[#EEEEEE] dark:divide-[#3A3A3A]">
             <div className="flex items-center justify-between py-3">
               <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">Address 1</dt>
-              <dd className="text-[15px] font-medium">{address1 || 'Not provided'}</dd>
+              <dd className="text-[16px] font-medium">{address1 || 'Not provided'}</dd>
             </div>
             <div className="flex items-center justify-between py-3">
               <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">Address 2</dt>
-              <dd className="text-[15px] font-medium">{address2 || 'Not provided'}</dd>
+              <dd className="text-[16px] font-medium">{address2 || 'Not provided'}</dd>
             </div>
             <div className="flex items-center justify-between py-3">
               <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">City</dt>
-              <dd className="text-[15px] font-medium">{city || 'Not provided'}</dd>
+              <dd className="text-[16px] font-medium">{city || 'Not provided'}</dd>
             </div>
             <div className="flex items-center justify-between py-3">
               <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">State</dt>
-              <dd className="text-[15px] font-medium">{state || 'Not provided'}</dd>
+              <dd className="text-[16px] font-medium">{state || 'Not provided'}</dd>
             </div>
             <div className="flex items-center justify-between py-3">
               <dt className="text-sm text-[#4D4D4D] dark:text-[#838383]">Country</dt>
-              <dd className="text-[15px] font-medium">{country || 'Not provided'}</dd>
+              <dd className="text-[16px] font-medium">{country || 'Not provided'}</dd>
             </div>
           </dl>
         </section>

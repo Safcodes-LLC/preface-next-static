@@ -35,12 +35,12 @@ const HeroSection = ({ surahData }: { surahData: any }) => {
               <span className="text-[14px] font-medium dark:text-white">Surah Info</span>
             </button>
           </div>
-          <h3 className="mt-[20px] text-[15px] font-semibold max-md:mt-[0px] max-md:text-[14px]">
+          <h3 className="mt-[20px] text-[16px] font-semibold max-md:mt-[0px] max-md:text-[14px]">
             Madani | Verses – {surahData?.verse}
           </h3>
         </div>
 
-        <div className="mt-2 max-w-4xl text-[15px] leading-relaxed max-md:text-[14px]">
+        <div className="mt-2 max-w-4xl text-[16px] leading-relaxed max-md:text-[14px]">
           <p>{surahData?.info}</p>
         </div>
       </div>
