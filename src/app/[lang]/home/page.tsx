@@ -11,7 +11,7 @@ import SwipableSliderPosts from '@/components/SwipableSliderPosts'
 import VideoHeroBanner from '@/components/VideoHeroBanner'
 import { getBannerHighlightedArticles, getBannerHighlightedVideos } from '@/data/api/banner'
 import { getCategory, getQuranSubcategories, getTopTrendingTopics } from '@/data/api/category'
-import { getIslamForBeginners, getLatestArticles, getLatestVideos, getQuranLatestArticles } from '@/data/api/posts'
+import { getIslamForBeginners, getLatestVideos, getQuranLatestArticles } from '@/data/api/posts'
 import { getAuthors } from '@/data/authors'
 import { getCategories } from '@/data/categories'
 import { getNavigation } from '@/data/navigation'
@@ -19,6 +19,7 @@ import { getAllPosts, getPostsAudio, getPostsDefault, getPostsGallery, getPostsV
 import { Metadata } from 'next'
 import { ApplicationLayout } from '../application-layout'
 import HomeHeader from './components/homeHeader'
+import { getLatestArticles } from '@/utils/getServices'
 
 export const metadata: Metadata = {
   title: 'Preface Islam',

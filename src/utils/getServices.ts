@@ -232,11 +232,41 @@ export async function getSavedArticlesList(
     // throw notFound();
   }
 }
+
 export async function getSavedArticleStatus(postId: string, authToken: string): Promise<any | undefined> {
   try {
     return await getData(`savedlist/status/${postId}`, authToken || '', 300)
   } catch (error) {
     console.error('Failed to fetch saved article status data:', error)
+    // throw notFound();
+  }
+}
+
+export async function getLatestArticles(lang: string): Promise<any | undefined> {
+  try {
+    return await getData(`frontend/latest-articles?lang=${lang}`, '', 0)
+  } catch (error) {
+    console.error('Failed to fetch latest articles:', error)
+    // throw notFound();
+  }
+}
+export async function getPopularArticles(lang: string): Promise<any | undefined> {
+  try {
+    return await getData(`frontend/popular-articles?lang=${lang}`, '', 0)
+  } catch (error) {
+    console.error('Failed to fetch popular articles:', error)
+    // throw notFound();
+  }
+}
+
+
+
+export async function searchPosts(searchTerm: string, lang: string): Promise<any | undefined> {
+  try {
+    const encodedSearch = encodeURIComponent(searchTerm);
+    return await getData(`frontend/search-posts?search=${encodedSearch}&lang=${lang}`, '', 0);
+  } catch (error) {
+    console.error('Failed to fetch search results:', error);
     // throw notFound();
   }
 }

@@ -1,12 +1,9 @@
 import ImageHeroBanner from '@/components/ImageHeroBanner'
 import ImageHeroBannerSkeleton from '@/components/Skeletons/ImageHeroBannerSkelton'
-import {
-  // getLatestVideos,
-  getLatestArticles,
-} from '@/data/api/posts'
+
 import { getNavigation } from '@/data/navigation'
 import { getDictionary } from '@/i18n'
-import { getVisualBannerList } from '@/utils/getServices'
+import { getLatestArticles, getVisualBannerList } from '@/utils/getServices'
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 import HomeHeader from '../home/components/homeHeader'
@@ -62,7 +59,7 @@ const PageVisuals = async ({
     navigationMenu,
   ] = await Promise.all([
     // getLatestVideos(),
-    getLatestArticles(),
+    getLatestArticles((await params).lang),
     getNavigation((await params).lang),
   ])
 
