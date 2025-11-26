@@ -7,8 +7,31 @@ import { toTitleCase } from '@/utils/slug'
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 import Link from 'next/link'
+import { Noto_Naskh_Arabic, Noto_Serif_Malayalam } from 'next/font/google'
+import localFont from 'next/font/local'
 import React, { FC, ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+
+const elgraine = localFont({
+  src: [
+    {
+      path: '../../../../public/fonts/Elgraine-Regular.woff',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-elgraine',
+})
+const notoNaskhArabic = Noto_Naskh_Arabic({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+const notoSerifMalayalam = Noto_Serif_Malayalam({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
 
 /* ------------------------------- Utilities ------------------------------- */
 
@@ -192,10 +215,17 @@ const NestedMenuList: FC<{
   lang?: string
   level: number
 }> = ({ items, lang, level }) => {
+  const fontFamily =
+    lang === 'ar'
+      ? notoNaskhArabic.style.fontFamily
+      : lang === 'ml'
+        ? notoSerifMalayalam.style.fontFamily
+        : elgraine.style.fontFamily
+
   return (
     <ul
       className={clsx(
-        'relative grid space-y-1 rounded-lg bg-white py-3 text-sm shadow-lg',
+        'relative grid space-y-1 rounded-lg bg-white py-3 text-sm shadow-lg [&_*]:!font-[inherit]',
         'ring-1 ring-black/5 dark:bg-[#0D0D0D] dark:ring-white/10',
         'max-h-[70vh] overflow-y-auto',
         level >= 3
@@ -203,6 +233,7 @@ const NestedMenuList: FC<{
           : 'w-56 overflow-x-hidden'
       )}
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
+      style={{ fontFamily }}
     >
       {items.map((item) => (
         <NestedMenuItem key={item.id} item={item} lang={lang} level={level} />
@@ -360,8 +391,19 @@ export interface Props {
 }
 
 const Navigation: FC<Props> = ({ menu, className, featuredPosts, isScrolled, isTransparentHeader, home, lang }) => {
+  const fontFamily =
+    lang === 'ar'
+      ? notoNaskhArabic.style.fontFamily
+      : lang === 'ml'
+        ? notoSerifMalayalam.style.fontFamily
+        : elgraine.style.fontFamily
+
   return (
-    <ul className={clsx('flex gap-6', className)} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <ul
+      className={clsx('flex gap-6 [&_*]:!font-[inherit]', className)}
+      dir={lang === 'ar' ? 'rtl' : 'ltr'}
+      style={{ fontFamily }}
+    >
       {menu.map((menuItem) => {
         if (menuItem.type === 'dropdown') {
           return (
