@@ -259,14 +259,12 @@ export async function getPopularArticles(lang: string): Promise<any | undefined>
   }
 }
 
-
-
 export async function searchPosts(searchTerm: string, lang: string): Promise<any | undefined> {
   try {
-    const encodedSearch = encodeURIComponent(searchTerm);
-    return await getData(`frontend/search-posts?search=${encodedSearch}&lang=${lang}`, '', 0);
+    const encodedSearch = encodeURIComponent(searchTerm)
+    return await getData(`frontend/search-posts?search=${encodedSearch}&lang=${lang}`, '', 0)
   } catch (error) {
-    console.error('Failed to fetch search results:', error);
+    console.error('Failed to fetch search results:', error)
     // throw notFound();
   }
 }
