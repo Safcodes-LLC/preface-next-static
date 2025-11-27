@@ -155,11 +155,11 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
   return (
     <>
       {/* footer */}
-      <div
+      {/* <div
         className="nc-Footer relative border-t border-neutral-200 py-16 lg:py-28 dark:border-neutral-700"
         dir={lang === 'ar' ? 'rtl' : 'ltr'}
       >
-        <div className="container grid grid-cols-2 gap-x-5 gap-y-10 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10">
+        <div className="container">
           <div className="col-span-2 grid grid-cols-4 gap-5 md:col-span-4 lg:flex lg:flex-col lg:md:col-span-1">
             <div className="col-span-2 md:col-span-1">
               <Logo size="size-10" />
@@ -182,11 +182,46 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
               </a>
             </div>
             <div className="col-span-2 flex items-center md:col-span-3">
-              {/* <SocialsList1 /> */}
               <SocialsListStroke2 />
             </div>
           </div>
-          {widgetMenus.map(renderWidgetMenuItem)}
+          <div className="grid grid-cols-1 gap-x-5 gap-y-6 pt-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-8 md:grid-cols-4 md:gap-y-10 lg:grid-cols-5 lg:gap-x-10">
+            {widgetMenus.map(renderWidgetMenuItem)}
+          </div>
+        </div>
+      </div> */}
+
+      <div className="nc-Footer relative container border-t border-neutral-200 py-16 lg:py-28 dark:border-neutral-700">
+        <div className="grid grid-cols-12 gap-x-4 gap-y-4 sm:gap-x-8 sm:gap-y-8 lg:gap-x-0">
+          <div className="col-span-12 flex flex-col items-center gap-5 md:items-start lg:col-span-3">
+            <div className="w-full">
+              <Logo size="size-10" lang={lang} />
+            </div>
+            <div className="flex w-full flex-col space-y-2">
+              <Link href="/about" className="text-sm font-medium text-[#444444] dark:text-white">
+                About Us
+              </Link>
+              <a href="mailto:info@prefacetoislam.com" className="text-sm text-[#444444] dark:text-white">
+                info@prefacetoislam.com
+              </a>
+              <a
+                href="https://www.prefacetoislam.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-[#444444] dark:text-white"
+              >
+                www.prefacetoislam.com
+              </a>
+            </div>
+            <div className="w-full">
+              <SocialsListStroke2 />
+            </div>
+          </div>
+          <div className="col-span-12 lg:col-span-9">
+            <div className="grid grid-cols-1 gap-x-5 gap-y-6 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-8 md:grid-cols-3 md:gap-y-10 lg:grid-cols-4 lg:gap-x-10">
+              {widgetMenus.map(renderWidgetMenuItem)}
+            </div>
+          </div>
         </div>
       </div>
     </>
