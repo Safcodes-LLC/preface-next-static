@@ -25,7 +25,7 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
     itemClass = 'ps-3 text-neutral-900 dark:text-neutral-200 font-medium'
   ) => {
     return (
-      <ul className="nav-mobile-sub-menu ps-6 pb-1 text-base">
+      <ul className="nav-mobile-sub-menu ps-4 pb-1 text-base">
         {item.children?.map((childMenu, index) => (
           <Disclosure key={index} as="li">
             <Link
@@ -56,7 +56,7 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
   const _renderItem = (menu: TNavigationItem, index: number) => {
     return (
       <Disclosure key={index} as="li" className="text-neutral-900 dark:text-white">
-        <DisclosureButton className="flex w-full cursor-pointer rounded-lg px-3 text-start text-sm font-medium tracking-wide uppercase hover:bg-neutral-100 dark:hover:bg-neutral-800">
+        <DisclosureButton className="flex w-full cursor-pointer rounded-lg  text-start text-sm font-medium tracking-wide uppercase hover:bg-neutral-100 dark:hover:bg-neutral-800">
           <Link
             href={menu.href || '#'}
             className={clsx(!menu.children?.length && 'flex-1', 'block py-1')}
@@ -109,7 +109,7 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
         <SocialsList />
       </div>
       {/* <div className="mt-5">{renderSearchForm()}</div> */}
-      <ul className="flex flex-col gap-y-1 px-2 py-6">{data?.map(_renderItem)}</ul>
+      <ul className="flex flex-col gap-y-1 py-6">{data?.map(_renderItem)}</ul>
       <Divider className="mb-6" />
 
       {/* FOR OUR DEMO */}

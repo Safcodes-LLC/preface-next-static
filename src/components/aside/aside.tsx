@@ -58,7 +58,7 @@ export function Aside({
                 openFrom === 'right' && 'data-closed:translate-x-20 data-closed:opacity-0'
               )}
             >
-              <div className="flex h-full flex-col px-4 md:px-8">
+              <div className="flex h-full flex-col px-5 md:px-8">
                 {showHeading ? (
                   <header
                     className={`flex h-16 flex-shrink-0 items-center border-b border-neutral-900/10 md:h-20 ${
