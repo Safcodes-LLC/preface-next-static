@@ -1,30 +1,35 @@
 'use client'
 
-import { ThemeContext } from '@/app/theme-provider'
-import { Moon02Icon, Sun03Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
-import clsx from 'clsx'
-import React, { useContext } from 'react'
+import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
+
 interface Props {
   className?: string
-  iconSize?: string
 }
-const SwitchDarkMode: React.FC<Props> = ({ className, iconSize = 'size-7' }) => {
-  const theme = useContext(ThemeContext)
+
+const SwitchDarkMode: React.FC<Props> = ({ className }) => {
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  // Avoid hydration mismatch
+  useEffect(() => setMounted(true), [])
+  if (!mounted) return null
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
 
   return (
     <button
-      onClick={theme?.toggleDarkMode}
-      className={clsx(
-        'flex size-12 items-center justify-center self-center rounded-full text-2xl text-neutral-700 hover:bg-neutral-100 focus:outline-hidden md:text-3xl dark:text-neutral-300 dark:hover:bg-neutral-800',
-        className
-      )}
+      onClick={toggleTheme}
+      className={className}
+      aria-label="Toggle dark mode"
     >
-      <span className="sr-only">Enable dark mode</span>
-      {theme?.isDarkMode ? (
-        <HugeiconsIcon icon={Sun03Icon} className={iconSize} />
+      {theme === 'dark' ? (
+        <SunIcon className="h-6 w-6 text-[#CBDB2A]" />
       ) : (
-        <HugeiconsIcon icon={Moon02Icon} className={iconSize} />
+        <MoonIcon className="h-5 w-5 text-gray-700" />
       )}
     </button>
   )
