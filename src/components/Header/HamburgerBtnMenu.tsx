@@ -5,7 +5,7 @@ import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import { useAside } from '../aside'
 
-const HamburgerBtnMenu = ({ className }: { className?: string }) => {
+const HamburgerBtnMenu = ({ className, home, isTransparentHeader }: { className?: string, home?: boolean, isTransparentHeader?: boolean }) => {
   const { open: openAside } = useAside()
 
   return (
@@ -18,7 +18,19 @@ const HamburgerBtnMenu = ({ className }: { className?: string }) => {
       )}
     >
       <span className="sr-only">Open main menu</span>
-      <HugeiconsIcon icon={Menu01Icon} size={24} color="currentColor" strokeWidth={1.5} />
+      <HugeiconsIcon 
+        icon={Menu01Icon} 
+        size={24} 
+        color="currentColor" 
+        strokeWidth={1.5} 
+        className={
+          home
+            ? isTransparentHeader
+              ? 'text-[#fff] dark:text-[#fff]'
+              : 'text-[#000000] dark:text-white'
+            : 'text-[#000000] dark:text-white'
+        }
+      />
     </button>
   )
 }

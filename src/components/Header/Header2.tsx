@@ -83,7 +83,7 @@ const Header2: FC<Header2Props> = ({
             }
           />
           <div className="ms-2 flex lg:hidden">
-            <HamburgerBtnMenu />
+            <HamburgerBtnMenu home={home} isTransparentHeader={isTransparentHeader}/>
           </div>
         </div>
       </div>

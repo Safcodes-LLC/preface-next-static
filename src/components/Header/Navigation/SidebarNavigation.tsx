@@ -33,7 +33,7 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
               onClick={handleClose}
               className={`mt-0.5 flex rounded-lg pe-4 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 ${itemClass}`}
             >
-              <span className={`py-2.5 ${!childMenu.children ? 'block w-full' : ''}`}>{childMenu.name}</span>
+              <span className={`py-1.5 ${!childMenu.children ? 'block w-full' : ''}`}>{childMenu.name}</span>
               {childMenu.children && (
                 <span className="flex grow items-center" onClick={(e) => e.preventDefault()}>
                   <DisclosureButton as="span" className="flex grow justify-end">
@@ -59,7 +59,7 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
         <DisclosureButton className="flex w-full cursor-pointer rounded-lg px-3 text-start text-sm font-medium tracking-wide uppercase hover:bg-neutral-100 dark:hover:bg-neutral-800">
           <Link
             href={menu.href || '#'}
-            className={clsx(!menu.children?.length && 'flex-1', 'block py-2.5')}
+            className={clsx(!menu.children?.length && 'flex-1', 'block py-1')}
             onClick={handleClose}
           >
             {menu.name}
@@ -75,30 +75,30 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
     )
   }
 
-  const renderSearchForm = () => {
-    return (
-      <form
-        action="#"
-        method="POST"
-        className="flex-1 text-neutral-900 dark:text-neutral-200"
-        onSubmit={(e) => {
-          e.preventDefault()
-          handleClose()
-          redirect('/search')
-        }}
-      >
-        <div className="flex h-full items-center gap-x-2.5 rounded-xl bg-neutral-50 px-3 py-3 dark:bg-neutral-800">
-          <HugeiconsIcon icon={Search01Icon} size={24} color="currentColor" strokeWidth={1.5} />
-          <input
-            type="search"
-            placeholder="Type and press enter"
-            className="w-full border-none bg-transparent focus:ring-0 focus:outline-hidden sm:text-sm"
-          />
-        </div>
-        <input type="submit" hidden value="" />
-      </form>
-    )
-  }
+  // const renderSearchForm = () => {
+  //   return (
+  //     <form
+  //       action="#"
+  //       method="POST"
+  //       className="flex-1 text-neutral-900 dark:text-neutral-200"
+  //       onSubmit={(e) => {
+  //         e.preventDefault()
+  //         handleClose()
+  //         redirect('/search')
+  //       }}
+  //     >
+  //       <div className="flex h-full items-center gap-x-2.5 rounded-xl bg-neutral-50 px-3 py-3 dark:bg-neutral-800">
+  //         <HugeiconsIcon icon={Search01Icon} size={24} color="currentColor" strokeWidth={1.5} />
+  //         <input
+  //           type="search"
+  //           placeholder="Type and press enter"
+  //           className="w-full border-none bg-transparent focus:ring-0 focus:outline-hidden sm:text-sm"
+  //         />
+  //       </div>
+  //       <input type="submit" hidden value="" />
+  //     </form>
+  //   )
+  // }
 
   return (
     <div>
@@ -108,7 +108,7 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
       <div className="mt-5 flex items-center justify-between">
         <SocialsList />
       </div>
-      <div className="mt-5">{renderSearchForm()}</div>
+      {/* <div className="mt-5">{renderSearchForm()}</div> */}
       <ul className="flex flex-col gap-y-1 px-2 py-6">{data?.map(_renderItem)}</ul>
       <Divider className="mb-6" />
 
