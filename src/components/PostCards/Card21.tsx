@@ -2,6 +2,8 @@
 import { toTitleCase } from '@/utils/slug'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
+import { RawDraftContentState as DraftRawDraftContentState, convertFromRaw } from 'draft-js'
+import { stateToHTML } from 'draft-js-export-html'
 import draftToHtml from 'draftjs-to-html'
 import { Noto_Naskh_Arabic, Noto_Serif_Malayalam } from 'next/font/google'
 import localFont from 'next/font/local'
@@ -46,21 +48,54 @@ const Card21: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
   const { likeCount = 120, liked, bookmarked, favoriteCount } = post || {}
 
   const renderedHtml = useMemo(() => {
-    const str = typeof content.content === 'string' ? content.content : String(content.content ?? '')
-    try {
-      const parsed = JSON.parse(str) as unknown
-      if (parsed && typeof parsed === 'object' && Array.isArray((parsed as { blocks?: unknown }).blocks)) {
+  const str = typeof content.content === 'string' ? content.content : String(content.content ?? '')
+  try {
+    const parsed = JSON.parse(str) as unknown
+    if (parsed && typeof parsed === 'object' && Array.isArray((parsed as { blocks?: unknown }).blocks)) {
+      // Try the new Draft.js conversion first
+      try {
+        const rawContent = parsed as DraftRawDraftContentState
+        const contentState = convertFromRaw(rawContent)
+        
+        const options = {
+          inlineStyles: {
+            FONTWEIGHT_NORMAL: { style: { fontWeight: '400' } },
+            FONTWEIGHT_SLIM: { style: { fontWeight: '300' } },
+            FONTWEIGHT_MEDIUM: { style: { fontWeight: '500' } },
+            FONTWEIGHT_SEMIBOLD: { style: { fontWeight: '600' } },
+            FONTWEIGHT_BOLD: { style: { fontWeight: '700' } },
+            FONTWEIGHT_EXTRABOLD: { style: { fontWeight: '800' } },
+            SUBSCRIPT: { element: 'sub', style: {} },
+            SUPERSCRIPT: { element: 'sup', style: {} },
+          },
+          inlineStyleFn: (styles: any) => {
+            const cls: string[] = []
+            if (styles.has('HIGHLIGHT_YELLOW')) cls.push('bg-yellow-200 dark:bg-yellow-200/30')
+            if (styles.has('HIGHLIGHT_GREEN')) cls.push('bg-green-200 dark:bg-green-200/30')
+            if (styles.has('HIGHLIGHT_BLUE')) cls.push('bg-sky-200 dark:bg-sky-900/50')
+            if (styles.has('HIGHLIGHT_PINK')) cls.push('bg-pink-200 dark:bg-pink-200/30')
+            if (styles.has('HIGHLIGHT_ORANGE')) cls.push('bg-orange-200 dark:bg-orange-200/30')
+            if (styles.has('HIGHLIGHT_PURPLE')) cls.push('bg-purple-200 dark:bg-purple-200/30')
+            if (styles.has('UPPERCASE')) cls.push('uppercase')
+            if (styles.has('LOWERCASE')) cls.push('lowercase')
+            if (styles.has('CAPITALIZE')) cls.push('capitalize')
+            return cls.length ? { element: 'span', attributes: { class: cls.join(' ') } } : undefined
+          }
+        }
+        
+        return stateToHTML(contentState, options)
+      } catch (e) {
+        // Fall back to draftToHtml if the new conversion fails
+        console.warn('Falling back to draftToHtml', e)
         let html = draftToHtml(parsed as any)
-        // Remove any inline font-family styles from CMS content
-        html = html.replace(/font-family:\s*[^;}"']+[;]?/gi, '')
-        // html = html.replace(/style=["']\s*["']/g, '') // Remove empty style attributes
-        return html
+        return html.replace(/font-family:\s*[^;}"']+[;]?/gi, '')
       }
-      return str
-    } catch {
-      return str
     }
-  }, [content])
+    return str
+  } catch {
+    return str
+  }
+}, [content])
 
   return (
     <div
