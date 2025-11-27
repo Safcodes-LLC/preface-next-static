@@ -268,3 +268,13 @@ export async function searchPosts(searchTerm: string, lang: string): Promise<any
     // throw notFound();
   }
 }
+
+export async function AboutPage( lang: string): Promise<any | undefined> {
+  try {
+    return await getData(`pages/slug/about-us?lang=${lang}`, '', 0)
+  } catch (error) {
+    console.error('Failed to fetch search results:', error)
+    // throw notFound();
+  }
+}
+
