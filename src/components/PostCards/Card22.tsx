@@ -1,8 +1,14 @@
+'use client'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
+import { RawDraftContentState as DraftRawDraftContentState, convertFromRaw } from 'draft-js'
+import { stateToHTML } from 'draft-js-export-html'
+import draftToHtml from 'draftjs-to-html'
+import { Noto_Naskh_Arabic, Noto_Serif_Malayalam } from 'next/font/google'
+import localFont from 'next/font/local'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 import PostCardLikeBtn from '../PostCardLikeBtn'
 import PostCardSaveBtn from '../PostCardSaveBtn'
 
@@ -14,10 +20,32 @@ interface Props {
   lang?: string
 }
 
+const elgraine = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/Elgraine-Regular.woff',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-elgraine',
+})
+const notoNaskhArabic = Noto_Naskh_Arabic({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+const notoSerifMalayalam = Noto_Serif_Malayalam({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+
 const Card22: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post, lang }) => {
   const {
     title,
     excerpt,
+    content,
     slug,
     handle,
     thumbnail,
@@ -29,6 +57,57 @@ const Card22: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
     bookmarked,
     favoriteCount,
   } = post || {}
+
+const renderedHtml = useMemo(() => {
+  // Use content directly instead of content.content
+  const contentData = content?.content || content;
+  const str = typeof contentData === 'string' ? contentData : String(contentData || '');
+  
+  try {
+    const parsed = JSON.parse(str) as unknown;
+    if (parsed && typeof parsed === 'object' && Array.isArray((parsed as { blocks?: unknown }).blocks)) {
+      try {
+        const rawContent = parsed as DraftRawDraftContentState;
+        const contentState = convertFromRaw(rawContent);
+
+        const options = {
+          inlineStyles: {
+            FONTWEIGHT_NORMAL: { style: { fontWeight: '400' } },
+            FONTWEIGHT_SLIM: { style: { fontWeight: '300' } },
+            FONTWEIGHT_MEDIUM: { style: { fontWeight: '500' } },
+            FONTWEIGHT_SEMIBOLD: { style: { fontWeight: '600' } },
+            FONTWEIGHT_BOLD: { style: { fontWeight: '700' } },
+            FONTWEIGHT_EXTRABOLD: { style: { fontWeight: '800' } },
+            SUBSCRIPT: { element: 'sub', style: {} },
+            SUPERSCRIPT: { element: 'sup', style: {} },
+          },
+          inlineStyleFn: (styles: any) => {
+            const cls: string[] = [];
+            if (styles.has('HIGHLIGHT_YELLOW')) cls.push('bg-yellow-200 dark:bg-yellow-200/30');
+            if (styles.has('HIGHLIGHT_GREEN')) cls.push('bg-green-200 dark:bg-green-200/30');
+            if (styles.has('HIGHLIGHT_BLUE')) cls.push('bg-sky-200 dark:bg-sky-900/50');
+            if (styles.has('HIGHLIGHT_PINK')) cls.push('bg-pink-200 dark:bg-pink-200/30');
+            if (styles.has('HIGHLIGHT_ORANGE')) cls.push('bg-orange-200 dark:bg-orange-200/30');
+            if (styles.has('HIGHLIGHT_PURPLE')) cls.push('bg-purple-200 dark:bg-purple-200/30');
+            if (styles.has('UPPERCASE')) cls.push('uppercase');
+            if (styles.has('LOWERCASE')) cls.push('lowercase');
+            if (styles.has('CAPITALIZE')) cls.push('capitalize');
+            return cls.length ? { element: 'span', attributes: { class: cls.join(' ') } } : undefined;
+          },
+        };
+
+        return stateToHTML(contentState, options);
+      } catch (e) {
+        console.warn('Falling back to draftToHtml', e);
+        const html = draftToHtml(parsed as any);
+        return html.replace(/font-family:\s*[^;}"']+[;]?/gi, '');
+      }
+    }
+    return str;
+  } catch {
+    return str;
+  }
+}, [content]);
 
   const link =
     lang == 'en'
@@ -66,10 +145,20 @@ const Card22: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
             <PostCardSaveBtn bookmarked={bookmarked} post={post} />
           </div>
         ) : null}
-        <p className="line-clamp-5 text-base leading-relaxed text-[#444444] sm:text-base dark:text-white">
-          {excerpt ||
-            "is simply dummy text of the Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi velit tempora eos aliquam delectus perspiciatis veritatis, molestias voluptas. Doloremque aspernatur voluptatibus nulla maiores eos velit excepturi, obcaecati reprehenderit nostrum unde! Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti doloribus eligendi debitis amet. Iusto consequuntur at tempore. Dolorem amet voluptate nobis, exercitationem veritatis culpa quibusdam dignissimos? In similique eos placeat. printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
-        </p>
+        {content && (
+          <div
+            dangerouslySetInnerHTML={{ __html: renderedHtml }}
+            className="line-clamp-6 w-full dark:[&_*]:!text-white"
+            style={{
+              fontFamily:
+                lang === 'ar'
+                  ? notoNaskhArabic.style.fontFamily
+                  : lang === 'ml'
+                    ? notoSerifMalayalam.style.fontFamily
+                    : elgraine.style.fontFamily,
+            }}
+          />
+        )}
         <Link
           href={link}
           className="group mt-1 flex cursor-pointer items-center gap-2 self-start text-base font-semibold text-[#00652E] transition-all hover:gap-3 dark:text-[#60a43a]"
