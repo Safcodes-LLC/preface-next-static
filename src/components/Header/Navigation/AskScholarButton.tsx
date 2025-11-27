@@ -34,7 +34,7 @@ const AskScholarButton = ({ className, home, isTransparentHeader, dict }: Props)
       {token ? (
         <Link
           href={'/dashboard/ask-the-scholar'}
-          className={`flex min-w-[155px] cursor-pointer items-center gap-2 rounded-sm border border-[#EEEEEE] px-5 py-2 text-sm font-normal hover:shadow-sm focus:outline-none dark:border-[#777777] ${
+          className={`flex cursor-pointer items-center gap-2 rounded-sm border border-[#EEEEEE] px-5 py-2 text-sm font-normal hover:shadow-sm focus:outline-none dark:border-[#777777] ${
             home
               ? isTransparentHeader
                 ? 'text-[#fff] dark:text-[#fff]'
