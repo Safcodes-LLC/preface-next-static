@@ -192,7 +192,7 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
       </div> */}
 
       <div className="nc-Footer relative container border-t border-neutral-200 py-16 lg:py-28 dark:border-neutral-700">
-        <div className="grid grid-cols-12 gap-x-4 gap-y-4 sm:gap-x-8 sm:gap-y-8 lg:gap-x-0">
+        <div className="grid grid-cols-12 gap-x-4 gap-y-6 sm:gap-x-8 sm:gap-y-8 lg:gap-x-0">
           <div className="col-span-12 flex flex-col items-center gap-5 md:items-start lg:col-span-3">
             <div className="w-full">
               <Logo size="size-10" lang={lang} />
