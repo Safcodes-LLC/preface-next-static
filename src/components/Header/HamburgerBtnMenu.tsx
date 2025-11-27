@@ -24,11 +24,14 @@ const HamburgerBtnMenu = ({ className, home, isTransparentHeader }: { className?
         color="currentColor" 
         strokeWidth={1.5} 
         className={
-          home
-            ? isTransparentHeader
-              ? 'text-[#fff] dark:text-[#fff]'
+          clsx(
+            'transition-colors duration-100',
+            home
+              ? isTransparentHeader
+                ? 'text-[#fff] dark:text-[#fff]'
+                : 'text-[#000000] dark:text-white'
               : 'text-[#000000] dark:text-white'
-            : 'text-[#000000] dark:text-white'
+          )
         }
       />
     </button>

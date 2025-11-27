@@ -65,11 +65,11 @@ const Header2: FC<Header2Props> = ({
               <button
                 type="button"
                 aria-label="Settings"
-                className="flex cursor-pointer items-center justify-center rounded-full p-2 transition-all duration-200 focus:ring-2 focus:outline-none"
+                className="flex cursor-pointer items-center justify-center rounded-full p-2 transition-all duration-100 focus:ring-2 focus:outline-none"
               >
                 <Cog6ToothIcon
                   className={clsx(
-                    `h-6 w-6 transition-colors duration-200 ${
+                    `h-6 w-6 transition-colors duration-100 ${
                       home
                         ? isTransparentHeader
                           ? 'text-[#fff] dark:text-[#fff]'
