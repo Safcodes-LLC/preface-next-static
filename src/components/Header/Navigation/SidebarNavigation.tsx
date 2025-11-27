@@ -44,7 +44,7 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
             </Link>
             {childMenu.children && (
               <DisclosurePanel>
-                {_renderMenuChild(childMenu, 'ps-3 text-neutral-600 dark:text-neutral-400')}
+                {_renderMenuChild(childMenu, 'ps-3 text-neutral-600 dark:text-white')}
               </DisclosurePanel>
             )}
           </Disclosure>

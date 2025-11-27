@@ -70,7 +70,7 @@ const ApplicationLayout = async ({ children, home, params }: Props) => {
       )}
       {children}
       <Footer lang={(await params).lang} />
-      <AsideSidebarNavigation />
+      <AsideSidebarNavigation lang={(await params).lang} />
       <SocialSidebar />
     </div>
   )

@@ -7,16 +7,17 @@ import Aside from './aside'
 
 interface Props {
   className?: string
+  lang: string
 }
 
-const AsideSidebarNavigation = ({ className }: Props) => {
+const AsideSidebarNavigation = ({ className, lang }: Props) => {
   const [navigationMenu, setNavigationMenu] = useState<TNavigationItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const loadNavigation = async () => {
       try {
-        const navData = await fetchNavigation()
+        const navData = await fetchNavigation(lang || 'en')
         setNavigationMenu(navData)
       } catch (error) {
         console.error('Error fetching navigation:', error)
