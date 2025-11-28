@@ -131,9 +131,6 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false, home, isTr
   const [latestArticles, setLatestArticles] = useState<Article[]>([])
   const [popularArticles, setPopularArticles] = useState<Article[]>([])
 
-  console.log(popularArticles,"latest articles");
-  
-
   // Debounced search function
   const debouncedSearch = useCallback(
     _.debounce(async (searchQuery: string) => {
@@ -273,6 +270,13 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false, home, isTr
                     className="h-12 w-full border-0 bg-transparent ps-11 pe-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm dark:text-gray-100 dark:placeholder:text-gray-300"
                     placeholder="Type to search..."
                     onChange={handleSetSearchValue}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && query.trim()) {
+                        e.preventDefault()
+                        router.push(`/search?s=${encodeURIComponent(query)}`)
+                        setOpen(false)
+                      }
+                    }}
                     value={query}
                     data-autofocus
                   />

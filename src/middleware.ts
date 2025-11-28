@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 import { defaultLocale, locales } from './i18n/settings'
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const { pathname, search } = request.nextUrl
   const allowedExtensions = ['.xml', '.txt', '.xml.gz']
   const allowedRoutes = ['/sitemap.xml', '/robots.txt', '/auth/facebook', '/auth/google']
 
@@ -32,7 +32,8 @@ export function middleware(request: NextRequest) {
     // If it's the default locale, redirect to remove it from URL
     if (pathLocale === defaultLocale) {
       const newPathname = `/${pathSegments.slice(2).join('/')}`
-      return NextResponse.redirect(new URL(newPathname || '/', request.url))
+      // Preserve query parameters in redirect
+      return NextResponse.redirect(new URL(`${newPathname || '/'}${search}`, request.url))
     }
     return NextResponse.next()
   }
@@ -51,7 +52,8 @@ export function middleware(request: NextRequest) {
   // }
   // If no locale is provided, assume English and rewrite URL internally
   if (!pathname.startsWith('/ml') && !pathname.startsWith('/ar')) {
-    const rewrittenPath = new URL(`/en${pathname}`, request.url)
+    // CRITICAL FIX: Include search params (query string) in the rewrite
+    const rewrittenPath = new URL(`/en${pathname}${search}`, request.url)
     return NextResponse.rewrite(rewrittenPath)
   }
   return NextResponse.next()

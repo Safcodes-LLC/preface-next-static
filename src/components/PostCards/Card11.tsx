@@ -12,17 +12,20 @@ interface Props {
   ratio?: string
   hiddenAuthor?: boolean
   lang?: any
+  isSearch?: boolean
 }
 
-const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'aspect-5/3', lang }) => {
+const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, isSearch = false, ratio = 'aspect-5/3', lang }) => {
   const {
     title,
     subCategory,
     name,
+    image,
     slug,
     featuredImage,
     handle,
     categories,
+    thumbnail,
     date,
     likeCount,
     liked,
@@ -32,6 +35,8 @@ const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'asp
   } = post
 
   const [isHover, setIsHover] = useState(false)
+
+  console.log(post, 'post..')
 
   return (
     <div
@@ -44,11 +49,20 @@ const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'asp
     >
       <div className={clsx('relative w-full shrink-0 overflow-hidden rounded-t-3xl', ratio)}>
         {/* <PostFeaturedMedia post={post} isHover={isHover} /> */}
-        <Link href={lang === 'en' ? `/${slug}` : `/${lang}/${slug}`} className="block h-full w-full">
+        <Link
+          href={
+            isSearch
+              ? `/${categories?.[0]?.parentCategory?.slug}/${categories?.[0]?.slug}/${slug}`
+              : lang === 'en'
+                ? `/${slug}`
+                : `/${lang}/${slug}`
+          }
+          className="block h-full w-full"
+        >
           <Image
             alt={name || title || 'Post image'}
             fill
-            src={featuredImage}
+            src={featuredImage || image || thumbnail}
             className="object-cover transition-transform duration-500 group-hover:scale-110"
             sizes="(max-width: 1600px) 100vw, 95vw"
             priority
@@ -69,7 +83,7 @@ const Card11: FC<Props> = ({ className, post, hiddenAuthor = false, ratio = 'asp
               </span>
             </Link>
           </h3>
-          <span className="text-xs font-normal">{subCategory?.length} topics</span>
+          {!isSearch && <span className="text-xs font-normal">{subCategory?.length} topics</span>}
         </div>
 
         {/* Right content: arrow icon (fixed size) */}

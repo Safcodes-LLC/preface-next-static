@@ -1,6 +1,7 @@
 import CardAuthorBox2 from '@/components/CardAuthorBoxs/CardAuthorBox2'
 import CardCategory2 from '@/components/CategoryCards/CardCategory2'
 import Card11 from '@/components/PostCards/Card11'
+import { searchPosts } from '@/utils/getServices'
 import { getSearchResults } from '@/data/search'
 import ButtonSecondary from '@/shared/ButtonSecondary'
 import Tag from '@/shared/Tag'
@@ -42,7 +43,7 @@ const PageSearch = async ({
   params,
   searchParams,
 }: {
-  params: Promise<{ query: string }>
+  params: { lang: string }
   searchParams: SearchParams
 }) => {
   async function handleSearch(formData: FormData) {
@@ -52,6 +53,7 @@ const PageSearch = async ({
     const searchTab = formData.get('tab') as string
     redirect(`/search?s=${searchQuery}&tab=${searchTab}`)
   }
+
 
   let searchQuery = (await searchParams)['s']
   let searchTab = (await searchParams)['tab']
@@ -74,6 +76,9 @@ const PageSearch = async ({
     searchQuery || '',
     searchTab as 'posts' | 'categories' | 'tags' | 'authors'
   )
+
+   const searchData = await searchPosts(searchQuery || '', params.lang || 'en')
+console.log(searchData,"search data");
 
   const renderLoopItems = () => {
     switch (searchTab) {
@@ -107,8 +112,8 @@ const PageSearch = async ({
       default:
         return (
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-8 lg:mt-10 lg:grid-cols-3 xl:grid-cols-4">
-            {posts?.map((post) => (
-              <Card11 key={post.id} post={post} />
+            {searchData?.data?.map((post:any) => (
+              <Card11 key={post._id} post={post} isSearch={true}/>
             ))}
           </div>
         )
@@ -180,15 +185,15 @@ const PageSearch = async ({
 
         {/* LOOP ITEMS */}
         <p className="mt-4 block text-sm">
-          We found {totalResults} results for &quot;{searchQuery}&quot;
+          We found {searchData?.data?.length} results for &quot;{searchQuery}&quot;
         </p>
         {renderLoopItems()}
 
         {/* PAGINATION */}
         {/* <PaginationWrapper className="mt-20" /> */}
-        <div className="mx-auto mt-10 text-center md:mt-16">
+        {/* <div className="mx-auto mt-10 text-center md:mt-16">
           <ButtonSecondary>Load more</ButtonSecondary>
-        </div>
+        </div> */}
       </div>
     </div>
   )
