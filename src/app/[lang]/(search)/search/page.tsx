@@ -78,7 +78,6 @@ const PageSearch = async ({
   )
 
    const searchData = await searchPosts(searchQuery || '', params.lang || 'en')
-console.log(searchData,"search data");
 
   const renderLoopItems = () => {
     switch (searchTab) {
