@@ -1,19 +1,11 @@
-import ArchiveSortByListBox from '@/components/ArchiveSortByListBox'
-import ArchiveTabs from '@/components/ArchiveTabs'
 import CardAuthorBox2 from '@/components/CardAuthorBoxs/CardAuthorBox2'
 import CardCategory2 from '@/components/CategoryCards/CardCategory2'
-import PaginationWrapper from '@/components/PaginationWrapper'
 import Card11 from '@/components/PostCards/Card11'
 import { getSearchResults } from '@/data/search'
-import { ButtonCircle } from '@/shared/Button'
-import Input from '@/shared/Input'
+import ButtonSecondary from '@/shared/ButtonSecondary'
 import Tag from '@/shared/Tag'
-import { Link } from '@/shared/link'
-import { ArrowRightIcon } from '@heroicons/react/24/solid'
-import { Folder02Icon, LicenseIcon, Search01Icon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
 import { Metadata } from 'next'
-import Image from 'next/image'
 import { redirect } from 'next/navigation'
 
 const sortByOptions = [
@@ -127,7 +119,7 @@ const PageSearch = async ({
     <div className="search-page">
       {/* HEADER */}
       <div className="mx-auto w-screen px-2 xl:max-w-(--breakpoint-2xl)">
-        <div className="relative aspect-16/9 lg:aspect-16/5">
+        {/* <div className="relative aspect-16/9 lg:aspect-16/5">
           <Image
             alt="search"
             fill
@@ -136,10 +128,10 @@ const PageSearch = async ({
             sizes="(max-width: 1600px) 100vw, 95vw"
             priority
           />
-        </div>
+        </div> */}
 
         {/* CONTENT */}
-        <div className="relative -mt-14 sm:container sm:-mt-36 lg:-mt-48">
+        {/* <div className="relative -mt-14 sm:container sm:-mt-36 lg:-mt-48">
           <div className="flex items-center rounded-3xl bg-white px-2.5 py-5 shadow-2xl sm:rounded-4xl sm:px-5 lg:py-14 dark:border dark:bg-neutral-900">
             <header className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
               <h2 className="text-2xl font-semibold sm:text-4xl">{searchQuery}</h2>
@@ -177,20 +169,26 @@ const PageSearch = async ({
               </div>
             </header>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="container py-16 lg:pt-20">
-        <div className="flex flex-wrap items-center gap-4">
+        {/* <div className="flex flex-wrap items-center gap-4">
           <ArchiveTabs tabs={filterTabs} />
           <ArchiveSortByListBox className="ms-auto shrink-0" filterOptions={sortByOptions} />
-        </div>
+        </div> */}
 
         {/* LOOP ITEMS */}
+        <p className="mt-4 block text-sm">
+          We found {totalResults} results for &quot;{searchQuery}&quot;
+        </p>
         {renderLoopItems()}
 
         {/* PAGINATION */}
-        <PaginationWrapper className="mt-20" />
+        {/* <PaginationWrapper className="mt-20" /> */}
+        <div className="mx-auto mt-10 text-center md:mt-16">
+          <ButtonSecondary>Load more</ButtonSecondary>
+        </div>
       </div>
     </div>
   )
