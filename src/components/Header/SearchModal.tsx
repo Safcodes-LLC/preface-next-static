@@ -113,8 +113,10 @@ interface SearchResult {
   slug: string
   categories: Array<{
     name: string
+    slug: string
     parentCategory: {
       name: string
+      slug: string
     }
   }>
   // Add other fields as needed
@@ -128,6 +130,9 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false, home, isTr
   const [isLoading, setIsLoading] = useState(false)
   const [latestArticles, setLatestArticles] = useState<Article[]>([])
   const [popularArticles, setPopularArticles] = useState<Article[]>([])
+
+  console.log(popularArticles,"latest articles");
+  
 
   // Debounced search function
   const debouncedSearch = useCallback(
@@ -252,7 +257,7 @@ const SearchModal: FC<Props> = ({ type = 'type1', isScrolled = false, home, isTr
                 if ('uri' in item) {
                   router.push(item.uri + (item.type === 'recommended_searches' ? '' : query))
                 } else {
-                  router.push(`/post/${item.slug}`)
+                  router.push(`/${item.categories[0]?.parentCategory?.slug}/${item.categories[0]?.slug}/${item.slug}`)
                 }
                 setOpen(false)
               }}
