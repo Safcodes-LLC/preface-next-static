@@ -36,7 +36,7 @@ export function Subheading({ className, level = 3, headingColor, ...props }: Hea
       className={clsx(
         className,
         'text-base font-normal lg:text-lg',
-        isLight ? 'text-black' : 'text-black dark:text-neutral-400'
+        isLight ? 'text-white' : 'text-black dark:text-neutral-400'
       )}
     />
   )
