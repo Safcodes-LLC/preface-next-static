@@ -31,12 +31,15 @@ export async function generateMetadata({ params }: { params: Promise<{ video: st
 }
 
 interface PageProps {
-  params: Promise<{ video: string }>
+  params: Promise<{ video: string; lang: string }>
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 const Page = async ({ params }: PageProps) => {
   const resolvedParams = await params
+
+  const { lang } = await params
+
   const post = (await getPostBySlug(resolvedParams.video)) as TPost | null
 
   if (!post) {
@@ -67,7 +70,7 @@ const Page = async ({ params }: PageProps) => {
         </div>
       </div> */}
 
-      <SingleRelatedPosts />
+      <SingleRelatedPosts lang={lang}/>
     </div>
   )
 }

@@ -24,6 +24,11 @@ const Card10V6: FC<Props> = ({
   const [isHover, setIsHover] = useState(false)
   const { categories, bookmarked, likeCount, liked, slug } = post
 
+  console.log(post,"post story");
+  console.log(lang,"langgg");
+  
+  
+
   return (
     <div
       className={clsx('group post-card-10 relative flex flex-col', className)}
