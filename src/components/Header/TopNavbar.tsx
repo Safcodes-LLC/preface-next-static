@@ -104,7 +104,7 @@ const TopNavbar: FC<TopNavbarProps> = ({ isScrolled, className }) => {
 
           {/* About Label */}
           <Link
-            href="/about"
+            href="/about-us"
             className={clsx(
               'rounded-full px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors',
               isScrolled

@@ -166,7 +166,7 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
             </div>
 
             <div className="flex w-full flex-col space-y-2">
-              <Link href="/about" className="text-sm font-medium text-[#444444] dark:text-white">
+              <Link href="/about-us" className="text-sm font-medium text-[#444444] dark:text-white">
                 About Us
               </Link>
               <a href="mailto:info@prefacetoislam.com" className="text-sm text-[#444444] dark:text-white">
@@ -198,7 +198,7 @@ const Footer: React.FC<{ lang?: string }> = async ({ lang }) => {
               <Logo size="size-10" lang={lang} />
             </div>
             <div className="flex w-full flex-col space-y-2">
-              <Link href="/about" className="text-sm font-medium text-[#444444] dark:text-white">
+              <Link href={lang === 'en' ? `/about-us` :`/${lang}/about-us`  } className="text-sm font-medium text-[#444444] dark:text-white">
                 About Us
               </Link>
               <a href="mailto:info@prefacetoislam.com" className="text-sm text-[#444444] dark:text-white">

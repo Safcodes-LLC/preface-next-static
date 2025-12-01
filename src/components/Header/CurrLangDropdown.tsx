@@ -50,8 +50,8 @@ const Languages = ({
     pathname === `/${isLang}/visuals` ||
     pathname === `/stories` ||
     pathname === `/${isLang}/stories` ||
-    pathname === `/about` ||
-    pathname === `/${isLang}/about`
+    pathname === `/about-us` ||
+    pathname === `/${isLang}/about-us`
 
   return (
     <div className="grid gap-6">
