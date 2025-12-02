@@ -148,7 +148,7 @@ const Card22: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
         {content && (
           <div
             dangerouslySetInnerHTML={{ __html: renderedHtml }}
-            className="line-clamp-6 w-full dark:[&_*]:!text-white"
+            className="richtext-section line-clamp-6 w-full dark:[&_*]:!text-white"
             style={{
               fontFamily:
                 lang === 'ar'

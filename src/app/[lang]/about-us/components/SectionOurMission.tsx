@@ -70,5 +70,10 @@ export default function SectionOurMission({ content }: SectionOurMissionProps) {
     }
     return content
   }, [content])
-  return <div className="prose max-w-none dark:prose-invert" dangerouslySetInnerHTML={{ __html: renderedHtml }} />
+  return (
+    <div
+      className="richtext-section prose max-w-none dark:prose-invert"
+      dangerouslySetInnerHTML={{ __html: renderedHtml }}
+    />
+  )
 }
