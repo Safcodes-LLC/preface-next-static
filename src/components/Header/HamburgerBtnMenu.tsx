@@ -5,7 +5,15 @@ import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import { useAside } from '../aside'
 
-const HamburgerBtnMenu = ({ className, home, isTransparentHeader }: { className?: string, home?: boolean, isTransparentHeader?: boolean }) => {
+const HamburgerBtnMenu = ({
+  className,
+  home,
+  isTransparentHeader,
+}: {
+  className?: string
+  home?: boolean
+  isTransparentHeader?: boolean
+}) => {
   const { open: openAside } = useAside()
 
   return (
@@ -18,21 +26,19 @@ const HamburgerBtnMenu = ({ className, home, isTransparentHeader }: { className?
       )}
     >
       <span className="sr-only">Open main menu</span>
-      <HugeiconsIcon 
-        icon={Menu01Icon} 
-        size={24} 
-        color="currentColor" 
-        strokeWidth={1.5} 
-        className={
-          clsx(
-            'transition-colors duration-100',
-            home
-              ? isTransparentHeader
-                ? 'text-[#fff] dark:text-[#fff]'
-                : 'text-[#000000] dark:text-white'
+      <HugeiconsIcon
+        icon={Menu01Icon}
+        size={24}
+        color="currentColor"
+        strokeWidth={1.5}
+        className={clsx(
+          'transition-colors duration-100',
+          home
+            ? isTransparentHeader
+              ? 'text-[#fff] dark:text-[#fff]'
               : 'text-[#000000] dark:text-white'
-          )
-        }
+            : 'text-[#000000] dark:text-white'
+        )}
       />
     </button>
   )

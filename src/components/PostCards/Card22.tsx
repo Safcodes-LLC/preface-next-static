@@ -58,56 +58,56 @@ const Card22: FC<Props> = ({ className, titleClass = 'text-xl sm:text-3xl', post
     favoriteCount,
   } = post || {}
 
-const renderedHtml = useMemo(() => {
-  // Use content directly instead of content.content
-  const contentData = content?.content || content;
-  const str = typeof contentData === 'string' ? contentData : String(contentData || '');
-  
-  try {
-    const parsed = JSON.parse(str) as unknown;
-    if (parsed && typeof parsed === 'object' && Array.isArray((parsed as { blocks?: unknown }).blocks)) {
-      try {
-        const rawContent = parsed as DraftRawDraftContentState;
-        const contentState = convertFromRaw(rawContent);
+  const renderedHtml = useMemo(() => {
+    // Use content directly instead of content.content
+    const contentData = content?.content || content
+    const str = typeof contentData === 'string' ? contentData : String(contentData || '')
 
-        const options = {
-          inlineStyles: {
-            FONTWEIGHT_NORMAL: { style: { fontWeight: '400' } },
-            FONTWEIGHT_SLIM: { style: { fontWeight: '300' } },
-            FONTWEIGHT_MEDIUM: { style: { fontWeight: '500' } },
-            FONTWEIGHT_SEMIBOLD: { style: { fontWeight: '600' } },
-            FONTWEIGHT_BOLD: { style: { fontWeight: '700' } },
-            FONTWEIGHT_EXTRABOLD: { style: { fontWeight: '800' } },
-            SUBSCRIPT: { element: 'sub', style: {} },
-            SUPERSCRIPT: { element: 'sup', style: {} },
-          },
-          inlineStyleFn: (styles: any) => {
-            const cls: string[] = [];
-            if (styles.has('HIGHLIGHT_YELLOW')) cls.push('bg-yellow-200 dark:bg-yellow-200/30');
-            if (styles.has('HIGHLIGHT_GREEN')) cls.push('bg-green-200 dark:bg-green-200/30');
-            if (styles.has('HIGHLIGHT_BLUE')) cls.push('bg-sky-200 dark:bg-sky-900/50');
-            if (styles.has('HIGHLIGHT_PINK')) cls.push('bg-pink-200 dark:bg-pink-200/30');
-            if (styles.has('HIGHLIGHT_ORANGE')) cls.push('bg-orange-200 dark:bg-orange-200/30');
-            if (styles.has('HIGHLIGHT_PURPLE')) cls.push('bg-purple-200 dark:bg-purple-200/30');
-            if (styles.has('UPPERCASE')) cls.push('uppercase');
-            if (styles.has('LOWERCASE')) cls.push('lowercase');
-            if (styles.has('CAPITALIZE')) cls.push('capitalize');
-            return cls.length ? { element: 'span', attributes: { class: cls.join(' ') } } : undefined;
-          },
-        };
+    try {
+      const parsed = JSON.parse(str) as unknown
+      if (parsed && typeof parsed === 'object' && Array.isArray((parsed as { blocks?: unknown }).blocks)) {
+        try {
+          const rawContent = parsed as DraftRawDraftContentState
+          const contentState = convertFromRaw(rawContent)
 
-        return stateToHTML(contentState, options);
-      } catch (e) {
-        console.warn('Falling back to draftToHtml', e);
-        const html = draftToHtml(parsed as any);
-        return html.replace(/font-family:\s*[^;}"']+[;]?/gi, '');
+          const options = {
+            inlineStyles: {
+              FONTWEIGHT_NORMAL: { style: { fontWeight: '400' } },
+              FONTWEIGHT_SLIM: { style: { fontWeight: '300' } },
+              FONTWEIGHT_MEDIUM: { style: { fontWeight: '500' } },
+              FONTWEIGHT_SEMIBOLD: { style: { fontWeight: '600' } },
+              FONTWEIGHT_BOLD: { style: { fontWeight: '700' } },
+              FONTWEIGHT_EXTRABOLD: { style: { fontWeight: '800' } },
+              SUBSCRIPT: { element: 'sub', style: {} },
+              SUPERSCRIPT: { element: 'sup', style: {} },
+            },
+            inlineStyleFn: (styles: any) => {
+              const cls: string[] = []
+              if (styles.has('HIGHLIGHT_YELLOW')) cls.push('bg-yellow-200 dark:bg-yellow-200/30')
+              if (styles.has('HIGHLIGHT_GREEN')) cls.push('bg-green-200 dark:bg-green-200/30')
+              if (styles.has('HIGHLIGHT_BLUE')) cls.push('bg-sky-200 dark:bg-sky-900/50')
+              if (styles.has('HIGHLIGHT_PINK')) cls.push('bg-pink-200 dark:bg-pink-200/30')
+              if (styles.has('HIGHLIGHT_ORANGE')) cls.push('bg-orange-200 dark:bg-orange-200/30')
+              if (styles.has('HIGHLIGHT_PURPLE')) cls.push('bg-purple-200 dark:bg-purple-200/30')
+              if (styles.has('UPPERCASE')) cls.push('uppercase')
+              if (styles.has('LOWERCASE')) cls.push('lowercase')
+              if (styles.has('CAPITALIZE')) cls.push('capitalize')
+              return cls.length ? { element: 'span', attributes: { class: cls.join(' ') } } : undefined
+            },
+          }
+
+          return stateToHTML(contentState, options)
+        } catch (e) {
+          console.warn('Falling back to draftToHtml', e)
+          const html = draftToHtml(parsed as any)
+          return html.replace(/font-family:\s*[^;}"']+[;]?/gi, '')
+        }
       }
+      return str
+    } catch {
+      return str
     }
-    return str;
-  } catch {
-    return str;
-  }
-}, [content]);
+  }, [content])
 
   const link =
     lang == 'en'

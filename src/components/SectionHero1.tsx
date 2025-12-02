@@ -15,15 +15,14 @@ const SectionHero1: FC<Props> = ({ className, rightImg, heading, subHeading, btn
   return (
     <div className={clsx('section-hero relative', className)}>
       <div className="relative">
-
-          <h2 className="text-3xl leading-tight font-semibold text-pretty md:text-4xl xl:text-5xl">{heading}</h2>
-          <span className="block text-base text-neutral-600 xl:text-lg dark:text-neutral-400">{subHeading}</span>
-          {/* {!!btnText && <ButtonPrimary href={btnHref || '/'}>{btnText}</ButtonPrimary>} */}
-        </div>
-        {/* <div className="grow">
+        <h2 className="text-3xl leading-tight font-semibold text-pretty md:text-4xl xl:text-5xl">{heading}</h2>
+        <span className="block text-base text-neutral-600 xl:text-lg dark:text-neutral-400">{subHeading}</span>
+        {/* {!!btnText && <ButtonPrimary href={btnHref || '/'}>{btnText}</ButtonPrimary>} */}
+      </div>
+      {/* <div className="grow">
           <Image className="w-full" src={rightImg || ''} alt="" />
         </div> */}
-      </div>
+    </div>
   )
 }
 

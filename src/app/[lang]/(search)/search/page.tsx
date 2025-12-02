@@ -1,10 +1,9 @@
 import CardAuthorBox2 from '@/components/CardAuthorBoxs/CardAuthorBox2'
 import CardCategory2 from '@/components/CategoryCards/CardCategory2'
 import Card11 from '@/components/PostCards/Card11'
-import { searchPosts } from '@/utils/getServices'
 import { getSearchResults } from '@/data/search'
-import ButtonSecondary from '@/shared/ButtonSecondary'
 import Tag from '@/shared/Tag'
+import { searchPosts } from '@/utils/getServices'
 import { Folder02Icon, LicenseIcon, Tag02Icon, UserListIcon } from '@hugeicons/core-free-icons'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
@@ -43,7 +42,7 @@ const PageSearch = async ({
   params,
   searchParams,
 }: {
-  params: { lang: string }
+  params: Promise<{ lang: string }>
   searchParams: SearchParams
 }) => {
   async function handleSearch(formData: FormData) {
@@ -54,6 +53,7 @@ const PageSearch = async ({
     redirect(`/search?s=${searchQuery}&tab=${searchTab}`)
   }
 
+  const { lang } = await params
 
   let searchQuery = (await searchParams)['s']
   let searchTab = (await searchParams)['tab']
@@ -77,7 +77,7 @@ const PageSearch = async ({
     searchTab as 'posts' | 'categories' | 'tags' | 'authors'
   )
 
-   const searchData = await searchPosts(searchQuery || '', params.lang || 'en')
+  const searchData = await searchPosts(searchQuery || '', lang || 'en')
 
   const renderLoopItems = () => {
     switch (searchTab) {
@@ -111,8 +111,8 @@ const PageSearch = async ({
       default:
         return (
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-8 lg:mt-10 lg:grid-cols-3 xl:grid-cols-4">
-            {searchData?.data?.map((post:any) => (
-              <Card11 key={post._id} post={post} isSearch={true}/>
+            {searchData?.data?.map((post: any) => (
+              <Card11 key={post._id} post={post} isSearch={true} />
             ))}
           </div>
         )

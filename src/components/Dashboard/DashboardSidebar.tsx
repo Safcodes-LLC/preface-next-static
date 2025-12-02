@@ -56,15 +56,13 @@ export default function DashboardSidebar({ subPages, pathname, lang }: Dashboard
                 <li key={`desktop-${index}`}>
                   <Link
                     href={lang === 'en' ? Item.href : `/${lang}${Item.href}`}
-                    className={`flex cursor-pointer gap-3 items-center rounded-lg bg-[#F0F0F0] p-3 text-sm dark:bg-[#0D0D0D] ${
+                    className={`flex cursor-pointer items-center gap-3 rounded-lg bg-[#F0F0F0] p-3 text-sm dark:bg-[#0D0D0D] ${
                       isActive
                         ? 'bg-[#FFFFFF] text-[#00652E] dark:bg-[#1D1D1D] dark:text-[#60A43A]'
                         : 'text-neutral-700 hover:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-neutral-700/50'
                     }`}
                   >
-                    <span
-                      className={` flex h-4 w-4 items-center justify-center text-lg`}
-                    >
+                    <span className={`flex h-4 w-4 items-center justify-center text-lg`}>
                       <Item.icon
                         className={` ${isActive ? 'fill-[#00652E] dark:fill-[#60A43A]' : 'fill-[#222222] dark:fill-[#DFDFDF]'}`}
                       />

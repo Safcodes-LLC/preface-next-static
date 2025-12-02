@@ -352,7 +352,7 @@ export function SimpleEditor() {
             <Button data-style="ghost" onClick={() => setIsOpenPreview(true)}>
               Preview
             </Button>
-            <SwitchDarkMode iconSize="size-4.5" className="size-8!" />
+            <SwitchDarkMode className="size-8!" />
           </div>
         </div>
 

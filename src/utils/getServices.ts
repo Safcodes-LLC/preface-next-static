@@ -269,7 +269,7 @@ export async function searchPosts(searchTerm: string, lang: string): Promise<any
   }
 }
 
-export async function AboutPage( lang: string): Promise<any | undefined> {
+export async function AboutPage(lang: string): Promise<any | undefined> {
   try {
     return await getData(`pages/slug/about-us?lang=${lang}`, '', 0)
   } catch (error) {
@@ -277,4 +277,3 @@ export async function AboutPage( lang: string): Promise<any | undefined> {
     // throw notFound();
   }
 }
-

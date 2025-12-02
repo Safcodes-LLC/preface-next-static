@@ -7,10 +7,7 @@ import SocialsList from '@/shared/SocialsList'
 import SwitchDarkMode from '@/shared/SwitchDarkMode'
 import { Disclosure, DisclosureButton, DisclosurePanel, useClose } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
-import { Search01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
-import { redirect } from 'next/navigation'
 import React from 'react'
 
 interface Props {
@@ -43,9 +40,7 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
               )}
             </Link>
             {childMenu.children && (
-              <DisclosurePanel>
-                {_renderMenuChild(childMenu, 'ps-3 text-neutral-600 dark:text-white')}
-              </DisclosurePanel>
+              <DisclosurePanel>{_renderMenuChild(childMenu, 'ps-3 text-neutral-600 dark:text-white')}</DisclosurePanel>
             )}
           </Disclosure>
         ))}
@@ -56,7 +51,7 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
   const _renderItem = (menu: TNavigationItem, index: number) => {
     return (
       <Disclosure key={index} as="li" className="text-neutral-900 dark:text-white">
-        <DisclosureButton className="flex w-full cursor-pointer rounded-lg  text-start text-sm font-medium tracking-wide uppercase hover:bg-neutral-100 dark:hover:bg-neutral-800">
+        <DisclosureButton className="flex w-full cursor-pointer rounded-lg text-start text-sm font-medium tracking-wide uppercase hover:bg-neutral-100 dark:hover:bg-neutral-800">
           <Link
             href={menu.href || '#'}
             className={clsx(!menu.children?.length && 'flex-1', 'block py-1')}
@@ -113,7 +108,7 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
       <Divider className="mb-6" />
 
       {/* FOR OUR DEMO */}
-      <div className="flex items-center justify-between gap-x-2.5 ">
+      <div className="flex items-center justify-between gap-x-2.5">
         {/* <ButtonPrimary
           href="https://themeforest.net/item/ncmaz-blog-news-magazine-nextjs-template/44412092"
           target="_blank"

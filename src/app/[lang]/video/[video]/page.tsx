@@ -70,7 +70,7 @@ const Page = async ({ params }: PageProps) => {
         </div>
       </div> */}
 
-      <SingleRelatedPosts lang={lang}/>
+      <SingleRelatedPosts lang={lang} />
     </div>
   )
 }

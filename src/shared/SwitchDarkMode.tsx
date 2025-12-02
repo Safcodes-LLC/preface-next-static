@@ -21,11 +21,7 @@ const SwitchDarkMode: React.FC<Props> = ({ className }) => {
   }
 
   return (
-    <button
-      onClick={toggleTheme}
-      className={className}
-      aria-label="Toggle dark mode"
-    >
+    <button onClick={toggleTheme} className={className} aria-label="Toggle dark mode">
       {theme === 'dark' ? (
         <SunIcon className="h-6 w-6 text-[#CBDB2A]" />
       ) : (
