@@ -44,50 +44,15 @@ const userNavigation = [
   { name: 'Sign out', href: '#' },
 ]
 
-const subPages = [
-  {
-    href: '/dashboard',
-    icon: DashboardIcon,
-    pageName: 'Dashboard',
-  },
-  {
-    href: '/dashboard/quran',
-    icon: QuranIcon,
-    pageName: "Qur'an",
-  },
-  {
-    href: '/dashboard/continuos-read',
-    icon: ContinuosReadIcon,
-    pageName: 'Continuous Read',
-  },
-  {
-    href: '/dashboard/my-favourite',
-    icon: FavouriteIcon,
-    pageName: 'Favorites',
-  },
-  {
-    href: '/dashboard/saved-read',
-    icon: SavedIcon,
-    pageName: 'Saved Read',
-  },
-  {
-    href: '/dashboard/ask-the-scholar',
-    icon: QAIcon,
-    pageName: 'Q & A',
-  },
-  {
-    href: '/dashboard/preferences',
-    icon: PreferenceIcon,
-    pageName: 'Preferences',
-  },
-  {
-    href: '/dashboard/profile',
-    icon: ProfileIcon,
-    pageName: 'Profile',
-  },
-]
-
-export default function DashboardLayoutClient({ children, lang }: { children: React.ReactNode; lang?: string }) {
+export default function DashboardLayoutClient({
+  children,
+  lang,
+  dict,
+}: {
+  children: React.ReactNode
+  lang?: string
+  dict?: any
+}) {
   let token = getAuthToken()
   const pathname = usePathname()
   const [profile, setProfile] = useState<any | null>(() => {
@@ -128,6 +93,48 @@ export default function DashboardLayoutClient({ children, lang }: { children: Re
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Empty deps to run only once
 
+  const subPages = [
+    {
+      href: '/dashboard',
+      icon: DashboardIcon,
+      pageName: dict?.dashboard?.dashboard || 'Dashboard',
+    },
+    {
+      href: '/dashboard/quran',
+      icon: QuranIcon,
+      pageName: dict?.dashboard?.quran || "Qur'an",
+    },
+    {
+      href: '/dashboard/continuos-read',
+      icon: ContinuosReadIcon,
+      pageName: dict?.dashboard?.continuousRead || 'Continuous Read',
+    },
+    {
+      href: '/dashboard/my-favourite',
+      icon: FavouriteIcon,
+      pageName: dict?.dashboard?.favorites || 'Favorites',
+    },
+    {
+      href: '/dashboard/saved-read',
+      icon: SavedIcon,
+      pageName: dict?.dashboard?.savedRead || 'Saved Read',
+    },
+    {
+      href: '/dashboard/ask-the-scholar',
+      icon: QAIcon,
+      pageName: dict?.dashboard?.qa || 'Q & A',
+    },
+    {
+      href: '/dashboard/preferences',
+      icon: PreferenceIcon,
+      pageName: dict?.dashboard?.preferences || 'Preferences',
+    },
+    {
+      href: '/dashboard/profile',
+      icon: ProfileIcon,
+      pageName: dict?.dashboard?.profile || 'Profile',
+    },
+  ]
   return (
     <div className="h-screen max-md:h-full md:overflow-hidden" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <Disclosure as="nav" className="top-0 left-0 z-20 w-full bg-[#F8F8F8] max-md:fixed dark:bg-black">
@@ -234,7 +241,7 @@ export default function DashboardLayoutClient({ children, lang }: { children: Re
           </h1>
           <div className="flex flex-col justify-between gap-4 sm:flex-row">
             <span className="text-lg text-[#444444] max-md:mt-1 max-md:text-[14px] dark:text-[#DFDFDF]">
-              View your dashboard, manage your posts
+              {dict?.dashboard?.viewyourdashboard}
             </span>
 
             <div className="flex gap-4">

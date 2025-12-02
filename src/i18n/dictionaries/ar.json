@@ -90,7 +90,7 @@
     "knowledgehub": "مركز المعرفة",
     "quicklook": "نظرة سريعة",
     "topics": "عناوين",
-    "askthescholar": "الفتوى",
+    "askthescholar": "اسأل العالِم",
     "dashboard": "لوحة الرئيسية",
     "myaccount": "حسابي",
     "signin": "تسجيل الدخول",
@@ -132,6 +132,25 @@
     "populararticles": {
       "heading": "المقالات الشهيرة",
       "description": ""
+    }
+  },
+  "dashboard": {
+    "viewyourdashboard": "شاهد لوحة التحكم الخاصة بك، وقم بإدارة منشوراتك",
+    "dashboard": "لوحة التحكم",
+    "quran": "القرآن",
+    "continuousRead": "القراءة المستمرة",
+    "favorites": "المفضّلة",
+    "savedRead": "القراءة المحفوظة",
+    "qa": "الأسئلة والأجوبة",
+    "preferences": "التفضيلات",
+    "profile": "الملف الشخصي",
+    "askthescholar": {
+      "date": "التاريخ",
+      "subject": "الموضوع",
+      "status": "الحالة",
+      "lastupdated": "آخر تحديث",
+      "noquestionsfound": "لا توجد أسئلة",
+      "asknewquestion": "اطرح سؤالًا جديدًا"
     }
   }
 }

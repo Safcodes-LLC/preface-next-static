@@ -133,5 +133,25 @@
       "heading": "POPULAR ARTICLES",
       "description": ""
     }
+  },
+  "dashboard": {
+    "viewyourdashboard": "View your dashboard, manage your posts",
+    "dashboard": "Dashboard",
+    "quran": "Quran",
+    "continuousRead": "Continuous Read",
+    "favorites": "Favorites",
+    "savedRead": "Saved Read",
+    "qa": "Q & A",
+    "preferences": "Preferences",
+    "profile": "Profile",
+    "logout": "Logout",
+    "askthescholar": {
+      "date": "Date",
+      "subject": "Subject",
+      "status": "Status",
+      "lastupdated": "Last Updated",
+      "noquestionsfound": "No Questions Found",
+      "asknewquestion": "Ask New Question"
+    }
   }
 }
