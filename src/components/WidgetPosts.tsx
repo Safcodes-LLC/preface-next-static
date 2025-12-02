@@ -39,7 +39,7 @@ const WidgetPosts: FC<Props> = ({
           href: isFavourite
             ? lang === 'en'
               ? `/dashboard/my-favourite`
-              : `${lang}/dashboard/my-favourite`
+              : `/${lang}/dashboard/my-favourite`
             : viewAllHref,
         }}
         isArrowHide={isArrowHide}

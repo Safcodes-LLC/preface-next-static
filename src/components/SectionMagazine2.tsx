@@ -68,7 +68,7 @@ const SectionMagazine2: FC<Props> = ({ heading, className, subHeading, dimHeadin
             title="Saved for Reading"
             viewAll={{
               label: 'View all',
-              href: lang === 'en' ? `/dashboard/saved-read` : `${lang}/dashboard/saved-read`,
+              href: lang === 'en' ? `/dashboard/saved-read` : `/${lang}/dashboard/saved-read`,
             }}
             isArrowHide={true}
             className="!px-0"

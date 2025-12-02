@@ -63,7 +63,6 @@ const Page = async ({ params, dict }: any) => {
       status: 'Saved',
     },
   ]
-  console.log(lang)
 
   return (
     <ProtectedRoute lang={lang}>
