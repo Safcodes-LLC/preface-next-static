@@ -299,19 +299,19 @@
 }
 
 /* Ensure alignment works within article content */
-.richtext-section .text-align-left {
+.richtext-content .text-align-left {
   text-align: left !important;
 }
 
-.richtext-section .text-align-center {
+.richtext-content .text-align-center {
   text-align: center !important;
 }
 
-.richtext-section .text-align-right {
+.richtext-content .text-align-right {
   text-align: right !important;
 }
 
-.richtext-section .text-align-justify {
+.richtext-content .text-align-justify {
   text-align: justify !important;
 }
 /* Article Content Styles - Custom Font Weights, Highlights, and Text Alignment */
@@ -342,62 +342,62 @@
 }
 
 /* Ensure alignment works in article content display */
-.richtext-section .text-align-left {
+.richtext-content .text-align-left {
   text-align: left !important;
 }
 
-.richtext-section .text-align-center {
+.richtext-content .text-align-center {
   text-align: center !important;
 }
 
-.richtext-section .text-align-right {
+.richtext-content .text-align-right {
   text-align: right !important;
 }
 
-.richtext-section .text-align-justify {
+.richtext-content .text-align-justify {
   text-align: justify !important;
 }
 
 /* Ensure inline styles from Draft.js are displayed properly */
-.richtext-section span[style*='font-weight'],
-.richtext-section span[style*='background-color'] {
+.richtext-content span[style*='font-weight'],
+.richtext-content span[style*='background-color'] {
   display: inline !important;
 }
 
 /* Highlight styles - ensure proper display */
-.richtext-section span[style*='background-color'] {
+.richtext-content span[style*='background-color'] {
   padding: 2px 0 !important;
   border-radius: 2px;
   display: inline !important;
 }
 
 /* Force font-weight styles to apply */
-.richtext-section span[style*='font-weight'] {
+.richtext-content span[style*='font-weight'] {
   display: inline !important;
 }
 
 /* Override any default styling that might interfere */
-.richtext-section span[style] {
+.richtext-content span[style] {
   display: inline !important;
 }
 
 /* Ensure proper spacing for highlighted text */
-.richtext-section span[style*='background-color'] {
+.richtext-content span[style*='background-color'] {
   line-height: 1.6;
 }
 
 /* Dark mode adjustments for highlights */
-.dark .richtext-section span[style*='background-color'] {
+.dark .richtext-content span[style*='background-color'] {
   opacity: 0.9;
 }
 
 /* Ensure font weights work in dark mode */
-.dark .richtext-section span[style*='font-weight'] {
+.dark .richtext-content span[style*='font-weight'] {
   color: inherit;
 }
 
 /* Indentation Levels - LTR (Left-to-Right) */
-.richtext-section .indent-level-1,
+.richtext-content .indent-level-1,
 .indent-level-1,
 .prose .indent-level-1,
 p.indent-level-1,
@@ -406,7 +406,7 @@ div.indent-level-1 {
   margin-right: 0 !important;
 }
 
-.richtext-section .indent-level-2,
+.richtext-content .indent-level-2,
 .indent-level-2,
 .prose .indent-level-2,
 p.indent-level-2,
@@ -415,7 +415,7 @@ div.indent-level-2 {
   margin-right: 0 !important;
 }
 
-.richtext-section .indent-level-3,
+.richtext-content .indent-level-3,
 .indent-level-3,
 .prose .indent-level-3,
 p.indent-level-3,
@@ -424,7 +424,7 @@ div.indent-level-3 {
   margin-right: 0 !important;
 }
 
-.richtext-section .indent-level-4,
+.richtext-content .indent-level-4,
 .indent-level-4,
 .prose .indent-level-4,
 p.indent-level-4,
@@ -433,7 +433,7 @@ div.indent-level-4 {
   margin-right: 0 !important;
 }
 
-.richtext-section .indent-level-5,
+.richtext-content .indent-level-5,
 .indent-level-5,
 .prose .indent-level-5,
 p.indent-level-5,
@@ -442,7 +442,7 @@ div.indent-level-5 {
   margin-right: 0 !important;
 }
 
-.richtext-section .indent-level-6,
+.richtext-content .indent-level-6,
 .indent-level-6,
 .prose .indent-level-6,
 p.indent-level-6,
@@ -451,7 +451,7 @@ div.indent-level-6 {
   margin-right: 0 !important;
 }
 
-.richtext-section .indent-level-7,
+.richtext-content .indent-level-7,
 .indent-level-7,
 .prose .indent-level-7,
 p.indent-level-7,
@@ -460,7 +460,7 @@ div.indent-level-7 {
   margin-right: 0 !important;
 }
 
-.richtext-section .indent-level-8,
+.richtext-content .indent-level-8,
 .indent-level-8,
 .prose .indent-level-8,
 p.indent-level-8,
@@ -470,7 +470,7 @@ div.indent-level-8 {
 }
 
 /* Indentation Levels - RTL (Right-to-Left) for Arabic, Hebrew, etc. */
-.richtext-section .indent-level-1-rtl,
+.richtext-content .indent-level-1-rtl,
 .indent-level-1-rtl,
 .prose .indent-level-1-rtl,
 p.indent-level-1-rtl,
@@ -483,7 +483,7 @@ div.indent-level-1-rtl {
   text-align: right;
 }
 
-.richtext-section .indent-level-2-rtl,
+.richtext-content .indent-level-2-rtl,
 .indent-level-2-rtl,
 .prose .indent-level-2-rtl,
 p.indent-level-2-rtl,
@@ -496,7 +496,7 @@ div.indent-level-2-rtl {
   text-align: right;
 }
 
-.richtext-section .indent-level-3-rtl,
+.richtext-content .indent-level-3-rtl,
 .indent-level-3-rtl,
 .prose .indent-level-3-rtl,
 p.indent-level-3-rtl,
@@ -509,7 +509,7 @@ div.indent-level-3-rtl {
   text-align: right;
 }
 
-.richtext-section .indent-level-4-rtl,
+.richtext-content .indent-level-4-rtl,
 .indent-level-4-rtl,
 .prose .indent-level-4-rtl,
 p.indent-level-4-rtl,
@@ -522,7 +522,7 @@ div.indent-level-4-rtl {
   text-align: right;
 }
 
-.richtext-section .indent-level-5-rtl,
+.richtext-content .indent-level-5-rtl,
 .indent-level-5-rtl,
 .prose .indent-level-5-rtl,
 p.indent-level-5-rtl,
@@ -535,7 +535,7 @@ div.indent-level-5-rtl {
   text-align: right;
 }
 
-.richtext-section .indent-level-6-rtl,
+.richtext-content .indent-level-6-rtl,
 .indent-level-6-rtl,
 .prose .indent-level-6-rtl,
 p.indent-level-6-rtl,
@@ -548,7 +548,7 @@ div.indent-level-6-rtl {
   text-align: right;
 }
 
-.richtext-section .indent-level-7-rtl,
+.richtext-content .indent-level-7-rtl,
 .indent-level-7-rtl,
 .prose .indent-level-7-rtl,
 p.indent-level-7-rtl,
@@ -561,7 +561,7 @@ div.indent-level-7-rtl {
   text-align: right;
 }
 
-.richtext-section .indent-level-8-rtl,
+.richtext-content .indent-level-8-rtl,
 .indent-level-8-rtl,
 .prose .indent-level-8-rtl,
 p.indent-level-8-rtl,
@@ -575,85 +575,85 @@ div.indent-level-8-rtl {
 }
 
 /* Direction classes */
-.richtext-section .dir-rtl,
+.richtext-content .dir-rtl,
 .dir-rtl {
   direction: rtl !important;
   text-align: right !important;
 }
 
-.richtext-section .dir-ltr,
+.richtext-content .dir-ltr,
 .dir-ltr {
   direction: ltr !important;
   text-align: left !important;
 }
 
 /* Line Spacing Classes */
-.richtext-section .line-spacing-normal,
+.richtext-content .line-spacing-normal,
 .line-spacing-normal {
   line-height: normal !important;
 }
 
-.richtext-section .line-spacing-1,
+.richtext-content .line-spacing-1,
 .line-spacing-1 {
   line-height: 1 !important;
 }
 
-.richtext-section .line-spacing-1-15,
+.richtext-content .line-spacing-1-15,
 .line-spacing-1-15 {
   line-height: 1.15 !important;
 }
-.richtext-section .line-spacing-1-25,
+.richtext-content .line-spacing-1-25,
 .line-spacing-1-25 {
   line-height: 1.25 !important;
 }
 
-.richtext-section .line-spacing-1-5,
+.richtext-content .line-spacing-1-5,
 .line-spacing-1-5 {
   line-height: 1.5 !important;
 }
 
-.richtext-section .line-spacing-2,
+.richtext-content .line-spacing-2,
 .line-spacing-2 {
   line-height: 2 !important;
 }
 
-.richtext-section .line-spacing-2-5,
+.richtext-content .line-spacing-2-5,
 .line-spacing-2-5 {
   line-height: 2.5 !important;
 }
 
-.richtext-section .line-spacing-3,
+.richtext-content .line-spacing-3,
 .line-spacing-3 {
   line-height: 3 !important;
 }
 
 /* Subscript and Superscript Styles */
-.richtext-section sub,
-.richtext-section sup {
+.richtext-content sub,
+.richtext-content sup {
   font-size: 0.75em;
   line-height: 0;
   position: relative;
   vertical-align: baseline;
 }
 
-.richtext-section sub {
+.richtext-content sub {
   bottom: -0.25em;
 }
 
-.richtext-section sup {
+.richtext-content sup {
   top: -0.5em;
 }
 
 /* Text Transform Classes */
-.richtext-section .text-uppercase {
+.richtext-content .text-uppercase {
   text-transform: uppercase !important;
 }
 
-.richtext-section .text-lowercase {
+.richtext-content .text-lowercase {
   text-transform: lowercase !important;
 }
 
-.richtext-section .text-capitalize {
+.richtext-content .text-capitalize {
   text-transform: capitalize !important;
 }
 
