@@ -602,6 +602,10 @@ div.indent-level-8-rtl {
 .line-spacing-1-15 {
   line-height: 1.15 !important;
 }
+.article-content .line-spacing-1-25,
+.line-spacing-1-25 {
+  line-height: 1.25 !important;
+}
 
 .article-content .line-spacing-1-5,
 .line-spacing-1-5 {
