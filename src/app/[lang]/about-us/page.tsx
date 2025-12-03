@@ -13,7 +13,7 @@ const PageAbout = async ({ params }: { params: Promise<{ lang: string }> }) => {
   const { lang } = await params
   const aboutData = await AboutPage(lang || 'en')
 
-  console.log(aboutData, 'about data')
+  // console.log(aboutData, 'about data')
 
   return (
     <div className={`nc-PageAbout relative`}>
