@@ -12,6 +12,7 @@ interface Props {
   className?: string
   post: TPost
   isHover?: boolean
+  isVerticalImage?: boolean
   autoPlay?: boolean
   href?: string
   isSquareImg?: boolean
@@ -22,12 +23,14 @@ const PostFeaturedMedia: FC<Props> = ({
   post,
   isHover = false,
   autoPlay = false,
+  isVerticalImage = false,
   href,
   isSquareImg = false,
 }) => {
   const {
     featuredImage,
     featured_image,
+    more_images,
     thumbnail,
     postType,
     videoFile,
@@ -94,7 +97,21 @@ const PostFeaturedMedia: FC<Props> = ({
   }
 
   const renderImage = () => {
-    const imageSrc = isSquareImg ? featured_image : featuredImage || thumbnail
+    const imageSrc = isVerticalImage
+      ? Array.isArray(more_images)
+        ? more_images[0]
+        : more_images
+      : isSquareImg
+        ? featured_image
+        : featuredImage || thumbnail
+
+    // If no valid image source, return null or a placeholder
+    if (!imageSrc) {
+      return null // or return a placeholder component
+    }
+
+    // Ensure we have a string URL for the image
+    const imgUrl = Array.isArray(imageSrc) ? imageSrc[0] : imageSrc
 
     if (!imageSrc) {
       return (
@@ -122,7 +139,7 @@ const PostFeaturedMedia: FC<Props> = ({
           alt={title}
           fill
           className="object-cover transition-transform duration-600 ease-in-out group-hover:scale-110"
-          src={imageSrc}
+          src={imgUrl}
           sizes="(max-width: 600px) 100vw, 50vw"
         />
         <div className="absolute inset-0 bg-black/25 opacity-100 transition-opacity group-hover:opacity-75" />

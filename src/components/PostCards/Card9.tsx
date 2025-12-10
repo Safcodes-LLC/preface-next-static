@@ -45,7 +45,7 @@ const Card9: FC<Props> = ({ className, ratio = 'aspect-3/4', post, lang }) => {
       onMouseLeave={() => setIsHover(false)}
     >
       <div className={`relative flex w-full items-start ${ratio}`}>
-        <PostFeaturedMedia post={post} isHover={isHover} />
+        <PostFeaturedMedia post={post} isHover={isHover} isVerticalImage={true} />
 
         {/* Single Link wrapping media */}
         <Link
