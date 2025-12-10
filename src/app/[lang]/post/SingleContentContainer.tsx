@@ -384,7 +384,7 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
         >
           <div
             dangerouslySetInnerHTML={{ __html: renderedHtml }}
-            className="richtext-content [&_a]:text-blue-600 [&_a]:underline [&_a]:transition-colors [&_a]:hover:text-blue-800 dark:[&_a]:text-blue-400 dark:[&_a]:hover:text-blue-300 [&_a.has-custom-tooltip]:cursor-help [&_a.has-custom-tooltip]:border-b [&_a.has-custom-tooltip]:border-dotted [&_a.has-custom-tooltip]:border-blue-600 dark:[&_a.has-custom-tooltip]:border-blue-400"
+            className="richtext-content text-[#2a2a2a] dark:text-white [&_a]:text-blue-600 [&_a]:underline [&_a]:transition-colors [&_a]:hover:text-blue-800 dark:[&_a]:text-blue-400 dark:[&_a]:hover:text-blue-300 [&_a.has-custom-tooltip]:cursor-help [&_a.has-custom-tooltip]:border-b [&_a.has-custom-tooltip]:border-dotted [&_a.has-custom-tooltip]:border-blue-600 dark:[&_a.has-custom-tooltip]:border-blue-400"
             style={{
               fontFamily:
                 lang === 'ar'
