@@ -28,7 +28,7 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
             <Link
               href={childMenu.href || '#'}
               onClick={handleClose}
-              className={`mt-0.5 flex rounded-lg pe-4 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 ${itemClass}`}
+              className={`mt-0.5 flex rounded-lg pe-4 text-[16px] hover:bg-neutral-100 dark:hover:bg-neutral-800 ${itemClass}`}
             >
               <span className={`py-1.5 ${!childMenu.children ? 'block w-full' : ''}`}>{childMenu.name}</span>
               {childMenu.children && (
@@ -51,7 +51,7 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
   const _renderItem = (menu: TNavigationItem, index: number) => {
     return (
       <Disclosure key={index} as="li" className="text-neutral-900 dark:text-white">
-        <DisclosureButton className="flex w-full cursor-pointer rounded-lg text-start text-sm font-medium tracking-wide uppercase hover:bg-neutral-100 dark:hover:bg-neutral-800">
+        <DisclosureButton className="flex w-full cursor-pointer rounded-lg text-start text-[16px] font-medium tracking-wide uppercase hover:bg-neutral-100 dark:hover:bg-neutral-800">
           <Link
             href={menu.href || '#'}
             className={clsx(!menu.children?.length && 'flex-1', 'block py-1')}

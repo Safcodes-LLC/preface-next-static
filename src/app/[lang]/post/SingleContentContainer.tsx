@@ -375,6 +375,62 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
 
   return (
     <div className={`relative ${className}`}>
+      <style jsx global>{`
+        /* Rich text list marker and number color adjustments */
+        .richtext-content ul {
+          list-style: none;
+          padding-left: 1rem;
+          margin-left: 0;
+        }
+
+        .richtext-content ul li {
+          position: relative;
+          padding-left: 1.25rem;
+          margin-bottom: 0.5rem;
+        }
+
+        /* custom radio-like marker for unordered lists */
+        .richtext-content ul li::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 45%;
+          transform: translateY(-50%);
+          width: 0.5rem;
+          height: 0.5rem;
+          border-radius: 9999px;
+          background: #2a2a2a; /* dark marker for day mode */
+        }
+
+        /* ensure marker becomes white in dark mode */
+        .dark .richtext-content ul li::before {
+          background: #ffffff;
+        }
+
+        /* ordered list numbers color */
+        .richtext-content ol {
+          padding-left: 1.5rem;
+        }
+
+        .richtext-content ol li {
+          margin-bottom: 0.5rem;
+        }
+
+        .richtext-content ol li::marker {
+          color: #2a2a2a; /* day mode number color */
+          font-weight: 500;
+        }
+
+        .dark .richtext-content ol li::marker {
+          color: #ffffff; /* dark mode number color */
+        }
+
+        /* small fallback for browsers without ::marker support: color the first child */
+        .richtext-content ol li > *:first-child,
+        .richtext-content ol li > p:first-child {
+          color: inherit;
+        }
+      `}</style>
       <div className="single-content space-y-10">
         {/* ENTRY CONTENT */}
         <div
