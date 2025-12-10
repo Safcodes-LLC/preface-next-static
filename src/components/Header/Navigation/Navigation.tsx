@@ -185,7 +185,7 @@ const Lv1MenuItem = ({
   return (
     <Link
       className={clsx(
-        'flex w-full !items-center self-center rounded-full px-2 py-[2px] text-sm text-[16px] font-normal whitespace-nowrap',
+        'flex w-full !items-center self-center rounded-full px-2 py-[2px] text-[16px] font-normal whitespace-nowrap',
         'hover:bg-neutral-100 hover:text-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-neutral-200',
         home
           ? isTransparentHeader
