@@ -2328,7 +2328,7 @@ export type TPost = Awaited<ReturnType<typeof getAllPosts>>[number] & {
   categories?: any
   favoriteCount?: number
   featured_image?: string
-  more_images?:string[]
+  more_images?: string[]
   image?: string
 }
 export type TPostDetail = Awaited<ReturnType<typeof getPostByHandle>>
