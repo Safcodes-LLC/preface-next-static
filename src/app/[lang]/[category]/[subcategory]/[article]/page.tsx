@@ -137,6 +137,7 @@ const Page = async ({
               posts={popularArticles || relatedPosts}
               heading={`${dict.sections.populararticles.heading}`}
               postCardName="card10V5"
+              lang={lang}
             />
           </Suspense>
         </div>

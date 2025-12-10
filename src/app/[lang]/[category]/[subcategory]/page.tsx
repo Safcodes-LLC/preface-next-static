@@ -134,6 +134,7 @@ const Page = async ({ params }: { params: Promise<{ category: string; subcategor
                 posts={popularArticles}
                 heading={`${lang === 'en' ? `${dict.sections.populararticlesfrom.heading} ${subcategoryName}` : `${subcategoryName} ${dict.sections.populararticlesfrom.heading} `}`}
                 postCardName="card10V5"
+                lang={lang}
               />
             </Suspense>
           </div>
