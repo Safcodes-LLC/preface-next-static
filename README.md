@@ -1,6 +1,6 @@
-# Ncmaz Next.js template
+# Preface Next.js template
 
-To run the Ncmaz demo, first install the npm dependencies:
+To run the Preface demo, first install the npm dependencies:
 
 ```bash
 npm install

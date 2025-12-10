@@ -120,7 +120,7 @@
 //                       <div className="bg-gray-50 p-5 dark:bg-white/5">
 //                         <a
 //                           className="flex w-full items-center justify-center rounded-xl! bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700"
-//                           href={'https://themeforest.net/item/ncmaz-blog-news-magazine-nextjs-template/44412092'}
+//                           href={'https://themeforest.net/item/preface-blog-news-magazine-nextjs-template/44412092'}
 //                           target="_blank"
 //                           rel="noopener noreferrer"
 //                         >

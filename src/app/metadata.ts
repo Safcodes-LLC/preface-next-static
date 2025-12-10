@@ -2,9 +2,9 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Ncmaz',
-    default: 'Ncmaz - Blog, News, Magazine template',
+    template: '%s - Preface',
+    default: 'Preface - Blog, News, Magazine template',
   },
-  description: 'Ncmaz - Blog, News, Magazine template',
-  keywords: ['Ncmaz', 'Blog', 'News', 'Magazine'],
+  description: 'Preface - Blog, News, Magazine template',
+  keywords: ['Preface', 'Blog', 'News', 'Magazine'],
 }

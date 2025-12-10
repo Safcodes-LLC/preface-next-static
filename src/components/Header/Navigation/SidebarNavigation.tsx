@@ -110,7 +110,7 @@ const SidebarNavigation: React.FC<Props> = ({ data }) => {
       {/* FOR OUR DEMO */}
       <div className="flex items-center justify-between gap-x-2.5">
         {/* <ButtonPrimary
-          href="https://themeforest.net/item/ncmaz-blog-news-magazine-nextjs-template/44412092"
+          href="https://themeforest.net/item/preface-blog-news-magazine-nextjs-template/44412092"
           target="_blank"
           rel="noopener noreferrer"
         >
