@@ -18,7 +18,7 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
   return (
     <div className={`text-white ${className}`}>
       <div className="mb-4">{/* <CategoryBadgeList categories={categories || []} /> */}</div>
-      <SingleTitle title={title} className="mb-4 text-2xl font-semibold sm:font-bold md:text-4xl lg:text-5xl" />
+      <SingleTitle title={title} className="mb-4" />
       {/* {excerpt && (
         <p className="text-base/relaxed text-white/80 mb-6 md:text-lg/relaxed">
           {excerpt}
