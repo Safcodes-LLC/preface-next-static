@@ -3,6 +3,7 @@
 import PostCardLikeBtn from '@/components/PostCardLikeBtn'
 import { TComment, TPostDetail } from '@/data/posts'
 import useIntersectionObserver from '@/hooks/useIntersectionObserver'
+import { useStore } from '@/store/store'
 import { ArrowUp02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { RawDraftContentState as DraftRawDraftContentState, convertFromRaw } from 'draft-js'
@@ -74,9 +75,14 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
   //
   const [isShowScrollToTop, setIsShowScrollToTop] = useState<boolean>(false)
   //
+  const { isTextSize } = useStore() as { isTextSize: 'small' | 'medium' | 'large' }
 
   const { tags, author, content, likeCount, favoriteCount, commentCount, liked, handle } = post
-
+  const sizes = {
+    small: { text: 'text-[14px]! max-lg:text-[12px]!' },
+    medium: { text: 'text-[16px]! max-lg:text-[14px]!' },
+    large: { text: 'text-[18px]! max-lg:text-[16px]!' },
+  }
   // State for custom tooltip
   const [tooltipData, setTooltipData] = useState<{
     visible: boolean
@@ -440,7 +446,7 @@ const SingleContentContainer: FC<Props> = ({ post, comments, className, lang }) 
         >
           <div
             dangerouslySetInnerHTML={{ __html: renderedHtml }}
-            className="richtext-content text-[#2a2a2a] dark:text-white [&_a]:text-blue-600 [&_a]:underline [&_a]:transition-colors [&_a]:hover:text-blue-800 dark:[&_a]:text-blue-400 dark:[&_a]:hover:text-blue-300 [&_a.has-custom-tooltip]:cursor-help [&_a.has-custom-tooltip]:border-b [&_a.has-custom-tooltip]:border-dotted [&_a.has-custom-tooltip]:border-blue-600 dark:[&_a.has-custom-tooltip]:border-blue-400"
+            className={`richtext-content ${sizes[isTextSize].text} text-[#2a2a2a] dark:text-white [&_a]:text-blue-600 [&_a]:underline [&_a]:transition-colors [&_a]:hover:text-blue-800 dark:[&_a]:text-blue-400 dark:[&_a]:hover:text-blue-300 [&_a.has-custom-tooltip]:cursor-help [&_a.has-custom-tooltip]:border-b [&_a.has-custom-tooltip]:border-dotted [&_a.has-custom-tooltip]:border-blue-600 dark:[&_a.has-custom-tooltip]:border-blue-400`}
             style={{
               fontFamily:
                 lang === 'ar'

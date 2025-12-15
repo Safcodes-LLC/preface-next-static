@@ -1,5 +1,7 @@
+'use client'
 import { TPostDetail } from '@/data/posts'
 import { Divider } from '@/shared/divider'
+import { useStore } from '@/store/store'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { FC } from 'react'
@@ -14,6 +16,7 @@ interface Props {
 
 const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
   const { categories, date, author, readingTime, commentCount, handle, likeCount, liked, title, excerpt } = post
+  const { isTextSize, setTextSize } = useStore() as { isTextSize: string; setTextSize: (size: string) => void }
 
   return (
     <div className={`text-white ${className}`}>
@@ -32,7 +35,7 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
           readingTime={readingTime} 
           className="text-white/80"
         /> */}
-        <div className="">
+        <div className="flex items-center justify-start gap-[20px] max-md:flex-wrap max-md:gap-[16px]">
           <SingleMetaAction
             commentCount={commentCount}
             handle={handle}
@@ -42,6 +45,29 @@ const TitleAndMeta = ({ className, post }: Omit<Props, 'headerStyle'>) => {
             title={title}
             className="text-white hover:text-white/80"
           />
+          <div className="flex items-center rounded-full bg-white/10 shadow-md">
+            <p className="h-full rounded-full bg-black p-[8px_16px] text-[14px] text-white max-md:text-[12px]">Aa</p>
+            <div className="flex gap-1 p-[4px] max-md:gap-0">
+              <button
+                onClick={() => setTextSize('large')}
+                className={`${isTextSize === 'large' ? 'bg-white/20' : ''} cursor-pointer rounded-full p-[4px_12px] text-[14px] text-white hover:bg-white/20 max-md:text-[12px]`}
+              >
+                Large
+              </button>
+              <button
+                onClick={() => setTextSize('medium')}
+                className={`${isTextSize === 'medium' ? 'bg-white/20' : ''} cursor-pointer rounded-full p-[4px_12px] text-[14px] text-white hover:bg-white/20 max-md:text-[12px]`}
+              >
+                Medium
+              </button>
+              <button
+                onClick={() => setTextSize('small')}
+                className={`${isTextSize === 'small' ? 'bg-white/20' : ''} cursor-pointer rounded-full p-[4px_12px] text-[14px] text-white hover:bg-white/20 max-md:text-[12px]`}
+              >
+                Small
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
