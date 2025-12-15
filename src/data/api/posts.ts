@@ -5,7 +5,7 @@ export const getLatestArticles = async (lang?: string) => {
   try {
     const data = await serverFetch.get<{ data: any[] }>('/api/frontend/latest-articles', {
       language: lang,
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 0 }, // Revalidate every 60 seconds
     })
     return data
   } catch (error) {
@@ -19,7 +19,7 @@ export const getLatestVideos = async (lang?: string, options?: { limit?: number 
   try {
     const response = await serverFetch.get<{ data: any[] }>('/api/frontend/latest-videos', {
       language: lang,
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 0 }, // Revalidate every 60 seconds
       limit: options?.limit,
     })
     return response?.data || []
@@ -34,7 +34,7 @@ export const getIslamForBeginners = async (lang?: string) => {
   try {
     const response = await serverFetch.get<{ data: { latestArticles: any[] } }>('/api/frontend/islam-for-beginners', {
       language: lang,
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 0 }, // Revalidate every 60 seconds
     })
     return response?.data?.latestArticles || []
   } catch (error) {
@@ -48,7 +48,7 @@ export const getQuranLatestArticles = async (lang?: string, options?: { limit?: 
   try {
     const response = await serverFetch.get<{ data: any[] }>('/api/frontend/quran-latest-articles', {
       language: lang,
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 0 }, // Revalidate every 60 seconds
       limit: options?.limit,
     })
     return response?.data || []
@@ -91,7 +91,7 @@ export const getSubcategoryPosts = async (
       }
     }>(`/api/frontend/list-posts?categorySlug=${categorySlug}`, {
       language: lang,
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 0 }, // Revalidate every 60 seconds
       page: options?.page || 1,
       limit: options?.limit || 100,
     })
@@ -124,7 +124,7 @@ export const getPostBySlug = async (slug: string) => {
 
     // console.log(`Fetching post with slug: ${slug}`)
     const response = await serverFetch.get<{ data: any }>(`/api/frontend/posts/slug/${slug}`, {
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 0 }, // Revalidate every 60 seconds
     })
 
     // console.log(`API response for slug ${slug}:`, response)
@@ -145,7 +145,7 @@ export const getTopicsWithArticles = async (lang?: string) => {
   try {
     const response = await serverFetch.get<{ data: any[] }>('/api/frontend/topics-with-articles', {
       language: lang,
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 0 }, // Revalidate every 60 seconds
     })
     return response?.data || []
   } catch (error) {
@@ -174,7 +174,7 @@ export const getPopularArticles = async (params?: {
 
     const response = await serverFetch.get<{ data: any[] }>(url, {
       language: params?.lang || 'en',
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 0 }, // Revalidate every 60 seconds
     })
 
     return response?.data || []
@@ -189,7 +189,7 @@ export const getCategoryBySlug = async (category: string, lang?: string) => {
   try {
     const response = await serverFetch.get<{ data: any }>(`/api/frontend/category/slug/${category}`, {
       language: lang,
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 0 }, // Revalidate every 60 seconds
     })
     return response?.data || null
   } catch (error) {
@@ -202,7 +202,7 @@ export const getCategoryBySlug = async (category: string, lang?: string) => {
 //   try {
 //     const response = await serverFetch.get<{ data: any }>(`/api/frontend/postsbyparentcategory/${category}`, {
 //       language: lang,
-//       next: { revalidate: 60 }, // Revalidate every 60 seconds
+//       next: { revalidate: 0 }, // Revalidate every 60 seconds
 //     })
 //     return response?.data || null
 //   } catch (error) {
@@ -238,7 +238,7 @@ export const getPostsByParentCategory = async (
       }
     }>(`/api/frontend/postsbyparentcategory/${category}?${queryParams}`, {
       language: lang || 'en',
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 0 }, // Revalidate every 60 seconds
     })
 
     return {
@@ -257,7 +257,7 @@ export const getContinuosRead1 = async (userId: string, lang?: string) => {
   try {
     const response = await serverFetch.get<{ data: any }>(`/api/user/read-posts/${userId}`, {
       language: lang,
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 0 }, // Revalidate every 60 seconds
     })
     return response?.data
   } catch (error) {

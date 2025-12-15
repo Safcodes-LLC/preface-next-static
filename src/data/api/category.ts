@@ -6,7 +6,7 @@ export const getCategory = async (lang?: string) => {
   try {
     const data = await serverFetch.get<{ data: any[] }>('/api/frontend/all-category-list', {
       language: lang,
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 0 }, // Revalidate every 60 seconds
     })
     return data
   } catch (error) {
@@ -20,7 +20,7 @@ export const getTopTrendingTopics = async (lang?: string) => {
   try {
     const data = await serverFetch.get<{ data: any[] }>('/api/frontend/top-trending-topics', {
       language: lang,
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 0 }, // Revalidate every 60 seconds
     })
     return data
   } catch (error) {
@@ -38,7 +38,7 @@ export const getQuranSubcategories = async (lang?: string, options?: { limit?: n
       }>
     }>('/api/frontend/quran-categories', {
       language: lang,
-      next: { revalidate: 60 },
+      next: { revalidate: 0 },
       limit: options?.limit,
     })
 
