@@ -208,9 +208,7 @@ export async function postSavedArticle(postId: string, authToken: string): Promi
   try {
     return await postData(
       `savedlist/toggle/${postId}`,
-      {
-        postType: '66d9d564987787d3e3ff1312', // Article post type ID
-      },
+      {},
       authToken || '',
       0
     )
